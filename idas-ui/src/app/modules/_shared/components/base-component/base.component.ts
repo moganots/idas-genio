@@ -1,0 +1,186 @@
+import { Component, Input } from '@angular/core';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { DataService, User } from 'app/shared/shared.module';
+import { ModulesSharedConfiguration } from '../../modules-shared-configuration';
+
+@Component({
+  selector: 'app-base',
+  templateUrl: './base.component.html',
+  styleUrls: ['./base.component.scss'],
+  providers: [
+    DataService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
+  ]
+})
+export class BaseComponent {
+  @Input() public pageIcon: string;
+  @Input() public pageName: string;
+  @Input() public pageTitle: string;
+  @Input() public entityName: string;
+  @Input() public currentUser: User;
+  @Input() public dataService: DataService;
+  @Input() public sourceData: any[];
+  @Input() public sourceDataColumnNames: any[];
+  @Input() public action: string;
+  isLoading = false;
+  hasError = false;
+  hasWarnings = false;
+  hasCrashed = false;
+
+  constructor(public matDialog: MatDialog) {}
+
+  isLoggedIn() {
+    return true;
+  }
+  isObjectSet(value: any) {
+    return !(value === null && value === undefined);
+  }
+  splitCamelCase(value: string): string {
+    return ((value || '').trim().length === 0) ? '' : (value || '').trim().replace(/([a-z])([A-Z])/g, '$1 $2');
+  }
+  splitCamelCaseAndSpecialCharacters(value: string): string {
+    return ((value || '').trim().length === 0) ? '' : (value || '').trim().replace(/([a-z])([A-Z])([_-])/g, '$1 $2 $3');
+  }
+  capitalizeFirstLetter(value: string): string {
+    return ((value || '').trim().length === 0) ? '' : value.charAt(0).toLocaleUpperCase() + value.slice(1);
+  }
+  formatDisplayColumnName(columnName: string): string {
+    columnName = (!ModulesSharedConfiguration.ignoreColumns.includes(columnName) && columnName.toLocaleLowerCase().endsWith('id'))
+    ? columnName.substring(0, columnName.length - 2)
+    : columnName;
+    return this.splitCamelCase(columnName).split(' ').join(' ').trim();
+  }
+  isUseCheckbox(field: any) {
+    return (field.name || field || '').trim().toLocaleLowerCase().startsWith('is');
+  }
+  isDateField(field: any){
+    return (field.name || field || '').trim().toLocaleLowerCase().includes('date');
+  }
+  isNumberField(field: any){
+    switch((field.name || field || '').trim()){
+      case 'AccountNumber':
+      case 'Amount':
+      case 'HoursWorked':
+      case 'IdNumber':
+      case 'MaximumHoursAllocated':
+      case 'MobileTelephoneNumber':
+      case 'OfficeTelephoneNumber':
+      case 'TelephoneNumber':
+      case 'VATNumber':
+        return true;
+      default: return false;
+    }
+  }
+  isMaskedField(field: any){
+    switch((field.name || field || '').trim()){
+      case 'Password':
+      case 'ConfirmPassword':
+        return true;
+      default: return false;
+    }
+  }
+  isTextAreaField(field: any){
+    switch((field.name || field || '').trim()){
+      case 'Description':
+        return true;
+      default: return false;
+    }
+  }
+  isReferenceValueField(field: any){
+    switch((field.name || field || '').trim()){
+      case 'ClientId':
+      case 'EmployeeId':
+      case 'EntityId':
+      case 'ManagerId':
+      case 'MenuItemId':
+      case 'ProjectId':
+      case 'SupplierId':
+      case 'TaskId':
+      case 'UserId':
+      case 'UserGroupId':
+      case 'EmployeeClientSupplierId':
+        return true;
+      default: return false;
+    }
+  }
+  isLookupValueField(field: any) {
+    switch((field.name || field || '').trim()){
+      case 'BudgetCodeId':
+      case 'BankId':
+      case 'CapacityId':
+      case 'DepartmentId':
+      case 'EmploymentTypeId':
+      case 'GenderId':
+      case 'GroupId':
+      case 'IndustryTypeId':
+      case 'LookupCategoryId':
+      case 'ProjectAssignmentTypeId':
+      case 'PositionId':
+      case 'PreferredLanguageId':
+      case 'ProvinceId':
+      case 'SalutationId':
+      case 'StatusId':
+      case 'TransactionTypeId':
+      case 'UserLockReasonId':
+      case 'UserTypeId':
+      case 'WageTypeId':
+        return true;
+      default: return false;
+    }
+  }
+  trimId(field: any){
+    const fieldName = (field.name || field || '').toString();
+    return (!['_id', 'userid'].includes(fieldName.toLocaleLowerCase())
+    && (fieldName.toLocaleLowerCase().endsWith('id'))) ? fieldName.substring(0, fieldName.length - 2) : fieldName;
+  }
+  isUseLookupValueIcon(field: any){
+    switch((field.name || field || '').trim()){
+      case 'GenderId':
+      case 'GroupId':
+      case 'UserTypeId':
+        return true;
+      default: return false;
+    }
+  }
+  isUseLookupValueImage(field: any){
+    switch((field.name || field || '').trim()){
+      case 'BankId':
+        return true;
+      default: return false;
+    }
+  }
+  isCreate() {
+    return ['add', 'create', 'new'].includes((this.action || '').toLocaleLowerCase());
+  }
+  isEdit() {
+    return ['change', 'edit', 'update'].includes((this.action || '').toLocaleLowerCase());
+  }
+  isDelete() {
+    return ['delete', 'remove', 'deactivate'].includes((this.action || '').toLocaleLowerCase());
+  }
+  openDialog(dialogComponent: any, data?: any
+    ,        afterClosed?: () => void, height: string = '93vh'
+    ,        width: string = '38vw', top: string = '10vh'): void {
+      const left = '25vw';
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = data;
+    dialogConfig.height = height;
+    dialogConfig.maxHeight = '95%';
+    dialogConfig.width = width;
+    dialogConfig.panelClass = 'idas-dialog-container';
+    dialogConfig.position = {
+      left,
+      top
+    };
+
+    const matDialogSub = this.matDialog
+      .open(dialogComponent, dialogConfig)
+      .afterClosed()
+      .subscribe({
+        next: (result) => { console.log(result); },
+        complete: () => { if (afterClosed) { afterClosed(); } },
+        error: (error) => { console.error(error); }
+      });
+  }
+}

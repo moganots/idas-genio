@@ -1,0 +1,76 @@
+<div class="idas-dialog open">
+  <header class="header">
+    <i class="material-icons">{{pageIcon}}</i>
+    <h4>{{ capitalizeFirstLetter(action) }} {{ capitalizeFirstLetter(entityName) }}</h4>
+  </header>
+  <form [formGroup]="frmGroup">
+    <div class="content" formGroupName="frmFields">
+      <div *ngFor="let udf of useDataFields; let i = index">
+        <span [ngSwitch]="udf.controlType">
+          <span *ngSwitchCase="'textbox'">
+            <mat-form-field>
+              <input matInput type="text" id="{{udf.name}}" name="{{udf.name}}"
+              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
+              placeholder="{{ getFieldPlaceholder(udf) }}" (change)="onValueChanged(udf, $event)" />
+            </mat-form-field>
+          </span>
+          <span *ngSwitchCase="'number'">
+            <mat-form-field>
+              <input matInput type="number" id="{{udf.name}}" name="{{udf.name}}"
+              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
+              placeholder="{{ getFieldPlaceholder(udf) }}" (keyup)="onValueChanged(udf, $event)" />
+            </mat-form-field>
+          </span>
+          <span *ngSwitchCase="'select'">
+            <mat-form-field>
+              <input matInput type="text" id="{{udf.name}}" name="{{udf.name}}"
+                  formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
+                  placeholder="{{ getFieldPlaceholder(udf) }}" [matAutocomplete]="i" (keyup)="onValueChanged(udf, $event)" (ngModel)="getNgModelValue()">
+              <mat-autocomplete #i="matAutocomplete">
+                  <mat-option *ngFor="let value of udf.filteredLookupValues | async" [value]="value.id"
+                      (onSelectionChange)="onSelectedValueChanged(udf, $event)" matSort>
+                      <span class="span-mat-option">{{value.displayValue || 'No option value(s)'}}</span>
+                  </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </span>
+          <span *ngSwitchCase="'checkbox'">
+            <mat-checkbox id="{{udf.name}}" name="{{udf.name}}" formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class="" >{{ getFieldPlaceholder(udf) }}</mat-checkbox>
+          </span>
+          <span *ngSwitchCase="'datetimepicker'">
+            <mat-form-field>
+              <mat-label>{{ getFieldPlaceholder(udf) }}</mat-label>
+              <input matInput [matDatepicker]="picker" id="{{udf.name}}" name="{{udf.name}}"
+              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
+              placeholder="{{ getFieldPlaceholder(udf) }}" (dateInput)="onDateChanged(udf, $event)" (dateChange)="onDateChanged(udf, $event)" />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </span>
+          <span *ngSwitchCase="'password'">
+            <mat-form-field>
+              <input matInput type="password" id="{{udf.name}}" name="{{udf.name}}"
+              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
+              placeholder="{{ getFieldPlaceholder(udf) }}" (keyup)="onValueChanged(udf, $event)" />
+            </mat-form-field>
+          </span>
+          <span *ngSwitchCase="'textarea'">
+            <mat-form-field>
+              <textarea matInput type="textarea" id="{{udf.name}}" name="{{udf.name}}"
+              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
+              placeholder="{{ getFieldPlaceholder(udf) }}" (keyup)="onValueChanged(udf, $event)"></textarea>
+            </mat-form-field>
+          </span>
+        </span>
+      </div>
+    </div>
+  </form>
+  <footer class="footer">
+    <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right" type="button" data-dismiss="modal" (click)="onClickDialogClose()" title="Close">
+      <i class="material-icons">close</i>
+    </button>
+    <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right" type="button" [disabled]="frmGroup.invalid" (click)="onClickSave()" title="Save Changes">
+      <i class="material-icons">save</i>
+    </button>
+  </footer>
+</div>

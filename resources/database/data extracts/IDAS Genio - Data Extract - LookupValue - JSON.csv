@@ -1,0 +1,481 @@
+_id;LookupCategoryId;Value;Value2;Value3;Image;Icon;IsActive;CreatedBy;DateCreated;ModifiedBy;DateModified
+1;1;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+2;2;Absa Bank Ltd;NULL;NULL;./assets/img/banks/icon/absa-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+3;2;African Bank Ltd;NULL;NULL;./assets/img/banks/icon/african-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+4;2;Albaraka Bank Limited;NULL;NULL;./assets/img/banks/icon/albaraka-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+5;2;Bidvest Bank Limited;NULL;NULL;./assets/img/banks/icon/bidvest-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+6;2;BoE Private Clients;NULL;NULL;./assets/img/banks/icon/boe-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+7;2;Capitec Bank Ltd;NULL;NULL;./assets/img/banks/icon/capitec-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+8;2;Discovery Bank Ltd;NULL;NULL;./assets/img/banks/icon/discovery-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+9;2;FirstRand Bank Ltd;NULL;NULL;./assets/img/banks/icon/fnb-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+10;2;Grindrod Bank;NULL;NULL;./assets/img/banks/icon/grindrod-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+11;2;Habib Overseas Bank Limited;NULL;NULL;./assets/img/banks/icon/habib-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+12;2;HBZ Bank Limited;NULL;NULL;./assets/img/banks/icon/hbz-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+13;2;Investec Bank Ltd;NULL;NULL;./assets/img/banks/icon/investec-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+14;2;Mercantile Bank Limited;NULL;NULL;./assets/img/banks/icon/mercantile-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+15;2;Nedbank Group Limited;NULL;NULL;./assets/img/banks/icon/ned-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+16;2;Rand Merchant Bank;NULL;NULL;./assets/img/banks/icon/rand-merchant-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+17;2;RMB Private Bank;NULL;NULL;./assets/img/banks/icon/rmb-private-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+18;2;Sasfin Bank Ltd;NULL;NULL;./assets/img/banks/icon/sasfin-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+19;2;South African Bank of Athens Limited;NULL;NULL;./assets/img/banks/icon/south-african-bank-of-athens-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+20;2;Standard Bank of SA Ltd;NULL;NULL;./assets/img/banks/icon/standard-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+21;2;Standard Chartered Bank Ltd;NULL;NULL;./assets/img/banks/icon/standard-chartered-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+22;2;Wesbank;NULL;NULL;./assets/img/banks/icon/wes-bank.png;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+23;3;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+24;4;Administration;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+25;4;Business Development;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+26;4;Communications;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+27;4;Customer Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+28;4;Finance;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+29;4;General Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+30;4;Health and Safety;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+31;4;Human Resources;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+32;4;IT Support;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+33;4;Learning, Training and Development;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+34;4;Legal;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+35;4;Management;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+36;4;Manufacturing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+37;4;Marketing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+38;4;Operations;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+39;4;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+40;4;Procurement;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+41;4;Research and Development;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+42;4;Sales;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+43;4;Transportation;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+44;5;Consultant;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+45;5;Freelancer;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+46;5;Indipendent Contractor;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+47;5;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+48;5;Part-Time;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+49;5;Permanent;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+50;5;Seasonal;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+51;5;Temporary;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+52;6;Female;NULL;NULL;NULL;female;1;1;2021-04-08 20:32:50.820;NULL;NULL
+53;6;Male;NULL;NULL;NULL;male;1;1;2021-04-08 20:32:50.820;NULL;NULL
+54;6;Other;NULL;NULL;NULL;person;1;1;2021-04-08 20:32:50.820;NULL;NULL
+55;7;Administrators;NULL;NULL;NULL;supervisor_account;1;1;2021-04-08 20:32:50.820;NULL;NULL
+56;7;Clients;NULL;NULL;NULL;stream;1;1;2021-04-08 20:32:50.820;NULL;NULL
+57;7;Employees;NULL;NULL;NULL;groups;1;1;2021-04-08 20:32:50.820;NULL;NULL
+58;7;General;NULL;NULL;NULL;person;1;1;2021-04-08 20:32:50.820;NULL;NULL
+59;7;Suppliers;NULL;NULL;NULL;reduce_capacity;1;1;2021-04-08 20:32:50.820;NULL;NULL
+60;8;Abortion Policy/Anti-Abortion;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+61;8;Abortion Policy/Pro-Abortion Rights;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+62;8;Accountants;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+63;8;Advertising/Public Relations;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+64;8;Aerospace, Defense Contractors;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+65;8;Agribusiness;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+66;8;Agricultural Services & Products;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+67;8;Agriculture;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+68;8;Air Transport;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+69;8;Air Transport Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+70;8;Airlines;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+71;8;Alcoholic Beverages;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+72;8;Alternative Energy Production & Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+73;8;Architectural Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+74;8;Attorneys/Law Firms;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+75;8;Auto Dealers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+76;8;Auto Dealers, Japanese;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+77;8;Auto Manufacturers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+78;8;Automotive;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+79;8;Banking, Mortgage;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+80;8;Banks, Commercial;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+81;8;Banks, Savings & Loans;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+82;8;Bars & Restaurants;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+83;8;Beer, Wine & Liquor;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+84;8;Books, Magazines & Newspapers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+85;8;Broadcasters, Radio/TV;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+86;8;Builders/General Contractors;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+87;8;Builders/Residential;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+88;8;Building Materials & Equipment;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+89;8;Building Trade Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+90;8;Business Associations;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+91;8;Business Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+92;8;Cable & Satellite TV Production & Distribution;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+93;8;Candidate Committees;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+94;8;Candidate Committees, Democratic;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+95;8;Candidate Committees, Republican;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+96;8;Car Dealers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+97;8;Car Dealers, Imports;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+98;8;Car Manufacturers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+99;8;Casinos / Gambling;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+100;8;Cattle Ranchers/Livestock;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+101;8;Chemical & Related Manufacturing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+102;8;Chiropractors;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+103;8;Civil Servants/Public Officials;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+104;8;Clergy & Religious Organizations;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+105;8;Clothing Manufacturing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+106;8;Coal Mining;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+107;8;Colleges, Universities & Schools;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+108;8;Commercial Banks;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+109;8;Commercial TV & Radio Stations;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+110;8;Communications/Electronics;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+111;8;Computer Software;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+112;8;Conservative/Republican;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+113;8;Construction;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+114;8;Construction Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+115;8;Construction Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+116;8;Credit Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+117;8;Crop Production & Basic Processing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+118;8;Cruise Lines;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+119;8;Cruise Ships & Lines;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+120;8;Dairy;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+121;8;Defense;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+122;8;Defense Aerospace;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+123;8;Defense Electronics;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+124;8;Defense/Foreign Policy Advocates;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+125;8;Democratic Candidate Committees;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+126;8;Democratic Leadership PACs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+127;8;Democratic/Liberal;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+128;8;Dentists;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+129;8;Doctors & Other Health Professionals;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+130;8;Drug Manufacturers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+131;8;Education;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+132;8;Electric Utilities;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+133;8;Electronics Manufacturing & Equipment;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+134;8;Electronics, Defense Contractors;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+135;8;Energy & Natural Resources;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+136;8;Entertainment Industry;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+137;8;Environment;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+138;8;Farm Bureaus;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+139;8;Farming;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+140;8;Finance / Credit Companies;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+141;8;Finance, Insurance & Real Estate;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+142;8;Food & Beverage;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+143;8;Food Processing & Sales;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+144;8;Food Products Manufacturing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+145;8;Food Stores;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+146;8;Foreign & Defense Policy;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+147;8;Forestry & Forest Products;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+148;8;For-profit Education;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+149;8;For-profit Prisons;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+150;8;Foundations, Philanthropists & Non-Profits;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+151;8;Funeral Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+152;8;Gambling & Casinos;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+153;8;Gambling, Indian Casinos;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+154;8;Garbage Collection/Waste Management;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+155;8;Gas & Oil;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+156;8;General Contractors;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+157;8;Government Employee Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+158;8;Government Employees;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+159;8;Gun Control;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+160;8;Gun Rights;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+161;8;Health;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+162;8;Health Professionals;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+163;8;Health Services/HMOs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+164;8;Hedge Funds;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+165;8;HMOs & Health Care Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+166;8;Home Builders;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+167;8;Hospitals & Nursing Homes;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+168;8;Hotels, Motels & Tourism;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+169;8;Human Rights;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+170;8;Ideological/Single-Issue;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+171;8;Indian Gaming;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+172;8;Industrial Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+173;8;Insurance;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+174;8;Internet;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+175;8;Israel Policy;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+176;8;Labor;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+177;8;Lawyers & Lobbyists;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+178;8;Lawyers / Law Firms;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+179;8;Leadership PACs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+180;8;LGBTQIA Rights & Issues;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+181;8;Liberal/Democratic;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+182;8;Liquor, Wine & Beer;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+183;8;Livestock;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+184;8;Lobbyists;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+185;8;Lodging / Tourism;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+186;8;Logging, Timber & Paper Mills;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+187;8;Manufacturing, Misc;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+188;8;Marijuana;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+189;8;Marine Transport;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+190;8;Meat processing & products;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+191;8;Medical Supplies;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+192;8;Mining;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+193;8;Misc Business;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+194;8;Misc Finance;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+195;8;Misc Manufacturing & Distributing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+196;8;Misc Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+197;8;Miscellaneous Defense;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+198;8;Miscellaneous Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+199;8;Mortgage Bankers & Brokers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+200;8;Motion Picture Production & Distribution;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+201;8;Music Production;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+202;8;Natural Gas Pipelines;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+203;8;Newspaper, Magazine & Book Publishing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+204;8;Non-profits, Foundations & Philanthropists;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+205;8;Nurses;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+206;8;Nursing Homes/Hospitals;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+207;8;Nutritional & Dietary Supplements;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+208;8;Oil & Gas;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+209;8;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+210;8;Payday Lenders;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+211;8;Pharmaceutical Manufacturing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+212;8;Pharmaceuticals / Health Products;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+213;8;Phone Companies;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+214;8;Physicians & Other Health Professionals;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+215;8;Postal Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+216;8;Poultry & Eggs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+217;8;Power Utilities;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+218;8;Printing & Publishing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+219;8;Private Equity & Investment Firms;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+220;8;Professional Sports, Sports Arenas & Related Equipment & Services;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+221;8;Progressive/Democratic;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+222;8;Pro-Israel;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+223;8;Public Employees;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+224;8;Public Sector Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+225;8;Publishing & Printing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+226;8;Radio/TV Stations;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+227;8;Railroads;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+228;8;Real Estate;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+229;8;Record Companies/Singers;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+230;8;Recorded Music & Music Production;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+231;8;Recreation / Live Entertainment;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+232;8;Religious Organizations/Clergy;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+233;8;Republican Candidate Committees;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+234;8;Republican Leadership PACs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+235;8;Republican/Conservative;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+236;8;Residential Construction;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+237;8;Restaurants & Drinking Establishments;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+238;8;Retail Sales;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+239;8;Retired;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+240;8;Savings & Loans;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+241;8;Schools/Education;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+242;8;Sea Transport;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+243;8;Securities & Investment;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+244;8;Special Trade Contractors;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+245;8;Sports, Professional;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+246;8;Steel Production;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+247;8;Stock Brokers/Investment Industry;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+248;8;Student Loan Companies;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+249;8;Sugar Cane & Sugar Beets;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+250;8;Teachers Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+251;8;Teachers/Education;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+252;8;Telecom Services & Equipment;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+253;8;Telephone Utilities;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+254;8;Textiles;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+255;8;Timber, Logging & Paper Mills;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+256;8;Tobacco;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+257;8;Transportation;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+258;8;Transportation Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+259;8;Trash Collection/Waste Management;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+260;8;Trucking;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+261;8;TV / Movies / Music;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+262;8;TV Production;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+263;8;Unions;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+264;8;Unions, Airline;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+265;8;Unions, Building Trades;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+266;8;Unions, Industrial;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+267;8;Unions, Misc;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+268;8;Unions, Public Sector;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+269;8;Unions, Teacher;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+270;8;Unions, Transportation;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+271;8;Universities, Colleges & Schools;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+272;8;Vegetables & Fruits;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+273;8;Venture Capital;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+274;8;Waste Management;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+275;8;Wine, Beer & Liquor;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+276;8;Womens Issues;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+277;9;Business Analyst;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+278;9;Client;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+279;9;Client Liason;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+280;9;Engineer;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+281;9;General;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+282;9;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+283;9;Project Manager;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+284;9;Senior Engineer;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+285;9;Supervisor;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+286;9;Supplier;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+287;9;Team Lead;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+288;9;Technical Lead;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+289;10;CEO;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+290;10;CFO;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+291;10;Clerk;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+292;10;Engineer;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+293;10;General Manager;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+294;10;Managing Director;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+295;10;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+296;10;Personal Assistant;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+297;10;Secretary;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+298;10;Senior Engineer;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+299;11;Afrikaans;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+300;11;English;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+301;11;IsiNdebele;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+302;11;IsiSwati;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+303;11;IsiXhosa;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+304;11;IsiZulu;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+305;11;SePedi;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+306;11;SeSotho;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+307;11;SeTswana;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+308;11;TshiVenda;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+309;11;Tshonga;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+310;12;Eastern Cape;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+311;12;Free State;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+312;12;Gauteng;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+313;12;KwaZulu-Natal;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+314;12;Limpopo;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+315;12;Mpumalanga;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+316;12;North West;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+317;12;Northern Cape;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+318;12;Western Cape;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+319;13;Admiral;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+320;13;Air Comm;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+321;13;Ambassador;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+322;13;Baron;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+323;13;Baroness;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+324;13;Brig & Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+325;13;Brig Gen;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+326;13;Brigadier;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+327;13;Brother;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+328;13;Canon;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+329;13;Capt;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+330;13;Chief;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+331;13;Cllr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+332;13;Col;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+333;13;Commander;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+334;13;Commander & Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+335;13;Consul;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+336;13;Consul General;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+337;13;Count;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+338;13;Countess;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+339;13;Countess of;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+340;13;Cpl;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+341;13;Dame;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+342;13;Deputy;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+343;13;Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+344;13;Dr & Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+345;13;Drs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+346;13;Duchess;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+347;13;Duke;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+348;13;Earl;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+349;13;Father;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+350;13;General;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+351;13;Gräfin;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+352;13;HE;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+353;13;Her Grace;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+354;13;His Excellency;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+355;13;HMA;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+356;13;Ing;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+357;13;Judge;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+358;13;Justice;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+359;13;Lady;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+360;13;Lic;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+361;13;Llc;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+362;13;Lord;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+363;13;Lord & Lady;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+364;13;Lt;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+365;13;Lt Col;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+366;13;Lt Cpl;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+367;13;M;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+368;13;Madam;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+369;13;Madame;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+370;13;Major;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+371;13;Major General;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+372;13;Marchioness;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+373;13;Marquis;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+374;13;Minister;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+375;13;Miss;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+376;13;Mme;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+377;13;Mr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+378;13;Mr & Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+379;13;Mr & Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+380;13;Mr & Ms;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+381;13;Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+382;13;Ms;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+383;13;Other;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+384;13;Prince;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+385;13;Princess;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+386;13;Prof;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+387;13;Prof & Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+388;13;Prof & Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+389;13;Prof & Rev;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+390;13;Prof Dame;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+391;13;Prof Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+392;13;Professor;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+393;13;Pvt;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+394;13;Rabbi;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+395;13;Rear Admiral;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+396;13;Rev;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+397;13;Rev & Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+398;13;Rev Canon;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+399;13;Rev Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+400;13;Senator;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+401;13;Sgt;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+402;13;Sheriff;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+403;13;Sir;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+404;13;Sir & Lady;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+405;13;Sister;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+406;13;Sqr. Leader;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+407;13;The Earl of;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+408;13;The Hon;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+409;13;The Hon Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+410;13;The Hon Lady;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+411;13;The Hon Lord;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+412;13;The Hon Mrs;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+413;13;The Hon Sir;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+414;13;The Honourable;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+415;13;The Rt Hon;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+416;13;The Rt Hon Dr;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+417;13;The Rt Hon Lord;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+418;13;The Rt Hon Sir;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+419;13;The Rt Hon Visc;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+420;13;Viscount;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+421;14;Blocked;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+422;14;Cancelled;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+423;14;Completed;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+424;14;Created;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+425;14;De-scoped;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+426;14;Done;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+427;14;In Progress;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+428;14;Not Started;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+429;14;On Hold;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+430;14;Re-Started;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+431;14;Started;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+432;15;Activation;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+433;15;Assign;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+434;15;Calculate;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+435;15;Change;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+436;15;Create;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+437;15;De-Activation;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+438;15;Delete;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+439;15;De-Registration;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+440;15;Download;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+441;15;Edit;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+442;15;Email;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+443;15;Error;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+444;15;Login;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+445;15;Logout;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+446;15;Message;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+447;15;Re-Activation;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+448;15;Read;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+449;15;Re-Assign;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+450;15;Re-Calculate;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+451;15;Receive;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+452;15;Registration;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+453;15;Re-Registration;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+454;15;Resend;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+455;15;Send;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+456;15;Termination;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+457;15;Un-Assign;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+458;15;Update;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+459;15;Upload;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+460;16;Invalid Credentials;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+461;16;Number of Retries Reached;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+462;16;User Account Compromised;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+463;16;User Account Does Not Exist;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+464;16;User Account Expired;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+465;16;User Account Not Activated;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+466;16;User Account Terminated;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+467;17;Admin;NULL;NULL;NULL;supervisor_account;1;1;2021-04-08 20:32:50.820;NULL;NULL
+468;17;Client;NULL;NULL;NULL;stream;1;1;2021-04-08 20:32:50.820;NULL;NULL
+469;17;Employee;NULL;NULL;NULL;person;1;1;2021-04-08 20:32:50.820;NULL;NULL
+470;17;General;NULL;NULL;NULL;supervised_user_circle;1;1;2021-04-08 20:32:50.820;NULL;NULL
+471;17;Root;NULL;NULL;NULL;admin_panel_settings;1;1;2021-04-08 20:32:50.820;NULL;NULL
+472;17;Supplier;NULL;NULL;NULL;reduce_capacity;1;1;2021-04-08 20:32:50.820;NULL;NULL
+473;18;Accrued Time Off;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+474;18;Bonus;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+475;18;Commission;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+476;18;Hourly;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+477;18;Monthly;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+478;18;Overtime;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+479;18;Retroactive;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL
+480;18;Severance;NULL;NULL;NULL;report_problem;1;1;2021-04-08 20:32:50.820;NULL;NULL

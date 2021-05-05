@@ -1,0 +1,13 @@
+sb.AppendLine("/*");
+sb.AppendLine("|------------------------------------------------------------------------------------------------------------------");
+sb.AppendLine("| Author:	    TS MOGANO");
+sb.AppendLine("| Create date:  02/03/2021");
+sb.AppendLine("| Description:  IDAS - Genio API - [dbo].[" + tableName + "] database table model class");
+sb.AppendLine("|------------------------------------------------------------------------------------------------------------------");
+sb.AppendLine(" */");
+sb.AppendLine("");
+sb.AppendLine("const " + tableName + "Schema = {");
+sb.AppendLine("    _id: Number");
+sb.AppendLine("}");
+sb.AppendLine("");
+sb.AppendLine("module.exports = " + tableName + "Schema;");

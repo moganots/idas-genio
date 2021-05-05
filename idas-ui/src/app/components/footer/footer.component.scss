@@ -1,0 +1,17 @@
+.idas-footer {
+  background-color: #353434;
+  color: whitesmoke;
+  height: fit-content;
+
+  .powered-by {
+    font-size: 14px;
+
+    a {
+      color: #FF4500;
+      &:hover{
+        color: #ec5800;
+        text-decoration: none;
+      }
+    }
+  }
+}

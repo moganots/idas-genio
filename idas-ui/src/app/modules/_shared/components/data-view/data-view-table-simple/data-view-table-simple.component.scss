@@ -1,0 +1,73 @@
+@import './../../../../../../assets/scss/idas/colors.scss';
+@import './../../../../../../assets/scss/idas/fonts.scss';
+
+.mat-table {
+  border: 1px gray;
+  overflow: auto;
+  max-height: 500px;
+}
+
+mat-footer-row,
+mat-header-row,
+mat-row {
+  display:inline-flex;
+  min-width: 100%;
+  width: 100%;
+}
+
+mwlResizable {
+  box-sizing: border-box;
+}
+
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 200px;
+  word-break: break-all;
+  flex: none;
+  display: block;
+}
+
+mat-header-cell {
+  background-color: gray;
+  color: whitesmoke;
+  font-family: $OpenSans_Bold;
+  font-size: 0.90em;
+  padding: 18px 10px 10px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.mat-sort-header-button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+mat-cell {
+  display: inline-block;
+  font-family: $OpenSans_Light;
+  font-size: 0.90em;
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+
+  mat-checkbox {
+    padding: 2px 12px 0 15px;
+  }
+}
+
+.mat-cell {
+  padding: 13px 12px 0 13px;
+}
+
+.data-view-action-buttons-header {
+  background-color: white;
+}
+
+.data-view-action-buttons-cell {
+  padding: 0 5px 0 60px;
+  right: 0;
+}
