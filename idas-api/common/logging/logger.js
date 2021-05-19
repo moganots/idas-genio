@@ -2,7 +2,7 @@
 |------------------------------------------------------------------------------------------------------------------
 | Author:	    TS MOGANO
 | Create date:  02/03/2021
-| Description:  IDAS - Genio API logging utilities class
+| Description:  IDAS - Genio - API - logging utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
 
@@ -68,6 +68,13 @@ const logToPromise = (caller, logType, methodName, message, data = null) => {
 | Functions - Logging (Http)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
+const onHttpRequestCompleted = (caller, request, response, error = null, message = null, data = null) => {
+  if(error){
+      return httpOnError(caller, request, response, error);
+  }else{
+      return httpOnSuccess(caller, request, response, {data: data, message: message});
+  }
+}
 const httpOnSuccess = (caller, request, response, result) => {
   return httpLog(caller, `INFO`, request, response, result);
 }
@@ -160,6 +167,7 @@ module.exports = {
   fatal: fatal,
   log: log,
   logToPromise: logToPromise,
+  onHttpRequestCompleted: onHttpRequestCompleted,
   httpOnSuccess: httpOnSuccess,
   httpOnError: httpOnError,
   message: message,

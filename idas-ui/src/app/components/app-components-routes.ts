@@ -24,7 +24,7 @@ export const AppComponentsRoutes: RouteInfo[] = [
   // tslint:disable-next-line:max-line-length
   { path: UserProfileConfiguration.pageRoute, title: UserProfileConfiguration.pageRouteTitle, icon: UserProfileConfiguration.pageIcon, class: UserProfileConfiguration.pageRouteCssClass  },
   // tslint:disable-next-line:max-line-length
-  { path: UserNotificationsConfiguration.pageRoute, title: UserNotificationsConfiguration.pageRouteTitle, icon: UserNotificationsConfiguration.pageIcon, class: UserNotificationsConfiguration.pageRouteCssClass  },
+  // { path: UserNotificationsConfiguration.pageRoute, title: UserNotificationsConfiguration.pageRouteTitle, icon: UserNotificationsConfiguration.pageIcon, class: UserNotificationsConfiguration.pageRouteCssClass  },
   // tslint:disable-next-line:max-line-length
   { path: UserInboxConfiguration.pageRoute, title: UserInboxConfiguration.pageRouteTitle, icon: UserInboxConfiguration.pageIcon, class: UserInboxConfiguration.pageRouteCssClass  },
   // tslint:disable-next-line:max-line-length

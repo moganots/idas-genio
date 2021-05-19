@@ -2,7 +2,7 @@
 |------------------------------------------------------------------------------------------------------------------
 | Author:	    TS MOGANO
 | Create date:  02/03/2021
-| Description:  IDAS - Genio API common Functions utilities class 
+| Description:  IDAS - Genio - API - common Functions utilities class 
 |------------------------------------------------------------------------------------------------------------------
  */
 
@@ -27,14 +27,22 @@ const padRight = (value, padding) => {
   return (value && padding) ? value.toString().padStart(padding.length, padding) : value;
 }
 const isObjectSet = (value) => {
-    return !(value === null) || !(value === undefined) || !(value === NaN);
+    return !(value === null || value === undefined || value === NaN);
 }
-const isEmptyObject = (value) => { return Object.keys(value).length === 0 && value.constructor === Object; }
-const isStringSet = (value) => {
-    return isObjectSet(value) && value.trim().length != 0;
+const isEmptyObject = (value) => {
+    return Object.keys(value).length === 0 || value.constructor === Object;
+}
+const isEmptyString = (value = '') => {
+    return value.trim().length === 0;
+}
+const isNotEmptyString = (value = '') => {
+    return !isEmptyString(value);
+}
+const isNotNaN = (value = NaN) => {
+    return !(value === NaN);
 }
 const IsSetReturn = (value, defaultValue = null) => {
-    return isStringSet(value) ? value : defaultValue;
+    return isEmptyString(value) ? value : defaultValue;
 }
 const ifNullReturn = (value) => {
     return (value) ? value.trim() : null;
@@ -59,6 +67,9 @@ const bytesToString = (byteArray) => {
 }
 const toBase64 = (valueToEncode) => {
     return Buffer.from(valueToEncode).toString(`base64`);
+}
+const toLocaleLowerCaseTrim = (value) => {
+    return (value || '').toString().toLocaleLowerCase().trim();
 }
 const getBaseUrl = (protocol, hostIpName, portNumber = null) => {
     if(protocol && hostIpName && portNumber) return `${protocol}://${hostIpName}:${portNumber}`;
@@ -108,9 +119,6 @@ const getLast = (valueToSplit, delimiter) => {
   var items = (valueToSplit && delimiter) ? valueToSplit.split(delimiter) : [];
   return items[items.length - 1];
 }
-const toLocaleLowerCase = (value) => {
-    return (value || ``).toLocaleLowerCase();
-}
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,7 +131,9 @@ module.exports = {
     padRight: padRight,
     isObjectSet: isObjectSet,
     isEmptyObject: isEmptyObject,
-    isStringSet: isStringSet,
+    isEmptyString: isEmptyString,
+    isNotEmptyString: isNotEmptyString,
+    isNotNaN: isNotNaN,
     IsSetReturn, IsSetReturn,
     ifNullReturn: ifNullReturn,
     hasValues: hasValues,
@@ -141,5 +151,5 @@ module.exports = {
     getFirst: getFirst,
     getElementAt:getElementAt,
     getLast, getLast,
-    toLocaleLowerCase: toLocaleLowerCase
+    toLocaleLowerCaseTrim: toLocaleLowerCaseTrim
 }

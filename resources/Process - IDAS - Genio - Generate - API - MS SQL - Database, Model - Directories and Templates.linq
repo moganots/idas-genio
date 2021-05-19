@@ -46,19 +46,16 @@ void Main()
 	// -- root:/database ---------------------------------------------------------------------------------------------------------------		
 	string rootDatabaseDirectory = @"C:\Users\A236978\Documents\Personal\Projects\Izingodla\idas-v.0.2\idas-api\database";
 	
-	// Create /database directory
 	createDirectoryIfNotExists(rootDatabaseDirectory);
 	
 	// -- root:/database/mssql ---------------------------------------------------------------------------------------------------------
 	string rootDatabaseMsSqlDirectory = System.IO.Path.Combine(rootDatabaseDirectory, "mssql");
 	
-	// Create /database/mssql directory
 	createDirectoryIfNotExists(rootDatabaseMsSqlDirectory);
 	
 	// -- root:/database/mssql/models -------------------------------------------------------------------------------------------------
 	string rootDatabaseMsSqlModelsDirectory = System.IO.Path.Combine(rootDatabaseMsSqlDirectory, "models");
 	
-	// Create /database/mssql/models directory
 	createDirectoryIfNotExists(rootDatabaseMsSqlModelsDirectory);
 	
 	// Create a model template file for each modelName in modelNames
@@ -72,7 +69,6 @@ void Main()
 	// -- root:/database/mssql/repository ----------------------------------------------------------------------------------------------
 	string rootDatabaseMsSqlRepositoryDirectory = System.IO.Path.Combine(rootDatabaseMsSqlDirectory, "repository");
 	
-	// Create /database/mssql/repository directory
 	createDirectoryIfNotExists(rootDatabaseMsSqlRepositoryDirectory);
 	
 	// Create a directory and template file for each modelName in modelNames into /database/mssql/repository

@@ -1,23 +1,29 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AppComponentsRoutes } from '../app-components-routes';
+import { AuthenticationService, CommonComponent } from 'app/shared/shared.module';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  providers: [AuthenticationService]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent extends CommonComponent implements OnInit {
     private listTitles: any[];
-    location: Location;
     // tslint:disable-next-line:variable-name
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
-      this.location = location;
+    constructor(
+        public location: Location,
+        public router: Router,
+        public authenticationService: AuthenticationService,
+        private element: ElementRef
+        ) {
+        super(location, router, authenticationService);
           this.sidebarVisible = false;
     }
 
@@ -41,7 +47,7 @@ export class NavbarComponent implements OnInit {
         const body = document.getElementsByTagName('body')[0];
         // tslint:disable-next-line:only-arrow-functions
         setTimeout(function(){
-            toggleButton.classList.add('toggled');
+            if(toggleButton){ toggleButton.classList.add('toggled'); }
         }, 500);
 
         body.classList.add('nav-open');
@@ -88,9 +94,9 @@ export class NavbarComponent implements OnInit {
             $layer.setAttribute('class', 'close-layer');
 
 
-            if (body.querySelectorAll('.main-panel')) {
+            if (this.isLoggedIn() && body.querySelectorAll('.main-panel')) {
                 document.getElementsByClassName('main-panel')[0].appendChild($layer);
-            }else if (body.classList.contains('off-canvas-sidebar')) {
+            }else if (this.isLoggedIn() && body.classList.contains('off-canvas-sidebar')) {
                 document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
             }
 

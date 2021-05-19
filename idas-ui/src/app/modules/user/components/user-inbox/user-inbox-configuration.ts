@@ -1,7 +1,7 @@
 export class UserInboxConfiguration {
-  public static identifier = 'inbox';
+  public static identifier = 'user-inbox';
   public static pageIcon = 'mail_outline';
-  public static pageRoute = 'inbox';
+  public static pageRoute = 'user-inbox';
   public static pageRouteTitle = 'My Inbox';
   public static pageRouteCssClass = '';
   public static pageTitle = `Manage Inbox`;

@@ -1,19 +1,19 @@
 import { User } from '../user/user';
 export class BaseModel {
   _id:number;
-  code:string;
-  name:string;
-  description:string;
-  isActive:boolean;
-  createdBy:User;
-  dateCreated:Date;
+  Code:string;
+  Name:string;
+  Description:string;
+  IsActive:boolean;
+  CreatedBy:User;
+  DateCreated:Date;
   ModifiedBy:User;
-  dateModified:Date;
+  DateModified:Date;
 
   constructor(id, code?, name?, description?){
     this._id = id;
-    this.code = code;
-    this.name = name;
-    this.description = description;
+    this.Code = code;
+    this.Name = name;
+    this.Description = description;
   }
 }

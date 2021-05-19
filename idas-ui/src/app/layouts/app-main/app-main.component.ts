@@ -8,18 +8,27 @@ import * as $ from 'jquery';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { AuthenticationService, CommonComponent, User } from 'app/shared/shared.module';
 
 @Component({
   selector: 'app-main',
   templateUrl: './app-main.component.html',
-  styleUrls: ['./app-main.component.scss']
+  styleUrls: ['./app-main.component.scss'],
+  providers: [AuthenticationService]
 })
-export class AppMainComponent implements OnInit, AfterViewInit {
+export class AppMainComponent extends CommonComponent implements OnInit, AfterViewInit {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  public currentUser: User;
 
-  constructor( public location: Location, private router: Router) {}
+  constructor(
+    public location: Location,
+    public router: Router,
+    public authenticationService: AuthenticationService
+    ) {
+      super(location, router, authenticationService);
+  }
 
   ngOnInit() {
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
@@ -53,7 +62,7 @@ export class AppMainComponent implements OnInit, AfterViewInit {
            elemMainPanel.scrollTop = 0;
            elemSidebar.scrollTop = 0;
       });
-      if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+      if (this.isLoggedIn() && window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
           let ps = new PerfectScrollbar(elemMainPanel);
           ps = new PerfectScrollbar(elemSidebar);
       }
@@ -153,7 +162,7 @@ export class AppMainComponent implements OnInit, AfterViewInit {
       }
   }
   runOnRouteChange(): void {
-    if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+    if (this.isLoggedIn() && window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
       const elemMainPanel = document.querySelector('.main-panel') as HTMLElement;
       const ps = new PerfectScrollbar(elemMainPanel);
       ps.update();

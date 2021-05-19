@@ -1,4 +1,10 @@
 export class GeneralUtil {
+  public static isObjectSet(obj: any){
+    return !(obj === null || obj === undefined);
+  }
+  public static isNotEmptyString(str: string){
+    return this.isObjectSet(str) && str.length != 0;
+  }
   public static appendLeadingZero(value: number) {
     return (value <= 9) ? '0' + value : value;
   }

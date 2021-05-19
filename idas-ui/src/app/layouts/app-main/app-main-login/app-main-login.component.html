@@ -1,0 +1,157 @@
+<div *ngIf="!isLoggedIn()" class="main-content idas-main-content" tabindex="-1" role="dialog">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="header">
+                <div class="logo">
+                    <img src="./../../../assets/img/idas/izz-logo-icon-only.png"/>
+                </div>
+                <div class="app-name">
+                    <p class="primary">{{companyName}} - {{applicationName}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="welcome">Log In</p>
+                <form [formGroup]="formLogin">
+                    <span>
+                      <mat-form-field>
+                        <input matInput
+                            type="text"
+                            id="uid"
+                            name="uid"
+                            formControlName="uid"
+                            class=""
+                            placeholder="Email Address / User Name" />
+                      </mat-form-field>
+                      <a class="forgot" href="#">Forgot email address / username?</a>
+                    </span>
+                    <br />
+                    <br />                   
+                    <span>
+                        <mat-form-field>
+                          <input matInput
+                              type="password"
+                              id="password"
+                              name="password"
+                              formControlName="password"
+                              class=""
+                              placeholder="Password" />
+                        </mat-form-field>
+                        <a class="forgot" href="#">Forgot password?</a>
+                    </span>
+                    <br />
+                    <br />
+                    <button mat-icon-button type="submit" class="btn btn-white btn-round btn-just-icon" [disabled]="formLogin.pristine || formLogin.invalid || isBusy" (click)="onClickLogin()" title="Login">
+                      <i class="material-icons">{{isBusy ? "lock" : "lock_open"}}</i>
+                    </button>
+                    <span>
+                        <a class="register" href="#">Register</a>
+                    </span>
+                    <div *ngIf="isBusy || authError" [ngClass]="{'on-login':this.isBusy, 'on-error':this.authError}">
+                        <p>{{authError ? 'Login: failed. An invalid username or password was specified.' : 'Please wait, authenticating'}}</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer idas-footer">
+        <div class="container-fluid">
+            <nav class="pull-left">
+                <ul>
+                    <li>
+                        <a href="http://www.izingcweti.co.za/" target="_blank">
+                          &copy;
+                          {{test | date: 'yyyy'}} {{companyName}} - {{applicationName}}. All Rights Reserved.
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright pull-right powered-by">
+              Powered by:
+              <a href="http://www.skinnovations.co.za/" target="_blank">SK Innovations</a>
+            </div>
+        </div>
+      </footer>
+</div>
+
+<!-- <div *ngIf="!isLoggedIn()" class="idas-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog idas-modal-login" [ngClass]="{ 'animated pulse' : authError == false }" [ngClass]="{ 'animated wobble' : authError == true }" role="document">
+        <div class="modal-content idas-modal-login-content">
+            <div class="header">
+                <div class="logo">
+                    <img src="./../../../assets/img/idas/izz-logo-icon-only.png"/>
+                </div>
+                <div class="app-name">
+                    <p class="primary">{{companyName}} - {{applicationName}}</p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer idas-footer">
+    <div class="container-fluid">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="http://www.izingcweti.co.za/" target="_blank">
+                      &copy;
+                      {{test | date: 'yyyy'}} {{companyName}} - {{applicationName}}. All Rights Reserved.
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright pull-right powered-by">
+          Powered by:
+          <a href="http://www.skinnovations.co.za/" target="_blank">SK Innovations</a>
+        </div>
+    </div>
+  </footer>
+
+
+<!-- <div *ngIf="!isLoggedIn" class="modal" tabindex="-1" role="dialog" style="display:block!important">
+    <div class="modal-dialog idas-modal-login" [ngClass]="{ 'animated pulse' : authError == false }" [ngClass]="{ 'animated wobble' : authError == true }" role="document">
+        <div class="modal-content idas-modal-login-content">
+            <div class="header">
+                <div class="logo">
+                    <img src="./../../../assets/img/idas/izz-logo-icon-only.png" />
+                </div>
+                <div class="app-name">
+                    <p class="name-primary">{{companyName}}</p>
+                    <p class="platinum">{{businessUnit}} - {{applicationName}}</p>
+                </div>
+            </div>
+            <div class="idas-login">
+                <p>Use your windows credentials to login.</p>
+                <br />
+                <form [formGroup]="formLogin">
+                    <mat-form-field>
+                        <input matInput name="uid" type="text" formControlName="uid" [(ngModel)]="uid" placeholder="a-number / user id / e-mail address" [disabled]="isBusy" required>
+                    </mat-form-field>
+                    <div *ngIf="onUidChanged()" class="alert alert-danger">
+                        <div *ngIf="formLogin.controls['uid'].errors.required">
+                            a-number / e-mail address is required
+                        </div>
+                    </div>
+                    <mat-form-field>
+                        <input matInput name="password" type="password" formControlName="password" [(ngModel)]="password" placeholder="password" [disabled]="isBusy" required>
+                    </mat-form-field>
+                    <div *ngIf="onPasswordChanged()" class="alert alert-danger">
+                        <div *ngIf="formLogin.controls['password'].errors.required">
+                            password is required
+                        </div>
+                    </div>
+                    <button mat-icon-button id="submit" (click)="login()" name="submit" type="submit" [disabled]="formLogin.pristine || formLogin.invalid || isBusy" class="btn-sbg btn-float-right">
+                        <mat-icon class="mat-32">{{isBusy ? "lock" : "lock_open"}}</mat-icon>
+                    </button>
+                    <div *ngIf="isBusy || authError" [ngClass]="{'on-login':this.isBusy, 'on-error':this.authError}">
+                        <p>{{authError ? 'Login: failed. An invalid username or password was specified.' : 'Please wait, authenticating'}}</p>
+                    </div>
+                    <app-login-wait *ngIf="isBusy"></app-login-wait>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ -->

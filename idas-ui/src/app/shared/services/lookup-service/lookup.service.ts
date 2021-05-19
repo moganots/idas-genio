@@ -24,7 +24,7 @@ export class LookupService {
     return this.getAllCategories().find((lc) => lc._id === categoryId);
   }
   getCategoryByColumnName(column: any) {
-    return this.getAllCategories().find((lc) => lc.name === this.columnNameWithoutId(column));
+    return this.getAllCategories().find((lc) => lc.Name === this.columnNameWithoutId(column));
   }
   columnNameWithoutId(column: any) {
     const columnName = (column.name || column).trim();
@@ -55,7 +55,7 @@ export class LookupService {
   }
   getLookupValueIdByCategoryAndValue(category: string, value: any): any {
     return this.getAllLookupValues().find((lv) =>
-      this.toLocaleLowerCaseTrim(lv.lookupCategory.name) === this.toLocaleLowerCaseTrim(category)
+      this.toLocaleLowerCaseTrim(lv.lookupCategory.Name) === this.toLocaleLowerCaseTrim(category)
       && this.toLocaleLowerCaseTrim(lv.value) === this.toLocaleLowerCaseTrim(value))._id;
   }
   private filteredLookupValuesByCategory(filterValue: any) {
@@ -65,7 +65,7 @@ export class LookupService {
     return (lv) =>
       (lv.lookupCategory)
       && ((lv.lookupCategory._id === filterValue)
-      || (this.toLocaleLowerCaseTrim(lv.lookupCategory.name) === this.toLocaleLowerCaseTrim(filterValue)));
+      || (this.toLocaleLowerCaseTrim(lv.lookupCategory.Name) === this.toLocaleLowerCaseTrim(filterValue)));
   }
   private toLocaleLowerCaseTrim(value: any){
     return (value || '').toString().toLocaleLowerCase().trim();

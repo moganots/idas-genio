@@ -1,8 +1,10 @@
-import { Component, Inject, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Location } from '@angular/common';
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { DatesUtil, LookupService, ReferenceEntityService } from 'app/shared/shared.module';
+import { Router } from '@angular/router';
+import { AuthenticationService, LookupService, ReferenceEntityService } from 'app/shared/shared.module';
+import { map, startWith } from 'rxjs/operators';
 import { BaseDataViewComponent } from '../../data-view/base-data-view/base-data-view.component';
 
 @Component({
@@ -10,23 +12,19 @@ import { BaseDataViewComponent } from '../../data-view/base-data-view/base-data-
   templateUrl: './base-dialog.component.html',
   styleUrls: ['./base-dialog.component.scss'],
   providers: [
+    AuthenticationService,
     LookupService,
     ReferenceEntityService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
 export class BaseDialogComponent extends BaseDataViewComponent {
-  @Input() public dataFields: any[];
-  public form = new FormControl();
-  public frmGroup: FormGroup;
-  public frmGroupFields: FormGroup;
-  public updates: { [key: string]: any } = {};
-  public dataFieldNames: string[];
-  public useDataFields: any[];
-  public useDataFieldNames: any[];
 
   constructor(
+    public location: Location,
+    public router: Router,
     public matDialog: MatDialog,
+    public authenticationService: AuthenticationService,
     public lookupService: LookupService,
     public referenceEntityService: ReferenceEntityService,
     public dialogRef: MatDialogRef<BaseDialogComponent>,
@@ -40,70 +38,35 @@ export class BaseDialogComponent extends BaseDataViewComponent {
       dataFields: [],
       selected: {},
       selectedIndex: -1
-    }) {
-    super(matDialog, lookupService, referenceEntityService);
+    },
+    public frmBuilder: FormBuilder) {
+    super(location, router, matDialog, authenticationService, lookupService, referenceEntityService);
     this.action = data.action;
     this.dataService = data.dataService;
     this.entityName = data.entityName;
     this.pageIcon = data.pageIcon;
     this.pageName = data.pageName;
     this.pageTitle = data.pageTitle;
-    this.dataFields = data.dataFields;
+    this.sourceDataColumnNames = this.dataFields = data.dataFields;
     this.selected = data.selected || {};
     this.selectedIndex = data.selectedIndex;
+  }
+
+  ngOnInit() {
+    this.setDataSourceDisplayColumnNames();
     this.setDataFieldNames();
     this.setUseDataFields();
-  }
-  setDataFieldNames() {
-    this.dataFieldNames = this.dataFields.map((df) => df.name);
-  }
-  setUseDataFields() {
-    this.useDataFields = this.dataFields.filter((df) => df.canEdit);
-    this.useDataFieldNames = this.useDataFields.map((udf) => udf.name);
-  }
-  getFieldPlaceholder(field: any) {
-    return this.splitCamelCase(this.trimId(field));
-  }
-  getFieldLookupValues(field: any) {
-    if(field.isLookupValueField){
-      field.lookupValues = this.getLookupValuesByColumnName(field)
-        .map((lv) => ({value: lv._id, displayValue: lv.value}));
-    }
-  }
-  filterBy(field: any, filterValue: any) {
-    const noValues = [{displayValue: 'No option value(s)'}];
-    const values: any[] = field.lookupValues || noValues;
-    filterValue = this.getFilterValue(filterValue, field).toString().trim().toLocaleLowerCase();
-    // tslint:disable-next-line:max-line-length
-    const filteredValues = values.filter((value) => this.filterById(value, filterValue) || this.filterByDisplayValue(value, filterValue));
-    const hasValues = !filteredValues.every((value) => value === undefined);
-    return hasValues ? Array.from(new Set(
-      filteredValues.map((value) => value)))
-      .sort((value) => value.displayValue.toLocaleLowerCase().trim()) : noValues;
-  }
-  getFilterValue(filterValue: any, field: any): any {
-    return (this.getFormControlFieldValue(field) || filterValue || '');
-  }
-  getFormControlFieldValue(field: any): any {
-    return (this.frmGroupFields.get(field.name) || new FormControl()).value;
-  }
-  filterById(value: any, filterValue: any): unknown {
-    return ((value.id || '').toString().trim() === filterValue);
-  }
-  filterByDisplayValue(value: any, filterValue: any): unknown {
-    return (value.displayValue.toString().trim().toLocaleLowerCase().includes(filterValue));
-  }
-  onValueChanged(field: any, event: any) {
-    if (!(field)) { return; }
-    this.updates[field.name] = event.target.value;
-  }
-  onSelectedValueChanged(field: any, event: any) {
-    if (!(field) || event.source.value === 'No option value(s)') { return; }
-    this.updates[field.name] = event.source.value;
-  }
-  onDateChanged(field: any, event: MatDatepickerInputEvent<Date>){
-    if (!(field)) { return; }
-    this.updates[field.name] = DatesUtil.formatDateMMDDYYWithSlashSeparator(event.value);
+    this.frmGroupFields = new FormGroup({});
+    this.useDataFields.forEach((field) => {
+      // tslint:disable-next-line:max-line-length
+      this.selected = (this.isCreate()) ? {} : this.selected;
+      const control = new FormControl({value: this.selected[field.name], disabled: this.isFieldDisabled(field)}, this.getFieldConditionalIsRequired(field));
+      field.filteredLookupValues = control.valueChanges.pipe(startWith(''), map((value) => this.filterBy(field, value)));
+      this.frmGroupFields.addControl(field.name, control);
+    });
+    this.frmGroup = this.frmBuilder.group({
+      frmFields: this.frmGroupFields
+    });
   }
   onClickDialogClose(){
     this.dialogRef.close();

@@ -2,7 +2,7 @@
 |------------------------------------------------------------------------------------------------------------------
 | Author:	    TS MOGANO
 | Create date:  02/03/2021
-| Description:  IDAS - Genio API Database common message(s) utilities class
+| Description:  IDAS - Genio - API - Database common message(s) utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
 
@@ -18,8 +18,8 @@
 |------------------------------------------------------------------------------------------------------------------
  */
 const getInfoOnInitMsSqlDbConnectionMessage = (connectionString) => { return {type: ``, message: `Initialising MS SQL database connection to:\r\n${addConnectionString(connectionString)}`}; }
-const getInfoOnFetchNoDataMessage = (command) => { return {type: `InfoFetchNoData`, message: `Command executed successfully. No records found.\r\n${addCommand(command)}`}; };
-const getInfoOnFetchSuccessfulMessage = (command, rowCount = 0) => { return {type: `InfoFetchWithData`, message: `Command executed successfully. ${rowCount} records found\r\n${addCommand(command)}`}; };
+const getInfoOnFetchNoDataMessage = (command, modelType) => { return {type: `InfoFetchNoData`, message: `Command executed successfully. No ${modelType} found.\r\n${addCommand(command)}`}; };
+const getInfoOnFetchSuccessfulMessage = (command, modelType, rowCount = 0) => { return {type: `InfoFetchWithData`, message: `Command executed successfully. ${rowCount} ${modelType}${(rowCount > 1) ? '(s)' : ''} found\r\n${addCommand(command)}`}; };
 const getErrorOnConnectionMessage = (connectionString) => { return {type: `ErrorOnConnection`, message: `Failed to initialise MS SQL database connection to:\r\n${addConnectionString(connectionString)}`}; }
 
 const addConnectionString = (connectionString) => {

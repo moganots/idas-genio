@@ -1,15 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
 import { BaseAssignment } from './domain-models/base/base-assignment';
 import { BaseComment } from './domain-models/base/base-comment';
 import { BaseModel } from './domain-models/base/base-model';
 import { BaseWorkLog } from './domain-models/base/base-work-log';
+
 import { LookupService } from './services/lookup-service/lookup.service';
 import { DataService } from './services/data-service/data.service';
 import { SortingService } from './services/sorting-service/sorting.service';
 import { LookupCategoryService } from './services/lookup-service/lookup-category-service/lookup-category.service';
 import { LookupValueService } from './services/lookup-service/lookup-value-service/lookup-value.service';
 import { ReferenceEntityService } from './services/reference-entity-service/reference-entity.service';
+import { AuthenticationService } from './services/authentication-service/authentication.service';
+
+import { CommonComponent } from './common-component/common/common.component';
+import { SharedConfiguration } from './configuration/shared-configuration';
+
+export { CommonComponent } from './common-component/common/common.component';
+export { SharedConfiguration } from './configuration/shared-configuration';
+
 export { Client } from './domain-models/client/client';
 export { EmployeeSalary } from './domain-models/employee/employee-salary';
 export { Employee } from './domain-models/employee/employee';
@@ -56,6 +66,7 @@ export { DatesUtil } from './utilities/dates-util';
 export { GeneralUtil } from './utilities/general-util';
 
 export { BaseService } from './services/base-service/base.service';
+export { AuthenticationService } from './services/authentication-service/authentication.service';
 export { DataService } from './services/data-service/data.service';
 export { SortingService } from './services/sorting-service/sorting.service';
 export { LookupService } from './services/lookup-service/lookup.service';
@@ -67,8 +78,8 @@ export { ReferenceEntityService } from './services/reference-entity-service/refe
   imports: [
     CommonModule
   ],
-  declarations: [],
+  declarations: [CommonComponent],
   exports: [],
-  providers: [DataService, SortingService, LookupService, LookupCategoryService, LookupValueService, ReferenceEntityService]
+  providers: [AuthenticationService, DataService, SortingService, LookupService, LookupCategoryService, LookupValueService, ReferenceEntityService]
 })
 export class SharedModule { }

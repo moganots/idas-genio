@@ -258,6 +258,27 @@ GO
 -- Dropping existing tables
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
+IF (OBJECT_ID(N'[dbo].[User]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[User];
+	PRINT ('>> Completed > Drop table [dbo].[User], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[Employee]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[Employee];
+	PRINT ('>> Completed > Drop table [dbo].[Employee], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[Department]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[Department];
+	PRINT ('>> Completed > Drop table [dbo].[Department], successful')
+END
+GO
+
 IF (OBJECT_ID(N'[dbo].[Client]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[Client];
@@ -272,80 +293,10 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[Department]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[Department];
-	PRINT ('>> Completed > Drop table [dbo].[Department], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[Employee]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[Employee];
-	PRINT ('>> Completed > Drop table [dbo].[Employee], successful')
-END
-GO
-
 IF (OBJECT_ID(N'[dbo].[EmployeeSalary]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[EmployeeSalary];
 	PRINT ('>> Completed > Drop table [dbo].[EmployeeSalary], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[Entity]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[Entity];
-	PRINT ('>> Completed > Drop table [dbo].[Entity], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[EntityRelationship]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[EntityRelationship];
-	PRINT ('>> Completed > Drop table [dbo].[EntityRelationship], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[EntityUserGroupCapacity]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[EntityUserGroupCapacity];
-	PRINT ('>> Completed > Drop table [dbo].[EntityUserGroupCapacity], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[LookupCategory]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[LookupCategory];
-	PRINT ('>> Completed > Drop table [dbo].[LookupCategory], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[LookupValue]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[LookupValue];
-	PRINT ('>> Completed > Drop table [dbo].[LookupValue], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[MenuItem]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[MenuItem];
-	PRINT ('>> Completed > Drop table [dbo].[MenuItem], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[MenuItemUser]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[MenuItemUser];
-	PRINT ('>> Completed > Drop table [dbo].[MenuItemUser], successful')
-END
-GO
-
-IF (OBJECT_ID(N'[dbo].[GroupMenuItem]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[GroupMenuItem];
-	PRINT ('>> Completed > Drop table [dbo].[GroupMenuItem], successful')
 END
 GO
 
@@ -370,17 +321,17 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[ProjectStatus]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[ProjectStatus];
-	PRINT ('>> Completed > Drop table [dbo].[ProjectStatus], successful')
-END
-GO
-
 IF (OBJECT_ID(N'[dbo].[ProjectWorkLog]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[ProjectWorkLog];
 	PRINT ('>> Completed > Drop table [dbo].[ProjectWorkLog], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[ProjectStatus]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[ProjectStatus];
+	PRINT ('>> Completed > Drop table [dbo].[ProjectStatus], successful')
 END
 GO
 
@@ -405,13 +356,6 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[TaskStatus]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[TaskStatus];
-	PRINT ('>> Completed > Drop table [dbo].[TaskStatus], successful')
-END
-GO
-
 IF (OBJECT_ID(N'[dbo].[TaskWorkLog]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[TaskWorkLog];
@@ -419,10 +363,24 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[User]', 'U') IS NOT NULL)
+IF (OBJECT_ID(N'[dbo].[TaskStatus]', 'U') IS NOT NULL)
 BEGIN
-    DROP TABLE [dbo].[User];
-	PRINT ('>> Completed > Drop table [dbo].[User], successful')
+    DROP TABLE [dbo].[TaskStatus];
+	PRINT ('>> Completed > Drop table [dbo].[TaskStatus], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[LookupCategory]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[LookupCategory];
+	PRINT ('>> Completed > Drop table [dbo].[LookupCategory], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[LookupValue]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[LookupValue];
+	PRINT ('>> Completed > Drop table [dbo].[LookupValue], successful')
 END
 GO
 
@@ -454,6 +412,69 @@ BEGIN
 END
 GO
 
+IF (OBJECT_ID(N'[dbo].[Entity]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[Entity];
+	PRINT ('>> Completed > Drop table [dbo].[Entity], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[EntityRelationship]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[EntityRelationship];
+	PRINT ('>> Completed > Drop table [dbo].[EntityRelationship], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[EntityUserGroupCapacity]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[EntityUserGroupCapacity];
+	PRINT ('>> Completed > Drop table [dbo].[EntityUserGroupCapacity], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[MenuItem]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[MenuItem];
+	PRINT ('>> Completed > Drop table [dbo].[MenuItem], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[MenuItemUser]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[MenuItemUser];
+	PRINT ('>> Completed > Drop table [dbo].[MenuItemUser], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[GroupMenuItem]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[GroupMenuItem];
+	PRINT ('>> Completed > Drop table [dbo].[GroupMenuItem], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[Supplier]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[Supplier];
+	PRINT ('>> Completed > Drop table [dbo].[Supplier], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[NotificationMessage]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[NotificationMessage];
+	PRINT ('>> Completed > Drop table [dbo].[NotificationMessage], successful')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[InboxMessage]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[InboxMessage];
+	PRINT ('>> Completed > Drop table [dbo].[InboxMessage], successful')
+END
+GO
+
 PRINT ('>> Completed > Drop existing tables')
 GO
 
@@ -461,10 +482,34 @@ GO
 -- Creating all tables
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
+-- Create the [dbo].[User] table
+CREATE TABLE [dbo].[User](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[EmployeeId] [bigint] NULL,
+	[ClientId] [bigint] NULL,
+	[SupplierId] [bigint] NULL,
+	[EmailAddress] [nvarchar] (320) NOT NULL,
+	[PasswordHash] [nvarchar] (255) NOT NULL,
+	[IsAdmin] [bit] NULL,
+	[IsLocked] [bit] NULL,
+	[IsActive] [bit] NULL,
+	[DateLastLoggedIn] [datetime] NULL,
+	[CreatedBy] [bigint] NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create the [dbo].[User] table, successfully')
+GO
+
 -- Create the [dbo].[Employee] table
 CREATE TABLE [dbo].[Employee](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[EmployeeNumber] [nvarchar] (10) NOT NULL,
 	[SalutationId] [bigint] NOT NULL,
 	[Name] [nvarchar] (255) NOT NULL,
 	[MiddleName] [nvarchar] (255) NULL,
@@ -477,6 +522,7 @@ CREATE TABLE [dbo].[Employee](
 	[DepartmentId] [bigint] NOT NULL,
 	[ManagerId] [bigint] NULL,
 	[DateHired] [datetime] NOT NULL,
+	[EmployeeNumber] [nvarchar] (10) NOT NULL,
 	[IsTerminated] [bit] NULL,
 	[DateTerminated] [datetime] NULL,
 	[IsActive] [bit] NULL,
@@ -597,16 +643,18 @@ GO
 -- Create the [dbo].[Project] table
 CREATE TABLE [dbo].[Project](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar] (255) NOT NULL,
-	[Description] [nvarchar] (255) NOT NULL,
-	[StartDate] [datetime] NOT NULL,
-	[EndDate] [datetime] NOT NULL,
+	[ProjectTypeId] [bigint]  NULL,
+	[ProjectPriorityId] [bigint]  NULL,
+	[Name] [nvarchar] (50) NULL,
+	[Description] [nvarchar] (255) NULL,
+	[StartDate] [datetime]  NULL,
+	[EndDate] [datetime]  NULL,
 	[MaximumHoursAllocated] AS (DATEDIFF(HOUR, [StartDate], [EndDate])),
-	[IsActive] [bit] NULL,
-	[CreatedBy] [bigint] NOT NULL,
-	[DateCreated] [datetime] NOT NULL,
-	[ModifiedBy] [bigint] NULL,
-	[DateModified] [datetime] NULL,
+	[IsActive] [bit]  NULL,
+	[CreatedBy] [bigint]  NULL,
+	[DateCreated] [datetime]  NULL,
+	[ModifiedBy] [bigint]  NULL,
+	[DateModified] [datetime]  NULL,
  CONSTRAINT [PK_Project] PRIMARY KEY CLUSTERED 
 (
 	[_id] ASC
@@ -840,31 +888,6 @@ GO
 PRINT ('>> Completed > Create the [dbo].[LookupValue] table, successfully')
 GO
 
--- Create the [dbo].[User] table
-CREATE TABLE [dbo].[User](
-	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[EmployeeId] [bigint] NULL,
-	[ClientId] [bigint] NULL,
-	[SupplierId] [bigint] NULL,
-	[EmailAddress] [nvarchar] (320) NOT NULL,
-	[Password] [nvarchar] (255) NOT NULL,
-	[IsAdmin] [bit] NULL,
-	[IsLocked] [bit] NULL,
-	[IsActive] [bit] NULL,
-	[DateLastLoggedIn] [datetime] NULL,
-	[CreatedBy] [bigint] NOT NULL,
-	[DateCreated] [datetime] NOT NULL,
-	[ModifiedBy] [bigint] NULL,
-	[DateModified] [datetime] NULL,
- CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
-(
-	[_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-PRINT ('>> Completed > Create the [dbo].[User] table, successfully')
-GO
-
 -- Create the [dbo].[UserGroup] table
 CREATE TABLE [dbo].[UserGroup](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
@@ -1013,13 +1036,13 @@ GO
 -- Create the [dbo].[MenuItem] table
 CREATE TABLE [dbo].[MenuItem](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[Path] [nvarchar] (255) NOT NULL,
 	[Title] [nvarchar] (255) NOT NULL,
+	[Path] [nvarchar] (255) NOT NULL,
 	[Image] [nvarchar] (255) NULL,
 	[Icon] [nvarchar] (255) NULL,
-	[Class] [nvarchar] (255) NULL,
-	[Configuration] [nvarchar] (255) NOT NULL,
 	[Component] [nvarchar] (255) NOT NULL,
+	[Configuration] [nvarchar] (255) NOT NULL,
+	[CssClass] [nvarchar] (255) NULL,
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NOT NULL,
 	[DateCreated] [datetime] NOT NULL,
@@ -1099,6 +1122,49 @@ GO
 PRINT ('>> Completed > Create the [dbo].[Supplier] table, successfully')
 GO
 
+-- Create the [dbo].[NotificationMessage] table
+CREATE TABLE [dbo].[NotificationMessage](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TransactionTypeId] [bigint] NULL,
+	[EntityId] [bigint] NULL,
+	[UserId] [bigint] NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [bigint] NULL,
+	[DateCreated] [datetime] NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_NotificationMessage] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create the [dbo].[NotificationMessage] table, successfully')
+GO
+
+-- Create the [dbo].[InboxMessage] table
+CREATE TABLE [dbo].[InboxMessage](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[From] [nvarchar] (max) NULL,
+	[To] [nvarchar] (max) NULL,
+	[Cc] [nvarchar] (max) NULL,
+	[Bcc] [nvarchar] (max) NULL,
+	[Subject] [nvarchar] (max) NULL,
+	[Message] [nvarchar] (max) NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [bigint] NULL,
+	[DateCreated] [datetime] NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_InboxMessage] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create the [dbo].[InboxMessage] table, successfully')
+GO
+
 PRINT ('>> Completed > Creating tables')
 GO
 
@@ -1114,6 +1180,7 @@ GO
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 ALTER TABLE [dbo].[Client]  WITH CHECK ADD  CONSTRAINT [FK_Client_LookupValue_IndustryTypeId] FOREIGN KEY([IndustryTypeId])
 REFERENCES [dbo].[LookupValue] ([_id])
@@ -1610,6 +1677,24 @@ GO
 PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_Project_User_ModifiedBy] on table [dbo].[Project]')
 GO
 
+ALTER TABLE [dbo].[Project]  WITH CHECK ADD  CONSTRAINT [FK_Project_LookupValue_ProjectTypeId] FOREIGN KEY([ProjectTypeId])
+REFERENCES [dbo].[LookupValue] ([_id])
+GO
+
+ALTER TABLE [dbo].[Project] CHECK CONSTRAINT [FK_Project_LookupValue_ProjectTypeId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_Project_LookupValue_ProjectTypeId] on table [dbo].[Project]')
+GO
+
+ALTER TABLE [dbo].[Project]  WITH CHECK ADD  CONSTRAINT [FK_Project_LookupValue_ProjectPriorityId] FOREIGN KEY([ProjectPriorityId])
+REFERENCES [dbo].[LookupValue] ([_id])
+GO
+
+ALTER TABLE [dbo].[Project] CHECK CONSTRAINT [FK_Project_LookupValue_ProjectPriorityId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_Project_LookupValue_ProjectPriorityId] on table [dbo].[Project]')
+GO
+
 ALTER TABLE [dbo].[ProjectAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ProjectAssignment_Project_ProjectId] FOREIGN KEY([ProjectId])
 REFERENCES [dbo].[Project] ([_id])
 GO
@@ -1619,22 +1704,22 @@ GO
 PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_ProjectAssignment_Project_ProjectId] on table [dbo].[ProjectAssignment]')
 GO
 
-ALTER TABLE [dbo].[ProjectAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ProjectAssignment_Employee_PreviousAssigneeId] FOREIGN KEY([PreviousAssigneeId])
-REFERENCES [dbo].[Employee] ([_id])
+ALTER TABLE [dbo].[ProjectAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ProjectAssignment_User_PreviousAssigneeId] FOREIGN KEY([PreviousAssigneeId])
+REFERENCES [dbo].[User] ([_id])
 GO
 
-ALTER TABLE [dbo].[ProjectAssignment] CHECK CONSTRAINT [FK_ProjectAssignment_Employee_PreviousAssigneeId]
+ALTER TABLE [dbo].[ProjectAssignment] CHECK CONSTRAINT [FK_ProjectAssignment_User_PreviousAssigneeId]
 GO
-PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_ProjectAssignment_Employee_PreviousAssigneeId] on table [dbo].[ProjectAssignment]')
-GO
-
-ALTER TABLE [dbo].[ProjectAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ProjectAssignment_Employee_CurrentAssigneeId] FOREIGN KEY([CurrentAssigneeId])
-REFERENCES [dbo].[Employee] ([_id])
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_ProjectAssignment_User_PreviousAssigneeId] on table [dbo].[ProjectAssignment]')
 GO
 
-ALTER TABLE [dbo].[ProjectAssignment] CHECK CONSTRAINT [FK_ProjectAssignment_Employee_CurrentAssigneeId]
+ALTER TABLE [dbo].[ProjectAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ProjectAssignment_User_CurrentAssigneeId] FOREIGN KEY([CurrentAssigneeId])
+REFERENCES [dbo].[User] ([_id])
 GO
-PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_ProjectAssignment_Employee_CurrentAssigneeId] on table [dbo].[ProjectAssignment]')
+
+ALTER TABLE [dbo].[ProjectAssignment] CHECK CONSTRAINT [FK_ProjectAssignment_User_CurrentAssigneeId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_ProjectAssignment_User_CurrentAssigneeId] on table [dbo].[ProjectAssignment]')
 GO
 
 ALTER TABLE [dbo].[ProjectAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ProjectAssignment_User_CreatedBy] FOREIGN KEY([CreatedBy])
@@ -1844,22 +1929,22 @@ GO
 PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_TaskAssignment_Task_TaskId] on table [dbo].[TaskAssignment]')
 GO
 
-ALTER TABLE [dbo].[TaskAssignment]  WITH CHECK ADD  CONSTRAINT [FK_TaskAssignment_Employee_PreviousAssigneeId] FOREIGN KEY([PreviousAssigneeId])
-REFERENCES [dbo].[Employee] ([_id])
+ALTER TABLE [dbo].[TaskAssignment]  WITH CHECK ADD  CONSTRAINT [FK_TaskAssignment_User_PreviousAssigneeId] FOREIGN KEY([PreviousAssigneeId])
+REFERENCES [dbo].[User] ([_id])
 GO
 
-ALTER TABLE [dbo].[TaskAssignment] CHECK CONSTRAINT [FK_TaskAssignment_Employee_PreviousAssigneeId]
+ALTER TABLE [dbo].[TaskAssignment] CHECK CONSTRAINT [FK_TaskAssignment_User_PreviousAssigneeId]
 GO
-PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_TaskAssignment_Employee_PreviousAssigneeId] on table [dbo].[TaskAssignment]')
-GO
-
-ALTER TABLE [dbo].[TaskAssignment]  WITH CHECK ADD  CONSTRAINT [FK_TaskAssignment_Employee_CurrentAssigneeId] FOREIGN KEY([CurrentAssigneeId])
-REFERENCES [dbo].[Employee] ([_id])
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_TaskAssignment_User_PreviousAssigneeId] on table [dbo].[TaskAssignment]')
 GO
 
-ALTER TABLE [dbo].[TaskAssignment] CHECK CONSTRAINT [FK_TaskAssignment_Employee_CurrentAssigneeId]
+ALTER TABLE [dbo].[TaskAssignment]  WITH CHECK ADD  CONSTRAINT [FK_TaskAssignment_User_CurrentAssigneeId] FOREIGN KEY([CurrentAssigneeId])
+REFERENCES [dbo].[User] ([_id])
 GO
-PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_TaskAssignment_Employee_CurrentAssigneeId] on table [dbo].[TaskAssignment]')
+
+ALTER TABLE [dbo].[TaskAssignment] CHECK CONSTRAINT [FK_TaskAssignment_User_CurrentAssigneeId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_TaskAssignment_User_CurrentAssigneeId] on table [dbo].[TaskAssignment]')
 GO
 
 ALTER TABLE [dbo].[TaskAssignment]  WITH CHECK ADD  CONSTRAINT [FK_TaskAssignment_User_CreatedBy] FOREIGN KEY([CreatedBy])
@@ -2168,12 +2253,91 @@ GO
 PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_UserTransaction_User_ModifiedBy] on table [dbo].[UserTransaction]')
 GO
 
+ALTER TABLE [dbo].[NotificationMessage]  WITH CHECK ADD  CONSTRAINT [FK_NotificationMessage_LookupValue_TransactionTypeId] FOREIGN KEY([TransactionTypeId])
+REFERENCES [dbo].[LookupValue] ([_id])
+GO
+
+ALTER TABLE [dbo].[NotificationMessage] CHECK CONSTRAINT [FK_NotificationMessage_LookupValue_TransactionTypeId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_NotificationMessage_LookupValue_TransactionTypeId] on table [dbo].[NotificationMessage]')
+GO
+
+ALTER TABLE [dbo].[NotificationMessage]  WITH CHECK ADD  CONSTRAINT [FK_NotificationMessage_Entity_EntityId] FOREIGN KEY([EntityId])
+REFERENCES [dbo].[Entity] ([_id])
+GO
+
+ALTER TABLE [dbo].[NotificationMessage] CHECK CONSTRAINT [FK_NotificationMessage_Entity_EntityId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_NotificationMessage_Entity_EntityId] on table [dbo].[NotificationMessage]')
+GO
+
+ALTER TABLE [dbo].[NotificationMessage]  WITH CHECK ADD  CONSTRAINT [FK_NotificationMessage_User_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([_id])
+GO
+
+ALTER TABLE [dbo].[NotificationMessage] CHECK CONSTRAINT [FK_NotificationMessage_User_UserId]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_NotificationMessage_User_UserId] on table [dbo].[NotificationMessage]')
+GO
+
+ALTER TABLE [dbo].[NotificationMessage]  WITH CHECK ADD  CONSTRAINT [FK_NotificationMessage_User_CreatedBy] FOREIGN KEY([CreatedBy])
+REFERENCES [dbo].[User] ([_id])
+GO
+
+ALTER TABLE [dbo].[NotificationMessage] CHECK CONSTRAINT [FK_NotificationMessage_User_CreatedBy]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_NotificationMessage_User_CreatedBy] on table [dbo].[NotificationMessage]')
+GO
+
+ALTER TABLE [dbo].[NotificationMessage]  WITH CHECK ADD  CONSTRAINT [FK_NotificationMessage_User_ModifiedBy] FOREIGN KEY([ModifiedBy])
+REFERENCES [dbo].[User] ([_id])
+GO
+
+ALTER TABLE [dbo].[NotificationMessage] CHECK CONSTRAINT [FK_NotificationMessage_User_ModifiedBy]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_NotificationMessage_User_ModifiedBy] on table [dbo].[NotificationMessage]')
+GO
+
+ALTER TABLE [dbo].[InboxMessage]  WITH CHECK ADD  CONSTRAINT [FK_InboxMessage_User_CreatedBy] FOREIGN KEY([CreatedBy])
+REFERENCES [dbo].[User] ([_id])
+GO
+
+ALTER TABLE [dbo].[InboxMessage] CHECK CONSTRAINT [FK_InboxMessage_User_CreatedBy]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_InboxMessage_User_CreatedBy] on table [dbo].[InboxMessage]')
+GO
+
+ALTER TABLE [dbo].[InboxMessage]  WITH CHECK ADD  CONSTRAINT [FK_InboxMessage_User_ModifiedBy] FOREIGN KEY([ModifiedBy])
+REFERENCES [dbo].[User] ([_id])
+GO
+
+ALTER TABLE [dbo].[InboxMessage] CHECK CONSTRAINT [FK_InboxMessage_User_ModifiedBy]
+GO
+PRINT ('>> Completed > Creating FOREIGN KEY constraint [FK_InboxMessage_User_ModifiedBy] on table [dbo].[InboxMessage]')
+GO
+
 PRINT ('>> Completed > Creating all FOREIGN KEY constraints')
 GO
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
--- Creating all DEFAULT constraints
+-- Creating all *_DateCreated DEFAULT constraints
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_User_DateCreated] on table [dbo].[User]')
+GO
+
+ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [DF_Employee_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_Employee_DateCreated] on table [dbo].[Employee]')
+GO
+
+ALTER TABLE [dbo].[Department] ADD  CONSTRAINT [DF_Department_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_Department_DateCreated] on table [dbo].[Department]')
+GO
 
 ALTER TABLE [dbo].[Client] ADD  CONSTRAINT [DF_Client_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
@@ -2185,59 +2349,9 @@ GO
 PRINT ('>> Completed > Adding default constraint [DF_ContactDetail_DateCreated] on table [dbo].[ContactDetail]')
 GO
 
-ALTER TABLE [dbo].[Department] ADD  CONSTRAINT [DF_Department_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_Department_DateCreated] on table [dbo].[Department]')
-GO
-
-ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [DF_Employee_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_Employee_DateCreated] on table [dbo].[Employee]')
-GO
-
 ALTER TABLE [dbo].[EmployeeSalary] ADD  CONSTRAINT [DF_EmployeeSalary_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_EmployeeSalary_DateCreated] on table [dbo].[EmployeeSalary]')
-GO
-
-ALTER TABLE [dbo].[Entity] ADD  CONSTRAINT [DF_Entity_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_Entity_DateCreated] on table [dbo].[Entity]')
-GO
-
-ALTER TABLE [dbo].[EntityRelationship] ADD  CONSTRAINT [DF_EntityRelationship_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_EntityRelationship_DateCreated] on table [dbo].[EntityRelationship]')
-GO
-
-ALTER TABLE [dbo].[EntityUserGroupCapacity] ADD  CONSTRAINT [DF_EntityUserGroupCapacity_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_EntityUserGroupCapacity_DateCreated] on table [dbo].[EntityUserGroupCapacity]')
-GO
-
-ALTER TABLE [dbo].[LookupCategory] ADD  CONSTRAINT [DF_LookupCategory_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_LookupCategory_DateCreated] on table [dbo].[LookupCategory]')
-GO
-
-ALTER TABLE [dbo].[LookupValue] ADD  CONSTRAINT [DF_LookupValue_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_LookupValue_DateCreated] on table [dbo].[LookupValue]')
-GO
-
-ALTER TABLE [dbo].[MenuItem] ADD  CONSTRAINT [DF_MenuItem_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_MenuItem_DateCreated] on table [dbo].[MenuItem]')
-GO
-
-ALTER TABLE [dbo].[MenuItemUser] ADD  CONSTRAINT [DF_MenuItemUser_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_MenuItemUser_DateCreated] on table [dbo].[MenuItemUser]')
-GO
-
-ALTER TABLE [dbo].[GroupMenuItem] ADD  CONSTRAINT [DF_GroupMenuItem_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_GroupMenuItem_DateCreated] on table [dbo].[GroupMenuItem]')
 GO
 
 ALTER TABLE [dbo].[Project] ADD  CONSTRAINT [DF_Project_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
@@ -2255,14 +2369,14 @@ GO
 PRINT ('>> Completed > Adding default constraint [DF_ProjectComment_DateCreated] on table [dbo].[ProjectComment]')
 GO
 
-ALTER TABLE [dbo].[ProjectStatus] ADD  CONSTRAINT [DF_ProjectStatus_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_ProjectStatus_DateCreated] on table [dbo].[ProjectStatus]')
-GO
-
 ALTER TABLE [dbo].[ProjectWorkLog] ADD  CONSTRAINT [DF_ProjectWorkLog_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_ProjectWorkLog_DateCreated] on table [dbo].[ProjectWorkLog]')
+GO
+
+ALTER TABLE [dbo].[ProjectStatus] ADD  CONSTRAINT [DF_ProjectStatus_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_ProjectStatus_DateCreated] on table [dbo].[ProjectStatus]')
 GO
 
 ALTER TABLE [dbo].[Task] ADD  CONSTRAINT [DF_Task_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
@@ -2280,29 +2394,24 @@ GO
 PRINT ('>> Completed > Adding default constraint [DF_TaskComment_DateCreated] on table [dbo].[TaskComment]')
 GO
 
-ALTER TABLE [dbo].[TaskStatus] ADD  CONSTRAINT [DF_TaskStatus_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_TaskStatus_DateCreated] on table [dbo].[TaskStatus]')
-GO
-
 ALTER TABLE [dbo].[TaskWorkLog] ADD  CONSTRAINT [DF_TaskWorkLog_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_TaskWorkLog_DateCreated] on table [dbo].[TaskWorkLog]')
 GO
 
-ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_IsAdmin]  DEFAULT (0) FOR [IsAdmin]
+ALTER TABLE [dbo].[TaskStatus] ADD  CONSTRAINT [DF_TaskStatus_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
-PRINT ('>> Completed > Adding default constraint [DF_User_IsAdmin] on table [dbo].[User]')
-GO
-
-ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_IsActive]  DEFAULT (0) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_User_IsActive] on table [dbo].[User]')
+PRINT ('>> Completed > Adding default constraint [DF_TaskStatus_DateCreated] on table [dbo].[TaskStatus]')
 GO
 
-ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+ALTER TABLE [dbo].[LookupCategory] ADD  CONSTRAINT [DF_LookupCategory_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
-PRINT ('>> Completed > Adding default constraint [DF_User_DateCreated] on table [dbo].[User]')
+PRINT ('>> Completed > Adding default constraint [DF_LookupCategory_DateCreated] on table [dbo].[LookupCategory]')
+GO
+
+ALTER TABLE [dbo].[LookupValue] ADD  CONSTRAINT [DF_LookupValue_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_LookupValue_DateCreated] on table [dbo].[LookupValue]')
 GO
 
 ALTER TABLE [dbo].[UserGroup] ADD  CONSTRAINT [DF_UserGroup_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
@@ -2325,158 +2434,217 @@ GO
 PRINT ('>> Completed > Adding default constraint [DF_UserTransaction_DateCreated] on table [dbo].[UserTransaction]')
 GO
 
+ALTER TABLE [dbo].[Entity] ADD  CONSTRAINT [DF_Entity_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_Entity_DateCreated] on table [dbo].[Entity]')
+GO
+
+ALTER TABLE [dbo].[EntityRelationship] ADD  CONSTRAINT [DF_EntityRelationship_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_EntityRelationship_DateCreated] on table [dbo].[EntityRelationship]')
+GO
+
+ALTER TABLE [dbo].[EntityUserGroupCapacity] ADD  CONSTRAINT [DF_EntityUserGroupCapacity_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_EntityUserGroupCapacity_DateCreated] on table [dbo].[EntityUserGroupCapacity]')
+GO
+
+ALTER TABLE [dbo].[MenuItem] ADD  CONSTRAINT [DF_MenuItem_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_MenuItem_DateCreated] on table [dbo].[MenuItem]')
+GO
+
+ALTER TABLE [dbo].[MenuItemUser] ADD  CONSTRAINT [DF_MenuItemUser_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_MenuItemUser_DateCreated] on table [dbo].[MenuItemUser]')
+GO
+
+ALTER TABLE [dbo].[GroupMenuItem] ADD  CONSTRAINT [DF_GroupMenuItem_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_GroupMenuItem_DateCreated] on table [dbo].[GroupMenuItem]')
+GO
+
 ALTER TABLE [dbo].[Supplier] ADD  CONSTRAINT [DF_Supplier_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_Supplier_DateCreated] on table [dbo].[Supplier]')
 GO
 
-ALTER TABLE [dbo].[Client] ADD  CONSTRAINT [DF_Client_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[NotificationMessage] ADD  CONSTRAINT [DF_NotificationMessage_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
-PRINT ('>> Completed > Adding default constraint [DF_Client_IsActive] on table [dbo].[Client]')
-GO
-
-ALTER TABLE [dbo].[ContactDetail] ADD  CONSTRAINT [DF_ContactDetail_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_ContactDetail_IsActive] on table [dbo].[ContactDetail]')
+PRINT ('>> Completed > Adding default constraint [DF_NotificationMessage_DateCreated] on table [dbo].[NotificationMessage]')
 GO
 
-ALTER TABLE [dbo].[Department] ADD  CONSTRAINT [DF_Department_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[InboxMessage] ADD  CONSTRAINT [DF_InboxMessage_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
-PRINT ('>> Completed > Adding default constraint [DF_Department_IsActive] on table [dbo].[Department]')
+PRINT ('>> Completed > Adding default constraint [DF_InboxMessage_DateCreated] on table [dbo].[InboxMessage]')
 GO
 
-ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [DF_Employee_IsActive] DEFAULT (1) FOR [IsActive]
+PRINT ('>> Completed > Creating all *_DateCreated DEFAULT constraints')
+GO
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Creating all *_IsActive DEFAULT constraints
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_IsActive]  DEFAULT (0) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_User_IsActive] on table [dbo].[User]')
+GO
+
+ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [DF_Employee_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_Employee_IsActive] on table [dbo].[Employee]')
 GO
 
-ALTER TABLE [dbo].[EmployeeSalary] ADD  CONSTRAINT [DF_EmployeeSalary_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[Department] ADD  CONSTRAINT [DF_Department_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_Department_IsActive] on table [dbo].[Department]')
+GO
+
+ALTER TABLE [dbo].[Client] ADD  CONSTRAINT [DF_Client_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_Client_IsActive] on table [dbo].[Client]')
+GO
+
+ALTER TABLE [dbo].[ContactDetail] ADD  CONSTRAINT [DF_ContactDetail_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_ContactDetail_IsActive] on table [dbo].[ContactDetail]')
+GO
+
+ALTER TABLE [dbo].[EmployeeSalary] ADD  CONSTRAINT [DF_EmployeeSalary_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_EmployeeSalary_IsActive] on table [dbo].[EmployeeSalary]')
 GO
 
-ALTER TABLE [dbo].[Entity] ADD  CONSTRAINT [DF_Entity_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_Entity_IsActive] on table [dbo].[Entity]')
-GO
-
-ALTER TABLE [dbo].[EntityRelationship] ADD  CONSTRAINT [DF_EntityRelationship_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_EntityRelationship_IsActive] on table [dbo].[EntityRelationship]')
-GO
-
-ALTER TABLE [dbo].[EntityUserGroupCapacity] ADD  CONSTRAINT [DF_EntityUserGroupCapacity_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_EntityUserGroupCapacity_IsActive] on table [dbo].[EntityUserGroupCapacity]')
-GO
-
-ALTER TABLE [dbo].[LookupCategory] ADD  CONSTRAINT [DF_LookupCategory_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_LookupCategory_IsActive] on table [dbo].[LookupCategory]')
-GO
-
-ALTER TABLE [dbo].[LookupValue] ADD  CONSTRAINT [DF_LookupValue_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_LookupValue_IsActive] on table [dbo].[LookupValue]')
-GO
-
-ALTER TABLE [dbo].[MenuItem] ADD  CONSTRAINT [DF_MenuItem_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_MenuItem_IsActive] on table [dbo].[MenuItem]')
-GO
-
-ALTER TABLE [dbo].[MenuItemUser] ADD  CONSTRAINT [DF_MenuItemUser_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_MenuItemUser_IsActive] on table [dbo].[MenuItemUser]')
-GO
-
-ALTER TABLE [dbo].[GroupMenuItem] ADD  CONSTRAINT [DF_GroupMenuItem_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_GroupMenuItem_IsActive] on table [dbo].[GroupMenuItem]')
-GO
-
-ALTER TABLE [dbo].[Project] ADD  CONSTRAINT [DF_Project_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[Project] ADD  CONSTRAINT [DF_Project_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_Project_IsActive] on table [dbo].[Project]')
 GO
 
-ALTER TABLE [dbo].[ProjectAssignment] ADD  CONSTRAINT [DF_ProjectAssignment_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[ProjectAssignment] ADD  CONSTRAINT [DF_ProjectAssignment_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_ProjectAssignment_IsActive] on table [dbo].[ProjectAssignment]')
 GO
 
-ALTER TABLE [dbo].[ProjectComment] ADD  CONSTRAINT [DF_ProjectComment_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[ProjectComment] ADD  CONSTRAINT [DF_ProjectComment_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_ProjectComment_IsActive] on table [dbo].[ProjectComment]')
 GO
 
-ALTER TABLE [dbo].[ProjectStatus] ADD  CONSTRAINT [DF_ProjectStatus_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_ProjectStatus_IsActive] on table [dbo].[ProjectStatus]')
-GO
-
-ALTER TABLE [dbo].[ProjectWorkLog] ADD  CONSTRAINT [DF_ProjectWorkLog_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[ProjectWorkLog] ADD  CONSTRAINT [DF_ProjectWorkLog_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_ProjectWorkLog_IsActive] on table [dbo].[ProjectWorkLog]')
 GO
 
-ALTER TABLE [dbo].[Task] ADD  CONSTRAINT [DF_Task_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[ProjectStatus] ADD  CONSTRAINT [DF_ProjectStatus_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_ProjectStatus_IsActive] on table [dbo].[ProjectStatus]')
+GO
+
+ALTER TABLE [dbo].[Task] ADD  CONSTRAINT [DF_Task_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_Task_IsActive] on table [dbo].[Task]')
 GO
 
-ALTER TABLE [dbo].[TaskAssignment] ADD  CONSTRAINT [DF_TaskAssignment_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[TaskAssignment] ADD  CONSTRAINT [DF_TaskAssignment_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_TaskAssignment_IsActive] on table [dbo].[TaskAssignment]')
 GO
 
-ALTER TABLE [dbo].[TaskComment] ADD  CONSTRAINT [DF_TaskComment_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[TaskComment] ADD  CONSTRAINT [DF_TaskComment_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_TaskComment_IsActive] on table [dbo].[TaskComment]')
 GO
 
-ALTER TABLE [dbo].[TaskStatus] ADD  CONSTRAINT [DF_TaskStatus_IsActive] DEFAULT (1) FOR [IsActive]
-GO
-PRINT ('>> Completed > Adding default constraint [DF_TaskStatus_IsActive] on table [dbo].[TaskStatus]')
-GO
-
-ALTER TABLE [dbo].[TaskWorkLog] ADD  CONSTRAINT [DF_TaskWorkLog_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[TaskWorkLog] ADD  CONSTRAINT [DF_TaskWorkLog_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_TaskWorkLog_IsActive] on table [dbo].[TaskWorkLog]')
 GO
 
-ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_IsLocked]  DEFAULT (1) FOR [IsLocked]
+ALTER TABLE [dbo].[TaskStatus] ADD  CONSTRAINT [DF_TaskStatus_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
-PRINT ('>> Completed > Adding default constraint [DF_User_IsLocked] on table [dbo].[User]')
+PRINT ('>> Completed > Adding default constraint [DF_TaskStatus_IsActive] on table [dbo].[TaskStatus]')
 GO
 
-ALTER TABLE [dbo].[UserGroup] ADD  CONSTRAINT [DF_UserGroup_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[LookupCategory] ADD  CONSTRAINT [DF_LookupCategory_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_LookupCategory_IsActive] on table [dbo].[LookupCategory]')
+GO
+
+ALTER TABLE [dbo].[LookupValue] ADD  CONSTRAINT [DF_LookupValue_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_LookupValue_IsActive] on table [dbo].[LookupValue]')
+GO
+
+ALTER TABLE [dbo].[UserGroup] ADD  CONSTRAINT [DF_UserGroup_IsActive]  DEFAULT (0) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_UserGroup_IsActive] on table [dbo].[UserGroup]')
 GO
 
-ALTER TABLE [dbo].[UserGroupCapacity] ADD  CONSTRAINT [DF_UserGroupCapacity_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[UserGroupCapacity] ADD  CONSTRAINT [DF_UserGroupCapacity_IsActive]  DEFAULT (0) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_UserGroupCapacity_IsActive] on table [dbo].[UserGroupCapacity]')
 GO
 
-ALTER TABLE [dbo].[UserLocks] ADD  CONSTRAINT [DF_UserLocks_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[UserLocks] ADD  CONSTRAINT [DF_UserLocks_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_UserLocks_IsActive] on table [dbo].[UserLocks]')
 GO
 
-ALTER TABLE [dbo].[UserTransaction] ADD  CONSTRAINT [DF_UserTransaction_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[UserTransaction] ADD  CONSTRAINT [DF_UserTransaction_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_UserTransaction_IsActive] on table [dbo].[UserTransaction]')
 GO
 
-ALTER TABLE [dbo].[Supplier] ADD  CONSTRAINT [DF_Supplier_IsActive] DEFAULT (1) FOR [IsActive]
+ALTER TABLE [dbo].[Entity] ADD  CONSTRAINT [DF_Entity_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_Entity_IsActive] on table [dbo].[Entity]')
+GO
+
+ALTER TABLE [dbo].[EntityRelationship] ADD  CONSTRAINT [DF_EntityRelationship_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_EntityRelationship_IsActive] on table [dbo].[EntityRelationship]')
+GO
+
+ALTER TABLE [dbo].[EntityUserGroupCapacity] ADD  CONSTRAINT [DF_EntityUserGroupCapacity_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_EntityUserGroupCapacity_IsActive] on table [dbo].[EntityUserGroupCapacity]')
+GO
+
+ALTER TABLE [dbo].[MenuItem] ADD  CONSTRAINT [DF_MenuItem_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_MenuItem_IsActive] on table [dbo].[MenuItem]')
+GO
+
+ALTER TABLE [dbo].[MenuItemUser] ADD  CONSTRAINT [DF_MenuItemUser_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_MenuItemUser_IsActive] on table [dbo].[MenuItemUser]')
+GO
+
+ALTER TABLE [dbo].[GroupMenuItem] ADD  CONSTRAINT [DF_GroupMenuItem_IsActive]  DEFAULT (0) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_GroupMenuItem_IsActive] on table [dbo].[GroupMenuItem]')
+GO
+
+ALTER TABLE [dbo].[Supplier] ADD  CONSTRAINT [DF_Supplier_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 PRINT ('>> Completed > Adding default constraint [DF_Supplier_IsActive] on table [dbo].[Supplier]')
 GO
 
-PRINT ('>> Completed > Creating all DEFAULT constraints')
+ALTER TABLE [dbo].[NotificationMessage] ADD  CONSTRAINT [DF_NotificationMessage_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
+PRINT ('>> Completed > Adding default constraint [DF_NotificationMessage_IsActive] on table [dbo].[NotificationMessage]')
+GO
+
+ALTER TABLE [dbo].[InboxMessage] ADD  CONSTRAINT [DF_InboxMessage_IsActive]  DEFAULT (1) FOR [IsActive]
+GO
+PRINT ('>> Completed > Adding default constraint [DF_InboxMessage_IsActive] on table [dbo].[InboxMessage]')
+GO
+
+PRINT ('>> Completed > Creating all *_IsActive DEFAULT constraints')
+GO
+
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create user functions
@@ -2578,6 +2746,79 @@ GO
 -- =============================================
 -- Author:		TS MOGANO
 -- Create date: 02/03/2021
+-- Function Name: [dbo].[GetUserProfile]
+-- Description:	Fetches the User Profile of the specified @UID
+-- Parameters:
+-- @UID
+-- =============================================
+CREATE FUNCTION [dbo].[GetUserProfile]
+( @UID NVARCHAR(320) )
+RETURNS NVARCHAR(MAX) 
+AS
+BEGIN
+	DECLARE @UserProfile NVARCHAR(MAX) = (
+		SELECT
+			[u].[_id]
+			, [u].[EmailAddress]
+			, [u].[PasswordHash]
+			, [u].[IsAdmin]
+			, [u].[IsLocked]
+			, [u].[IsActive]
+			, [u].[DateLastLoggedIn]
+			, [e].[_id] AS 'Employee._id'
+			, [e].[SalutationId] AS 'Employee.SalutationId'
+			, [e].[Name] AS 'Employee.Name'
+			, [e].[MiddleName] AS 'Employee.MiddleName'
+			, [e].[Surname] AS 'Employee.Surname'
+			, [e].[IdNumber] AS 'Employee.IdNumber'
+			, [e].[BirthDate] AS 'Employee.BirthDate'
+			, [e].[GenderId] AS 'Employee.GenderId'
+			, [e].[EmploymentTypeId] AS 'Employee.EmploymentTypeId'
+			, [e].[PositionId] AS 'Employee.PositionId'
+			, [e].[DepartmentId] AS 'Employee.DepartmentId'
+			, [e].[ManagerId] AS 'Employee.ManagerId'
+			, [e].[DateHired] AS 'Employee.DateHired'
+			, [e].[EmployeeNumber] AS 'Employee.EmployeeNumber'
+			, [e].[IsTerminated] AS 'Employee.IsTerminated'
+			, [e].[DateTerminated] AS 'Employee.DateTerminated'
+			, [e].[IsActive] AS 'Employee.IsActive'
+			, [c].[_id] AS 'Client._id'
+			, [c].[SalutationId] AS 'Client.SalutationId'
+			, [c].[Name] AS 'Client.Name'
+			, [c].[Surname] AS 'Client.Surname'
+			, [c].[CompanyName] AS 'Client.CompanyName'
+			, [c].[IndustryTypeId] AS 'Client.IndustryTypeId'
+			, [c].[IdNumber] AS 'Client.IdNumber'
+			, [c].[RegistrationNumber] AS 'Client.RegistrationNumber'
+			, [c].[VATNumber] AS 'Client.VATNumber'
+			, [c].[IsActive] AS 'Client.IsActive'
+			, [s].[_id] AS 'Supplier._id'
+			, [s].[SalutationId] AS 'Supplier.SalutationId'
+			, [s].[Name] AS 'Supplier.Name'
+			, [s].[Surname] AS 'Supplier.Surname'
+			, [s].[CompanyName] AS 'Supplier.CompanyName'
+			, [s].[IndustryTypeId] AS 'Supplier.IndustryTypeId'
+			, [s].[IdNumber] AS 'Supplier.IdNumber'
+			, [s].[RegistrationNumber] AS 'Supplier.RegistrationNumber'
+			, [s].[VATNumber] AS 'Supplier.VATNumber'
+			, [s].[BankId] AS 'Supplier.BankId'
+			, [s].[AccountNumber] AS 'Supplier.AccountNumber'
+			, [s].[IsActive] AS 'Supplier.IsActive'
+		FROM [IdasGenioDb].[dbo].[User] AS [u]
+		LEFT JOIN [IdasGenioDb].[dbo].[Employee] AS [e] ON ([u].[EmployeeId] = [e].[_id])
+		LEFT JOIN [IdasGenioDb].[dbo].[Client] AS [c] ON ([u].[ClientId] = [c].[_id])
+		LEFT JOIN [IdasGenioDb].[dbo].[Supplier] AS [s] ON ([u].[SupplierId] = [s].[_id])
+		WHERE
+			([u].[EmailAddress] = @UID)
+		FOR JSON PATH
+	)
+	RETURN @UserProfile
+END
+GO
+
+-- =============================================
+-- Author:		TS MOGANO
+-- Create date: 02/03/2021
 -- Function Name: [dbo].[GetAllUsers]
 -- Description:	Fetches the User(s) details
 -- Parameters:
@@ -2588,10 +2829,10 @@ RETURNS TABLE
 AS
 RETURN 
 (
-	WITH [cte] ([_id], [EmployeeClientSupplierId], [UserTypeId], [EmailAddress], [Password], [IsAdmin], [IsActive], [IsLocked], [DateLastLoggedIn], [CreatedBy], [DateCreated], [ModifiedBy], [DateModified]) AS (
+	WITH [cte] ([_id], [EmployeeClientSupplierId], [UserTypeId], [EmailAddress], [PasswordHash], [IsAdmin], [IsActive], [IsLocked], [DateLastLoggedIn], [CreatedBy], [DateCreated], [ModifiedBy], [DateModified]) AS (
 	SELECT
 		[_id]
-		, COALESCE([EmployeeId], [ClientId], [SupplierId], [_id]) AS [EmployeeClientSupplierId]
+		, COALESCE([EmployeeId], [ClientId], [SupplierId]) AS [EmployeeClientSupplierId]
 		, CASE
 			WHEN [EmailAddress] = 'root@genio.idas.co.za' THEN 'Root'
 			WHEN [EmailAddress] = 'admin@genio.idas.co.za' THEN 'Admin'
@@ -2600,7 +2841,7 @@ RETURN
 			WHEN [SupplierId] IS NOT NULL THEN 'Supplier'
 			ELSE 'General' END AS [UserTypeId]
 		, [EmailAddress]
-		, [Password]
+		, [PasswordHash]
 		, [IsAdmin]
 		, [IsActive]
 		, [IsLocked]
@@ -2616,7 +2857,7 @@ RETURN
 		, [EmployeeClientSupplierId]
 		, (SELECT [lv].[_id] FROM [IdasGenioDb].[dbo].[LookupValue] AS [lv] JOIN [IdasGenioDb].[dbo].[LookupCategory] AS [lc] ON [lv].[LookupCategoryId] = [lc].[_id] WHERE [lc].[Name] = 'UserType' AND [lv].[Value] = [cte].[UserTypeId]) AS [UserTypeId]
 		, [EmailAddress]
-		, [Password]
+		, [PasswordHash]
 		, [IsAdmin]
 		, [IsActive]
 		, [IsLocked]
@@ -2739,7 +2980,7 @@ RETURN
 		[mi].[Path]
 		,[mi].[Title]
 		,[mi].[Icon]
-		,[mi].[Class]
+		,[mi].[CssClass]
 	FROM [IdasGenioDb].[dbo].[User] AS [u]
 	JOIN [IdasGenioDb].[dbo].[UserGroup] AS [ug] ON [u].[_id] = [ug].[UserId]
 	JOIN [IdasGenioDb].[dbo].[GroupMenuItem] AS [gmi] ON [ug].[GroupId] = [gmi].[GroupId]
@@ -2770,7 +3011,7 @@ RETURN
 		[mi].[Path]
 		,[mi].[Title]
 		,[mi].[Icon]
-		,[mi].[Class]
+		,[mi].[CssClass]
 	FROM [IdasGenioDb].[dbo].[User] AS [u]
 	JOIN [IdasGenioDb].[dbo].[UserGroup] AS [ug] ON [u].[_id] = [ug].[UserId]
 	JOIN [IdasGenioDb].[dbo].[GroupMenuItem] AS [gmi] ON [ug].[GroupId] = [gmi].[GroupId]
@@ -2802,9 +3043,9 @@ GO
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Setup Root (Super) User
-INSERT INTO [dbo].[User]([EmailAddress], [Password], [IsAdmin], [IsLocked], [IsActive], [DateLastLoggedIn], [CreatedBy]) VALUES ('root@genio.idas.co.za', 'root@123', 1, 0, 1, GETDATE(), 1);
+INSERT INTO [dbo].[User]([EmailAddress], [PasswordHash], [IsAdmin], [IsLocked], [IsActive], [DateLastLoggedIn], [CreatedBy]) VALUES ('root@genio.idas.co.za', '$2b$10$eoK5EK7xYSdpvHDBACS/E.NQt.93QdwVLYbHj2ih2mSYychXS3a6u', 1, 0, 1, GETDATE(), 1);
 -- Setup Admin User
-INSERT INTO [dbo].[User]([EmailAddress], [Password], [IsAdmin], [IsLocked], [IsActive], [DateLastLoggedIn], [CreatedBy]) VALUES ('admin@genio.idas.co.za', 'admin@123', 1, 0, 1, GETDATE(), 1);
+INSERT INTO [dbo].[User]([EmailAddress], [PasswordHash], [IsAdmin], [IsLocked], [IsActive], [DateLastLoggedIn], [CreatedBy]) VALUES ('admin@genio.idas.co.za', '$2b$10$Zxi7IiLajl9Jyuf58kWIgOdFWkOIWWdZ2Ix93gTNBMKpCoHzLoSDW', 1, 0, 1, GETDATE(), 1);
 
 PRINT ('>> Completed > INSERT > Default > Default System User(s) into [dbo].[User]')
 GO
@@ -3541,13 +3782,13 @@ SELECT [EmployeeId], NULL AS [ClientId], NULL AS [SupplierId], [EmailAddress] FR
 SELECT NULL AS [EmployeeId], [ClientId], NULL AS [SupplierId], [EmailAddress] FROM [IdasGenioDb].[dbo].[ContactDetail] WHERE [ClientId] IS NOT NULL UNION
 SELECT NULL AS [EmployeeId], NULL AS [ClientId], [SupplierId], [EmailAddress] FROM [IdasGenioDb].[dbo].[ContactDetail] WHERE [SupplierId] IS NOT NULL
 )
-INSERT INTO [IdasGenioDb].[dbo].[User]([EmployeeId], [ClientId], [SupplierId], [EmailAddress], [Password], [IsAdmin], [IsLocked], [IsActive], [DateLastLoggedIn], [CreatedBy])
+INSERT INTO [IdasGenioDb].[dbo].[User]([EmployeeId], [ClientId], [SupplierId], [EmailAddress], [PasswordHash], [IsAdmin], [IsLocked], [IsActive], [DateLastLoggedIn], [CreatedBy])
 SELECT
 	[EmployeeId],
 	[ClientId],
 	[SupplierId],
 	[EmailAddress],
-	'admin@123' AS [Password],
+	'$2b$10$Zxi7IiLajl9Jyuf58kWIgOdFWkOIWWdZ2Ix93gTNBMKpCoHzLoSDW' AS [PasswordHash],
 	0 AS [IsAdmin],
 	0 AS [IsLocked],
 	1 AS [IsActive],
@@ -3583,28 +3824,26 @@ GO
 -- INSERT >> Default Menu Item(s) ([dbo].[MenuItem])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-;WITH [cte] ([rowId], [Path], [Title], [Image], [Icon], [Class], [Configuration], [Component]) AS (
-SELECT 1 AS [rowId], '/dashboard' AS [path], 'Dashboard' AS [title],NULL AS [image], 'dashboard' AS [icon],NULL AS [class], 'DashboardConfiguration' AS [configuration], 'DashboardComponent' AS [component] UNION
-SELECT 2 AS [rowId], '/profile' AS [path], 'My Profile' AS [title],NULL AS [image], 'person' AS [icon],NULL AS [class], 'UserProfileConfiguration' AS [configuration], 'UserProfileComponent' AS [component] UNION
-SELECT 3 AS [rowId], '/notifications' AS [path], 'My Notifications' AS [title],NULL AS [image], 'circle_notifications' AS [icon],NULL AS [class], 'UserNotificationsConfiguration' AS [configuration], 'UserNotificationsComponent' AS [component] UNION
-SELECT 4 AS [rowId], '/inbox' AS [path], 'My Inbox' AS [title],NULL AS [image], 'mail_outline' AS [icon],NULL AS [class], 'UserInboxConfiguration' AS [configuration], 'UserInboxComponent' AS [component] UNION
-SELECT 5 AS [rowId], '/schedule' AS [path], 'My Schedule' AS [title],NULL AS [image], 'event' AS [icon],NULL AS [class], 'UserScheduleConfiguration' AS [configuration], 'UserScheduleComponent' AS [component] UNION
-SELECT 6 AS [rowId], '/projects' AS [path], 'My Projects' AS [title],NULL AS [image], 'auto_awesome_motion' AS [icon],NULL AS [class], 'UserProjectsConfiguration' AS [configuration], 'UserProjectsComponent' AS [component] UNION
-SELECT 7 AS [rowId], '/tasks' AS [path], 'My Tasks' AS [title],NULL AS [image], 'tune' AS [icon],NULL AS [class], 'UserTasksConfiguration' AS [configuration], 'UserTasksComponent' AS [component] UNION
-SELECT 8 AS [rowId], '/employees' AS [path], 'Employees' AS [title],NULL AS [image], 'groups' AS [icon],NULL AS [class], 'EmployeesConfiguration' AS [configuration], 'EmployeesComponent' AS [component] UNION
-SELECT 9 AS [rowId], '/clients' AS [path], 'Clients' AS [title],NULL AS [image], 'stream' AS [icon],NULL AS [class], 'ClientsConfiguration' AS [configuration], 'ClientsComponent' AS [component] UNION
-SELECT 10 AS [rowId], '/suppliers' AS [path], 'Suppliers' AS [title],NULL AS [image], 'reduce_capacity' AS [icon],NULL AS [class], 'SuppliersConfiguration' AS [configuration], 'SuppliersComponent' AS [component] UNION
-SELECT 11 AS [rowId], '/users' AS [path], 'Users' AS [title],NULL AS [image], 'manage_accounts' AS [icon],NULL AS [class], 'UsersConfiguration' AS [configuration], 'UsersComponent' AS [component]
+;WITH [cte] ([rowId], [path], [title], [image], [icon], [CssClass], [configuration], [component]) AS (
+SELECT 1 AS [rowId], '/dashboard' AS [path], 'Dashboard' AS [title],NULL AS [image], 'dashboard' AS [icon],NULL AS [CssClass], 'DashboardConfiguration' AS [configuration], 'DashboardComponent' AS [component] UNION
+SELECT 2 AS [rowId], '/user-profile' AS [path], 'My Profile' AS [title],NULL AS [image], 'person' AS [icon],NULL AS [CssClass], 'UserProfileConfiguration' AS [configuration], 'UserProfileComponent' AS [component] UNION
+SELECT 3 AS [rowId], '/notifications' AS [path], 'My Notifications' AS [title],NULL AS [image], 'circle_notifications' AS [icon],NULL AS [CssClass], 'UserNotificationsConfiguration' AS [configuration], 'UserNotificationsComponent' AS [component] UNION
+SELECT 4 AS [rowId], '/inbox' AS [path], 'My Inbox' AS [title],NULL AS [image], 'mail_outline' AS [icon],NULL AS [CssClass], 'UserInboxConfiguration' AS [configuration], 'UserInboxComponent' AS [component] UNION
+SELECT 5 AS [rowId], '/schedule' AS [path], 'My Schedule' AS [title],NULL AS [image], 'event' AS [icon],NULL AS [CssClass], 'UserScheduleConfiguration' AS [configuration], 'UserScheduleComponent' AS [component] UNION
+SELECT 6 AS [rowId], '/projects' AS [path], 'My Projects' AS [title],NULL AS [image], 'auto_awesome_motion' AS [icon],NULL AS [CssClass], 'UserProjectsConfiguration' AS [configuration], 'UserProjectsComponent' AS [component] UNION
+SELECT 7 AS [rowId], '/tasks' AS [path], 'My Tasks' AS [title],NULL AS [image], 'tune' AS [icon],NULL AS [CssClass], 'UserTasksConfiguration' AS [configuration], 'UserTasksComponent' AS [component] UNION
+SELECT 8 AS [rowId], '/employees' AS [path], 'Employees' AS [title],NULL AS [image], 'groups' AS [icon],NULL AS [CssClass], 'EmployeesConfiguration' AS [configuration], 'EmployeesComponent' AS [component] UNION
+SELECT 9 AS [rowId], '/clients' AS [path], 'Clients' AS [title],NULL AS [image], 'stream' AS [icon],NULL AS [CssClass], 'ClientsConfiguration' AS [configuration], 'ClientsComponent' AS [component] UNION
+SELECT 10 AS [rowId], '/suppliers' AS [path], 'Suppliers' AS [title],NULL AS [image], 'reduce_capacity' AS [icon],NULL AS [CssClass], 'SuppliersConfiguration' AS [configuration], 'SuppliersComponent' AS [component] UNION
+SELECT 11 AS [rowId], '/users' AS [path], 'Users' AS [title],NULL AS [image], 'manage_accounts' AS [icon],NULL AS [CssClass], 'UsersConfiguration' AS [configuration], 'UsersComponent' AS [component]
 )
-INSERT INTO [IdasGenioDb].[dbo].[MenuItem]([Path], [Title], [Image], [Icon], [Class], [Configuration], [Component], [CreatedBy])
+INSERT INTO [IdasGenioDb].[dbo].[MenuItem]([Path], [Title], [Image], [Icon], [CssClass], [Configuration], [Component], [IsActive], [CreatedBy])
 SELECT
-	[Path],
-	[Title],
-	[Image],
-	[Icon],
-	[Class],
-	[Configuration],
-	[Component],
+	[path], [title], [image], [icon], [CssClass], [configuration], [component],
+	CASE
+		WHEN [path] IN ('/notifications') THEN 0
+		ELSE 1
+	END AS [IsActive],
 	(SELECT [_id] FROM [IdasGenioDb].[dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
 FROM [cte]
 ORDER BY [rowId]

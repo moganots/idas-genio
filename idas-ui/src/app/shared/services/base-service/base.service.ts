@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SharedConfiguration } from 'app/shared/configuration/shared-configuration';
 import { User } from 'app/shared/domain-models/user/user';
-import { environment } from 'environments/environment';
 import { Observable, throwError as ObservableThrowError } from 'rxjs';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class BaseService {
   }
 
   getEndpointUrl(): string {
-    return `${environment.baseApi}${[
+    return `${SharedConfiguration.baseApi}${[
       this.anchorName,
       this.serviceName,
       this.actionName,
@@ -50,7 +50,11 @@ export class BaseService {
   getEntityId(entity: any) {
     return (entity) ? `id=${entity._id}` : null;
   }
-  toLocaleLowerCaseTrim(value: any){
+  public columnNameWithoutId(column: any) {
+    const columnName = (column.name || column).trim();
+    return (columnName && columnName.toLocaleLowerCase().endsWith('id')) ? columnName.substring(0, columnName.length - 2) : columnName;
+  }
+  public toLocaleLowerCaseTrim(value: any){
     return (value || '').toString().toLocaleLowerCase().trim();
   }
 

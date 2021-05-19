@@ -1,7 +1,7 @@
 export class UserScheduleConfiguration {
-  public static identifier = 'schedule';
+  public static identifier = 'user-schedule';
   public static pageIcon = 'event';
-  public static pageRoute = 'schedule';
+  public static pageRoute = 'user-schedule';
   public static pageRouteTitle = 'My Schedule';
   public static pageRouteCssClass = '';
   public static pageTitle = `Manage Schedule`;

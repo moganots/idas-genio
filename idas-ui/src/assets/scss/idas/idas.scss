@@ -10,7 +10,7 @@
 } */
 
 html, body {
-  background-color: $idas-color-background-main;
+  background-color: $idas-color-body-background-main;
   font-family: $OpenSans_Light;
   font-size: 0.85em;
   height:100%;
@@ -151,7 +151,7 @@ h1, h2, h3, h4, mat-header-cell {
 }
 
 .btn-idas {
-  background: $idas-color-background-main;
+  background: $idas-color-body-background-main;
   border: 1px solid $white;
   border-radius: 6px;
   box-shadow: none;
@@ -192,14 +192,14 @@ h1, h2, h3, h4, mat-header-cell {
 
 .btn-idas-no:hover{
     background-color: $bad-trend;
-    border: 1px solid $idas-color-background-main;
-    color: $idas-color-background-main;
+    border: 1px solid $idas-color-body-background-main;
+    color: $idas-color-body-background-main;
 }
 
 .btn-idas-yes:hover{
     background-color: $good-trend;
-    border: 1px solid $idas-color-background-main;
-    color: $idas-color-background-main;
+    border: 1px solid $idas-color-body-background-main;
+    color: $idas-color-body-background-main;
 }
 
 .mat-form-field {

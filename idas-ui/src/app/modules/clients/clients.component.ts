@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { PageComponent } from 'app/modules/_shared/modules-shared.module';
+import { AuthenticationService } from 'app/shared/shared.module';
 import { ClientsConfiguration } from './clients-configuration';
 import { ClientsService } from './services/clients.service';
 
@@ -10,6 +12,7 @@ import { ClientsService } from './services/clients.service';
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
   providers: [
+    AuthenticationService,
     ClientsService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
@@ -17,10 +20,13 @@ import { ClientsService } from './services/clients.service';
 export class ClientsComponent extends PageComponent {
 
   constructor(
+    public location: Location,
+    public router: Router,
     public matDialog: MatDialog,
+    public authenticationService: AuthenticationService,
     public clientsService: ClientsService
     ) {
-      super(matDialog);
+      super(location, router, matDialog, authenticationService);
       this.pageIcon = ClientsConfiguration.pageIcon;
       this.pageTitle = ClientsConfiguration.pageTitle;
       this.pageName = ClientsConfiguration.pageName;

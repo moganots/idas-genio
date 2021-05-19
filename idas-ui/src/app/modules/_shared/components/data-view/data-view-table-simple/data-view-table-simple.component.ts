@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LookupService, ReferenceEntityService } from 'app/shared/shared.module';
+import { Router } from '@angular/router';
+import { AuthenticationService, LookupService, ReferenceEntityService } from 'app/shared/shared.module';
 import { DialogCreateEditDataComponent } from '../../dialogs/dialog-create-edit-data/dialog-create-edit-data.component';
 import { BaseDataViewComponent } from '../base-data-view/base-data-view.component';
 
@@ -13,6 +14,7 @@ import { BaseDataViewComponent } from '../base-data-view/base-data-view.componen
   templateUrl: './data-view-table-simple.component.html',
   styleUrls: ['./data-view-table-simple.component.scss'],
   providers: [
+    AuthenticationService,
     LookupService,
     ReferenceEntityService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
@@ -29,10 +31,13 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
+    public location: Location,
+    public router: Router,
     public matDialog: MatDialog,
+    public authenticationService: AuthenticationService,
     public lookupService: LookupService,
     public referenceEntityService: ReferenceEntityService) {
-    super(matDialog, lookupService, referenceEntityService);
+    super(location, router, matDialog, authenticationService, lookupService, referenceEntityService);
     this.isLoading = true;
     this.onInitDataSource();
   }
@@ -57,12 +62,12 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
   onClickCreate(): void {
     super.onClickCreate();
     this.create.emit();
-    this.openDialog();
+    this.onOpenCreateEditDialog();
   }
   onClickEdit(element: any, index?: number): void {
     super.onClickEdit(element, index);
     this.edit.emit(element);
-    this.openDialog(element, index);
+    this.onOpenCreateEditDialog(element, index);
   }
   getTitleEditButton(element: any, index?: number) {
     return `${['Edit', this.capitalizeFirstLetter(this.entityName || '')/*, `(${index})`*/].join(' ').trim()}`;
@@ -84,6 +89,18 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
   }
   onClickAssignments(element: any, index?: number): void {
     this.assignments.emit({index, element});
+    super.openDialog(
+      DialogCreateEditDataComponent, {
+        action : this.action,
+        dataService : this.dataService,
+        entityName : this.entityName,
+        pageIcon : this.pageIcon,
+        pageName : this.pageName,
+        pageTitle : this.pageTitle,
+        dataFields : this.sourceDataColumnNames,
+        selected : element || this.selected,
+        selectedIndex : index || this.selectedIndex
+      }, () => { this.onDataRefresh(); });
   }
   getTitleAssignmentsButton(element: any, index?: number) {
     return `${[this.capitalizeFirstLetter(this.entityName || ''), 'Assignment(s)'].join(' ').trim()}`;
@@ -114,7 +131,7 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
         this.alertifyService.success('Update failed due to errors');
       }); */
   }
-  openDialog(element?: any, index?: number) {
+  onOpenCreateEditDialog(element?: any, index?: number) {
     super.openDialog(
       DialogCreateEditDataComponent, {
         action : this.action,

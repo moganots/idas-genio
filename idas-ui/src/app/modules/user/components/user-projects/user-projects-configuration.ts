@@ -16,9 +16,10 @@ export class UserProjectsConfiguration {
     {id: 4, name: 'StartDate', canShow: true, canSort: true, canGroup: false},
     {id: 5, name: 'EndDate', canShow: true, canSort: true, canGroup: false},
     {id: 6, name: 'MaximumHoursAllocated', canShow: true, canSort: true, canGroup: false},
-    {id: 7, name: 'CreatedBy', canShow: false, canSort: true, canGroup: false},
-    {id: 8, name: 'DateCreated', canShow: false, canSort: true, canGroup: false},
-    {id: 9, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
-    {id: 10, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
+    {id: 7, name: 'StatusId', canShow: true, canSort: true, canGroup: false},
+    {id: 8, name: 'CreatedBy', canShow: false, canSort: true, canGroup: false},
+    {id: 9, name: 'DateCreated', canShow: false, canSort: true, canGroup: false},
+    {id: 10, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
+    {id: 11, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
   ];
 }

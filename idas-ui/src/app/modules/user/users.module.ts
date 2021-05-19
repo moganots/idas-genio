@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs'
 
 import { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 import { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -42,6 +43,7 @@ export { UsersService } from './services/users.service';
 @NgModule({
   imports: [
     CommonModule,
+    MatTabsModule,
     ModulesSharedModule
   ],
   declarations: [

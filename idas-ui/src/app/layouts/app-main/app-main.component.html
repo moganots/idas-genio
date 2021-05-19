@@ -1,15 +1,16 @@
 <div class="wrapper">
-  <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg" aria-disabled="true">
-      <app-sidebar></app-sidebar>
-      <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
-  </div>
-  <div class="main-panel">
-      <app-navbar></app-navbar>
-      <router-outlet></router-outlet>
-      <div *ngIf="isMaps('maps')">
-          <app-footer></app-footer>
-      </div>
-  </div>
+    <app-main-login *ngIf="!isLoggedIn()"></app-main-login>
+    <div *ngIf="isLoggedIn()" class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg" aria-disabled="true">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+    </div>
+    <div *ngIf="isLoggedIn()" class="main-panel">
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+        <div *ngIf="isMaps('maps')">
+            <app-footer></app-footer>
+        </div>
+    </div>
   <!-- Right-side plugin pop-up
     <div class="fixed-plugin">
       <div class="dropdown show-dropdown open show">
@@ -74,9 +75,9 @@
               </li>
           </ul>
       </div>
-  </div> -->
+  </div> --
 </div>
-<!-- Buy-Modal-angular -->
+<!-- Buy-Modal-angular --
 <div class="modal modal-angular fade" id="buy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -144,6 +145,6 @@
           </a>
       </div>
   </div>
-</div>
+</div> -->
 
 </div>

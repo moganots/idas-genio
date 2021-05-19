@@ -1,0 +1,164 @@
+@import "../../../...../../../assets/scss/idas/colors.scss";
+@import "../../../...../../../assets/scss/idas/fonts.scss";
+
+.header {
+  height: auto;
+  margin-left: 42vw;
+  margin-top: 2vh;
+  padding: 0;
+  width: 40vw;
+}
+
+.logo {
+  display: inline-block;
+  height: auto;
+  margin: 10px 70px 10px auto;
+  padding: 0;
+  width: 5px;
+
+  img {
+    display: inline-block;
+    height: auto;
+    width: 65px;
+  }
+}
+
+.app-name {
+  display: inline-block;
+  position: relative;
+
+  p {
+    &.primary {
+      color: $idas-color-heading-background-secondary;
+      display: inline-block;
+      font-family: $OpenSans_Bold;
+      font-size: 1.45em;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.form-group {
+  margin-left: 25vw;
+  width: 60vw;
+
+  p {
+    &.welcome {
+      color: $idas-color-footer-background;
+      display: inline-block;
+      font-family: $OpenSans_SemiBold;
+      font-size: 1.45em;
+      letter-spacing: 0.10em;
+      margin: 10vh auto 5vh 22vw;
+      text-align: center;
+    }
+  }
+
+  mat-form-field {
+    font-family: $OpenSans_Bold;
+    font-size: 1.35em;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
+  }
+
+  a:link, a:active, a:visited {
+    color: $idas-color-body-links-active-visited;
+    font-family: $OpenSans_SemiBold;
+    font-size: 1.15em;
+    &.forgot {
+      float: right;
+      padding: 10px 0 5px 0;
+    }
+    &.register {
+      padding: 10px 0 0 10px;      
+    }
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.idas-modal-login-content {
+  border: 1px solid $idas-color-heading-background-secondary;
+  height: auto;
+  margin: auto;
+  padding: 10px;
+  width: 50vw;
+}
+
+.idas-modal {
+  background-color: $idas-color-body-background-main;
+}
+
+.idas-modal-container {
+  margin: 5px auto;
+  z-index: 9999 !important;
+}
+
+.idas-modal-login {
+  height: auto;
+  margin: 30vh auto;
+
+  .alert-custom {
+    span {
+      font-family: $OpenSans_SemiBold;
+    }
+  }
+}
+
+.idas-login {
+  padding: 5px;
+
+  span {
+    color: $idas-color-body-background-main;
+  }
+
+  mat-form-field {
+    padding-top: 5px;
+  }
+}
+
+.on-login {
+  background-color: orange;
+  border-radius: 6px;
+  display: inline-block;
+  font-family: $OpenSans_Light;
+  float: right;
+  padding: 15px;
+}
+
+.on-error {
+  background-color: #ffc2b3;
+  border-radius: 6px;
+  color: red;
+  display: inline-block;
+  font-family: $OpenSans_Light;
+  float: right;
+  padding: 15px;
+}
+
+footer {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+.idas-footer {
+  background-color: $idas-color-footer-background;
+  color: whitesmoke;
+  height: fit-content;
+  padding-top: 20px;
+
+  .powered-by {
+    font-size: 14px;
+  }
+}
+
+a {
+  color: #FF4500;
+  &:hover{
+    color: #ec5800;
+    text-decoration: none;
+  }
+}

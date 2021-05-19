@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { DataService, User } from 'app/shared/shared.module';
+import { Router } from '@angular/router';
+import { AuthenticationService, CommonComponent, DataService } from 'app/shared/shared.module';
 import { ModulesSharedConfiguration } from '../../modules-shared-configuration';
 
 @Component({
@@ -8,41 +11,38 @@ import { ModulesSharedConfiguration } from '../../modules-shared-configuration';
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss'],
   providers: [
+    AuthenticationService,
     DataService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
-export class BaseComponent {
+export class BaseComponent extends CommonComponent {
   @Input() public pageIcon: string;
   @Input() public pageName: string;
   @Input() public pageTitle: string;
   @Input() public entityName: string;
-  @Input() public currentUser: User;
   @Input() public dataService: DataService;
   @Input() public sourceData: any[];
   @Input() public sourceDataColumnNames: any[];
+  @Input() public dataFields: any[];
   @Input() public action: string;
+  @Input() public selected: any = {};
+  @Input() public selectedIndex: number;
+  public form = new FormControl();
+  public frmGroup: FormGroup;
+  public frmGroupFields: FormGroup;
   isLoading = false;
   hasError = false;
   hasWarnings = false;
   hasCrashed = false;
 
-  constructor(public matDialog: MatDialog) {}
-
-  isLoggedIn() {
-    return true;
-  }
-  isObjectSet(value: any) {
-    return !(value === null && value === undefined);
-  }
-  splitCamelCase(value: string): string {
-    return ((value || '').trim().length === 0) ? '' : (value || '').trim().replace(/([a-z])([A-Z])/g, '$1 $2');
-  }
-  splitCamelCaseAndSpecialCharacters(value: string): string {
-    return ((value || '').trim().length === 0) ? '' : (value || '').trim().replace(/([a-z])([A-Z])([_-])/g, '$1 $2 $3');
-  }
-  capitalizeFirstLetter(value: string): string {
-    return ((value || '').trim().length === 0) ? '' : value.charAt(0).toLocaleUpperCase() + value.slice(1);
+  constructor(
+    public location: Location,
+    public router: Router,
+    public matDialog: MatDialog,
+    public authenticationService: AuthenticationService
+    ) {
+    super(location, router, authenticationService);
   }
   formatDisplayColumnName(columnName: string): string {
     columnName = (!ModulesSharedConfiguration.ignoreColumns.includes(columnName) && columnName.toLocaleLowerCase().endsWith('id'))

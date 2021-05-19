@@ -21,6 +21,8 @@ import { BaseDialogComponent } from './components/dialogs/base-dialog/base-dialo
 import { DialogCreateEditDataComponent } from './components/dialogs/dialog-create-edit-data/dialog-create-edit-data.component';
 import { PageComponent } from './components/page/page.component';
 import { DataViewTableSimpleComponent } from './components/data-view/data-view-table-simple/data-view-table-simple.component';
+import { DialogProjectTaskAssignmentComponent } from './components/dialogs/dialog-project-task-assignment/dialog-project-task-assignment.component';
+import { BaseDataComponent } from './components/base-data-component/base-data.component';
 
 export { ModulesSharedConfiguration } from './modules-shared-configuration';
 
@@ -53,7 +55,9 @@ export { DialogCreateEditDataComponent } from './components/dialogs/dialog-creat
     DataViewTableSimpleComponent,
     BaseDialogComponent,
     DialogCreateEditDataComponent,
-    PageComponent
+    PageComponent,
+    DialogProjectTaskAssignmentComponent,
+    BaseDataComponent
   ],
   entryComponents: [
     DialogCreateEditDataComponent

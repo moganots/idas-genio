@@ -746,6 +746,7 @@
         display: none;
     }
     .navbar-fixed-top {
+        backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
     }
     #bodyClick {

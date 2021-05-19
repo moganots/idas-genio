@@ -1,7 +1,7 @@
 export class UserNotificationsConfiguration {
-  public static identifier = 'notifications';
+  public static identifier = 'user-notification';
   public static pageIcon = 'circle_notifications';
-  public static pageRoute = 'notifications';
+  public static pageRoute = 'user-notification';
   public static pageRouteTitle = 'My Notifications';
   public static pageRouteCssClass = '';
   public static pageTitle = `Manage Notifications`;

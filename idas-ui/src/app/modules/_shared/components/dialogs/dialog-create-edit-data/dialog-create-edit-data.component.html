@@ -27,9 +27,9 @@
                   formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
                   placeholder="{{ getFieldPlaceholder(udf) }}" [matAutocomplete]="i" (keyup)="onValueChanged(udf, $event)" (ngModel)="getNgModelValue()">
               <mat-autocomplete #i="matAutocomplete">
-                  <mat-option *ngFor="let value of udf.filteredLookupValues | async" [value]="value.id"
+                  <mat-option style="padding: 1px 0 1px 15px;" *ngFor="let value of udf.filteredLookupValues | async" [value]="value.id"
                       (onSelectionChange)="onSelectedValueChanged(udf, $event)" matSort>
-                      <span class="span-mat-option">{{value.displayValue || 'No option value(s)'}}</span>
+                      <span style="padding: 1px 0 1px 15px;">{{value.displayValue || 'No option value(s)'}}</span>
                   </mat-option>
               </mat-autocomplete>
             </mat-form-field>

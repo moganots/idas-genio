@@ -2,7 +2,7 @@
 |------------------------------------------------------------------------------------------------------------------
 | Author:	    TS MOGANO
 | Create date:  02/03/2021
-| Description:  IDAS - Genio API heartbeat utilities class
+| Description:  IDAS - Genio - API - heartbeat utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
 
@@ -13,7 +13,7 @@
  */
 const { getFirst } = require(`./../common/functions`);
 const { toLocaleLowerCase } = require(`./../common/functions`);
-const { isStringSet } = require(`./../common/functions`);
+const { isEmptyString } = require(`./../common/functions`);
 const { httpOnSuccess } = require(`../common/logging/logger`);
 const { httpOnError } = require(`../common/logging/logger`);
 
@@ -38,7 +38,7 @@ const getDefaultConfig = () => {
 }
 const addRequestAnchorName = (request) => {
     let anchorName = toLocaleLowerCase(request.route.path.split(`/`)[1]);
-    let pathWithoutPing = request.route.path.split(`/`).filter((element) => isStringSet(element) && !(toLocaleLowerCase(element) === 'ping')).join(`/`).trim();
+    let pathWithoutPing = request.route.path.split(`/`).filter((element) => isEmptyString(element) && !(toLocaleLowerCase(element) === 'ping')).join(`/`).trim();
     return `${!(anchorName === 'ping') ? ` (${pathWithoutPing})` : ``}`;
 }
 
