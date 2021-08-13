@@ -11,11 +11,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { AppMainRoutes } from './app-main.routing';
 import { ModulesModule } from 'app/modules/modules.module';
-import { DialogCreateEditDataComponent } from 'app/modules/_shared/modules-shared.module';
-import { DialogProjectTaskAssignmentComponent } from 'app/modules/_shared/components/dialogs/dialog-project-task-assignment/dialog-project-task-assignment.component';
+import { DialogCreateEditDataComponent } from 'app/modules/_shared/shared-modules.module';
 import { MatIconModule } from '@angular/material/icon';
+import { DialogProjectAssignmentComponent } from 'app/modules/projects/projects.module';
 
 export { AppMainLoginComponent } from './app-main-login/app-main-login.component';
+export { AppLoginConfiguration } from './app-main-login/app-login-configuration';
 export { AppMainComponent } from './app-main.component';
 
 @NgModule({
@@ -37,7 +38,7 @@ export { AppMainComponent } from './app-main.component';
   declarations: [],
   entryComponents: [
     DialogCreateEditDataComponent,
-    DialogProjectTaskAssignmentComponent
+    DialogProjectAssignmentComponent
   ]
 })
 export class AppMainModule {}

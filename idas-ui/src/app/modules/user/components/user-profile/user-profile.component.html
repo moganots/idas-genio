@@ -1,36 +1,704 @@
-<div class="main-content idas-main-content">
+<div *ngIf="isLoggedIn()" class="main-content idas-main-content">
   <div class="container-fluid">
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger idas-page-heading">
-            <i class="material-icons idas-page-heading-icon">{{pageIcon}}</i><h4 class="card-title">{{pageTitle}}</h4>
-            <!-- <p class="card-category">{{pageTitle}}</p> -->
+          <div class="card-header card-header-danger idas-main-card-header">
+            <i class="material-icons">{{ pageIcon }}</i>
+            <h4 class="card-title">{{ pageTitle }}</h4>
+            <p class="category"></p>
+            <span>
+              <button
+                mat-icon-button
+                class="
+                  btn btn-white btn-round btn-just-icon btn-idas-float-right
+                "
+                type="button"
+                (click)="onClickSave()"
+              >
+                <i class="material-icons" style="margin: 0 0 0 5px">save</i>
+              </button>
+            </span>
           </div>
           <div class="card-body">
             <form [formGroup]="frmGroup">
-              <mat-tab-group animationDuration="2000ms">
+              <mat-tab-group
+                animationDuration="2000ms"
+                formGroupName="frmFields"
+              >
                 <mat-tab label="Personal Details">
                   <div class="card-body">
                     <div class="row gutters">
-                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <mat-form-field>
-                          <input matInput type="text" id="SalutationId" name="SalutationId"
-                          formControlName="SalutationId" [formControl]="frmGroupFields.controls["""SalutationId"""]" class=""
-                          placeholder="Salutation" />
-                        </mat-form-field>
-                      </div>
-                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
-                          <label for="eMail">Email</label>
-                          <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
-                        </div>
+                      <div
+                        *ngFor="
+                          let fidc of fieldsPersonalDetails;
+                          let i = index
+                        "
+                        class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
+                      >
+                        <span [ngSwitch]="fidc.controlType">
+                          <span *ngSwitchCase="'textbox'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="text"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
+                                    {})[fidc.name]
+                                "
+                                (change)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'number'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="number"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
+                                    {})[fidc.name]
+                                "
+                                (keyup)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'select'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="text"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
+                                    {})[fidc.name]
+                                "
+                                [matAutocomplete]="i"
+                              />
+                              <mat-autocomplete
+                                id="{{ fidc.name }}"
+                                #i="matAutocomplete"
+                                [displayWith]="getDisplayWithValue"
+                              >
+                                <mat-option
+                                  id="{{ fidc.name }}"
+                                  *ngFor="
+                                    let value of fidc.filteredLookupValues
+                                      | async
+                                  "
+                                  [value]="value"
+                                  (onSelectionChange)="
+                                    onSelectedValueChanged($event)
+                                  "
+                                  matSort
+                                >
+                                  <span
+                                    [ngStyle]="{
+                                      display:
+                                        value?.icon === null ||
+                                        value?.icon === undefined
+                                          ? 'none'
+                                          : 'inline'
+                                    }"
+                                  >
+                                    <i
+                                      class="material-icons {{
+                                        value?.cssClassCategory
+                                      }} {{ value?.cssClass }}"
+                                      [title]="value?.title"
+                                      [ngStyle]="{
+                                        display:
+                                          value?.icon === null ||
+                                          value?.icon === undefined
+                                            ? 'none'
+                                            : 'inline'
+                                      }"
+                                      >{{ value?.icon }}</i
+                                    >
+                                  </span>
+                                  <span
+                                    [ngStyle]="{
+                                      display:
+                                        value?.image === null ||
+                                        value?.image === undefined
+                                          ? 'none'
+                                          : 'inline'
+                                    }"
+                                  >
+                                    <img
+                                      class="img-mat-option"
+                                      src="{{ value?.image }}"
+                                      [ngStyle]="{
+                                        display:
+                                          value?.image === null ||
+                                          value?.image === undefined
+                                            ? 'none'
+                                            : 'inline'
+                                      }"
+                                    />
+                                  </span>
+                                  <p class="display-value">
+                                    {{ value?.displayValue }}
+                                  </p>
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'checkbox'">
+                            <mat-checkbox
+                              id="{{ fidc.name }}"
+                              name="{{ fidc.name }}"
+                              [formControl]="frmGroupFields.controls[fidc.name]"
+                              [(ngModel)]="
+                                (currentUser.Client ||
+                                  currentUser.Employee ||
+                                  currentUser.Supplier ||
+                                  {})[fidc.name]
+                              "
+                              (change)="onCheckboxClicked($event)"
+                              class=""
+                              ><p class="display-name-check-box">
+                                {{ fidc.displayName }}
+                              </p></mat-checkbox
+                            >
+                          </span>
+                          <span *ngSwitchCase="'datetimepicker'">
+                            <mat-form-field>
+                              <mat-label>{{ fidc.displayName }}</mat-label>
+                              <input
+                                matInput
+                                [matDatepicker]="picker"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
+                                    {})[fidc.name]
+                                "
+                                (dateInput)="onDateChanged($event)"
+                                (dateChange)="onDateChanged($event)"
+                              />
+                              <mat-datepicker-toggle
+                                id="{{ fidc.name }}"
+                                matSuffix
+                                [for]="picker"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker
+                                id="{{ fidc.name }}"
+                                #picker
+                              ></mat-datepicker>
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'password'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="password"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
+                                    {})[fidc.name]
+                                "
+                                (keyup)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'textarea'">
+                            <mat-form-field>
+                              <textarea
+                                matInput
+                                type="textarea"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
+                                    {})[fidc.name]
+                                "
+                                (keyup)="onValueChanged($event)"
+                              ></textarea>
+                            </mat-form-field>
+                          </span>
+                        </span>
                       </div>
                     </div>
                   </div>
                 </mat-tab>
-                <mat-tab label="Contact Details">Content 2</mat-tab>
-                <mat-tab label="Third">Content 3</mat-tab>
+                <mat-tab label="Contact Details">
+                  <div class="card-body">
+                    <div class="row gutters">
+                      <div
+                        *ngFor="let fidc of fieldsContactDetails; let i = index"
+                        class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
+                      >
+                        <span [ngSwitch]="fidc.controlType">
+                          <span *ngSwitchCase="'textbox'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="text"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.ContactDetail || {})[fidc.name]
+                                "
+                                (change)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'number'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="number"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.ContactDetail || {})[fidc.name]
+                                "
+                                (keyup)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'select'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="text"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.ContactDetail || {})[fidc.name]
+                                "
+                                [matAutocomplete]="i"
+                              />
+                              <mat-autocomplete
+                                id="{{ fidc.name }}"
+                                #i="matAutocomplete"
+                                [displayWith]="getDisplayWithValue"
+                              >
+                                <mat-option
+                                  id="{{ fidc.name }}"
+                                  *ngFor="
+                                    let value of fidc.filteredLookupValues
+                                      | async
+                                  "
+                                  [value]="value"
+                                  (onSelectionChange)="
+                                    onSelectedValueChanged($event)
+                                  "
+                                  matSort
+                                >
+                                  <span
+                                    [ngStyle]="{
+                                      display:
+                                        value?.icon === null ||
+                                        value?.icon === undefined
+                                          ? 'none'
+                                          : 'inline'
+                                    }"
+                                  >
+                                    <i
+                                      class="material-icons {{
+                                        value?.cssClassCategory
+                                      }} {{ value?.cssClass }}"
+                                      [title]="value?.title"
+                                      [ngStyle]="{
+                                        display:
+                                          value?.icon === null ||
+                                          value?.icon === undefined
+                                            ? 'none'
+                                            : 'inline'
+                                      }"
+                                      >{{ value?.icon }}</i
+                                    >
+                                  </span>
+                                  <span
+                                    [ngStyle]="{
+                                      display:
+                                        value?.image === null ||
+                                        value?.image === undefined
+                                          ? 'none'
+                                          : 'inline'
+                                    }"
+                                  >
+                                    <img
+                                      class="img-mat-option"
+                                      src="{{ value?.image }}"
+                                      [ngStyle]="{
+                                        display:
+                                          value?.image === null ||
+                                          value?.image === undefined
+                                            ? 'none'
+                                            : 'inline'
+                                      }"
+                                    />
+                                  </span>
+                                  <p class="display-value">
+                                    {{ value?.displayValue }}
+                                  </p>
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'checkbox'">
+                            <mat-checkbox
+                              id="{{ fidc.name }}"
+                              name="{{ fidc.name }}"
+                              [formControl]="frmGroupFields.controls[fidc.name]"
+                              [(ngModel)]="
+                                (currentUser.ContactDetail || {})[fidc.name]
+                              "
+                              (change)="onCheckboxClicked($event)"
+                              class=""
+                              ><p class="display-name-check-box">
+                                {{ fidc.displayName }}
+                              </p></mat-checkbox
+                            >
+                          </span>
+                          <span *ngSwitchCase="'datetimepicker'">
+                            <mat-form-field>
+                              <mat-label>{{ fidc.displayName }}</mat-label>
+                              <input
+                                matInput
+                                [matDatepicker]="picker"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.ContactDetail || {})[fidc.name]
+                                "
+                                (dateInput)="onDateChanged($event)"
+                                (dateChange)="onDateChanged($event)"
+                              />
+                              <mat-datepicker-toggle
+                                id="{{ fidc.name }}"
+                                matSuffix
+                                [for]="picker"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker
+                                id="{{ fidc.name }}"
+                                #picker
+                              ></mat-datepicker>
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'password'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="password"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.ContactDetail || {})[fidc.name]
+                                "
+                                (keyup)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'textarea'">
+                            <mat-form-field>
+                              <textarea
+                                matInput
+                                type="textarea"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="
+                                  (currentUser.ContactDetail || {})[fidc.name]
+                                "
+                                (keyup)="onValueChanged($event)"
+                              ></textarea>
+                            </mat-form-field>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+                <mat-tab label="User Account">
+                  <div class="card-body">
+                    <div class="row gutters">
+                      <div
+                        *ngFor="
+                          let fidc of fieldsUserAccountDetails;
+                          let i = index
+                        "
+                        class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
+                      >
+                        <span [ngSwitch]="fidc.controlType">
+                          <span *ngSwitchCase="'textbox'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="text"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="(currentUser || {})[fidc.name]"
+                                (change)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'number'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="number"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="(currentUser || {})[fidc.name]"
+                                (keyup)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'select'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="text"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="(currentUser || {})[fidc.name]"
+                                [matAutocomplete]="i"
+                              />
+                              <mat-autocomplete
+                                id="{{ fidc.name }}"
+                                #i="matAutocomplete"
+                                [displayWith]="getDisplayWithValue"
+                              >
+                                <mat-option
+                                  id="{{ fidc.name }}"
+                                  *ngFor="
+                                    let value of fidc.filteredLookupValues
+                                      | async
+                                  "
+                                  [value]="value"
+                                  (onSelectionChange)="
+                                    onSelectedValueChanged($event)
+                                  "
+                                  matSort
+                                >
+                                  <span
+                                    [ngStyle]="{
+                                      display:
+                                        value?.icon === null ||
+                                        value?.icon === undefined
+                                          ? 'none'
+                                          : 'inline'
+                                    }"
+                                  >
+                                    <i
+                                      class="material-icons {{
+                                        value?.cssClassCategory
+                                      }} {{ value?.cssClass }}"
+                                      [title]="value?.title"
+                                      [ngStyle]="{
+                                        display:
+                                          value?.icon === null ||
+                                          value?.icon === undefined
+                                            ? 'none'
+                                            : 'inline'
+                                      }"
+                                      >{{ value?.icon }}</i
+                                    >
+                                  </span>
+                                  <span
+                                    [ngStyle]="{
+                                      display:
+                                        value?.image === null ||
+                                        value?.image === undefined
+                                          ? 'none'
+                                          : 'inline'
+                                    }"
+                                  >
+                                    <img
+                                      class="img-mat-option"
+                                      src="{{ value?.image }}"
+                                      [ngStyle]="{
+                                        display:
+                                          value?.image === null ||
+                                          value?.image === undefined
+                                            ? 'none'
+                                            : 'inline'
+                                      }"
+                                    />
+                                  </span>
+                                  <p class="display-value">
+                                    {{ value?.displayValue }}
+                                  </p>
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'checkbox'">
+                            <mat-checkbox
+                              id="{{ fidc.name }}"
+                              name="{{ fidc.name }}"
+                              [formControl]="frmGroupFields.controls[fidc.name]"
+                              [(ngModel)]="(currentUser || {})[fidc.name]"
+                              (change)="onCheckboxClicked($event)"
+                              class=""
+                              ><p class="display-name-check-box">
+                                {{ fidc.displayName }}
+                              </p></mat-checkbox
+                            >
+                          </span>
+                          <span *ngSwitchCase="'datetimepicker'">
+                            <mat-form-field>
+                              <mat-label>{{ fidc.displayName }}</mat-label>
+                              <input
+                                matInput
+                                [matDatepicker]="picker"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="(currentUser || {})[fidc.name]"
+                                (dateInput)="onDateChanged($event)"
+                                (dateChange)="onDateChanged($event)"
+                              />
+                              <mat-datepicker-toggle
+                                id="{{ fidc.name }}"
+                                matSuffix
+                                [for]="picker"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker
+                                id="{{ fidc.name }}"
+                                #picker
+                              ></mat-datepicker>
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'password'">
+                            <mat-form-field>
+                              <input
+                                matInput
+                                type="password"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="(currentUser || {})[fidc.name]"
+                                (keyup)="onValueChanged($event)"
+                              />
+                            </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'textarea'">
+                            <mat-form-field>
+                              <textarea
+                                matInput
+                                type="textarea"
+                                id="{{ fidc.name }}"
+                                name="{{ fidc.name }}"
+                                [formControl]="
+                                  frmGroupFields.controls[fidc.name]
+                                "
+                                class=""
+                                placeholder="{{ fidc.displayName }}"
+                                [(ngModel)]="(currentUser || {})[fidc.name]"
+                                (keyup)="onValueChanged($event)"
+                              ></textarea>
+                            </mat-form-field>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
               </mat-tab-group>
             </form>
           </div>

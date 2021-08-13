@@ -1,28 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService, Supplier } from 'app/shared/shared.module';
+import {
+  AuthenticationService,
+  DataService,
+  GeneralUtils,
+  LookupValue,
+  LookupValueService,
+  Supplier,
+} from 'app/shared/shared.module';
 import { SuppliersConfiguration } from '../suppliers-configuration';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SuppliersService extends DataService {
-
-  constructor(public httpClient: HttpClient) {
-    super(httpClient);
+  lookupValues: LookupValue[] = [];
+  constructor(
+    public httpClient: HttpClient,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService
+  ) {
+    super(httpClient, authenticationService);
     this.entityName = SuppliersConfiguration.identifier;
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .subscribe((lookupValues) => {
+        this.lookupValues = lookupValues;
+      });
   }
-
-  create(entity: any): any {
-    return super.create<Supplier>(entity);
+  mapValues(supplier: Supplier) {
+    supplier.Salutation = this.lookupValues.find(
+      (lv) => lv._id === supplier.SalutationId
+    );
+    supplier.IndustryType = this.lookupValues.find(
+      (lv) => lv._id === supplier.IndustryTypeId
+    );
+    supplier.Bank = this.lookupValues.find((lv) => lv._id === supplier.BankId);
+    supplier.DisplayName = GeneralUtils.getSupplierDisplayName(supplier);
+    return supplier;
   }
-
-  update(entity: any): any {
-    return super.update<Supplier>(entity);
-  }
-
-  delete(entity: any): any {
-    return super.delete<Supplier>(entity);
-  }
-
 }

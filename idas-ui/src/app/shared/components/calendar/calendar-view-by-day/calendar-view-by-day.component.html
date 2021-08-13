@@ -1,0 +1,61 @@
+<table class="calendar-table" *ngIf="calendarService.viewDate">
+    <thead>
+      <tr>
+        <th class="no-data">&nbsp;</th>
+        <th
+          class="calendar-day day-view"
+        >
+          <strong style="font-size: 1.25em;">{{ weekDays[calendarService.viewDate.getDay()] }}</strong>
+        </th>
+      </tr>
+      <tr>
+        <th class="no-data">&nbsp;</th>
+        <td
+          class="calendar-day day-view date"
+        >
+          {{ calendarService.viewDate.getDate() }}
+        </td>
+      </tr>
+    </thead>
+  <tbody>
+    <tr *ngFor="let operatingHour of operatingHours; let i = index">
+      <td>
+        {{ operatingHour }}
+      </td>
+      <td>
+        <div
+          *ngFor="
+            let calendarEvent of getCalendarEventsByTime(
+              calendarService.viewDate,
+              operatingHour
+            )
+          "
+          class="calendar-event day-view {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+          [title]="calendarEvent?.Title"
+        >
+          <i
+            class="material-icons {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+            [ngStyle]="{
+              display:
+                calendarEvent?.MeetingType?.Icon === null || calendarEvent?.MeetingType?.Icon === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            >{{ calendarEvent?.MeetingType?.Icon }}</i
+          >
+          {{ calendarEvent?.Title }}
+          <i
+            class="material-icons recurring {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+            [ngStyle]="{
+              display: !calendarEvent?.isRecurring ? 'none' : 'inline'
+            }"
+            >autorenew</i
+          >
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>

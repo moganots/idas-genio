@@ -1,0 +1,51 @@
+import { NgModule } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+
+import { CalendarConfiguration } from './shared/calendar-configuration/calendar-configuration';
+import { ViewByOption } from './shared/calendar-interfaces/view-by-option';
+import { ViewNavOption } from './shared/calendar-interfaces/view-nav-option';
+import { CalendarService } from './shared/calendar-service/calendar.service';
+import { CalendarViewByComponent } from './shared/components/calendar-view-by/calendar-view-by.component';
+import { CalendarToolbarComponent } from './shared/calendar-toolbar/calendar-toolbar.component';
+import { CalendarComponent } from './calendar.component';
+import { CalendarViewByMonthComponent } from './calendar-view-by-month/calendar-view-by-month.component';
+import { CalendarViewByWeekComponent } from './calendar-view-by-week/calendar-view-by-week.component';
+import { CalendarViewByWorkWeekComponent } from './calendar-view-by-work-week/calendar-view-by-work-week.component';
+import { CalendarViewByDayComponent } from './calendar-view-by-day/calendar-view-by-day.component';
+import { ChunkPipe } from 'app/shared/shared.module';
+
+export { CalendarConfiguration } from './shared/calendar-configuration/calendar-configuration';
+export { ViewByOption } from './shared/calendar-interfaces/view-by-option';
+export { ViewNavOption } from './shared/calendar-interfaces/view-nav-option';
+export { CalendarService } from './shared/calendar-service/calendar.service';
+export { CalendarViewByComponent } from './shared/components/calendar-view-by/calendar-view-by.component';
+export { CalendarToolbarComponent } from './shared/calendar-toolbar/calendar-toolbar.component';
+export { CalendarComponent } from './calendar.component';
+export { CalendarViewByMonthComponent } from './calendar-view-by-month/calendar-view-by-month.component';
+export { CalendarViewByWeekComponent } from './calendar-view-by-week/calendar-view-by-week.component';
+export { CalendarViewByWorkWeekComponent } from './calendar-view-by-work-week/calendar-view-by-work-week.component';
+export { CalendarViewByDayComponent } from './calendar-view-by-day/calendar-view-by-day.component';
+
+@NgModule({
+  declarations: [
+    CalendarToolbarComponent,
+    CalendarViewByComponent,
+    CalendarComponent,
+    CalendarViewByMonthComponent,
+    CalendarViewByWeekComponent,
+    CalendarViewByWorkWeekComponent,
+    CalendarViewByDayComponent,
+  ],
+  imports: [CommonModule],
+  exports: [
+    CalendarViewByComponent,
+    CalendarToolbarComponent,
+    CalendarComponent,
+    CalendarViewByMonthComponent,
+    CalendarViewByWeekComponent,
+    CalendarViewByWorkWeekComponent,
+    CalendarViewByDayComponent,
+  ],
+  providers: [ChunkPipe, DatePipe, CalendarService],
+})
+export class CalendarModule {}

@@ -1,0 +1,152 @@
+<!-- <app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [sourceDataColumns] = "sourceDataColumns" [sourceData] = "sourceData"></app-data-view-table-simple> -->
+<div *ngIf="isLoggedIn()" class="main-content idas-main-content">
+  <div class="container-fluid">
+    <div class="element">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger idas-main-card-header">
+            <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+            <h4 class="card-title">{{ pageTitle }}</h4>
+            <p class="category"></p>
+          </div>
+          <div class="card-body">
+            <div class="idas-project-task-card-main-toolbar mat-elevation-z4">
+              <p>Filter By User:</p>
+              <img
+                *ngFor="let user of users"
+                class="btn-idas img-manage-task-toolbar"
+                src="{{ user?.Avatar || './assets/img/avatars/avatar-0.png' }}"
+                [title]="user?.DisplayName || user?.EmailAddress"
+              />
+            </div>
+            <br />
+            <br />
+            <mat-accordion>
+              <mat-expansion-panel
+                class="mat-elevation-z0"
+                [expanded]="i === 0"
+                [togglePosition]="'before'"
+                *ngFor="let project of projects; let i = index"
+              >
+                <mat-expansion-panel-header
+                  class="mat-elevation-z2 idas-project-task-panel-header"
+                >
+                  <i
+                    class="material-icons project type {{
+                      project?.ProjectType?.CssClassCategory
+                    }} {{ project?.ProjectType?.CssClass }}"
+                    [title]="project?.Value"
+                    [ngStyle]="{
+                      display:
+                        project?.ProjectType?.Icon === null ||
+                        project?.ProjectType?.Icon === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                    >{{ project?.ProjectType?.Icon }}</i
+                  >
+                  <p class="project code id">
+                    <a href="#/projects/project/{{ project?._id }}"
+                      >{{ project?.Code }} / {{ project?._id }}</a
+                    >
+                  </p>
+                  <p class="project name">{{ project?.Name }}</p>
+                  <p class="project task-count">
+                    {{ project?.Tasks?.length || 0 }} Task(s)
+                  </p>
+                  <p
+                    class="project status {{
+                      project?.Status?.CssClassCategory
+                    }} {{ project?.Status?.CssClass }}"
+                  >
+                    {{ project?.Status?.Value }}
+                  </p>
+                </mat-expansion-panel-header>
+                <div
+                  class="mat-elevation-z1 idas-project-task-card-main"
+                  *ngFor="let task of project?.Tasks"
+                >
+                  <i
+                    class="material-icons task type {{
+                      task?.TaskType?.CssClassCategory
+                    }} {{ task?.TaskType?.CssClass }}"
+                    [title]="task?.TaskType?.Value"
+                    [ngStyle]="{
+                      display:
+                        task?.TaskType?.Icon === null ||
+                        task?.TaskType?.Icon === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                    >{{ task?.TaskType?.Icon || "report_problem" }}</i
+                  >
+                  <i
+                    class="material-icons task priority {{
+                      task?.Priority?.CssClassCategory
+                    }} {{ task?.Priority?.CssClass }}"
+                    [title]="task?.Priority?.Value"
+                    [ngStyle]="{
+                      display:
+                        task?.Priority?.Icon === null ||
+                        task?.Priority?.Icon === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                    >{{ task?.Priority?.Icon || "report_problem" }}</i
+                  >
+                  <a class="" href="#/tasks/task/{{task?._id}}"
+                    >{{ task?.Project?.Code }} / {{ task?._id }}</a
+                  >
+                  <p class="task name">
+                    {{ task?.Name }}
+                  </p>
+                  <img
+                    class="btn-idas avatar assignee"
+                    src="{{
+                      task?.Assignee?.Avatar ||
+                        './assets/img/avatars/avatar-0.png'
+                    }}"
+                    [title]="
+                      (
+                        task?.Assignee || {
+                          DisplayName: 'Unassigned'
+                        }
+                      ).DisplayName
+                    "
+                    [ngStyle]="{
+                      display:
+                        task?.Assignee?.Avatar === null ||
+                        task?.Assignee?.Avatar === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                  />
+                  <p
+                    class="task status {{ task?.Status?.CssClassCategory }} {{
+                      task?.Status?.CssClass
+                    }}"
+                  >
+                    {{ task?.Status?.Value }}
+                  </p>
+                </div>
+                <div class="idas-tasks-footer-action-buttons">
+                  <button
+                    mat-icon-button
+                    class="
+                      btn btn-white btn-round btn-just-icon btn-idas-float-right
+                    "
+                    type="button"
+                    (click)="onClickAddNewProjectTask(project)"
+                    title="Add New Task"
+                  >
+                    <i class="material-icons idas-button-icon">post_add</i>
+                  </button>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

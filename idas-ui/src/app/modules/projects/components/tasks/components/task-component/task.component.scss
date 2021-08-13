@@ -1,0 +1,386 @@
+@import "./../../../../../../../assets/scss/idas/colors.scss";
+@import "./../../../../../../../assets/scss/idas/fonts.scss";
+
+.idas-manage-project-task-card-header {
+  float: left;
+  i {
+    text-align: left;
+    vertical-align: middle;
+    &.project,
+    &.task {
+      font-size: 75px;
+      height: auto;
+      margin: 0 0.3vw 0 0;
+      padding: 0 0 0 0;
+    }
+  }
+  p {
+    color: #000000;
+    font-size: 1.35em;
+    text-align: left;
+    vertical-align: middle;
+    &.project,
+    &.task {
+      font-family: $OpenSans_Regular;
+      &.code,
+      &.name,
+      &.type {
+        margin-left: 3vw;
+        padding: 0 0 0 0;
+      }
+      &.code {
+        margin-top: 1.4vh;
+        padding: 0 0 0 0;
+        position: absolute;
+        text-transform: uppercase;
+      }
+      &.name {
+        margin-top: 3.6vh;
+        padding: 0 0 0 0;
+        position: absolute;
+      }
+      &.type {
+        margin-top: 5.3vh;
+        padding: 6px 0 0 0;
+        position: absolute;
+      }
+    }
+    span {
+      font-family: $OpenSans_Bold;
+    }
+  }
+}
+.idas-manage-project-task-toolbar {
+  border-bottom: 3px solid $idas-color-heading-background-secondary;
+  border-radius: 12px;
+  padding: 5px 0 5px 10px;
+  .btn-idas-manage-task-edit {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-edit;
+  }
+  .btn-idas-manage-task-comment {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-comment;
+  }
+  .btn-idas-manage-task-log-work {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-log-work;
+  }
+  .btn-idas-manage-task-assign {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-assign;
+  }
+  .btn-idas-manage-task-attach-file {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-attach-file;
+  }
+  .btn-idas-manage-project-task-create-sub {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-create;
+  }
+  .btn-idas-manage-project-task-copy {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-clone;
+  }
+  .btn-idas-manage-project-task-review {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-review;
+  }
+  .btn-idas-manage-task-progress-status {
+    color: $idas-color-whitesmoke;
+    background-color: $idas-color-action-progress;
+  }
+}
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  font-family: $OpenSans_Bold;
+  margin-top: 7px;
+  text-align: justify;
+  vertical-align: middle;
+}
+.idas-manage-project-task-container {
+  display: table;
+  font-family: $OpenSans_Regular;
+  font-weight: 100;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  width: 100%;
+  .idas-manage-project-task-content-child {
+    color: #000000;
+    display: table-cell;
+    font-family: $OpenSans_Regular;
+    font-weight: 100;
+    span {
+      color: #000000;
+      display: inline;
+      padding: 0 0 0 8px;
+      text-align: justify;
+      vertical-align: middle;
+    }
+    span.resize {
+      width: 50%;
+    }
+  }
+  .idas-manage-project-task-content-child.row {
+    display: table-row;
+    font-family: $OpenSans_Regular;
+    font-weight: 100;
+  }
+  .idas-manage-project-task-content-child.detail {
+    font-family: $OpenSans_Regular;
+    font-weight: 100;
+    height: auto;
+    width: 75%;
+    i {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+      &.created-by,
+      &.modified-by {
+        margin: 0 0.2vw 0 0.6vw;
+        padding: 0 0 0 0;
+      }
+      &.btn-idas-detail {
+        border: none;
+      }
+    }
+    p {
+      font-family: $OpenSans_Regular;
+      font-weight: 100;
+      font-size: 0.95em;
+      text-align: left;
+      vertical-align: middle;
+      &.label-title {
+        border: none;
+        width: 95px;
+        &.type,
+        &.created-by,
+        &.modified-by,
+        &.priority,
+        &.status {
+          margin: 0 0 0 0;
+          padding: 0 0 0 0;
+        }
+      }
+      &.label-detail {
+        border: none;
+        &.type {
+          border: none;
+          margin: 0 0 0 0;
+          padding: 0 0 0 0;
+          text-align: center;
+        }
+        &.created-by,
+        &.modified-by,
+        &.assignee {
+          border: none;
+          margin: 0 0 0 0.4vw;
+          padding: 0 0 0 0;
+          text-align: left;
+        }
+        &.priority,
+        &.status {
+          border: none;
+          color: $white;
+          margin: 0 0 0 0;
+          padding: 5px 0 6px 0;
+          text-align: center;
+          width: 35%;
+        }
+        &.task-status {
+          border: none;
+          color: $white;
+          margin: 0 0 0 0;
+          padding: 5px 0 6px 0;
+          text-align: center;
+          width: 35%;
+        }
+      }
+    }
+    mat-menu {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+      button {
+        bottom: none;
+        font-size: 3.65em;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        i {
+          margin: 0 0 0 0;
+          padding: 0 0 0 0;
+        }
+      }
+    }
+    .idas-project-task-card-main {
+      float: right;
+      font-size: 0.95em;
+      margin: 0 0 0 0;
+      padding: 35px 5px 5px 5px;
+      width: 100%;
+      i {
+        display: inline;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        &.task {
+          &.type,
+          &.priority {
+            margin: 0 0 0 0;
+            padding: 10px 0 0 0;
+          }
+        }
+      }
+      a {
+        display: inline;
+        margin: 0 0 0 0;
+        padding: 10px 0 0 3px;
+        vertical-align: middle;
+      }
+      p {
+        display: inline;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        vertical-align: middle;
+        &.project,
+        &.task {
+          display: inline;
+          &.name {
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+            vertical-align: middle;
+          }
+          &.status {
+            border: none;
+            color: $white;
+            float: right;
+            margin: 0 0.2vw 0 0;
+            padding: 4px;
+            position: relative;
+            text-align: center;
+            width: 100px;
+          }
+        }
+      }
+      img {
+        border-radius: 12px;
+        height: auto;
+        float: right;
+        &.avatar {
+          &.assignee {
+            margin: 0.2vh 0 0 0;
+            padding: 0 0 0 0;
+            position: relative;
+            vertical-align: middle;
+            width: 3.5%;
+          }
+        }
+      }
+    }
+  }
+  .idas-manage-project-task-content-child.sideview {
+    font-family: $OpenSans_Regular;
+    font-weight: 100;
+    height: auto;
+    margin-left: 5px;
+    padding: 0 0 0 0;
+    ul,
+    li {
+      font-family: $OpenSans_Regular;
+      font-weight: 100;
+      list-style: none;
+      list-style-type: none;
+      margin: 0 0 0 0;
+      padding: 1px 0 1px 0;
+      width: 350px;
+    }
+    i {
+      &.assignee {
+        margin: 0 0.3vw 0 0;
+        padding: 0 0 0 0;
+      }
+      &.created-by,
+      &.modified-by {
+        margin: 0 0.1vw 0 0;
+        padding: 0 0 0 0;
+      }
+    }
+    p {
+      font-family: $OpenSans_Regular;
+      font-weight: 100;
+      vertical-align: middle;
+      &.label-title {
+        border: none;
+        &.assignee,
+        &.created-by,
+        &.modified-by,
+        &.date-created,
+        &.date-modified {
+          margin: 0 0 0 0;
+          padding: 0 0 0 0;
+          width: 6.2vw;
+        }
+      }
+      &.label-detail {
+        border: none;
+        &.assignee,
+        &.created-by,
+        &.modified-by,
+        &.date-created,
+        &.date-modified {
+          border: none;
+          margin: 0 0 0 0.4vw;
+          padding: 0 0 0 0;
+        }
+      }
+    }
+  }
+  .mat-expansion-indicator {
+    position: absolute;
+    left: 15px;
+  }
+  .idas-mat-expansion-panel-header {
+    font-family: $OpenSans_Bold;
+    text-align: justify;
+    vertical-align: middle;
+  }
+}
+img {
+  height: auto;
+  width: 8%;
+  &.avatar {
+    border-radius: 8px;
+    height: auto;
+    margin: 0 5px 0 0;
+    padding: 0 0 0 0;
+    &.created-by,
+    &.modified-by {
+      margin: 0 0 0 0.2vw;
+      padding: 0 0 0 0;
+    }
+    &.assignee {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+    }
+  }
+}
+.textarea {
+  border: 1px solid #f5f5f5;
+  height: auto;
+  padding: 10px;
+  width: 100%;
+}
+a,
+a:link,
+a:active,
+a:visited {
+  color: $idas-color-main-links-link-active-visited;
+  cursor: pointer;
+  display: inline;
+  font-family: $OpenSans_Bold;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: justify;
+  text-decoration: none;
+  vertical-align: middle;
+}
+a:hover {
+  color: $idas-color-main-links-hover;
+}

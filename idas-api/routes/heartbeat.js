@@ -8,23 +8,20 @@
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |------------------------------------------------------------------------------------------------------------------
  */
-const { getFirst } = require(`./../common/functions`);
-const { toLocaleLowerCase } = require(`./../common/functions`);
-const { isEmptyString } = require(`./../common/functions`);
-const { httpOnSuccess } = require(`../common/logging/logger`);
-const { httpOnError } = require(`../common/logging/logger`);
+const { onHttpSuccess } = require(`../common/logging/logger`);
+const { getHttpRequestPacket } = require("../common/http-helper");
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Functions
+| Function(s)
 |------------------------------------------------------------------------------------------------------------------
  */
 const Heartbeat = (config = getDefaultConfig()) => {
-    const ping = (request, response, next) => {
-        return httpOnSuccess(__filename, request, response, {message: `<br />${getApiName(config)}${addRequestAnchorName(request)} API is up and running`});
+    const ping = (request, response) => {
+        return onHttpSuccess(__filename, request, response, {message: `<br />${getApiName(config)}${addRequestAnchorName(request)} API is up and running`});
     }
     return {
         ping: ping
@@ -37,14 +34,13 @@ const getDefaultConfig = () => {
     return require(`./../config/config`);
 }
 const addRequestAnchorName = (request) => {
-    let anchorName = toLocaleLowerCase(request.route.path.split(`/`)[1]);
-    let pathWithoutPing = request.route.path.split(`/`).filter((element) => isEmptyString(element) && !(toLocaleLowerCase(element) === 'ping')).join(`/`).trim();
-    return `${!(anchorName === 'ping') ? ` (${pathWithoutPing})` : ``}`;
+    const packet = getHttpRequestPacket(request);
+    return ['', 'api', 'ping'].includes(packet.anchorName) ? '' : ` (${packet.anchorName})`;
 }
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| module exports
+| module.exports
 |------------------------------------------------------------------------------------------------------------------
  */
 module.exports = Heartbeat;

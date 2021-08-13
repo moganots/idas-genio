@@ -1,0 +1,102 @@
+@import "./../../../../../assets/scss/idas/colors.scss";
+@import "./../../../../../assets/scss/idas/fonts.scss";
+@import "./../../../../../assets/scss/idas/_idas-dialogs.scss";
+@import "./../../../../../assets/scss/idas/_idas-tables.scss";
+
+.idas-toolbar {
+  overflow: hidden;
+  padding: 0 8px 45px 35px;
+  width: 100%;
+
+  .idas-toolbar-field {
+    display: inline-block;
+    padding: 0 5px 0 5px;
+    width: 35%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+table {
+  table-layout: auto;
+  width: 100%;
+}
+
+.mat-table {
+  border: 1px gray;
+  overflow: auto;
+  max-height: 500px;
+}
+
+mat-footer-row,
+mat-header-row,
+mat-row {
+  display: inline-flex;
+  min-width: 100%;
+  width: 100%;
+}
+
+mwlResizable {
+  box-sizing: border-box;
+}
+
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 21vw;
+  word-break: break-all;
+  flex: none;
+  display: block;
+}
+
+mat-cell:first-child,
+mat-footer-cell:first-child,
+mat-header-cell:first-child {
+  padding-left: 24px !important;
+}
+
+mat-header-cell {
+  background-color: gray;
+  color: whitesmoke;
+  font-family: $OpenSans_Bold;
+  font-size: 0.9em;
+  padding: 18px 10px 10px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.mat-sort-header-button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+mat-cell {
+  display: inline-block;
+  font-family: $OpenSans_Light;
+  font-size: 0.9em;
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+
+  mat-checkbox {
+    padding: 2px 12px 0 15px;
+  }
+}
+
+.mat-cell {
+  padding: 13px 12px 0 13px;
+}
+
+.data-view-action-buttons-header {
+  background-color: white;
+}
+
+.data-view-action-buttons-cell {
+  padding: 0 5px 0 60px;
+  right: 0;
+}

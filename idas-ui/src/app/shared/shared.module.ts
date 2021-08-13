@@ -11,41 +11,45 @@ import { DataService } from './services/data-service/data.service';
 import { SortingService } from './services/sorting-service/sorting.service';
 import { LookupCategoryService } from './services/lookup-service/lookup-category-service/lookup-category.service';
 import { LookupValueService } from './services/lookup-service/lookup-value-service/lookup-value.service';
-import { ReferenceEntityService } from './services/reference-entity-service/reference-entity.service';
 import { AuthenticationService } from './services/authentication-service/authentication.service';
+import { AuthenticationGuardService } from './services/authentication-guard-service/authentication-guard.service';
+import { AlertifyService } from './services/alertify-service/alertify.service';
 
-import { CommonComponent } from './common-component/common/common.component';
 import { SharedConfiguration } from './configuration/shared-configuration';
+import { ResponseResult } from './domain-models/http/response-result';
+import { AuthenticationResult } from './domain-models/http/authentication-result';
+import { DataColumn } from './domain-models/data-column';
+import { FileDragDropDirective } from './components/file-upload-component/file-upload-directive/file-drag-drop.directive';
+import { FileUploadComponent } from './components/file-upload-component/file-upload.component';
+import { FileAttachment } from './domain-models/file-attachment';
+import { FileSizePipe } from './utilities/filesize.pipe';
+import { FileAttachmentService } from './services/file-attachment-service/file-attachment.service';
+import { CalendarDay } from './domain-models/scheduling/calendar-day';
+import { PreviousOrNext } from './utilities/enum-previous-next';
+import { ChunkPipe } from './utilities/chunk-pipe';
 
-export { CommonComponent } from './common-component/common/common.component';
+export { CommonComponent } from './components/common-component/common/common.component';
+export { FileDragDropDirective } from './components/file-upload-component/file-upload-directive/file-drag-drop.directive';
+export { FileUploadComponent } from './components/file-upload-component/file-upload.component';
+export { FileAttachment } from './domain-models/file-attachment';
+export { FileSizePipe } from './utilities/filesize.pipe';
+export { CalendarDay } from './domain-models/scheduling/calendar-day';
+export { PreviousOrNext } from './utilities/enum-previous-next';
+export { ChunkPipe } from './utilities/chunk-pipe';
+
 export { SharedConfiguration } from './configuration/shared-configuration';
+export { ResponseResult } from './domain-models/http/response-result';
+export { AuthenticationResult } from './domain-models/http/authentication-result';
+export { DataColumn } from './domain-models/data-column';
 
 export { Client } from './domain-models/client/client';
 export { EmployeeSalary } from './domain-models/employee/employee-salary';
 export { Employee } from './domain-models/employee/employee';
-export { BudgetCode } from './domain-models/lookup-models/budget-code';
-export { Capacity } from './domain-models/lookup-models/capacity';
-export { Department } from './domain-models/lookup-models/department';
-export { EmployeePosition } from './domain-models/lookup-models/employee-position';
-export { EmploymentType } from './domain-models/lookup-models/employment-type';
-export { Gender } from './domain-models/lookup-models/gender';
-export { Group } from './domain-models/lookup-models/group';
-export { IndustryType } from './domain-models/lookup-models/industry-type';
 export { InboxMessage } from './domain-models/user/inbox-message';
 export { LookupCategory } from './domain-models/lookup-models/lookup-category';
 export { LookupValue } from './domain-models/lookup-models/lookup-value';
 export { NotificationMessage } from './domain-models/user/notification-message';
-export { Position } from './domain-models/lookup-models/position';
-export { PreferredLanguage } from './domain-models/lookup-models/preferred-language';
-export { ProjectAssignmentType } from './domain-models/lookup-models/project-assignment-type';
-export { Province } from './domain-models/lookup-models/province';
-export { Salutation } from './domain-models/lookup-models/salutation';
-export { Schedule } from './domain-models/user/schedule';
-export { Status } from './domain-models/lookup-models/status';
-export { TransactionType } from './domain-models/lookup-models/transaction-type';
-export { UserLockedReason } from './domain-models/lookup-models/user-locked-reason';
-export { UserType } from './domain-models/lookup-models/user-type';
-export { WageType } from './domain-models/lookup-models/wage-type';
+export { MeetingCalendar } from './domain-models/scheduling/meeting-calendar';
 export { ProjectAssignment } from './domain-models/project/project-assignment';
 export { ProjectComment } from './domain-models/project/project-comment';
 export { ProjectStatus } from './domain-models/project/project-status';
@@ -59,27 +63,37 @@ export { TaskWorkLog } from './domain-models/task/task-work-log';
 export { Task } from './domain-models/task/task';
 export { SortParametersFor } from './types/classes/sort-parameters-for';
 export { SortParameters } from './types/classes/sort-parameters';
+export { RouteInfo } from './types/interfaces/route-info';
 export { User } from './domain-models/user/user';
 
 export { EmployeesUtil } from './utilities/employees-util';
-export { DatesUtil } from './utilities/dates-util';
-export { GeneralUtil } from './utilities/general-util';
+export { DateUtils } from './utilities/date-utils';
+export { GeneralUtils } from './utilities/general-utils';
 
 export { BaseService } from './services/base-service/base.service';
 export { AuthenticationService } from './services/authentication-service/authentication.service';
+export { AuthenticationGuardService } from './services/authentication-guard-service/authentication-guard.service';
 export { DataService } from './services/data-service/data.service';
 export { SortingService } from './services/sorting-service/sorting.service';
 export { LookupService } from './services/lookup-service/lookup.service';
 export { LookupCategoryService } from './services/lookup-service/lookup-category-service/lookup-category.service';
 export { LookupValueService } from './services/lookup-service/lookup-value-service/lookup-value.service';
-export { ReferenceEntityService } from './services/reference-entity-service/reference-entity.service';
+export { AlertifyService } from './services/alertify-service/alertify.service';
+export { FileAttachmentService } from './services/file-attachment-service/file-attachment.service';
 
 @NgModule({
-  imports: [
-    CommonModule
+  imports: [CommonModule],
+  providers: [
+    AuthenticationService,
+    AuthenticationGuardService,
+    DataService,
+    SortingService,
+    LookupService,
+    LookupCategoryService,
+    LookupValueService,
+    AlertifyService
   ],
-  declarations: [CommonComponent],
-  exports: [],
-  providers: [AuthenticationService, DataService, SortingService, LookupService, LookupCategoryService, LookupValueService, ReferenceEntityService]
+  declarations: [],
+  exports: []
 })
-export class SharedModule { }
+export class SharedModule {}

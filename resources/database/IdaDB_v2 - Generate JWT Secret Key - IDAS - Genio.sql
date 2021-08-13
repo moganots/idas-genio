@@ -4,4 +4,5 @@ DECLARE @ThumbPrint NVARCHAR(MAX) = '1D@S - G3N10 - 2 Thessalonians 3:3';
 SELECT
 	@UniqueSequence [@UniqueSequence],
 	@ThumbPrint [@ThumbPrint],
-	CONVERT(VARBINARY(MAX), (@UniqueSequence + @ThumbPrint)) [@EncryptionKey]
+	CONVERT(VARBINARY(MAX), (@UniqueSequence + @ThumbPrint)) [@EncryptionKeyMax],
+	CONVERT(VARBINARY(32), (@UniqueSequence + @ThumbPrint)) [@EncryptionKey32]

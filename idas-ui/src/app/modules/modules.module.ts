@@ -5,12 +5,15 @@ import { RouterModule } from '@angular/router';
 import { ClientsModule } from './clients/clients.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { EmployeesModule } from './employees/employees.module';
+import { ProjectsModule } from './projects/projects.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { UsersModule } from './user/users.module';
+import { SharedModulesModule } from './_shared/shared-modules.module';
 
 export { ClientsModule } from './clients/clients.module';
 export { DashboardModule } from './dashboard/dashboard.module';
 export { EmployeesModule } from './employees/employees.module';
+export { ProjectsModule } from './projects/projects.module';
 export { SuppliersModule } from './suppliers/suppliers.module';
 export { UsersModule } from './user/users.module';
 
@@ -21,16 +24,12 @@ export { UsersModule } from './user/users.module';
     ClientsModule,
     DashboardModule,
     EmployeesModule,
+    ProjectsModule,
     SuppliersModule,
-    UsersModule
+    UsersModule,
+    SharedModulesModule
   ],
   declarations: [],
-  exports: [
-    ClientsModule,
-    DashboardModule,
-    EmployeesModule,
-    SuppliersModule,
-    UsersModule
-  ]
+  exports: []
 })
 export class ModulesModule { }

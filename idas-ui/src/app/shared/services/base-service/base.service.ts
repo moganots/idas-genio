@@ -2,6 +2,7 @@ import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular
 import { Injectable } from '@angular/core';
 import { SharedConfiguration } from 'app/shared/configuration/shared-configuration';
 import { User } from 'app/shared/domain-models/user/user';
+import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { Observable, throwError as ObservableThrowError } from 'rxjs';
 
 @Injectable({
@@ -20,7 +21,6 @@ export class BaseService {
   constructor(public httpClient: HttpClient) {
     this.httpHeaders = new HttpHeaders();
     this.httpHeaders.set('Access-Control-Allow-Origin', '*');
-    this.currentUser = (this.currentUser || new User(1));
   }
 
   getEndpointUrl(): string {
@@ -35,33 +35,30 @@ export class BaseService {
       .map((uriComponent) => encodeURIComponent(uriComponent))
       .join('/')}`;
   }
-  getQueryParams(action: string, entity?: any) {
+  getQueryParams(predicate?: any) {
     const fromStringOptions = [
       this.getCurrentUserId(),
-      `action=${action}`,
-      this.getEntityId(entity)]
+      this.getPredicateParams(predicate)]
       .filter((fromStringOption) =>
         !(fromStringOption === null || fromStringOption === undefined)).join('&');
     return { params: new HttpParams({ fromString: fromStringOptions }) };
   }
   getCurrentUserId() {
-    return (this.currentUser) ? `uid=${this.currentUser._id}` : 1;
+    return (this.currentUser && GeneralUtils.isNumber(this.currentUser._id)) ? `uid=${this.currentUser._id}` : null;
   }
-  getEntityId(entity: any) {
-    return (entity) ? `id=${entity._id}` : null;
+  getPredicateParams(predicate?: any) {
+    return (predicate) ? Object.keys(predicate).map((key) => `${key}=${predicate[key]}`).join('&') : null;
   }
-  public columnNameWithoutId(column: any) {
-    const columnName = (column.name || column).trim();
-    return (columnName && columnName.toLocaleLowerCase().endsWith('id')) ? columnName.substring(0, columnName.length - 2) : columnName;
+  columnNameWithoutId(column: any) {
+    const columnName = String(column.name || column).trim();
+    return (this.toLocaleLowerCaseTrim(columnName).endsWith('id')) ? columnName.substring(0, columnName.length - 2) : columnName;
   }
-  public toLocaleLowerCaseTrim(value: any){
-    return (value || '').toString().toLocaleLowerCase().trim();
+  toLocaleLowerCaseTrim(value: any){
+    return String(value || '').toLocaleLowerCase().trim();
   }
-
   protected _handleError(error: HttpErrorResponse | any): Observable<any> {
-    const errorMsg = error.message || 'Error: Unable to complete request.';
-    console.error(errorMsg);
+    // tslint:disable-next-line:max-line-length
+    const errorMsg = [error.message || 'Error: Unable to complete request.', JSON.stringify(error)].filter((message) => !(message === null)).join(`\r\n`);
     return ObservableThrowError(errorMsg);
   }
 }
-

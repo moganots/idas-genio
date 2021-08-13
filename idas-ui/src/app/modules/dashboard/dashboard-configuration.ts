@@ -9,6 +9,6 @@ export class DashboardConfiguration {
   public static tableHeading = 'Manage Dashboards';
   public static graphHeading = '';
   public static buildingBlockLabel = '';
-  public static fieldNames = [
+  public static dataColumns = [
   ];
 }

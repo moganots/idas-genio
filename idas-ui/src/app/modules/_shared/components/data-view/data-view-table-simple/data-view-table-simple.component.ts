@@ -1,12 +1,16 @@
-import { Location } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { AuthenticationService, LookupService, ReferenceEntityService } from 'app/shared/shared.module';
-import { DialogCreateEditDataComponent } from '../../dialogs/dialog-create-edit-data/dialog-create-edit-data.component';
+import { ReferenceValueService } from 'app/modules/_shared/services/reference-value-service/reference-value.service';
+import {
+  AlertifyService
+  ,AuthenticationService
+  ,LookupService,
+  LookupValueService
+} from 'app/shared/shared.module';
+import {
+  DialogCreateEditDataComponent
+} from '../../dialogs/dialog-create-edit-data/dialog-create-edit-data.component';
 import { BaseDataViewComponent } from '../base-data-view/base-data-view.component';
 
 @Component({
@@ -14,59 +18,47 @@ import { BaseDataViewComponent } from '../base-data-view/base-data-view.componen
   templateUrl: './data-view-table-simple.component.html',
   styleUrls: ['./data-view-table-simple.component.scss'],
   providers: [
+    AlertifyService,
     AuthenticationService,
     LookupService,
-    ReferenceEntityService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
-export class DataViewTableSimpleComponent extends BaseDataViewComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Output() create: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
+export class DataViewTableSimpleComponent extends BaseDataViewComponent implements OnInit, AfterViewInit {
   @Output() delete: EventEmitter<any> = new EventEmitter();
-  @Output() assignments: EventEmitter<any> = new EventEmitter();
-  @Output() unlock: EventEmitter<any> = new EventEmitter();
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @Output() manageEmployee: EventEmitter<any> = new EventEmitter();
+  @Output() manageUser: EventEmitter<any> = new EventEmitter();
+  @Output() manageProjectAssignments: EventEmitter<any> = new EventEmitter();
+  @Output() manageProjectTasks: EventEmitter<any> = new EventEmitter();
+  @Output() manageProjectReInstate: EventEmitter<any> = new EventEmitter();
+  @Output() manageSubtask: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    public location: Location,
     public router: Router,
     public matDialog: MatDialog,
+    public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
-    public lookupService: LookupService,
-    public referenceEntityService: ReferenceEntityService) {
-    super(location, router, matDialog, authenticationService, lookupService, referenceEntityService);
-    this.isLoading = true;
-    this.onInitDataSource();
+    public lookupValueService: LookupValueService,
+    public referenceValueService: ReferenceValueService
+    ) {
+    super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
   }
-
   ngOnInit() {
-    this.setDataSourceDisplayColumnNames();
+    this.setDataSourceColumns();
     this.onDataRefresh();
   }
-  onInitDataSource() {
-    this.dataSource = new MatTableDataSource<any[]>();
-  }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  getTitleDataRefreshButton() {
-    return `${['Refresh', this.capitalizeFirstLetter(this.entityName || ''), 'View'].join(' ').trim()}`;
-  }
-  getTitleAddButton() {
-    return `${['Add', 'New', this.capitalizeFirstLetter(this.entityName || '')].join(' ').trim()}`;
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
   onClickCreate(): void {
     super.onClickCreate();
-    this.create.emit();
     this.onOpenCreateEditDialog();
   }
   onClickEdit(element: any, index?: number): void {
     super.onClickEdit(element, index);
-    this.edit.emit(element);
     this.onOpenCreateEditDialog(element, index);
   }
   getTitleEditButton(element: any, index?: number) {
@@ -87,51 +79,82 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     // ToDo: Check current user's permissions
     return true;
   }
-  onClickAssignments(element: any, index?: number): void {
-    this.assignments.emit({index, element});
-    super.openDialog(
-      DialogCreateEditDataComponent, {
-        action : this.action,
-        dataService : this.dataService,
-        entityName : this.entityName,
-        pageIcon : this.pageIcon,
-        pageName : this.pageName,
-        pageTitle : this.pageTitle,
-        dataFields : this.sourceDataColumnNames,
-        selected : element || this.selected,
-        selectedIndex : index || this.selectedIndex
-      }, () => { this.onDataRefresh(); });
+  onClickManageUserAccountButton(element: any, index?: number): void {
+    this.setSelectedElementAndIndex(element, index);
+    this.manageUser.emit({index, element});
   }
-  getTitleAssignmentsButton(element: any, index?: number) {
-    return `${[this.capitalizeFirstLetter(this.entityName || ''), 'Assignment(s)'].join(' ').trim()}`;
+  getTitleManageUserAccountButton(element: any, index?: number) {
+    return `${[(element[`IsLocked`]) ? `Unlock` : 'Lock', 'User Account'].join(' ').trim()}`;
   }
-  hideAssignmentsButton(){
+  hideManageUserAccountButton(){
     // ToDo: Check current user's permissions
-    return !['employee', 'project', 'supplier'].includes((this.entityName || '').toLocaleLowerCase().trim());
+    return !['user'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''));
   }
-  onClickUnLockUser(element: any, index?: number): void {
-    this.unlock.emit({index, element});
-  }
-  getTitleUnLockUserButton(element: any, index?: number) {
-    return `${[(element[`IsLocked`]) ? `Unlock` : 'Lock', 'User Account'].join( ' ').trim()}`;
-  }
-  hideUnLockUserButton(){
-    // ToDo: Check current user's permissions
-    return !['user'].includes((this.entityName || '').toLocaleLowerCase().trim());
-  }
-  getUserUnLockIcon(element: any, index?: number) {
+  getManageUserAccountIcon(element: any, index?: number) {
     return (element[`IsLocked`]) ? `lock_open` : `lock`;
   }
-  onCheckboxClicked(element: any) {
-/*     this.dataService
-      .update(element, 'update')
-      .subscribe(() => {
-        this.alertifyService.success('Update completed successfully');
-      }, () => {
-        this.alertifyService.success('Update failed due to errors');
-      }); */
+  onClickManageEmployeeButton(element: any, index?: number): void {
+    this.setSelectedElementAndIndex(element, index);
+    this.manageEmployee.emit({index, element});
+  }
+  getTitleManageEmployeeButton(element: any, index?: number) {
+    return `${[(element[`IsTerminated`]) ? `Re-Instate` : 'Terminate', 'Employee'].join(' ').trim()}`;
+  }
+  hideManageEmployeeButton(){
+    // ToDo: Check current user's permissions
+    return !['employee'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''));
+  }
+  getManageEmployeeIcon(element: any, index?: number) {
+    return (element[`IsTerminated`]) ? `person_add` : `person_off`;
+  }
+  onClickManageProjectTaskButton(element: any, index?: number): void {
+    this.setSelectedElementAndIndex(element, index);
+    this.manageProjectTasks.emit({index, element});
+  }
+  getTitleManageProjectTaskButton(element: any, index?: number) {
+    return [`Add`, (this.capitalizeFirstLetter(this.entityName || '')), `Task`].join(' ').trim();
+  }
+  hideManageProjectTaskButton(element: any) {
+    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || '');
+    return !(['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''))
+      && ['created', 'not started', 'started', 're-started', 'in progress'].includes(status));
+  }
+  onClickManageProjectAssignmentButton(element: any, index?: number): void {
+    this.setSelectedElementAndIndex(element, index);
+    this.manageProjectAssignments.emit({index, element});
+  }
+  getTitleManageProjectAssignmentButton(element: any, index?: number) {
+    return `${[this.capitalizeFirstLetter(this.entityName || ''), 'Assignment(s)'].join(' ').trim()}`;
+  }
+  hideManageProjectAssignmentButton(element: any, index?: number) {
+    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || '');
+    return !(['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''))
+      && ['created', 'not started', 'started', 're-started', 'in progress'].includes(status));
+  }
+  onClickManageProjectReInstateButton(element: any, index?: number): void {
+    this.setSelectedElementAndIndex(element, index);
+    this.manageProjectReInstate.emit({index, element});
+  }
+  getTitleManageProjectReInstateButton(element: any, index?: number) {
+    return [`Re-Instate`, (this.capitalizeFirstLetter(this.entityName || ''))].join(' ').trim();
+  }
+  hideManageProjectReInstateButton(element: any, index?: number) {
+    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || '');
+    return !(['project'].includes((this.entityName || ''))
+      && ['blocked', 'completed', 'done'].includes(status));
+  }
+  onClickManageParentTaskButton(element: any, index?: number) {
+    this.setSelectedElementAndIndex(element, index);
+    this.manageSubtask.emit({index, element});
+  }
+  getTitleManageParentTaskButton(element: any, index?: number) {
+    return [`Create`, `sub-task`].join(' ').trim();
+  }
+  hideManageParentTaskButton(element: any, index?: number) {
+    return !(['task'].includes(this.toLocaleLowerCaseTrim(this.entityName || '')));
   }
   onOpenCreateEditDialog(element?: any, index?: number) {
+    this.setSelectedElementAndIndex(element, index);
     super.openDialog(
       DialogCreateEditDataComponent, {
         action : this.action,
@@ -140,12 +163,9 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
         pageIcon : this.pageIcon,
         pageName : this.pageName,
         pageTitle : this.pageTitle,
-        dataFields : this.sourceDataColumnNames,
-        selected : element || this.selected,
+        dataColumns : this.dataSourceColumns,
+        selected : element || {},
         selectedIndex : index || this.selectedIndex
       }, () => { this.onDataRefresh(); });
   }
-
-  ngOnDestroy(): void {}
-
 }

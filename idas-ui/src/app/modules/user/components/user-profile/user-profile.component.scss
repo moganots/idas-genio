@@ -1,0 +1,12 @@
+span {
+    p {
+        &.display-value {
+            font-size: 0.75em;
+        }
+    }
+}
+p {
+    &.display-value {
+        font-size: 0.75em;
+    }
+}

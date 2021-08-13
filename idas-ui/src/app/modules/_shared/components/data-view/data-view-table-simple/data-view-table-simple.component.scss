@@ -1,8 +1,8 @@
-@import './../../../../../../assets/scss/idas/colors.scss';
-@import './../../../../../../assets/scss/idas/fonts.scss';
+@import "./../../../../../../assets/scss/idas/colors.scss";
+@import "./../../../../../../assets/scss/idas/fonts.scss";
 
 .mat-table {
-  border: 1px gray;
+  // border: 1px gray;
   overflow: auto;
   max-height: 500px;
 }
@@ -10,7 +10,7 @@
 mat-footer-row,
 mat-header-row,
 mat-row {
-  display:inline-flex;
+  display: inline-flex;
   min-width: 100%;
   width: 100%;
 }
@@ -28,11 +28,17 @@ mat-header-cell {
   display: block;
 }
 
+mat-cell:first-child,
+mat-footer-cell:first-child,
+mat-header-cell:first-child {
+  padding-left: 24px !important;
+}
+
 mat-header-cell {
   background-color: gray;
   color: whitesmoke;
   font-family: $OpenSans_Bold;
-  font-size: 0.90em;
+  font-size: 0.9em;
   padding: 18px 10px 10px 10px;
   text-align: left;
   vertical-align: middle;
@@ -47,7 +53,7 @@ mat-header-cell {
 mat-cell {
   display: inline-block;
   font-family: $OpenSans_Light;
-  font-size: 0.90em;
+  font-size: 1em;
   overflow: hidden;
   vertical-align: middle;
   white-space: nowrap;
@@ -60,7 +66,7 @@ mat-cell {
 }
 
 .mat-cell {
-  padding: 13px 12px 0 13px;
+  padding: 13px 6px 0 13px;
 }
 
 .data-view-action-buttons-header {

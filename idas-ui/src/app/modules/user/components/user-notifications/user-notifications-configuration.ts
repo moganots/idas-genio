@@ -1,7 +1,7 @@
 export class UserNotificationsConfiguration {
-  public static identifier = 'user-notification';
+  public static identifier = 'notification-message';
   public static pageIcon = 'circle_notifications';
-  public static pageRoute = 'user-notification';
+  public static pageRoute = 'notifications';
   public static pageRouteTitle = 'My Notifications';
   public static pageRouteCssClass = '';
   public static pageTitle = `Manage Notifications`;
@@ -9,6 +9,6 @@ export class UserNotificationsConfiguration {
   public static tableHeading = 'Manage Notifications';
   public static graphHeading = '';
   public static buildingBlockLabel = '';
-  public static fieldNames = [
+  public static dataColumns = [
   ];
 }

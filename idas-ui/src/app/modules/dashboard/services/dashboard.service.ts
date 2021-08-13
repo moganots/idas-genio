@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService } from 'app/shared/shared.module';
+import { AuthenticationService, DataService } from 'app/shared/shared.module';
 import { DashboardConfiguration } from '../dashboard-configuration';
 
 @Injectable({
@@ -8,8 +8,8 @@ import { DashboardConfiguration } from '../dashboard-configuration';
 })
 export class DashboardService extends DataService {
 
-  constructor(public httpClient: HttpClient) {
-    super(httpClient);
+  constructor(public httpClient: HttpClient, public authenticationService: AuthenticationService) {
+    super(httpClient, authenticationService);
     this.entityName = DashboardConfiguration.identifier;
   }
 

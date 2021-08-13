@@ -1,28 +1,33 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'app/shared/shared.module';
-import { BaseComponent } from '../base-component/base.component';
+import { AlertifyService, AuthenticationService, LookupValueService } from 'app/shared/shared.module';
+import { ReferenceValueService } from '../../services/reference-value-service/reference-value.service';
+import { BaseDataViewComponent } from '../data-view/base-data-view/base-data-view.component';
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   providers: [
+    AlertifyService,
     AuthenticationService,
+    LookupValueService,
+    ReferenceValueService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
-export class PageComponent extends BaseComponent implements OnInit {
+export class PageComponent extends BaseDataViewComponent implements OnInit {
 
   constructor(
-    public location: Location,
     public router: Router,
     public matDialog: MatDialog,
-    public authenticationService: AuthenticationService
+    public alertifyService: AlertifyService,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService,
+    public referenceValueService: ReferenceValueService
     ) {
-    super(location, router, matDialog, authenticationService);
+      super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
   }
 
   ngOnInit(): void {

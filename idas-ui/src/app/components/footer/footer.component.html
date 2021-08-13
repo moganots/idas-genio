@@ -1,11 +1,11 @@
-<footer *ngIf="!isLoggedIn()" class="footer idas-footer">
+<footer *ngIf="isLoggedIn()" class="footer idas-footer">
   <div class="container-fluid">
       <nav class="pull-left">
           <ul>
               <li>
                   <a href="http://www.izingcweti.co.za/" target="_blank">
                     &copy;
-                    {{test | date: 'yyyy'}}, IDAS. ALL Rights Reserved.
+                    {{todaysDate | date: 'yyyy'}}, IDAS. ALL Rights Reserved.
                   </a>
               </li>
           </ul>

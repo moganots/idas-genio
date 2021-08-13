@@ -1,4 +1,3 @@
-
 @import "./colors.scss";
 @import "./fonts.scss";
 
@@ -9,14 +8,594 @@
   transition: all 0.2s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 } */
 
-html, body {
+html,
+body {
   background-color: $idas-color-body-background-main;
   font-family: $OpenSans_Light;
   font-size: 0.85em;
-  height:100%;
-  margin:0;
-  padding:0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   position: relative;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+p {
+  display: inline-block;
+  text-align: justify;
+  vertical-align: middle;
+
+  &.idas-task-assign-to-me {
+    color: $idas-color-main-links-active;
+    display: inline;
+    font-family: $OpenSans_Bold;
+    margin: 0 0 0 5px;
+  }
+
+  &.usertype,
+  &.projecttype,
+  &.tasktype,
+  &.status,
+  &.priority {
+    border-radius: 8px;
+    color: $idas-color-body-background-main;
+    font-family: $OpenSans_Light;
+    font-size: 0.85em;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  &.usertype {
+    &.admin {
+      background-color: $idas-color-usertype-admin;
+    }
+    &.client {
+      background-color: $idas-color-usertype-client;
+    }
+    &.employee {
+      background-color: $idas-color-usertype-employee;
+    }
+    &.general {
+      background-color: $idas-color-usertype-general;
+    }
+    &.root {
+      background-color: $idas-color-usertype-root;
+    }
+    &.supplier {
+      background-color: $idas-color-usertype-supplier;
+    }
+  }
+
+  &.tasktype {
+    &.advertising {
+      background-color: $idas-color-tasktype-advertising;
+    }
+    &.bug {
+      background-color: $idas-color-tasktype-bug;
+    }
+    &.change {
+      background-color: $idas-color-tasktype-change;
+    }
+    &.consultation {
+      background-color: $idas-color-tasktype-consultation;
+    }
+    &.deployment {
+      background-color: $idas-color-tasktype-deployment;
+    }
+    &.design {
+      background-color: $idas-color-tasktype-design;
+    }
+    &.development {
+      background-color: $idas-color-tasktype-development;
+    }
+    &.incident {
+      background-color: $idas-color-tasktype-incident;
+    }
+    &.marketing {
+      background-color: $idas-color-tasktype-marketing;
+    }
+    &.monitor {
+      background-color: $idas-color-tasktype-monitor;
+    }
+    &.planning {
+      background-color: $idas-color-tasktype-planning;
+    }
+    &.problem {
+      background-color: $idas-color-tasktype-problem;
+    }
+    &.reporting {
+      background-color: $idas-color-tasktype-reporting;
+    }
+    &.research {
+      background-color: $idas-color-tasktype-research;
+    }
+    &.sales {
+      background-color: $idas-color-tasktype-sales;
+    }
+    &.service-request {
+      background-color: $idas-color-tasktype-service-request;
+    }
+    &.support {
+      background-color: $idas-color-tasktype-support;
+    }
+    &.training {
+      background-color: $idas-color-tasktype-training;
+    }
+  }
+
+  &.priority {
+    &.blocked {
+      background-color: $idas-color-priority-blocked;
+    }
+    &.blocker {
+      background-color: $idas-color-priority-blocker;
+    }
+    &.critical {
+      background-color: $idas-color-priority-critical;
+    }
+    &.dependency {
+      background-color: $idas-color-priority-dependency;
+    }
+    &.done {
+      background-color: $idas-color-priority-done;
+    }
+    &.high {
+      background-color: $idas-color-priority-high;
+    }
+    &.highest {
+      background-color: $idas-color-priority-highest;
+    }
+    &.low {
+      background-color: $idas-color-priority-low;
+    }
+    &.lowest {
+      background-color: $idas-color-priority-lowest;
+    }
+    &.major {
+      background-color: $idas-color-priority-major;
+    }
+    &.medium {
+      background-color: $idas-color-priority-medium;
+    }
+    &.minor {
+      background-color: $idas-color-priority-minor;
+    }
+    &.normal {
+      background-color: $idas-color-priority-normal;
+    }
+    &.trivial {
+      background-color: $idas-color-priority-trivial;
+    }
+  }
+
+  &.status {
+    &.blocked {
+      background-color: $idas-color-status-blocked;
+    }
+    &.cancelled {
+      background-color: $idas-color-status-cancelled;
+    }
+    &.completed {
+      background-color: $idas-color-status-completed;
+    }
+    &.created {
+      background-color: $idas-color-status-created;
+    }
+    &.de-scoped {
+      background-color: $idas-color-status-de-scoped;
+    }
+    &.done {
+      background-color: $idas-color-status-done;
+    }
+    &.in-progress {
+      background-color: $idas-color-status-in-progress;
+    }
+    &.not-started {
+      background-color: $idas-color-status-not-started;
+    }
+    &.on-hold {
+      background-color: $idas-color-status-on-hold;
+    }
+    &.re-started {
+      background-color: $idas-color-status-re-started;
+    }
+    &.started {
+      background-color: $idas-color-status-started;
+    }
+
+    &.meetingtype {
+      background-color: $idas-color-meetingtype;
+      &.action-review {
+        background-color: $idas-color-meetingtype-action-review;
+      }
+      &.board {
+        background-color: $idas-color-meetingtype-board;
+      }
+      &.broadcast {
+        background-color: $idas-color-meetingtype-broadcast;
+      }
+      &.community-of-practice {
+        background-color: $idas-color-meetingtype-community-of-practice;
+      }
+      &.consultation {
+        background-color: $idas-color-meetingtype-consultation;
+      }
+      &.decision-making {
+        background-color: $idas-color-meetingtype-decision-making;
+      }
+      &.governance {
+        background-color: $idas-color-meetingtype-governance;
+      }
+      &.idea-generation {
+        background-color: $idas-color-meetingtype-idea-generation;
+      }
+      &.interview {
+        background-color: $idas-color-meetingtype-interview;
+      }
+      &.introductions {
+        background-color: $idas-color-meetingtype-introductions;
+      }
+      &.issue-resolution {
+        background-color: $idas-color-meetingtype-issue-resolution;
+      }
+      &.one-on-one {
+        background-color: $idas-color-meetingtype-one-on-one;
+      }
+      &.planning {
+        background-color: $idas-color-meetingtype-planning;
+      }
+      &.problem-solving {
+        background-color: $idas-color-meetingtype-problem-solving;
+      }
+      &.progress-check {
+        background-color: $idas-color-meetingtype-progress-check;
+      }
+      &.sensemaking {
+        background-color: $idas-color-meetingtype-sensemaking;
+      }
+      &.site-visit {
+        background-color: $idas-color-meetingtype-site-visit;
+      }
+      &.team-cadence {
+        background-color: $idas-color-meetingtype-team-cadence;
+      }
+      &.training {
+        background-color: $idas-color-meetingtype-training;
+      }
+      &.workshop {
+        background-color: $idas-color-meetingtype-workshop;
+      }
+    }
+  }
+  &.display-value {
+    padding: 16px 0 0 8px;
+    font-size: 0.85em;
+  }
+  &.display-name-check-box {
+    font-size: 0.9em;
+    padding: 15px 0 0 0;
+  }
+}
+
+i {
+  display: inline-block;
+  height: auto;
+  width: 30px;
+  text-align: justify;
+  vertical-align: middle;
+
+  &.idas-button-icon {
+    padding: 0 0 0 10px;
+  }
+
+  &.icon-mat-option {
+    margin: 0 0 0 5px;
+  }
+
+  &.btn-idas-task-assign-to-me {
+    color: $idas-color-main-links-active;
+  }
+
+  &.usertype {
+    &.admin {
+      color: $idas-color-usertype-admin;
+    }
+    &.client {
+      color: $idas-color-usertype-client;
+    }
+    &.employee {
+      color: $idas-color-usertype-employee;
+    }
+    &.general {
+      color: $idas-color-usertype-general;
+    }
+    &.root {
+      color: $idas-color-usertype-root;
+    }
+    &.supplier {
+      color: $idas-color-usertype-supplier;
+    }
+  }
+
+  &.tasktype {
+    &.advertising {
+      color: $idas-color-tasktype-advertising;
+    }
+    &.bug {
+      color: $idas-color-tasktype-bug;
+    }
+    &.change {
+      color: $idas-color-tasktype-change;
+    }
+    &.consultation {
+      color: $idas-color-tasktype-consultation;
+    }
+    &.deployment {
+      color: $idas-color-tasktype-deployment;
+    }
+    &.design {
+      color: $idas-color-tasktype-design;
+    }
+    &.development {
+      color: $idas-color-tasktype-development;
+    }
+    &.incident {
+      color: $idas-color-tasktype-incident;
+    }
+    &.marketing {
+      color: $idas-color-tasktype-marketing;
+    }
+    &.monitor {
+      color: $idas-color-tasktype-monitor;
+    }
+    &.planning {
+      color: $idas-color-tasktype-planning;
+    }
+    &.problem {
+      color: $idas-color-tasktype-problem;
+    }
+    &.reporting {
+      color: $idas-color-tasktype-reporting;
+    }
+    &.research {
+      color: $idas-color-tasktype-research;
+    }
+    &.sales {
+      color: $idas-color-tasktype-sales;
+    }
+    &.service-request {
+      color: $idas-color-tasktype-service-request;
+    }
+    &.support {
+      color: $idas-color-tasktype-support;
+    }
+    &.training {
+      color: $idas-color-tasktype-training;
+    }
+    &.reposition {
+      display: inline-block;
+      margin: 0 0 0 0;
+      // padding: 5px 0 0 5px;
+    }
+  }
+
+  &.priority {
+    &.blocked {
+      color: $idas-color-priority-blocked;
+    }
+    &.blocker {
+      color: $idas-color-priority-blocker;
+    }
+    &.critical {
+      color: $idas-color-priority-critical;
+    }
+    &.dependency {
+      color: $idas-color-priority-dependency;
+    }
+    &.done {
+      color: $idas-color-priority-done;
+    }
+    &.high {
+      color: $idas-color-priority-high;
+    }
+    &.highest {
+      color: $idas-color-priority-highest;
+    }
+    &.low {
+      color: $idas-color-priority-low;
+    }
+    &.lowest {
+      color: $idas-color-priority-lowest;
+    }
+    &.major {
+      color: $idas-color-priority-major;
+    }
+    &.medium {
+      color: $idas-color-priority-medium;
+    }
+    &.minor {
+      color: $idas-color-priority-minor;
+    }
+    &.normal {
+      color: $idas-color-priority-normal;
+    }
+    &.trivial {
+      color: $idas-color-priority-trivial;
+    }
+    &.reposition {
+      margin: 0 0 0 0;
+      // padding: 5px 0 0 5px;
+    }
+  }
+
+  &.status {
+    &.blocked {
+      color: $idas-color-status-blocked;
+    }
+    &.cancelled {
+      color: $idas-color-status-cancelled;
+    }
+    &.completed {
+      color: $idas-color-status-completed;
+    }
+    &.created {
+      color: $idas-color-status-created;
+    }
+    &.de-scoped {
+      color: $idas-color-status-de-scoped;
+    }
+    &.done {
+      color: $idas-color-status-done;
+    }
+    &.in-progress {
+      color: $idas-color-status-in-progress;
+    }
+    &.not-started {
+      color: $idas-color-status-not-started;
+    }
+    &.on-hold {
+      color: $idas-color-status-on-hold;
+    }
+    &.re-started {
+      color: $idas-color-status-re-started;
+    }
+    &.started {
+      color: $idas-color-status-started;
+    }
+  }
+  &.meetingtype {
+    color: $idas-color-meetingtype;
+    &.action-review {
+      color: $idas-color-meetingtype-action-review;
+    }
+    &.board {
+      color: $idas-color-meetingtype-board;
+    }
+    &.broadcast {
+      color: $idas-color-meetingtype-broadcast;
+    }
+    &.community-of-practice {
+      color: $idas-color-meetingtype-community-of-practice;
+    }
+    &.consultation {
+      color: $idas-color-meetingtype-consultation;
+    }
+    &.decision-making {
+      color: $idas-color-meetingtype-decision-making;
+    }
+    &.governance {
+      color: $idas-color-meetingtype-governance;
+    }
+    &.idea-generation {
+      color: $idas-color-meetingtype-idea-generation;
+    }
+    &.interview {
+      color: $idas-color-meetingtype-interview;
+    }
+    &.introductions {
+      color: $idas-color-meetingtype-introductions;
+    }
+    &.issue-resolution {
+      color: $idas-color-meetingtype-issue-resolution;
+    }
+    &.one-on-one {
+      color: $idas-color-meetingtype-one-on-one;
+    }
+    &.planning {
+      color: $idas-color-meetingtype-planning;
+    }
+    &.problem-solving {
+      color: $idas-color-meetingtype-problem-solving;
+    }
+    &.progress-check {
+      color: $idas-color-meetingtype-progress-check;
+    }
+    &.sensemaking {
+      color: $idas-color-meetingtype-sensemaking;
+    }
+    &.site-visit {
+      color: $idas-color-meetingtype-site-visit;
+    }
+    &.team-cadence {
+      color: $idas-color-meetingtype-team-cadence;
+    }
+    &.training {
+      color: $idas-color-meetingtype-training;
+    }
+    &.workshop {
+      color: $idas-color-meetingtype-workshop;
+    }
+  }
+}
+
+img {
+  display: inline-block;
+  height: auto;
+  padding: 0 0 0 0;
+  text-align: justify;
+  vertical-align: middle;
+
+  &.img10 {
+    width: 10px;
+  }
+  &.img15 {
+    width: 15px;
+  }
+  &.img20 {
+    width: 20px;
+  }
+  &.img25 {
+    width: 25px;
+  }
+  &.img30 {
+    width: 30px;
+  }
+  &.img35 {
+    width: 35px;
+  }
+  &.img40 {
+    width: 40px;
+  }
+  &.img45 {
+    width: 45px;
+  }
+  &.img-in-grid {
+    margin: 0 0 17px 0;
+    width: 30px;
+  }
+  &.img-mat-option {
+    margin: 0 0 0 5px;
+    width: 30px;
+  }
+  &.img-manage-task-toolbar {
+    margin: 0 0 0 5px;
+    padding: 0 0 0 0;
+    width: 30px;
+  }
+  &.img-task-avatar {
+    float: right;
+    margin: 2px 0 0 0;
+  }
 }
 
 .idas-main-content {
@@ -24,110 +603,188 @@ html, body {
   padding: 0;
 }
 
-span, input, mat-form-field, mat-autocomplete, mat-checkbox, mat-option, mat-select, select {
+.idas-main-card-header {
+  background: transparent;
+  background: $idas-color-heading-background-secondary;
+  border-radius: 6px;
+  color: $idas-color-body-background-main;
+  height: 12vh;
+  position: relative;
+
+  i {
+    display: inline-block;
+    height: auto;
+    width: 35px;
+    padding: 0 0 25px 5px;
+    text-align: justify;
+    vertical-align: middle;
+  }
+
+  h4 {
+    color: $idas-color-body-background-main;
+    display: inline-block;
+    font-family: $OpenSans_Bold;
+    font-size: 1.55em;
+    padding: 0 0 25px 15px;
+    text-align: justify;
+    vertical-align: middle;
+  }
+
+  p {
+    color: $idas-color-body-background-main;
+    display: inline-block;
+    text-align: justify;
+    vertical-align: middle;
+
+    &.category {
+      font-family: $OpenSans_Bold;
+      font-size: 1.05em;
+      padding: 55px 0 10px 50px;
+    }
+  }
+
+  span {
+    float: right;
+    padding: 0 10px 25px 0;
+
+    i {
+      padding: 1px 0 25px 5px;
+    }
+  }
+}
+
+span,
+input,
+mat-form-field,
+mat-autocomplete,
+mat-checkbox,
+mat-option,
+mat-select,
+select {
   font-family: $OpenSans_Light;
-  font-size: 0.95em;
+  font-size: 1em;
   padding: 0 0 0 0;
 }
 
-h1, h2, h3, h4, mat-header-cell {
+h1,
+h2,
+h3,
+h4,
+mat-header-cell {
   font-family: $OpenSans_Bold;
 }
 
 .idas-page-heading {
-
-    .idas-page-heading-icon{
-      display: inline-block;
-      height: auto;
-      padding: 12px 2px 10px 0;
-      width: 35px;
-      text-align: justify;
-      vertical-align: middle;
+  .idas-page-heading-icon {
+    display: inline-block;
+    height: auto;
+    padding: 12px 2px 10px 0;
+    width: 35px;
+    text-align: justify;
+    vertical-align: middle;
   }
 
-  h4{
+  h4 {
     display: inline-block;
     font-family: $OpenSans_Bold;
     font-size: 1.35em;
     padding: 8px 2px 1.5px 10px;
     vertical-align: middle;
   }
+
+  span {
+    float: inherit;
+    top: 0;
+  }
+}
+
+mat-cell:first-child,
+mat-footer-cell:first-child,
+mat-header-cell:first-child {
+  padding-left: 0px !important;
 }
 
 .data-table-view-simple {
-  font-size: 0.90em;
+  font-size: 1em;
   height: 100%;
   overflow-x: auto;
   width: 100%;
 
+  table,
   .mat-table {
     border: 1px gray;
     overflow: auto;
     max-height: 500px;
-  }
 
-  mat-footer-row,
-  mat-header-row,
-  mat-row {
-    display:inline-flex;
-    min-width: 100%;
-    width: 100%;
-  }
+    mat-footer-row,
+    mat-header-row,
+    mat-row {
+      display: inline-flex;
+      min-width: 100%;
+      width: 100%;
+    }
 
-  mwlResizable {
-    box-sizing: border-box;
-  }
+    mwlResizable {
+      box-sizing: border-box;
+    }
 
-  mat-cell,
-  mat-footer-cell,
-  mat-header-cell {
-    width: 200px;
-    word-break: break-all;
-    flex: none;
-    display: block;
-  }
+    mat-cell:first-child,
+    mat-footer-cell:first-child,
+    mat-header-cell:first-child {
+      padding-left: 0px !important;
+    }
 
-  mat-header-cell {
-    background-color: gray;
-    color: whitesmoke;
-    font-family: $OpenSans_Bold;
-    font-size: 0.90em;
-    padding: 18px 10px 10px 10px;
-    text-align: left;
-    vertical-align: middle;
-  }
+    mat-cell,
+    mat-footer-cell,
+    mat-header-cell {
+      width: 200px;
+      word-break: break-all;
+      flex: none;
+      display: block;
+    }
 
-  .mat-sort-header-button {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    mat-header-cell {
+      background-color: gray;
+      color: whitesmoke;
+      font-family: $OpenSans_Bold;
+      font-size: 0.9em;
+      padding: 18px 10px 10px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
 
-  mat-cell {
-    display: inline-block;
-    font-family: $OpenSans_Light;
-    font-size: 0.90em;
-    overflow: hidden;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-align: left;
-    text-overflow: ellipsis;
-  }
+    .mat-sort-header-button {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-  .data-view-action-buttons-header {
-    background-color: white;
-  }
+    mat-cell {
+      display: inline-block;
+      font-family: $OpenSans_Light;
+      font-size: 0.9em;
+      overflow: hidden;
+      vertical-align: middle;
+      white-space: nowrap;
+      text-align: left;
+      text-overflow: ellipsis;
+    }
 
-  .data-view-action-buttons-cell {
-    padding-right: 5px;
-  }
+    .data-view-action-buttons-header {
+      background-color: white;
+    }
 
+    .data-view-action-buttons-cell {
+      padding-right: 5px;
+    }
+  }
 }
 
 .btn-idas-resize {
   height: auto;
   width: 5px;
-  i, img {
+  i,
+  img {
     height: auto;
     width: 5px;
   }
@@ -152,7 +809,7 @@ h1, h2, h3, h4, mat-header-cell {
 
 .btn-idas {
   background: $idas-color-body-background-main;
-  border: 1px solid $white;
+  border: 0px solid $white;
   border-radius: 6px;
   box-shadow: none;
   display: inline-block;
@@ -162,9 +819,218 @@ h1, h2, h3, h4, mat-header-cell {
   text-align: center;
   width: 45px;
 
-  i, img {
+  i,
+  img {
     height: auto;
     width: auto;
+  }
+
+  &.usertype {
+    &.admin {
+      background-color: $idas-color-usertype-admin;
+      color: #ffffff;
+    }
+    &.client {
+      background-color: $idas-color-usertype-client;
+      color: #ffffff;
+    }
+    &.employee {
+      background-color: $idas-color-usertype-employee;
+      color: #ffffff;
+    }
+    &.general {
+      background-color: $idas-color-usertype-general;
+      color: #ffffff;
+    }
+    &.root {
+      background-color: $idas-color-usertype-root;
+      color: #ffffff;
+    }
+    &.supplier {
+      background-color: $idas-color-usertype-supplier;
+      color: #ffffff;
+    }
+  }
+
+  &.tasktype {
+    &.advertising {
+      background-color: $idas-color-tasktype-advertising;
+      color: #ffffff;
+    }
+    &.bug {
+      background-color: $idas-color-tasktype-bug;
+      color: #ffffff;
+    }
+    &.change {
+      background-color: $idas-color-tasktype-change;
+      color: #ffffff;
+    }
+    &.consultation {
+      background-color: $idas-color-tasktype-consultation;
+      color: #ffffff;
+    }
+    &.deployment {
+      background-color: $idas-color-tasktype-deployment;
+      color: #ffffff;
+    }
+    &.design {
+      background-color: $idas-color-tasktype-design;
+      color: #ffffff;
+    }
+    &.development {
+      background-color: $idas-color-tasktype-development;
+      color: #ffffff;
+    }
+    &.incident {
+      background-color: $idas-color-tasktype-incident;
+      color: #ffffff;
+    }
+    &.marketing {
+      background-color: $idas-color-tasktype-marketing;
+      color: #ffffff;
+    }
+    &.monitor {
+      background-color: $idas-color-tasktype-monitor;
+      color: #ffffff;
+    }
+    &.planning {
+      background-color: $idas-color-tasktype-planning;
+      color: #ffffff;
+    }
+    &.problem {
+      background-color: $idas-color-tasktype-problem;
+      color: #ffffff;
+    }
+    &.reporting {
+      background-color: $idas-color-tasktype-reporting;
+      color: #ffffff;
+    }
+    &.research {
+      background-color: $idas-color-tasktype-research;
+      color: #ffffff;
+    }
+    &.sales {
+      background-color: $idas-color-tasktype-sales;
+      color: #ffffff;
+    }
+    &.service-request {
+      background-color: $idas-color-tasktype-service-request;
+      color: #ffffff;
+    }
+    &.support {
+      background-color: $idas-color-tasktype-support;
+      color: #ffffff;
+    }
+    &.training {
+      background-color: $idas-color-tasktype-training;
+      color: #ffffff;
+    }
+  }
+
+  &.priority {
+    &.blocked {
+      background-color: $idas-color-priority-blocked;
+      color: #ffffff;
+    }
+    &.blocker {
+      background-color: $idas-color-priority-blocker;
+      color: #ffffff;
+    }
+    &.critical {
+      background-color: $idas-color-priority-critical;
+      color: #ffffff;
+    }
+    &.dependency {
+      background-color: $idas-color-priority-dependency;
+      color: #ffffff;
+    }
+    &.done {
+      background-color: $idas-color-priority-done;
+      color: #ffffff;
+    }
+    &.high {
+      background-color: $idas-color-priority-high;
+      color: #ffffff;
+    }
+    &.highest {
+      background-color: $idas-color-priority-highest;
+      color: #ffffff;
+    }
+    &.low {
+      background-color: $idas-color-priority-low;
+      color: #ffffff;
+    }
+    &.lowest {
+      background-color: $idas-color-priority-lowest;
+      color: #ffffff;
+    }
+    &.major {
+      background-color: $idas-color-priority-major;
+      color: #ffffff;
+    }
+    &.medium {
+      background-color: $idas-color-priority-medium;
+      color: #ffffff;
+    }
+    &.minor {
+      background-color: $idas-color-priority-minor;
+      color: #ffffff;
+    }
+    &.normal {
+      background-color: $idas-color-priority-normal;
+      color: #ffffff;
+    }
+    &.trivial {
+      background-color: $idas-color-priority-trivial;
+      color: #ffffff;
+    }
+  }
+
+  &.status {
+    &.blocked {
+      background-color: $idas-color-status-blocked;
+      color: #ffffff;
+    }
+    &.cancelled {
+      background-color: $idas-color-status-cancelled;
+      color: #ffffff;
+    }
+    &.completed {
+      background-color: $idas-color-status-completed;
+      color: #ffffff;
+    }
+    &.created {
+      background-color: $idas-color-status-created;
+      color: #ffffff;
+    }
+    &.de-scoped {
+      background-color: $idas-color-status-de-scoped;
+      color: #ffffff;
+    }
+    &.done {
+      background-color: $idas-color-status-done;
+      color: #ffffff;
+    }
+    &.in-progress {
+      background-color: $idas-color-status-in-progress;
+      color: #ffffff;
+    }
+    &.not-started {
+      background-color: $idas-color-status-not-started;
+      color: #ffffff;
+    }
+    &.on-hold {
+      background-color: $idas-color-status-on-hold;
+      color: #ffffff;
+    }
+    &.re-started {
+      background-color: $idas-color-status-re-started;
+      color: #ffffff;
+    }
+    &.started {
+      background-color: $idas-color-status-started;
+      color: #ffffff;
+    }
   }
 }
 
@@ -182,24 +1048,94 @@ h1, h2, h3, h4, mat-header-cell {
   display: inline-block;
 }
 
-.btn-idas-float-right{
-  float:right;
+.btn-idas-float-right {
+  float: right;
 }
 
-.btn-idas-float-left{
-  float:left;
+.btn-idas-float-left {
+  float: left;
 }
 
-.btn-idas-no:hover{
-    background-color: $bad-trend;
-    border: 1px solid $idas-color-body-background-main;
-    color: $idas-color-body-background-main;
+.btn-idas-no {
+  background-color: $idas-color-body-background-main;
+  border: 1px solid $idas-color-body-background-main;
+  color: $bad-trend;
 }
 
-.btn-idas-yes:hover{
-    background-color: $good-trend;
-    border: 1px solid $idas-color-body-background-main;
-    color: $idas-color-body-background-main;
+.btn-idas-no:hover {
+  background-color: $bad-trend;
+  border: 1px solid $idas-color-body-background-main;
+  color: $idas-color-body-background-main;
+}
+
+.btn-idas-yes {
+  background-color: $idas-color-body-background-main;
+  border: 1px solid $idas-color-body-background-main;
+  color: $good-trend;
+}
+
+.btn-idas-yes:hover {
+  background-color: $good-trend;
+  border: 1px solid $idas-color-body-background-main;
+  color: $idas-color-body-background-main;
+}
+
+.btn-idas-with-border {
+  border: 1px solid $idas-color-heading-background-secondary;
+}
+
+.btn-idas-task-assign-to-me {
+  color: $idas-color-main-links-active;
+}
+
+.btn-idas-task-assign-to-me:hover {
+  background-color: $idas-color-main-links-active;
+  color: $white;
+}
+
+span,
+mat-form-field,
+input,
+mat-input,
+mat-select,
+mat-option,
+mat-autocomplete,
+select {
+  font-size: 1em;
+}
+
+span {
+  mat-form-field {
+    mat-autocomplete {
+      mat-select {
+        mat-option {
+          font-size: 0.75em;
+          padding: 0 0 0 0 !important;
+        }
+      }
+
+      mat-option {
+        font-size: 0.75em;
+        padding: 0 0 0 0 !important;
+      }
+    }
+  }
+}
+
+mat-option,
+mat-select,
+select {
+  padding: 0 0 0 0 !important;
+}
+
+:host mat-option,
+mat-select,
+select {
+  padding: 0 0 0 0;
+}
+
+.mat-checkbox {
+  font-size: 0.95em;
 }
 
 .mat-form-field {
@@ -207,28 +1143,24 @@ h1, h2, h3, h4, mat-header-cell {
   padding: 1px;
   width: 100%;
 
-  .input{
+  .input {
     background-color: linear-gradient(#a9a9a9, #d9d9d9);
-    font-size: 0.90em;
+    font-size: 1em;
     padding: 1px;
     width: 100%;
   }
 
-	.mat-autocomplete{
-
-		.mat-option{
-
-      .span{
+  .mat-autocomplete {
+    .mat-option {
+      .span {
         color: red;
-        font-size: 1.95em;
+        font-size: 1em;
       }
-
-		}
+    }
   }
-
 }
 
-.mat-form-field-display-inline-block{
+.mat-form-field-display-inline-block {
   display: inline-block;
 }
 

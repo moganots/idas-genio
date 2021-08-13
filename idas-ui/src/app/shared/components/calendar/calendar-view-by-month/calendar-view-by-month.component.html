@@ -1,0 +1,88 @@
+<table class="calendar-table" *ngIf="calendarService.viewCalendarDays">
+  <thead>
+    <tr>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 0 }">
+        Sunday
+      </th>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 1 }">
+        Monday
+      </th>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 2 }">
+        Tuesday
+      </th>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 3 }">
+        Wednesday
+      </th>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 4 }">
+        Thursday
+      </th>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 5 }">
+        Friday
+      </th>
+      <th [ngClass]="{ 'is-today': calendarService.viewDate.getDay() === 6 }">
+        Saturday
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let calendarDays of calendarService.viewCalendarDays | chunkpipe: 7;
+        let i = index
+      "
+    >
+      <td
+        class="calendar-day"
+        [ngClass]="{
+          'is-past-date': calendarDay?.isPastDate,
+          'is-today': calendarDay?.isToday
+        }"
+        *ngFor="let calendarDay of calendarDays; let j = index"
+      >
+        <div
+          class="calendar-day header"
+          [ngClass]="{
+            'is-today': (calendarDay?.isToday || (i == 0 && j == 0) || (calendarDay?.isFirstDayOfMonth)),
+            'is-past-date': calendarDay?.isPastDate,
+            'is-future-date': calendarDay?.isFutureDate
+          }"
+        >
+          {{ calendarDay?.date?.getDate() }}
+          {{
+            (i == 0 && j == 0) || calendarDay?.date?.getDate() == 1
+              ? monthNames[calendarDay?.date?.getMonth()].substring(0, 3)
+              : ""
+          }}
+        </div>
+        <div
+          class="calendar-day count-events"
+          [ngStyle]="{ display: hasEvents(calendarDay?.date) }"
+          [title]="getEventsCountTitle(calendarDay?.date)"
+        >
+          {{ numberOfEvents(calendarDay?.date) }}
+        </div>
+        <br />
+        <br />
+        <div
+          *ngFor="
+            let calendarEvent of getCalendarEventsByDate(calendarDay?.date)
+          "
+          class="calendar-event {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+          [title]="calendarEvent?.Title"
+        >
+          <i
+            class="material-icons {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+            [ngStyle]="{
+              display:
+              calendarEvent?.MeetingType?.Icon === null || calendarEvent?.MeetingType?.Icon === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            >{{ calendarEvent?.MeetingType?.Icon }}</i
+          >
+          {{ calendarEvent?.Title }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

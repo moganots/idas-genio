@@ -1,0 +1,65 @@
+<table class="calendar-table" *ngIf="calendarService.viewCalendarDays">
+  <thead>
+    <tr>
+      <th class="no-data">&nbsp;</th>
+      <th
+        *ngFor="let calendarDay of calendarService.viewCalendarDays"
+        class="calendar-day week-view"
+        [ngClass]="{ 'is-today': calendarDay?.isToday }"
+      >
+        {{ weekDays[calendarDay?.date?.getDay()] }}
+      </th>
+    </tr>
+    <tr>
+      <th class="no-data">&nbsp;</th>
+      <td
+        *ngFor="let calendarDay of calendarService.viewCalendarDays"
+        class="calendar-day week-view date"
+        [ngClass]="{ 'is-today': calendarDay?.isToday }"
+      >
+        {{ calendarDay?.date?.getDate() }}
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let operatingHour of operatingHours; let i = index">
+      <td>
+        {{ operatingHour }}
+      </td>
+      <td *ngFor="let calendarDay of calendarService.viewCalendarDays">
+        <div
+          *ngFor="
+            let calendarEvent of getCalendarEventsByTime(
+              calendarDay?.date,
+              operatingHour
+            )
+          "
+          class="calendar-event {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+          [title]="calendarEvent?.Title"
+        >
+          <i
+            class="material-icons {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+            [ngStyle]="{
+              display:
+                calendarEvent?.MeetingType?.Icon === null || calendarEvent?.MeetingType?.Icon === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            >{{ calendarEvent?.MeetingType?.Icon }}</i
+          >
+          {{ calendarEvent?.Title }}
+          <i
+            class="material-icons recurring {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+            [ngStyle]="{
+              display: !calendarEvent?.isRecurring ? 'none' : 'inline'
+            }"
+            >autorenew</i
+          >
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>

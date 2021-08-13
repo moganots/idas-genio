@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService, NotificationMessage } from 'app/shared/shared.module';
+import { AuthenticationService, DataService, NotificationMessage } from 'app/shared/shared.module';
 import { UserNotificationsConfiguration } from '../user-notifications-configuration';
 
 @Injectable({
@@ -8,8 +8,8 @@ import { UserNotificationsConfiguration } from '../user-notifications-configurat
 })
 export class NotificationsService extends DataService {
 
-  constructor(public httpClient: HttpClient) {
-    super(httpClient);
+  constructor(public httpClient: HttpClient, public authenticationService: AuthenticationService) {
+    super(httpClient, authenticationService);
     this.entityName = UserNotificationsConfiguration.identifier;
   }
 

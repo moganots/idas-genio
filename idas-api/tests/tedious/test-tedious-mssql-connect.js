@@ -1,3 +1,4 @@
+console.log(`\r\n===> Start Test:\r\n${__filename}`);
 let connectionConfig = {
     server: `localhost`,
     authentication: {

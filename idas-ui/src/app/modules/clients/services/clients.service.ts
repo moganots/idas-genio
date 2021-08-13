@@ -1,28 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Client, DataService } from 'app/shared/shared.module';
+import {
+  AuthenticationService,
+  Client,
+  DataService,
+  GeneralUtils,
+  LookupValue,
+  LookupValueService,
+} from 'app/shared/shared.module';
+import { catchError, map } from 'rxjs/operators';
 import { ClientsConfiguration } from '../clients-configuration';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientsService extends DataService {
-
-  constructor(public httpClient: HttpClient) {
-    super(httpClient);
+  lookupValues: LookupValue[] = [];
+  constructor(
+    public httpClient: HttpClient,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService
+  ) {
+    super(httpClient, authenticationService);
     this.entityName = ClientsConfiguration.identifier;
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .subscribe((lookupValues) => {
+        this.lookupValues = lookupValues;
+      });
   }
-
-  create(entity: any): any {
-    return super.create<Client>(entity);
+  mapValues(client: Client) {
+    client.Salutation = this.lookupValues.find(
+      (lv) => lv._id === client.SalutationId
+    );
+    client.IndustryType = this.lookupValues.find(
+      (lv) => lv._id === client.IndustryTypeId
+    );
+    client.DisplayName = GeneralUtils.getClientDisplayName(client);
+    return client;
   }
-
-  update(entity: any): any {
-    return super.update<Client>(entity);
-  }
-
-  delete(entity: any): any {
-    return super.delete<Client>(entity);
-  }
-
 }

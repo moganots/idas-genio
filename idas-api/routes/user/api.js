@@ -1,50 +1,55 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Author:	    TS MOGANO
-| Create date:  02/03/2021
-| Description:  IDAS - Genio - API - user routes class
+| Author:	   TS MOGANO
+| Create date:  2021-08-04
+| Description:  IDAS - Genio - API - Routes utility class for the [dbo].[User] table
 |------------------------------------------------------------------------------------------------------------------
  */
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |------------------------------------------------------------------------------------------------------------------
  */
 const _hearbeat = require(`./../heartbeat`);
-const _repository = require(`./../../models/mssql/repository/user/repository-user`);
+const _repository = require(`./../../database/repository/mssql/UserRepository`);
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| module exports
+| module.exports
 |------------------------------------------------------------------------------------------------------------------
  */
 module.exports = function(router, config) {
+  const apiAnchorName = `user`;
   const heartbeat = _hearbeat(config);
-  const repository = _repository(config);
+  const repository = _repository();
 
     // ping
-    router.route('/user/ping')
+    router.route(`/${apiAnchorName}/ping`)
       .get(heartbeat.ping);
 
     // create
-    router.route('/user/create')
+    router.route(`/${apiAnchorName}/create`)
       .put(repository.create);
 
     // getAll
-    router.route('/user/getAll')
+    router.route(`/${apiAnchorName}/getAll`)
       .get(repository.getAll);
 
     // getById
-    router.route('/user/getById')
+    router.route(`/${apiAnchorName}/getById`)
       .get(repository.getById);
 
+    // getBy
+    router.route(`/${apiAnchorName}/getBy`)
+      .get(repository.getBy);
+
     // update
-    router.route('/user/update')
+    router.route(`/${apiAnchorName}/update`)
       .put(repository.update);
 
     // delete
-    router.route('/user/delete')
+    router.route(`/${apiAnchorName}/delete`)
       .put(repository.delete);
 
 }

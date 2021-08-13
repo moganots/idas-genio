@@ -1,5 +1,8 @@
-DECLARE @UID NVARCHAR(320) = 'root@genio.idas.co.za';
-
+DECLARE @EmailAddress NVARCHAR(320) = 'root@genio.idas.co.za'
+DECLARE @_id [bigint] = NULL
+DECLARE @EmployeeId [bigint] = NULL
+DECLARE @ClientId [bigint] = NULL
+DECLARE @SupplierId [bigint] = NULL
 SELECT
 	[u].[_id]
 	, [u].[EmailAddress]
@@ -8,49 +11,53 @@ SELECT
 	, [u].[IsLocked]
 	, [u].[IsActive]
 	, [u].[DateLastLoggedIn]
-	, [e].[_id] AS 'Employee._id'
-	, [e].[SalutationId] AS 'Employee.SalutationId'
-	, [e].[Name] AS 'Employee.Name'
-	, [e].[MiddleName] AS 'Employee.MiddleName'
-	, [e].[Surname] AS 'Employee.Surname'
-	, [e].[IdNumber] AS 'Employee.IdNumber'
-	, [e].[BirthDate] AS 'Employee.BirthDate'
-	, [e].[GenderId] AS 'Employee.GenderId'
-	, [e].[EmploymentTypeId] AS 'Employee.EmploymentTypeId'
-	, [e].[PositionId] AS 'Employee.PositionId'
-	, [e].[DepartmentId] AS 'Employee.DepartmentId'
-	, [e].[ManagerId] AS 'Employee.ManagerId'
-	, [e].[DateHired] AS 'Employee.DateHired'
-	, [e].[EmployeeNumber] AS 'Employee.EmployeeNumber'
-	, [e].[IsTerminated] AS 'Employee.IsTerminated'
-	, [e].[DateTerminated] AS 'Employee.DateTerminated'
-	, [e].[IsActive] AS 'Employee.IsActive'
-	, [c].[_id] AS 'Client._id'
-	, [c].[SalutationId] AS 'Client.SalutationId'
-	, [c].[Name] AS 'Client.Name'
-	, [c].[Surname] AS 'Client.Surname'
-	, [c].[CompanyName] AS 'Client.CompanyName'
-	, [c].[IndustryTypeId] AS 'Client.IndustryTypeId'
-	, [c].[IdNumber] AS 'Client.IdNumber'
-	, [c].[RegistrationNumber] AS 'Client.RegistrationNumber'
-	, [c].[VATNumber] AS 'Client.VATNumber'
-	, [c].[IsActive] AS 'Client.IsActive'
-	, [s].[_id] AS 'Supplier._id'
-	, [s].[SalutationId] AS 'Supplier.SalutationId'
-	, [s].[Name] AS 'Supplier.Name'
-	, [s].[Surname] AS 'Supplier.Surname'
-	, [s].[CompanyName] AS 'Supplier.CompanyName'
-	, [s].[IndustryTypeId] AS 'Supplier.IndustryTypeId'
-	, [s].[IdNumber] AS 'Supplier.IdNumber'
-	, [s].[RegistrationNumber] AS 'Supplier.RegistrationNumber'
-	, [s].[VATNumber] AS 'Supplier.VATNumber'
-	, [s].[BankId] AS 'Supplier.BankId'
-	, [s].[AccountNumber] AS 'Supplier.AccountNumber'
-	, [s].[IsActive] AS 'Supplier.IsActive'
+	, [e].[_id] AS 'EmployeeId'
+	, [e].[SalutationId] AS 'EmployeeSalutationId'
+	, [e].[Name] AS 'EmployeeName'
+	, [e].[MiddleName] AS 'EmployeeMiddleName'
+	, [e].[Surname] AS 'EmployeeSurname'
+	, [e].[IdNumber] AS 'EmployeeIdNumber'
+	, [e].[BirthDate] AS 'EmployeeBirthDate'
+	, [e].[GenderId] AS 'EmployeeGenderId'
+	, [e].[EmploymentTypeId] AS 'EmployeeEmploymentTypeId'
+	, [e].[PositionId] AS 'EmployeePositionId'
+	, [e].[DepartmentId] AS 'EmployeeDepartmentId'
+	, [e].[ManagerId] AS 'EmployeeManagerId'
+	, [e].[DateHired] AS 'EmployeeDateHired'
+	, [e].[EmployeeNumber] AS 'EmployeeEmployeeNumber'
+	, [e].[IsTerminated] AS 'EmployeeIsTerminated'
+	, [e].[DateTerminated] AS 'EmployeeDateTerminated'
+	, [e].[IsActive] AS 'EmployeeIsActive'
+	, [c].[_id] AS 'ClientId'
+	, [c].[SalutationId] AS 'ClientSalutationId'
+	, [c].[Name] AS 'ClientName'
+	, [c].[Surname] AS 'ClientSurname'
+	, [c].[CompanyName] AS 'ClientCompanyName'
+	, [c].[IndustryTypeId] AS 'ClientIndustryTypeId'
+	, [c].[IdNumber] AS 'ClientIdNumber'
+	, [c].[RegistrationNumber] AS 'ClientRegistrationNumber'
+	, [c].[VATNumber] AS 'ClientVATNumber'
+	, [c].[IsActive] AS 'ClientIsActive'
+	, [s].[_id] AS 'SupplierId'
+	, [s].[SalutationId] AS 'SupplierSalutationId'
+	, [s].[Name] AS 'SupplierName'
+	, [s].[Surname] AS 'SupplierSurname'
+	, [s].[CompanyName] AS 'SupplierCompanyName'
+	, [s].[IndustryTypeId] AS 'SupplierIndustryTypeId'
+	, [s].[IdNumber] AS 'SupplierIdNumber'
+	, [s].[RegistrationNumber] AS 'SupplierRegistrationNumber'
+	, [s].[VATNumber] AS 'SupplierVATNumber'
+	, [s].[BankId] AS 'SupplierBankId'
+	, [s].[AccountNumber] AS 'SupplierAccountNumber'
+	, [s].[IsActive] AS 'SupplierIsActive'
+	, [s].[IsActive] AS 'UserGroup'
 FROM [IdasGenioDb].[dbo].[User] AS [u]
 LEFT JOIN [IdasGenioDb].[dbo].[Employee] AS [e] ON ([u].[EmployeeId] = [e].[_id])
 LEFT JOIN [IdasGenioDb].[dbo].[Client] AS [c] ON ([u].[ClientId] = [c].[_id])
 LEFT JOIN [IdasGenioDb].[dbo].[Supplier] AS [s] ON ([u].[SupplierId] = [s].[_id])
 WHERE
-	([u].[EmailAddress] = @UID)
-FOR JSON PATH
+	([u].[EmailAddress] = @EmailAddress)
+	AND (@_id IS NULL OR [u].[_id] = @_id)
+	AND (@EmployeeId IS NULL OR [u].[EmployeeId] = @EmployeeId)
+	AND (@ClientId IS NULL OR [u].[ClientId] = @ClientId)
+	AND (@SupplierId IS NULL OR [u].[SupplierId] = @SupplierId)

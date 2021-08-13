@@ -1,10 +1,68 @@
-import { environment } from "environments/environment";
-
+import { environment } from 'environments/environment';
 export class SharedConfiguration {
-    public static baseApi = environment.baseApi;
-    public static companyName = environment.companyName;
-    public static applicationName = environment.applicationName;
-    public static encryptionKey = environment.encryptionKey;
-    public static encryptionSaltCount = environment.encryptionSaltCount;
-    public static userLocalStorageName = 'idas-genio-user';
+  public static baseApi = environment.baseApi;
+  public static companyName = environment.companyName;
+  public static applicationName = environment.applicationName;
+  public static encryptionKey = environment.encryptionKey;
+  public static encryptionSaltCount = environment.encryptionSaltCount;
+  public static userLocalStorageName = 'idas-genio-user';
+  public static fileExtensions = [
+    `7z`,
+    `7zip`,
+    `ae`,
+    `ai`,
+    `apk`,
+    `au`,
+    `avi`,
+    `br`,
+    `css`,
+    `csv`,
+    `dbf`,
+    `doc`,
+    `docx`,
+    `dw`,
+    `dwg`,
+    `email`,
+    `eml`,
+    `eps`,
+    `exe`,
+    `file`,
+    `fl`,
+    `fla`,
+    `fw`,
+    `html`,
+    `il`,
+    `iso`,
+    `jar`,
+    `java`,
+    `jpeg`,
+    `jpg`,
+    `js`,
+    `json`,
+    `ld`,
+    `mp3`,
+    `mp4`,
+    `msg`,
+    `msi`,
+    `pdf`,
+    `pl`,
+    `png`,
+    `ppt`,
+    `pr`,
+    `ps`,
+    `psd`,
+    `pub`,
+    `rtf`,
+    `search`,
+    `svg`,
+    `txt`,
+    `vsd`,
+    `word`,
+    `xls`,
+    `xlsx`,
+    `xml`,
+    `zar`,
+    `zip`,
+  ];
+  static uriFileAttachment = `#/secure/attachment`;
 }

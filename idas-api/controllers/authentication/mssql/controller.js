@@ -8,51 +8,115 @@
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const dbContext = require(`../../../database/mssql/context/context-idas-genio-db-mssql`);
-const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);
-const { isEmptyString } = require(`../../../common/functions`);
+const _UserProfile = require(`./../../../database/models/UserProfile`);
+const _UserRepository = require(`./../../../database/repository/mssql/UserRepository`);
+const { isEmptyString, getElementAt } = require(`./../../../common/functions`);
+const { decrypt, validateHash } = require(`./../../../common/encryption/dencryption`);
+const { onHttpRequestStarted, onHttpError, onHttpSuccess } = require(`./../../../common/logging/logger`);
+const { createJwtUserSessionToken } = require("../../../common/authentication/jwt");
+const { yyyymmddhmsmsWithDashSeparator } = require("../../../common/date-util");
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Functions
+| Function(s)
 |------------------------------------------------------------------------------------------------------------------
  */
-const Controller = (config = getDefaultConfig()) => {
-    const register = (request, response, next) => {
-
-    }
-    const loginSso = (request, response, next) => {
-
-    }
-    const login = (request, response, next) => {
+const Controller = () => {
+    const UserProfile = _UserProfile();
+    const UserRepository = _UserRepository();
+    const login = (request, response) => {
         try{
+            onHttpRequestStarted(__filename, request);
             const uid = request.body.uid;
             const password = request.body.password;
             if(isEmptyString(uid) && isEmptyString(password)){
-                return onHttpRequestCompleted(__filename, request, response, {message: `UserID (Email Address) and Password not provided`});
+                return onHttpError(__filename, request, response, {error: `UserID (Email Address) and Password not provided`, message: `Authentication failed`});
             }else if(isEmptyString(uid)){
-                return onHttpRequestCompleted(__filename, request, response, {message: `UserID (Email Address) not provided`});
+                return onHttpError(__filename, request, response, {error: `UserID (Email Address) not provided`, message: `Authentication failed`});
             }else if(isEmptyString(password)){
-                return onHttpRequestCompleted(__filename, request, response, {message: `Password not provided`});
+                return onHttpError(__filename, request, response, {error: `Password not provided`, message: `Authentication failed`});
             }
-            dbContext(request.query.uid).executeScalarFunction(`dbo`, `GetUserProfile`, [{ UID: uid }], function (error, data, message) {
-                return onHttpRequestCompleted(__filename, request, response, error, message, data);
+            UserRepository.callGetUserProfile(uid, uid, null, null, null, null, (error, data) => {
+                if(error){
+                    return onHttpError(__filename, request, response, {error: error, message:`Authentication failed for User: ${uid}`});
+                }
+                const dataItem0 = getElementAt(data, null);
+                const dataItem0AsJson = JSON.parse(dataItem0.data);
+                const userProfile = dataItem0AsJson.UserProfile[0];
+                console.log(userProfile)
+/*                 const userProfile = UserProfile.fromComponents(
+                    dataItem0AsJsonUserProfile.User
+                    , dataItem0AsJsonUserProfile.Employee
+                    , dataItem0AsJsonUserProfile.Client
+                    , dataItem0AsJsonUserProfile.Supplier); */
+                if(hasSessionToken(userProfile.User.SessionToken)){
+                    return onHttpError(__filename, request, response, {message:`User: ${uid} is already logged in and still has a valid authentication session token`, data: userProfile});
+                }else{
+                    const passwordHash = userProfile.User.PasswordHash;
+                    const validPassword = validateHash(password, decrypt(passwordHash));
+                    if(validPassword){
+                        const sessionToken = createJwtUserSessionToken(uid);
+                        if(hasSessionToken(sessionToken)){
+                            userProfile.User.DateLastLoggedIn = yyyymmddhmsmsWithDashSeparator();
+                            userProfile.User.SessionToken = sessionToken;
+                            UserRepository.onSuccessfulLogin(userProfile.User._id, userProfile, (error) => {
+                                if(error){
+                                    return onHttpError(__filename, request, response, {error: error, message: `Authentication failed for User: ${uid}`});
+                                }
+                                return onHttpSuccess(__filename, request, response, {message: `User: ${userProfile.User.EmailAddress} authenticated successfully`, data: userProfile});
+                            });
+                        }else{
+                            return onHttpError(__filename, request, response, {message:`Failed to generate SessionToken for User: ${uid}`});
+                        }
+                    }else{
+                        return onHttpError(__filename, request, response, {message:`Invalid password provided for User: ${uid}`});
+                    }                    
+                }
             });
         }catch(error){
-            return onHttpRequestCompleted(__filename, request, response, error);
+            return onHttpError(__filename, request, response, {error: error, message: `Unable to complete user authentication request`});
         }finally{}
     }
-    const logout = (request, response, next) => {
-        console.log(request);
+    const logout = (request, response) => {
+        try{
+            onHttpRequestStarted(__filename, request);
+            if(request.body){
+                const userProfile = UserProfile.fromComponents(request.body.User);
+                if(userProfile && userProfile.User){
+                    userProfile.User.SessionToken = null;
+                    UserRepository.onSuccessfulLogout(userProfile.User._id, userProfile, (error) => {
+                        if(error){
+                            return onHttpError(__filename, request, response, {error: error, message: `Unable to logout User: ${userProfile.User.EmailAddress}. Reason: ${error.message}`});                        
+                        }else{
+                            return onHttpSuccess(__filename, request, response, {message: `User: ${userProfile.User.EmailAddress} logged out successfully`, data: userProfile});
+                        }
+                    });
+                }else{
+                    return onHttpError(__filename, request, response, {message: `Unable to complete user logout request. Reason: UserProfile was not specified`});                    
+                }
+            }else{
+                return onHttpError(__filename, request, response, {message: `Unable to complete user logout request. Reason: Request body was not specified`});
+            }
+        }catch(error){
+            return onHttpError(__filename, request, response, {error: error, message: `Unable to complete user logout request. Reason: ${error.message}`});
+        }finally{}
     }
-    const validateToken = (request, response, next) => {
-
+    const validateToken = (request, response) => {
+        try{
+            onHttpRequestStarted(__filename, request);
+        }catch(error){
+            return onHttpError(__filename, request, response, {error: error, message: `Unable to complete token validation request`});
+        }finally{}
     }
-    const cancelToken = (request, response, next) => {
-
+    const cancelToken = (request, response) => {
+        try{
+            onHttpRequestStarted(__filename, request);
+        }catch(error){
+            return onHttpError(__filename, request, response, {error: error, message: `Unable to complete token cancellation request`});
+        }finally{}
     }
 
     /*
@@ -61,20 +125,19 @@ const Controller = (config = getDefaultConfig()) => {
     |------------------------------------------------------------------------------------------------------------------
      */
     return {
-        register: register,
-        loginSso: loginSso,
         login: login,
         logout: logout,
         validateToken: validateToken,
         cancelToken: cancelToken
     };
-
 }
-const getDefaultConfig = () => { return require(`../../../config/config`); }
+const hasSessionToken = (sessionToken) => {
+    return !(sessionToken === null || sessionToken === undefined || String(sessionToken).trim().length === 0);
+}
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| module exports
+| module.exports
 |------------------------------------------------------------------------------------------------------------------
  */
 module.exports = Controller;

@@ -18,7 +18,7 @@ export class UserRoutesService extends BaseService {
     this.entityName = `menu-item`;
     this.resourceType = `getAll`;
     return this.httpClient
-      .get(`${this.getEndpointUrl()}`, this.getQueryParams(this.resourceType))
+      .get(`${this.getEndpointUrl()}`, this.getQueryParams())
       .pipe(map((results: any) => results.data), catchError((error) => this._handleError(error)));
   }
 

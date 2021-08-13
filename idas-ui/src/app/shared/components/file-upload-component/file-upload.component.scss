@@ -1,0 +1,107 @@
+@import "./../../../../assets/scss/idas/colors.scss";
+@import "./../../../../assets/scss/idas/fonts.scss";
+
+.file-upload {
+  border: 2px dashed #dcdcdc;
+  border-radius: 10px;
+  padding: 0 0 5px 0;
+
+  .file-list {
+    border-bottom: 2px dashed grey;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 5px 5px;
+    width: 100%;
+
+    img {
+      display: inline-block;
+      height: auto;
+      margin: 0 0 0 0;
+      padding: 0 5px 0 0;
+      text-align: justify;
+      width: 6%;
+      vertical-align: middle;
+    }
+
+    .file-details {
+      display: inline-block;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+
+      ul, li {
+        display: inline-block;
+        font-size: 0.95em;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+      }
+      li.label {
+        font-family: $OpenSans_Bold;
+        padding: 0 0 0 0;
+      }
+      li.detail {
+        padding: 0 5px 0 5px;
+      }
+    }
+
+    button {
+      display: inline-block;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;      
+    }
+  }
+
+  p {
+    &.cloud-upload {
+      display: inline-block;
+      font-family: $OpenSans_Bold;
+      padding: 5px 0 0 0;
+      text-align: center;
+      width: 100%;
+      vertical-align: middle;      
+    }
+    &.file-details {
+      border: 1px solid purple;
+      display: inline;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+    }
+    &.file-name {
+      border: 1px solid red;
+      display: inline;
+      font-size: 0.75em;
+      width: 100%;
+      vertical-align: middle;
+    }
+    &.file-dateCreated {
+      border: 1px solid yellow;
+      display: inline;
+      font-size: 0.75em;
+      text-align: justify;
+      vertical-align: middle;
+    }
+    &.file-size {
+      border: 1px solid purple;
+      display: inline;
+      font-size: 0.75em;
+      text-align: justify;
+      vertical-align: middle;
+    }
+  }
+
+  a,
+  a:link,
+  a:visited,
+  a:active {
+    color: $idas-color-main-links-link-active-visited;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $OpenSans_Bold;
+    padding-bottom: 3px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+  a:hover {
+    color: $idas-color-main-links-hover;
+  }
+}

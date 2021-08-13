@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthenticationService, CommonComponent } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/shared.module';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  providers: [AuthenticationService]
+  providers: [
+    AlertifyService,
+    AuthenticationService,
+    LookupValueService
+  ]
 })
 export class FooterComponent extends CommonComponent implements OnInit {
-  test : Date = new Date();
+  todaysDate = Date.now();
 
   constructor(
-    public location: Location,
     public router: Router,
-    public authenticationService: AuthenticationService
+    public alertifyService: AlertifyService,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService
     ) {
-    super(location, router, authenticationService);
+    super(router, alertifyService, authenticationService, lookupValueService);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }

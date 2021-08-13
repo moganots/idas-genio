@@ -1,7 +1,10 @@
-import { Employee, WageType } from 'app/shared/shared.module';
 import { BaseModel } from '../base/base-model';
+import { LookupValue } from '../lookup-models/lookup-value';
+import { Employee } from './employee';
 export class EmployeeSalary extends BaseModel {
-  employeeId:Employee;
-  wageTypeId:WageType;
-  amount:number;
+  EmployeeId: number;
+  WageTypeId: number;
+  Amount: number;
+  Employee: Employee;
+  WageType: LookupValue;
 }

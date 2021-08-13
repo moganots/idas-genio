@@ -1,3 +1,4 @@
+console.log(`\r\n===> Start Test:\r\n${__filename}`);
 const TYPES = require(`tedious`).TYPES;
 const { hasValues, toLocaleLowerCaseTrim } = require("./../../common/functions");
 

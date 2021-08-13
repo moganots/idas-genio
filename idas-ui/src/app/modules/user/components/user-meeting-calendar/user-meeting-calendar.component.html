@@ -1,0 +1,46 @@
+<!-- <app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [sourceDataColumns] = "sourceDataColumns" [sourceData] = "sourceData"></app-data-view-table-simple> -->
+<div *ngIf="isLoggedIn()" class="main-content idas-main-content">
+  <div class="container-fluid">
+    <div class="element">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger idas-main-card-header">
+            <i class="material-icons">{{ pageIcon }}</i>
+            <h4 class="card-title">{{ pageTitle }}</h4>
+            <p class="category"></p>
+            <span>
+              <button
+                mat-icon-button
+                class="
+                  btn btn-white btn-round btn-just-icon btn-idas-float-right
+                "
+                type="button"
+                (click)="onDataRefresh()"
+                title="{{ getButtonTitleDataRefresh() }}"
+              >
+                <i class="material-icons" style="margin: 0 0 0 5px;">autorenew</i>
+              </button>
+              <button
+                mat-icon-button
+                class="
+                  btn btn-white btn-round btn-just-icon btn-idas-float-right
+                "
+                type="button"
+                data-toggle="modal"
+                data-target="#create-edit-modal-dialog"
+                (click)="onClickCreate()"
+                title="{{ getButtonTitleAdd() }}"
+              >
+                <i class="material-icons" style="margin: 0 0 0 5px;">add</i>
+              </button>
+            </span>
+          </div>
+          <div class="card-body">
+            <app-calendar-toolbar></app-calendar-toolbar>
+            <!-- <app-calendar [calendarEvents]="calendarEvents"></app-calendar> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

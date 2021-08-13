@@ -1,58 +1,51 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService, Employee, EmployeesUtil, LookupService } from 'app/shared/shared.module';
+import {
+  AuthenticationService,
+  DataService,
+  Employee,
+  GeneralUtils,
+  LookupValue,
+  LookupValueService,
+} from 'app/shared/shared.module';
+import { catchError, map } from 'rxjs/operators';
 import { EmployeesConfiguration } from '../employees-configuration';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeesService extends DataService {
-
-  constructor(public httpClient: HttpClient, public lookupService: LookupService) {
-    super(httpClient);
+  lookupValues: LookupValue[] = [];
+  constructor(
+    public httpEmployee: HttpClient,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService
+  ) {
+    super(httpEmployee, authenticationService);
     this.entityName = EmployeesConfiguration.identifier;
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .subscribe((lookupValues) => {
+        this.lookupValues = lookupValues;
+      });
   }
-
-  create(entity: any): any {
-    entity.EmployeeNumber = this.getNewEmployeeNumber(entity.EmploymentTypeId);
-    entity.BirthDate = EmployeesUtil.getSAIdNumberBirthDate(entity.IdNumber);
-    entity.Gender = this.lookupService.getLookupValueIdByCategoryAndValue('Gender', EmployeesUtil.getSAIdNumberGender(entity.IdNumber));
-    return super.create<Employee>(entity);
-  }
-
-  update(entity: any): any {
-    entity.BirthDate = EmployeesUtil.getSAIdNumberBirthDate(entity.IdNumber);
-    entity.Gender = this.lookupService.getLookupValueIdByCategoryAndValue('Gender', EmployeesUtil.getSAIdNumberGender(entity.IdNumber));
-    return super.update<Employee>(entity);
-  }
-
-  delete(entity: any): any {
-    return super.delete<Employee>(entity);
-  }
-
-  private getNewEmployeeNumber(employmentTypeId: number) {
-    const employmentType = this.getEmploymentType(this.lookupService.getLookupValueById(employmentTypeId).value);
-    let newEmployeeNumber = this.newRandomEmployeeNumber(employmentType);
-    super.getAll<Employee>().map((employee) => employee.employeeNumber).forEach((en) => {
-      if(en === newEmployeeNumber){
-        newEmployeeNumber = this.newRandomEmployeeNumber(employmentType);
-      }
-    });
-    return newEmployeeNumber;
-  }
-  getEmploymentType(value: string) {
-    switch((value || '').trim().toLocaleLowerCase()) {
-      case 'consultant':
-      case 'freelancer':
-      case 'indipendent contractor': return 'C';
-      case 'permanent': return 'P';
-      case 'part-time':
-      case 'seasonal':
-      case 'temporary':
-      default: return 'T';
-    }
-  }
-  private newRandomEmployeeNumber(employmentType: string) {
-    return `${employmentType}${(Math.random() * (899999) + 100000)}`.split('.')[0].toLocaleUpperCase();
+  mapValues(employee: Employee) {
+    employee.Salutation = this.lookupValues.find(
+      (lv) => lv._id === employee.SalutationId
+    );
+    employee.Gender = this.lookupValues.find(
+      (lv) => lv._id === employee.GenderId
+    );
+    employee.EmploymentType = this.lookupValues.find(
+      (lv) => lv._id === employee.EmploymentTypeId
+    );
+    employee.Position = this.lookupValues.find(
+      (lv) => lv._id === employee.PositionId
+    );
+    employee.Department = this.lookupValues.find(
+      (lv) => lv._id === employee.DepartmentId
+    );
+    employee.DisplayName = GeneralUtils.getEmployeeDisplayName(employee);
+    return employee;
   }
 }

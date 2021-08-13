@@ -1,0 +1,74 @@
+.data-table-view-simple {
+    font-size: 0.90em;
+    height: 100%;
+    overflow-x: auto;
+    width: 100%;
+  
+    table, .mat-table {
+      border: 1px gray;
+      overflow: auto;
+      max-height: 500px;
+  
+      mat-footer-row,
+      mat-header-row,
+      mat-row {
+        display:inline-flex;
+        min-width: 100%;
+        width: 100%;
+      }
+  
+      mwlResizable {
+        box-sizing: border-box;
+      }
+  
+      mat-cell,
+      mat-footer-cell,
+      mat-header-cell {
+        width: 200px;
+        word-break: break-all;
+        flex: none;
+        display: block;
+      }
+
+      mat-cell:first-child,
+      mat-footer-cell:first-child,
+      mat-header-cell:first-child {
+        padding-left: 0px !important;
+      }
+  
+      mat-header-cell {
+        background-color: gray;
+        color: whitesmoke;
+        font-family: $OpenSans_Bold;
+        font-size: 0.90em;
+        padding: 18px 10px 10px 10px;
+        text-align: left;
+        vertical-align: middle;
+      }
+  
+      .mat-sort-header-button {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+  
+      mat-cell {
+        display: inline-block;
+        font-family: $OpenSans_Light;
+        font-size: 0.90em;
+        overflow: hidden;
+        vertical-align: middle;
+        white-space: nowrap;
+        text-align: left;
+        text-overflow: ellipsis;        
+      }
+  
+      .data-view-action-buttons-header {
+        background-color: white;
+      }
+    
+      .data-view-action-buttons-cell {
+        padding-right: 5px;
+      }
+    }
+  }

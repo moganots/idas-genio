@@ -1,3 +1,4 @@
+console.log(`\r\n===> Start Test:\r\n${__filename}`);
 const { encryptionKey, encryptionSaltCount } = require(`../../config/encryption/config`);
 const bcrypt = require(`bcrypt`);
 const encrypt = (password) => {

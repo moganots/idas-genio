@@ -1,0 +1,50 @@
+:: IDAS - Genio
+: Dashboard - Metrics
+> Health
+	- Time
+	- Tasks
+	- Workload
+	- Progress
+	- Cost
+	>> Ahead of schedule
+	>> Behind schedule
+	>> Completed
+	>> To be completed
+	>> Overdue
+	>> Under budget
+	>> Over budget
+> Tasks
+	- Not Started
+	- Completed
+	- In Progress
+> Progress
+	> Project
+		- Time
+		- Cost
+		- Workload
+		- Tasks
+		- % Progress
+	> Tasks
+	>> Goal-setting
+	>> Target marketing
+	>> Product development
+	>> Pre-launch marketing
+	>> Launch week
+	>> Post launch
+	>>> Analysis
+	>>> Design
+	>>> Development
+	>>> Testing
+	>>> Implementation
+> Time
+	- Ahead
+	- Behind
+	- On time
+> Cost
+	- Actual
+	- Planned
+	- Budget
+> Workload
+	- Completed
+	- Remaining
+	- Overdue

@@ -1,10 +1,9 @@
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { PageComponent } from 'app/modules/_shared/modules-shared.module';
+import { PageComponent, ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
 import { UserNotificationsConfiguration } from './user-notifications-configuration';
 import { NotificationsService } from './services/notifications.service';
-import { AuthenticationService } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, LookupValueService } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,28 +11,31 @@ import { Router } from '@angular/router';
   templateUrl: './user-notifications.component.html',
   styleUrls: ['./user-notifications.component.scss'],
   providers: [
+    AlertifyService,
     AuthenticationService,
+    LookupValueService,
+    ReferenceValueService,
     NotificationsService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
-export class UserNotificationsComponent extends PageComponent {
+export class UserNotificationsComponent extends PageComponent implements OnInit {
 
   constructor(
-    public location: Location,
     public router: Router,
     public matDialog: MatDialog,
+    public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService,
+    public referenceValueService: ReferenceValueService,
     public notificationsService: NotificationsService
     ) {
-    super(location, router, matDialog, authenticationService);
+    super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
     this.pageIcon = UserNotificationsConfiguration.pageIcon;
     this.pageTitle = UserNotificationsConfiguration.pageTitle;
     this.pageName = UserNotificationsConfiguration.pageName;
     this.dataService = notificationsService;
     this.entityName = UserNotificationsConfiguration.identifier;
-    this.sourceDataColumnNames = UserNotificationsConfiguration.fieldNames;
-    // this.sourceData = notificationsService.getAll<Notification>();
+    this.sourceDataColumns = UserNotificationsConfiguration.dataColumns;
   }
-
 }

@@ -2,39 +2,41 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Location, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from 'jquery';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { AuthenticationService, CommonComponent, User } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/shared.module';
 
 @Component({
   selector: 'app-main',
   templateUrl: './app-main.component.html',
   styleUrls: ['./app-main.component.scss'],
-  providers: [AuthenticationService]
+  providers: [
+    AlertifyService,
+    AuthenticationService,
+    LookupValueService
+  ]
 })
 export class AppMainComponent extends CommonComponent implements OnInit, AfterViewInit {
-  private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
-  public currentUser: User;
 
   constructor(
-    public location: Location,
     public router: Router,
-    public authenticationService: AuthenticationService
+    public alertifyService: AlertifyService,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService,
+    private location: Location
     ) {
-      super(location, router, authenticationService);
+      super(router, alertifyService, authenticationService, lookupValueService);
+      this.applicationHostName = this.getApplicationHostName();
   }
 
   ngOnInit() {
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
-          // if we are on windows OS we activate the perfectScrollbar function
+
+        // if we are on windows OS we activate the perfectScrollbar function
 
           document.getElementsByTagName('body')[0].classList.add('perfect-scrollbar-on');
       } else {
@@ -58,11 +60,7 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
                  window.scrollTo(0, 0);
          }
       });
-      this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
-           elemMainPanel.scrollTop = 0;
-           elemSidebar.scrollTop = 0;
-      });
-      if (this.isLoggedIn() && window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+      if (this.isLoggedIn() && elemMainPanel && elemSidebar && window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
           let ps = new PerfectScrollbar(elemMainPanel);
           ps = new PerfectScrollbar(elemSidebar);
       }
@@ -75,12 +73,10 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
       // tslint:disable-next-line:variable-name
       const $sidebar_img_container = $sidebar.find('.sidebar-background');
 
-
       if(window_width > 767){
           if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
               $('.fixed-plugin .dropdown').addClass('open');
           }
-
       }
 
       $('.fixed-plugin a').click(function(event){
@@ -97,8 +93,6 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
 
       $('.fixed-plugin .badge').click(function(){
           // tslint:disable-next-line:variable-name
-          const $full_page_background = $('.full-page-background');
-
 
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
@@ -121,7 +115,6 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
 
           $(this).parent('li').siblings().removeClass('active');
           $(this).parent('li').addClass('active');
-
 
           // tslint:disable-next-line:variable-name
           const new_image = $(this).find('img').attr('src');
@@ -164,8 +157,10 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
   runOnRouteChange(): void {
     if (this.isLoggedIn() && window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
       const elemMainPanel = document.querySelector('.main-panel') as HTMLElement;
-      const ps = new PerfectScrollbar(elemMainPanel);
-      ps.update();
+      if(elemMainPanel){
+        const ps = new PerfectScrollbar(elemMainPanel);
+        if(ps) { ps.update(); }
+      }
     }
   }
   isMac(): boolean {
@@ -175,5 +170,27 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
       }
       return bool;
   }
+  getApplicationHostName(): string {
+    const url = this.getApplicationUrl();
+    let hostname;
+    // find & remove protocol (http, ftp, etc.) and get hostname
 
+    if (url.indexOf('//') > -1) {
+        hostname = url.split('/')[2];
+    } else {
+        hostname = url.split('/')[0];
+    }
+
+    // find & remove port number
+    hostname = hostname.split(':')[0];
+    // find & remove "?"
+    hostname = hostname.split('?')[0];
+
+    return (hostname || '').toLocaleLowerCase().trim();
+  }
+  getApplicationUrl() {
+    const angularRoute = this.location.path();
+    const url = window.location.href;
+    return url.replace(angularRoute, '');
+  }
 }

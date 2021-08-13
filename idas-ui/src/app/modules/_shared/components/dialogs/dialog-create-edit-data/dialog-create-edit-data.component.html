@@ -1,64 +1,175 @@
 <div class="idas-dialog open">
-  <header class="header">
-    <i class="material-icons">{{pageIcon}}</i>
-    <h4>{{ capitalizeFirstLetter(action) }} {{ capitalizeFirstLetter(entityName) }}</h4>
-  </header>
+  <div class="card-header card-header-danger header">
+    <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+    <h4 class="card-title">{{ pageTitle }}</h4>
+    <p class="category"></p>
+    <span>
+      <button
+        mat-icon-button
+        class="
+          btn
+          btn-white
+          btn-round
+          btn-just-icon
+          btn-idas-dialog-no
+          btn-idas-dialog-float-right
+        "
+        type="button"
+        data-dismiss="modal"
+        (click)="onClickDialogClose()"
+        title="Close"
+      >
+        <i class="material-icons header.buttons">close</i>
+      </button>
+    </span>
+  </div>
   <form [formGroup]="frmGroup">
     <div class="content" formGroupName="frmFields">
-      <div *ngFor="let udf of useDataFields; let i = index">
-        <span [ngSwitch]="udf.controlType">
+      <div *ngFor="let fidc of formInputDataColumns; let i = index">
+        <span [ngSwitch]="fidc.controlType">
           <span *ngSwitchCase="'textbox'">
             <mat-form-field>
-              <input matInput type="text" id="{{udf.name}}" name="{{udf.name}}"
-              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
-              placeholder="{{ getFieldPlaceholder(udf) }}" (change)="onValueChanged(udf, $event)" />
+              <input
+                matInput
+                type="text"
+                id="{{ fidc.name }}"
+                name="{{ fidc.name }}"
+                [formControl]="frmGroupFields.controls[fidc.name]"
+                class=""
+                placeholder="{{ fidc.displayName }}"
+                (change)="onValueChanged($event)"
+              />
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'number'">
             <mat-form-field>
-              <input matInput type="number" id="{{udf.name}}" name="{{udf.name}}"
-              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
-              placeholder="{{ getFieldPlaceholder(udf) }}" (keyup)="onValueChanged(udf, $event)" />
+              <input
+                matInput
+                type="number"
+                id="{{ fidc.name }}"
+                name="{{ fidc.name }}"
+                [formControl]="frmGroupFields.controls[fidc.name]"
+                class=""
+                placeholder="{{ fidc.displayName }}"
+                (keyup)="onValueChanged($event)"
+              />
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'select'">
             <mat-form-field>
-              <input matInput type="text" id="{{udf.name}}" name="{{udf.name}}"
-                  formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
-                  placeholder="{{ getFieldPlaceholder(udf) }}" [matAutocomplete]="i" (keyup)="onValueChanged(udf, $event)" (ngModel)="getNgModelValue()">
-              <mat-autocomplete #i="matAutocomplete">
-                  <mat-option style="padding: 1px 0 1px 15px;" *ngFor="let value of udf.filteredLookupValues | async" [value]="value.id"
-                      (onSelectionChange)="onSelectedValueChanged(udf, $event)" matSort>
-                      <span style="padding: 1px 0 1px 15px;">{{value.displayValue || 'No option value(s)'}}</span>
-                  </mat-option>
+              <input
+                matInput
+                type="text"
+                id="{{ fidc.name }}"
+                name="{{ fidc.name }}"
+                [formControl]="frmGroupFields.controls[fidc.name]"
+                class=""
+                placeholder="{{ fidc.displayName }}"
+                [matAutocomplete]="i"
+              />
+              <mat-autocomplete
+                id="{{ fidc.name }}"
+                #i="matAutocomplete"
+                [displayWith]="getDisplayWithValue"
+              >
+                <mat-option
+                  id="{{ fidc.name }}"
+                  *ngFor="let value of fidc.filteredLookupValues | async"
+                  [value]="value"
+                  (onSelectionChange)="onSelectedValueChanged($event)"
+                  matSort
+                >
+                  <span
+                    [ngStyle]="{
+                      display:
+                        value.icon === null || value.icon === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                  >
+                    <i
+                      class="material-icons icon-mat-option {{ value.cssClassCategory }} {{
+                        value.cssClass
+                      }}"
+                      [title]="value.title"
+                      >{{ value.icon }}</i
+                    >
+                  </span>
+                  <span
+                    [ngStyle]="{
+                      display:
+                        value.image === null || value.image === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                  >
+                    <img class="img-mat-option" src="{{ value.image }}" />
+                  </span>
+                  <p class="display-value">{{ value.displayValue }}</p>
+                </mat-option>
               </mat-autocomplete>
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'checkbox'">
-            <mat-checkbox id="{{udf.name}}" name="{{udf.name}}" formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class="" >{{ getFieldPlaceholder(udf) }}</mat-checkbox>
+            <mat-checkbox
+              id="{{ fidc.name }}"
+              name="{{ fidc.name }}"
+              [formControl]="frmGroupFields.controls[fidc.name]"
+              (change)="onCheckboxClicked($event)"
+              class=""
+              ><p class="display-name-check-box">
+                {{ fidc.displayName }}
+              </p></mat-checkbox
+            >
           </span>
           <span *ngSwitchCase="'datetimepicker'">
             <mat-form-field>
-              <mat-label>{{ getFieldPlaceholder(udf) }}</mat-label>
-              <input matInput [matDatepicker]="picker" id="{{udf.name}}" name="{{udf.name}}"
-              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
-              placeholder="{{ getFieldPlaceholder(udf) }}" (dateInput)="onDateChanged(udf, $event)" (dateChange)="onDateChanged(udf, $event)" />
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-label>{{ fidc.displayName }}</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                id="{{ fidc.name }}"
+                name="{{ fidc.name }}"
+                [formControl]="frmGroupFields.controls[fidc.name]"
+                class=""
+                placeholder="{{ fidc.displayName }}"
+                (dateInput)="onDateChanged($event)"
+                (dateChange)="onDateChanged($event)"
+              />
+              <mat-datepicker-toggle
+                id="{{ fidc.name }}"
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker id="{{ fidc.name }}" #picker></mat-datepicker>
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'password'">
             <mat-form-field>
-              <input matInput type="password" id="{{udf.name}}" name="{{udf.name}}"
-              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
-              placeholder="{{ getFieldPlaceholder(udf) }}" (keyup)="onValueChanged(udf, $event)" />
+              <input
+                matInput
+                type="password"
+                id="{{ fidc.name }}"
+                name="{{ fidc.name }}"
+                [formControl]="frmGroupFields.controls[fidc.name]"
+                class=""
+                placeholder="{{ fidc.displayName }}"
+                (keyup)="onValueChanged($event)"
+              />
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'textarea'">
             <mat-form-field>
-              <textarea matInput type="textarea" id="{{udf.name}}" name="{{udf.name}}"
-              formControlName="{{udf.name}}" [formControl]="frmGroupFields.controls[udf.name]" class=""
-              placeholder="{{ getFieldPlaceholder(udf) }}" (keyup)="onValueChanged(udf, $event)"></textarea>
+              <textarea
+                matInput
+                type="textarea"
+                id="{{ fidc.name }}"
+                name="{{ fidc.name }}"
+                [formControl]="frmGroupFields.controls[fidc.name]"
+                class=""
+                placeholder="{{ fidc.displayName }}"
+                (keyup)="onValueChanged($event)"
+              ></textarea>
             </mat-form-field>
           </span>
         </span>
@@ -66,11 +177,23 @@
     </div>
   </form>
   <footer class="footer">
-    <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right" type="button" data-dismiss="modal" (click)="onClickDialogClose()" title="Close">
-      <i class="material-icons">close</i>
-    </button>
-    <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right" type="button" [disabled]="frmGroup.invalid" (click)="onClickSave()" title="Save Changes">
-      <i class="material-icons">save</i>
+    <button
+      mat-icon-button
+      class="
+        btn
+        btn-white
+        btn-round
+        btn-just-icon
+        btn-idas-dialog-yes
+        btn-idas-dialog-float-right
+      "
+      type="button"
+      [disabled]="frmGroup.invalid"
+      (click)="onClickSave()"
+      [mat-dialog-close]="selected"
+      title="Save Changes"
+    >
+      <i class="material-icons idas-button-icon">save</i>
     </button>
   </footer>
 </div>

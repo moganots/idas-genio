@@ -1,0 +1,36 @@
+<div class="file-upload" appFileDragDrop (onFileDropped)="uploadFile($event)">
+  <p class="cloud-upload">
+    <i class="material-icons">cloud_upload</i>Drag and drop file(s), or
+    <a (click)="fileInput.click()">Browse</a>.
+  </p>
+  <input
+    hidden
+    type="file"
+    #fileInput
+    (change)="uploadFile($event.target.files)"
+  />
+  <div class="file-list" *ngFor="let file of files; let i = index">
+    <img src="{{ getFileExtensionIcon(file) }}"/>
+    <span class="file-details">
+      <a href="{{ file?.Url }}">{{ file?.FileName }}</a>
+      <ul>
+        <li class="label">Uploaded By:</li>
+        <li class="detail">{{ file?.createdBy?.DisplayName}}</li>
+        <li class="label">Date Uploaded:</li>
+        <li class="detail">{{ file?.DateCreated | date: "dd-MMM-yyyy HH:mm:ss"}}</li>
+        <li class="label">File Size:</li>
+        <li class="detail">{{ getFileSize(file) }}</li>
+      </ul>
+    </span>
+    <button
+      mat-icon-button
+      class="
+        btn btn-round btn-just-icon btn-idas-dialog-float-right btn-idas-no
+      "
+      type="button"
+      (click)="deleteAttachment(i)"
+    >
+      <i class="material-icons idas-button-icon">delete</i>
+    </button>
+  </div>
+</div>

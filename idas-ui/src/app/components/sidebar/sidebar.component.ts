@@ -1,33 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService, CommonComponent } from 'app/shared/shared.module';
-import { AppComponentsRoutes } from '../app-components-routes';
+import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/shared.module';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  providers: [AuthenticationService]
+  providers: [
+    AlertifyService,
+    AuthenticationService,
+    LookupValueService
+  ]
 })
-export class SidebarComponent extends CommonComponent implements OnInit {
+export class SidebarComponent extends CommonComponent {
   menuItems: any[];
 
   constructor(
-    public location: Location,
     public router: Router,
-    public authenticationService:AuthenticationService
+    public alertifyService: AlertifyService,
+    public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService
     ) {
-    super(location, router, authenticationService);
-  }
-
-  ngOnInit() {
-    this.menuItems = AppComponentsRoutes.filter(menuItem => menuItem);
+    super(router, alertifyService, authenticationService, lookupValueService);
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
           return false;
       }
       return true;
-  };
+  }
 }

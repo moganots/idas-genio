@@ -8,13 +8,13 @@
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Functions
+| Function(s)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 const appendLeadingZero = (number) => {
@@ -26,20 +26,23 @@ const padLeft = (value, padding) => {
 const padRight = (value, padding) => {
   return (value && padding) ? value.toString().padStart(padding.length, padding) : value;
 }
-const isObjectSet = (value) => {
-    return !(value === null || value === undefined || value === NaN);
+const isObjectSet = (obj) => {
+    return !(obj === null || obj === undefined || obj === {});
 }
-const isEmptyObject = (value) => {
-    return Object.keys(value).length === 0 || value.constructor === Object;
+const isEmptyObject = (obj) => {
+    return !isObjectSet(obj) || Object.keys(obj).length === 0 || obj.constructor === {};
 }
-const isEmptyString = (value = '') => {
-    return value.trim().length === 0;
+const isNotEmptyObject = (obj) => {
+    return !isEmptyObject(obj);
 }
-const isNotEmptyString = (value = '') => {
-    return !isEmptyString(value);
+const isEmptyString = (str = '') => {
+    return isObjectSet(str) && str.trim().length === 0;
+}
+const isNotEmptyString = (str = '') => {
+    return !isEmptyString(str);
 }
 const isNotNaN = (value = NaN) => {
-    return !(value === NaN);
+    return !(value === NaN || value <= 0);
 }
 const IsSetReturn = (value, defaultValue = null) => {
     return isEmptyString(value) ? value : defaultValue;
@@ -49,6 +52,9 @@ const ifNullReturn = (value) => {
 }
 const hasValues = (values) => {
     return values && Array.isArray(values) && values.length != 0;
+}
+const onlyUniqueValues = (value, index, self) => {
+    return self.indexOf(value) === index;
 }
 const isValidEmail = (email) => {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -112,17 +118,18 @@ const getFirst = (valueToSplit, delimiter) => {
     return getElementAt(valueToSplit, delimiter, 0);
 }
 const getElementAt = (valueToSplit, delimiter, index = 0) => {
-  var items = (valueToSplit && delimiter) ? valueToSplit.split(delimiter) : [];
+  var items = (valueToSplit && delimiter) ? valueToSplit.split(delimiter) : valueToSplit;
   return items[index];
 }
 const getLast = (valueToSplit, delimiter) => {
   var items = (valueToSplit && delimiter) ? valueToSplit.split(delimiter) : [];
   return items[items.length - 1];
 }
+const NullIfEmptyObject = (value) => { return isEmptyObject(value) ? null : value; }
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| module exports
+| module.exports
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 module.exports = {
@@ -131,12 +138,14 @@ module.exports = {
     padRight: padRight,
     isObjectSet: isObjectSet,
     isEmptyObject: isEmptyObject,
+    isNotEmptyObject: isNotEmptyObject,
     isEmptyString: isEmptyString,
     isNotEmptyString: isNotEmptyString,
     isNotNaN: isNotNaN,
     IsSetReturn, IsSetReturn,
     ifNullReturn: ifNullReturn,
     hasValues: hasValues,
+    onlyUniqueValues: onlyUniqueValues,
     isValidEmail: isValidEmail,
     getBytes: getBytes,
     bytesToString: bytesToString,
@@ -151,5 +160,6 @@ module.exports = {
     getFirst: getFirst,
     getElementAt:getElementAt,
     getLast, getLast,
-    toLocaleLowerCaseTrim: toLocaleLowerCaseTrim
+    toLocaleLowerCaseTrim: toLocaleLowerCaseTrim,
+    NullIfEmptyObject: NullIfEmptyObject
 }

@@ -1,10 +1,9 @@
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { PageComponent } from 'app/modules/_shared/modules-shared.module';
+import { PageComponent, ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
 import { SuppliersConfiguration } from './suppliers-configuration';
 import { SuppliersService } from './services/suppliers.service';
-import { AuthenticationService } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, LookupValueService } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,28 +11,31 @@ import { Router } from '@angular/router';
   templateUrl: './suppliers.component.html',
   styleUrls: ['./suppliers.component.scss'],
   providers: [
+    AlertifyService,
     AuthenticationService,
+    LookupValueService,
+    ReferenceValueService,
     SuppliersService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
-export class SuppliersComponent extends PageComponent {
+export class SuppliersComponent extends PageComponent implements OnInit {
 
   constructor(
-    public location: Location,
     public router: Router,
     public matDialog: MatDialog,
+    public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService,
+    public referenceValueService: ReferenceValueService,
     public suppliersService: SuppliersService
     ) {
-      super(location, router, matDialog, authenticationService);
+      super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
       this.pageIcon = SuppliersConfiguration.pageIcon;
       this.pageTitle = SuppliersConfiguration.pageTitle;
       this.pageName = SuppliersConfiguration.pageName;
       this.dataService = suppliersService;
       this.entityName = SuppliersConfiguration.identifier;
-      this.sourceDataColumnNames = SuppliersConfiguration.fieldNames;
-      // this.sourceData = suppliersService.getAll<Supplier>();
+      this.sourceDataColumns = SuppliersConfiguration.dataColumns;
   }
-
 }

@@ -1,69 +1,405 @@
-<div class="main-content idas-main-content">
+<div *ngIf="isLoggedIn()" class="main-content idas-main-content">
   <div class="container-fluid">
-      <div class="element">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger idas-page-heading">
-                    <i class="material-icons idas-page-heading-icon">{{pageIcon}}</i><h4 class="card-title">{{pageTitle}}</h4>
-                      <!-- <p class="card-category">{{pageTitle}}</p> -->
+    <div class="element">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger idas-main-card-header">
+            <i class="material-icons">{{ pageIcon }}</i>
+            <h4 class="card-title">{{ pageTitle }}</h4>
+            <p class="category"></p>
+            <span>
+              <button
+                mat-icon-button
+                class="
+                  btn btn-white btn-round btn-just-icon btn-idas-float-right
+                "
+                type="button"
+                (click)="onDataRefresh()"
+                title="{{ getButtonTitleDataRefresh() }}"
+              >
+                <i class="material-icons" style="margin: 0 0 0 5px;">autorenew</i>
+              </button>
+              <button
+                mat-icon-button
+                class="
+                  btn btn-white btn-round btn-just-icon btn-idas-float-right
+                "
+                type="button"
+                data-toggle="modal"
+                data-target="#create-edit-modal-dialog"
+                (click)="onClickCreate()"
+                title="{{ getButtonTitleAdd() }}"
+              >
+                <i class="material-icons" style="margin: 0 0 0 5px;">add</i>
+              </button>
+            </span>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container
+                  [matColumnDef]="column.name"
+                  *ngFor="let column of dataSourceDisplayColumns"
+                >
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{ column.displayName }}
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let index; let element"
+                    class="mat-cell"
+                  >
+                    <span [ngSwitch]="column.controlType">
+                      <span *ngSwitchCase="'break'"><br /></span>
+                      <span *ngSwitchCase="'checkbox'">
+                        <mat-checkbox
+                          [value]="element[column.name]"
+                          [(ngModel)]="element[column.name]"
+                        ></mat-checkbox>
+                      </span>
+                      <span *ngSwitchCase="'datetimepicker'">
+                        {{ element[column.name] }}
+                      </span>
+                      <span *ngSwitchCase="'number'">
+                        {{ element[column.name] }}
+                      </span>
+                      <span *ngSwitchCase="'password'"> </span>
+                      <span *ngSwitchCase="'select'">
+                        <span [ngSwitch]="column.selectOptionControlType">
+                          <span *ngSwitchCase="'lookupIcon'">
+                            <i
+                              class="material-icons {{
+                                getColumnCssClassCategoryById(
+                                  column,
+                                  element[column.name]
+                                )
+                              }} {{
+                                getColumnCssClassById(
+                                  column,
+                                  element[column.name]
+                                )
+                              }}"
+                              [title]="
+                                getColumnDisplayTitleById(
+                                  column,
+                                  element[column.name]
+                                )
+                              "
+                              >{{
+                                getColumnDisplayIconById(
+                                  column,
+                                  element[column.name]
+                                )
+                              }}</i
+                            >
+                          </span>
+                          <span *ngSwitchCase="'lookupImage'">
+                            <img
+                              class="img-in-grid"
+                              src="{{
+                                getColumnDisplayImageById(
+                                  column,
+                                  element[column.name]
+                                )
+                              }}"
+                              [title]="
+                                getColumnDisplayTitleById(
+                                  column,
+                                  element[column.name]
+                                )
+                              "
+                            />
+                          </span>
+                          <span *ngSwitchCase="'lookupValue'">
+                            {{
+                              getColumnDisplayValueById(
+                                column,
+                                element[column.name]
+                              )
+                            }}
+                          </span>
+                          <span *ngSwitchCase="'referenceValue'">
+                            {{
+                              getColumnDisplayValueById(
+                                column,
+                                element[column.name]
+                              )
+                            }}
+                          </span>
+                        </span>
+                      </span>
+                      <span *ngSwitchCase="'image'">
+                        <img
+                          class="img-in-grid"
+                          src="{{
+                            getColumnDisplayImageById(
+                              column,
+                              element[column.name]
+                            )
+                          }}"
+                          [title]="
+                            getColumnDisplayTitleById(
+                              column,
+                              element[column.name]
+                            )
+                          "
+                        />
+                      </span>
+                      <span *ngSwitchCase="'textarea'">
+                        {{ element[column.name] }}
+                      </span>
+                      <span *ngSwitchCase="'textbox'">
+                        {{ element[column.name] }}
+                      </span>
+                    </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="buttons" sticky>
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    class="data-view-action-buttons-header"
+                    >&nbsp;</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let i = index; let element; let column"
+                    class="data-view-action-buttons-cell"
+                  >
                     <span>
-                      <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-float-right" type="button" (click)="onDataRefresh()" title="{{ getTitleDataRefreshButton() }}">
-                        <i class="material-icons">autorenew</i>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickManageEmployeeButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageEmployeeButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageEmployeeButton()"
+                      >
+                        <i class="material-icons idas-button-icon">{{
+                          getManageEmployeeIcon(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}</i>
                       </button>
-                      <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-float-right" type="button" data-toggle="modal" data-target="#create-edit-modal-dialog" (click)="onClickCreate()" title="{{ getTitleAddButton() }}">
-                        <i class="material-icons">add</i>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickManageParentTaskButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageParentTaskButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageParentTaskButton(element)"
+                      >
+                        <i class="material-icons idas-button-icon">task_alt</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickManageProjectTaskButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageProjectTaskButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageProjectTaskButton(element)"
+                      >
+                        <i class="material-icons idas-button-icon">task_alt</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickManageProjectAssignmentButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageProjectAssignmentButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageProjectAssignmentButton(element)"
+                      >
+                        <i class="material-icons idas-button-icon"
+                          >assignment</i
+                        >
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickManageProjectReInstateButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageProjectReInstateButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageProjectReInstateButton(element)"
+                      >
+                        <i class="material-icons idas-button-icon">repeat</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickManageUserAccountButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageUserAccountButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageUserAccountButton()"
+                      >
+                        <i class="material-icons idas-button-icon">{{
+                          getManageUserAccountIcon(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-resize
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickDelete(element, getElementIndex(element))
+                        "
+                        title="{{
+                          getTitleDeleteButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideDeleteButton()"
+                      >
+                        <i class="material-icons idas-button-icon"
+                          >delete_sweep</i
+                        >
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#create-edit-modal-dialog"
+                        (click)="onClickEdit(element, getElementIndex(element))"
+                        title="{{
+                          getTitleEditButton(element, getElementIndex(element))
+                        }}"
+                        [hidden]="hideEditButton()"
+                      >
+                        <i class="material-icons idas-button-icon">edit</i>
                       </button>
                     </span>
-                  </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                        <mat-table #table class="data-view-table-simple" [dataSource]="dataSource" matSort>
-                          <ng-container [matColumnDef]="column[0]" *ngFor="let column of dataSourceDisplayColumnNames">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header> {{column[1]}} </mat-header-cell>
-                            <mat-cell *matCellDef="let index; let element" class="mat-cell">
-                              <span [hidden]="isLookupValueField(column[0]) || isUseLookupValueIcon(column[0]) || isUseLookupValueImage(column[0]) || isUseCheckbox(column[0])">
-                                  {{element[column[0]]}}
-                              </span>
-                              <span [hidden]="!isLookupValueField(column[0])" >
-                                <i class="material-icons btn-idas" [hidden]="!isUseLookupValueIcon(column[0])" [title]="getLookupValueByIdAsTitle(element[column[0]]).value">{{ getLookupValueIconById(element[column[0]]) }}</i>
-                                <img class="btn-idas btn-idas-resize-30-px" [hidden]="!isUseLookupValueImage(column[0])" src="{{ getLookupValueImageById(element[column[0]]) }}" [title]="getLookupValueByIdAsTitle(element[column[0]])" />
-                                <span [hidden]="isUseLookupValueIcon(column[0]) || isUseLookupValueImage(column[0])">
-                                  {{ getLookupValueById(element[column[0]]).value }}
-                                </span>
-                              </span>
-                              <span [hidden]="!isUseCheckbox(column[0])">
-                                <mat-checkbox class="btn-idas" [(ngModel)]="element[column[0]]" (change)="onCheckboxClicked(element)"></mat-checkbox>
-                              </span>
-                            </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="buttons">
-                              <mat-header-cell *matHeaderCellDef class="data-view-action-buttons-header">&nbsp;</mat-header-cell>
-                              <mat-cell *matCellDef="let i = index; let element; let column" class="data-view-action-buttons-cell">
-                                <span>
-                                  <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-float-right" type="button" (click)="onClickAssignments(element, getElementIndex(element))" title="{{ getTitleAssignmentsButton(element, getElementIndex(element)) }}" [hidden]="hideAssignmentsButton()">
-                                    <i class="material-icons">assignment</i>
-                                  </button>
-                                  <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-float-right" type="button" (click)="onClickUserUnLock(element, getElementIndex(element))" title="{{ getTitleUnLockUserButton(element, getElementIndex(element)) }}" [hidden]="hideUnLockUserButton()">
-                                    <i class="material-icons">{{ getUserUnLockIcon(element, getElementIndex(element)) }}</i>
-                                  </button>
-                                  <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-resize btn-idas-float-right" type="button" (click)="onClickDelete(element, getElementIndex(element))" title="{{ getTitleDeleteButton(element, getElementIndex(element)) }}" [hidden]="hideDeleteButton()">
-                                    <i class="material-icons">delete_sweep</i>
-                                  </button>
-                                  <button mat-icon-button class="btn btn-white btn-round btn-just-icon btn-idas-float-right" type="button" data-toggle="modal" data-target="#create-edit-modal-dialog" (click)="onClickEdit(element, getElementIndex(element))" title="{{ getTitleEditButton(element, getElementIndex(element)) }}" [hidden]="hideEditButton()">
-                                    <i class="material-icons">edit</i>
-                                  </button>
-                                </span>
-                              </mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="dataSourceColumnNames"></mat-header-row>
-                            <mat-row *matRowDef="let element; let elementIndex = index; columns: dataSourceColumnNames;"></mat-row>
-                        </mat-table>
-                        <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
-                      </div>
-                  </div>
-              </div>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row
+                  *matHeaderRowDef="dataSourceColumnNames"
+                ></mat-header-row>
+                <mat-row
+                  *matRowDef="
+                    let element;
+                    let elementIndex = index;
+                    columns: dataSourceColumnNames
+                  "
+                ></mat-row>
+              </table>
+              <mat-paginator
+                [pageSizeOptions]="[5, 10, 15]"
+                showFirstLastButtons
+              ></mat-paginator>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>

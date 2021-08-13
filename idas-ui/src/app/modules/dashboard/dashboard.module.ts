@@ -4,9 +4,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DashboardConfiguration } from './dashboard-configuration';
 import { DashboardComponent } from './dashboard.component';
+import { DashboardService } from './services/dashboard.service';
 
 export { DashboardConfiguration } from './dashboard-configuration';
 export { DashboardComponent } from './dashboard.component';
+
+export { DashboardService } from './services/dashboard.service';
 
 @NgModule({
   imports: [
@@ -19,6 +22,9 @@ export { DashboardComponent } from './dashboard.component';
   exports: [
     DashboardConfiguration,
     DashboardComponent
+  ],
+  providers: [
+    DashboardService
   ]
 })
 export class DashboardModule { }

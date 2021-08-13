@@ -1,9 +1,18 @@
-import { Location } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MAT_DIALOG_DEFAULT_OPTIONS
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthenticationService, LookupService, ReferenceEntityService } from 'app/shared/shared.module';
+import { ReferenceValueService } from 'app/modules/_shared/services/reference-value-service/reference-value.service';
+import {
+  AlertifyService,
+  AuthenticationService,
+  LookupValueService
+} from 'app/shared/shared.module';
 import { BaseDialogComponent } from '../base-dialog/base-dialog.component';
 
 @Component({
@@ -11,26 +20,43 @@ import { BaseDialogComponent } from '../base-dialog/base-dialog.component';
   templateUrl: './dialog-create-edit-data.component.html',
   styleUrls: ['./dialog-create-edit-data.component.scss'],
   providers: [
+    AlertifyService,
     AuthenticationService,
-    LookupService,
-    ReferenceEntityService,
+    LookupValueService,
+    ReferenceValueService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
-export class DialogCreateEditDataComponent extends BaseDialogComponent {
+export class DialogCreateEditDataComponent extends BaseDialogComponent implements OnInit {
 
   constructor(
-    public location: Location,
     public router: Router,
     public matDialog: MatDialog,
+    public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
-    public lookupService: LookupService,
-    public referenceEntityService: ReferenceEntityService,
+    public lookupValueService: LookupValueService,
+    public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogCreateEditDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     public frmBuilder: FormBuilder
     ) {
-    super(location, router, matDialog, authenticationService, lookupService, referenceEntityService, dialogRef, data, frmBuilder);
+    super(
+      router
+      , matDialog
+      , alertifyService
+      , authenticationService
+      , lookupValueService
+      , referenceValueService
+      , dialogRef
+      , data
+      , frmBuilder);
+      this.pageTitle = `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`;
   }
-  
+
+  ngOnInit() {
+    this.initFormGroupAndFields(null);
+    this.frmGroup = this.frmBuilder.group({
+      frmFields: this.frmGroupFields,
+    });
+  }
 }

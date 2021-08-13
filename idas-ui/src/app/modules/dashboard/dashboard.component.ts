@@ -1,9 +1,8 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { AuthenticationService } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, LookupValueService } from 'app/shared/shared.module';
 import * as Chartist from 'chartist';
-import { PageComponent } from 'app/modules/_shared/modules-shared.module';
+import { PageComponent, ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
 import { DashboardService } from './services/dashboard.service';
 import { Router } from '@angular/router';
 
@@ -12,7 +11,10 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [
+    AlertifyService,
     AuthenticationService,
+    LookupValueService,
+    ReferenceValueService,
     DashboardService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
@@ -20,14 +22,17 @@ import { Router } from '@angular/router';
 export class DashboardComponent extends PageComponent implements OnInit {
 
   constructor(
-    public location: Location,
     public router: Router,
     public matDialog: MatDialog,
+    public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
+    public lookupValueService: LookupValueService,
+    public referenceValueService: ReferenceValueService,
     public dashboardService: DashboardService
     ) {
-    super(location, router, matDialog, authenticationService);
+    super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
   }
+
   startAnimationForLineChart(chart){
       // tslint:disable-next-line:one-variable-per-declaration
       let seq: any, delays: any, durations: any;

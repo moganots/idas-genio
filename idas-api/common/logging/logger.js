@@ -8,19 +8,21 @@
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
-const { yyyymmddThmsmsZDashSeparator } = require(`../date-util`);
-const { hasValues } = require(`./../functions`);
-const { getHttpRequestUriPath, getHttpRequestMethodName } = require(`./../http-helper`);
+const { yyyymmddThmsmsZ0200WithDashSeparator, yyyymmdd } = require(`./../date-util`);
+const { isNotEmptyObject } = require(`./../functions`);
+const { getHttpRequestPacket } = require(`./../http-helper`);
+const { companyName, applicationName} = require(`./../../config/config`);
+const fs = require('fs');
 let defaultCaller = __filename;
 let message = ``;
 let consoleMessage = ``;
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Functions - Logging
+| Function(s) - Logging
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 const setCaller = (caller) => { defaultCaller = caller || defaultCaller; }
@@ -39,10 +41,13 @@ const error = (caller, methodName, message, detailMessage = null) => {
 const fatal = (caller, methodName, message, detailMessage = null) => {
     log(caller, `FATAL`, methodName, message, detailMessage);
 }
+const crtical = (caller, methodName, message, detailMessage = null) => {
+    log(caller, `CRITICAL`, methodName, message, detailMessage);
+}
 const log = (caller, logType, methodName, message, detailMessage = null) => {
   caller = formatCaller(caller);
   if(((logType || ``).trim().length === 0) || ((methodName || ``).trim().length === 0) || ((message === null || message === undefined || message === ``))) return;
-  let time = yyyymmddThmsmsZDashSeparator();
+  let time = yyyymmddThmsmsZ0200WithDashSeparator();
   if(Array.isArray(message) && detailMessage){
     message.push(detailMessage);
   }else if(message && detailMessage){
@@ -50,12 +55,13 @@ const log = (caller, logType, methodName, message, detailMessage = null) => {
   }
   message = formatMessage(message);
   consoleMessage = `[${time}] [${logType.toLocaleUpperCase()}] /${caller}${(methodName) ? `/${methodName}()` : ``} : ${message}`;
-  consoleLog(logType, consoleMessage);
+  logToConsole(logType, consoleMessage);
+  logToFile(consoleMessage);
 }
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Functions - Logging (Promise)
+| Function(s) - Logging (Promise)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 const logToPromise = (caller, logType, methodName, message, data = null) => {
@@ -65,37 +71,42 @@ const logToPromise = (caller, logType, methodName, message, data = null) => {
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Functions - Logging (Http)
+| Function(s) - Logging (Http)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
-const onHttpRequestCompleted = (caller, request, response, error = null, message = null, data = null) => {
+const onHttpRequestStarted = (caller, request) => {
+  const packet = getHttpRequestPacket(request);
+  const message = [packet.absoluteUrlWithHttpMethod, `Http request initiated and processing`, JSON.stringify(packet)].join('\r\n');
+  info(caller, packet.action, message);
+}
+const onHttpRequestCompleted = (caller, request, response, error = null, data = null, message = null) => {
   if(error){
-      return httpOnError(caller, request, response, error);
+      return onHttpError(caller, request, response, {error: error, data: data, message: error.message || message});
   }else{
-      return httpOnSuccess(caller, request, response, {data: data, message: message});
+      return onHttpSuccess(caller, request, response, {data: data, message: message});
   }
 }
-const httpOnSuccess = (caller, request, response, result) => {
+const onHttpSuccess = (caller, request, response, result) => {
   return httpLog(caller, `INFO`, request, response, result);
 }
-const httpOnError = (caller, request, response, result) => {
+const onHttpError = (caller, request, response, result) => {
   return httpLog(caller, `ERROR`, request, response, result);
 }
 const httpLog = (caller, logType, request, response, result) => {
   caller = (caller || __filename);
   logType = (logType || `` || `INFO`);
   logType = (result.hasError) ? `ERROR` : logType;
-  let httpPath = getHttpRequestUriPath(request);
-  let methodName = getHttpRequestMethodName(request);
+  const packet = getHttpRequestPacket(request);
+  let httpStatusCode = getHttpStatusCode(logType, packet.action);
   let data = (result ||{data: null}).data;
   let checkData = hasData(data);
   data = (checkData) ? data : null;
-  let message = (result || {message: null}).message;
-  message = [httpPath, (message && message.message) ? message.message : message].join(`\r\n`).trim();
-  log(caller, logType, methodName, message);
+  let shortMessage = (result || {message: null}).message;
+  let errorMessage = (result.error) ?  JSON.stringify(result.error) : null;
+  let detailMessage = [packet.absoluteUrlWithHttpMethod, JSON.stringify(shortMessage), errorMessage].filter((message) => !(message === null)).join(`\r\n`).trim();
+  log(caller, logType, packet.action, detailMessage);
   if(response){
-    let statusCode = getStatusCode(logType, methodName);
-    return response.status(statusCode).json({data: data, hasData: checkData, dataCount: dataCount(data), hasError: hasError(logType), message: message});
+    return response.status(httpStatusCode).json({data: data, hasData: checkData, dataCount: dataCount(data), hasError: hasError(logType), message: shortMessage});
   }
 }
 
@@ -114,13 +125,36 @@ const formatCaller = (caller) => {
 const formatMessage = (message) => {
   return ((Array.isArray(message)) ? message.filter((msg) => !(msg === null || msg === undefined || msg === ``)).map((msg) => `${(msg.type) ? [msg.type, msg.message].join(`:`) : msg.message || msg}`).join(`\r\n`) : message.message || message);
 }
-const consoleLog = (logType, consoleMessage) => {
+const logToConsole = (logType, message) => {
   switch((logType || `info`).trim().toLocaleLowerCase()){
-    case `debug`: console.debug(consoleMessage); break;
-    case `warn`: console.warn(consoleMessage); break;
+    case `debug`: console.debug(message); break;
+    case `warn`: console.warn(message); break;
     case `error`:
-    case `fatal`: console.error(consoleMessage); break;
-    default : console.info(consoleMessage); break;
+    case `fatal`: console.error(message); break;
+    default : console.info(message); break;
+  }
+}
+const logToFile = (message) => {
+  const logDirectory = `/data/tmp/${companyName}/${applicationName}/logs/${yyyymmdd()}`;
+  const logFile = `${logDirectory}/api.${yyyymmdd()}.log`;
+  logDirectory.split('/').reduce(
+    (directories, directory) => {
+      directories += `${directory}/`;  
+      if (!fs.existsSync(directories)) {
+        fs.mkdirSync(directories);
+      }  
+      return directories;
+    },
+    '',
+  );
+  fs.appendFile(logFile, message + '\n', function (err) {
+      if (err) { error(__filename, `logToFile:fs.appendFile`, (err.message || err), err) };
+    });
+}
+const LdapCustomError = (message, ldapError) => {
+  return {
+    message: message,
+    error: ldapError
   }
 }
 
@@ -138,9 +172,9 @@ const toPromise = (logType, message, data = null) => {
 | Internal Functions - Logging (Http)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
-const getStatusCode = (logType, methodName = null) => {
+const getHttpStatusCode = (logType, methodName = null) => {
   let isError = hasError(logType);
-  if(([`auth`, `authenticate`].includes((methodName || ``).toLocaleLowerCase().trim()) && isError)) return 401;
+  if(([`auth`, `authenticate`, `authentication`, `login`, `logout`].includes((methodName || ``).toLocaleLowerCase().trim()) && isError)) return 401;
   return (isError) ? 400 : 200;
 }
 
@@ -149,13 +183,13 @@ const getStatusCode = (logType, methodName = null) => {
 | Internal Functions - Logging (General)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
-const hasData = (data) => { return ((data != null) || (data != undefined) || hasValues(data)); }
+const hasData = (data) => { return isNotEmptyObject(data); }
 const dataCount = (data) => { return (hasData(data) && Array.isArray(data)) ? data.length : (hasData(data)) ? 1 : 0; }
 const hasError = (logType) => { return !([`debug`, `info`].includes((logType || ``).toLocaleLowerCase().trim())); }
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| module exports
+| module.exports
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 module.exports = {
@@ -165,11 +199,14 @@ module.exports = {
   warn: warn,
   error: error,
   fatal: fatal,
+  crtical: crtical,
+  onHttpRequestStarted: onHttpRequestStarted,
+  onHttpRequestCompleted: onHttpRequestCompleted,
+  onHttpSuccess: onHttpSuccess,
+  onHttpError: onHttpError,
   log: log,
   logToPromise: logToPromise,
-  onHttpRequestCompleted: onHttpRequestCompleted,
-  httpOnSuccess: httpOnSuccess,
-  httpOnError: httpOnError,
+  LdapCustomError: LdapCustomError,
   message: message,
   consoleMessage: consoleMessage,
 }

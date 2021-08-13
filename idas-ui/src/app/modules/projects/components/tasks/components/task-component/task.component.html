@@ -1,0 +1,604 @@
+<div *ngIf="isLoggedIn()" class="main-content idas-main-content">
+  <div class="container-fluid">
+    <div class="element">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header idas-manage-project-task-card-header">
+            <i
+              class="material-icons task {{
+                task?.TaskType?.CssClassCategory
+              }} {{ task?.TaskType?.CssClass }}"
+              >{{ task?.TaskType?.Icon }}</i
+            >
+            <p class="project code">
+              {{ task?.Project?.Code }} / {{ task?._id }}
+            </p>
+            <p class="task name">{{ task?.Name }}</p>
+            <p class="task type">({{ task?.TaskType?.Value }})</p>
+          </div>
+        </div>
+        <div class="mat-elevation-z4 idas-manage-project-task-toolbar">
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-task-edit
+            "
+            type="button"
+            title="Edit"
+          >
+            <i class="material-icons idas-button-icon">edit</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-task-comment
+            "
+            type="button"
+            title="Comment"
+          >
+            <i class="material-icons idas-button-icon">comment</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-task-log-work
+            "
+            type="button"
+            title="Log Work"
+          >
+            <i class="material-icons idas-button-icon">pending_actions</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-task-assign
+            "
+            type="button"
+            title="Assign"
+          >
+            <i class="material-icons idas-button-icon">assignment_ind</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-task-attach-file
+            "
+            type="button"
+            title="Attach File(s)"
+          >
+            <i class="material-icons idas-button-icon">upload_file</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-project-task-create-sub
+            "
+            type="button"
+            title="Create Sub-{{ capitalizeFirstLetter(entityName) }}"
+          >
+            <i class="material-icons idas-button-icon">dns</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-project-task-copy
+            "
+            type="button"
+            title="Clone or Copy {{ capitalizeFirstLetter(entityName) }}"
+          >
+            <i class="material-icons idas-button-icon">launch</i>
+          </button>
+          <button
+            mat-icon-button
+            class="
+              btn
+              btn-white
+              btn-round
+              btn-just-icon
+              btn-idas-dialog-float-left
+              btn-idas-manage-project-task-review
+            "
+            type="button"
+            title="Review"
+          >
+            <i class="material-icons idas-button-icon">rate_review</i>
+          </button>
+        </div>
+        <br />
+        <div class="idas-manage-project-task-container">
+          <div class="idas-manage-project-task-content-child row">
+            <div class="idas-manage-project-task-content-child detail">
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Details </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="row gutters">
+                    <span class="resize">
+                      <p class="label-title priority">Priority</p>
+                      <button
+                        mat-icon-button
+                        class="
+                                  btn
+                                  btn-white
+                                  btn-round
+                                  btn-just-icon btn-idas {{
+                          task?.Priority?.CssClassCategory
+                        }} {{ task?.Priority?.CssClass }}
+                                "
+                        type="button"
+                        [matMenuTriggerFor]="priorityMenu"
+                      >
+                        <i
+                          class="material-icons btn-idas btn-idas-detail {{
+                            task?.Priority?.CssClassCategory
+                          }} {{ task?.Priority?.CssClass }}"
+                          >{{ task?.Priority?.Icon }}</i
+                        >
+                      </button>
+                      <p
+                        class="label-detail {{
+                          task?.Priority?.CssClassCategory
+                        }} {{ task?.Priority?.CssClass }} priority"
+                      >
+                        {{ task?.Priority?.Value }}
+                      </p>
+                      <mat-menu
+                        #priorityMenu="matMenu"
+                        xPosition="after"
+                        yPosition="below"
+                        class=""
+                      >
+                        <button
+                          *ngFor="let priority of priorities"
+                          class=""
+                          mat-menu-item
+                          (click)="onClickChangePriority(priority)"
+                        >
+                          <i
+                            class="material-icons {{
+                              priority?.CssClassCategory
+                            }} {{ priority?.CssClass }}"
+                            >{{ priority?.Icon }}</i
+                          >{{ priority?.Value }}
+                        </button>
+                      </mat-menu>
+                    </span>
+                    <span class="resize">
+                      <p class="label-title status">Status</p>
+                      <button
+                        mat-icon-button
+                        class="
+                                  btn
+                                  btn-white
+                                  btn-round
+                                  btn-just-icon btn-idas {{
+                          task?.Status?.CssClassCategory
+                        }} {{ task?.Status?.CssClass }}
+                                "
+                        type="button"
+                        [matMenuTriggerFor]="statusMenu"
+                      >
+                        <i
+                          class="material-icons btn-idas btn-idas-detail {{
+                            task?.Status?.CssClassCategory
+                          }} {{ task?.Status?.CssClass }}"
+                          >{{ task?.Status?.Icon }}</i
+                        >
+                      </button>
+                      <p
+                        class="label-detail {{
+                          task?.Status?.CssClassCategory
+                        }} {{ task?.Status?.CssClass }} status"
+                      >
+                        {{ task?.Status?.Value }}
+                      </p>
+                      <mat-menu
+                        #statusMenu="matMenu"
+                        xPosition="after"
+                        yPosition="below"
+                        class=""
+                      >
+                        <button
+                          *ngFor="let status of statuses"
+                          class=""
+                          mat-menu-item
+                          (click)="onClickChangeStatus(status)"
+                        >
+                          <i
+                            class="material-icons {{
+                              status?.CssClassCategory
+                            }} {{ status?.CssClass }}"
+                            >{{ status?.Icon }}</i
+                          >{{ status?.Value }}
+                        </button>
+                      </mat-menu>
+                    </span>
+                  </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Description </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-form-field>
+                    <textarea
+                      matInput
+                      cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="5"
+                      [(ngModel)]="(task || {}).Description"
+                    ></textarea>
+                  </mat-form-field>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Attachments </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <app-file-upload
+                    [ProjectId]="projectId"
+                    [files]="task?.Files"
+                    appFileDragDrop
+                  ></app-file-upload>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                  [hidden]="task?.Project === undefined"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Project </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="mat-elevation-z1 idas-project-task-card-main">
+                    <i
+                      class="material-icons type {{
+                        task?.Project?.ProjectType?.CssClassCategory
+                      }} {{ task?.Project?.ProjectType?.CssClass }}"
+                      [title]="task?.Project?.ProjectType?.Value"
+                      [ngStyle]="{
+                        display:
+                          task?.Project?.ProjectType?.Icon === null ||
+                          task?.Project?.ProjectType?.Icon === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                      >{{
+                        task?.Project?.ProjectType?.Icon || "report_problem"
+                      }}</i
+                    >
+                    <i
+                      class="material-icons priority {{
+                        task?.Project?.Priority?.CssClassCategory
+                      }} {{ task?.Project?.Priority?.CssClass }}"
+                      [title]="task?.Project?.Priority?.Value"
+                      [ngStyle]="{
+                        display:
+                          task?.Project?.Priority?.Icon === null ||
+                          task?.Project?.Priority?.Icon === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                      >{{
+                        task?.Project?.Priority?.Icon || "report_problem"
+                      }}</i
+                    >
+                    <a
+                      class=""
+                      href="#/projects/project/{{ task?.Project?._id }}"
+                      >{{ task?.Project?.Code }}</a
+                    >
+                    <p class="project name">
+                      {{ task?.Project?.Name }}
+                    </p>
+                    <img
+                      class="btn-idas avatar assignee"
+                      src="{{
+                        task?.Project?.Assignee?.Avatar ||
+                          './assets/img/avatars/avatar-0.png'
+                      }}"
+                      [title]="
+                        (
+                          task?.Project?.Assignee || {
+                            DisplayName: 'Unassigned'
+                          }
+                        ).DisplayName
+                      "
+                      [ngStyle]="{
+                        display:
+                          task?.Project?.Assignee?.Avatar === null ||
+                          task?.Project?.Assignee?.Avatar === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                    />
+                    <p
+                      class="project status {{
+                        task?.Project?.Status?.CssClassCategory
+                      }} {{ task?.Project?.Status?.CssClass }}"
+                    >
+                      {{ task?.Project?.Status?.Value }}
+                    </p>
+                  </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                  [hidden]="task?.SubTasks?.length === 0"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Sub Task(s) </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div
+                    class="mat-elevation-z1 idas-project-task-card-main"
+                    *ngFor="let subTask of task?.SubTasks"
+                  >
+                    <i
+                      class="material-icons type {{
+                        subTask?.TaskType?.CssClassCategory
+                      }} {{ subTask?.TaskType?.CssClass }}"
+                      [title]="subTask?.TaskType?.Value"
+                      [ngStyle]="{
+                        display:
+                          subTask?.TaskType?.Icon === null ||
+                          subTask?.TaskType?.Icon === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                      >{{ subTask?.TaskType?.Icon || "report_problem" }}</i
+                    >
+                    <i
+                      class="material-icons priority {{
+                        subTask?.Priority?.CssClassCategory
+                      }} {{ subTask?.Priority?.CssClass }}"
+                      [title]="subTask?.Priority?.Value"
+                      [ngStyle]="{
+                        display:
+                          subTask?.Priority?.Icon === null ||
+                          subTask?.Priority?.Icon === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                      >{{ subTask?.Priority?.Icon || "report_problem" }}</i
+                    >
+                    <a class="" [routerLink]="['../', subTask?._id]"
+                      >{{ subTask?.Project?.Code }} / {{ subTask?._id }}</a
+                    >
+                    <p class="task name">
+                      {{ subTask?.Name }}
+                    </p>
+                    <img
+                      class="btn-idas avatar assignee"
+                      src="{{
+                        subTask?.Assignee?.Avatar ||
+                          './assets/img/avatars/avatar-0.png'
+                      }}"
+                      [title]="
+                        (
+                          subTask?.Assignee || {
+                            DisplayName: 'Unassigned'
+                          }
+                        ).DisplayName
+                      "
+                      [ngStyle]="{
+                        display:
+                          subTask?.Assignee?.Avatar === null ||
+                          subTask?.Assignee?.Avatar === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                    />
+                    <p
+                      class="task status {{ subTask?.Status?.CssClassCategory }} {{
+                        subTask?.Status?.CssClass
+                      }}"
+                    >
+                      {{ subTask?.Status?.Value }}
+                    </p>
+                  </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Activity </mat-panel-title>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <div class="idas-manage-project-task-content-child sideview">
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> People </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <ul>
+                    <li>
+                      <p class="label-title assignee">Assignee</p>
+                      <i
+                        [ngStyle]="{
+                          display:
+                            task?.Assignee?.UserType?.Icon === null ||
+                            task?.Assignee?.UserType?.Icon === undefined
+                              ? 'none'
+                              : 'inline'
+                        }"
+                        class="material-icons assignee {{
+                          task?.Assignee?.UserType?.CssClassCategory
+                        }} {{ task?.Assignee?.UserType?.CssClass }}"
+                        [title]="task?.Assignee?.UserType?.Value"
+                        >{{
+                          task?.Assignee?.UserType?.Icon || "report_problem"
+                        }}</i
+                      >
+                      <img
+                        [ngStyle]="{
+                          display:
+                            task?.Assignee?.Avatar === null ||
+                            task?.Assignee?.Avatar === undefined
+                              ? 'none'
+                              : 'inline'
+                        }"
+                        class="btn-idas avatar assignee"
+                        src="{{ task?.Assignee?.Avatar }}"
+                        [title]="task?.Assignee?.DisplayName"
+                      />
+                      <p class="label-detail assignee">
+                        {{ task?.Assignee?.DisplayName }}
+                      </p>
+                    </li>
+                    <li>
+                      <p class="label-title created-by">Created By</p>
+                      <i
+                        [ngStyle]="{
+                          display:
+                            task?.createdBy?.UserType?.Icon === null ||
+                            task?.createdBy?.UserType?.Icon === undefined
+                              ? 'none'
+                              : 'inline'
+                        }"
+                        class="material-icons created-by {{
+                          task?.createdBy?.UserType?.CssClassCategory
+                        }} {{ task?.createdBy?.UserType?.CssClass }}"
+                        [title]="task?.createdBy?.UserType?.Value"
+                        >{{
+                          task?.createdBy?.UserType?.Icon || "report_problem"
+                        }}</i
+                      >
+                      <img
+                        [ngStyle]="{
+                          display:
+                            task?.createdBy?.Avatar === null ||
+                            task?.createdBy?.Avatar === undefined
+                              ? 'none'
+                              : 'inline'
+                        }"
+                        class="btn-idas avatar created-by"
+                        src="{{ task?.createdBy?.Avatar }}"
+                        [title]="task?.createdBy?.DisplayName"
+                      />
+                      <p class="label-detail created-by">
+                        {{ task?.createdBy?.DisplayName }}
+                      </p>
+                    </li>
+                    <li>
+                      <p class="label-title modified-by">Modified By</p>
+                      <i
+                        [ngStyle]="{
+                          display:
+                            task?.modifiedBy?.UserType?.Icon === null ||
+                            task?.modifiedBy?.UserType?.Icon === undefined
+                              ? 'none'
+                              : 'inline'
+                        }"
+                        class="material-icons modified-by {{
+                          task?.modifiedBy?.UserType?.CssClassCategory
+                        }} {{ task?.modifiedBy?.UserType?.CssClass }}"
+                        [title]="task?.modifiedBy?.UserType?.Value"
+                        >{{
+                          task?.modifiedBy?.UserType?.Icon || "report_problem"
+                        }}</i
+                      >
+                      <img
+                        [ngStyle]="{
+                          display:
+                            task?.modifiedBy?.Avatar === null ||
+                            task?.modifiedBy?.Avatar === undefined
+                              ? 'none'
+                              : 'inline'
+                        }"
+                        class="btn-idas avatar modified-by"
+                        src="{{ task?.modifiedBy?.Avatar }}"
+                        [title]="task?.modifiedBy?.DisplayName"
+                      />
+                      <p class="label-detail modified-by">
+                        {{ task?.modifiedBy?.DisplayName }}
+                      </p>
+                    </li>
+                  </ul>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Dates </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <ul>
+                    <li>
+                      <p class="label-title date-created">Date Created</p>
+                      <p class="label-detail date-created">
+                        {{ task?.DateCreated | date: "yyyy-MM-dd" }}
+                      </p>
+                    </li>
+                    <li>
+                      <p class="label-title date-modified">Date Modified</p>
+                      <p class="label-detail date-modified">
+                        {{ task?.DateModified | date: "yyyy-MM-dd" }}
+                      </p>
+                    </li>
+                  </ul>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
-import { Project, Status } from 'app/shared/shared.module';
+import { Project } from 'app/shared/shared.module';
 import { BaseModel } from '../base/base-model';
+import { LookupValue } from '../lookup-models/lookup-value';
 export class ProjectStatus extends BaseModel {
-  projectId:Project;
-  statusId:Status;
+  ProjectId: number;
+  StatusId: number;
+  Project: Project;
+  Status: LookupValue;
 }

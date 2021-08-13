@@ -10,7 +10,7 @@ console.clear();
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |------------------------------------------------------------------------------------------------------------------
  */
 const express = require(`express`);
@@ -23,8 +23,7 @@ const responseTime = require(`response-time`);
 const { apiProtocol, apiHost, apiPort } = require(`./config/config`);
 const { companyName, applicationName } = require(`./config/config`);
 const apiName = `${companyName} - ${applicationName} API`;
-const { info } = require(`./common/logging/logger`);
-const { error } = require(`./common/logging/logger`);
+const { error, info } = require(`./common/logging/logger`);
 
 info(__filename, `server.init`, `Starting up the ${apiName}`);
 
@@ -67,7 +66,7 @@ info(__filename, `http.createServer`, `Server initialised successfully`);
 | Routes
 |------------------------------------------------------------------------------------------------------------------
  */
-const router = require(`./routes`)(app);
+const router = require(`./routes/routes`)(app);
 app.use('/api', router);
 info(__filename, `app.use('/api', router)`, `${apiName} Router initialised successfully`);
 

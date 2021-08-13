@@ -1,0 +1,140 @@
+@import "./../../../../../assets/scss/idas/colors.scss";
+@import "./../../../../../assets/scss/idas/fonts.scss";
+
+.idas-project-task-card-main-toolbar {
+  display: inline-block;
+  padding: 5px;
+  width: 100%;
+
+  p {
+    display: inline-block;
+    font-family: $OpenSans_Bold;
+    font-size: 0.95em;
+    padding: 15px 5px 0 5px;
+    text-align: justify;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+}
+.idas-project-task-panel-header {
+  margin: 0 0 0 0;
+  padding: 15px 0 0 5px;
+  i {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    vertical-align: middle;
+    &.project {
+      &.type {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+      }
+    }
+  }
+  p {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    &.project {
+      &.code,
+      &.id {
+        font-family: $OpenSans_Bold;
+        margin: 0.3vh 0 0 0;
+        padding: 0 0 0 0;
+      }
+      &.name,
+      &.task-count {
+        font-family: $OpenSans_Regular;
+        margin: 0.6vh 0 0 0.5vw;
+        padding: 0 0 0 0;
+      }
+      &.status {
+        margin: 0 0 0.8vh 0.5vw;
+        padding: 5px;
+        text-align: center;
+        width: 12%;
+      }
+    }
+  }
+}
+.idas-project-task-card-main {
+  float: right;
+  font-size: 0.95em;
+  margin: 0 0 0 0;
+  padding: 5px 5px 5px 5px;
+  width: 100%;
+  i {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    &.task {
+      &.type,
+      &.priority {
+        margin: 0 0 0 0;
+        padding: 10px 0 0 0;
+      }
+    }
+  }
+  a {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 10px 0 0 3px;
+    vertical-align: middle;
+  }
+  p {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    vertical-align: middle;
+    &.task {
+      display: inline;
+      &.name {
+        margin: 0 0 0 0;
+        padding: 11px 0 0 0;
+        vertical-align: middle;
+      }
+      &.status {
+        border: none;
+        color: $white;
+        float: right;
+        margin: 0 0.2vw 0 0;
+        padding: 5px;
+        position: relative;
+        text-align: center;
+        width: 100px;
+      }
+    }
+  }
+  img {
+    border-radius: 12px;
+    height: auto;
+    float: right;
+    margin: 0.2vh 0 0 0;
+    padding: 0 0 0 0;
+    position: relative;
+    vertical-align: middle;
+    width: 2.5%;
+  }
+}
+.idas-tasks-footer-action-buttons {
+  padding: 15px;
+}
+a,
+a:link,
+a:active,
+a:visited {
+  color: $idas-color-main-links-link-active-visited;
+  cursor: pointer;
+  display: inline;
+  font-family: $OpenSans_Bold;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: justify;
+  text-decoration: none;
+  vertical-align: middle;
+}
+a:hover {
+  color: $idas-color-main-links-hover;
+}

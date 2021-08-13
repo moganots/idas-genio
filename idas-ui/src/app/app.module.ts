@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { ComponentsModule } from './components/components.module';
 import { ClientsModule, DashboardModule, EmployeesModule, ModulesModule, SuppliersModule, UsersModule } from './modules/modules.module';
-import { ModulesSharedModule } from './modules/_shared/modules-shared.module';
+import { SharedModulesModule } from './modules/_shared/shared-modules.module';
 import { SharedModule } from './shared/shared.module';
 import { AppMainComponent, AppMainLoginComponent } from './layouts/app-main/app-main.module';
 
@@ -23,7 +23,7 @@ import { AppMainComponent, AppMainLoginComponent } from './layouts/app-main/app-
     MatInputModule,
     SharedModule,
     ComponentsModule,
-    ModulesSharedModule,
+    SharedModulesModule,
     ClientsModule,
     DashboardModule,
     EmployeesModule,

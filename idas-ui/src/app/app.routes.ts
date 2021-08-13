@@ -7,10 +7,6 @@ import { AppMainComponent } from './layouts/app-main/app-main.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }, {
-    path: '',
     component: AppMainComponent,
     children: [{
       path: '',

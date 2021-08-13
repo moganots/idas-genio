@@ -1,6 +1,9 @@
-import { Task, Status } from 'app/shared/shared.module';
+import { Task } from 'app/shared/shared.module';
 import { BaseModel } from '../base/base-model';
+import { LookupValue } from '../lookup-models/lookup-value';
 export class TaskStatus extends BaseModel {
-  taskId:Task;
-  statusId:Status;
+  TaskId: number;
+  StatusId: number;
+  Task: Task;
+  Status: LookupValue;
 }

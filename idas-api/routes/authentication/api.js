@@ -8,7 +8,7 @@
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| Dependencies
+| Dependency(ies)
 |------------------------------------------------------------------------------------------------------------------
  */
 const _hearbeat = require(`./../heartbeat`);
@@ -16,39 +16,32 @@ const _controller = require(`../../controllers/authentication/mssql/controller`)
 
 /*
 |------------------------------------------------------------------------------------------------------------------
-| module exports
+| module.exports
 |------------------------------------------------------------------------------------------------------------------
  */
 module.exports = function(router, config) {
+  const apiAnchorName = `authentication`;
   const heartbeat = _hearbeat(config);
   const controller = _controller(config);
 
     // ping
-    router.route('/authentication/ping')
+    router.route(`/${apiAnchorName}/ping`)
       .get(heartbeat.ping);
 
-    // register
-    router.route('/authentication/register')
-      .put(controller.register);
-
     // login
-    router.route('/authentication/login')
+    router.route(`/${apiAnchorName}/login`)
       .put(controller.login);
 
-    // loginSso
-    router.route('/authentication/loginSso')
-      .put(controller.loginSso);
-
     // logout
-    router.route('/authentication/logout')
+    router.route(`/${apiAnchorName}/logout`)
       .put(controller.logout);
 
     // validateToken
-    router.route('/authentication/validateToken')
+    router.route(`/${apiAnchorName}/validateToken`)
       .get(controller.validateToken);
 
     // cancelToken
-    router.route('/authentication/cancelToken')
+    router.route(`/${apiAnchorName}/cancelToken`)
       .put(controller.cancelToken);
 
 }

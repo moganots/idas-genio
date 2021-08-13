@@ -1,19 +1,39 @@
 import { User } from '../user/user';
 export class BaseModel {
-  _id:number;
-  Code:string;
-  Name:string;
-  Description:string;
-  IsActive:boolean;
-  CreatedBy:User;
-  DateCreated:Date;
-  ModifiedBy:User;
-  DateModified:Date;
+  _id: number;
+  Code: string;
+  Name: string;
+  Description: string;
+  IsActive: boolean;
+  CreatedBy: number;
+  DateCreated: Date;
+  ModifiedBy: number;
+  DateModified: Date;
+  createdBy: User;
+  modifiedBy: User;
+  image: string;
+  DisplayName: string;
+  RouterLink: string;
 
-  constructor(id, code?, name?, description?){
+  constructor(
+    id: number,
+    IsActive: boolean,
+    Code?: string,
+    Name?: string,
+    Description?: string,
+    CreatedBy?: number,
+    DateCreated?: Date,
+    ModifiedBy?: number,
+    DateModified?: Date
+  ) {
     this._id = id;
-    this.Code = code;
-    this.Name = name;
-    this.Description = description;
+    this.Code = Code;
+    this.Name = Name;
+    this.Description = Description;
+    this.IsActive = IsActive;
+    this.CreatedBy = CreatedBy;
+    this.DateCreated = DateCreated;
+    this.ModifiedBy = ModifiedBy;
+    this.DateModified = DateModified;
   }
 }

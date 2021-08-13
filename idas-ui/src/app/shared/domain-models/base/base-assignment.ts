@@ -1,8 +1,9 @@
-import { BaseModel } from './base-model';
 import { User } from '../user/user';
+import { BaseModel } from './base-model';
 export class BaseAssignment extends BaseModel {
-  previousAssignment:User;
-  currentAssignment:User;
-  hoursWorked:number;
-  assignedBy:User;
+  AssigneeId: number;
+  PreviousAssigneeId: number;
+  HoursWorked: number;
+  Assignee: User;
+  PreviousAssignee: User;
 }
