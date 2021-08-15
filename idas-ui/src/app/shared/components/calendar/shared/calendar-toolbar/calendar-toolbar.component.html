@@ -1,11 +1,11 @@
-<div class="toolbar">
+<div class="calendar-toolbar">
     <ul>
-        <li *ngFor="let option of viewNavOptions" class="{{option.cssClass}}" [ngClass]="{'active': calendarService.viewNavOption === option}" (click)="setViewNavOption(option)">
-            {{option.name}}
+        <li *ngFor="let option of viewNavOptions" class="{{option?.cssClass}}" [ngClass]="{'active': calendarService?.viewNavOption === option}" (click)="setViewNavOption(option)">
+            {{option?.name}}
         </li>
-        <li class="view-date">{{ calendarService.viewDateAsString }}</li>
-        <li *ngFor="let option of viewByOptions" class="{{option.cssClass}}" [ngClass]="{'active': calendarService.viewByOption === option}" (click)="setViewByOption(option)">
-            {{option.name}}
+        <li class="view-date">{{ calendarService?.viewDateAsString }}</li>
+        <li *ngFor="let option of viewByOptions" class="{{option?.cssClass}}" [ngClass]="{'active': calendarService?.viewByOption === option}" (click)="setViewByOption(option)">
+            {{option?.name}}
         </li>
     </ul>
 </div>

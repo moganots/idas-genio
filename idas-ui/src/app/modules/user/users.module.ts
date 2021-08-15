@@ -13,32 +13,29 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { FlatpickrModule } from 'angularx-flatpickr';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 import { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserMeetingCalendarComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
+import { UserCalendarEventComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
 import { SharedModulesModule } from '../_shared/shared-modules.module';
 import { UsersComponent } from './users.component';
 import { InboxService } from './components/user-inbox/services/inbox.service';
 import { NotificationsService } from './components/user-notifications/services/notifications.service';
 import { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar.service';
 import { UsersService } from './services/users.service';
+import { SharedModule } from 'app/shared/shared.module';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
 export { UserProfileComponent } from './components/user-profile/user-profile.component';
-export { UserMeetingCalendarComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
+export { UserCalendarEventComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
 export { UsersComponent } from './users.component';
 
 export { UserInboxConfiguration } from './components/user-inbox/user-inbox-configuration';
 export { UserNotificationsConfiguration } from './components/user-notifications/user-notifications-configuration';
 export { UserProfileConfiguration } from './components/user-profile/user-profile-configuration';
-export { UserMeetingCalendarConfiguration } from './components/user-meeting-calendar/user-meeting-calendar-configuration';
+export { UserCalendarEventConfiguration } from './components/user-meeting-calendar/user-meeting-calendar-configuration';
 export { UsersConfiguration } from './users-configuration';
 
 export { InboxService } from './components/user-inbox/services/inbox.service';
@@ -64,13 +61,13 @@ export { UsersService } from './services/users.service';
     MatAutocompleteModule,
     MatDatepickerModule,
     SharedModulesModule,
-    CalendarModule,
+    SharedModule
   ],
   declarations: [
     UserInboxComponent,
     UserNotificationsComponent,
     UserProfileComponent,
-    UserMeetingCalendarComponent,
+    UserCalendarEventComponent,
     UsersComponent,
   ],
   providers: [

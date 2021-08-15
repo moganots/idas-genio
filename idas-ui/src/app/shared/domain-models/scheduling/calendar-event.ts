@@ -1,7 +1,7 @@
 import { BaseModel } from '../base/base-model';
-import { LookupValue } from '../lookup-models/lookup-value';
+import { LookupValue } from '../lookups/lookup-value';
 import { User } from '../user/user';
-export class MeetingCalendar extends BaseModel {
+export class CalendarEvent extends BaseModel {
     MeetingTypeId: number;
     Title: string;
     StartDate: Date;

@@ -1,7 +1,7 @@
 import { BaseModel } from '../base/base-model';
 import { Client } from '../client/client';
 import { Employee } from '../employee/employee';
-import { LookupValue } from '../lookup-models/lookup-value';
+import { LookupValue } from '../lookups/lookup-value';
 import { Supplier } from '../supplier/supplier';
 export class ContactDetail extends BaseModel {
   EmployeeId: number;

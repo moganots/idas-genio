@@ -1071,10 +1071,10 @@ GO
 PRINT ('>> Completed > Create > Table > [dbo].[MenuItem]')
 GO
 
--- Create the [dbo].[MeetingCalendar] table
-CREATE TABLE [dbo].[MeetingCalendar](
+-- Create the [dbo].[CalendarEvent] table
+CREATE TABLE [dbo].[CalendarEvent](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[MeetingTypeId] [bigint]  NULL,
+	[CalendarEventTypeId] [bigint]  NULL,
 	[Title] [nvarchar] (max) NULL,
 	[StartDate] [datetime]  NULL,
 	--[StartTime] [nvarchar] (10)  NULL,
@@ -1083,19 +1083,19 @@ CREATE TABLE [dbo].[MeetingCalendar](
 	[IsAllDayEvent] [bit]  NULL,
 	[Location] [nvarchar] (max) NULL,
 	[Description] [nvarchar] (max) NULL,
-	[MeetingAttendeeId] [bigint]  NULL,
+	[EventAttendeeId] [bigint]  NULL,
 	[IsActive] [bit]  NULL,
 	[CreatedBy] [bigint]  NULL,
 	[DateCreated] [datetime]  NULL,
 	[ModifiedBy] [bigint]  NULL,
 	[DateModified] [datetime]  NULL,
- CONSTRAINT [PK_MeetingCalendar] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_CalendarEvent] PRIMARY KEY CLUSTERED 
 (
 	[_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-PRINT ('>> Completed > Create > Table > [dbo].[MeetingCalendar]')
+PRINT ('>> Completed > Create > Table > [dbo].[CalendarEvent]')
 GO
 
 -- Create the [dbo].[UserLocks] table
@@ -1347,7 +1347,7 @@ BEGIN
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
 		-- User
-		ELSE IF(@ColumnName IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'MeetingAttendeeId'))
+		ELSE IF(@ColumnName IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'EventAttendeeId'))
 		BEGIN
 			SET @ReferenceTableName = 'User';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
@@ -2671,7 +2671,7 @@ SELECT
 		WHEN [LookupCategory] IN ('UserLockReason') THEN 'ULR'
 		WHEN [LookupCategory] IN ('UserType') THEN 'UT'
 		WHEN [LookupCategory] IN ('WageType') THEN 'WGTY'
-		WHEN [LookupCategory] IN ('MeetingType') THEN 'MTG'
+		WHEN [LookupCategory] IN ('CalendarEventType') THEN 'CET'
 	ELSE 'NOCAT' END AS [Code]
 	,[LookupCategory] AS [Name]
 	,[LookupCategory] AS [Description]
@@ -3358,7 +3358,7 @@ SELECT 'Salutation' AS [LookupCategory], 'The Rt Hon Visc' AS [Value], NULL AS [
 SELECT 'Salutation' AS [LookupCategory], 'Viscount' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Salutation' AS [LookupCategory], 'Other' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'ScheduleType' AS [LookupCategory], 'Appointment' AS [Value], NULL AS [Image], 'timer' AS [Icon], NULL AS [Color] UNION
-SELECT 'ScheduleType' AS [LookupCategory], 'MeetingType' AS [Value], NULL AS [Image], 'event' AS [Icon], NULL AS [Color] UNION
+SELECT 'ScheduleType' AS [LookupCategory], 'Meeting' AS [Value], NULL AS [Image], 'event' AS [Icon], NULL AS [Color] UNION
 SELECT 'ScheduleType' AS [LookupCategory], 'Holiday' AS [Value], NULL AS [Image], 'view_day' AS [Icon], NULL AS [Color] UNION
 SELECT 'ScheduleType' AS [LookupCategory], 'Public Holiday' AS [Value], NULL AS [Image], 'today' AS [Icon], NULL AS [Color] UNION
 SELECT 'ScheduleType' AS [LookupCategory], 'Task' AS [Value], NULL AS [Image], 'task_alt' AS [Icon], NULL AS [Color] UNION
@@ -3440,26 +3440,26 @@ SELECT 'WageType' AS [LookupCategory], 'Retroactive' AS [Value], NULL AS [Image]
 SELECT 'WageType' AS [LookupCategory], 'Bonus' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'WageType' AS [LookupCategory], 'Severance' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'WageType' AS [LookupCategory], 'Accrued Time Off' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Team Cadence' AS [Value], NULL AS [Image], 'groups' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Progress Check' AS [Value], NULL AS [Image], 'checklist_rtl' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'One-on-One' AS [Value], NULL AS [Image], 'account_tree' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Action Review' AS [Value], NULL AS [Image], 'schedule' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Governance' AS [Value], NULL AS [Image], 'description' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Idea Generation' AS [Value], NULL AS [Image], 'lightbulb' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Planning' AS [Value], NULL AS [Image], 'workspaces' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Workshop' AS [Value], NULL AS [Image], 'miscellaneous_services' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Problem Solving' AS [Value], NULL AS [Image], 'verified' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Decision Making' AS [Value], NULL AS [Image], 'assistant' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Sensemaking' AS [Value], NULL AS [Image], 'fingerprint' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Introductions' AS [Value], NULL AS [Image], 'widgets' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Issue Resolution' AS [Value], NULL AS [Image], 'fact_check' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Community of Practice' AS [Value], NULL AS [Image], 'language' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Training' AS [Value], NULL AS [Image], 'pending_actions' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Broadcast' AS [Value], NULL AS [Image], 'question_answer' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Consultation' AS [Value], NULL AS [Image], 'account_balance' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Interview' AS [Value], NULL AS [Image], 'person_pin' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Site Visit' AS [Value], NULL AS [Image], 'store' AS [Icon], NULL AS [Color]  UNION
-SELECT 'MeetingType' AS [LookupCategory], 'Board' AS [Value], NULL AS [Image], 'leaderboard' AS [Icon], NULL AS [Color]
+SELECT 'CalendarEventType' AS [LookupCategory], 'Team Cadence' AS [Value], NULL AS [Image], 'groups' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Progress Check' AS [Value], NULL AS [Image], 'checklist_rtl' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'One-on-One' AS [Value], NULL AS [Image], 'account_tree' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Action Review' AS [Value], NULL AS [Image], 'schedule' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Governance' AS [Value], NULL AS [Image], 'description' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Idea Generation' AS [Value], NULL AS [Image], 'lightbulb' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Planning' AS [Value], NULL AS [Image], 'workspaces' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Workshop' AS [Value], NULL AS [Image], 'miscellaneous_services' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Problem Solving' AS [Value], NULL AS [Image], 'verified' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Decision Making' AS [Value], NULL AS [Image], 'assistant' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Sensemaking' AS [Value], NULL AS [Image], 'fingerprint' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Introductions' AS [Value], NULL AS [Image], 'widgets' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Issue Resolution' AS [Value], NULL AS [Image], 'fact_check' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Community of Practice' AS [Value], NULL AS [Image], 'language' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Training' AS [Value], NULL AS [Image], 'pending_actions' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Broadcast' AS [Value], NULL AS [Image], 'question_answer' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Consultation' AS [Value], NULL AS [Image], 'account_balance' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Interview' AS [Value], NULL AS [Image], 'person_pin' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Site Visit' AS [Value], NULL AS [Image], 'store' AS [Icon], NULL AS [Color]  UNION
+SELECT 'CalendarEventType' AS [LookupCategory], 'Board' AS [Value], NULL AS [Image], 'leaderboard' AS [Icon], NULL AS [Color]
 )
 INSERT INTO [dbo].[LookupValue]([LookupCategoryId], [Value], [Image], [Icon], [CreatedBy])
 SELECT DISTINCT
@@ -4284,7 +4284,7 @@ JOIN [dbo].[ProjectStatus] AS [psts] ON ([tsk].[ProjectId] = [psts].[ProjectId])
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskStatus]')
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
--- INSERT >> Test >> Administrator(s), Employee(s), Client(s), Supplier(s) > ([dbo].[MeetingCalendar])
+-- INSERT >> Test >> Administrator(s), Employee(s), Client(s), Supplier(s) > ([dbo].[CalendarEvent])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ;WITH [cte] AS (
 	SELECT	1 AS [Number], 
@@ -4297,106 +4297,106 @@ PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskStatus]')
 	FROM [cte]
 	WHERE [Number] < 12
 )
-INSERT INTO [dbo].[MeetingCalendar]([MeetingTypeId],[Title],[Description],[Location],[IsAllDayEvent],[StartDate],[EndDate],[MeetingAttendeeId],[CreatedBy])
+INSERT INTO [dbo].[CalendarEvent]([CalendarEventTypeId],[Title],[Description],[Location],[IsAllDayEvent],[StartDate],[EndDate],[EventAttendeeId],[CreatedBy])
 SELECT DISTINCT
-	[MeetingTypeId]
+	[CalendarEventTypeId]
 	,[Title]
 	,[Description]
 	,[Location]
 	,[IsAllDayEvent]
 	,[StartDate]
 	,[EndDate]
-	,[MeetingAttendeeId]
+	,[EventAttendeeId]
 	,[CreatedBy]
 FROM (
 	SELECT
-		[MeetingTypeId]
-		,CONCAT([MeetingType], ' Meeting') AS [Title]
-		,CONCAT([MeetingType], ' Meeting') AS [Description]
+		[CalendarEventTypeId]
+		,CONCAT([CalendarEventType], ' Meeting') AS [Title]
+		,CONCAT([CalendarEventType], ' Meeting') AS [Description]
 		,'Teams Meeting' AS [Location]
 		,1 AS [IsAllDayEvent]
 		,CONCAT(CONVERT(VARCHAR, [StartDate], 23), ' ', (RIGHT('00' + CAST(ROUND(RAND() * 8, 0) AS VARCHAR(2)), 2) + ':' + RIGHT('00' + CAST(ROUND(RAND() * 31, 0) AS VARCHAR(2)), 2))) AS [StartDate]
 		,CONCAT(CONVERT(VARCHAR, [EndDate], 23), ' ', (RIGHT('00' + CAST(ROUND(RAND() * 8, 0) AS VARCHAR(2)), 2) + ':' + RIGHT('00' + CAST(ROUND(RAND() * 31, 0) AS VARCHAR(2)), 2))) AS [EndDate]
-		,[u].[_id] AS [MeetingAttendeeId]
+		,[u].[_id] AS [EventAttendeeId]
 		,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
 	FROM [cte]
 	CROSS JOIN (
 		SELECT
-			[lv].[_id] AS [MeetingTypeId]
-			,[lv].[Value] AS [MeetingType]
+			[lv].[_id] AS [CalendarEventTypeId]
+			,[lv].[Value] AS [CalendarEventType]
 		FROM [dbo].[LookupValue] AS [lv], [dbo].[LookupCategory] AS [lc]
 		WHERE
 			([lv].[LookupCategoryId] = [lc].[_id])
-			AND ([lc].[Name] = 'MeetingType')
+			AND ([lc].[Name] = 'CalendarEventType')
 	) AS [mtg]
 	LEFT JOIN [dbo].[User] AS [u] ON  (
 		-- Action Review
-		([mtg].[MeetingType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[MeetingType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
 		-- Board
-		OR ([mtg].[MeetingType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
 		-- Broadcast
 		-- Community of Practice
 		-- Consultation
-		OR ([mtg].[MeetingType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[MeetingType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
 		-- Decision Making
 		-- Governance
-		OR ([mtg].[MeetingType] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
 		-- Idea Generation
-		OR ([mtg].[MeetingType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[MeetingType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
 		-- Interview
-		OR ([mtg].[MeetingType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'good.job@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'good.job@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
 		-- Introductions
-		OR ([mtg].[MeetingType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[MeetingType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[MeetingType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[MeetingType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[MeetingType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
 		-- Issue Resolution
-		OR ([mtg].[MeetingType] IN ('Issue Resolution') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Issue Resolution') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
 		-- One-on-One
-		OR ([mtg].[MeetingType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
 		-- Planning
-		OR ([mtg].[MeetingType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[MeetingType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
 		-- Problem Solving
 		-- Progress Check
-		OR ([mtg].[MeetingType] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
 		-- Sensemaking
 		-- Site Visit
 		-- Team Cadence
-		OR ([mtg].[MeetingType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[MeetingType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[MeetingType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[MeetingType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
 		-- Training
 		-- Workshop
-		OR ([mtg].[MeetingType] IN ('Workshop') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+		OR ([mtg].[CalendarEventType] IN ('Workshop') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
 	)
 ) AS [Meetings]
 WHERE
-	([MeetingAttendeeId] IS NOT NULL);
+	([EventAttendeeId] IS NOT NULL);
 
-PRINT ('>> Completed > INSERT >> Test Data > [dbo].[MeetingCalendar]')
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[CalendarEvent]')
 GO
 
 PRINT ('>> Completed > INSERT >> Default Data Setup')
@@ -4463,7 +4463,7 @@ SELECT '[dbo].[ProjectStatus]' AS [TableName], * FROM [dbo].[ProjectStatus]
 SELECT '[dbo].[Task]' AS [TableName], * FROM [dbo].[Task]
 SELECT '[dbo].[TaskAssignment]' AS [TableName], * FROM [dbo].[TaskAssignment]
 SELECT '[dbo].[TaskStatus]' AS [TableName], * FROM [dbo].[TaskStatus]
-SELECT '[dbo].[MeetingCalendar]' AS [TableName], * FROM [dbo].[MeetingCalendar]
+SELECT '[dbo].[CalendarEvent]' AS [TableName], * FROM [dbo].[CalendarEvent]
 SELECT '[dbo].[EntityChangeHistory]' AS [TableName], * FROM [dbo].[EntityChangeHistory]
 
 PRINT ('>> Done')

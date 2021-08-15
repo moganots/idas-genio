@@ -2,7 +2,7 @@ import { RouteInfo } from 'app/shared/types/interfaces/route-info';
 import { BaseModel } from '../base/base-model';
 import { Client } from '../client/client';
 import { Employee } from '../employee/employee';
-import { LookupValue } from '../lookup-models/lookup-value';
+import { LookupValue } from '../lookups/lookup-value';
 import { Supplier } from '../supplier/supplier';
 import { ContactDetail } from './contact-detail';
 export class User extends BaseModel {

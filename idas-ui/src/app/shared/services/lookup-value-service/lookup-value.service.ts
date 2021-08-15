@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LookupCategory } from 'app/shared/domain-models/lookup-models/lookup-category';
-import { LookupValue } from 'app/shared/domain-models/lookup-models/lookup-value';
+import { LookupCategory } from 'app/shared/domain-models/lookups/lookup-category';
+import { LookupValue } from 'app/shared/domain-models/lookups/lookup-value';
 import { DefaultObjectUtil } from 'app/shared/utilities/default-object-util';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
-import { AuthenticationService } from '../../authentication-service/authentication.service';
-import { DataService } from '../../data-service/data.service';
-import { LookupCategoryService } from '../lookup-category-service/lookup-category.service';
+import { AuthenticationService } from 'app/shared/services/authentication-service/authentication.service';
+import { DataService } from 'app/shared/services/data-service/data.service';
+import { LookupCategoryService } from 'app/shared/services/lookup-category-service/lookup-category.service';
 import { LookupValueConfiguration } from './lookup-value-configuration';
 
 @Injectable({

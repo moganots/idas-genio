@@ -4,10 +4,10 @@ import { AuthenticationService } from 'app/shared/services/authentication-servic
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { SharedConfiguration } from 'app/shared/configuration/shared-configuration';
 import { AlertifyService } from 'app/shared/services/alertify-service/alertify.service';
-import { LookupValue } from 'app/shared/domain-models/lookup-models/lookup-value';
+import { LookupValue } from 'app/shared/domain-models/lookups/lookup-value';
 import { User } from 'app/shared/domain-models/user/user';
 import { first } from 'rxjs/operators';
-import { LookupValueService } from 'app/shared/services/lookup-service/lookup-value-service/lookup-value.service';
+import { LookupValueService } from 'app/shared/services/lookup-value-service/lookup-value.service';
 import { DefaultObjectUtil } from 'app/shared/utilities/default-object-util';
 import { RouteInfo } from 'app/shared/types/interfaces/route-info';
 

@@ -1,6 +1,6 @@
 import { BaseModel } from '../base/base-model';
 import { FileAttachment } from '../file-attachment';
-import { LookupValue } from '../lookup-models/lookup-value';
+import { LookupValue } from '../lookups/lookup-value';
 import { Task } from '../task/task';
 import { ProjectAssignment } from './project-assignment';
 export class Project extends BaseModel {

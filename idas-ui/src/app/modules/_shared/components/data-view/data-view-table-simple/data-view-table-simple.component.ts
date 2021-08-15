@@ -5,8 +5,7 @@ import { ReferenceValueService } from 'app/modules/_shared/services/reference-va
 import {
   AlertifyService
   ,AuthenticationService
-  ,LookupService,
-  LookupValueService
+  ,LookupValueService
 } from 'app/shared/shared.module';
 import {
   DialogCreateEditDataComponent
@@ -18,10 +17,10 @@ import { BaseDataViewComponent } from '../base-data-view/base-data-view.componen
   templateUrl: './data-view-table-simple.component.html',
   styleUrls: ['./data-view-table-simple.component.scss'],
   providers: [
-    AlertifyService,
-    AuthenticationService,
-    LookupService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
+    AlertifyService
+    ,AuthenticationService
+    ,LookupValueService
+    ,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
   ]
 })
 export class DataViewTableSimpleComponent extends BaseDataViewComponent implements OnInit, AfterViewInit {

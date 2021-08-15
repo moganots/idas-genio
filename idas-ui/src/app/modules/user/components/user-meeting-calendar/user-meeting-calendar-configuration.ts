@@ -1,5 +1,5 @@
-export class UserMeetingCalendarConfiguration {
-  public static identifier = 'meeting-calendar';
+export class UserCalendarEventConfiguration {
+  public static identifier = 'calendar-event';
   public static pageIcon = 'event';
   public static pageRoute = 'schedule';
   public static pageRouteTitle = 'My Schedule';

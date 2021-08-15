@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 @Pipe({
-  name: 'chunkpipe'
+  name: 'chunk'
 })
 export class ChunkPipe implements PipeTransform {
   transform(calendarDaysArray: any, chunkSize: number): any {

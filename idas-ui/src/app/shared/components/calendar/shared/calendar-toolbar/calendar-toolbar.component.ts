@@ -15,9 +15,9 @@ export class CalendarToolbarComponent implements OnInit {
   constructor(public calendarService: CalendarService) {}
   ngOnInit(): void {}
   setViewNavOption(option: ViewNavOption): void {
-    this.calendarService.setViewNavOption(option);
+    this.calendarService?.setViewNavOption(option);
   }
   setViewByOption(option: ViewByOption): void {
-    this.calendarService.setViewByOption(option);
+    this.calendarService?.setViewByOption(option);
   }
 }

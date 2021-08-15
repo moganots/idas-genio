@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChunkPipe } from 'app/shared/shared.module';
+import { ChunkPipe } from 'app/shared/utilities/chunk.pipe';
 import { CalendarService } from '../shared/calendar-service/calendar.service';
 import { CalendarViewByComponent } from '../shared/components/calendar-view-by/calendar-view-by.component';
 

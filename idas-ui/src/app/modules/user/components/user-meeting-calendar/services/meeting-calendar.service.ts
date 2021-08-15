@@ -6,10 +6,10 @@ import {
   DataService,
   LookupValue,
   LookupValueService,
-  MeetingCalendar,
+  CalendarEvent,
   User,
 } from 'app/shared/shared.module';
-import { UserMeetingCalendarConfiguration } from '../user-meeting-calendar-configuration';
+import { UserCalendarEventConfiguration } from '../user-meeting-calendar-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class MeetingCalendarService extends DataService {
     public usersService: UsersService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = UserMeetingCalendarConfiguration.identifier;
+    this.entityName = UserCalendarEventConfiguration.identifier;
     this.lookupValueService.getAll<LookupValue>().subscribe((lookupValues) => {
       this.lookupValues = lookupValues;
     });
@@ -32,7 +32,7 @@ export class MeetingCalendarService extends DataService {
       this.users = users;
     });
   }
-  mapValues(meetingCalendarEvent: MeetingCalendar) {
+  mapValues(meetingCalendarEvent: CalendarEvent) {
     meetingCalendarEvent.MeetingType = this.lookupValues.find(
       (lookupValue) => lookupValue._id === meetingCalendarEvent?.MeetingTypeId
     );

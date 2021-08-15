@@ -7,15 +7,16 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/shared-modules.module';
-import { UserMeetingCalendarConfiguration } from './user-meeting-calendar-configuration';
+import { UserCalendarEventConfiguration } from './user-meeting-calendar-configuration';
 import { MeetingCalendarService } from './services/meeting-calendar.service';
 import {
   AlertifyService,
   AuthenticationService,
   LookupValue,
   LookupValueService,
-  MeetingCalendar,
+  CalendarEvent,
   User,
+  CalendarService,
 } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
 
@@ -32,11 +33,11 @@ import { Router } from '@angular/router';
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
   ],
 })
-export class UserMeetingCalendarComponent
+export class UserCalendarEventComponent
   extends PageComponent
   implements OnInit, AfterViewInit
 {
-  calendarEvents: MeetingCalendar[] = [];
+  calendarEvents: CalendarEvent[] = [];
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -44,7 +45,8 @@ export class UserMeetingCalendarComponent
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public meetingCalendarService: MeetingCalendarService
+    public meetingCalendarService: MeetingCalendarService,
+    public calendarService: CalendarService
   ) {
     super(
       router,
@@ -54,18 +56,18 @@ export class UserMeetingCalendarComponent
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = UserMeetingCalendarConfiguration.pageIcon;
-    this.pageTitle = UserMeetingCalendarConfiguration.pageTitle;
-    this.pageName = UserMeetingCalendarConfiguration.pageName;
+    this.pageIcon = UserCalendarEventConfiguration.pageIcon;
+    this.pageTitle = UserCalendarEventConfiguration.pageTitle;
+    this.pageName = UserCalendarEventConfiguration.pageName;
     this.dataService = meetingCalendarService;
-    this.entityName = UserMeetingCalendarConfiguration.identifier;
-    this.sourceDataColumns = UserMeetingCalendarConfiguration.dataColumns;
+    this.entityName = UserCalendarEventConfiguration.identifier;
+    this.sourceDataColumns = UserCalendarEventConfiguration.dataColumns;
+    this.loadCurrentUsercalendarEvents();
+    console.log(this.calendarEvents);
   }
 
   ngOnInit() {}
-  ngAfterViewInit() {
-    this.loadCurrentUsercalendarEvents();
-  }
+  ngAfterViewInit() {}
   private loadCurrentUsercalendarEvents() {
     this.lookupValueService
       .getAll<LookupValue>()
@@ -76,13 +78,13 @@ export class UserMeetingCalendarComponent
           .toPromise()
           .then((users) => {
             this.meetingCalendarService
-              .getBy<MeetingCalendar>({
+              .getBy<CalendarEvent>({
                 MeetingAttendeeId: this.currentUser._id,
               })
               .toPromise()
               .then((meetingCalendarEvents) => {
                 meetingCalendarEvents.forEach((meetingCalendarEvent) => {
-                  this.mapMeetingCalendarValues(
+                  this.mapCalendarEventValues(
                     meetingCalendarEvent,
                     lookupValues,
                     users
@@ -94,8 +96,8 @@ export class UserMeetingCalendarComponent
       });
   }
 
-  mapMeetingCalendarValues(
-    meetingCalendarEvent: MeetingCalendar,
+  mapCalendarEventValues(
+    meetingCalendarEvent: CalendarEvent,
     lookupValues: LookupValue[] = [],
     users: User[] = []
   ) {

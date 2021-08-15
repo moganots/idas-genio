@@ -1,6 +1,6 @@
 import { BaseModel } from '../base/base-model';
 import { Entity } from '../base/entity';
-import { LookupValue } from '../lookup-models/lookup-value';
+import { LookupValue } from '../lookups/lookup-value';
 import { User } from './user';
 export class NotificationMessage extends BaseModel {
     TransactionTypeId: number;

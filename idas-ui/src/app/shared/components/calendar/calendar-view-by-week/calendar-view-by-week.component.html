@@ -1,63 +1,66 @@
-<table class="calendar-table" *ngIf="calendarService.viewCalendarDays">
+<table
+  class="calendar-table week-view"
+  *ngIf="calendarService?.viewCalendarDays"
+>
   <thead>
     <tr>
-      <th class="no-data">&nbsp;</th>
+      <th class="no-data" style="background-color: #ffffff; border-style: none">
+        &nbsp;
+      </th>
       <th
-        *ngFor="let calendarDay of calendarService.viewCalendarDays"
-        class="calendar-day week-view"
-        [ngClass]="{ 'is-today': calendarDay?.isToday }"
+        *ngFor="let calendarDay of calendarService?.viewCalendarDays"
+        [ngClass]="{ 'is-today': calendarDay?.IsToday }"
       >
-        {{ weekDays[calendarDay?.date?.getDay()] }}
+        <span [ngClass]="{ 'is-today': calendarDay?.IsToday }">{{
+          weekDays[calendarDay?.Date?.getDay()]
+        }}</span>
       </th>
     </tr>
     <tr>
-      <th class="no-data">&nbsp;</th>
+      <th class="no-data" style="background-color: #ffffff; border-style: none">
+        &nbsp;
+      </th>
       <td
-        *ngFor="let calendarDay of calendarService.viewCalendarDays"
-        class="calendar-day week-view date"
-        [ngClass]="{ 'is-today': calendarDay?.isToday }"
+        *ngFor="let calendarDay of calendarService?.viewCalendarDays"
+        style="background-color: #ffffff"
       >
-        {{ calendarDay?.date?.getDate() }}
+        <span class="day" [ngClass]="{ 'is-today': calendarDay?.IsToday }">{{
+          calendarDay?.Date?.getDate()
+        }}</span>
       </td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let operatingHour of operatingHours; let i = index;">
-      <td>
+      <td class="operating-hour">
         {{ operatingHour }}
       </td>
-      <td *ngFor="let calendarDay of calendarService.viewCalendarDays">
-        <div
+      <td *ngFor="let calendarDay of calendarService?.viewCalendarDays">
+        <span
           *ngFor="
             let calendarEvent of getCalendarEventsByTime(
-              calendarDay?.date,
+              calendarDay?.Date,
               operatingHour
             )
           "
-          class="calendar-event week-view {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+          class="calendar-event week-view"
           [title]="calendarEvent?.Title"
+          [ngStyle]="{ display: hasEvents(calendarDay?.Date) }"
         >
           <i
-            class="material-icons {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
+            class="material-icons {{ calendarEvent?.CssClass }}"
             [ngStyle]="{
               display:
-                calendarEvent?.MeetingType?.Icon === null || calendarEvent?.MeetingType?.Icon === undefined
+                calendarEvent?.Icon === null ||
+                calendarEvent?.Icon === undefined
                   ? 'none'
                   : 'inline'
             }"
-            >{{ calendarEvent?.MeetingType?.Icon }}</i
+            >{{ calendarEvent?.Icon }}</i
           >
-          {{ calendarEvent?.Title }}
-          <i
-            class="material-icons recurring {{ calendarEvent?.MeetingType?.CssClassCategory }} {{ calendarEvent?.MeetingType?.CssClass }}"
-            [ngStyle]="{
-              display: !calendarEvent?.isRecurring ? 'none' : 'inline'
-            }"
-            >autorenew</i
-          >
-        </div>
+          {{ calendarEvent?.Title }}</span
+        >
       </td>
     </tr>
-    <tr><td>&nbsp;</td></tr>
   </tbody>
 </table>

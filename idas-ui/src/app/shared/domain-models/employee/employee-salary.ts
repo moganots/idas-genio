@@ -1,5 +1,5 @@
 import { BaseModel } from '../base/base-model';
-import { LookupValue } from '../lookup-models/lookup-value';
+import { LookupValue } from '../lookups/lookup-value';
 import { Employee } from './employee';
 export class EmployeeSalary extends BaseModel {
   EmployeeId: number;

@@ -1,6 +1,9 @@
 import { DatePipe, WeekDay } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { CalendarDay, ChunkPipe, DateUtils, PreviousOrNext } from 'app/shared/shared.module';
+import { CalendarDay } from 'app/shared/domain-models/scheduling/calendar-day';
+import { ChunkPipe } from 'app/shared/utilities/chunk.pipe';
+import { DateUtils } from 'app/shared/utilities/date-utils';
+import { PreviousOrNext } from 'app/shared/utilities/enum-previous-next';
 import { BehaviorSubject } from 'rxjs';
 import { CalendarConfiguration } from '../calendar-configuration/calendar-configuration';
 import { ViewByOption } from '../calendar-interfaces/view-by-option';
@@ -59,7 +62,7 @@ export class CalendarService {
   public get viewCalendarDays(): CalendarDay[] {
     return (
       this.subjectViewCalendarDays || {
-        value: [new CalendarDay(this.viewDate)],
+        value: this.getViewCalendarDays()
       }
     ).value;
   }
@@ -78,9 +81,10 @@ export class CalendarService {
     this.subjectViewCalendarDays = new BehaviorSubject<CalendarDay[]>(
       this.getViewCalendarDays()
     );
+    console.log(this.viewCalendarDays);
   }
   private getDefaultViewNavOption(): ViewNavOption {
-    return CalendarConfiguration.viewNavOptions.find(vno => vno.active);
+    return CalendarConfiguration.viewNavOptions.find((vno) => vno.active);
   }
   private updateViewDate(option: ViewNavOption): void {
     switch (option.name) {
@@ -126,7 +130,11 @@ export class CalendarService {
   getViewFirstDay(): Date {
     switch (this.viewByOption.name) {
       case `Month`:
-        return DateUtils.getFirst(DateUtils.getFirstDayOfMonth(this.viewDate), WeekDay.Sunday, PreviousOrNext.Previous);
+        return DateUtils.getFirst(
+          DateUtils.getFirstDayOfMonth(this.viewDate),
+          WeekDay.Sunday,
+          PreviousOrNext.Previous
+        );
       case `Week`:
         return DateUtils.getFirstDayOfWeek(this.viewDate, WeekDay.Sunday);
       case `Work Week`:
@@ -139,7 +147,11 @@ export class CalendarService {
   getViewLastDay(): Date {
     switch (this.viewByOption.name) {
       case `Month`:
-        return DateUtils.getFirst(DateUtils.getLastDayOfMonth(this.viewDate), WeekDay.Saturday, PreviousOrNext.Next);
+        return DateUtils.getFirst(
+          DateUtils.getLastDayOfMonth(this.viewDate),
+          WeekDay.Saturday,
+          PreviousOrNext.Next
+        );
       case `Week`:
         return DateUtils.getLastDayOfWeek(this.viewDate, WeekDay.Saturday);
       case `Work Week`:
@@ -155,14 +167,8 @@ export class CalendarService {
     );
   }
   private getViewDateAsStringForWeek(): void {
-    const firstDay = DateUtils.getFirstDayOfWeek(
-      this.viewDate,
-      WeekDay.Sunday
-    );
-    const lastDay = DateUtils.getLastDayOfWeek(
-      this.viewDate,
-      WeekDay.Saturday
-    );
+    const firstDay = DateUtils.getFirstDayOfWeek(this.viewDate, WeekDay.Sunday);
+    const lastDay = DateUtils.getLastDayOfWeek(this.viewDate, WeekDay.Saturday);
     this.subjectViewDateAsString.next(
       `${this.datepipe.transform(
         firstDay,
@@ -186,9 +192,11 @@ export class CalendarService {
     );
   }
   private getDefaultViewByOption(): ViewByOption {
-    return CalendarConfiguration.viewByOptions.find(vbo => vbo.active);
+    return CalendarConfiguration.viewByOptions.find((vbo) => vbo.active);
   }
   private getViewCalendarDays(): CalendarDay[] {
-    return DateUtils.getDatesBetween(this.viewFirstDay, this.viewLastDay).map(date => new CalendarDay(date));
+    return DateUtils.getDatesBetween(this.viewFirstDay, this.viewLastDay).map(
+      (date) => new CalendarDay(date)
+    );
   }
 }

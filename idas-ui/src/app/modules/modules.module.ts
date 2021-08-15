@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'app/shared/shared.module';
 
 import { ClientsModule } from './clients/clients.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -21,13 +22,14 @@ export { UsersModule } from './user/users.module';
   imports: [
     CommonModule,
     RouterModule,
+    SharedModulesModule,
+    SharedModule,
     ClientsModule,
     DashboardModule,
     EmployeesModule,
     ProjectsModule,
     SuppliersModule,
-    UsersModule,
-    SharedModulesModule
+    UsersModule
   ],
   declarations: [],
   exports: []

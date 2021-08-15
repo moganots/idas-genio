@@ -1,11 +1,12 @@
 import { Client } from '../domain-models/client/client';
 import { Employee } from '../domain-models/employee/employee';
-import { LookupCategory } from '../domain-models/lookup-models/lookup-category';
-import { LookupValue } from '../domain-models/lookup-models/lookup-value';
+import { LookupCategory } from '../domain-models/lookups/lookup-category';
+import { LookupValue } from '../domain-models/lookups/lookup-value';
 import { Project } from '../domain-models/project/project';
 import { Supplier } from '../domain-models/supplier/supplier';
 import { Task } from '../domain-models/task/task';
 import { User } from '../domain-models/user/user';
+
 export class DefaultObjectUtil {
   public static noUser() {
     return {

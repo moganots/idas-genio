@@ -18,7 +18,9 @@
                 (click)="onDataRefresh()"
                 title="{{ getButtonTitleDataRefresh() }}"
               >
-                <i class="material-icons" style="margin: 0 0 0 5px;">autorenew</i>
+                <i class="material-icons" style="margin: 0 0 0 5px"
+                  >autorenew</i
+                >
               </button>
               <button
                 mat-icon-button
@@ -31,13 +33,34 @@
                 (click)="onClickCreate()"
                 title="{{ getButtonTitleAdd() }}"
               >
-                <i class="material-icons" style="margin: 0 0 0 5px;">add</i>
+                <i class="material-icons" style="margin: 0 0 0 5px">add</i>
               </button>
             </span>
           </div>
           <div class="card-body">
             <app-calendar-toolbar></app-calendar-toolbar>
-            <!-- <app-calendar [calendarEvents]="calendarEvents"></app-calendar> -->
+            <span [ngSwitch]="calendarService?.viewByOption.name">
+              <span *ngSwitchCase="'Month'">
+                <app-calendar-view-by-month
+                  [calendarEvents]="calendarEvents"
+                ></app-calendar-view-by-month>
+              </span>
+              <span *ngSwitchCase="'Week'">
+                <app-calendar-view-by-week
+                  [calendarEvents]="calendarEvents"
+                ></app-calendar-view-by-week>
+              </span>
+              <span *ngSwitchCase="'Work Week'">
+                <app-calendar-view-by-work-week
+                  [calendarEvents]="calendarEvents"
+                ></app-calendar-view-by-work-week>
+              </span>
+              <span *ngSwitchCase="'Day'">
+                <app-calendar-view-by-day
+                  [calendarEvents]="calendarEvents"
+                ></app-calendar-view-by-day>
+              </span>
+            </span>
           </div>
         </div>
       </div>

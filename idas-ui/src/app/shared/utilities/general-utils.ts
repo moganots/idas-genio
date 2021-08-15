@@ -101,14 +101,11 @@ export class GeneralUtils {
       array.length !== 0
     );
   }
-  public static firstItem(array: any[]) {
+  public static getFirstItem(array: any[]) {
     return this.hasItems(array) ? array[0] : null;
   }
-  public static lastItem(array: any[]) {
+  public static getLastItem(array: any[]) {
     return this.hasItems(array) ? array[array.length - 1] : null;
-  }
-  public static getLastItem(value: any, delimeter: string) {
-    return this.lastItem((value || {}).split(delimeter));
   }
   public static getFileAttachmentUrl(file: FileAttachment) {
     const projectTaskId = file.ProjectId || file.TaskId;
