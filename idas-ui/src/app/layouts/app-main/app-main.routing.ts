@@ -33,7 +33,7 @@ import {
   UserNotificationsConfiguration,
   UserProfileComponent,
   UserProfileConfiguration,
-  UserCalendarEventComponent,
+  UserMeetingCalendarComponent,
   UserCalendarEventConfiguration,
   UsersComponent,
   UsersConfiguration,
@@ -70,7 +70,7 @@ export const AppMainRoutes: Routes = [
   {
     path: UserCalendarEventConfiguration.pageRoute,
     pathMatch: 'full',
-    component: UserCalendarEventComponent,
+    component: UserMeetingCalendarComponent,
   },
   {
     path: ProjectsConfiguration.pageRoute,

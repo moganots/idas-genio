@@ -1,6 +1,9 @@
 import { SharedConfiguration } from '../configuration/shared-configuration';
+import { Client } from '../domain-models/client/client';
+import { Employee } from '../domain-models/employee/employee';
 import { FileAttachment } from '../domain-models/file-attachment';
-import { Client, Employee, Supplier, User } from '../shared.module';
+import { Supplier } from '../domain-models/supplier/supplier';
+import { User } from '../domain-models/user/user';
 export class GeneralUtils {
   public static isObjectSet(obj: any) {
     return !(obj === null || obj === undefined);

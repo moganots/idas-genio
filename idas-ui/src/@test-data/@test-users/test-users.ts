@@ -356,7 +356,7 @@ export class TestUsers {
         Title: 'My Schedule',
         Path: '/schedule',
         Icon: 'event',
-        Component: 'UserCalendarEventComponent',
+        Component: 'UserMeetingCalendarComponent',
         Configuration: 'UserCalendarEventConfiguration',
         IsActive: true,
         CreatedBy: 3,

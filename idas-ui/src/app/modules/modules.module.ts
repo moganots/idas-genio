@@ -22,8 +22,8 @@ export { UsersModule } from './user/users.module';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModulesModule,
     SharedModule,
+    SharedModulesModule,
     ClientsModule,
     DashboardModule,
     EmployeesModule,

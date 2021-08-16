@@ -17,7 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 import { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserCalendarEventComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
+import { UserMeetingCalendarComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
 import { SharedModulesModule } from '../_shared/shared-modules.module';
 import { UsersComponent } from './users.component';
 import { InboxService } from './components/user-inbox/services/inbox.service';
@@ -25,11 +25,12 @@ import { NotificationsService } from './components/user-notifications/services/n
 import { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar.service';
 import { UsersService } from './services/users.service';
 import { SharedModule } from 'app/shared/shared.module';
+import { CalendarModule } from 'app/shared/components/calendar/calendar.module';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
 export { UserProfileComponent } from './components/user-profile/user-profile.component';
-export { UserCalendarEventComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
+export { UserMeetingCalendarComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
 export { UsersComponent } from './users.component';
 
 export { UserInboxConfiguration } from './components/user-inbox/user-inbox-configuration';
@@ -61,20 +62,21 @@ export { UsersService } from './services/users.service';
     MatAutocompleteModule,
     MatDatepickerModule,
     SharedModulesModule,
-    SharedModule
+    SharedModule,
+    CalendarModule
   ],
   declarations: [
     UserInboxComponent,
     UserNotificationsComponent,
     UserProfileComponent,
-    UserCalendarEventComponent,
+    UserMeetingCalendarComponent,
     UsersComponent,
   ],
   providers: [
     UsersService,
     NotificationsService,
     InboxService,
-    MeetingCalendarService,
+    MeetingCalendarService
   ],
 })
 export class UsersModule {}

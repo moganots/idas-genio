@@ -11,31 +11,6 @@ export { CommonComponent } from './components/common-component/common/common.com
 export { FileUploadComponent } from './components/file-upload-component/file-upload.component';
 
 /**
- * Shared Components - Calendar
- */
- import { CalendarConfiguration } from './components/calendar/shared/calendar-configuration/calendar-configuration';
- import { ViewByOption } from './components/calendar/shared/calendar-interfaces/view-by-option';
- import { ViewNavOption } from './components/calendar/shared/calendar-interfaces/view-nav-option';
- import { CalendarService } from './components/calendar/shared/calendar-service/calendar.service';
- import { CalendarViewByComponent } from './components/calendar/shared/components/calendar-view-by/calendar-view-by.component';
- import { CalendarToolbarComponent } from './components/calendar/shared/calendar-toolbar/calendar-toolbar.component';
- import { CalendarViewByMonthComponent } from './components/calendar/calendar-view-by-month/calendar-view-by-month.component';
- import { CalendarViewByWeekComponent } from './components/calendar/calendar-view-by-week/calendar-view-by-week.component';
- import { CalendarViewByWorkWeekComponent } from './components/calendar/calendar-view-by-work-week/calendar-view-by-work-week.component';
- import { CalendarViewByDayComponent } from './components/calendar/calendar-view-by-day/calendar-view-by-day.component';
-
- export { CalendarConfiguration } from './components/calendar/shared/calendar-configuration/calendar-configuration';
- export { ViewByOption } from './components/calendar/shared/calendar-interfaces/view-by-option';
- export { ViewNavOption } from './components/calendar/shared/calendar-interfaces/view-nav-option';
- export { CalendarService } from './components/calendar/shared/calendar-service/calendar.service';
- export { CalendarViewByComponent } from './components/calendar/shared/components/calendar-view-by/calendar-view-by.component';
- export { CalendarToolbarComponent } from './components/calendar/shared/calendar-toolbar/calendar-toolbar.component';
- export { CalendarViewByMonthComponent } from './components/calendar/calendar-view-by-month/calendar-view-by-month.component';
- export { CalendarViewByWeekComponent } from './components/calendar/calendar-view-by-week/calendar-view-by-week.component';
- export { CalendarViewByWorkWeekComponent } from './components/calendar/calendar-view-by-work-week/calendar-view-by-work-week.component';
- export { CalendarViewByDayComponent } from './components/calendar/calendar-view-by-day/calendar-view-by-day.component';
-
-/**
  * Shared Configuration
  */
 import { SharedConfiguration } from './configuration/shared-configuration';
@@ -200,7 +175,6 @@ export { RouteInfo } from './types/interfaces/route-info';
 /**
  * Shared Utilities
  */
-import { ChunkPipe } from './utilities/chunk.pipe';
 import { DateUtils } from './utilities/date-utils';
 import { DefaultObjectUtil } from './utilities/default-object-util';
 import { EmployeesUtil } from './utilities/employees-util';
@@ -208,7 +182,6 @@ import { PreviousOrNext } from './utilities/enum-previous-next';
 import { FileSizePipe } from './utilities/filesize.pipe';
 import { GeneralUtils } from './utilities/general-utils';
 
-export { ChunkPipe } from './utilities/chunk.pipe';
 export { DateUtils } from './utilities/date-utils';
 export { DefaultObjectUtil } from './utilities/default-object-util';
 export { EmployeesUtil } from './utilities/employees-util';
@@ -218,6 +191,7 @@ export { GeneralUtils } from './utilities/general-utils';
 
 @NgModule({
   imports: [CommonModule],
+  declarations: [CommonComponent, FileUploadComponent],
   providers: [
     DatePipe,
     AlertifyService,
@@ -228,10 +202,8 @@ export { GeneralUtils } from './utilities/general-utils';
     LookupCategoryService,
     LookupValueService,
     SortingService,
-    ChunkPipe,
     FileSizePipe,
   ],
-  declarations: [],
   exports: [],
 })
 export class SharedModule {}

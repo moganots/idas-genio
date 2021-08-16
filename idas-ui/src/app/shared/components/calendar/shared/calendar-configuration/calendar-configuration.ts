@@ -7,12 +7,12 @@ export class CalendarConfiguration {
     { name: 'Next', cssClass: 'btn next', active: false },
   ];
   public static viewByOptions: ViewByOption[] = [
-    { name: 'Month', cssClass: 'btn month', active: true, canShow: true },
+    { name: 'Month', cssClass: 'btn month', active: false, canShow: true },
     { name: 'Week', cssClass: 'btn week', active: false, canShow: true },
     {
       name: 'Work Week',
       cssClass: 'btn work-week',
-      active: false,
+      active: true,
       canShow: true,
     },
     { name: 'Day', cssClass: 'btn day', active: false, canShow: true },

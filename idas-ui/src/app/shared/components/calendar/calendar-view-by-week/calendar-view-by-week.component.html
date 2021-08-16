@@ -8,12 +8,30 @@
         &nbsp;
       </th>
       <th
-        *ngFor="let calendarDay of calendarService?.viewCalendarDays"
-        [ngClass]="{ 'is-today': calendarDay?.IsToday }"
+        *ngFor="
+          let calendarDay of calendarService?.viewCalendarDays;
+          let i = index
+        "
+        [ngClass]="{
+          'is-past-date': calendarDay?.IsPastDate,
+          'is-today':
+            (i == 0 && j == 0) ||
+            calendarDay?.IsToday ||
+            calendarDay?.IsFirstDayOfMonth,
+          'is-future-date': calendarDay?.IsFutureDate
+        }"
       >
-        <span [ngClass]="{ 'is-today': calendarDay?.IsToday }">{{
-          weekDays[calendarDay?.Date?.getDay()]
-        }}</span>
+        <span
+          [ngClass]="{
+            'is-past-date': calendarDay?.IsPastDate,
+            'is-today':
+              (i == 0 && j == 0) ||
+              calendarDay?.IsToday ||
+              calendarDay?.IsFirstDayOfMonth,
+            'is-future-date': calendarDay?.IsFutureDate
+          }"
+          >{{ weekDays[calendarDay?.Date?.getDay()] }}</span
+        >
       </th>
     </tr>
     <tr>
@@ -24,14 +42,23 @@
         *ngFor="let calendarDay of calendarService?.viewCalendarDays"
         style="background-color: #ffffff"
       >
-        <span class="day" [ngClass]="{ 'is-today': calendarDay?.IsToday }">{{
-          calendarDay?.Date?.getDate()
-        }}</span>
+        <span
+          class="day"
+          [ngClass]="{
+            'is-past-date': calendarDay?.IsPastDate,
+            'is-today':
+              (i == 0 && j == 0) ||
+              calendarDay?.IsToday ||
+              calendarDay?.IsFirstDayOfMonth,
+            'is-future-date': calendarDay?.IsFutureDate
+          }"
+          >{{ calendarDay?.Date?.getDate() }}</span
+        >
       </td>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let operatingHour of operatingHours; let i = index;">
+    <tr *ngFor="let operatingHour of operatingHours; let i = index">
       <td class="operating-hour">
         {{ operatingHour }}
       </td>

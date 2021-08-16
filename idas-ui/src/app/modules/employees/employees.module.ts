@@ -6,6 +6,7 @@ import { EmployeesComponent } from './employees.component';
 import { SharedModulesModule } from '../_shared/shared-modules.module';
 import { EmployeesService } from './services/employees.service';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 export { EmployeesConfiguration } from './employees-configuration';
 export { EmployeesComponent } from './employees.component';
@@ -16,6 +17,7 @@ export { EmployeesService } from './services/employees.service';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     SharedModulesModule
   ],
   declarations: [

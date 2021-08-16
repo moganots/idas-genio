@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { UserCalendarEventComponent } from './user-meeting-calendar.component';
+import { UserMeetingCalendarComponent } from './user-meeting-calendar.component';
 
-describe('UserCalendarEventComponent', () => {
-  let component: UserCalendarEventComponent;
-  let fixture: ComponentFixture<UserCalendarEventComponent>;
+describe('UserMeetingCalendarComponent', () => {
+  let component: UserMeetingCalendarComponent;
+  let fixture: ComponentFixture<UserMeetingCalendarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserCalendarEventComponent ]
+      declarations: [ UserMeetingCalendarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserCalendarEventComponent);
+    fixture = TestBed.createComponent(UserMeetingCalendarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

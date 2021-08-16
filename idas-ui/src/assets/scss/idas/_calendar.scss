@@ -87,13 +87,20 @@
 .calendar-table.week-view td:first-child,
 .calendar-table.work-week-view thead:first-child,
 .calendar-table.work-week-view th:first-child,
-.calendar-table.work-week-view td:first-child,
+.calendar-table.work-week-view td:first-child {
+  width: 6em;
+  min-width: 6em;
+  max-width: 6em;
+  text-align: left;
+  word-break: break-all;
+}
+
 .calendar-table.day-view thead:first-child,
 .calendar-table.day-view th:first-child,
 .calendar-table.day-view td:first-child {
-  width: 3em;
-  min-width: 3em;
-  max-width: 3em;
+  width: 5.3em;
+  min-width: 5.3em;
+  max-width: 5.3em;
   text-align: left;
   word-break: break-all;
 }
@@ -123,12 +130,14 @@
 }
 
 .calendar-day {
+  color: #000000;
   cursor: pointer;
   font-size: 0.8em;
   font-weight: normal;
   height: 15vh;
   text-align: left;
   span {
+    color: #000000;
     float: left;
     font-size: 0.8em;
     text-align: left;

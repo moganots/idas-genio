@@ -1,24 +1,24 @@
 <table class="calendar-table day-view" *ngIf="calendarService?.viewDate">
-    <thead>
-      <tr>
-        <th class="no-data" style="background-color: #ffffff; border-style: none">
-          &nbsp;
-        </th>
-        <th>
-          <span>{{ weekDays[calendarService?.viewDate?.getDay()] }}</span>
-        </th>
-      </tr>
-      <tr>
-        <th class="no-data" style="background-color: #ffffff; border-style: none">
-          &nbsp;
-        </th>
-        <td>
-          <span>{{ calendarService?.viewDate?.getDate() }}</span>
-        </td>
-      </tr>
-    </thead>
+  <thead>
+    <tr>
+      <th class="no-data" style="background-color: #ffffff; border-style: none">
+        &nbsp;
+      </th>
+      <th style="width: 100%">
+        <span>{{ weekDays[calendarService?.viewDate?.getDay()] }}</span>
+      </th>
+    </tr>
+    <tr>
+      <th class="no-data" style="background-color: #ffffff; border-style: none">
+        &nbsp;
+      </th>
+      <td>
+        <span>{{ calendarService?.viewDate?.getDate() }}</span>
+      </td>
+    </tr>
+  </thead>
   <tbody>
-    <tr *ngFor="let operatingHour of operatingHours; let i = index;">
+    <tr *ngFor="let operatingHour of operatingHours; let i = index">
       <td class="operating-hour">
         {{ operatingHour }}
       </td>
@@ -37,7 +37,8 @@
             class="material-icons {{ calendarEvent?.CssClass }}"
             [ngStyle]="{
               display:
-                calendarEvent?.Icon === null || calendarEvent?.Icon === undefined
+                calendarEvent?.Icon === null ||
+                calendarEvent?.Icon === undefined
                   ? 'none'
                   : 'inline'
             }"
@@ -53,9 +54,6 @@
           >
         </div>
       </td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
     </tr>
   </tbody>
 </table>

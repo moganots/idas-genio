@@ -15,10 +15,10 @@ import {
   LookupValue,
   LookupValueService,
   CalendarEvent,
-  User,
-  CalendarService,
+  User
 } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
+import { CalendarService } from 'app/shared/components/calendar/calendar.module';
 
 @Component({
   selector: 'app-user-meeting-calendar',
@@ -33,7 +33,7 @@ import { Router } from '@angular/router';
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
   ],
 })
-export class UserCalendarEventComponent
+export class UserMeetingCalendarComponent
   extends PageComponent
   implements OnInit, AfterViewInit
 {
@@ -46,7 +46,7 @@ export class UserCalendarEventComponent
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public meetingCalendarService: MeetingCalendarService,
-    public calendarService: CalendarService
+    private calendarService: CalendarService
   ) {
     super(
       router,

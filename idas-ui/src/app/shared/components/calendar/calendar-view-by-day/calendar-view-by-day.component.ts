@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChunkPipe } from 'app/shared/utilities/chunk.pipe';
 import { CalendarService } from '../shared/calendar-service/calendar.service';
 import { CalendarViewByComponent } from '../shared/components/calendar-view-by/calendar-view-by.component';
 
@@ -12,8 +11,8 @@ export class CalendarViewByDayComponent
   extends CalendarViewByComponent
   implements OnInit
 {
-  constructor(public calendarService: CalendarService, public chunkpipe: ChunkPipe) {
-    super(calendarService, chunkpipe);
+  constructor(public calendarService: CalendarService) {
+    super(calendarService);
   }
   ngOnInit(): void {}
 }
