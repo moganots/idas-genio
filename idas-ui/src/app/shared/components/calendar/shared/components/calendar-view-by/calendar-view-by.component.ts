@@ -10,14 +10,12 @@ import { CalendarService } from '../../calendar-service/calendar.service';
   styleUrls: ['./calendar-view-by.component.scss'],
 })
 export class CalendarViewByComponent implements OnInit {
-  @Input() calendarEvents: CalendarEvent[] = [];
   monthNames = CalendarConfiguration.monthNames;
   weekDays = CalendarConfiguration.weekDays;
   operatingHours = CalendarConfiguration.operatingHours;
   constructor(public calendarService: CalendarService) {}
-  ngOnInit(): void {
-  }
-  hasEvents(date: Date): string {
+  ngOnInit(): void {}
+  showEvents(date: Date): string {
     return this.getCalendarEventsByDate(date).length >= 1 ? 'inline' : 'none';
   }
   numberOfEvents(date: Date): number {
@@ -32,7 +30,7 @@ export class CalendarViewByComponent implements OnInit {
     return (this.getCalendarEventsByDate(date) || []).slice(0, 3);
   }
   getCalendarEventsByTime(date: Date, operatingHour: string): CalendarEvent[] {
-    if(!GeneralUtils.isObjectSet(date)) return [];
+    if (!GeneralUtils.isObjectSet(date)) return [];
     const hour = Number(
       GeneralUtils.getFirstItem((operatingHour || ``).split(':'))
     );
@@ -42,20 +40,24 @@ export class CalendarViewByComponent implements OnInit {
     const datesEvents = this.getCalendarEventsByDate(date);
     return datesEvents.filter(
       (ce) =>
-        (ce && ce.StartDate && ce.StartDate.getHours() === hour) ||
-        ce.StartDate.getMinutes() === minute
+      ce &&
+      ce.StartDate &&
+      (new Date(ce.StartDate)).getHours() === hour ||
+      (new Date(ce.StartDate)).getMinutes() === minute
     );
   }
   getCalendarEventsByDate(date: Date): CalendarEvent[] {
-    if(!GeneralUtils.isObjectSet(date)) return [];
-    return this.calendarEvents.filter(
-      (ce) =>
-        ce &&
-        ce.StartDate &&
-        ce.StartDate.getFullYear() === date.getFullYear() &&
-        ce.StartDate.getMonth() === date.getMonth() &&
-        ce.StartDate.getDate() === date.getDate()
-    );
+    if (GeneralUtils.hasItems(this.calendarService.viewCalendarEvents)) {
+      return this.calendarService.viewCalendarEvents.filter(
+        (ce) =>
+          ce &&
+          ce.StartDate &&
+          (new Date(ce.StartDate)).getFullYear() === date.getFullYear() &&
+          (new Date(ce.StartDate)).getMonth() === date.getMonth() &&
+          (new Date(ce.StartDate)).getDate() === date.getDate()
+      );
+    }
+    return [];
   }
   onClickShowMore(date: Date): void {
     this.calendarService.setViewDate(date);

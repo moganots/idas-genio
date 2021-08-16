@@ -33,11 +33,11 @@ export class MeetingCalendarService extends DataService {
     });
   }
   mapValues(meetingCalendarEvent: CalendarEvent) {
-    meetingCalendarEvent.MeetingType = this.lookupValues.find(
-      (lookupValue) => lookupValue._id === meetingCalendarEvent?.MeetingTypeId
+    meetingCalendarEvent.CalendarEventType = this.lookupValues.find(
+      (lookupValue) => lookupValue._id === meetingCalendarEvent?.CalendarEventTypeId
     );
-    meetingCalendarEvent.MeetingAttendee = this.users.find(
-      (user) => user._id === meetingCalendarEvent?.MeetingAttendeeId
+    meetingCalendarEvent.EventAttendee = this.users.find(
+      (user) => user._id === meetingCalendarEvent?.EventAttendeeId
     );
     meetingCalendarEvent.createdBy = this.users.find(
       (user) => user._id === meetingCalendarEvent?.CreatedBy
@@ -45,6 +45,7 @@ export class MeetingCalendarService extends DataService {
     meetingCalendarEvent.modifiedBy = this.users.find(
       (user) => user._id === meetingCalendarEvent?.ModifiedBy
     );
+    meetingCalendarEvent.CssClass = `${meetingCalendarEvent.CalendarEventType.CssClassCategory} ${meetingCalendarEvent.CalendarEventType.CssClass}`.trim();
     return meetingCalendarEvent;
   }
 }

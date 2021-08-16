@@ -16,21 +16,21 @@ export class GeneralUtils {
   }
   public static isNumber = (value: any) => {
     return value && typeof value === 'number';
-  }
+  };
   public static getEmployeeDisplayName(employee: Employee) {
-    return `${this.EmptyStringIfNull(
-      employee?.Name
-    )} ${this.EmptyStringIfNull(employee?.Surname)}`.trim();
+    return `${this.EmptyStringIfNull(employee?.Name)} ${this.EmptyStringIfNull(
+      employee?.Surname
+    )}`.trim();
   }
   public static getClientDisplayName(client: Client) {
-    return `${this.EmptyStringIfNull(
-      client?.Name
-    )} ${this.EmptyStringIfNull(client?.Surname || client?.CompanyName)}`.trim();
+    return `${this.EmptyStringIfNull(client?.Name)} ${this.EmptyStringIfNull(
+      client?.Surname || client?.CompanyName
+    )}`.trim();
   }
   public static getSupplierDisplayName(supplier: Supplier) {
-    return `${this.EmptyStringIfNull(
-      supplier?.Name
-    )} ${this.EmptyStringIfNull(supplier?.Surname || supplier?.CompanyName)}`.trim();
+    return `${this.EmptyStringIfNull(supplier?.Name)} ${this.EmptyStringIfNull(
+      supplier?.Surname || supplier?.CompanyName
+    )}`.trim();
   }
   public static getUserDisplayName(user: User) {
     if (this.isObjectSet(user) && this.isObjectSet(user.Employee)) {
@@ -97,12 +97,7 @@ export class GeneralUtils {
     return String(value).toLocaleUpperCase().trim();
   }
   public static hasItems(array: any[]) {
-    return (
-      Array.isArray(array) &&
-      array !== null &&
-      array !== undefined &&
-      array.length !== 0
-    );
+    return !(array === null && array === undefined && array.length === 0);
   }
   public static getFirstItem(array: any[]) {
     return this.hasItems(array) ? array[0] : null;

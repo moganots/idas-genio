@@ -55,7 +55,7 @@
           <span
             class="count"
             [title]="getEventsCountTitle(calendarDay?.Date)"
-            [ngStyle]="{ display: hasEvents(calendarDay?.Date) }"
+            [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
             >{{ numberOfEvents(calendarDay?.Date) }}</span
           >
           <br />
@@ -67,7 +67,7 @@
             "
             class="calendar-event month-view"
             [title]="calendarEvent?.Title"
-            [ngStyle]="{ display: hasEvents(calendarDay?.Date) }"
+            [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
           >
             <i
               class="material-icons {{ calendarEvent?.CssClass }}"

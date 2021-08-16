@@ -15,7 +15,7 @@ import {
   LookupValue,
   LookupValueService,
   CalendarEvent,
-  User
+  User,
 } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
 import { CalendarService } from 'app/shared/components/calendar/calendar.module';
@@ -37,7 +37,6 @@ export class UserMeetingCalendarComponent
   extends PageComponent
   implements OnInit, AfterViewInit
 {
-  calendarEvents: CalendarEvent[] = [];
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -46,7 +45,7 @@ export class UserMeetingCalendarComponent
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public meetingCalendarService: MeetingCalendarService,
-    private calendarService: CalendarService
+    public calendarService: CalendarService
   ) {
     super(
       router,
@@ -62,13 +61,9 @@ export class UserMeetingCalendarComponent
     this.dataService = meetingCalendarService;
     this.entityName = UserCalendarEventConfiguration.identifier;
     this.sourceDataColumns = UserCalendarEventConfiguration.dataColumns;
-    this.loadCurrentUsercalendarEvents();
-    console.log(this.calendarEvents);
   }
 
-  ngOnInit() {}
-  ngAfterViewInit() {}
-  private loadCurrentUsercalendarEvents() {
+  ngOnInit() {
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()
@@ -79,7 +74,7 @@ export class UserMeetingCalendarComponent
           .then((users) => {
             this.meetingCalendarService
               .getBy<CalendarEvent>({
-                MeetingAttendeeId: this.currentUser._id,
+                EventAttendeeId: this.currentUser._id,
               })
               .toPromise()
               .then((meetingCalendarEvents) => {
@@ -90,22 +85,25 @@ export class UserMeetingCalendarComponent
                     users
                   );
                 });
-                this.calendarEvents = meetingCalendarEvents;
+                this.calendarService.setViewCalendarEvents(meetingCalendarEvents);
               });
           });
       });
   }
-
+  ngAfterViewInit() {}
+  private loadCurrentUsercalendarEvents() {
+  }
   mapCalendarEventValues(
     meetingCalendarEvent: CalendarEvent,
     lookupValues: LookupValue[] = [],
     users: User[] = []
   ) {
-    meetingCalendarEvent.MeetingType = lookupValues.find(
-      (lookupValue) => lookupValue._id === meetingCalendarEvent?.MeetingTypeId
+    meetingCalendarEvent.CalendarEventType = lookupValues.find(
+      (lookupValue) =>
+        lookupValue._id === meetingCalendarEvent?.CalendarEventTypeId
     );
-    meetingCalendarEvent.MeetingAttendee = users.find(
-      (user) => user._id === meetingCalendarEvent?.MeetingAttendeeId
+    meetingCalendarEvent.EventAttendee = users.find(
+      (user) => user._id === meetingCalendarEvent?.EventAttendeeId
     );
     meetingCalendarEvent.createdBy = users.find(
       (user) => user._id === meetingCalendarEvent?.CreatedBy

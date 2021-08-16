@@ -88,9 +88,9 @@
 .calendar-table.work-week-view thead:first-child,
 .calendar-table.work-week-view th:first-child,
 .calendar-table.work-week-view td:first-child {
-  width: 6em;
-  min-width: 6em;
-  max-width: 6em;
+  width: 6.1em;
+  min-width: 6.1em;
+  max-width: 6.1em;
   text-align: left;
   word-break: break-all;
 }
@@ -110,7 +110,7 @@
   &.operating-hour {
     font-size: 0.85em;
     font-weight: normal;
-    height: 5vh;
+    height: 8vh;
   }
 }
 
@@ -122,7 +122,7 @@
   &.operating-hour {
     font-size: 0.85em;
     font-weight: normal;
-    height: 5vh;
+    height: 8vh;
   }
 }
 .calendar-table.day-view td {
@@ -161,7 +161,7 @@
       margin: 3px 0 0 0;
       right: 0;
       text-align: center;
-      width: 9.56vw;
+      width: 9.5vw;
     }
     &.is-past-date {
       background-color: #f8f8ff;
@@ -265,6 +265,6 @@
     width: 13.2vw;
   }
   &.day-view {
-    width: 73.6vw;
+    width: 69.4vw;
   }
 }

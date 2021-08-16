@@ -1,6 +1,7 @@
 import { DatePipe, WeekDay } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { CalendarDay } from 'app/shared/domain-models/scheduling/calendar-day';
+import { CalendarEvent } from 'app/shared/shared.module';
 import { DateUtils } from 'app/shared/utilities/date-utils';
 import { PreviousOrNext } from 'app/shared/utilities/enum-previous-next';
 import { BehaviorSubject } from 'rxjs';
@@ -19,6 +20,7 @@ export class CalendarService {
   private subjectViewDateAsString: BehaviorSubject<string>;
   private subjectViewByOption: BehaviorSubject<ViewByOption>;
   private subjectViewCalendarDays: BehaviorSubject<CalendarDay[]>;
+  private subjectViewCalendarEvents: BehaviorSubject<CalendarEvent[]>;
 
   public get viewNavOption(): ViewNavOption {
     return (
@@ -65,6 +67,16 @@ export class CalendarService {
       }
     ).value;
   }
+  public get viewCalendarEvents(): CalendarEvent[] {
+    return (
+      this.subjectViewCalendarEvents || {
+        value: []
+      }
+    ).value;
+  }
+  public setViewCalendarEvents(calendarEvents: CalendarEvent[]): void {
+    this.subjectViewCalendarEvents.next(calendarEvents || []);
+  }
 
   constructor(public datepipe: DatePipe) {
     this.subjectViewNavOption = new BehaviorSubject<ViewNavOption>(
@@ -79,6 +91,8 @@ export class CalendarService {
     );
     this.subjectViewCalendarDays = new BehaviorSubject<CalendarDay[]>(
       this.getViewCalendarDays()
+    );
+    this.subjectViewCalendarEvents = new BehaviorSubject<CalendarEvent[]>([]
     );
   }
   private getDefaultViewNavOption(): ViewNavOption {

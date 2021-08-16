@@ -1,16 +1,18 @@
 export class CalendarDay {
-  public date: Date;
-  public title: string;
-  public isPastDate: boolean;
-  public isFirstDayOfMonth: boolean;
-  public isToday: boolean;
-  public isFutureDate: boolean;
+  public Date: Date;
+  public Title: string;
+  public IsPastDate: boolean;
+  public IsFirstDayOfMonth: boolean;
+  public IsToday: boolean;
+  public IsFutureDate: boolean;
 
-  constructor(d: Date) {
-    this.date = d;
-    this.isPastDate = d.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
-    this.isFirstDayOfMonth = d.getDate() === 1;
-    this.isToday = d.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0);
-    this.isFutureDate = d.getMonth() > new Date().getMonth();
+  constructor(date: Date) {
+    this.Date = date;
+    this.IsPastDate =
+      date?.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
+    this.IsFirstDayOfMonth = date?.getDate() === 1;
+    this.IsToday =
+      date?.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0);
+    this.IsFutureDate = date?.getMonth() > new Date().getMonth();
   }
 }

@@ -3,7 +3,7 @@
         <li *ngFor="let option of viewNavOptions" class="{{option?.cssClass}}" [ngClass]="{'active': calendarService?.viewNavOption === option}" (click)="setViewNavOption(option)">
             {{option?.name}}
         </li>
-        <li class="view-date">{{ calendarService?.viewDateAsString }}</li>
+        <li class="view-date"><p>{{ calendarService?.viewDateAsString }}</p><br /><p>Current Date: {{ calendarService?.viewDate | date: 'EEEE, MMMM d, y' }}</p></li>
         <li *ngFor="let option of viewByOptions" class="{{option?.cssClass}}" [ngClass]="{'active': calendarService?.viewByOption === option}" (click)="setViewByOption(option)">
             {{option?.name}}
         </li>

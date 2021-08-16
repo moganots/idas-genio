@@ -73,7 +73,7 @@
           "
           class="calendar-event week-view"
           [title]="calendarEvent?.Title"
-          [ngStyle]="{ display: hasEvents(calendarDay?.Date) }"
+          [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
         >
           <i
             class="material-icons {{ calendarEvent?.CssClass }}"

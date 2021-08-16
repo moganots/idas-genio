@@ -1,20 +1,30 @@
 .calendar-toolbar {
   // border: 1px solid #D3D3D3;
-  margin: 0 0 0 0;
+  margin: 8px 0 8px 0;
   padding: 0 0 0 0;
   text-align: center;
   vertical-align: middle;
-  // width: 80vw;
+  width: 100%;
   ul,
   li {
     color: #000000;
     display: inline-block;
+    font-size: 0.9em;
     list-style: none;
     list-style-type: none;
     &.view-date {
-      padding: 5px 5px 8px 5px;
+      font-size: 1em;
+      font-weight: bold;
+      margin: 0 0 0 0;
       text-align: center;
+      vertical-align: bottom;
       width: 250px;
+      p {
+        font-weight: bold;
+        margin:  0 0 0;
+        padding: 0 0 0 0;
+        text-align: center;
+      }
     }
   }
   .btn {
