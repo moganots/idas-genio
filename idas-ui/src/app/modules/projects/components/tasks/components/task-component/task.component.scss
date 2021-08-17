@@ -234,9 +234,15 @@
       }
       a {
         display: inline;
-        margin: 0 0 0 0;
-        padding: 10px 0 0 3px;
         vertical-align: middle;
+        &.project {
+          &.code {
+            font-size: 1.10em;
+            font-weight: bold;
+            margin: 0 0 0 0;
+            padding: 1px 0 0 3px;
+          }
+        }
       }
       p {
         display: inline;
@@ -248,7 +254,7 @@
           display: inline;
           &.name {
             margin: 0 0 0 0;
-            padding: 0 0 0 0;
+            padding: 2px 0 0 3px;
             vertical-align: middle;
           }
           &.status {

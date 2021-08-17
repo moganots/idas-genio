@@ -156,9 +156,15 @@
       .data-view-action-buttons-header {
         background-color: white;
       }
-    
+
       .data-view-action-buttons-cell {
-        padding-right: 5px;
+        border-style: none;
+        padding: 0 5px 0 60px;
+        right: 0;
+        i {
+          margin: 0 0 0 10px;
+          padding: 0 0 0 0;
+        }
       }
     }
   }
@@ -222,6 +228,10 @@ mat-checkbox {
   bottom: 0;
   height: 13vh;
   padding: 0 10px 35px 0;
+  i {
+    margin: 0 0 0 10px;
+    padding: 0 0 0 0;
+  }
 }
 
 .hidden {
