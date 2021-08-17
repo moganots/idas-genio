@@ -1,3 +1,6 @@
+@import './../../../assets/scss/idas/colors.scss';
+@import './../../../assets/scss/idas/fonts.scss';
+
 .idas-navbar {
   width: 15%;
   ul,
@@ -15,7 +18,7 @@
     padding: 0 0 0 0;
   }
   img {
-    border-radius: 12px;
+    border-radius: 8px;
     display: inline;
     float: right;
     height: auto;
@@ -24,17 +27,19 @@
       cursor: pointer;
       margin: 0 0 0 0;
       padding: 0 0 0 0;
-      width: 68%;
+      width: 48%;
     }
   }
 }
 
 .idas-dropdown-item-link {
+  width: 15vw;
   a:link,
   a:active,
   a:visited {
+    color: $idas-color-main-links-link-active-visited;
   }
   a:hover {
-    background-color: yellowgreen;
+    background-color: $idas-color-main-links-hover;
   }
 }

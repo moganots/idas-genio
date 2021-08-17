@@ -30,6 +30,14 @@ void Main()
 	string directoryIdasGenioApiDatabaseRepositoryMsSql = System.IO.Path.Combine(directoryIdasGenioApiDatabaseRepository, "mssql");
 	string directoryIdasGenioApiDatabaseRepositoryMongoDb = System.IO.Path.Combine(directoryIdasGenioApiDatabaseRepository, "mongodb");
 	
+	// Clean and delete directory(ies)
+	cleanAndDeleteDirectory(directoryIdasGenioApiDatabaseModels);
+	cleanAndDeleteDirectory(directoryIdasGenioApiDatabaseModelsMsSql);
+	cleanAndDeleteDirectory(directoryIdasGenioApiDatabaseModelsMongoDb);
+	cleanAndDeleteDirectory(directoryIdasGenioApiDatabaseRepository);
+	cleanAndDeleteDirectory(directoryIdasGenioApiDatabaseRepositoryMsSql);
+	cleanAndDeleteDirectory(directoryIdasGenioApiDatabaseRepositoryMongoDb);
+	
 	// Create directory(ies), if it does not exist
 	createDirectoryIfNotExists(directoryIdasGenioApi);
 	createDirectoryIfNotExists(directoryIdasGenioApiDatabase);
@@ -99,18 +107,36 @@ public string SplitCamelCase(string str)
 {
 	return Regex.Replace( Regex.Replace( str, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2" ), @"(\p{Ll})(\P{Ll})", "$1 $2" );
 }
+private void cleanAndDeleteDirectory(string path){
+	if(System.IO.Directory.Exists(path)){
+		Console.WriteLine("Clean and Delete Directory : {0}", path);
+		System.IO.DirectoryInfo rootDir = new DirectoryInfo(path);
+		foreach (FileInfo file in rootDir.EnumerateFiles())
+		{
+		    file.Delete(); 
+		}
+		foreach (DirectoryInfo dir in rootDir.EnumerateDirectories())
+		{
+		    cleanAndDeleteDirectory(dir.ToString());
+		}
+		rootDir.Delete(true);
+	}
+}
 private void createDirectoryIfNotExists(string path){
 	if(!System.IO.Directory.Exists(path)){
+		Console.WriteLine("Create Directory : {0}", path);
 		System.IO.Directory.CreateDirectory(path);
 	}
 }
 private void deleteFileIfExists(string path){
 	if(System.IO.File.Exists(path)){
+		Console.WriteLine("Delete File : {0}", path);
 		System.IO.File.Delete(path);
 	}
 }
 private void createFileIfNotExists(string path, string content){
 	if(!System.IO.File.Exists(path)){
+		Console.WriteLine("Create File : {0}", path);
 		System.IO.File.WriteAllText(path, content);
 	}
 }

@@ -1264,6 +1264,7 @@ CREATE TABLE [dbo].[FileAttachment](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[ProjectId] [bigint] NULL,
 	[TaskId] [bigint] NULL,
+	[CalendarEventId] [bigint] NULL,
 	[FileName] [nvarchar] (max) NOT NULL,
 	[FileSize] [bigint] NULL,
 	[IsActive] [bit] NULL,
@@ -1382,10 +1383,10 @@ BEGIN
 			SET @ReferenceTableName = 'Task';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
-		-- Schedule
-		ELSE IF(@ColumnName IN ('Schedule'))
+		-- CalendarEvent
+		ELSE IF(@ColumnName IN ('CalendarEventId'))
 		BEGIN
-			SET @ReferenceTableName = 'Schedule';
+			SET @ReferenceTableName = 'CalendarEvent';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
 		-- LookupCategory
@@ -4464,6 +4465,7 @@ SELECT '[dbo].[Task]' AS [TableName], * FROM [dbo].[Task]
 SELECT '[dbo].[TaskAssignment]' AS [TableName], * FROM [dbo].[TaskAssignment]
 SELECT '[dbo].[TaskStatus]' AS [TableName], * FROM [dbo].[TaskStatus]
 SELECT '[dbo].[CalendarEvent]' AS [TableName], * FROM [dbo].[CalendarEvent]
+SELECT '[dbo].[FileAttachment]' AS [TableName], * FROM [dbo].[FileAttachment]
 SELECT '[dbo].[EntityChangeHistory]' AS [TableName], * FROM [dbo].[EntityChangeHistory]
 
 PRINT ('>> Done')

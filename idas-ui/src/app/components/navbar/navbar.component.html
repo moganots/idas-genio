@@ -46,20 +46,13 @@
               </li>
               <li class="nav-item dropdown">
                 <img id="navbarUserAccountDropdownMenuLink" src="{{ currentUser?.Avatar || './assets/img/avatars/avatar-0.png' }}" class="avatar" [title]="getTitleCurrentUserDisplayName()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
-                  <!-- <a class="nav-link" href="javascript:void(0)" id="navbarUserAccountDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <img src="{{ currentUser?.Avatar || '' }}" class="" [title]="getTitleCurrentUserDisplayName()" />
-                     <!--  <i class="material-icons idas-button-icon">person</i>
-                      <p>
-                          <span class="d-lg-none d-md-block">User Account</span>
-                      </p> --
-                  </a> -->
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserAccountDropdownMenuLink">
-                    <a class="dropdown-item idas-dropdown-item-link" href="#/my-profile">
-                        <i class="material-icons idas-button-icon">manage_accounts</i>
+                    <a class="dropdown-item idas-dropdown-item-link" href="#/profile">
+                        <i class="material-icons">manage_accounts</i>
                         My Profile
                     </a>
                     <a class="dropdown-item" (click)="toggleLogout()" href="#/login">
-                        <i class="material-icons idas-button-icon">logout</i>
+                        <i class="material-icons">logout</i>
                         Logout
                     </a>
                   </div>

@@ -54,6 +54,10 @@
   border-bottom: 3px solid $idas-color-heading-background-secondary;
   border-radius: 12px;
   padding: 5px 0 5px 10px;
+  i {
+    margin: 0 0 0 10px;
+    padding: 0 0 0 0;
+  }
   .btn-idas-manage-task-edit {
     color: $idas-color-whitesmoke;
     background-color: $idas-color-action-edit;
@@ -214,7 +218,7 @@
       float: right;
       font-size: 0.95em;
       margin: 0 0 0 0;
-      padding: 35px 5px 5px 5px;
+      padding: 8px 5px 5px 5px;
       width: 100%;
       i {
         display: inline;
