@@ -1,14 +1,18 @@
+import { GeneralUtils } from '../utilities/general-utils';
 import { BaseModel } from './base/base-model';
 import { Project } from './project/project';
+import { CalendarEvent } from './scheduling/calendar-event';
 import { Task } from './task/task';
 export class FileAttachment extends BaseModel {
-  ProjectId?: number;
-  TaskId?: number;
+  ProjectId: number;
+  TaskId: number;
+  CalendarEventId: number;
   FileName: string;
-  FileSize?: number;
+  FileSize: number;
+  Url?: string;
   Project: Project;
   Task: Task;
-  Url?: string;
+  CalendarEvent: CalendarEvent;
 
   constructor(
     id: number,
@@ -17,6 +21,7 @@ export class FileAttachment extends BaseModel {
     FileSize: number,
     ProjectId?: number,
     TaskId?: number,
+    CalendarEventId?: number,
     CreatedBy?: number,
     DateCreated?: Date,
     ModifiedBy?: number,
@@ -35,8 +40,9 @@ export class FileAttachment extends BaseModel {
     );
     this.ProjectId = ProjectId;
     this.TaskId = TaskId;
+    this.CalendarEventId = TaskId;
     this.FileName = FileName;
     this.FileSize = FileSize;
-    this.Url = `#/secure/attachment/${this.ProjectId || this.TaskId}${(this._id) ? `/${this._id}` : ``}/${this.FileName}`;
+    this.Url = GeneralUtils.getFileAttachmentUrl(this);
   }
 }

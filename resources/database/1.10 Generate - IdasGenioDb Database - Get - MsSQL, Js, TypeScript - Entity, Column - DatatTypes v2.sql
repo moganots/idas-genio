@@ -46,6 +46,6 @@ SELECT
 	,[ColumnName] + ': ' + [ColumnJsDataType] + ';' AS [JsClassField]
 FROM [cte]
 WHERE
-	([EntityName] = 'CalendarEvent')
+	([EntityName] = 'FileAttachment')
 ORDER BY
 	[ColumnId]

@@ -12,6 +12,7 @@ import { CalendarViewByWeekComponent } from './calendar-view-by-week/calendar-vi
 import { CalendarViewByWorkWeekComponent } from './calendar-view-by-work-week/calendar-view-by-work-week.component';
 import { CalendarViewByDayComponent } from './calendar-view-by-day/calendar-view-by-day.component';
 import { ChunkPipe } from './shared/pipes/chunk.pipe';
+import { MatMenuModule } from '@angular/material/menu';
 
 export { CalendarConfiguration } from './shared/calendar-configuration/calendar-configuration';
 export { ViewByOption } from './shared/calendar-interfaces/view-by-option';
@@ -26,7 +27,7 @@ export { CalendarViewByDayComponent } from './calendar-view-by-day/calendar-view
 export { ChunkPipe } from './shared/pipes/chunk.pipe';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MatMenuModule],
   declarations: [
     CalendarToolbarComponent,
     CalendarViewByComponent,

@@ -79,55 +79,55 @@ export class DateUtils {
       .trim();
   }
   public static yyyymmddThms = () => {
-    return [DateUtils.yyyymmdd(), DateUtils.Thms()].join('').trim();
+    return [DateUtils.yyyymmdd(), DateUtils.Thms()].join(``).trim();
   }
   public static yyyymmddThmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.Thms()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.Thms()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsms = () => {
-    return [DateUtils.yyyymmdd(), DateUtils.Thmsms()].join('').trim();
+    return [DateUtils.yyyymmdd(), DateUtils.Thmsms()].join(``).trim();
   }
   public static yyyymmddThmsmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.Thmsms()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsmsDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.Thmsms()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsZ0200 = () => {
-    return [DateUtils.yyyymmdd(), DateUtils.ThmsZ0200()].join('').trim();
+    return [DateUtils.yyyymmdd(), DateUtils.ThmsZ0200()].join(``).trim();
   }
   public static yyyymmddThmsZDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.ThmsZ0200()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsZDotSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.ThmsZ0200()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsmsZ0200 = () => {
-    return [DateUtils.yyyymmdd(), DateUtils.ThmsmsZ0200()].join('').trim();
+    return [DateUtils.yyyymmdd(), DateUtils.ThmsmsZ0200()].join(``).trim();
   }
   public static yyyymmddThmsmsZDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.ThmsmsZ0200()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static yyyymmddThmsmsZDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.ThmsmsZ0200()]
-      .join('')
+      .join(``)
       .trim();
   }
   public static dateDiffInDays(startDate: any, endDate: any): number {

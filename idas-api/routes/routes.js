@@ -1,7 +1,7 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
-| Create date:  2021-08-17
+| Create date:  2021-08-19
 | Description:  IDAS - Genio - API - routes utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
@@ -48,6 +48,7 @@ function eRoutes() {
     var routeUserGroupCapacity = require(`./user-group-capacity/api`)(router, config);
     var routeMenuItem = require(`./menu-item/api`)(router, config);
     var routeCalendarEvent = require(`./calendar-event/api`)(router, config);
+    var routeCalendarEventAttendee = require(`./calendar-event-attendee/api`)(router, config);
     var routeUserLocks = require(`./user-locks/api`)(router, config);
     var routeUserTransaction = require(`./user-transaction/api`)(router, config);
     var routeGroupMenuItem = require(`./group-menu-item/api`)(router, config);

@@ -1,5 +1,5 @@
 <table
-  class="calendar-table week-view"
+  class="calendar-table work-week-view"
   *ngIf="calendarService?.viewCalendarDays"
 >
   <thead>
@@ -53,7 +53,31 @@
               calendarDay?.IsFirstDayOfMonth,
             'is-future-date': calendarDay?.IsFutureDate
           }"
-          >{{ calendarDay?.Date?.getDate() }}</span
+          >{{ calendarDay?.Date?.getDate() }}<mat-menu
+          #dayMenu="matMenu"
+          xPosition="after"
+          yPosition="below"
+          class="mat-menu"
+        >
+          <button
+            *ngFor="let menuOption of dayMenuNavOptions"
+            class="btn-calendar"
+            mat-menu-item
+            (click)="onClickCalendarDayMenu(menuOption.name, calendarDay?.Date)"
+          >
+            <i
+              class="material-icons {{ menuOption?.cssClass }}"
+              [ngStyle]="{
+                display:
+                  menuOption?.icon === null ||
+                  menuOption?.icon === undefined
+                    ? 'none'
+                    : 'inline'
+              }"
+              >{{ menuOption?.icon }}</i
+            >{{ menuOption?.title }}
+          </button>
+        </mat-menu></span
         >
       </td>
     </tr>
@@ -66,12 +90,12 @@
       <td *ngFor="let calendarDay of calendarService?.viewCalendarDays">
         <span
           *ngFor="
-            let calendarEvent of getCalendarEventsByTime(
+            let calendarEvent of getCalendarEventsByDateTime(
               calendarDay?.Date,
               operatingHour
             )
           "
-          class="calendar-event week-view"
+          class="calendar-event work-week-view"
           [title]="calendarEvent?.Title"
           [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
         >
@@ -84,6 +108,7 @@
                   ? 'none'
                   : 'inline'
             }"
+            [title]="calendarEvent?.IconTitle"
             >{{ calendarEvent?.Icon }}</i
           >
           {{ calendarEvent?.Title }}</span

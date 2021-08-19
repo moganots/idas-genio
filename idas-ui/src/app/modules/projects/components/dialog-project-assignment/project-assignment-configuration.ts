@@ -3,12 +3,12 @@ export class ProjectAssignmentConfiguration {
   public static pageIcon = 'assignment';
   public static pageRoute = 'project-assignment';
   public static pageRouteTitle = 'Project Assignment(s)';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Project Assignment(s)`;
   public static pageName = `Manage Project Assignment(s)`;
   public static tableHeading = 'Manage Project Assignment(s)';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: '_id', canShow: false, canSort: true, canGroup: false},
     {id: 2, name: 'ProjectAssignmentTypeId', canShow: true, canSort: true, canGroup: false},

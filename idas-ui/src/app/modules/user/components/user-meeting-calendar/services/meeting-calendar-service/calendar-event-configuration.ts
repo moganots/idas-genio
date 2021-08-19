@@ -1,14 +1,14 @@
-export class UserCalendarEventConfiguration {
+export class CalendarEventConfiguration {
   public static identifier = 'calendar-event';
   public static pageIcon = 'event';
   public static pageRoute = 'schedule';
   public static pageRouteTitle = 'My Schedule';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Schedule`;
   public static pageName = `Manage Schedule`;
   public static tableHeading = 'Manage Schedule';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: `_id` , canShow: false, canSort: true, canGroup: false},
     {id: 2, name: `CalendarEventTypeId` , canShow: true, canSort: true, canGroup: false},

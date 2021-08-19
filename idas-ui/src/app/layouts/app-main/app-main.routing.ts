@@ -34,7 +34,7 @@ import {
   UserProfileComponent,
   UserProfileConfiguration,
   UserMeetingCalendarComponent,
-  UserCalendarEventConfiguration,
+  CalendarEventConfiguration,
   UsersComponent,
   UsersConfiguration,
 } from 'app/modules/user/users.module';
@@ -68,7 +68,7 @@ export const AppMainRoutes: Routes = [
     component: UserInboxComponent,
   },
   {
-    path: UserCalendarEventConfiguration.pageRoute,
+    path: CalendarEventConfiguration.pageRoute,
     pathMatch: 'full',
     component: UserMeetingCalendarComponent,
   },

@@ -137,7 +137,7 @@ export class BaseDataComponent extends BaseComponent {
       });
   }
   mapLookupValue(value: LookupValue) {
-    const name = `${value.Value || value.Value2 || value.Value3 || ''}`;
+    const name = `${value.Value || value.Value2 || value.Value3 || ``}`;
     return {
       id: value._id,
       displayValue: name,
@@ -173,7 +173,7 @@ export class BaseDataComponent extends BaseComponent {
       column.controlType === `select`
     ) {
       column.filteredLookupValues = control.valueChanges.pipe(
-        startWith(''),
+        startWith(``),
         map((value) => this.filterBy(column, value))
       );
     }
@@ -261,7 +261,7 @@ export class BaseDataComponent extends BaseComponent {
       : [];
   }
   getFilterValue(filterValue: any, column: DataColumn): any {
-    return this.getFormControlFieldValue(column) || filterValue || '';
+    return this.getFormControlFieldValue(column) || filterValue || ``;
   }
   getFormControlFieldValue(column: DataColumn): any {
     return (
@@ -271,13 +271,13 @@ export class BaseDataComponent extends BaseComponent {
     ).value;
   }
   filterById(value: any, filterValue: any): unknown {
-    return String(value.id || value._id || '').includes(
+    return String(value.id || value._id || ``).includes(
       this.toLocaleLowerCaseTrim(filterValue)
     );
   }
   filterByDisplayValue(value: any, filterValue: any): unknown {
     return this.toLocaleLowerCaseTrim(
-      String(value.displayValue || value || '')
+      String(value.displayValue || value || ``)
     ).includes(this.toLocaleLowerCaseTrim(filterValue));
   }
   getDisplayWithValue(event: any) {

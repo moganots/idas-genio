@@ -3,12 +3,12 @@ export class UserProfileConfiguration {
   public static pageIcon = 'manage_accounts';
   public static pageRoute = 'profile';
   public static pageRouteTitle = 'My Profile';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Profile`;
   public static pageName = `Manage Profile`;
   public static tableHeading = 'Manage Profile';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     // Fields : Personal Details
     {id: 1, name: 'SalutationId', canShow: true, canSort: true, canGroup: false},

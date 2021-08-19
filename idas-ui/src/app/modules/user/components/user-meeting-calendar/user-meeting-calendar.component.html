@@ -4,7 +4,7 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger idas-main-card-header">
+          <div class="card-header card-header-danger idas-main-card-header" style="padding: 17px 0 0 0;">
             <i class="material-icons">{{ pageIcon }}</i>
             <h4 class="card-title">{{ pageTitle }}</h4>
             <p class="category"></p>
@@ -18,9 +18,7 @@
                 (click)="onDataRefresh()"
                 title="{{ getButtonTitleDataRefresh() }}"
               >
-                <i class="material-icons" style="margin: 0 0 0 5px"
-                  >autorenew</i
-                >
+                <i class="material-icons">autorenew</i>
               </button>
               <button
                 mat-icon-button
@@ -33,7 +31,7 @@
                 (click)="onClickCreate()"
                 title="{{ getButtonTitleAdd() }}"
               >
-                <i class="material-icons" style="margin: 0 0 0 5px">add</i>
+                <i class="material-icons">add</i>
               </button>
             </span>
           </div>
@@ -41,16 +39,16 @@
             <app-calendar-toolbar></app-calendar-toolbar>
             <span [ngSwitch]="calendarService?.viewByOption?.name">
               <span *ngSwitchCase="'Month'">
-                <app-calendar-view-by-month></app-calendar-view-by-month>
+                <app-calendar-view-by-month [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-month>
               </span>
               <span *ngSwitchCase="'Week'">
-                <app-calendar-view-by-week></app-calendar-view-by-week>
+                <app-calendar-view-by-week [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-week>
               </span>
               <span *ngSwitchCase="'Work Week'">
-                <app-calendar-view-by-work-week></app-calendar-view-by-work-week>
+                <app-calendar-view-by-work-week [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-work-week>
               </span>
               <span *ngSwitchCase="'Day'">
-                <app-calendar-view-by-day></app-calendar-view-by-day>
+                <app-calendar-view-by-day [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-day>
               </span>
             </span>
           </div>

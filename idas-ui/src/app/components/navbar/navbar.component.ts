@@ -138,7 +138,7 @@ export class NavbarComponent extends CommonComponent implements OnInit {
   getTitle() {
     let titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee.charAt(0) === '#') {
-      titlee = titlee.slice(2).replace(/[0-9]/g, '');
+      titlee = titlee.slice(2).replace(/[0-9]/g, ``);
     }
 
     // tslint:disable-next-line:prefer-for-of

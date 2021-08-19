@@ -3,12 +3,12 @@ export class EmployeesConfiguration {
   public static pageIcon = 'groups';
   public static pageRoute = 'employees';
   public static pageRouteTitle = 'My Employees';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Employees`;
   public static pageName = `Manage Employees`;
   public static tableHeading = 'Manage Employees';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: '_id', canShow: false, canSort: true, canGroup: false},
     {id: 2, name: 'SalutationId', canShow: true, canSort: true, canGroup: false},

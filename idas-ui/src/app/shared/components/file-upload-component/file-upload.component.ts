@@ -12,7 +12,7 @@ import { GeneralUtils } from 'app/shared/utilities/general-utils';
   styleUrls: ['./file-upload.component.scss'],
   providers: [AuthenticationService, FileSizePipe],
 })
-export class FileUploadComponent {
+export class FileUploadComponent implements OnInit {
   @Input() ProjectId?: number;
   @Input() TaskId?: number;
   @Input() files: FileAttachment[] = [];
@@ -27,6 +27,8 @@ export class FileUploadComponent {
     });
   }
 
+  ngOnInit(): void {}
+
   uploadFile(event) {
     // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < event.length; index++) {
@@ -39,7 +41,6 @@ export class FileUploadComponent {
         createdBy: this.currentUser,
         DateCreated: element.lastModifiedDate
       } as unknown as FileAttachment;
-      console.log(file)
       file.Url = GeneralUtils.getFileAttachmentUrl(file);
       this.files.push(file);
     }

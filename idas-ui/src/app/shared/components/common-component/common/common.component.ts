@@ -97,22 +97,22 @@ export class CommonComponent {
     return GeneralUtils.isNotEmptyString(value);
   }
   splitCamelCase(value: string): string {
-    return (value || '').trim().length === 0
-      ? ''
-      : (value || '').trim().replace(/([a-z])([A-Z])/g, '$1 $2');
+    return (value || ``).trim().length === 0
+      ? ``
+      : (value || ``).trim().replace(/([a-z])([A-Z])/g, '$1 $2');
   }
   splitCamelCaseAndSpecialCharacters(value: string): string {
-    return (value || '').trim().length === 0
-      ? ''
-      : (value || '').trim().replace(/([a-z])([A-Z])([_-])/g, '$1 $2 $3');
+    return (value || ``).trim().length === 0
+      ? ``
+      : (value || ``).trim().replace(/([a-z])([A-Z])([_-])/g, '$1 $2 $3');
   }
   capitalizeFirstLetter(value: string): string {
-    return (value || '').trim().length === 0
-      ? ''
+    return (value || ``).trim().length === 0
+      ? ``
       : value.charAt(0).toLocaleUpperCase() + value.slice(1);
   }
   toLocaleLowerCase(value: any) {
-    return String(value || '').toLocaleLowerCase();
+    return String(value || ``).toLocaleLowerCase();
   }
   toLocaleLowerCaseTrim(value: any) {
     return this.toLocaleLowerCase(value).trim();

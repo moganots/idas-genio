@@ -3,12 +3,12 @@ export class ProjectsConfiguration {
   public static pageIcon = 'auto_awesome_motion';
   public static pageRoute = 'projects';
   public static pageRouteTitle = 'My Projects';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Projects`;
   public static pageName = `Manage Projects`;
   public static tableHeading = 'Manage Projects';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: '_id', canShow: false, canSort: true, canGroup: false},
     {id: 2, name: 'Code', canShow: true, canSort: true, canGroup: false},

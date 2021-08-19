@@ -61,7 +61,7 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     this.onOpenCreateEditDialog(element, index);
   }
   getTitleEditButton(element: any, index?: number) {
-    return `${['Edit', this.capitalizeFirstLetter(this.entityName || '')/*, `(${index})`*/].join(' ').trim()}`;
+    return `${['Edit', this.capitalizeFirstLetter(this.entityName || ``)/*, `(${index})`*/].join(' ').trim()}`;
   }
   hideEditButton(){
     // ToDo: Check current user's permissions
@@ -72,7 +72,7 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     this.delete.emit(element);
   }
   getTitleDeleteButton(element: any, index?: number) {
-    return `${['Delete', this.capitalizeFirstLetter(this.entityName || '')/*, `(${index})`*/].join(' ').trim()}`;
+    return `${['Delete', this.capitalizeFirstLetter(this.entityName || ``)/*, `(${index})`*/].join(' ').trim()}`;
   }
   hideDeleteButton(){
     // ToDo: Check current user's permissions
@@ -87,7 +87,7 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
   }
   hideManageUserAccountButton(){
     // ToDo: Check current user's permissions
-    return !['user'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''));
+    return !['user'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``));
   }
   getManageUserAccountIcon(element: any, index?: number) {
     return (element[`IsLocked`]) ? `lock_open` : `lock`;
@@ -101,7 +101,7 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
   }
   hideManageEmployeeButton(){
     // ToDo: Check current user's permissions
-    return !['employee'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''));
+    return !['employee'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``));
   }
   getManageEmployeeIcon(element: any, index?: number) {
     return (element[`IsTerminated`]) ? `person_add` : `person_off`;
@@ -111,11 +111,11 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     this.manageProjectTasks.emit({index, element});
   }
   getTitleManageProjectTaskButton(element: any, index?: number) {
-    return [`Add`, (this.capitalizeFirstLetter(this.entityName || '')), `Task`].join(' ').trim();
+    return [`Add`, (this.capitalizeFirstLetter(this.entityName || ``)), `Task`].join(' ').trim();
   }
   hideManageProjectTaskButton(element: any) {
-    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || '');
-    return !(['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''))
+    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || ``);
+    return !(['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``))
       && ['created', 'not started', 'started', 're-started', 'in progress'].includes(status));
   }
   onClickManageProjectAssignmentButton(element: any, index?: number): void {
@@ -123,11 +123,11 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     this.manageProjectAssignments.emit({index, element});
   }
   getTitleManageProjectAssignmentButton(element: any, index?: number) {
-    return `${[this.capitalizeFirstLetter(this.entityName || ''), 'Assignment(s)'].join(' ').trim()}`;
+    return `${[this.capitalizeFirstLetter(this.entityName || ``), 'Assignment(s)'].join(' ').trim()}`;
   }
   hideManageProjectAssignmentButton(element: any, index?: number) {
-    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || '');
-    return !(['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ''))
+    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || ``);
+    return !(['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``))
       && ['created', 'not started', 'started', 're-started', 'in progress'].includes(status));
   }
   onClickManageProjectReInstateButton(element: any, index?: number): void {
@@ -135,11 +135,11 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     this.manageProjectReInstate.emit({index, element});
   }
   getTitleManageProjectReInstateButton(element: any, index?: number) {
-    return [`Re-Instate`, (this.capitalizeFirstLetter(this.entityName || ''))].join(' ').trim();
+    return [`Re-Instate`, (this.capitalizeFirstLetter(this.entityName || ``))].join(' ').trim();
   }
   hideManageProjectReInstateButton(element: any, index?: number) {
-    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || '');
-    return !(['project'].includes((this.entityName || ''))
+    const status = this.toLocaleLowerCaseTrim(this.getLookupValueById(element[`StatusId`]).Value || ``);
+    return !(['project'].includes((this.entityName || ``))
       && ['blocked', 'completed', 'done'].includes(status));
   }
   onClickManageParentTaskButton(element: any, index?: number) {
@@ -150,7 +150,7 @@ export class DataViewTableSimpleComponent extends BaseDataViewComponent implemen
     return [`Create`, `sub-task`].join(' ').trim();
   }
   hideManageParentTaskButton(element: any, index?: number) {
-    return !(['task'].includes(this.toLocaleLowerCaseTrim(this.entityName || '')));
+    return !(['task'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``)));
   }
   onOpenCreateEditDialog(element?: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);

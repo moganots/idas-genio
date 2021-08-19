@@ -216,10 +216,8 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     );
   }
   onClickSave() {
-    console.log(this.updates);
     if (this.hasChanges() && this.dataService) {
       this.setChanges();
-      console.log(this.selected);
       this.dataService
         .CreateUpdateDelete(this.action, this.selected)
         .pipe(first())

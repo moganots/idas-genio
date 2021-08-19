@@ -20,8 +20,8 @@ import {
 })
 export class AppMainLoginComponent extends CommonComponent {
   formLogin: FormGroup;
-  uid = '';
-  password = '';
+  uid = ``;
+  password = ``;
   isBusy: boolean;
   authError: boolean;
   todaysDate = Date.now();

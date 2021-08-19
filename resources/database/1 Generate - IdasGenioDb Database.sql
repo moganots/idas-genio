@@ -1083,7 +1083,6 @@ CREATE TABLE [dbo].[CalendarEvent](
 	[IsAllDayEvent] [bit]  NULL,
 	[Location] [nvarchar] (max) NULL,
 	[Description] [nvarchar] (max) NULL,
-	[EventAttendeeId] [bigint]  NULL,
 	[IsActive] [bit]  NULL,
 	[CreatedBy] [bigint]  NULL,
 	[DateCreated] [datetime]  NULL,
@@ -1096,6 +1095,28 @@ CREATE TABLE [dbo].[CalendarEvent](
 ) ON [PRIMARY]
 GO
 PRINT ('>> Completed > Create > Table > [dbo].[CalendarEvent]')
+GO
+
+-- Create the [dbo].[CalendarEventAttendee] table
+CREATE TABLE [dbo].[CalendarEventAttendee](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[CalendarEventId] [bigint]  NOT NULL,
+	[AttendeeId] [bigint]  NOT NULL,
+	[IsAccepted] [bit]  NULL,
+	[IsRejected] [bit]  NULL,
+	[IsTentative] [bit]  NULL,
+	[IsActive] [bit]  NULL,
+	[CreatedBy] [bigint]  NULL,
+	[DateCreated] [datetime]  NULL,
+	[ModifiedBy] [bigint]  NULL,
+	[DateModified] [datetime]  NULL,
+ CONSTRAINT [PK_CalendarEventAttendee] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create > Table > [dbo].[CalendarEventAttendee]')
 GO
 
 -- Create the [dbo].[UserLocks] table
@@ -1348,7 +1369,7 @@ BEGIN
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
 		-- User
-		ELSE IF(@ColumnName IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'EventAttendeeId'))
+		ELSE IF(@ColumnName IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'AttendeeId'))
 		BEGIN
 			SET @ReferenceTableName = 'User';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
@@ -4285,119 +4306,140 @@ JOIN [dbo].[ProjectStatus] AS [psts] ON ([tsk].[ProjectId] = [psts].[ProjectId])
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskStatus]')
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
--- INSERT >> Test >> Administrator(s), Employee(s), Client(s), Supplier(s) > ([dbo].[CalendarEvent])
+-- INSERT >> Test >> Calendar Event(s) > ([dbo].[CalendarEvent])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
-;WITH [cte] AS (
-	SELECT	1 AS [Number], 
-			DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 0, 0) AS [StartDate], 
-			DATEADD(DAY, -1, DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0)) AS [EndDate]
-	UNION ALL
-	SELECT	[Number] + 1 AS [Number], 
-			DATEADD(MONTH, -1, [StartDate]) AS [StartDate], 
-			DATEADD(MONTH, -1, [EndDate]) AS [EndDate]
-	FROM [cte]
-	WHERE [Number] < 12
+;WITH [dateVars] AS (
+	SELECT
+		DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0) AS [FirstDayOfCurrentYear]
+		,DATEADD(dd, -1, DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) + 1, 0)) AS [LastDayOfCurrentYear]
 )
-INSERT INTO [dbo].[CalendarEvent]([CalendarEventTypeId],[Title],[Description],[Location],[IsAllDayEvent],[StartDate],[EndDate],[EventAttendeeId],[CreatedBy])
-SELECT DISTINCT
+, [daysIn] AS (
+	SELECT
+		DATEDIFF(DAY, [FirstDayOfCurrentYear], [LastDayOfCurrentYear]) AS [Days]
+	FROM [dateVars]
+)
+, [dates] AS (
+	SELECT
+		1 AS [DayAdd]
+		,(RAND(CHECKSUM(NEWID())) * [Days] + [FirstDayOfCurrentYear]) AS [StartDate]
+		,(RAND(CHECKSUM(NEWID())) * [Days] + [FirstDayOfCurrentYear]) AS [EndDate]
+	FROM [dateVars], [daysIn]
+	UNION ALL
+	SELECT
+		([DayAdd] + 1) AS [DayAdd]
+		,(RAND(CHECKSUM(NEWID())) * [DayAdd] + [StartDate]) AS [StartDate]
+		,(RAND(CHECKSUM(NEWID())) * [DayAdd] + [StartDate]) AS [EndDate]
+	FROM [dateVars], [daysIn], [dates]
+	WHERE
+		([StartDate] <= DATEADD(DAY, 200, [LastDayOfCurrentYear]))
+)
+INSERT INTO [dbo].[CalendarEvent]([CalendarEventTypeId],[Title],[Description],[Location],[IsAllDayEvent],[StartDate],[EndDate],[CreatedBy])
+SELECT
 	[CalendarEventTypeId]
-	,[Title]
-	,[Description]
-	,[Location]
-	,[IsAllDayEvent]
+	,CONCAT([CalendarEventType], ' Meeting') AS [Title]
+	,CONCAT([CalendarEventType], ' Meeting') AS [Description]
+	,'Teams Meeting' AS [Location]
+	,1 AS [IsAllDayEvent]
 	,[StartDate]
 	,[EndDate]
-	,[EventAttendeeId]
-	,[CreatedBy]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
 FROM (
 	SELECT
-		[CalendarEventTypeId]
-		,CONCAT([CalendarEventType], ' Meeting') AS [Title]
-		,CONCAT([CalendarEventType], ' Meeting') AS [Description]
-		,'Teams Meeting' AS [Location]
-		,1 AS [IsAllDayEvent]
-		,CONCAT(CONVERT(VARCHAR, [StartDate], 23), ' ', (RIGHT('00' + CAST(ROUND(RAND() * 8, 0) AS VARCHAR(2)), 2) + ':' + RIGHT('00' + CAST(ROUND(RAND() * 31, 0) AS VARCHAR(2)), 2))) AS [StartDate]
-		,CONCAT(CONVERT(VARCHAR, [EndDate], 23), ' ', (RIGHT('00' + CAST(ROUND(RAND() * 8, 0) AS VARCHAR(2)), 2) + ':' + RIGHT('00' + CAST(ROUND(RAND() * 31, 0) AS VARCHAR(2)), 2))) AS [EndDate]
-		,[u].[_id] AS [EventAttendeeId]
-		,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
-	FROM [cte]
-	CROSS JOIN (
-		SELECT
-			[lv].[_id] AS [CalendarEventTypeId]
-			,[lv].[Value] AS [CalendarEventType]
-		FROM [dbo].[LookupValue] AS [lv], [dbo].[LookupCategory] AS [lc]
-		WHERE
-			([lv].[LookupCategoryId] = [lc].[_id])
-			AND ([lc].[Name] = 'CalendarEventType')
-	) AS [mtg]
-	LEFT JOIN [dbo].[User] AS [u] ON  (
-		-- Action Review
-		([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		-- Board
-		OR ([mtg].[CalendarEventType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
-		-- Broadcast
-		-- Community of Practice
-		-- Consultation
-		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		-- Decision Making
-		-- Governance
-		OR ([mtg].[CalendarEventType] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		-- Idea Generation
-		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		-- Interview
-		OR ([mtg].[CalendarEventType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'good.job@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		-- Introductions
-		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
-		-- Issue Resolution
-		OR ([mtg].[CalendarEventType] IN ('Issue Resolution') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
-		-- One-on-One
-		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
-		-- Planning
-		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		-- Problem Solving
-		-- Progress Check
-		OR ([mtg].[CalendarEventType] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		-- Sensemaking
-		-- Site Visit
-		-- Team Cadence
-		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
-		OR ([mtg].[CalendarEventType] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
-		-- Training
-		-- Workshop
-		OR ([mtg].[CalendarEventType] IN ('Workshop') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
-	)
-) AS [Meetings]
-WHERE
-	([EventAttendeeId] IS NOT NULL);
+		CASE WHEN [EndDate] > [StartDate] THEN [StartDate] ELSE [EndDate] END [StartDate]
+		,CASE WHEN [StartDate] > [EndDate] THEN [StartDate] ELSE [EndDate] END [EndDate]
+	FROM [dates]
+) AS [dates]
+CROSS JOIN (
+	SELECT
+		[lv].[_id] AS [CalendarEventTypeId]
+		,[lv].[Value] AS [CalendarEventType]
+	FROM [dbo].[LookupValue] AS [lv], [dbo].[LookupCategory] AS [lc]
+	WHERE
+		([lv].[LookupCategoryId] = [lc].[_id])
+		AND ([lc].[Name] = 'CalendarEventType')
+) AS [cet]
+OPTION (MAXRECURSION 9999);
 
+GO
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[CalendarEvent]')
+GO
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+-- INSERT >> Test >> Calendar Event(s), Attendee (Administrator, Employee, Client, Supplier) > ([dbo].[CalendarEventAttendee])
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [dbo].[CalendarEventAttendee]([CalendarEventId], [AttendeeId], [CreatedBy])
+SELECT
+	[ce].[_id] AS [CalendarEventId]
+	,[u].[_id] AS [AttendeeId]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[CalendarEvent] AS [ce]
+JOIN [dbo].[LookupValue] AS [cet] ON ([ce].[CalendarEventTypeId] = [cet].[_id])
+JOIN [dbo].[User] AS [u] ON (
+	-- Action Review
+	([cet].[Value] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	OR ([cet].[Value] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Action Review') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	-- Board
+	OR ([cet].[Value] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Board') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za'))
+	-- Broadcast
+	-- Community of Practice
+	-- Consultation
+	OR ([cet].[Value] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	OR ([cet].[Value] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Consultation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	-- Decision Making
+	-- Governance
+	OR ([cet].[Value] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	-- Idea Generation
+	OR ([cet].[Value] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	OR ([cet].[Value] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Idea Generation') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	-- Interview
+	OR ([cet].[Value] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'good.job@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Interview') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	-- Introductions
+	OR ([cet].[Value] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
+	OR ([cet].[Value] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
+	OR ([cet].[Value] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
+	OR ([cet].[Value] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@closecorporation.co.za', 'info@thandindabaattorneys.co.za'))
+	OR ([cet].[Value] IN ('Introductions') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za', 'info@privatecompany.co.za', 'info@thandindabaattorneys.co.za'))
+	-- Issue Resolution
+	OR ([cet].[Value] IN ('Issue Resolution') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@thandindabaattorneys.co.za'))
+	-- One-on-One
+	OR ([cet].[Value] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za'))
+	-- Planning
+	OR ([cet].[Value] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	OR ([cet].[Value] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Planning') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	-- Problem Solving
+	-- Progress Check
+	OR ([cet].[Value] IN ('Governance') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	-- Sensemaking
+	-- Site Visit
+	-- Team Cadence
+	OR ([cet].[Value] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+	OR ([cet].[Value] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	OR ([cet].[Value] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@closecorporation.co.za'))
+	OR ([cet].[Value] IN ('Team Cadence') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'good.job@genio.idas.co.za', 'info@privatecompany.co.za'))
+	-- Training
+	-- Workshop
+	OR ([cet].[Value] IN ('Workshop') AND [u].[EmailAddress] IN ('jane.doe@genio.idas.co.za', 'john.doe@genio.idas.co.za', 'bad.job@genio.idas.co.za', 'good.job@genio.idas.co.za', 'joe.soap@genio.idas.co.za'))
+);
+
+GO
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[CalendarEventAttendee]')
 GO
 
 PRINT ('>> Completed > INSERT >> Default Data Setup')
@@ -4465,6 +4507,7 @@ SELECT '[dbo].[Task]' AS [TableName], * FROM [dbo].[Task]
 SELECT '[dbo].[TaskAssignment]' AS [TableName], * FROM [dbo].[TaskAssignment]
 SELECT '[dbo].[TaskStatus]' AS [TableName], * FROM [dbo].[TaskStatus]
 SELECT '[dbo].[CalendarEvent]' AS [TableName], * FROM [dbo].[CalendarEvent]
+SELECT '[dbo].[CalendarEventAttendee]' AS [TableName], * FROM [dbo].[CalendarEventAttendee]
 SELECT '[dbo].[FileAttachment]' AS [TableName], * FROM [dbo].[FileAttachment]
 SELECT '[dbo].[EntityChangeHistory]' AS [TableName], * FROM [dbo].[EntityChangeHistory]
 

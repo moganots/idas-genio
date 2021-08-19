@@ -127,7 +127,6 @@ export class TaskComponent extends PageComponent implements OnInit {
                 this.setTaskLookups(lookupValues, task);
                 this.setCreatedModifiedUser(users, task);
                 this.task = task;
-                console.log(this.task);
               });
             // Get (Set) Status / Priority dropdown value(s)
             this.statuses = lookupValues.filter(

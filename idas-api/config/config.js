@@ -16,5 +16,6 @@ module.exports = {
     apiHost: `localhost`,
     apiPort: `4238`,
     companyName: `IDAS`,
-    applicationName: `Genio`
+    applicationName: `Genio`,
+    fileAttachmentRouterLink: `#/secure/attachment`
 }

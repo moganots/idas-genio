@@ -31,8 +31,8 @@ export class PageComponent extends BaseDataViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pageIcon = ((this.pageIcon || '').trim() || '' || 'home');
-    this.pageTitle = ((this.pageTitle || '').trim() || '' || 'Page').replace(new RegExp('-'), ' ').replace(new RegExp('/'), ' > ');
+    this.pageIcon = ((this.pageIcon || ``).trim() || `` || 'home');
+    this.pageTitle = ((this.pageTitle || ``).trim() || `` || 'Page').replace(new RegExp('-'), ' ').replace(new RegExp('/'), ' > ');
   }
 
 }

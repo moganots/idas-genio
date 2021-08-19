@@ -1,3 +1,6 @@
+@import "./colors.scss";
+@import "./fonts.scss";
+
 .calendar-table {
   background-color: #ffffff;
   border-collapse: collapse;
@@ -130,6 +133,7 @@
 }
 
 .calendar-day {
+  border-radius: 12px;
   color: #000000;
   cursor: pointer;
   font-size: 0.8em;
@@ -137,23 +141,27 @@
   height: 15vh;
   text-align: left;
   span {
-    color: #000000;
     float: left;
-    font-size: 0.8em;
+    font-size: 1em;
     text-align: left;
     &.day {
+      background-color: #1e90ff;
+      border-radius: 12px;
+      color: #ffffff;
       float: left;
+      font-size: 1em;
       margin: 0 0 3px 0;
+      padding: 6px;
     }
     &.count {
-      background-color: #1e90ff;
-      border-radius: 8px;
+      background-color: #f44336;
+      border-radius: 12px;
       color: #ffffff;
       float: right;
       font-size: 0.9em;
       font-weight: bold;
       margin: 0 0 3px 0;
-      padding: 3px;
+      padding: 8px;
     }
     &.show-more {
       border: 1px solid #1e90ff;
@@ -174,8 +182,10 @@
     }
     &.is-today,
     &.is-first-day-of-month {
-      color: #1e90ff;
-      font-size: 1.15em;
+      background-color: #1e90ff;
+      color: #ffffff;
+      font-size: 1.25em;
+      font-weight: bold;
     }
     &.is-future-date {
       color: #b0c4de;
@@ -231,12 +241,13 @@
   border-right: 5px solid #1e90ff;
   color: #000000;
   display: inline-block;
-  font-size: 0.85em;
-  font-weight: normal;
   overflow: hidden;
   padding: 2px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  span {
+    color: #000000;
+  }
   i {
     display: inline-block;
     height: auto;
@@ -253,7 +264,8 @@
   &.week-view,
   &.work-week-view,
   &.day-view {
-    font-size: 0.85em;
+    color: #000000;
+    font-size: 0.9em;
   }
   &.month-view {
     width: 9.5vw;
@@ -266,5 +278,27 @@
   }
   &.day-view {
     width: 69.4vw;
+  }
+}
+
+.calendar-day.mat-menu {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+.btn-calendar {
+  font-family: $OpenSans_Light;
+  font-size: 0.95em;
+  margin: 0 0 0 0;
+  padding: 0 5px 0 5px;
+  text-align: left;
+  vertical-align: middle;
+  i,
+  img {
+    height: auto;
+    font-size: 20px;
+    margin: 0 0 0 0;
+    padding: 0 3px 0 0;
+    text-align: left;
+    vertical-align: middle;
   }
 }

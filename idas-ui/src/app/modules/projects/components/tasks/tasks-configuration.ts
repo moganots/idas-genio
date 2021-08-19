@@ -3,12 +3,12 @@ export class TasksConfiguration {
   public static pageIcon = 'tune';
   public static pageRoute = 'tasks';
   public static pageRouteTitle = 'My Tasks';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Tasks`;
   public static pageName = `Manage Tasks`;
   public static tableHeading = 'Manage Tasks';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: '_id', canShow: false, canSort: true, canGroup: false},
     {id: 2, name: 'ProjectId', canShow: true, canSort: true, canGroup: false},

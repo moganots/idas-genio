@@ -42,7 +42,7 @@ public User = [{UserId:1,UserTypeId:471,EmailAddress:'root@genio.idas.co.za',Pas
 // tslint:disable-next-line:max-line-length
 public UserGroup = [{_id:1,UserId:1,GroupId:54,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:2,UserId:1,GroupId:55,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:3,UserId:1,GroupId:56,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:4,UserId:1,GroupId:57,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:5,UserId:1,GroupId:58,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:6,UserId:2,GroupId:54,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:7,UserId:3,GroupId:58,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:8,UserId:4,GroupId:55,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:9,UserId:5,GroupId:55,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:10,UserId:6,GroupId:56,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:11,UserId:7,GroupId:56,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:12,UserId:8,GroupId:56,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:13,UserId:9,GroupId:56,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'},{_id:14,UserId:10,GroupId:56,CreatedBy:1,DateCreated:'2021-04-08T12:01:02.967'}];
 // tslint:disable-next-line:max-line-length
-public MenuItem = [[{_id:1,Path:'\/dashboard',Title:'Dashboard',Icon:'dashboard',Configuration:'DashboardConfiguration',Component:'DashboardComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:2,Path:'\/profile',Title:'My Profile',Icon:'person',Configuration:'UserProfileConfiguration',Component:'UserProfileComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:3,Path:'\/notifications',Title:'My Notifications',Icon:'circle_notifications',Configuration:'UserNotificationsConfiguration',Component:'UserNotificationsComponent',IsActive:false,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:4,Path:'\/inbox',Title:'My Inbox',Icon:'mail_outline',Configuration:'UserInboxConfiguration',Component:'UserInboxComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:5,Path:'\/schedule',Title:'My Schedule',Icon:'event',Configuration:'UserCalendarEventConfiguration',Component:'UserMeetingCalendarComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:6,Path:'\/projects',Title:'My Projects',Icon:'auto_awesome_motion',Configuration:'ProjectsConfiguration',Component:'UserProjectsComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:7,Path:'\/tasks',Title:'My Tasks',Icon:'tune',Configuration:'TasksConfiguration',Component:'UserTasksComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:8,Path:'\/employees',Title:'Employees',Icon:'groups',Configuration:'EmployeesConfiguration',Component:'EmployeesComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:9,Path:'\/clients',Title:'Clients',Icon:'stream',Configuration:'ClientsConfiguration',Component:'ClientsComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:10,Path:'\/suppliers',Title:'Suppliers',Icon:'reduce_capacity',Configuration:'SuppliersConfiguration',Component:'SuppliersComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:11,Path:'\/users',Title:'Users',Icon:'manage_accounts',Configuration:'UsersConfiguration',Component:'UsersComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'}]];
+public MenuItem = [[{_id:1,Path:'\/dashboard',Title:'Dashboard',Icon:'dashboard',Configuration:'DashboardConfiguration',Component:'DashboardComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:2,Path:'\/profile',Title:'My Profile',Icon:'person',Configuration:'UserProfileConfiguration',Component:'UserProfileComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:3,Path:'\/notifications',Title:'My Notifications',Icon:'circle_notifications',Configuration:'UserNotificationsConfiguration',Component:'UserNotificationsComponent',IsActive:false,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:4,Path:'\/inbox',Title:'My Inbox',Icon:'mail_outline',Configuration:'UserInboxConfiguration',Component:'UserInboxComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:5,Path:'\/schedule',Title:'My Schedule',Icon:'event',Configuration:'CalendarEventConfiguration',Component:'UserMeetingCalendarComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:6,Path:'\/projects',Title:'My Projects',Icon:'auto_awesome_motion',Configuration:'ProjectsConfiguration',Component:'UserProjectsComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:7,Path:'\/tasks',Title:'My Tasks',Icon:'tune',Configuration:'TasksConfiguration',Component:'UserTasksComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:8,Path:'\/employees',Title:'Employees',Icon:'groups',Configuration:'EmployeesConfiguration',Component:'EmployeesComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:9,Path:'\/clients',Title:'Clients',Icon:'stream',Configuration:'ClientsConfiguration',Component:'ClientsComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:10,Path:'\/suppliers',Title:'Suppliers',Icon:'reduce_capacity',Configuration:'SuppliersConfiguration',Component:'SuppliersComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'},{_id:11,Path:'\/users',Title:'Users',Icon:'manage_accounts',Configuration:'UsersConfiguration',Component:'UsersComponent',IsActive:true,CreatedBy:1,DateCreated:'2021-05-07T11:20:14.913'}]];
 // tslint:disable-next-line:max-line-length
 public Entity = [{_id:1,Name:'User',Description:'User',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:2,Name:'Employee',Description:'Employee',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:3,Name:'Department',Description:'Department',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:4,Name:'Client',Description:'Client',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:5,Name:'ContactDetail',Description:'ContactDetail',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:6,Name:'EmployeeSalary',Description:'EmployeeSalary',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:7,Name:'Project',Description:'Project',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:8,Name:'ProjectAssignment',Description:'ProjectAssignment',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:9,Name:'ProjectComment',Description:'ProjectComment',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:10,Name:'ProjectWorkLog',Description:'ProjectWorkLog',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:11,Name:'ProjectStatus',Description:'ProjectStatus',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:12,Name:'Task',Description:'Task',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:13,Name:'TaskAssignment',Description:'TaskAssignment',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:14,Name:'TaskComment',Description:'TaskComment',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:15,Name:'TaskWorkLog',Description:'TaskWorkLog',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:16,Name:'TaskStatus',Description:'TaskStatus',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:17,Name:'LookupCategory',Description:'LookupCategory',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:18,Name:'LookupValue',Description:'LookupValue',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:19,Name:'UserGroup',Description:'UserGroup',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:20,Name:'UserGroupCapacity',Description:'UserGroupCapacity',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:21,Name:'UserLocks',Description:'UserLocks',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:22,Name:'UserTransaction',Description:'UserTransaction',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:23,Name:'Entity',Description:'Entity',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:24,Name:'EntityRelationship',Description:'EntityRelationship',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:25,Name:'EntityUserGroupCapacity',Description:'EntityUserGroupCapacity',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:26,Name:'MenuItem',Description:'MenuItem',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:27,Name:'MenuItemUser',Description:'MenuItemUser',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:28,Name:'GroupMenuItem',Description:'GroupMenuItem',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:29,Name:'Supplier',Description:'Supplier',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:30,Name:'NotificationMessage',Description:'NotificationMessage',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'},{_id:31,Name:'InboxMessage',Description:'InboxMessage',IsActive:true,CreatedBy:1,DateCreated:'2021-05-10T15:39:02.077'}];
 // tslint:disable-next-line:max-line-length
@@ -59,7 +59,7 @@ public InboxMessage = [
 ];
 
   public getModel(entityName: string): any[] {
-    switch((entityName || '').toString().trim().toLocaleLowerCase()) {
+    switch((entityName || ``).toString().trim().toLocaleLowerCase()) {
       case 'employee' : return this.Employee;
       case 'department' : return this.Department;
       case 'client' : return this.Client;
@@ -111,7 +111,7 @@ public InboxMessage = [
     return groupedBy;
   }
   public addModel(entityName: string, model: any[]): any {
-    switch((entityName || '').toString().trim().toLocaleLowerCase()) {
+    switch((entityName || ``).toString().trim().toLocaleLowerCase()) {
       case 'employee' : this.Employee = model; break;
       case 'department' : this.Department = model; break;
       case 'client' : this.Client = model; break;
@@ -144,7 +144,7 @@ public InboxMessage = [
     }
   }
   public updateOrDeleteModel(entityName: string, entityIndex: number, entity: any): any {
-    switch((entityName || '').toString().trim().toLocaleLowerCase()) {
+    switch((entityName || ``).toString().trim().toLocaleLowerCase()) {
       case 'employee' : this.Employee[entityIndex] = entity; return entity;
       case 'department' : this.Department[entityIndex] = entity; return entity;
       case 'client' : this.Client[entityIndex] = entity; return entity;
@@ -210,8 +210,8 @@ public InboxMessage = [
     return entity;
   }
   public onCreateOrUpdate(action: string, entityName: string, entity: any) {
-    action = (action || '').toString().toLocaleLowerCase().trim();
-    switch((entityName || '').toString().trim().toLocaleLowerCase()) {
+    action = (action || ``).toString().toLocaleLowerCase().trim();
+    switch((entityName || ``).toString().trim().toLocaleLowerCase()) {
       case 'employee':
         if(action === 'create') {
           entity.EmployeeNumber = this.getNewEmployeeNumber(entity.PositionId, entity.EmploymentTypeId);
@@ -229,7 +229,7 @@ public InboxMessage = [
   }
   public onCreateOrUpdateOrDelete(action: string, entity: any, userId: number) {
     if(entity) {
-      switch((action || '').toString().toLocaleLowerCase().trim()) {
+      switch((action || ``).toString().toLocaleLowerCase().trim()) {
         case 'add':
         case 'create':
           entity.CreatedBy = userId;
@@ -258,7 +258,7 @@ public InboxMessage = [
     return newEmployeeNumber;
   }
   public getSAIdNumberBirthDate(idNumber: number) {
-    const useIdNumber = (idNumber || '').toString();
+    const useIdNumber = (idNumber || ``).toString();
     if(useIdNumber && useIdNumber.length === 13){
       const year = Number(useIdNumber.substring(0, 2));
       const month = Number(useIdNumber.substring(2, 4));

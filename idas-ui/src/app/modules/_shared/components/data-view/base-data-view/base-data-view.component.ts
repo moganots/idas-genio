@@ -56,16 +56,16 @@ export class BaseDataViewComponent extends BaseDataComponent {
     });
   }
   getButtonTitleDataRefresh() {
-    return `${['Refresh', this.capitalizeFirstLetter(this.entityName || ''), 'View'].join(' ').trim()}`;
+    return `${['Refresh', this.capitalizeFirstLetter(this.entityName || ``), 'View'].join(' ').trim()}`;
   }
   getButtonTitleAdd() {
-    return `${['Add', 'New', this.capitalizeFirstLetter(this.entityName || '')].join(' ').trim()}`;
+    return `${['Add', 'New', this.capitalizeFirstLetter(this.entityName || ``)].join(' ').trim()}`;
   }
   getColumnCssClassCategoryById(column: DataColumn, id?: number) {
-    return ((column.lookupValues || []).find((lv) => lv.id === id) || {cssClassCategory : ''}).cssClassCategory;
+    return ((column.lookupValues || []).find((lv) => lv.id === id) || {cssClassCategory : ``}).cssClassCategory;
   }
   getColumnCssClassById(column: DataColumn, id?: number) {
-    return ((column.lookupValues || []).find((lv) => lv.id === id) || {cssClass : ''}).cssClass;
+    return ((column.lookupValues || []).find((lv) => lv.id === id) || {cssClass : ``}).cssClass;
   }
   getColumnDisplayTitleById(column, id?: number) {
     return ((column.lookupValues || []).find((lv) => lv.id === id) || {title: ``}).title;
@@ -81,7 +81,6 @@ export class BaseDataViewComponent extends BaseDataComponent {
   }
   onApplyFilter(filterValue) {
     if (this.hasData()) {
-      console.log(`applying filter`)
       this.dataSource.filter = this.toLocaleLowerCaseTrim(filterValue);
     }
   }

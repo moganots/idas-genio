@@ -1,6 +1,6 @@
 import { BaseModel } from '../base/base-model';
 import { LookupValue } from '../lookups/lookup-value';
-import { User } from '../user/user';
+import { CalendarEventAttendee } from './calendar-event-attendee';
 export class CalendarEvent extends BaseModel {
   CalendarEventTypeId: number;
   Title: string;
@@ -8,8 +8,9 @@ export class CalendarEvent extends BaseModel {
   EndDate: Date;
   IsAllDayEvent: boolean;
   Location: string;
-  EventAttendeeId: number;
   CalendarEventType: LookupValue;
-  EventAttendee: User;
+  Attendees: CalendarEventAttendee[];
   CssClass: string;
+  Icon: string;
+  IconTitle: string;
 }

@@ -35,16 +35,16 @@ export class UsersService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = UsersConfiguration.identifier;
-    this.clientsService.getAll<Client>().subscribe((clients) => {
+    this.clientsService.getAll<Client>().toPromise().then((clients) => {
       this.clients = clients;
     });
-    this.employeesService.getAll<Employee>().subscribe((employees) => {
+    this.employeesService.getAll<Employee>().toPromise().then((employees) => {
       this.employees = employees;
     });
-    this.suppliersService.getAll<Supplier>().subscribe((suppliers) => {
+    this.suppliersService.getAll<Supplier>().toPromise().then((suppliers) => {
       this.suppliers = suppliers;
     });
-    this.lookupValueService.getAll<LookupValue>().subscribe((lookupValues) => {
+    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => {
       this.lookupValues = lookupValues;
     });
   }

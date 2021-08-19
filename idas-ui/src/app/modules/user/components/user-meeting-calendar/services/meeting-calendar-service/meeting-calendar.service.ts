@@ -8,8 +8,10 @@ import {
   LookupValueService,
   CalendarEvent,
   User,
+  CalendarEventAttendee,
 } from 'app/shared/shared.module';
-import { UserCalendarEventConfiguration } from '../user-meeting-calendar-configuration';
+import { MeetingCalendarAttendeeService } from '../meeting-calendar-attendee/meeting-calendar-attendee.service';
+import { CalendarEventConfiguration } from './calendar-event-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -17,35 +19,41 @@ import { UserCalendarEventConfiguration } from '../user-meeting-calendar-configu
 export class MeetingCalendarService extends DataService {
   lookupValues: LookupValue[] = [];
   users: User[] = [];
+  attendees: CalendarEventAttendee[] = [];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
-    public usersService: UsersService
+    public usersService: UsersService,
+    public calendarEventAttendeeService: MeetingCalendarAttendeeService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = UserCalendarEventConfiguration.identifier;
-    this.lookupValueService.getAll<LookupValue>().subscribe((lookupValues) => {
+    this.entityName = CalendarEventConfiguration.identifier;
+    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => {
       this.lookupValues = lookupValues;
     });
-    this.usersService.getAll<User>().subscribe((users) => {
+    this.usersService.getAll<User>().toPromise().then((users) => {
       this.users = users;
+    });
+    this.usersService.getAll<CalendarEventAttendee>().toPromise().then((attendees) => {
+      this.attendees = attendees;
     });
   }
   mapValues(meetingCalendarEvent: CalendarEvent) {
     meetingCalendarEvent.CalendarEventType = this.lookupValues.find(
       (lookupValue) => lookupValue._id === meetingCalendarEvent?.CalendarEventTypeId
     );
-    meetingCalendarEvent.EventAttendee = this.users.find(
-      (user) => user._id === meetingCalendarEvent?.EventAttendeeId
-    );
+    meetingCalendarEvent.Attendees = this.attendees.filter(attendee => attendee.CalendarEventId === meetingCalendarEvent?._id);
     meetingCalendarEvent.createdBy = this.users.find(
       (user) => user._id === meetingCalendarEvent?.CreatedBy
     );
     meetingCalendarEvent.modifiedBy = this.users.find(
       (user) => user._id === meetingCalendarEvent?.ModifiedBy
     );
-    meetingCalendarEvent.CssClass = `${meetingCalendarEvent.CalendarEventType.CssClassCategory} ${meetingCalendarEvent.CalendarEventType.CssClass}`.trim();
+    meetingCalendarEvent.CssClass = `${meetingCalendarEvent?.CalendarEventType?.CssClassCategory} ${meetingCalendarEvent?.CalendarEventType?.CssClass}`.trim();
+    meetingCalendarEvent.Icon = meetingCalendarEvent?.CalendarEventType?.Icon;
+    meetingCalendarEvent.IconTitle = meetingCalendarEvent?.CalendarEventType?.Value;
+    console.log(meetingCalendarEvent);
     return meetingCalendarEvent;
   }
 }

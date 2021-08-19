@@ -54,7 +54,7 @@ export class BaseService {
     return (this.toLocaleLowerCaseTrim(columnName).endsWith('id')) ? columnName.substring(0, columnName.length - 2) : columnName;
   }
   toLocaleLowerCaseTrim(value: any){
-    return String(value || '').toLocaleLowerCase().trim();
+    return String(value || ``).toLocaleLowerCase().trim();
   }
   protected _handleError(error: HttpErrorResponse | any): Observable<any> {
     // tslint:disable-next-line:max-line-length

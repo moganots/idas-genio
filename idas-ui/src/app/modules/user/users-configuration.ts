@@ -3,12 +3,12 @@ export class UsersConfiguration {
   public static pageIcon = 'manage_accounts';
   public static pageRoute = 'users';
   public static pageRouteTitle = 'Users';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Users`;
   public static pageName = `Manage Users`;
   public static tableHeading = 'Manage Users';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: 'UserId', canShow: false, canSort: true, canGroup: false},
     {id: 2, name: 'Avatar', canShow: true, canSort: true, canGroup: false},

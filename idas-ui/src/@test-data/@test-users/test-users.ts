@@ -357,7 +357,7 @@ export class TestUsers {
         Path: '/schedule',
         Icon: 'event',
         Component: 'UserMeetingCalendarComponent',
-        Configuration: 'UserCalendarEventConfiguration',
+        Configuration: 'CalendarEventConfiguration',
         IsActive: true,
         CreatedBy: 3,
         DateCreated: '2021-07-27T16:54:00.130',
@@ -429,7 +429,7 @@ export class TestUsers {
         DateCreated: '2021-07-27T16:54:00.130',
       },
     ];
-    switch (GeneralUtils.toLocalLowerCaseWithTrim(userType || '')) {
+    switch (GeneralUtils.toLocalLowerCaseWithTrim(userType || ``)) {
       case 'client':
       case 'employee-active':
       case 'supplier':

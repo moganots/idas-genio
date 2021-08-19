@@ -66,4 +66,30 @@ export class CalendarConfiguration {
     `22:00`,
     `23:00`,
   ];
+  public static dayMenuNavOptions = [
+    {
+      name: `Week`,
+      title: `Go to Week`,
+      icon: `calendar_view_month`,
+      cssClass: ``,
+    },
+    {
+      name: `Work Week`,
+      title: `Go to Work Week`,
+      icon: `calendar_view_week`,
+      cssClass: ``,
+    },
+    {
+      name: `Day`,
+      title: `Go to Day`,
+      icon: `calendar_today`,
+      cssClass: ``,
+    },
+    {
+      name: `New Event`,
+      title: `New Event`,
+      icon: `edit_calendar`,
+      cssClass: ``,
+    },
+  ];
 }

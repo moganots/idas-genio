@@ -6,10 +6,10 @@ import { AppMainComponent } from './layouts/app-main/app-main.module';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ``,
     component: AppMainComponent,
     children: [{
-      path: '',
+      path: ``,
       loadChildren: './layouts/app-main/app-main.module#AppMainModule'
     }]
   }

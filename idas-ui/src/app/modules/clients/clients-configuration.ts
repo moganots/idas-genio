@@ -3,12 +3,12 @@ export class ClientsConfiguration {
   public static pageIcon = 'stream';
   public static pageRoute = 'clients';
   public static pageRouteTitle = 'Clients';
-  public static pageRouteCssClass = '';
+  public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Clients`;
   public static pageName = `Manage Clients`;
   public static tableHeading = 'Manage Clients';
-  public static graphHeading = '';
-  public static buildingBlockLabel = '';
+  public static graphHeading = ``;
+  public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: '_id', canShow: false, canSort: true, canGroup: false},
     {id: 2, name: 'SalutationId', canShow: true, canSort: true, canGroup: false},

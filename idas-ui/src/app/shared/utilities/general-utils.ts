@@ -58,18 +58,18 @@ export class GeneralUtils {
       : value;
   }
   public static splitCamelCase(value: string): string {
-    return (value || '').trim().length === 0
-      ? ''
-      : (value || '').trim().replace(/([a-z])([A-Z])/g, '$1 $2');
+    return (value || ``).trim().length === 0
+      ? ``
+      : (value || ``).trim().replace(/([a-z])([A-Z])/g, '$1 $2');
   }
   public static splitCamelCaseAndSpecialCharacters(value: string): string {
-    return (value || '').trim().length === 0
-      ? ''
-      : (value || '').trim().replace(/([a-z])([A-Z])([_-])/g, '$1 $2 $3');
+    return (value || ``).trim().length === 0
+      ? ``
+      : (value || ``).trim().replace(/([a-z])([A-Z])([_-])/g, '$1 $2 $3');
   }
   public static capitalizeFirstLetter(value: string): string {
-    return (value || '').trim().length === 0
-      ? ''
+    return (value || ``).trim().length === 0
+      ? ``
       : value.charAt(0).toLocaleUpperCase() + value.slice(1);
   }
   public static formatDisplayColumnName(column: any): string {
@@ -106,16 +106,24 @@ export class GeneralUtils {
     return this.hasItems(array) ? array[array.length - 1] : null;
   }
   public static getFileAttachmentUrl(file: FileAttachment) {
-    const projectTaskId = file.ProjectId || file.TaskId;
+    const parentType = this.getFileAttachmentParentType(file);
+    const parentId = file.ProjectId || file.TaskId || file.CalendarEventId;
     const fileId = file._id;
     return [
       SharedConfiguration.uriFileAttachment,
-      projectTaskId,
+      parentType,
+      parentId,
       fileId,
       file.FileName,
     ]
       .filter((item) => this.isObjectSet(item))
       .join('/');
+  }
+  public static getFileAttachmentParentType(file: FileAttachment) {
+    if(file){
+      return (file.ProjectId) ? `project` : (file.TaskId) ? `task` : (file.CalendarEventId) ? `calendar` : `file`;
+    }
+    return `file`;
   }
   public static filterByValue<T>(array: T[], filterValue: any) {
     return array.filter((obj) =>
@@ -136,7 +144,7 @@ export class GeneralUtils {
         characters.charAt(Math.floor(Math.random() * charactersLength))
       );
     }
-    return result.join('');
+    return result.join(``);
   }
   public static ObjectNullIf(value: any) {
     return this.isObjectSet(value) ? value : null;
@@ -145,7 +153,7 @@ export class GeneralUtils {
     return this.isNotEmptyString(value) ? value : null;
   }
   public static EmptyStringIfNull(value: any) {
-    return String(value || '');
+    return String(value || ``);
   }
   public static ToJson(obj: any) {
     try {

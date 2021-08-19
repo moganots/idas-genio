@@ -24,7 +24,7 @@ export class SuppliersService extends DataService {
     this.entityName = SuppliersConfiguration.identifier;
     this.lookupValueService
       .getAll<LookupValue>()
-      .subscribe((lookupValues) => {
+      .toPromise().then((lookupValues) => {
         this.lookupValues = lookupValues;
       });
   }

@@ -112,9 +112,11 @@ export { TaskWorkLog } from './domain-models/task/task-work-log';
  */
 import { CalendarDay } from './domain-models/scheduling/calendar-day';
 import { CalendarEvent } from './domain-models/scheduling/calendar-event';
+import { CalendarEventAttendee } from './domain-models/scheduling/calendar-event-attendee';
 
 export { CalendarDay } from './domain-models/scheduling/calendar-day';
 export { CalendarEvent } from './domain-models/scheduling/calendar-event';
+export { CalendarEventAttendee } from './domain-models/scheduling/calendar-event-attendee';
 
 /**
  * Shared Domain Models - Http
@@ -181,6 +183,7 @@ import { EmployeesUtil } from './utilities/employees-util';
 import { PreviousOrNext } from './utilities/enum-previous-next';
 import { FileSizePipe } from './utilities/filesize.pipe';
 import { GeneralUtils } from './utilities/general-utils';
+import { FileDragDropDirective } from './components/file-upload-component/file-upload-directive/file-drag-drop.directive';
 
 export { DateUtils } from './utilities/date-utils';
 export { DefaultObjectUtil } from './utilities/default-object-util';
@@ -191,7 +194,7 @@ export { GeneralUtils } from './utilities/general-utils';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [CommonComponent, FileUploadComponent],
+  declarations: [CommonComponent, FileUploadComponent, FileDragDropDirective],
   providers: [
     DatePipe,
     AlertifyService,
@@ -203,7 +206,8 @@ export { GeneralUtils } from './utilities/general-utils';
     LookupValueService,
     SortingService,
     FileSizePipe,
+    FileDragDropDirective,
   ],
-  exports: [],
+  exports: [CommonComponent, FileUploadComponent, FileDragDropDirective],
 })
 export class SharedModule {}

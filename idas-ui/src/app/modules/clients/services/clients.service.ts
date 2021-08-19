@@ -25,7 +25,7 @@ export class ClientsService extends DataService {
     this.entityName = ClientsConfiguration.identifier;
     this.lookupValueService
       .getAll<LookupValue>()
-      .subscribe((lookupValues) => {
+      .toPromise().then((lookupValues) => {
         this.lookupValues = lookupValues;
       });
   }

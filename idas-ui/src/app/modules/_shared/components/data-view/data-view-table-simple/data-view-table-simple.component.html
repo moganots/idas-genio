@@ -3,7 +3,7 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger idas-main-card-header">
+          <div class="card-header card-header-danger idas-main-card-header" style="padding: 17px 0 0 0;">
             <i class="material-icons">{{ pageIcon }}</i>
             <h4 class="card-title">{{ pageTitle }}</h4>
             <p class="category"></p>
@@ -17,7 +17,7 @@
                 (click)="onDataRefresh()"
                 title="{{ getButtonTitleDataRefresh() }}"
               >
-                <i class="material-icons" style="margin: 0 0 0 5px;">autorenew</i>
+                <i class="material-icons">autorenew</i>
               </button>
               <button
                 mat-icon-button
@@ -30,7 +30,7 @@
                 (click)="onClickCreate()"
                 title="{{ getButtonTitleAdd() }}"
               >
-                <i class="material-icons" style="margin: 0 0 0 5px;">add</i>
+                <i class="material-icons">add</i>
               </button>
             </span>
           </div>

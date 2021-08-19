@@ -44,13 +44,41 @@
                 calendarDay?.IsFirstDayOfMonth,
               'is-future-date': calendarDay?.IsFutureDate
             }"
+            [matMenuTriggerFor]="dayMenu"
           >
             {{ calendarDay?.Date?.getDate() }}
             {{
               (i == 0 && j == 0) || calendarDay?.Date?.getDate() == 1
-                ? (monthNames[calendarDay?.Date?.getMonth()] || '').substring(0, 3)
+                ? (monthNames[calendarDay?.Date?.getMonth()] || "").substring(
+                    0,
+                    3
+                  )
                 : ""
-            }}</span
+            }}<mat-menu
+              #dayMenu="matMenu"
+              xPosition="after"
+              yPosition="below"
+              class="mat-menu"
+            >
+              <button
+                *ngFor="let menuOption of dayMenuNavOptions"
+                class="btn-calendar"
+                mat-menu-item
+                (click)="onClickCalendarDayMenu(menuOption.name, calendarDay?.Date)"
+              >
+                <i
+                  class="material-icons {{ menuOption?.cssClass }}"
+                  [ngStyle]="{
+                    display:
+                      menuOption?.icon === null ||
+                      menuOption?.icon === undefined
+                        ? 'none'
+                        : 'inline'
+                  }"
+                  >{{ menuOption?.icon }}</i
+                >{{ menuOption?.title }}
+              </button>
+            </mat-menu></span
           >
           <span
             class="count"
@@ -78,6 +106,7 @@
                     ? 'none'
                     : 'inline'
               }"
+              [title]="calendarEvent?.IconTitle"
               >{{ calendarEvent?.Icon }}</i
             >
             {{ calendarEvent?.Title }}</span
@@ -90,7 +119,7 @@
                   ? 'inline'
                   : 'none'
             }"
-            [click]=""
+            (click)="onClickShowMore(calendarDay?.Date)"
             >+
             {{
               getCalendarEventsByDate(calendarDay?.Date).slice(3).length

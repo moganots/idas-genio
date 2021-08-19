@@ -186,11 +186,11 @@ export class AppMainComponent extends CommonComponent implements OnInit, AfterVi
     // find & remove "?"
     hostname = hostname.split('?')[0];
 
-    return (hostname || '').toLocaleLowerCase().trim();
+    return (hostname || ``).toLocaleLowerCase().trim();
   }
   getApplicationUrl() {
     const angularRoute = this.location.path();
     const url = window.location.href;
-    return url.replace(angularRoute, '');
+    return url.replace(angularRoute, ``);
   }
 }

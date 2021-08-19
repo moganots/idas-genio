@@ -168,7 +168,7 @@ export class ReferenceValueService {
     return {
       id: user?._id,
       displayValue: user?.DisplayName,
-      title: (user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3 || ''),
+      title: (user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3 || ``),
       cssClassCategory: user?.UserType?.CssClassCategory,
       cssClass: user?.UserType?.CssClass,
       icon: user?.UserType?.Icon,

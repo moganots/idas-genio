@@ -25,7 +25,7 @@ export class EmployeesService extends DataService {
     this.entityName = EmployeesConfiguration.identifier;
     this.lookupValueService
       .getAll<LookupValue>()
-      .subscribe((lookupValues) => {
+      .toPromise().then((lookupValues) => {
         this.lookupValues = lookupValues;
       });
   }
