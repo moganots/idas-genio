@@ -40,9 +40,13 @@ body {
   }
 }
 
+::ng-deep .mat-menu-content, .mat-tab-group-content, .mat-tab-content {
+  padding: 0px !important;
+}
+
 p {
   display: inline-block;
-  text-align: justify;
+  text-align: left;
   vertical-align: middle;
 
   &.idas-task-assign-to-me {
@@ -301,7 +305,7 @@ i {
   display: inline-block;
   height: auto;
   width: 30px;
-  text-align: justify;
+  text-align: left;
   vertical-align: middle;
 
   &.idas-button-icon {
@@ -310,6 +314,7 @@ i {
 
   &.icon-mat-option {
     margin: 0 0 0 5px;
+    padding: 0 0 0 0;
   }
 
   &.btn-idas-task-assign-to-me {
@@ -551,8 +556,9 @@ i {
 img {
   display: inline-block;
   height: auto;
+  margin: 0 0 0 0;
   padding: 0 0 0 0;
-  text-align: justify;
+  text-align: left;
   vertical-align: middle;
 
   &.img10 {
@@ -584,8 +590,10 @@ img {
     width: 30px;
   }
   &.img-mat-option {
+    border-radius: 12px;
     margin: 0 0 0 5px;
-    width: 30px;
+    padding: 0 0 0 0;
+    width: 25px;
   }
   &.img-manage-task-toolbar {
     margin: 0 0 0 5px;
@@ -593,6 +601,7 @@ img {
     width: 30px;
   }
   &.img-task-avatar {
+    border-radius: 12px;
     float: right;
     margin: 2px 0 0 0;
   }
@@ -617,7 +626,7 @@ img {
     width: 35px;
     margin: 0 0 0 0;
     padding: 0 0 25px 10px;
-    text-align: justify;
+    text-align: left;
     vertical-align: middle;
   }
 
@@ -627,14 +636,14 @@ img {
     font-family: $OpenSans_Bold;
     font-size: 1.55em;
     padding: 0 0 25px 15px;
-    text-align: justify;
+    text-align: left;
     vertical-align: middle;
   }
 
   p {
     color: $idas-color-body-background-main;
     display: inline-block;
-    text-align: justify;
+    text-align: left;
     vertical-align: middle;
 
     &.category {
@@ -654,7 +663,7 @@ img {
       width: 35px;
       margin: 0 0 0 0;
       padding: 0 0 25px 10px;
-      text-align: justify;
+      text-align: left;
       vertical-align: middle;
     }
 
@@ -665,7 +674,7 @@ img {
         width: 35px;
         margin: 0 0 0 0;
         padding: 0 0 25px 10px;
-        text-align: justify;
+        text-align: left;
         vertical-align: middle;
       }
     }
@@ -678,7 +687,7 @@ img {
       width: 35px;
       margin: 0 0 0 0;
       padding: 0 0 25px 10px;
-      text-align: justify;
+      text-align: left;
       vertical-align: middle;
     }
   }
@@ -711,7 +720,7 @@ mat-header-cell {
     height: auto;
     padding: 12px 2px 10px 0;
     width: 35px;
-    text-align: justify;
+    text-align: left;
     vertical-align: middle;
   }
 

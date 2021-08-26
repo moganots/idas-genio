@@ -23,21 +23,22 @@ export class LookupValueService extends DataService {
     this.entityName = LookupValueConfiguration.identifier;
     this.lookupCategoryService
       .getAll<LookupCategory>()
-      .subscribe((categories) => {
+      .toPromise()
+      .then((categories) => {
         this.lookupCategories = categories;
       });
   }
-  mapValues(value: LookupValue) {
-    value.LookupCategory =
+  mapValues(lookupValue: LookupValue) {
+    lookupValue.LookupCategory =
       this.lookupCategories.find(
-        (category) => category._id === value.LookupCategoryId
+        (category) => category?._id === lookupValue?.LookupCategoryId
       ) || DefaultObjectUtil.noLookupCategory();
-    value.CssColorCategory = this.getCssColorCategory(value);
-    value.CssClassCategory = this.getCssClassCategory(value);
-    value.CssColorValue = this.getCssColorValue(value);
-    value.CssClass = this.getCssClass(value);
-    value.Icon = value.Icon;
-    return value;
+      lookupValue.CssColorCategory = this.getCssColorCategory(lookupValue);
+      lookupValue.CssClassCategory = this.getCssClassCategory(lookupValue);
+      lookupValue.CssColorValue = this.getCssColorValue(lookupValue);
+      lookupValue.CssClass = this.getCssClass(lookupValue);
+      lookupValue.Icon = lookupValue.Icon;
+    return lookupValue;
   }
   getCssColorCategory(value: LookupValue) {
     return `$idas-color-${this.getCssClassCategory(value)}`;

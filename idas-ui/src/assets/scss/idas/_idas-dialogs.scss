@@ -1,7 +1,68 @@
-
 @import "./colors.scss";
 @import "./fonts.scss";
-@import './_idas-tables.scss';
+@import "./_idas-tables.scss";
+
+span,
+mat-form-field,
+input,
+mat-input,
+mat-select,
+mat-option,
+mat-autocomplete,
+select {
+  font-size: 1em;
+}
+
+span {
+  mat-form-field {
+    mat-autocomplete {
+      mat-select {
+        mat-option {
+          padding: 0 0 0 0 !important;
+        }
+      }
+
+      mat-option {
+        padding: 0 0 0 0 !important;
+      }
+    }
+  }
+}
+
+mat-option,
+mat-select,
+select {
+  padding: 0 0 0 0 !important;
+}
+
+:host mat-option,
+mat-select,
+select {
+  padding: 0 0 0 0;
+}
+
+mat-checkbox {
+  font-size: 0.9em;
+}
+
+.mat-select-panel-wrap {
+  margin: 28px 0 0 0;
+  pointer-events: auto;
+}
+
+mat-tab-group,
+mat-tab {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: left;
+  vertical-align: middle;
+  div {
+    margin: 6px 8px 0 8px;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+}
 
 .idas-dialog {
   border-radius: 6px;
@@ -23,100 +84,111 @@
 
 .idas-dialog.resize {
   width: 67.3vw;
+  &.calendar-event-dialog {
+    width: 45vw;
+  }
+  &.project-assignment {
+    width: 67.3vw;
+  }
 }
 
-.header, .content, .footer {
+.header,
+.content,
+.footer {
   border-radius: 6px;
   display: table-row;
   width: 100%;
   right: 0%;
 }
 
-.content, .footer {
+.content,
+.footer {
   position: absolute;
 }
 
 .header {
-    background: transparent;
-    background: $idas-color-heading-background-secondary;
-    border-radius: 6px;
+  background: transparent;
+  background: $idas-color-heading-background-secondary;
+  border-radius: 6px;
+  color: $idas-color-body-background-main;
+  height: 12vh;
+  position: relative;
+
+  i {
+    display: inline-block;
+    height: auto;
+    width: 35px;
+    padding: 25px 0 10px 15px;
+    position: fixed;
+    text-align: justify;
+    vertical-align: middle;
+  }
+
+  h4 {
     color: $idas-color-body-background-main;
-    height: 12vh;
-    position: relative;
-  
+    display: inline-block;
+    font-family: $OpenSans_Bold;
+    font-size: 1.55em;
+    padding: 25px 0 10px 50px;
+    position: fixed;
+    text-align: justify;
+    vertical-align: middle;
+  }
+
+  p {
+    color: $idas-color-body-background-main;
+    display: inline-block;
+    position: fixed;
+    text-align: justify;
+    vertical-align: middle;
+
+    &.category {
+      font-family: $OpenSans_Bold;
+      font-size: 1.05em;
+      padding: 55px 0 10px 50px;
+    }
+  }
+
+  span {
+    float: right;
+    padding: 15px 10px 0 0;
+
     i {
-      display: inline-block;
-      height: auto;
-      width: 35px;
-      padding: 25px 0 10px 15px;
-      position: fixed;
-      text-align: justify;
-      vertical-align: middle;
+      padding: 1px 0 10px 10px;
     }
-  
-    h4 {
-        color: $idas-color-body-background-main;
-        display: inline-block;
-        font-family: $OpenSans_Bold;
-        font-size: 1.55em;
-        padding: 25px 0 10px 50px;
-        position: fixed;
-        text-align: justify;
-        vertical-align: middle;
-    }
-
-    p {
-        color: $idas-color-body-background-main;
-        display: inline-block;
-        position: fixed;
-        text-align: justify;
-        vertical-align: middle;
-
-        &.category {
-            font-family: $OpenSans_Bold;
-            font-size: 1.05em;
-            padding: 55px 0 10px 50px;
-        }
-    }
-
-    span {
-      float: right;
-      padding: 15px 10px 0 0;
-
-      i {
-        padding: 1px 0 10px 10px;
-      }
-    }
+  }
 }
 
 .content {
-  height: 70vh;
+  height: 71.5vh;
+  margin: 0 0 0 0;
   overflow-y: auto;
   padding: 12px;
 
   .data-table-view-simple {
-    font-size: 0.90em;
+    font-size: 0.9em;
     height: 100%;
     overflow-x: auto;
     width: 100%;
-  
-    table, .mat-table {
+
+    table,
+    .mat-table {
       // border: 1px gray;
       overflow: auto;
       max-height: 500px;
-  
+
       mat-footer-row,
       mat-header-row,
       mat-row {
-        display:inline-flex;
+        display: inline-flex;
         min-width: 100%;
         width: 100%;
       }
-  
+
       mwlResizable {
         box-sizing: border-box;
       }
-  
+
       mat-cell,
       mat-footer-cell,
       mat-header-cell {
@@ -125,34 +197,34 @@
         flex: none;
         display: block;
       }
-  
+
       mat-header-cell {
         background-color: gray;
         color: whitesmoke;
         font-family: $OpenSans_Bold;
-        font-size: 0.90em;
+        font-size: 0.9em;
         padding: 18px 10px 10px 10px;
         text-align: left;
         vertical-align: middle;
       }
-  
+
       .mat-sort-header-button {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-  
+
       mat-cell {
         display: inline-block;
         font-family: $OpenSans_Light;
-        font-size: 0.90em;
+        font-size: 0.9em;
         overflow: hidden;
         vertical-align: middle;
         white-space: nowrap;
         text-align: left;
         text-overflow: ellipsis;
       }
-  
+
       .data-view-action-buttons-header {
         background-color: white;
       }
@@ -170,48 +242,11 @@
   }
 }
 
-span, mat-form-field, input, mat-input, mat-select, mat-option, mat-autocomplete, select {
-  font-size: 1em;
-}
-
-span {
-  mat-form-field {
-    mat-autocomplete {
-      mat-select {
-        mat-option {
-          padding: 0 0 0 0 !important;
-        }
-      }
-
-      mat-option {
-        padding: 0 0 0 0 !important;
-      }
-    }
-  }
-}
-
-mat-option, mat-select, select {
-  padding: 0 0 0 0 !important;
-}
-
-:host mat-option, mat-select, select {
-  padding:  0 0 0 0;
-}
-
-mat-checkbox {
-  font-size: 0.90em;
-}
-
-.mat-select-panel-wrap {
-  margin: 28px 0;
-  pointer-events: auto;
-}
-
-.btn-idas-dialog-no:hover{
+.btn-idas-dialog-no:hover {
   box-shadow: 0 0 5px $bad-trend;
 }
 
-.btn-idas-dialog-yes:hover{
+.btn-idas-dialog-yes:hover {
   box-shadow: 0 0 5px $good-trend;
 }
 
@@ -225,15 +260,98 @@ mat-checkbox {
 
 .footer {
   background: transparent;
-  bottom: 0;
-  height: 13vh;
-  padding: 0 10px 35px 0;
-  i {
+  bottom: 2.4vh;
+  height: 7vh;
+  padding: 0 5px 0 5px;
+  text-align: left;
+  vertical-align: middle;
+  i,
+  img {
+    height: auto;
+    font-size: 20px;
     margin: 0 0 0 10px;
     padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
   }
 }
 
+.calendar-event-response {
+  float: left;
+  button {
+    float: left;
+    &.accept {
+      border: 1px solid $idas-color-action-create;
+    }
+    &.tentative {
+      border: 1px solid $idas-color-action-review;
+    }
+    &.decline {
+      border: 1px solid $idas-color-action-delete;
+    }
+  }
+  i,
+  img {
+    height: auto;
+    font-size: 20px;
+    margin: 0 0 0 10px;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+  i {
+    &.accept {
+      color: $idas-color-action-create;
+    }
+    &.tentative {
+      color: $idas-color-action-review;
+    }
+    &.decline {
+      color: $idas-color-action-delete;
+    }
+  }
+}
+
+/* .footer.calendar-event-footer {
+  .attendee {
+    button {
+      background-color: red;
+      float: right;
+      i,
+      img {
+        height: auto;
+        font-size: 20px;
+        margin: 0 0 0 10px;
+        padding: 0 0 0 0;
+        text-align: left;
+        vertical-align: middle;
+      }
+      i {
+        &.accept {
+          color: $idas-color-action-create;
+        }
+        &.tentative {
+          color: $idas-color-action-review;
+        }
+        &.decline {
+          color: $idas-color-action-delete;
+        }
+      }
+    }
+    i {
+      &.accept {
+        color: $idas-color-action-create;
+      }
+      &.tentative {
+        color: $idas-color-action-review;
+      }
+      &.decline {
+        color: $idas-color-action-delete;
+      }
+    }
+  }
+} */
+
 .hidden {
-  display:none;
+  display: none;
 }

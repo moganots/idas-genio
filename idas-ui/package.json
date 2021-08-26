@@ -20,6 +20,8 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.1.0",
+    "@angular-material-components/datetime-picker": "^6.0.3",
+    "@angular-material-components/moment-adapter": "^6.0.0",
     "@angular/animations": "10.1.4",
     "@angular/cdk": "10.2.4",
     "@angular/common": "10.1.4",
@@ -86,7 +88,7 @@
     "karma-coverage-istanbul-reporter": "3.0.3",
     "karma-jasmine": "4.0.1",
     "karma-jasmine-html-reporter": "1.5.4",
-    "npm": "^7.20.0",
+    "npm": "^7.21.0",
     "protractor": "7.0.0",
     "ts-node": "9.0.0",
     "tslint": "6.1.3",

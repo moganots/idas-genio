@@ -39,16 +39,16 @@
             <app-calendar-toolbar></app-calendar-toolbar>
             <span [ngSwitch]="calendarService?.viewByOption?.name">
               <span *ngSwitchCase="'Month'">
-                <app-calendar-view-by-month [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-month>
+                <app-calendar-view-by-month [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)" (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"></app-calendar-view-by-month>
               </span>
               <span *ngSwitchCase="'Week'">
-                <app-calendar-view-by-week [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-week>
+                <app-calendar-view-by-week [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)" (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"></app-calendar-view-by-week>
               </span>
               <span *ngSwitchCase="'Work Week'">
-                <app-calendar-view-by-work-week [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-work-week>
+                <app-calendar-view-by-work-week [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)" (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"></app-calendar-view-by-work-week>
               </span>
               <span *ngSwitchCase="'Day'">
-                <app-calendar-view-by-day [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"></app-calendar-view-by-day>
+                <app-calendar-view-by-day [calendarEvents]="calendarEvents" (newCalendarEvent)="onClickCreateNewCalendarEvent($event)" (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"></app-calendar-view-by-day>
               </span>
             </span>
           </div>

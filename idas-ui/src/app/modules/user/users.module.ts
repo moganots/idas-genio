@@ -13,6 +13,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 import { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -26,7 +29,6 @@ import { UsersService } from './services/users.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { CalendarModule } from 'app/shared/components/calendar/calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/user-meeting-calendar/components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
-import { CalendarEventAttendeeConfiguration } from './components/user-meeting-calendar/services/meeting-calendar-attendee/calendar-event-attendee-configuration';
 import { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar-service/meeting-calendar.service';
 import { MeetingCalendarAttendeeService } from './components/user-meeting-calendar/services/meeting-calendar-attendee/meeting-calendar-attendee.service';
 
@@ -66,9 +68,13 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     MatDialogModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule,
+    MatRadioModule,
     SharedModulesModule,
     SharedModule,
-    CalendarModule
+    CalendarModule,
   ],
   declarations: [
     UserInboxComponent,
@@ -76,14 +82,14 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     UserProfileComponent,
     UserMeetingCalendarComponent,
     UsersComponent,
-    DialogCreateEditCalendarEventComponent
+    DialogCreateEditCalendarEventComponent,
   ],
   providers: [
     UsersService,
     NotificationsService,
     InboxService,
     MeetingCalendarService,
-    MeetingCalendarAttendeeService
+    MeetingCalendarAttendeeService,
   ],
 })
 export class UsersModule {}

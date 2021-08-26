@@ -282,13 +282,13 @@ export class BaseDataComponent extends BaseComponent {
   }
   getDisplayWithValue(event: any) {
     if(event){
-      return event.displayValue || event;
+      return event.displayValue || event.Name || event.name || event.DisplayName || event.title || event.Title || event;
     }
     return null;
   }
   onValueChanged(event: any) {
     if (event && event.target) {
-      this.updates[event.target.id] = event.target.value;
+      this.updates[event.target.id] = event.target.value.id || event.target.value._id || event.target.value;
     }
     return;
   }
@@ -303,7 +303,7 @@ export class BaseDataComponent extends BaseComponent {
       )
     ) {
       this.updates[event.source.id] =
-        event.source.value.id || event.source.value;
+        event.source.value.id || event.source.value._id || event.source.value;
     }
     return;
   }

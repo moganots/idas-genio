@@ -3,7 +3,7 @@
 
 .file-upload {
   background-color: #ffffff;
-  border: 1px dashed #dcdcdc;
+  border: 0px dashed #dcdcdc;
   border-radius: 10px;
   padding: 0 0 5px 0;
 
@@ -11,8 +11,7 @@
     border-bottom: 1px dashed #dcdcdc;
     display: flex;
     justify-content: space-between;
-    padding: 5px 10px 5px 5px;
-    width: 100%;
+    padding: 5px;
 
     i {
       margin: 0 0 0 9px;
@@ -24,7 +23,7 @@
       height: auto;
       margin: 0 0 0 0;
       padding: 0 5px 0 0;
-      text-align: justify;
+      text-align: left;
       width: 6%;
       vertical-align: middle;
     }
@@ -33,12 +32,16 @@
       display: inline-block;
       margin: 0 0 0 0;
       padding: 0 0 0 0;
+      text-align: left;
+      vertical-align: middle;
 
       ul, li {
         display: inline-block;
         font-size: 0.95em;
         margin: 0 0 0 0;
         padding: 0 0 0 0;
+        text-align: left;
+        vertical-align: middle;
       }
       li.label {
         font-family: $OpenSans_Bold;
@@ -66,24 +69,23 @@
       vertical-align: middle;      
     }
     &.file-details {
-      display: inline;
+      display: inline-block;
       margin: 0 0 0 0;
       padding: 0 0 0 0;
     }
     &.file-name {
-      display: inline;
+      display: inline-block;
       font-size: 0.75em;
-      width: 100%;
       vertical-align: middle;
     }
-    &.file-dateCreated {
-      display: inline;
+    &.file-date-created {
+      display: inline-block;
       font-size: 0.75em;
       text-align: justify;
       vertical-align: middle;
     }
     &.file-size {
-      display: inline;
+      display: inline-block;
       font-size: 0.75em;
       text-align: justify;
       vertical-align: middle;

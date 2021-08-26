@@ -97,6 +97,7 @@
           class="calendar-event week-view"
           [title]="calendarEvent?.Title"
           [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
+          (click)="onClickEditCalendarEvent(calendarEvent)"
         >
           <i
             class="material-icons {{ calendarEvent?.CssClass }}"

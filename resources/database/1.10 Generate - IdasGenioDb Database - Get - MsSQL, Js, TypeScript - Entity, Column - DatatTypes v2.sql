@@ -44,8 +44,9 @@ SELECT
 	,'{id: ' + CAST([ColumnId] AS VARCHAR(255)) + ', name: `' + [ColumnName] + '` , canShow: ' + CASE WHEN [IsRequired] = 1 THEN 'true' ELSE 'false' END + ', canSort: true, canGroup: false},' AS [Configuration]
 	,[ColumnName] + ': ['''', ' + CASE WHEN [IsRequired] = 1 THEN 'Validators.required' ELSE 'null' END + '],' AS [FormField]
 	,[ColumnName] + ': ' + [ColumnJsDataType] + ';' AS [JsClassField]
+	,[ColumnName] + '?: ' + [ColumnJsDataType] + ',' AS [JsClassConstructorField]
 FROM [cte]
 WHERE
-	([EntityName] = 'FileAttachment')
+	([EntityName] = 'CalendarEvent')
 ORDER BY
 	[ColumnId]

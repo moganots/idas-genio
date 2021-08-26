@@ -48,7 +48,7 @@ export class ProjectsComponent extends PageComponent implements OnInit {
       DialogProjectAssignmentComponent, {
         selected : element || this.selected,
         selectedIndex : index || this.selectedIndex
-      }, () => { this.onDataRefresh(); }, '93vh', '67.3vw');
+      }, () => { this.onDataRefresh(); }, '96vh', '67.3vw');
   }
   onClickProjectTasks(element: any, index?: number) {
 

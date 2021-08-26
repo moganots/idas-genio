@@ -15,6 +15,7 @@ import { GeneralUtils } from 'app/shared/utilities/general-utils';
 export class FileUploadComponent implements OnInit {
   @Input() ProjectId?: number;
   @Input() TaskId?: number;
+  @Input() CalendarEventId?: number;
   @Input() files: FileAttachment[] = [];
   currentUser: User;
 

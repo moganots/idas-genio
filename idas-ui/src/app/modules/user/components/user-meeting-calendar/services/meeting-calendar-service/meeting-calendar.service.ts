@@ -29,31 +29,40 @@ export class MeetingCalendarService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = CalendarEventConfiguration.identifier;
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => {
+    this.lookupValueService.getAll<LookupValue>().toPromise()
+      .then((lookupValues) => {
       this.lookupValues = lookupValues;
     });
-    this.usersService.getAll<User>().toPromise().then((users) => {
+    this.usersService.getAll<User>().toPromise()
+      .then((users) => {
       this.users = users;
     });
-    this.usersService.getAll<CalendarEventAttendee>().toPromise().then((attendees) => {
-      this.attendees = attendees;
-    });
+    this.calendarEventAttendeeService
+      .getAll<CalendarEventAttendee>()
+      .toPromise()
+      .then((attendees) => {
+        this.attendees = attendees;
+      });
   }
   mapValues(meetingCalendarEvent: CalendarEvent) {
     meetingCalendarEvent.CalendarEventType = this.lookupValues.find(
-      (lookupValue) => lookupValue._id === meetingCalendarEvent?.CalendarEventTypeId
+      (lookupValue) =>
+        lookupValue._id === meetingCalendarEvent?.CalendarEventTypeId
     );
-    meetingCalendarEvent.Attendees = this.attendees.filter(attendee => attendee.CalendarEventId === meetingCalendarEvent?._id);
+    meetingCalendarEvent.EventAttendees = this.attendees.filter(
+      (attendee) => attendee?.CalendarEventId === meetingCalendarEvent?._id
+    );
     meetingCalendarEvent.createdBy = this.users.find(
       (user) => user._id === meetingCalendarEvent?.CreatedBy
     );
     meetingCalendarEvent.modifiedBy = this.users.find(
       (user) => user._id === meetingCalendarEvent?.ModifiedBy
     );
-    meetingCalendarEvent.CssClass = `${meetingCalendarEvent?.CalendarEventType?.CssClassCategory} ${meetingCalendarEvent?.CalendarEventType?.CssClass}`.trim();
+    meetingCalendarEvent.CssClass =
+      `${meetingCalendarEvent?.CalendarEventType?.CssClassCategory} ${meetingCalendarEvent?.CalendarEventType?.CssClass}`.trim();
     meetingCalendarEvent.Icon = meetingCalendarEvent?.CalendarEventType?.Icon;
-    meetingCalendarEvent.IconTitle = meetingCalendarEvent?.CalendarEventType?.Value;
-    console.log(meetingCalendarEvent);
+    meetingCalendarEvent.IconTitle =
+      meetingCalendarEvent?.CalendarEventType?.Value;
     return meetingCalendarEvent;
   }
 }

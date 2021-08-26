@@ -169,7 +169,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     dialogComponent: any,
     data?: any,
     afterClosed?: () => void,
-    height: string = '93vh',
+    height: string = '96vh',
     width: string = '38vw',
     top: string = '7vh'
   ): void {

@@ -76,7 +76,7 @@
                         : 'inline'
                   }"
                   >{{ menuOption?.icon }}</i
-                >{{ menuOption?.title }}
+                ><span>{{ menuOption?.title }}</span>
               </button>
             </mat-menu></span
           >
@@ -96,6 +96,7 @@
             class="calendar-event month-view"
             [title]="calendarEvent?.Title"
             [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
+            (click)="onClickEditCalendarEvent(calendarEvent)"
           >
             <i
               class="material-icons {{ calendarEvent?.CssClass }}"

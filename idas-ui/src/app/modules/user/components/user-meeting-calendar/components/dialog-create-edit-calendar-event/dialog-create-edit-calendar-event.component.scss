@@ -1,1 +1,278 @@
-@import './../../../../../../../assets/scss/idas/idas-dialogs';
+@import "./../../../../../../../assets/scss/idas/idas-dialogs";
+
+span,
+mat-form-field,
+input,
+mat-checkbox {
+  display: block;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: left;
+  vertical-align: middle;
+}
+i,
+img {
+  border-radius: 12px;
+  font-size: 23px;
+  height: auto;
+  text-align: left;
+  width: 23px;
+  vertical-align: middle;
+}
+.event {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: left;
+  vertical-align: middle;
+}
+.event.organiser {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: left;
+  vertical-align: middle;
+  i,
+  img {
+    border-radius: 12px;
+    font-size: 23px;
+    height: auto;
+    text-align: left;
+    width: 23px;
+    vertical-align: middle;
+  }
+  i {
+    margin: 0 5px 0 0;
+    padding: 0 0 0 0;
+    &.organiser-type {
+      margin: 0 5px 0 5px;
+      padding: 0 0 0 0;
+    }
+  }
+  img {
+    margin: 0 5px 0 0;
+    padding: 0 0 0 0;
+  }
+  p {
+    font-size: 1em;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    &.label,
+    &.created-by,
+    &.date-created {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+    }
+    &.label {
+      font-weight: bold;
+    }
+    &.created-by {
+      margin: 0 5px 0 0;
+    }
+    &.date-created {
+      margin: 0 0 0 5px;
+    }
+  }
+}
+.btn-idas-calendar-event-add-attendee {
+  display: inline-block;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  i,
+  img {
+    border-radius: 12px;
+    font-size: 23px;
+    height: auto;
+    text-align: left;
+    margin: 0 0 0 7px;
+    padding: 0 0 0 0;
+    width: 23px;
+    vertical-align: middle;
+  }
+}
+.event.attendee-input {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  mat-form-field {
+    margin: 0 10px 0 0;
+    padding: 0 0 0 0;
+    width: 40vw;
+    input {
+      width: 40vw;
+    }
+  }
+}
+.event.attendee {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+  i,
+  img,
+  p {
+    margin: 10px 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+  i,
+  img {
+    border-radius: 12px;
+    font-size: 23px;
+    margin: 10px 5px 0 0;
+    padding: 0 0 0 0;
+    width: 23px;
+  }
+  i {
+    &.attendee-type {
+      margin: 10px 5px 0 0;
+      padding: 0 0 0 0;
+    }
+  }
+  p {
+    &.attendee-display-name {
+      font-size: 1.15em;
+      font-weight: normal;
+      width: 20vw;
+    }
+  }
+  button {
+    float: right;
+    margin: 0 0 5px 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    i {
+      border-radius: 12px;
+      color: $idas-color-action-delete;
+      font-size: 23px;
+      height: auto;
+      text-align: left;
+      margin: 0 0 0 8px;
+      padding: 0 0 0 0;
+      width: 23px;
+      vertical-align: middle;
+    }
+  }
+  button:hover {
+    background-color: $idas-color-action-delete;
+    i {
+      color: #ffffff;
+    }
+  }
+  mat-checkbox {
+    float: right;
+    margin: 8px 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    span {
+      font-family: $OpenSans_Light;
+      font-size: 0.8em;
+      margin: 0 5px 0 0;
+      padding: 0 0 0 0;
+    }
+  }
+}
+
+.datetimepicker {
+  border: 1px solid purple;
+  text-align: left;
+  vertical-align: middle;
+  mat-form-field {
+    display: block;
+    input {
+      display: block;
+    }
+  }
+  .date,
+  .time {
+    text-align: left;
+    vertical-align: middle;
+    mat-form-field {
+      display: block;
+      input {
+        display: block;
+      }
+    }
+  }
+  .date {
+    width: 25vw;
+  }
+  .time {
+    width: 5vw;
+  }
+}
+
+/*
+.event-attendee-tab {
+  margin: 0 8px 0 8px;
+  padding: 0 0 0 0;
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  span,
+  button {
+    display: inline-block;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    i,
+    img {
+      margin: 0 0 0 10px;
+      padding: 0 0 0 0;
+    }
+  }
+  .event-attendee-field {
+    margin: 0 10px 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    width: 30vw;
+    vertical-align: middle;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+.event.attendee {
+  border: 1px solid red;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 100%;
+  i,
+  img,
+  p {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+  i,
+  img {
+    border-radius: 12px;
+    font-size: 23px;
+    margin: 0 5px 0 0;
+    width: 23px;
+  }
+  p {
+    &.attendee-display-name {
+      width: 100%;
+    }
+  }
+  mat-checkbox {
+    margin: 5px 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    span {
+      font-family: $OpenSans_Light;
+      font-size: 0.8em;
+      margin: 0 5px 0 0;
+      padding: 0 0 0 0;
+    }
+  }
+}
+ */

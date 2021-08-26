@@ -2,7 +2,7 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
 | Create date:	2021-08-26
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[CalendarEventAttendee] Table
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[ConfigurationSetting] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,8 +11,8 @@
 | Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const entityName = `CalendarEventAttendee`;
-const _CalendarEventAttendee = require(`./../../models/mssql/CalendarEventAttendee`);
+const entityName = `ConfigurationSetting`;
+const _ConfigurationSetting = require(`./../../models/mssql/ConfigurationSetting`);
 const _dbContext = require(`./../../db-context/mssql/mssql-idas-genio-db-context`);
 const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);
 const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-helper`);
@@ -23,12 +23,12 @@ const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-he
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 const Repository = () => {
-    const CalendarEventAttendee = _CalendarEventAttendee();
+    const ConfigurationSetting = _ConfigurationSetting();
     const dbContext = _dbContext();
     const create = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = CalendarEventAttendee.fromEntity(request.body);
+            const entity = ConfigurationSetting.fromEntity(request.body);
             dbContext.create(uid, entityName, entity, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -70,7 +70,7 @@ const Repository = () => {
     const update = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = CalendarEventAttendee.fromEntity(request.body);
+            const entity = ConfigurationSetting.fromEntity(request.body);
             dbContext.update(uid, entityName, entity, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -81,7 +81,7 @@ const Repository = () => {
     const _delete = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = CalendarEventAttendee.fromEntity(request.body);
+            const entity = ConfigurationSetting.fromEntity(request.body);
             dbContext.delete(uid, entityName, entity._id, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });

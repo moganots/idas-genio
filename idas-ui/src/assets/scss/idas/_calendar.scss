@@ -235,11 +235,42 @@
   width: 2%;
 }
 
+.calendar-day.mat-menu {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-align: left;
+  vertical-align: middle;
+  button {
+    font-family: $OpenSans_Light;
+    font-size: 1.95em;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    i,
+    img {
+      height: auto;
+      font-size: 20px;
+      margin: 0 0 0 0;
+      padding: 0 3px 0 0;
+      text-align: left;
+      vertical-align: middle;
+    }
+    span {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+}
+
 .calendar-event {
   background-color: #b0c4de;
   border: 1px solid #1e90ff;
   border-right: 5px solid #1e90ff;
   color: #000000;
+  cursor: pointer;
   display: inline-block;
   overflow: hidden;
   padding: 2px;
@@ -265,9 +296,10 @@
   &.work-week-view,
   &.day-view {
     color: #000000;
-    font-size: 0.9em;
+    font-size: 1em;
   }
   &.month-view {
+    font-size: 1.35em;
     width: 9.5vw;
   }
   &.week-view {
@@ -280,24 +312,64 @@
     width: 69.4vw;
   }
 }
-
-.calendar-day.mat-menu {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
+.calendar-event.attendee {
+  &.accept {
+    color: $idas-color-action-create;
+  }
+  &.tentative {
+    color: $idas-color-action-review;
+  }
+  &.decline {
+    color: $idas-color-action-delete;
+  }
+  button {
+    &.accept {
+      color: $idas-color-action-create;
+    }
+    &.tentative {
+      color: $idas-color-action-review;
+    }
+    &.decline {
+      color: $idas-color-action-delete;
+    }
+  }
+  i {
+    &.accept {
+      color: $idas-color-action-create;
+    }
+    &.tentative {
+      color: $idas-color-action-review;
+    }
+    &.decline {
+      color: $idas-color-action-delete;
+    }
+  }
 }
+
+::ng-deep .mat-menu-content {
+  padding: 0px !important;
+}
+
 .btn-calendar {
   font-family: $OpenSans_Light;
-  font-size: 0.95em;
+  font-size: 1em;
   margin: 0 0 0 0;
-  padding: 0 5px 0 5px;
+  padding: 0 8px 0 5px;
   text-align: left;
   vertical-align: middle;
   i,
   img {
     height: auto;
-    font-size: 20px;
+    font-size: 23px;
     margin: 0 0 0 0;
     padding: 0 3px 0 0;
+    text-align: left;
+    width: 23px;
+    vertical-align: middle;
+  }
+  span {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     text-align: left;
     vertical-align: middle;
   }

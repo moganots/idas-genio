@@ -2,7 +2,7 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
 | Create date:	2021-08-26
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[EntityRelationship] Table
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[ConfigurationSetting] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,18 +11,16 @@
 | Function(s)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const EntityRelationship = () => {
+const ConfigurationSetting = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.ParentEntityId, entity.ParentEntityColumnName, entity.ChildEntityId, entity.ChildEntityColumnName, entity.RelationshipName, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.ConfigurationTypeId, entity.Name, entity.Value, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, ParentEntityId, ParentEntityColumnName, ChildEntityId, ChildEntityColumnName, RelationshipName, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, ConfigurationTypeId, Name, Value, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
-			ParentEntityId: ParentEntityId,
-			ParentEntityColumnName: ParentEntityColumnName,
-			ChildEntityId: ChildEntityId,
-			ChildEntityColumnName: ChildEntityColumnName,
-			RelationshipName: RelationshipName,
+			ConfigurationTypeId: ConfigurationTypeId,
+			Name: Name,
+			Value: Value,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
 			DateCreated: DateCreated,
@@ -41,4 +39,4 @@ const EntityRelationship = () => {
 | module.exports
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-module.exports = EntityRelationship;
+module.exports = ConfigurationSetting;

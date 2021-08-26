@@ -12,7 +12,7 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 const { yyyymmddThmsmsZ0200WithDashSeparator, yyyymmdd } = require(`./../date-util`);
-const { isNotEmptyObject } = require(`./../functions`);
+const { isNotEmptyObject, toLocaleLowerCaseTrim } = require(`./../functions`);
 const { getHttpRequestPacket } = require(`./../http-helper`);
 const { companyName, applicationName} = require(`./../../config/config`);
 const fs = require('fs');
@@ -135,7 +135,7 @@ const logToConsole = (logType, message) => {
   }
 }
 const logToFile = (message) => {
-  const logDirectory = `/data/tmp/${companyName}/${applicationName}/logs/${yyyymmdd()}`;
+  const logDirectory = `/data/${toLocaleLowerCaseTrim(companyName)}/${toLocaleLowerCaseTrim(applicationName)}/api/logs/${yyyymmdd()}`;
   const logFile = `${logDirectory}/api.${yyyymmdd()}.log`;
   logDirectory.split('/').reduce(
     (directories, directory) => {

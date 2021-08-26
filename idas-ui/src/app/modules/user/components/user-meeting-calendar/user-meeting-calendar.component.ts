@@ -14,6 +14,7 @@ import {
   LookupValueService,
   CalendarEvent,
   CalendarEventAttendee,
+  LookupValue,
 } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
 import { CalendarService } from 'app/shared/components/calendar/calendar.module';
@@ -30,6 +31,7 @@ import { MeetingCalendarAttendeeService } from './services/meeting-calendar-atte
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
+    CalendarService,
     MeetingCalendarService,
     MeetingCalendarAttendeeService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
@@ -40,6 +42,7 @@ export class UserMeetingCalendarComponent
   implements OnInit, AfterViewInit
 {
   calendarEvents: CalendarEvent[];
+  eventAttendee: CalendarEventAttendee;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -65,33 +68,87 @@ export class UserMeetingCalendarComponent
     this.dataService = meetingCalendarService;
     this.entityName = CalendarEventConfiguration.identifier;
     this.sourceDataColumns = CalendarEventConfiguration.dataColumns;
-    this.calendarEvents = [];
-    this.meetingCalendarService.getAll<CalendarEvent>().subscribe(events => {
-      console.log(events)
-      events.map(event => ({CalendarEventId: event._id, AttendeeId: this.currentUser._id})).forEach(ce => console.log(ce));
-    });
   }
   ngOnInit() {
+    this.calendarEvents = [];
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .toPromise()
+      .then((lookupValues) => {
+        this.meetingCalendarAttendeeService
+          .getBy<CalendarEventAttendee>({
+            AttendeeId: this.currentUser._id,
+          })
+          .toPromise()
+          .then((attendeeEvents) => {
+            this.meetingCalendarService
+              .getAll<CalendarEvent>()
+              .toPromise()
+              .then((calendarEvents) => {
+                this.calendarEvents = calendarEvents.filter((ce) =>
+                  attendeeEvents
+                    .map((attendeeEvent) => attendeeEvent.CalendarEventId)
+                    .includes(ce._id)
+                );
+              });
+          });
+        this.calendarEvents.forEach((calendarEvent) => {
+          calendarEvent.CalendarEventType = lookupValues.find(
+            (lv) => lv._id === calendarEvent.CalendarEventTypeId
+          );
+        });
+      });
   }
   ngAfterViewInit() {}
   onClickCreateNewCalendarEvent(date: Date): void {
+    this.openDialog(
+      `Create`,
+      this.getDefaultCalendarEvent(undefined, undefined, date)
+    );
+  }
+  onClickCreateEditCalendarEvent(event: CalendarEvent): void {
+    this.openDialog(`Edit`, event);
+  }
+  openDialog(handleAction: string, event: CalendarEvent) {
     super.openDialog(
       DialogCreateEditCalendarEventComponent,
       {
-        action: `Create`,
+        action: handleAction,
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
         pageName: this.pageName,
         pageTitle: this.pageTitle,
         dataColumns: this.sourceDataColumns,
-        selected: { StartDate: date },
+        selected: event,
         selectedIndex: -1,
       },
       () => {
         this.onDataRefresh();
-      }
+      }, '96vh', '45vw'
     );
+  }
+  getDefaultCalendarEvent(
+    calendarEventTypeId?: number,
+    title?: string,
+    startDate?: Date,
+    endDate?: Date,
+    isAllDayEvent?: boolean,
+    location?: string,
+    description?: string
+  ): CalendarEvent {
+    return {
+      CalendarEventTypeId: calendarEventTypeId,
+      Title: title,
+      StartDate: startDate,
+      EndDate: endDate,
+      IsAllDayEvent: isAllDayEvent,
+      Location: location,
+      Description: description,
+      CreatedBy: this.currentUser._id,
+      EventAttendees: ([] = []),
+      Files: ([] = []),
+    } as unknown as CalendarEvent;
   }
 
   /* getCalendarViewEvents() {

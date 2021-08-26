@@ -12,6 +12,7 @@ import { CalendarService } from '../../calendar-service/calendar.service';
 export class CalendarViewByComponent implements OnInit {
   @Input() calendarEvents: CalendarEvent[] = [];
   @Output() newCalendarEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() editCalendarEvent: EventEmitter<any> = new EventEmitter<any>();
   monthNames = CalendarConfiguration.monthNames;
   weekDays = CalendarConfiguration.weekDays;
   operatingHours = CalendarConfiguration.operatingHours;
@@ -45,7 +46,7 @@ export class CalendarViewByComponent implements OnInit {
       (ce) =>
         ce &&
         ce.StartDate &&
-        new Date(ce.StartDate).getHours() - 4 === useOperatingHour.hour
+        new Date(ce.StartDate).getHours() - 2 === useOperatingHour.hour
     );
   }
   getCalendarEventsByDate(date: Date): CalendarEvent[] {
@@ -79,5 +80,8 @@ export class CalendarViewByComponent implements OnInit {
   }
   onClickNewCalendarEvent(date: Date) {
     this.newCalendarEvent.emit(date);
+  }
+  onClickEditCalendarEvent(event: CalendarEvent) {
+    this.editCalendarEvent.emit(event);
   }
 }

@@ -92,4 +92,24 @@ export class CalendarConfiguration {
       cssClass: ``,
     },
   ];
+  public static eventAttendeeResponses = [
+    {
+      name: `Accept`,
+      title: `Accept`,
+      icon: `thumb_up_off_alt`,
+      cssClass: `calendar-event-response accept`,
+    },
+    {
+      name: `Tentative`,
+      title: `Tentative`,
+      icon: `block`, // icon: `priority_high`,
+      cssClass: `calendar-event-response tentative`,
+    },
+    {
+      name: `Decline`,
+      title: `Decline`,
+      icon: `thumb_down_off_alt`,
+      cssClass: `calendar-event-response decline`,
+    }
+  ];
 }

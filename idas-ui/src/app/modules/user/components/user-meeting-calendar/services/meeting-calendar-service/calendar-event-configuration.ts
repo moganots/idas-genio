@@ -15,16 +15,15 @@ export class CalendarEventConfiguration {
     {id: 3, name: `Title` , canShow: true, canSort: true, canGroup: false},
     {id: 4, name: `StartDate` , canShow: true, canSort: true, canGroup: false},
     {id: 5, name: `EndDate` , canShow: true, canSort: true, canGroup: false},
-    {id: 6, name: `IsAllDayEvent` , canShow: true, canSort: true, canGroup: false},
     {id: 7, name: `Location` , canShow: true, canSort: true, canGroup: false},
-    {id: 8, name: `Description` , canShow: false, canSort: true, canGroup: false},
-    {id: 9, name: `EventAttendeeId` , canShow: true, canSort: true, canGroup: false},
-    {id: 10, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
+    {id: 8, name: `Description` , canShow: true, canSort: true, canGroup: false},
+    {id: 6, name: `IsAllDayEvent` , canShow: true, canSort: true, canGroup: false},
+    {id: 9, name: `IsActive` , canShow: false, canSort: false, canGroup: false},
     /*
-    {id: 11, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
-    {id: 12, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
-    {id: 13, name: `ModifiedBy` , canShow: false, canSort: true, canGroup: false},
-    {id: 14, name: `DateModified` , canShow: false, canSort: true, canGroup: false},
+    {id: 10, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
+    {id: 11, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
+    {id: 12, name: `ModifiedBy` , canShow: false, canSort: true, canGroup: false},
+    {id: 13, name: `DateModified` , canShow: false, canSort: true, canGroup: false},
     */
   ];
 }
