@@ -1307,6 +1307,9 @@ CREATE TABLE [dbo].[FileAttachment](
 	[TaskId] [bigint] NULL,
 	[CalendarEventId] [bigint] NULL,
 	[FileName] [nvarchar] (max) NOT NULL,
+	[FileExtension] [nvarchar] (255) NULL,
+	[ContentType] [nvarchar] (255) NULL,
+	[FileContent] [nvarchar] (max) NULL,
 	[FileSize] [bigint] NULL,
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NULL,
@@ -1549,7 +1552,6 @@ FETCH NEXT FROM Cursor_Table_Names INTO @TableName;
 
 WHILE(@@FETCH_STATUS = 0)
 BEGIN
-	-- === Add *_IsActive DEFAULT CONSTRAINT
 	EXEC('CREATE TRIGGER [dbo].[trg' + @TableName + ']
 	ON [dbo].[' + @TableName + ']
 	AFTER INSERT, UPDATE, DELETE
@@ -2242,6 +2244,53 @@ GO
 PRINT ('>> Completed > Create > UDF > [dbo].[GetDatabaseObjectParameters]')
 GO
 
+-- =============================================
+-- Author:		TS MOGANO
+-- Create date: 02/03/2021
+-- Function Name: [dbo].[GetFileAttachmentRouterLink]
+-- Description:	Gets (Constructs) the [routerLink] for a FileAttachment
+-- Parameters:
+-- @FileAttachmentId
+-- =============================================
+CREATE FUNCTION [dbo].[GetFileAttachmentRouterLink]
+(
+	@FileAttachmentId [bigint]
+)
+RETURNS NVARCHAR(MAX)
+AS
+BEGIN
+	DECLARE @FileAttachmentRouterLink NVARCHAR(MAX) = (
+		SELECT
+			CONCAT(
+				[cs].[Value]
+				, '/'
+				, CASE
+					WHEN [fa].[ProjectId] IS NOT NULL THEN 'project'
+					WHEN [fa].[TaskId] IS NOT NULL THEN 'task'
+					WHEN [fa].[CalendarEventId] IS NOT NULL THEN 'calendar-event'
+					ELSE 'file' END
+				, '/'
+				, COALESCE([fa].[ProjectId], [fa].[TaskId], [fa].[CalendarEventId], [fa].[_id])
+				, CASE
+					WHEN
+						[fa].[ProjectId] IS NOT NULL
+						OR [fa].[TaskId] IS NOT NULL
+						OR [fa].[CalendarEventId] IS NOT NULL
+							THEN CONCAT('/', [fa].[_id])
+					ELSE '' END
+			)
+		FROM [dbo].[FileAttachment] AS [fa]
+		CROSS JOIN [dbo].[ConfigurationSetting] AS [cs]
+		WHERE
+			([fa].[_id] = @FileAttachmentId)
+			AND ([cs].[Name] = 'AppAttachmentsRouterLink')
+	)
+	RETURN @FileAttachmentRouterLink
+END
+GO
+PRINT ('>> Completed > Create > UDF > [dbo].[GetFileAttachmentRouterLink]')
+GO
+
 PRINT ('>> Completed > Create > UDF (User Defined Functions)')
 GO
 
@@ -2445,7 +2494,7 @@ BEGIN
 	
 	IF(@TableName IN ('FileAttachment'))
 	BEGIN
-		SET @ExecQuery += CHAR(13) + CHAR(9) + ',CONCAT(''#/secure/attachment/'', ISNULL(CAST([t].[ProjectId] AS VARCHAR(MAX)) + ''/'', ''''), ISNULL(CAST([t].[TaskId] AS VARCHAR(MAX)) + ''/'', ''''), [t].[_id], '''') AS [RouterLink]'
+		SET @ExecQuery += CHAR(13) + CHAR(9) + ',(SELECT [dbo].[GetFileAttachmentRouterLink]([t].[_id])) AS [RouterLink]'
 	END
 	
 	SET @ExecQuery += CHAR(13) + CHAR(9) + 'FROM [dbo].[' + @TableName + '] AS [t]'
@@ -3587,10 +3636,12 @@ SELECT 'Api Port' AS [ConfigurationType], 'ApiPort' AS [Name], '4238' AS [Value]
 SELECT 'Security Key' AS [ConfigurationType], 'AppEncryptionKey' AS [Name], '0x390044003600300031003300390046002D0038004600450045002D0034003100300044002D0042003800360036002D00410045003200330044003300330044003100320044003300310044004000530020002D002000470033004E003100300020002D002000320020005400680065007300730061006C006F006E00690061006E007300200033003A003300' AS [Value] UNION
 SELECT 'Security Key' AS [ConfigurationType], 'AppEncryptionSaltCount' AS [Name], '10' AS [Value] UNION
 SELECT 'Path Directory' AS [ConfigurationType], 'ApiLogDirectory' AS [Name], '/data/{0}/{1}/api/logs/{2}' AS [Value] UNION
-SELECT 'Path File' AS [ConfigurationType], 'ApiLogFile' AS [Name], '{0}.{1}.api.{2}.logs' AS [Value] UNION
+SELECT 'Path File' AS [ConfigurationType], 'ApiLogFile' AS [Name], '{0}.{1}.api.{2}.log' AS [Value] UNION
 SELECT 'Path Directory' AS [ConfigurationType], 'AppLogDirectory' AS [Name], '/data/{0}/{1}/app/logs/{2}' AS [Value] UNION
-SELECT 'Path File' AS [ConfigurationType], 'AppLogFile' AS [Name], '{0}.{1}.app.{2}.logs' AS [Value] UNION
-SELECT 'Path Directory' AS [ConfigurationType], 'AppAttachmentsDirectory' AS [Name], '/data/{0}/{1}/secure/attachments' AS [Value]
+SELECT 'Path File' AS [ConfigurationType], 'AppLogFile' AS [Name], '{0}.{1}.app.{2}.log' AS [Value] UNION
+SELECT 'Path Directory' AS [ConfigurationType], 'AppAttachmentsDirectory' AS [Name], '/data/{0}/{1}/secure/attachments' AS [Value] UNION
+SELECT 'Path File' AS [ConfigurationType], 'AppAttachmentsRouterLink' AS [Name], '#/secure/attachments' AS [Value] UNION
+SELECT 'File Size' AS [ConfigurationType], 'MaximumFileSize' AS [Name], '9994.24' AS [Value]
 )
 INSERT INTO [dbo].[ConfigurationSetting]([ConfigurationTypeId], [Name], [Value], [CreatedBy])
 SELECT
@@ -4077,27 +4128,6 @@ LEFT JOIN (
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[Project]')
 
 -- ==============================================================================================================================
--- Setup >> Test >> Project File Attachment(s)
--- ==============================================================================================================================
---INSERT INTO [dbo].[FileAttachment]([ProjectId], [FileName], [FileSize], [CreatedBy])
---SELECT
---	[p].[_id] AS [ProjectId]
---	,[FileName]
---	,[FileSize]
---	,[p].[CreatedBy]
---FROM [dbo].[Project] AS [p]
---CROSS JOIN (
---SELECT 'Izingodla - Test Project Documentation.doc' AS [FileName], 9123  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.docx' AS [FileName], 3456789  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.pdf' AS [FileName], 9876543  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.xls' AS [FileName], 56765432  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.xlsx' AS [FileName], 98712654  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.txt' AS [FileName], 4562378  AS [FileSize]
---) AS [fa]
-
---PRINT ('>> Completed > INSERT >> Test Data > [dbo].[FileAttachment]')
-
--- ==============================================================================================================================
 -- Setup >> Test >> Project Assignee(s)
 -- ==============================================================================================================================
 INSERT INTO @TestAssignees
@@ -4377,25 +4407,6 @@ FROM [dbo].[Task];
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskAssignment]')
 
 -- ==============================================================================================================================
--- Setup >> Test >> Project File Attachment(s)
--- ==============================================================================================================================
---INSERT INTO [dbo].[FileAttachment]([TaskId], [FileName], [FileSize], [CreatedBy])
---SELECT
---	[ta].[_id] AS [TaskId]
---	,[FileName]
---	,[FileSize]
---	,[ta].[AssigneeId]
---FROM [dbo].[TaskAssignment] AS [ta]
---CROSS JOIN (
---SELECT 'Izingodla - Test Project Documentation.doc' AS [FileName], 9123  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.docx' AS [FileName], 3456789  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.pdf' AS [FileName], 9876543  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.xls' AS [FileName], 56765432  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.xlsx' AS [FileName], 98712654  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.txt' AS [FileName], 4562378  AS [FileSize]
---) AS [fa]
-
--- ==============================================================================================================================
 -- Setup >> Test >> Project Task Status(es)
 -- ==============================================================================================================================
 INSERT INTO [dbo].[TaskStatus] ([TaskId],[StatusId],[CreatedBy],[DateCreated])
@@ -4548,27 +4559,99 @@ PRINT ('>> Completed > INSERT >> Test Data > [dbo].[CalendarEventAttendee]')
 GO
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
--- INSERT >> Test >> File Attachment(s), Calendar Event(s) > ([dbo].[FileAttachment])
+-- INSERT >> Test >> File Attachment(s) > Project(s), Task(s), Calendar Event(s) > ([dbo].[FileAttachment])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
---INSERT INTO [dbo].[FileAttachment]([CalendarEventId], [FileName], [FileSize], [CreatedBy])
---SELECT
---	[ce].[_id] AS [CalendarEventId]
---	,[FileName]
---	,[FileSize]
---	,[ce].[CreatedBy]
---FROM [dbo].[CalendarEvent] AS [ce]
---CROSS JOIN (
---SELECT 'Izingodla - Test Project Documentation.doc' AS [FileName], 9123  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.docx' AS [FileName], 3456789  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.pdf' AS [FileName], 9876543  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.xls' AS [FileName], 56765432  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.xlsx' AS [FileName], 98712654  AS [FileSize] UNION ALL
---SELECT 'Izingodla - Test Project Documentation.txt' AS [FileName], 4562378  AS [FileSize]
---) AS [fa];
+;WITH [files] AS (
+SELECT 'Izingodla - Test Project Documentation.doc' AS [FileName], '.doc' AS [FileExtension], 'application/doc' AS [ContentType], 9123  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation.docx' AS [FileName], '.docx' AS [FileExtension], 'application/docx' AS [ContentType], 3456789  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation.pdf' AS [FileName], '.pdf' AS [FileExtension], 'application/pdf' AS [ContentType], 9876543  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation.xls' AS [FileName], '.xls' AS [FileExtension], 'application/xls' AS [ContentType], 56765432  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation.xlsx' AS [FileName], '.xlsx' AS [FileExtension], 'application/xlsx' AS [ContentType], 98712654  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation.txt' AS [FileName], '.txt' AS [FileExtension], 'application/txt' AS [ContentType], 4562378  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation (1).txt' AS [FileName], '.txt' AS [FileExtension], 'application/txt' AS [ContentType], 0  AS [FileSize] UNION ALL
+SELECT 'Izingodla - Test Project Documentation (2).txt' AS [FileName], '.txt' AS [FileExtension], 'application/txt' AS [ContentType], NULL AS [FileSize]
+)
+, [projectFiles] AS (
+	SELECT
+       [_id] AS [ProjectId]
+      ,[FileName]
+      ,[FileExtension]
+      ,[ContentType]
+      ,[FileSize]
+	  ,[CreatedBy]
+	FROM [dbo].[Project]
+	CROSS JOIN [files]
+)
+, [taskFiles] AS (
+	SELECT
+       [_id] AS [TaskId]
+      ,[FileName]
+      ,[FileExtension]
+      ,[ContentType]
+      ,[FileSize]
+	  ,[CreatedBy]
+	FROM [dbo].[Task]
+	CROSS JOIN [files]
+)
+, [calendarEventFiles] AS (
+	SELECT
+       [_id] AS [CalendarEventId]
+      ,[FileName]
+      ,[FileExtension]
+      ,[ContentType]
+      ,[FileSize]
+	  ,[CreatedBy]
+	FROM [dbo].[CalendarEvent]
+	CROSS JOIN [files]
+)
+INSERT INTO [dbo].[FileAttachment]([ProjectId],[TaskId],[CalendarEventId],[FileName],[FileExtension],[ContentType],[FileSize],[CreatedBy])
+SELECT
+	[ProjectId]
+	,[TaskId]
+	,[CalendarEventId]
+	,[FileName]
+	,[FileExtension]
+	,[ContentType]
+	,[FileSize]
+	,[CreatedBy]
+FROM (
+	SELECT
+		[ProjectId]
+		,NULL AS [TaskId]
+		,NULL AS [CalendarEventId]
+		,[FileName]
+		,[FileExtension]
+		,[ContentType]
+		,[FileSize]
+		,[CreatedBy]
+	FROM [projectFiles]
+	UNION ALL
+	SELECT
+		NULL AS [ProjectId]
+		,[TaskId]
+		,NULL AS [CalendarEventId]
+		,[FileName]
+		,[FileExtension]
+		,[ContentType]
+		,[FileSize]
+		,[CreatedBy]
+	FROM [taskFiles]
+	UNION ALL
+	SELECT
+		NULL AS [ProjectId]
+		,NULL AS [TaskId]
+		,[CalendarEventId]
+		,[FileName]
+		,[FileExtension]
+		,[ContentType]
+		,[FileSize]
+		,[CreatedBy]
+	FROM [calendarEventFiles]
+) AS [fileAttachments];
 
---GO
---PRINT ('>> Completed > INSERT >> Test >> File Attachment(s), Calendar Event(s) > ([dbo].[FileAttachment])')
---GO
+GO
+PRINT ('>> Completed > INSERT >> Test >> File Attachment(s) > Project(s), Task(s), Calendar Event(s) > ([dbo].[FileAttachment])')
+GO
 
 PRINT ('>> Completed > INSERT >> Default Data Setup')
 GO
@@ -4619,6 +4702,7 @@ GO
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 USE [IdasGenioDb];
 
+SELECT '[dbo].[ConfigurationSetting]' AS [TableName], * FROM [dbo].[ConfigurationSetting]
 SELECT '[dbo].[Employee]' AS [TableName], * FROM [dbo].[Employee]
 SELECT '[dbo].[Client]' AS [TableName], * FROM [dbo].[Client]
 SELECT '[dbo].[Supplier]' AS [TableName], * FROM [dbo].[Supplier]

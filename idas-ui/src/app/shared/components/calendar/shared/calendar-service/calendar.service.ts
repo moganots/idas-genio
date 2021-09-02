@@ -101,20 +101,25 @@ export class CalendarService {
   private updateViewDate(option: ViewNavOption): void {
     switch (option.name) {
       case `Previous`:
-        this.setViewDate(
-          new Date(this.viewDate.setDate(this.viewDate.getDate() - 1))
-        );
+        this.updateViewDateUsingViewNavAndViewBy(-1);
         break;
       case `Today`:
         this.setViewDate(new Date());
         break;
       case `Next`:
-        this.setViewDate(
-          new Date(this.viewDate.setDate(this.viewDate.getDate() + 1))
-        );
+        this.updateViewDateUsingViewNavAndViewBy(1);
         break;
     }
     this.updateViewDateAsString();
+    this.updateViewCalendarDays();
+  }
+  updateViewDateUsingViewNavAndViewBy(value: number) {
+    switch(this.viewByOption.name){
+      case `Month`: this.setViewDate(new Date(this.viewDate.setMonth(this.viewDate.getMonth() + value))); break;
+      case `Week`:
+      case `Work Week`: this.setViewDate(new Date(this.viewDate.setDate(this.viewDate.getDate() + (value * 7)))); break;
+      case `Day`: this.setViewDate(new Date(this.viewDate.setDate(this.viewDate.getDate() + value))); break;
+    }
   }
   private getDefaultViewDateAsString(): string {
     return this.datepipe.transform(this.viewDate, `MMMM, yyyy`);

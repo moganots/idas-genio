@@ -75,6 +75,13 @@
   text-align: left;
 }
 
+.calendar-table.month-view,
+.calendar-table.week-view,
+.calendar-table.work-week-view,
+.calendar-table.day-view td {
+  font-size: 0.9em;
+}
+
 .calendar-table.month-view thead:first-child,
 .calendar-table.month-view th:first-child,
 .calendar-table.month-view td:first-child {
@@ -272,6 +279,8 @@
   color: #000000;
   cursor: pointer;
   display: inline-block;
+  font-size: 1.15em;
+  font-weight: bold;
   overflow: hidden;
   padding: 2px;
   text-overflow: ellipsis;
@@ -296,21 +305,23 @@
   &.work-week-view,
   &.day-view {
     color: #000000;
-    font-size: 1em;
+    font-size: 1.15em;
   }
   &.month-view {
-    font-size: 1.35em;
     width: 9.5vw;
   }
   &.week-view {
     width: 8.8vw;
   }
   &.work-week-view {
-    width: 13.2vw;
+    width: 12.6vw;
   }
   &.day-view {
     width: 69.4vw;
   }
+}
+.calendar-event.month-view {
+  font-size: 1.15em;
 }
 .calendar-event.attendee {
   &.accept {

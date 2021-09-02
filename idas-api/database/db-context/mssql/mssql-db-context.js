@@ -182,7 +182,6 @@ const DatabaseContext = (connectionConfig) => {
                 objParameters.forEach((objParameter) => {
                   const parameterValue =
                     parameters[objParameter.ParameterName] || null;
-                  console.log(parameterValue);
                   request.addParameter(
                     objParameter.ParameterName,
                     getTediousMsSqlDataType(objParameter.DataType),
@@ -315,7 +314,6 @@ const addConnectionString = (connectionString) => {
 };
 const addRequestParameters = (request, parameters = []) => {
   if (request && hasValues(parameters)) {
-    console.log(parameters);
     parameters.forEach((parameter) => {
       const parameterName = Object.getOwnPropertyNames(parameter)[0];
       const parameterValue = parameter[parameterName] || null;

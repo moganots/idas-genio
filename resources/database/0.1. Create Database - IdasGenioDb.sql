@@ -1311,6 +1311,9 @@ CREATE TABLE [dbo].[FileAttachment](
 	[TaskId] [bigint] NULL,
 	[CalendarEventId] [bigint] NULL,
 	[FileName] [nvarchar] (max) NOT NULL,
+	[FileExtension] [nvarchar] (255) NULL,
+	[ContentType] [nvarchar] (255) NULL,
+	[FileContent] [nvarchar] (max) NULL,
 	[FileSize] [bigint] NULL,
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NULL,
@@ -2659,27 +2662,6 @@ PRINT ('>> Completed > INSERT >> Default >> Root (Super) and Admin user ([dbo].[
 GO
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
--- INSERT >> Default >> ([dbo].[ConfigurationSetting])
--- ---------------------------------------------------------------------------------------------------------------------------------------------------------
-;WITH
-INSERT [dbo].[User] ([EmailAddress],[PasswordHash],[IsAdmin],[IsLocked],[Avatar],[CreatedBy])
-SELECT
-	[EmailAddress]
-	,[PasswordHash]
-	,[IsAdmin]
-	,[IsLocked]
-	,[Avatar]
-	,1 AS [CreatedBy]
-FROM (
-SELECT 'root@genio.idas.co.za' AS [EmailAddress], '3b9a10e881e7329cfa4e478615fce90c/d4441ad5f5def0f519ee3b669e521ea40c0291522c26484cfdb3a6a8081e4d239633b183adbc208fa5e4fce4eaa049a9cd453f465586e92dff52ffa8ebc29e74' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-16.png' AS [Avatar] UNION
-SELECT 'admin@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-27.png' AS [Avatar] UNION
-SELECT 'general@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 0 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-7.png' AS [Avatar]
-) AS [u]
-
-PRINT ('>> Completed > INSERT >> Default >> Root (Super) and Admin user ([dbo].[User])')
-GO
-
--- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Default >> Entities ([dbo].[Entity])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO [dbo].[Entity]([Name], [Description], [CreatedBy])
@@ -3615,7 +3597,8 @@ SELECT 'Path Directory' AS [ConfigurationType], 'ApiLogDirectory' AS [Name], '/d
 SELECT 'Path File' AS [ConfigurationType], 'ApiLogFile' AS [Name], '{0}.{1}.api.{2}.logs' AS [Value] UNION
 SELECT 'Path Directory' AS [ConfigurationType], 'AppLogDirectory' AS [Name], '/data/{0}/{1}/app/logs/{2}' AS [Value] UNION
 SELECT 'Path File' AS [ConfigurationType], 'AppLogFile' AS [Name], '{0}.{1}.app.{2}.logs' AS [Value] UNION
-SELECT 'Path Directory' AS [ConfigurationType], 'AppAttachmentsDirectory' AS [Name], '/data/{0}/{1}/secure/attachments' AS [Value]
+SELECT 'Path Directory' AS [ConfigurationType], 'AppAttachmentsDirectory' AS [Name], '/data/{0}/{1}/secure/attachments' AS [Value] UNION
+SELECT 'Path File' AS [ConfigurationType], 'AppAttachmentsRouterLink' AS [Name], '#/secure/attachments' AS [Value]
 )
 INSERT INTO [dbo].[ConfigurationSetting]([ConfigurationTypeId], [Name], [Value], [CreatedBy])
 SELECT

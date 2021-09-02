@@ -13,10 +13,9 @@ console.clear();
 | Dependency(ies)
 |------------------------------------------------------------------------------------------------------------------
  */
-const express = require(`express`);
-const path = require(`path`);
-const bodyParser = require(`body-parser`);
 const http = require(`http`);
+const express = require(`express`);
+const bodyParser = require(`body-parser`);
 const methodOverride = require(`method-override`);
 const cors = require(`cors`);
 const responseTime = require(`response-time`);
@@ -36,10 +35,15 @@ info(__filename, `server.init`, `Dependencies loaded successfully`);
  */
 
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(methodOverride(`X-HTTP-Method-Override`));
+app.use(bodyParser.json({ parameterLimit: 100000, limit: 100000000 }));
+app.use(
+    bodyParser.urlencoded({
+    parameterLimit: 100000,
+    limit: 100000000,
+    extended: true,
+  })
+);
+app.use(methodOverride());
 app.use(cors());
 app.use(responseTime());
 
@@ -53,10 +57,9 @@ app.set(`port`, port);
 |------------------------------------------------------------------------------------------------------------------
  */
 const server = http.createServer(app);
-const apiUri = `${apiProtocol}://${apiHost}:${port}`;
 
-server.headersTimeout = (10 * 60 * 1000);
-server.keepAliveTimeout = (10 * 60 * 1000);
+server.headersTimeout = 10 * 60 * 1000;
+server.keepAliveTimeout = 10 * 60 * 1000;
 server.setTimeout(10 * 60 * 1000);
 
 info(__filename, `http.createServer`, `Server initialised successfully`);
@@ -67,22 +70,34 @@ info(__filename, `http.createServer`, `Server initialised successfully`);
 |------------------------------------------------------------------------------------------------------------------
  */
 const router = require(`./routes/routes`)(app);
-app.use('/api', router);
-info(__filename, `app.use('/api', router)`, `${apiName} Router initialised successfully`);
+app.use("/api", router);
+info(
+  __filename,
+  `app.use('/api', router)`,
+  `${apiName} Router initialised successfully`
+);
 
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Server - Start up
 |------------------------------------------------------------------------------------------------------------------
  */
-server.on(`connection`, function(socket) {
-    socket.setKeepAlive(10 * 60 * 1000);
-    socket.setTimeout(10 * 60 * 1000);
-    info(__filename, `server.on('connection')`, `Successfully created a socket connection for server`);
+server.on(`connection`, function (socket) {
+  socket.setKeepAlive(10 * 60 * 1000);
+  socket.setTimeout(10 * 60 * 1000);
+  info(
+    __filename,
+    `server.on('connection')`,
+    `Successfully created a socket connection for server`
+  );
 });
-server.on(`error`, function(err) {
-    error(__filename, `server.on('error')`, err);
+server.on(`error`, function (err) {
+  error(__filename, `server.on('error')`, err);
 });
 server.listen(port, function () {
-    info(__filename, `server.listen`, `${apiName} listening on ${apiProtocol}://${apiHost}:${port}`);
+  info(
+    __filename,
+    `server.listen`,
+    `${apiName} listening on ${apiProtocol}://${apiHost}:${port}`
+  );
 });

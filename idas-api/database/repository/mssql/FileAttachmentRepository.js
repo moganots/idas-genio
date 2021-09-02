@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2021-08-26
+| Create date:	2021-08-31
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[FileAttachment] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -16,6 +16,7 @@ const _FileAttachment = require(`./../../models/mssql/FileAttachment`);
 const _dbContext = require(`./../../db-context/mssql/mssql-idas-genio-db-context`);
 const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);
 const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-helper`);
+const { writeFileAttachmentToDisc } = require(`../../../common/functions`);
 
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,6 +31,7 @@ const Repository = () => {
             const uid = request.query.uid;
             const entity = FileAttachment.fromEntity(request.body);
             dbContext.create(uid, entityName, entity, (error, data, message) => {
+                writeFileAttachmentToDisc(error, data[0]);
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
         }catch(error){

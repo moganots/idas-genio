@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 /**
  * Shared Components
  */
-import { CommonComponent } from './components/common-component/common/common.component';
-import { FileUploadComponent } from './components/file-upload-component/file-upload.component';
+import { CommonComponent } from './components/common/common.component';
+import { FileDragDropDirective } from './components/file-upload/directives/file-drag-drop/file-drag-drop.directive';
+import { FileUploadComponent } from './components/file-upload/components/file-upload-component/file-upload.component';
 
-export { CommonComponent } from './components/common-component/common/common.component';
-export { FileUploadComponent } from './components/file-upload-component/file-upload.component';
+export { CommonComponent } from './components/common/common.component';
+export { FileDragDropDirective } from './components/file-upload/directives/file-drag-drop/file-drag-drop.directive';
+export { FileUploadComponent } from './components/file-upload/components/file-upload-component/file-upload.component';
 
 /**
  * Shared Configuration
@@ -183,7 +185,7 @@ import { EmployeesUtil } from './utilities/employees-util';
 import { PreviousOrNext } from './utilities/enum-previous-next';
 import { FileSizePipe } from './utilities/filesize.pipe';
 import { GeneralUtils } from './utilities/general-utils';
-import { FileDragDropDirective } from './components/file-upload-component/file-upload-directive/file-drag-drop.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export { DateUtils } from './utilities/date-utils';
 export { DefaultObjectUtil } from './utilities/default-object-util';
@@ -193,7 +195,7 @@ export { FileSizePipe } from './utilities/filesize.pipe';
 export { GeneralUtils } from './utilities/general-utils';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   declarations: [CommonComponent, FileUploadComponent, FileDragDropDirective],
   providers: [
     DatePipe,

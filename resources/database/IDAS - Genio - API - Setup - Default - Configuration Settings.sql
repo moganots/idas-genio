@@ -21,4 +21,4 @@ SELECT
 	,[cte].[Value]
 	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
 FROM [cte]
-LEFT JOIN [dbo].[LookupValue] AS [lv] ON ([cte].[ConfigurationType] = [lv].[Value])
+LEFT JOIN [dbo].[LookupValue] AS [lv] ON ([cte].[ConfigurationType] = [lv].[Value]);

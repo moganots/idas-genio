@@ -40,7 +40,9 @@ body {
   }
 }
 
-::ng-deep .mat-menu-content, .mat-tab-group-content, .mat-tab-content {
+::ng-deep .mat-menu-content,
+.mat-tab-group-content,
+.mat-tab-content {
   padding: 0px !important;
 }
 
@@ -554,6 +556,7 @@ i {
 }
 
 img {
+  background-size: cover;
   display: inline-block;
   height: auto;
   margin: 0 0 0 0;

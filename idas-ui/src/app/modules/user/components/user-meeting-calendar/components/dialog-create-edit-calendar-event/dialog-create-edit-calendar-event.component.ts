@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import {
   MatDialog,
@@ -31,7 +31,7 @@ import { MeetingCalendarService } from '../../services/meeting-calendar-service/
 })
 export class DialogCreateEditCalendarEventComponent
   extends BaseDialogComponent
-  implements OnInit
+  implements OnInit, AfterViewInit
 {
   eventAttendeeResponses = CalendarConfiguration.eventAttendeeResponses;
   frmCtrlEventAttendees: FormControl = new FormControl();
@@ -39,6 +39,8 @@ export class DialogCreateEditCalendarEventComponent
   users: User[] = [];
   currentEventAttendee: CalendarEventAttendee;
   newEventAttendee: User;
+  startDateTime: string;
+  endDateTime: string;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -71,28 +73,7 @@ export class DialogCreateEditCalendarEventComponent
       .map((en) => this.capitalizeFirstLetter(en))
       .join(` `)}`;
     this.sourceDataColumns = CalendarEventConfiguration.dataColumns;
-    /* this.fileAttachmentService
-      .getBy<FileAttachment>({ CalendarEventId: this.selected?._id })
-      .toPromise()
-      .then((files) => {
-        this.referenceValueService.usersService
-          .getAll<User>()
-          .toPromise()
-          .then((users) => {
-            files.forEach((file) => {
-              file.createdBy = users.find(
-                (user) => user._id === file.CreatedBy
-              );
-              file.modifiedBy = users.find(
-                (user) => user._id === file.ModifiedBy
-              );
-            });
-            this.users = users;
-          });
-        this.selected.Files = files;
-      }); */
   }
-
   ngOnInit() {
     this.setDataSourceColumns();
     this.initFormGroupAndFields(null);
@@ -124,6 +105,18 @@ export class DialogCreateEditCalendarEventComponent
       .then((files) => {
         this.selected.Files = files;
       });
+  }
+  ngAfterViewInit() {}
+  getModel(name: string) {
+    switch (name) {
+      case `StartDate`:
+        return this.startDateTime;
+      case `EndDate`:
+        return this.endDateTime;
+    }
+  }
+  getCalendarEventOperatingHours() {
+    return CalendarConfiguration.operatingHours.map(oh => ({displayValue: oh}));
   }
   onClickEventAttendeResponse(option): void {}
   onValueChanged(event) {

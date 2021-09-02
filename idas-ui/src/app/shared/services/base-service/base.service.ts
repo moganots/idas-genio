@@ -20,7 +20,7 @@ export class BaseService {
 
   constructor(public httpClient: HttpClient) {
     this.httpHeaders = new HttpHeaders();
-    this.httpHeaders.set('Access-Control-Allow-Origin', '*');
+    this.httpHeaders.set('Access-Control-Allow-Origin', 'origin-list');
   }
 
   getEndpointUrl(): string {

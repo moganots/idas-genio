@@ -52,7 +52,12 @@ export class SharedModulesModuleConfiguration {
     `EndDate`,
     `StartDate`,
   ];
-  public static timeColumns = [`EndTime`, `StartTime`];
+  public static timeColumns = [
+    `StartTime`,
+    `StartDateTime`,
+    `EndTime`,
+    `EndDateTime`,
+  ];
   public static numberColumns = [
     `AccountNumber`,
     `Amount`,

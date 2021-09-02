@@ -56,7 +56,9 @@
             <br />
             <br />
           </span>
-          <div *ngFor="let fidc of formInputDataColumns; let i = index">
+          <div
+            *ngFor="let fidc of getCanShowFormInputDataColumns(); let i = index"
+          >
             <span [ngSwitch]="fidc.controlType">
               <span *ngSwitchCase="'textbox'">
                 <mat-form-field>
@@ -160,7 +162,6 @@
                     id="{{ fidc.name }}"
                     name="{{ fidc.name }}"
                     [formControl]="frmGroupFields.controls[fidc.name]"
-                    class="date"
                     placeholder="{{ fidc.displayName }}"
                     (dateInput)="onDateChanged($event)"
                     (dateChange)="onDateChanged($event)"
@@ -172,19 +173,16 @@
                   ></mat-datepicker-toggle>
                   <mat-datepicker
                     id="{{ fidc.name }}"
-                    type="datetime"
+                    type="date"
                     #picker
                   ></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field>
-                  <input
-                    matInput
-                    type="text"
-                    id="StartDateTime"
-                    name="StartDateTime"
-                    class="time"
-                    placeholder="Time"
-                  />
+                <mat-form-field class="time">
+                  <mat-select id="{{ fidc.name }}Time" placeholder="Time">
+                    <mat-option *ngFor="let value of []" [value]="value">
+                      {{value?.displayValue}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </span>
               <span *ngSwitchCase="'password'">
@@ -308,7 +306,7 @@
                     ? 'none'
                     : 'inline'
               }"
-              class="material-icons attendee-type {{
+              class="material-icons {{
                 eventAttendee?.Attendee?.UserType?.CssClassCategory
               }} {{ eventAttendee?.Attendee?.UserType?.CssClass }}"
               [title]="eventAttendee?.Attendee?.UserType?.Value"
@@ -327,27 +325,36 @@
             <p class="attendee-display-name">
               {{ eventAttendee?.Attendee?.DisplayName }}
             </p>
-            <button
-              mat-icon-button
-              class="btn btn-white btn-round btn-just-icon"
-              type="button"
-              (click)="onClickEventAttendeeRemove(eventAttendee, i)"
-              title="{{ option?.title }}"
-            >
-              <i class="material-icons">delete</i>
-            </button>
-            <mat-checkbox [value]="eventAttendee?.IsDeclined" [disabled]="true"
-              ><span>Declined</span></mat-checkbox
-            >
-            <mat-checkbox [value]="eventAttendee?.IsTentative" [disabled]="true"
-              ><span>Tentative</span></mat-checkbox
-            >
-            <mat-checkbox [value]="eventAttendee?.IsAccepted" [disabled]="true"
-              ><span>Accepted</span></mat-checkbox
-            >
+            <span class="attendee">
+              <button
+                mat-icon-button
+                class="btn btn-white btn-round btn-just-icon"
+                type="button"
+                (click)="onClickEventAttendeeRemove(eventAttendee, i)"
+                title="{{ option?.title }}"
+              >
+                <i class="material-icons">delete</i>
+              </button>
+              <mat-checkbox
+                [value]="eventAttendee?.IsDeclined"
+                [disabled]="true"
+                ><span>Declined</span></mat-checkbox
+              >
+              <mat-checkbox
+                [value]="eventAttendee?.IsTentative"
+                [disabled]="true"
+                ><span>Tentative</span></mat-checkbox
+              >
+              <mat-checkbox
+                [value]="eventAttendee?.IsAccepted"
+                [disabled]="true"
+                ><span>Accepted</span></mat-checkbox
+              >
+            </span>
           </div>
         </mat-tab>
         <mat-tab label="Event Attachment(s)">
+          <br />
           <app-file-upload
             [CalendarEventId]="selected?._id"
             [files]="selected?.Files"

@@ -17,7 +17,7 @@ import {
   Task,
   User,
 } from 'app/shared/shared.module';
-import { first } from 'rxjs/operators';
+import { SharedModulesModuleConfiguration } from '../../shared-modules-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -38,64 +38,63 @@ export class ReferenceValueService {
       case `Assignee`:
       case `PreviousAssignee`:
       case `User`:
-        this.usersService
-          .getAll<User>()
-          .subscribe(users => {
-            this.addFieldLookupValues(
-              field,
-              users.map((user) => this.mapValuesUser(user)))
-          });
+        this.usersService.getAll<User>().subscribe((users) => {
+          this.addFieldLookupValues(
+            field,
+            users.map((user) => this.mapValuesUser(user))
+          );
+        });
         break;
       case `Client`:
-        this.clientsService
-          .getAll<Client>()
-          .subscribe(values => {
-            this.addFieldLookupValues(
-              field,
-              values.map((value) => this.mapValuesClient(value))
-            );
-          });
+        this.clientsService.getAll<Client>().subscribe((values) => {
+          this.addFieldLookupValues(
+            field,
+            values.map((value) => this.mapValuesClient(value))
+          );
+        });
         break;
       case `Employee`:
       case `Manager`:
-        this.employeesService
-          .getAll<Employee>()
-          .subscribe(values => {
-            this.addFieldLookupValues(
-              field,
-              values.map((value) => this.mapValuesEmployee(value))
-            );
-          });
+        this.employeesService.getAll<Employee>().subscribe((values) => {
+          this.addFieldLookupValues(
+            field,
+            values.map((value) => this.mapValuesEmployee(value))
+          );
+        });
         break;
       case `Project`:
-        this.projectsService
-          .getAll<Project>()
-          .subscribe(values => {
-            this.addFieldLookupValues(
-              field,
-              values.map((value) => this.mapValuesProject(value))
-            );
-          });
+        this.projectsService.getAll<Project>().subscribe((values) => {
+          this.addFieldLookupValues(
+            field,
+            values.map((value) => this.mapValuesProject(value))
+          );
+        });
         break;
       case `Supplier`:
-        this.suppliersService
-          .getAll<Supplier>()
-          .subscribe(values => {
-            this.addFieldLookupValues(
-              field,
-              values.map((value) => this.mapValuesSupplier(value))
-            );
-          });
+        this.suppliersService.getAll<Supplier>().subscribe((values) => {
+          this.addFieldLookupValues(
+            field,
+            values.map((value) => this.mapValuesSupplier(value))
+          );
+        });
         break;
       case `Task`:
-        this.tasksService
-          .getAll<Task>()
-          .subscribe(values => {
-            this.addFieldLookupValues(
-              field,
-              values.map((value) => this.mapValuesTask(value))
-            );
-          });
+        this.tasksService.getAll<Task>().subscribe((values) => {
+          this.addFieldLookupValues(
+            field,
+            values.map((value) => this.mapValuesTask(value))
+          );
+        });
+        break;
+      case `StartDateTime`:
+      case `EndDateTime`:
+        this.addFieldLookupValues(
+          field,
+          SharedModulesModuleConfiguration.scheduleTimes.map((time, index) => ({
+            id: index,
+            displayValue: time,
+          }))
+        );
         break;
     }
   }
@@ -135,7 +134,7 @@ export class ReferenceValueService {
       title: name,
       cssClassCategory: value?.ProjectType?.CssClassCategory,
       cssClass: value?.ProjectType?.CssClass,
-      icon: value?.ProjectType?.Icon
+      icon: value?.ProjectType?.Icon,
     };
   }
   mapValuesSupplier(value: Supplier): any {
@@ -161,14 +160,18 @@ export class ReferenceValueService {
       title: name,
       cssClassCategory: value?.TaskType?.CssClassCategory,
       cssClass: value?.TaskType?.CssClass,
-      icon: value?.TaskType?.Icon
+      icon: value?.TaskType?.Icon,
     };
   }
   mapValuesUser(user: User): any {
     return {
       id: user?._id,
       displayValue: user?.DisplayName,
-      title: (user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3 || ``),
+      title:
+        user?.UserType?.Value ||
+        user?.UserType?.Value2 ||
+        user?.UserType?.Value3 ||
+        ``,
       cssClassCategory: user?.UserType?.CssClassCategory,
       cssClass: user?.UserType?.CssClass,
       icon: user?.UserType?.Icon,

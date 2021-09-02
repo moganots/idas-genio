@@ -1,7 +1,7 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
-| Create date:  2021-08-19
+| Create date:  2021-08-31
 | Description:  IDAS - Genio - API - routes utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
@@ -23,7 +23,9 @@ function eRoutes() {
     const router = express.Router();
     var root = require(`./root`)(router, config);
     var authentication = require(`./authentication/api`)(router, config);
+    var routeFileAttachment = require(`./file-attachment/api`)(router, config);
     var routeUser = require(`./user/api`)(router, config);
+    var routeConfigurationSetting = require(`./configuration-setting/api`)(router, config);
     var routeLookupCategory = require(`./lookup-category/api`)(router, config);
     var routeLookupValue = require(`./lookup-value/api`)(router, config);
     var routeEntity = require(`./entity/api`)(router, config);
@@ -55,7 +57,6 @@ function eRoutes() {
     var routeUserTypeMenuItem = require(`./user-type-menu-item/api`)(router, config);
     var routeNotificationMessage = require(`./notification-message/api`)(router, config);
     var routeInboxMessage = require(`./inbox-message/api`)(router, config);
-    var routeFileAttachment = require(`./file-attachment/api`)(router, config);
     var routevwRandomEmployeeNumber = require(`./vw-random-employee-number/api`)(router, config);
     return router;
 }

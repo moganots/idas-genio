@@ -45,7 +45,7 @@ export class GeneralUtils {
     return ``;
   }
   public static appendLeadingZero(value: number) {
-    return value <= 9 ? '0' + value : value;
+    return String(value <= 9 ? '0' + value : value);
   }
   public static padRight(value: any, padding: string) {
     return value && padding
@@ -120,8 +120,14 @@ export class GeneralUtils {
       .join('/');
   }
   public static getFileAttachmentParentType(file: FileAttachment) {
-    if(file){
-      return (file.ProjectId) ? `project` : (file.TaskId) ? `task` : (file.CalendarEventId) ? `calendar` : `file`;
+    if (file) {
+      return file.ProjectId
+        ? `project`
+        : file.TaskId
+        ? `task`
+        : file.CalendarEventId
+        ? `calendar`
+        : `file`;
     }
     return `file`;
   }
@@ -161,5 +167,31 @@ export class GeneralUtils {
     } catch (error) {
       throw error;
     }
+  }
+  public static readUploadedFileAsText(inputFile) {
+    const fileReader = new FileReader();
+    return new Promise((resolve, reject) => {
+      fileReader.onerror = () => {
+        fileReader.abort();
+        reject(new DOMException('Problem parsing input file.'));
+      };
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.readAsText(inputFile);
+    });
+  }
+  public static readUploadedFileAsDataUrl(inputFile) {
+    const fileReader = new FileReader();
+    return new Promise((resolve, reject) => {
+      fileReader.onerror = () => {
+        fileReader.abort();
+        reject(new DOMException('Problem parsing input file.'));
+      };
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.readAsDataURL(inputFile);
+    });
   }
 }

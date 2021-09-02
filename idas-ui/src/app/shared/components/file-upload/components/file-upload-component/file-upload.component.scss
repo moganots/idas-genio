@@ -1,41 +1,40 @@
-@import "./../../../../assets/scss/idas/colors.scss";
-@import "./../../../../assets/scss/idas/fonts.scss";
+@import "./../../../../../../assets/scss/idas/colors.scss";
+@import "./../../../../../../assets/scss/idas/fonts.scss";
 
 .file-upload {
   background-color: #ffffff;
-  border: 0px dashed #dcdcdc;
-  border-radius: 10px;
-  padding: 0 0 5px 0;
+  border: 1px dashed #dcdcdc;
+  //border-radius: 10px;
+  padding: 0 0 0 0;
 
   .file-list {
     border-bottom: 1px dashed #dcdcdc;
     display: flex;
     justify-content: space-between;
     padding: 5px;
-
     i {
       margin: 0 0 0 9px;
       padding: 0 0 0 0;
     }
-
     img {
+      background-size: cover;
       display: inline-block;
       height: auto;
       margin: 0 0 0 0;
-      padding: 0 5px 0 0;
+      padding: 0 0 0 0;
       text-align: left;
-      width: 6%;
+      width: 4%;
       vertical-align: middle;
     }
-
     .file-details {
       display: inline-block;
       margin: 0 0 0 0;
-      padding: 0 0 0 0;
+      padding: 0 0 0 5px;
       text-align: left;
+      width: 100%;
       vertical-align: middle;
-
-      ul, li {
+      ul,
+      li {
         display: inline-block;
         font-size: 0.95em;
         margin: 0 0 0 0;
@@ -55,7 +54,7 @@
     button {
       display: inline-block;
       margin: 0 0 0 0;
-      padding: 0 0 0 0;      
+      padding: 0 0 0 0;
     }
   }
 
@@ -66,32 +65,33 @@
       padding: 5px 0 0 0;
       text-align: center;
       width: 100%;
-      vertical-align: middle;      
+      vertical-align: middle;
+      button {
+        background-color: #ffffff;
+        border: 1px dashed #2f4f4f;
+        i {
+          color: #2f4f4f;
+          font-size: 23px;
+          height: auto;
+          margin: 0 0 0 8px;
+          padding: 0 0 15px 0;
+          width: 23px;
+        }
+      }
+      button:hover {
+        background-color: #2f4f4f;
+        i {
+          color: #ffffff;
+        }
+      }
     }
     &.file-details {
       display: inline-block;
       margin: 0 0 0 0;
       padding: 0 0 0 0;
-    }
-    &.file-name {
-      display: inline-block;
-      font-size: 0.75em;
-      vertical-align: middle;
-    }
-    &.file-date-created {
-      display: inline-block;
-      font-size: 0.75em;
-      text-align: justify;
-      vertical-align: middle;
-    }
-    &.file-size {
-      display: inline-block;
-      font-size: 0.75em;
-      text-align: justify;
-      vertical-align: middle;
+      width: 100%;
     }
   }
-
   a,
   a:link,
   a:visited,
@@ -101,9 +101,12 @@
     display: inline-block;
     font-family: $OpenSans_Bold;
     padding-bottom: 3px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     vertical-align: middle;
+    &.file-name {
+      width: 100%;
+    }
   }
   a:hover {
     color: $idas-color-main-links-hover;

@@ -141,6 +141,14 @@ export class CommonComponent {
   hasItems(items: any[]) {
     return items && typeof items !== 'undefined' && items.slice() !== undefined;
   }
+  appendLeadingZero(value: number) {
+    return GeneralUtils.appendLeadingZero(value);
+  }
+  getHourMinuteFromDate(date: Date): string {
+    const hours = this.appendLeadingZero(date.getHours());
+    const minutes = this.appendLeadingZero(date.getMinutes());
+    return `${hours}:${minutes}`;
+  }
   toggleGoHome() {
     this.router.navigate(['/']);
   }

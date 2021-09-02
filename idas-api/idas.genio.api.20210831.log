@@ -1,0 +1,5 @@
+[2021-08-31T09:19:19.926+0200] [INFO] /c.u.a.d.p.p.i.i.g.i.a/app.js/server.init() : Starting up the IDAS - Genio API
+[2021-08-31T09:19:19.930+0200] [INFO] /c.u.a.d.p.p.i.i.g.i.a/app.js/server.init() : Dependencies loaded successfully
+[2021-08-31T09:19:20.592+0200] [INFO] /c.u.a.d.p.p.i.i.g.i.a/app.js/app.use('/api', router)() : IDAS - Genio API Router initialised successfully
+[2021-08-31T09:19:19.934+0200] [INFO] /c.u.a.d.p.p.i.i.g.i.a/app.js/http.createServer() : Server initialised successfully
+[2021-08-31T09:19:20.596+0200] [INFO] /c.u.a.d.p.p.i.i.g.i.a/app.js/server.listen() : IDAS - Genio API listening on http://localhost:4238

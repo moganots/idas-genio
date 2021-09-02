@@ -65,7 +65,9 @@ export class BaseDataComponent extends BaseComponent {
     this.addGridViewActionButtonsColumn();
   }
   getDataSourceColumns() {
-    this.dataSourceColumns = this.sourceDataColumns.map((sdc) => { return new DataColumn(sdc); });
+    this.dataSourceColumns = this.sourceDataColumns.map((sdc) => {
+      return new DataColumn(sdc);
+    });
   }
   setDataSourceColumnCanEditOrIsRequiredFlags() {
     this.dataSourceColumns.forEach((cn) => {
@@ -82,6 +84,7 @@ export class BaseDataComponent extends BaseComponent {
   }
   setDataSourceColumnControlTypes() {
     this.dataSourceColumns.forEach((cn) => {
+      cn.lookupValues = [];
       if (this.isUseCheckbox(cn)) {
         cn.controlType = 'checkbox';
       } else if (this.isDateField(cn)) {
@@ -99,6 +102,7 @@ export class BaseDataComponent extends BaseComponent {
         this.setSelectOptionControlType(cn);
       } else if (this.isTimeField(cn)) {
         cn.controlType = 'timepicker';
+        this.setTimePickerLookupValues(cn);
       } else if (this.isUseImage(cn)) {
         cn.controlType = 'image';
       } else {
@@ -106,11 +110,15 @@ export class BaseDataComponent extends BaseComponent {
       }
     });
   }
+  setTimePickerLookupValues(cn: DataColumn) {
+    SharedModulesModuleConfiguration.scheduleTimes
+      .map((time, index) => ({ id: index, displayValue: time }))
+      .forEach((value) => cn.lookupValues.push(value));
+  }
   setDataSourceColumnLookupOrReferenceValues() {
     this.dataSourceColumns
       .filter((cn) => cn.controlType === `select`)
       .forEach((cn) => {
-        cn.lookupValues = [];
         switch (cn.selectOptionControlType) {
           case 'lookupIcon':
           case 'lookupImage':
@@ -119,7 +127,7 @@ export class BaseDataComponent extends BaseComponent {
               .getBy<LookupValue>({
                 LookupCategoryName: this.columnNameWithoutId(cn),
               })
-              .subscribe(values => {
+              .subscribe((values) => {
                 values
                   .map((value) => this.mapLookupValue(value))
                   .forEach((value) => {
@@ -145,7 +153,7 @@ export class BaseDataComponent extends BaseComponent {
       cssClassCategory: value.CssClassCategory,
       cssClass: value.CssClass,
       icon: value.Icon,
-      image: value.Image
+      image: value.Image,
     };
   }
   setDataSourceColumnNames() {
@@ -169,9 +177,7 @@ export class BaseDataComponent extends BaseComponent {
     }
   }
   setControlFilterValues(column: DataColumn, control: FormControl) {
-    if (
-      column.controlType === `select`
-    ) {
+    if ([`select`, `timepicker`].includes(column.controlType)) {
       column.filteredLookupValues = control.valueChanges.pipe(
         startWith(``),
         map((value) => this.filterBy(column, value))
@@ -179,15 +185,16 @@ export class BaseDataComponent extends BaseComponent {
     }
   }
   setFormInputDataColumns(useColumns: DataColumn[]) {
-    this.formInputDataColumns = (useColumns || this.dataSourceColumns || []).filter(
-      (column) => column.canShow
-    );
+    this.formInputDataColumns = useColumns || this.dataSourceColumns || [];
+  }
+  getCanShowFormInputDataColumns() {
+    return (this.formInputDataColumns || []).filter((column) => column.canShow);
   }
   isFieldDisabled(column: DataColumn) {
     switch (this.toLocaleLowerCaseTrim(this.action)) {
       case 'create':
       case 'edit':
-        switch(column.name) {
+        switch (column.name) {
           case '_id':
           case 'BirthDate':
           case 'Code':
@@ -207,7 +214,8 @@ export class BaseDataComponent extends BaseComponent {
           case 'TaskId':
           case 'ParentTaskId':
             return true;
-          default: return !column.canEdit;
+          default:
+            return !column.canEdit;
         }
       default:
         return !column.canEdit;
@@ -215,9 +223,15 @@ export class BaseDataComponent extends BaseComponent {
   }
   getFieldConditionalIsRequired(column: DataColumn) {
     if (
-      ['Description', 'MiddleName', 'IsTerminated', 'VATNumber', 'AssigneeId', 'StatusId', 'IsActive'].includes(
-        column.name
-      )
+      [
+        'Description',
+        'MiddleName',
+        'IsTerminated',
+        'VATNumber',
+        'AssigneeId',
+        'StatusId',
+        'IsActive',
+      ].includes(column.name)
     ) {
       return null;
     }
@@ -239,8 +253,32 @@ export class BaseDataComponent extends BaseComponent {
   }
   getFieldValue(column: DataColumn, dataObject: any) {
     const columnValue = dataObject[column.name];
-    const lookupValue = ((column.lookupValues || []).find((lv) => lv.id === columnValue) || {displayValue: undefined});
-    return lookupValue.displayValue || columnValue;
+    const lookupValue = (column.lookupValues || []).find(
+      (lv) => lv.id === columnValue
+    ) || { displayValue: undefined };
+    return (
+      lookupValue.displayValue || columnValue || this.getTimeValue(column.name)
+    );
+  }
+  getTimeValue(name: string) {
+    const hours = String(this.appendLeadingZero(new Date().getHours()));
+    const minutes = String(this.appendLeadingZero(new Date().getMinutes()));
+    switch (name) {
+      case `StartDateTime`:
+        return this.isCreate()
+          ? `${hours}:00`
+          : this.selected?.StartDate
+          ? this.getHourMinuteFromDate(new Date(this.selected?.StartDate))
+          : `${hours}:00`;
+      case `EndDateTime`:
+        return this.isCreate()
+          ? `${hours}:30`
+          : this.selected?.EndDate
+          ? this.getHourMinuteFromDate(new Date(this.selected?.EndDate))
+          : `${hours}:30`;
+      default:
+        return `${hours}:${minutes}`;
+    }
   }
   filterBy(column: DataColumn, filterValue: any) {
     const values: any[] = column.lookupValues || [];
@@ -281,14 +319,23 @@ export class BaseDataComponent extends BaseComponent {
     ).includes(this.toLocaleLowerCaseTrim(filterValue));
   }
   getDisplayWithValue(event: any) {
-    if(event){
-      return event.displayValue || event.Name || event.name || event.DisplayName || event.title || event.Title || event;
+    if (event) {
+      return (
+        event.displayValue ||
+        event.Name ||
+        event.name ||
+        event.DisplayName ||
+        event.title ||
+        event.Title ||
+        event
+      );
     }
     return null;
   }
   onValueChanged(event: any) {
     if (event && event.target) {
-      this.updates[event.target.id] = event.target.value.id || event.target.value._id || event.target.value;
+      this.updates[event.target.id] =
+        event.target.value.id || event.target.value._id || event.target.value;
     }
     return;
   }

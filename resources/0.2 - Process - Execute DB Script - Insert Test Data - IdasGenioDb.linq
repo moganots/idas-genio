@@ -134,23 +134,26 @@ void Main()
 								}
 							});
 					});
+					fileAttachments.Dump();
 					cleanAndDeleteDirectory(attachmentsDirectory);
 					string attachmentFileDirectory = string.Empty;
 					fileAttachments.ForEach(fileAttachment => {
+						fileAttachment.Dump();
 						using(SqlCommand insertFileAttachment = new SqlCommand(fileAttachment.InsertQuery, connectionIdasGenioDb)) {
 							fileAttachment.FileAttachmentId = Convert.ToInt32(insertFileAttachment.ExecuteScalar());
 							attachmentFileDirectory = System.IO.Path.Combine(attachmentsDirectory, SplitCamelCase(fileAttachment.ObjectTableName).Replace(" ", "-").ToLower(), fileAttachment.ObjectId.ToString(), fileAttachment.FileAttachmentId.ToString());
 							fileAttachment.AttachmentFile = System.IO.Path.Combine(attachmentFileDirectory, fileAttachment.FileName);
 							createDirectoryIfNotExists(attachmentFileDirectory);
-							System.IO.File.Copy(fileAttachment.File.FullName, fileAttachment.AttachmentFile);
+							fileAttachment.File.CopyTo(fileAttachment.AttachmentFile);
 						}
 					});
 				}else{
 					Console.WriteLine("Unable to execute: {0}, file is empty", file02CreateDatabase);
 				}
-				if (connectionIdasGenioDb.State == System.Data.ConnectionState.Open){
-					connectionIdasGenioDb.Close();
-				}
+				//if (connectionIdasGenioDb.State == System.Data.ConnectionState.Open){
+				//	connectionIdasGenioDb.Close();
+				//}
+				connectionIdasGenioDb.Close();
 			}
 		}else{
 			hasError = true;
@@ -452,6 +455,9 @@ public class FileAttachment {
 	public object ObjectCreatedBy;
 	public FileInfo File;
 	public string FileName;
+	public string FileExtension;
+	public string ContentType;
+	public string FileContent;
 	public long FileSize;
 	public string InsertQuery;
 	public string AttachmentFile;
@@ -465,14 +471,31 @@ public class FileAttachment {
 		this.ObjectCreatedBy = objectCreatedBy;
 		this.File = file;
 		this.FileName = file.Name;
+		this.FileExtension = (this.File.Extension != null && !this.File.Extension.Contains(this.File.Name) && this.File.Extension.Trim() != "." && this.File.Extension.Trim() != string.Empty) ? this.File.Extension : null;
+		this.ContentType = (this.FileExtension != null) ? string.Format("application/{0}", this.FileExtension.Replace(".", "").Trim()) : null;
+		this.FileContent = fileContentAsBase64String(this.File.FullName);
 		this.FileSize = file.Length;
-		this.InsertQuery = string.Format("INSERT INTO [{0}].[{1}]([{2}Id], [FileName], [FileSize], [CreatedBy])VALUES({3}, '{4}', {5}, {6}); SELECT SCOPE_IDENTITY();"
-			, this.FileAttachmentSchemaName
-			, this.FileAttachmentTableName
-			, this.ObjectTableName
-			, this.ObjectId
-			, this.FileName
-			, this.FileSize
-			, this.ObjectCreatedBy);
+		this.InsertQuery = string.Format("INSERT INTO [{0}].[{1}]([{2}Id], [FileName], [FileExtension], [ContentType], [FileContent], [FileSize], [CreatedBy]) VALUES ({3}, {4}, {5}, {6}, {7}, {8}, {9}); SELECT SCOPE_IDENTITY();"
+			, this.FileAttachmentSchemaName		// 0
+			, this.FileAttachmentTableName		// 1
+			, this.ObjectTableName				// 2
+			, this.ObjectId						// 3
+			, formatStringForInsertQuery(this.FileName)			// 4
+			, formatStringForInsertQuery(this.FileExtension)	// 5
+			, formatStringForInsertQuery(this.ContentType)		// 6
+			, formatStringForInsertQuery(this.FileContent)		// 7
+			, this.FileSize						// 8
+			, this.ObjectCreatedBy				// 9
+		);
 	}
+}
+
+public static string formatStringForInsertQuery(string value) {
+	return (value == null || value.Trim() == string.Empty) ? "NULL" : string.Format("'{0}'", value);
+}
+public static string fileContentAsBase64String(string path) {
+	if(!File.Exists(path)) { return null; }
+	Byte[] bytes = File.ReadAllBytes(path);
+	String fileContent = Convert.ToBase64String(bytes);
+	return fileContent;
 }

@@ -202,6 +202,9 @@ private String templateMsSqlRepositoryIdasGenioDbApi(string createdBy, string da
 	sb.AppendLine("const _dbContext = require(`./../../db-context/mssql/mssql-idas-genio-db-context`);");
 	sb.AppendLine("const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);");
 	sb.AppendLine("const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-helper`);");
+	if(tableName.Equals("FileAttachment")){
+		sb.AppendLine("const { writeFileAttachmentToDisc } = require(`../../../common/functions`);");
+	}
 	sb.AppendLine("");
 	sb.AppendLine("/*");
 	sb.AppendLine("|--------------------------------------------------------------------------------------------------------------------------------------------");
@@ -216,6 +219,9 @@ private String templateMsSqlRepositoryIdasGenioDbApi(string createdBy, string da
 	sb.AppendLine("            const uid = request.query.uid;");
 	sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
 	sb.AppendLine("            dbContext.create(uid, entityName, entity, (error, data, message) => {");
+	if(tableName.Equals("FileAttachment")){
+		sb.AppendLine("                writeFileAttachmentToDisc(error, data[0]);");
+	}
 	sb.AppendLine("                return onHttpRequestCompleted(__filename, request, response, error, data, message);");
 	sb.AppendLine("            });");
 	sb.AppendLine("        }catch(error){");
