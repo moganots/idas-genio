@@ -46,6 +46,10 @@ body {
   padding: 0px !important;
 }
 
+.mat-form-field-no-padding .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+
 p {
   display: inline-block;
   text-align: left;
@@ -563,6 +567,10 @@ img {
   padding: 0 0 0 0;
   text-align: left;
   vertical-align: middle;
+
+  &.img-rounded {
+    border-radius: 12px;
+  }
 
   &.img10 {
     width: 10px;

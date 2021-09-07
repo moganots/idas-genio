@@ -2695,10 +2695,12 @@ SELECT
 	,[Avatar]
 	,1 AS [CreatedBy]
 FROM (
-SELECT 'root@genio.idas.co.za' AS [EmailAddress], '3b9a10e881e7329cfa4e478615fce90c/d4441ad5f5def0f519ee3b669e521ea40c0291522c26484cfdb3a6a8081e4d239633b183adbc208fa5e4fce4eaa049a9cd453f465586e92dff52ffa8ebc29e74' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-16.png' AS [Avatar] UNION
-SELECT 'admin@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-27.png' AS [Avatar] UNION
-SELECT 'general@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 0 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-7.png' AS [Avatar]
+SELECT 1 AS [id], 'root@genio.idas.co.za' AS [EmailAddress], '3b9a10e881e7329cfa4e478615fce90c/d4441ad5f5def0f519ee3b669e521ea40c0291522c26484cfdb3a6a8081e4d239633b183adbc208fa5e4fce4eaa049a9cd453f465586e92dff52ffa8ebc29e74' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-16.png' AS [Avatar] UNION
+SELECT 2 AS [id], 'admin@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-27.png' AS [Avatar] UNION
+SELECT 3 AS [id], 'general@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 0 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-7.png' AS [Avatar]
 ) AS [u]
+ORDER BY
+	[id]
 
 PRINT ('>> Completed > INSERT >> Default >> Root (Super) and Admin user ([dbo].[User])')
 GO
@@ -4447,7 +4449,7 @@ PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskStatus]')
 		,(RAND(CHECKSUM(NEWID())) * [DayAdd] + [StartDate]) AS [EndDate]
 	FROM [dateVars], [daysIn], [dates]
 	WHERE
-		([StartDate] <= DATEADD(DAY, 200, [LastDayOfCurrentYear]))
+		([StartDate] <= DATEADD(DAY, 365, [LastDayOfCurrentYear]))
 )
 INSERT INTO [dbo].[CalendarEvent]([CalendarEventTypeId],[Title],[Description],[Location],[IsAllDayEvent],[StartDate],[EndDate],[CreatedBy])
 SELECT
@@ -4463,8 +4465,19 @@ FROM (
 	SELECT
 		CASE WHEN [EndDate] > [StartDate] THEN [StartDate] ELSE [EndDate] END [StartDate]
 		,CASE WHEN [StartDate] > [EndDate] THEN [StartDate] ELSE [EndDate] END [EndDate]
-	FROM [dates]
-) AS [dates]
+	FROM (
+		SELECT
+			CASE
+				WHEN DATEPART(MINUTE, [StartDate]) < 30 THEN DATEADD(DAY, DATEDIFF(DAY, 0, [StartDate]), CONCAT(DATEPART(HOUR, [StartDate]), ':00:00'))
+				WHEN DATEPART(MINUTE, [StartDate]) > 30 THEN DATEADD(DAY, DATEDIFF(DAY, 0, [StartDate]), CONCAT(DATEPART(HOUR, [StartDate]), ':30:00'))
+			ELSE [StartDate] END AS [StartDate]
+			,CASE
+				WHEN DATEPART(MINUTE, [EndDate]) < 30 THEN DATEADD(DAY, DATEDIFF(DAY, 0, [EndDate]), CONCAT(DATEPART(HOUR, [EndDate]), ':00:00'))
+				WHEN DATEPART(MINUTE, [EndDate]) > 30 THEN DATEADD(DAY, DATEDIFF(DAY, 0, [EndDate]), CONCAT(DATEPART(HOUR, [EndDate]), ':30:00'))
+			ELSE [EndDate] END AS [EndDate]
+		FROM [dates]
+	) AS [dates]
+) AS [calendarEvents]
 CROSS JOIN (
 	SELECT
 		[lv].[_id] AS [CalendarEventTypeId]

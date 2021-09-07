@@ -15,6 +15,7 @@ import {
   CalendarEvent,
   CalendarEventAttendee,
   LookupValue,
+  User,
 } from 'app/shared/shared.module';
 import { Router } from '@angular/router';
 import { CalendarService } from 'app/shared/components/calendar/calendar.module';
@@ -75,28 +76,33 @@ export class UserMeetingCalendarComponent
       .getAll<LookupValue>()
       .toPromise()
       .then((lookupValues) => {
-        this.meetingCalendarAttendeeService
-          .getBy<CalendarEventAttendee>({
-            AttendeeId: this.currentUser._id,
-          })
+        this.referenceValueService.usersService
+          .getAll<User>()
           .toPromise()
-          .then((attendeeEvents) => {
-            this.meetingCalendarService
-              .getAll<CalendarEvent>()
+          .then((users) => {
+            this.meetingCalendarAttendeeService
+              .getBy<CalendarEventAttendee>({
+                AttendeeId: this.currentUser._id,
+              })
               .toPromise()
-              .then((calendarEvents) => {
-                this.calendarEvents = calendarEvents.filter((ce) =>
-                  attendeeEvents
-                    .map((attendeeEvent) => attendeeEvent.CalendarEventId)
-                    .includes(ce._id)
-                );
+              .then((attendeeEvents) => {
+                this.meetingCalendarService
+                  .getAll<CalendarEvent>()
+                  .toPromise()
+                  .then((calendarEvents) => {
+                    this.calendarEvents = calendarEvents.filter((ce) =>
+                      attendeeEvents
+                        .map((attendeeEvent) => attendeeEvent.CalendarEventId)
+                        .includes(ce._id)
+                    );
+                  });
               });
+            this.calendarEvents.forEach((calendarEvent) => {
+              calendarEvent.CalendarEventType = lookupValues.find(
+                (lv) => lv._id === calendarEvent.CalendarEventTypeId
+              );
+            });
           });
-        this.calendarEvents.forEach((calendarEvent) => {
-          calendarEvent.CalendarEventType = lookupValues.find(
-            (lv) => lv._id === calendarEvent.CalendarEventTypeId
-          );
-        });
       });
   }
   ngAfterViewInit() {}
@@ -125,7 +131,9 @@ export class UserMeetingCalendarComponent
       },
       () => {
         this.onDataRefresh();
-      }, '96vh', '45vw'
+      },
+      '96vh',
+      '45vw'
     );
   }
   getDefaultCalendarEvent(
@@ -150,81 +158,4 @@ export class UserMeetingCalendarComponent
       Files: ([] = []),
     } as unknown as CalendarEvent;
   }
-
-  /* getCalendarViewEvents() {
-    const events =  this.calendarEvents.filter(
-      (mce) =>
-        (new Date(mce.start)).getFullYear() === this.viewDate.getFullYear() &&
-        (new Date(mce.start)).getMonth() === this.viewDate.getMonth()
-    );
-    return events;
-  }
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.calendarEvents = this.calendarEvents.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
-
-  addEvent(): void {
-    this.calendarEvents = [
-      ...this.calendarEvents,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: null,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.calendarEvents = this.calendarEvents.filter(
-      (event) => event !== eventToDelete
-    );
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  } */
 }

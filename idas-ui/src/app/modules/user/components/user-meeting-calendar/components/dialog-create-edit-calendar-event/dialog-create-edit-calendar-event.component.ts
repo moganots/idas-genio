@@ -7,7 +7,10 @@ import {
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base-dialog/base-dialog.component';
-import { ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
+import {
+  ReferenceValueService,
+  SharedModulesModuleConfiguration,
+} from 'app/modules/_shared/shared-modules.module';
 import { CalendarConfiguration } from 'app/shared/components/calendar/calendar.module';
 import {
   AlertifyService,
@@ -33,14 +36,13 @@ export class DialogCreateEditCalendarEventComponent
   extends BaseDialogComponent
   implements OnInit, AfterViewInit
 {
+  calendarEventScheduleTimes: any[];
   eventAttendeeResponses = CalendarConfiguration.eventAttendeeResponses;
   frmCtrlEventAttendees: FormControl = new FormControl();
   filteredEventAttendees: Observable<any[]>;
   users: User[] = [];
   currentEventAttendee: CalendarEventAttendee;
   newEventAttendee: User;
-  startDateTime: string;
-  endDateTime: string;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -73,6 +75,15 @@ export class DialogCreateEditCalendarEventComponent
       .map((en) => this.capitalizeFirstLetter(en))
       .join(` `)}`;
     this.sourceDataColumns = CalendarEventConfiguration.dataColumns;
+    this.calendarEventScheduleTimes =
+      SharedModulesModuleConfiguration.scheduleTimes.map((time, index) => ({
+        id: index,
+        value: time,
+        displayValue: time,
+      }));
+      this.selected.StartDateTime = this.getTimeValue(`StartDateTime`);
+      this.selected.EndDateTime = this.getTimeValue(`EndDateTime`);
+      console.log(this.selected)
   }
   ngOnInit() {
     this.setDataSourceColumns();
@@ -100,24 +111,13 @@ export class DialogCreateEditCalendarEventComponent
         );
       });
     this.fileAttachmentService
-      .getBy<CalendarEventAttendee>({ CalendarEventId: this.selected?._id })
+      .getBy<FileAttachment>({ CalendarEventId: this.selected?._id })
       .toPromise()
       .then((files) => {
         this.selected.Files = files;
       });
   }
   ngAfterViewInit() {}
-  getModel(name: string) {
-    switch (name) {
-      case `StartDate`:
-        return this.startDateTime;
-      case `EndDate`:
-        return this.endDateTime;
-    }
-  }
-  getCalendarEventOperatingHours() {
-    return CalendarConfiguration.operatingHours.map(oh => ({displayValue: oh}));
-  }
   onClickEventAttendeResponse(option): void {}
   onValueChanged(event) {
     if (event && event.source && event.source.value) {

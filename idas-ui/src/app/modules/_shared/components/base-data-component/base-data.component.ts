@@ -261,6 +261,7 @@ export class BaseDataComponent extends BaseComponent {
     );
   }
   getTimeValue(name: string) {
+    if(!SharedModulesModuleConfiguration.timeColumns.includes(name)) return null;
     const hours = String(this.appendLeadingZero(new Date().getHours()));
     const minutes = String(this.appendLeadingZero(new Date().getMinutes()));
     switch (name) {

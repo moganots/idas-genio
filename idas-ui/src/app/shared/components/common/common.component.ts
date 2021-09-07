@@ -145,7 +145,7 @@ export class CommonComponent {
     return GeneralUtils.appendLeadingZero(value);
   }
   getHourMinuteFromDate(date: Date): string {
-    const hours = this.appendLeadingZero(date.getHours());
+    const hours = this.appendLeadingZero(date.getHours() - 2);
     const minutes = this.appendLeadingZero(date.getMinutes());
     return `${hours}:${minutes}`;
   }

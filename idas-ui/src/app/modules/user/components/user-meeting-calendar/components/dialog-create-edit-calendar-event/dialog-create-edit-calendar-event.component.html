@@ -149,6 +149,12 @@
                   name="{{ fidc.name }}"
                   [formControl]="frmGroupFields.controls[fidc.name]"
                   (change)="onCheckboxClicked($event)"
+                  style="
+                    margin: 0 0 0 0;
+                    margin-bottom: -1.25em;
+                    margin-top: -1.25em;
+                    padding: 0 0 0 0;
+                  "
                   ><p class="display-name-check-box">
                     {{ fidc.displayName }}
                   </p></mat-checkbox
@@ -178,9 +184,26 @@
                   ></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="time">
-                  <mat-select id="{{ fidc.name }}Time" placeholder="Time">
-                    <mat-option *ngFor="let value of []" [value]="value">
-                      {{value?.displayValue}}
+                  <mat-select
+                    id="{{ fidc.name }}Time"
+                    formControlName="{{ fidc.name }}Time"
+                    [(ngModel)]="
+                      fidc.name === 'StartDate'
+                        ? selected.StartDateTime
+                        : selected.EndDateTime
+                    "
+                    [(value)]="
+                      fidc.name === 'StartDate'
+                        ? selected.StartDateTime
+                        : selected.EndDateTime
+                    "
+                    placeholder="Time"
+                  >
+                    <mat-option
+                      *ngFor="let value of calendarEventScheduleTimes"
+                      [value]="value?.value"
+                    >
+                      <p class="display-value">{{ value?.displayValue }}</p>
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -200,7 +223,13 @@
                 </mat-form-field>
               </span>
               <span *ngSwitchCase="'textarea'">
-                <mat-form-field>
+                <mat-form-field
+                  style="
+                    margin: 0 0 0 0;
+                    margin-bottom: -1.25em;
+                    padding: 0 0 0 0;
+                  "
+                >
                   <textarea
                     matInput
                     type="textarea"
@@ -398,7 +427,6 @@
         btn-idas-dialog-float-right
       "
       type="button"
-      [disabled]="frmGroup.invalid"
       (click)="onClickSave()"
       [mat-dialog-close]="selected"
       title="Save Changes"

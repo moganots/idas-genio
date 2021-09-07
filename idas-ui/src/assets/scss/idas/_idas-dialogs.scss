@@ -89,7 +89,7 @@ mat-tab {
     width: 45vw;
   }
   &.project-assignment {
-    width: 67.3vw;
+    height: 90vh;
   }
 }
 
@@ -119,7 +119,7 @@ mat-tab {
     display: inline-block;
     height: auto;
     width: 35px;
-    padding: 25px 0 10px 15px;
+    padding: 30px 0 10px 15px;
     position: fixed;
     text-align: justify;
     vertical-align: middle;
@@ -130,7 +130,7 @@ mat-tab {
     display: inline-block;
     font-family: $OpenSans_Bold;
     font-size: 1.55em;
-    padding: 25px 0 10px 50px;
+    padding: 30px 0 10px 50px;
     position: fixed;
     text-align: justify;
     vertical-align: middle;
@@ -157,6 +157,10 @@ mat-tab {
     i {
       padding: 1px 0 10px 10px;
     }
+  }
+  button {
+    margin: 8px 0 0 0;
+    padding: 0 0 0 0;
   }
 }
 
@@ -312,46 +316,6 @@ mat-tab {
     }
   }
 }
-
-/* .footer.calendar-event-footer {
-  .attendee {
-    button {
-      background-color: red;
-      float: right;
-      i,
-      img {
-        height: auto;
-        font-size: 20px;
-        margin: 0 0 0 10px;
-        padding: 0 0 0 0;
-        text-align: left;
-        vertical-align: middle;
-      }
-      i {
-        &.accept {
-          color: $idas-color-action-create;
-        }
-        &.tentative {
-          color: $idas-color-action-review;
-        }
-        &.decline {
-          color: $idas-color-action-delete;
-        }
-      }
-    }
-    i {
-      &.accept {
-        color: $idas-color-action-create;
-      }
-      &.tentative {
-        color: $idas-color-action-review;
-      }
-      &.decline {
-        color: $idas-color-action-delete;
-      }
-    }
-  }
-} */
 
 .hidden {
   display: none;
