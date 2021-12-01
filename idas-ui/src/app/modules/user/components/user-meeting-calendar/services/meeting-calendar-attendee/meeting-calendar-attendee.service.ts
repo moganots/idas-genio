@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UsersService } from 'app/modules/user/services/users.service';
-import { AuthenticationService, CalendarEventAttendee, DataService, User } from 'app/shared/shared.module';
+import { UserService } from 'app/modules/user/services/users.service';
+import { AuthenticationService, CalendarEventAttendee, DataService, User } from 'app/shared/app-shared.module';
 import { CalendarEventAttendeeConfiguration } from './calendar-event-attendee-configuration';
 
 @Injectable({
@@ -12,11 +12,11 @@ export class MeetingCalendarAttendeeService extends DataService {
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
-    public usersService: UsersService
+    public UserService: UserService
   ) {
     super(httpClient, authenticationService);
     this.entityName = CalendarEventAttendeeConfiguration.identifier;
-    this.usersService.getAll<User>().toPromise().then((users) => {
+    this.UserService.getAll<User>().toPromise().then((users) => {
       this.users = users;
     });
   }

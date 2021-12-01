@@ -16,8 +16,8 @@ import {
   CommonComponent,
   DataService,
   LookupValueService,
-} from 'app/shared/shared.module';
-import { SharedModulesModuleConfiguration } from '../../shared-modules-configuration';
+} from 'app/shared/app-shared.module';
+import { AppModulesSharedModuleConfiguration } from '../../shared-modules-configuration';
 import { ReferenceValueService } from '../../services/reference-value-service/reference-value.service';
 
 @Component({
@@ -74,47 +74,47 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     }
   }
   isUseCheckbox(field: any) {
-    return SharedModulesModuleConfiguration.checkboxColumns.includes(
+    return AppModulesSharedModuleConfiguration.checkboxColumns.includes(
       field.name || field
     );
   }
   isDateField(field: any) {
-    return SharedModulesModuleConfiguration.dateColumns.includes(
+    return AppModulesSharedModuleConfiguration.dateColumns.includes(
       field.name || field
     );
   }
   isTimeField(field: any) {
-    return SharedModulesModuleConfiguration.timeColumns.includes(
+    return AppModulesSharedModuleConfiguration.timeColumns.includes(
       field.name || field
     );
   }
   isNumberField(field: any) {
-    return SharedModulesModuleConfiguration.numberColumns.includes(
+    return AppModulesSharedModuleConfiguration.numberColumns.includes(
       field.name || field
     );
   }
   isMaskedField(field: any) {
-    return SharedModulesModuleConfiguration.maskedColumns.includes(
+    return AppModulesSharedModuleConfiguration.maskedColumns.includes(
       field.name || field
     );
   }
   isTextAreaField(field: any) {
-    return SharedModulesModuleConfiguration.textAreaColumns.includes(
+    return AppModulesSharedModuleConfiguration.textAreaColumns.includes(
       field.name || field
     );
   }
   isUseIcon(field: any) {
-    return SharedModulesModuleConfiguration.useIconColumns.includes(
+    return AppModulesSharedModuleConfiguration.useIconColumns.includes(
       field.name || field
     );
   }
   isUseImage(field: any) {
-    return SharedModulesModuleConfiguration.useImageColumns.includes(
+    return AppModulesSharedModuleConfiguration.useImageColumns.includes(
       field.name || field
     );
   }
   isUseBreakOrNewlineOrSection(field: any) {
-    return SharedModulesModuleConfiguration.useBreakNewlineSectionColumns.includes(
+    return AppModulesSharedModuleConfiguration.useBreakNewlineSectionColumns.includes(
       field.name || field
     );
   }
@@ -133,12 +133,12 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     }
   }
   isLookupValueField(field: any) {
-    return SharedModulesModuleConfiguration.lookupValueColumns.includes(
+    return AppModulesSharedModuleConfiguration.lookupValueColumns.includes(
       field.name || field
     );
   }
   isReferenceValueField(field: any) {
-    return SharedModulesModuleConfiguration.referenceValueColumns.includes(
+    return AppModulesSharedModuleConfiguration.referenceValueColumns.includes(
       field.name || field
     );
   }

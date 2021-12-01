@@ -4,15 +4,15 @@ import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MAT_DIALOG_DEFAULT_OPTIONS
+  MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ReferenceValueService } from 'app/modules/_shared/services/reference-value-service/reference-value.service';
 import {
   AlertifyService,
   AuthenticationService,
-  LookupValueService
-} from 'app/shared/shared.module';
+  LookupValueService,
+} from 'app/shared/app-shared.module';
 import { BaseDialogComponent } from '../base-dialog/base-dialog.component';
 
 @Component({
@@ -24,39 +24,41 @@ import { BaseDialogComponent } from '../base-dialog/base-dialog.component';
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
-  ]
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
+  ],
 })
-export class DialogCreateEditDataComponent extends BaseDialogComponent implements OnInit {
-
+export class DialogCreateEditDataComponent
+  extends BaseDialogComponent
+  implements OnInit
+{
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogCreateEditDataComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
-    public frmBuilder: FormBuilder
-    ) {
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
     super(
-      router
-      , matDialog
-      , alertifyService
-      , authenticationService
-      , lookupValueService
-      , referenceValueService
-      , dialogRef
-      , data
-      , frmBuilder);
-      this.pageTitle = `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`;
+      router,
+      matDialog,
+      formBuilder,
+      alertifyService,
+      authenticationService,
+      lookupValueService,
+      referenceValueService,
+      dialogRef,
+      data
+    );
+    this.pageTitle = `${this.capitalizeFirstLetter(
+      this.action
+    )} ${this.capitalizeFirstLetter(this.entityName)}`;
   }
 
   ngOnInit() {
-    this.initFormGroupAndFields(null);
-    this.frmGroup = this.frmBuilder.group({
-      frmFields: this.frmGroupFields,
-    });
+    this.initFormGroupAndFields();
   }
 }

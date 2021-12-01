@@ -13,7 +13,7 @@ import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { ProjectAssignmentConfiguration } from './project-assignment-configuration';
 import { ProjectAssignmentsService } from './services/project-assignments.service';
 
@@ -41,25 +41,25 @@ export class DialogProjectAssignmentComponent
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogProjectAssignmentComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public frmBuilder: FormBuilder,
     public projectAssignmentService: ProjectAssignmentsService
   ) {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
       referenceValueService,
       dialogRef,
-      data,
-      frmBuilder
+      data
     );
     this.dataService = projectAssignmentService;
     this.projectId = data.selected.element._id;
@@ -69,14 +69,11 @@ export class DialogProjectAssignmentComponent
     this.pageName = `${ProjectAssignmentConfiguration.pageName}`;
     this.pageTitle = `${ProjectAssignmentConfiguration.pageTitle}`;
     this.sourceDataColumns = ProjectAssignmentConfiguration.dataColumns;
+    this.setDataSourceColumns();
   }
   ngOnInit() {
-    this.setDataSourceColumns();
     this.formInputDataColumns = this.dataSourceColumns.filter((column) => this.useInputColumnNames.includes(column.name));
     this.initFormGroupAndFields(this.formInputDataColumns);
-    this.frmGroup = this.frmBuilder.group({
-      frmFields: this.frmGroupFields,
-    });
     this.onDataRefresh();
     this.onApplyFilter(this.projectId);
   }

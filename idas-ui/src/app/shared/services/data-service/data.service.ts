@@ -6,6 +6,7 @@ import { ResponseResult } from 'app/shared/domain-models/http/response-result';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { User } from 'app/shared/domain-models/user/user';
+import { LookupValue, TaskStatus } from 'app/shared/app-shared.module';
 
 @Injectable({
   providedIn: 'root',

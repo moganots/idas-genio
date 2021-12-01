@@ -7,8 +7,7 @@ import {
   GeneralUtils,
   LookupValue,
   LookupValueService,
-} from 'app/shared/shared.module';
-import { catchError, map } from 'rxjs/operators';
+} from 'app/shared/app-shared.module';
 import { EmployeesConfiguration } from '../employees-configuration';
 
 @Injectable({

@@ -7,7 +7,7 @@ import {
   LookupValue,
   LookupValueService,
   Supplier,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { SuppliersConfiguration } from '../suppliers-configuration';
 
 @Injectable({

@@ -54,9 +54,9 @@
                   }"
                 >
                   <i
-                    class="material-icons icon-mat-option {{ value?.cssClassCategory }} {{
-                      value?.cssClass
-                    }}"
+                    class="material-icons icon-mat-option rounded {{
+                      value?.cssClassCategory
+                    }} {{ value?.cssClass }}"
                     [title]="value?.title"
                     >{{ value?.icon }}</i
                   >
@@ -69,7 +69,10 @@
                         : 'inline'
                   }"
                 >
-                  <img class="img-mat-option" src="{{ value?.image }}" />
+                  <img
+                    class="img-mat-option img23 rounded"
+                    src="{{ value?.image }}"
+                  />
                 </span>
                 <p class="display-value">{{ value?.displayValue }}</p>
               </mat-option>
@@ -127,7 +130,7 @@
                         )
                       }} {{
                         getColumnCssClassById(column, element[column.name])
-                      }}"
+                      }} rounded"
                       [title]="
                         getColumnDisplayTitleById(column, element[column.name])
                       "
@@ -138,7 +141,7 @@
                   </span>
                   <span *ngSwitchCase="'lookupImage'">
                     <img
-                      class="img-in-grid"
+                      class="img-in-grid img30 rounded"
                       src="{{
                         getColumnDisplayImageById(column, element[column.name])
                       }}"
@@ -161,7 +164,7 @@
               </span>
               <span *ngSwitchCase="'image'">
                 <img
-                  class="img-in-grid"
+                  class="img-in-grid img30 rounded"
                   src="{{
                     getColumnDisplayImageById(column, element[column.name])
                   }}"

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   PageComponent,
   ReferenceValueService,
-} from 'app/modules/_shared/shared-modules.module';
+} from 'app/modules/_shared/app-modules-shared.module';
 import {
   AlertifyService,
   AuthenticationService,
@@ -16,8 +17,8 @@ import {
   ProjectAssignment,
   Task,
   User,
-} from 'app/shared/shared.module';
-import { ProjectsConfiguration } from '../../projects-configuration';
+} from 'app/shared/app-shared.module';
+import { ProjectConfiguration } from '../../project-configuration';
 import { ProjectAssignmentsService } from '../dialog-project-assignment/services/project-assignments.service';
 
 @Component({
@@ -43,6 +44,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
@@ -54,12 +56,13 @@ export class ProjectComponent extends PageComponent implements OnInit {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
       referenceValueService
     );
-    this.entityName = ProjectsConfiguration.identifier;
+    this.entityName = ProjectConfiguration.identifier;
     // tslint:disable-next-line:only-arrow-functions
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -69,7 +72,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.usersService
+    this.referenceValueService.UserService
       .getAll<User>()
       .toPromise()
       .then((users) => {
@@ -78,20 +81,26 @@ export class ProjectComponent extends PageComponent implements OnInit {
           .toPromise()
           .then((lookupValues) => {
             // Get (Set) - Current project
-            this.referenceValueService.projectsService
+            this.referenceValueService.ProjectService
               .getFirstById<Project>(this.projectId)
               .toPromise()
               .then((project) => {
                 // Get (Set) - Assignee(s) for the current project
-                this.projectAssignmentsService.getBy<ProjectAssignment>({ProjectId: project?._id}).toPromise().then(projectAssignees => {
-                  projectAssignees.forEach(projectAssignee => {
-                    this.setProjectAssignee(users, projectAssignee);
-                    this.setProjectAssigneeLookups(lookupValues, projectAssignee);
+                this.projectAssignmentsService
+                  .getBy<ProjectAssignment>({ ProjectId: project?._id })
+                  .toPromise()
+                  .then((projectAssignees) => {
+                    projectAssignees.forEach((projectAssignee) => {
+                      this.setProjectAssignee(users, projectAssignee);
+                      this.setProjectAssigneeLookups(
+                        lookupValues,
+                        projectAssignee
+                      );
+                    });
+                    project.ProjectAssignees = projectAssignees;
                   });
-                  project.ProjectAssignees = projectAssignees;
-                });
                 // Get (Set) - Parent Project for the current project
-                this.referenceValueService.projectsService
+                this.referenceValueService.ProjectService
                   .getFirstById<Project>(project?.ParentProjectId)
                   .toPromise()
                   .then((parentProject) => {
@@ -100,7 +109,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
                     project.ParentProject = parentProject;
                   });
                 // Get (Set) - Child / Linked Project(s) for the current project
-                this.referenceValueService.projectsService
+                this.referenceValueService.ProjectService
                   .getBy<Project>({ ParentProjectId: project?._id })
                   .toPromise()
                   .then((linkedProjects) => {
@@ -111,7 +120,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
                     project.LinkedProjects = linkedProjects;
                   });
                 // Get (Set) - Task(s) for the current project
-                this.referenceValueService.tasksService
+                this.referenceValueService.TaskService
                   .getBy<Task>({ ProjectId: project?._id })
                   .toPromise()
                   .then((tasks) => {
@@ -147,10 +156,17 @@ export class ProjectComponent extends PageComponent implements OnInit {
       });
   }
   setProjectAssignee(users: User[], projectAssignee: ProjectAssignment) {
-    projectAssignee.Assignee = users.find((user) => user._id === projectAssignee?.AssigneeId);
-    projectAssignee.PreviousAssignee = users.find((user) => user._id === projectAssignee?.PreviousAssigneeId);
+    projectAssignee.Assignee = users.find(
+      (user) => user._id === projectAssignee?.AssigneeId
+    );
+    projectAssignee.PreviousAssignee = users.find(
+      (user) => user._id === projectAssignee?.PreviousAssigneeId
+    );
   }
-  setProjectAssigneeLookups(lookupValues: LookupValue[], projectAssignee: ProjectAssignment) {
+  setProjectAssigneeLookups(
+    lookupValues: LookupValue[],
+    projectAssignee: ProjectAssignment
+  ) {
     projectAssignee.Assignee.UserType = lookupValues.find(
       (lookupValue) => lookupValue._id === projectAssignee?.Assignee?.UserTypeId
     );
@@ -183,5 +199,38 @@ export class ProjectComponent extends PageComponent implements OnInit {
     task.Status = lookupValues.find(
       (lookupValue) => lookupValue._id === task?.StatusId
     );
+  }
+
+  onButtonClicked(action: string, index?: number, element?: any): void {
+    switch (this.toLocaleLowerCaseTrim(action)) {
+      case 'edit':
+        this.onClickLog(action, index, element);
+        break;
+      case 'comment':
+        this.onClickLog(action, index, element);
+        break;
+      case 'logwork':
+        this.onClickLog(action, index, element);
+        break;
+      case 'assign':
+        this.onClickLog(action, index, element);
+        break;
+      case 'attach':
+        this.onClickLog(action, index, element);
+        break;
+      case 'createsub':
+        this.onClickLog(action, index, element);
+        break;
+      case 'clonecopy':
+        this.onClickLog(action, index, element);
+        break;
+      case 'review':
+        this.onClickLog(action, index, element);
+        break;
+    }
+  }
+  onClickLog(action: string, index: number, element: any) {
+    console.log(`action=${action}, index=${index}`);
+    console.log(element);
   }
 }

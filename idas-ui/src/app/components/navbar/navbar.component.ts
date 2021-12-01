@@ -7,7 +7,7 @@ import {
   CommonComponent,
   GeneralUtils,
   LookupValueService,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 
 @Component({
   selector: 'app-navbar',

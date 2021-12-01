@@ -1,21 +1,19 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UsersService } from 'app/modules/user/users.module';
+import { UserService } from 'app/modules/user/app-modules-users.module';
 import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base-dialog/base-dialog.component';
-import { ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
+import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
 import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
-} from 'app/shared/shared.module';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+} from 'app/shared/app-shared.module';
 
 @Component({
   selector: 'app-dialog-create-new-task',
@@ -25,7 +23,7 @@ import { map, startWith } from 'rxjs/operators';
     AlertifyService,
     AuthenticationService,
     LookupValueService,
-    UsersService,
+    UserService,
   ],
 })
 export class DialogCreateNewTaskComponent
@@ -45,25 +43,25 @@ export class DialogCreateNewTaskComponent
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public usersService: UsersService,
+    public UserService: UserService,
     public dialogRef: MatDialogRef<DialogCreateNewTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public frmBuilder: FormBuilder
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
       referenceValueService,
       dialogRef,
-      data,
-      frmBuilder
+      data
     );
     this.pageIcon = 'post_add';
     this.pageTitle = `${this.capitalizeFirstLetter(
@@ -72,13 +70,10 @@ export class DialogCreateNewTaskComponent
     this.projectName = this.selected.Name;
     this.selected = { ProjectId: this.selected._id };
     this.sourceDataColumns = data.dataColumns;
+    this.setDataSourceColumns();
   }
   ngOnInit() {
-    this.setDataSourceColumns();
     this.initFormGroupAndFields(this.dataSourceColumns.filter((dsc) => this.useColumns.includes(dsc.name)));
-    this.frmGroup = this.frmBuilder.group({
-      frmFields: this.frmGroupFields,
-    });
   }
   onClickAssignToMe() {
     this.frmGroupFields.controls.AssigneeId.setValue(this.currentUser.DisplayName);

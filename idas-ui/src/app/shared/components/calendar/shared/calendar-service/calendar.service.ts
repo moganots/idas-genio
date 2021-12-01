@@ -1,7 +1,7 @@
 import { DatePipe, WeekDay } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { CalendarDay } from 'app/shared/domain-models/scheduling/calendar-day';
-import { CalendarEvent } from 'app/shared/shared.module';
+import { CalendarEvent } from 'app/shared/app-shared.module';
 import { DateUtils } from 'app/shared/utilities/date-utils';
 import { PreviousOrNext } from 'app/shared/utilities/enum-previous-next';
 import { BehaviorSubject } from 'rxjs';

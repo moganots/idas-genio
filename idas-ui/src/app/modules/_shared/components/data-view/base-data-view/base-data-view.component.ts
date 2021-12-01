@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -11,7 +11,7 @@ import {
   AlertifyService,
   LookupValueService,
   DataColumn,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { BaseDataComponent } from '../../base-data-component/base-data.component';
 
 @Component({
@@ -32,6 +32,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
@@ -51,7 +52,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
   hasData(): boolean {
     return this.dataSource && this.dataSource.data !== null;
   }
-  initFormGroupAndFields(useColumns: DataColumn[]) {
+  initFormGroupAndFields(useColumns: DataColumn[] = null) {
     this.setFormInputDataColumns(useColumns);
     this.frmGroupFields = new FormGroup({});
     this.formInputDataColumns.forEach((column) => {
@@ -65,6 +66,9 @@ export class BaseDataViewComponent extends BaseDataComponent {
       );
       this.setControlFilterValues(column, control);
       this.frmGroupFields.addControl(column.name, control);
+    });
+    this.frmGroup = this.formBuilder.group({
+      frmFields: this.frmGroupFields,
     });
   }
   getButtonTitleDataRefresh() {

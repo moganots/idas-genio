@@ -1,11 +1,11 @@
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   PageComponent,
   ReferenceValueService,
-} from 'app/modules/_shared/shared-modules.module';
+} from 'app/modules/_shared/app-modules-shared.module';
 import {
   AlertifyService,
   AuthenticationService,
@@ -16,8 +16,9 @@ import {
   User,
   Project,
   FileAttachment,
-} from 'app/shared/shared.module';
-import { TasksConfiguration } from '../../tasks-configuration';
+} from 'app/shared/app-shared.module';
+import { TaskService } from '../../services/task-service/task.service';
+import { TaskConfiguration } from '../../task-configuration';
 
 @Component({
   selector: 'app-task',
@@ -29,6 +30,7 @@ import { TasksConfiguration } from '../../tasks-configuration';
     LookupValueService,
     ReferenceValueService,
     FileAttachmentService,
+    TaskService
   ],
 })
 export class TaskComponent extends PageComponent implements OnInit {
@@ -39,27 +41,28 @@ export class TaskComponent extends PageComponent implements OnInit {
   statuses: LookupValue[] = [];
   priorities: LookupValue[] = [];
 
-  @ViewChild('autosize') autosize: CdkTextareaAutosize;
-
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public fileAttachmentService: FileAttachmentService,
+    public taskService: TaskService,
     private activatedRoute: ActivatedRoute
   ) {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
       referenceValueService
     );
-    this.entityName = TasksConfiguration.identifier;
+    this.entityName = TaskConfiguration.identifier;
     // tslint:disable-next-line:only-arrow-functions
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -69,7 +72,7 @@ export class TaskComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.usersService
+    this.referenceValueService.UserService
       .getAll<User>()
       .toPromise()
       .then((users) => {
@@ -77,7 +80,7 @@ export class TaskComponent extends PageComponent implements OnInit {
           .getAll<LookupValue>()
           .toPromise()
           .then((lookupValues) => {
-            this.referenceValueService.tasksService
+            this.referenceValueService.taskService
               .getFirstById<Task>(this.taskId)
               .toPromise()
               .then((task) => {
@@ -92,7 +95,7 @@ export class TaskComponent extends PageComponent implements OnInit {
                     task.Files = files;
                   });
                 // Get (Set) - Parent Project
-                this.referenceValueService.projectsService
+                this.referenceValueService.projectService
                   .getFirstById<Project>(task?.ProjectId)
                   .toPromise()
                   .then((project) => {
@@ -101,13 +104,13 @@ export class TaskComponent extends PageComponent implements OnInit {
                     task.Project = project;
                   });
                 // Get (Set) - Sub Task(s)
-                this.referenceValueService.tasksService
+                this.referenceValueService.taskService
                   .getBy<Task>({ ParentTaskId: task?._id })
                   .toPromise()
                   .then((subTasks) => {
                     subTasks.forEach((subTask) => {
                       // Get (Set) - Parent Project
-                      this.referenceValueService.projectsService
+                      this.referenceValueService.projectService
                         .getFirstById<Project>(subTask?.ProjectId)
                         .toPromise()
                         .then((project) => {
@@ -115,7 +118,7 @@ export class TaskComponent extends PageComponent implements OnInit {
                           this.setCreatedModifiedUser(users, project);
                           subTask.Project = project;
                         });
-                        // (Set) - Sub Task
+                      // (Set) - Sub Task
                       this.setTaskAssignee(users, subTask);
                       this.setTaskLookups(lookupValues, subTask);
                       this.setCreatedModifiedUser(users, subTask);
@@ -166,5 +169,38 @@ export class TaskComponent extends PageComponent implements OnInit {
   setCreatedModifiedUser(users: User[], value: any) {
     value.createdBy = users.find((user) => user._id === value?.CreatedBy);
     value.modifiedBy = users.find((user) => user._id === value?.ModifiedBy);
+  }
+
+  onButtonClicked(action: string, index?: number, element?: any): void {
+    switch (this.toLocaleLowerCaseTrim(action)) {
+      case 'edit':
+        this.onClickLog(action, index, element);
+        break;
+      case 'comment':
+        this.onClickLog(action, index, element);
+        break;
+      case 'logwork':
+        this.onClickLog(action, index, element);
+        break;
+      case 'assign':
+        this.onClickLog(action, index, element);
+        break;
+      case 'attach':
+        this.onClickLog(action, index, element);
+        break;
+      case 'createsub':
+        this.onClickLog(action, index, element);
+        break;
+      case 'clonecopy':
+        this.onClickLog(action, index, element);
+        break;
+      case 'review':
+        this.onClickLog(action, index, element);
+        break;
+    }
+  }
+  onClickLog(action: string, index: number, element: any) {
+    console.log(`action=${action}, index=${index}`);
+    console.log(element);
   }
 }

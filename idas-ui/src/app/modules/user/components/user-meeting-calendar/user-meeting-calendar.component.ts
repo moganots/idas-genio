@@ -6,7 +6,7 @@ import {
 import {
   PageComponent,
   ReferenceValueService,
-} from 'app/modules/_shared/shared-modules.module';
+} from 'app/modules/_shared/app-modules-shared.module';
 import { CalendarEventConfiguration } from './services/meeting-calendar-service/calendar-event-configuration';
 import {
   AlertifyService,
@@ -16,12 +16,13 @@ import {
   CalendarEventAttendee,
   LookupValue,
   User,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { Router } from '@angular/router';
 import { CalendarService } from 'app/shared/components/calendar/calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
 import { MeetingCalendarService } from './services/meeting-calendar-service/meeting-calendar.service';
 import { MeetingCalendarAttendeeService } from './services/meeting-calendar-attendee/meeting-calendar-attendee.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-meeting-calendar',
@@ -47,6 +48,7 @@ export class UserMeetingCalendarComponent
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
@@ -58,6 +60,7 @@ export class UserMeetingCalendarComponent
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
@@ -76,7 +79,7 @@ export class UserMeetingCalendarComponent
       .getAll<LookupValue>()
       .toPromise()
       .then((lookupValues) => {
-        this.referenceValueService.usersService
+        this.referenceValueService.UserService
           .getAll<User>()
           .toPromise()
           .then((users) => {

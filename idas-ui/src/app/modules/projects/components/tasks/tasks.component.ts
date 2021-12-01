@@ -12,13 +12,14 @@ import {
   Project,
   Task,
   User,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import {
   PageComponent,
   ReferenceValueService,
-} from 'app/modules/_shared/shared-modules.module';
-import { TasksConfiguration } from './tasks-configuration';
+} from 'app/modules/_shared/app-modules-shared.module';
+import { TaskConfiguration } from './task-configuration';
 import { DialogCreateNewTaskComponent } from './components/dialog-create-new-task/dialog-create-new-task.component';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-tasks',
@@ -41,6 +42,7 @@ export class TasksComponent extends PageComponent implements OnInit {
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
@@ -49,61 +51,91 @@ export class TasksComponent extends PageComponent implements OnInit {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = TasksConfiguration.pageIcon;
-    this.pageTitle = TasksConfiguration.pageTitle;
-    this.pageName = TasksConfiguration.pageName;
-    this.entityName = TasksConfiguration.identifier;
-    this.sourceDataColumns = TasksConfiguration.dataColumns;
+    this.pageIcon = TaskConfiguration.pageIcon;
+    this.pageTitle = TaskConfiguration.pageTitle;
+    this.pageName = TaskConfiguration.pageName;
+    this.entityName = TaskConfiguration.identifier;
+    this.sourceDataColumns = TaskConfiguration.dataColumns;
     this.onRefreshView();
   }
   ngOnInit() {
     this.onRefreshView();
   }
   private onRefreshView() {
-    this.referenceValueService.usersService.getAll<User>().toPromise().then(users => {
-      this.users = users;
-    });
-    this.lookupValueService.getAll<LookupValue>().toPromise().then(values => {
-      this.referenceValueService.projectsService.getAll<Project>().toPromise().then(projects => {
-        projects.forEach(project => {
-          project.ProjectType = values.find(value => value._id === project.ProjectTypeId);
-          project.Priority = values.find(value => value._id === project.PriorityId);
-          project.Status = values.find(value => value._id === project.StatusId);
-          this.referenceValueService.tasksService.getBy<Task>({ProjectId: project._id}).toPromise().then(tasks => {
-            tasks.forEach(task => {
-              task.TaskType = values.find(value => value._id === task.TaskTypeId);
-              task.Priority = values.find(value => value._id === task.PriorityId);
-              task.Status = values.find(value => value._id === task.StatusId);
-            });
-            project.Tasks = tasks;
-          });
-        });
-        this.projects = projects;
+    this.referenceValueService.UserService
+      .getAll<User>()
+      .toPromise()
+      .then((users) => {
+        this.users = users;
       });
-    });
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .toPromise()
+      .then((values) => {
+        this.referenceValueService.projectService
+          .getAll<Project>()
+          .toPromise()
+          .then((projects) => {
+            projects.forEach((project) => {
+              project.ProjectType = values.find(
+                (value) => value._id === project.ProjectTypeId
+              );
+              project.Priority = values.find(
+                (value) => value._id === project.PriorityId
+              );
+              project.Status = values.find(
+                (value) => value._id === project.StatusId
+              );
+              this.referenceValueService.taskService
+                .getBy<Task>({ ProjectId: project._id })
+                .toPromise()
+                .then((tasks) => {
+                  tasks.forEach((task) => {
+                    task.TaskType = values.find(
+                      (value) => value._id === task.TaskTypeId
+                    );
+                    task.Priority = values.find(
+                      (value) => value._id === task.PriorityId
+                    );
+                    task.Status = values.find(
+                      (value) => value._id === task.StatusId
+                    );
+                  });
+                  project.Tasks = tasks;
+                });
+            });
+            this.projects = projects;
+          });
+      });
   }
   setToolbarUserFilterTitle(user: User) {
     return `Display Task(s) assigned to ${user.DisplayName}`;
   }
   setTaskUserTitle(user: User) {
-    return (user) ? `Assignee: ${user.DisplayName}` : ``;
+    return user ? `Assignee: ${user.DisplayName}` : ``;
   }
   onClickAddNewProjectTask(project: Project) {
     super.openDialog(
-      DialogCreateNewTaskComponent, {
-        action : 'create',
-        dataService : this.referenceValueService.tasksService,
-        entityName : this.entityName,
-        pageIcon : this.pageIcon,
-        pageName : this.pageName,
-        pageTitle : this.pageTitle,
-        dataColumns : TasksConfiguration.dataColumns,
-        selected : project || {}
-      }, () => { this.onRefreshView(); });
+      DialogCreateNewTaskComponent,
+      {
+        action: 'create',
+        dataService: this.referenceValueService.taskService,
+        entityName: this.entityName,
+        pageIcon: this.pageIcon,
+        pageName: this.pageName,
+        pageTitle: this.pageTitle,
+        dataColumns: TaskConfiguration.dataColumns,
+        selected: project || {},
+      },
+      () => {
+        this.onRefreshView();
+      }
+    );
   }
 }

@@ -1,0 +1,48 @@
+@import '../../../../../../assets/scss/idas/colors.scss';
+@import '../../../../../../assets/scss/idas/fonts.scss';
+
+.idas-manage-project-task-toolbar {
+    border-bottom: 3px solid $idas-color-heading-background-secondary;
+    border-radius: 12px;
+    padding: 5px 0 5px 10px;
+    i {
+      margin: 0 0 0 10px;
+      padding: 0 0 0 0;
+    }
+    .btn-idas-manage-task-edit {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-edit;
+    }
+    .btn-idas-manage-task-comment {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-comment;
+    }
+    .btn-idas-manage-task-log-work {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-log-work;
+    }
+    .btn-idas-manage-task-assign {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-assign;
+    }
+    .btn-idas-manage-task-attach-file {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-attach-file;
+    }
+    .btn-idas-manage-project-task-create-sub {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-create;
+    }
+    .btn-idas-manage-project-task-copy {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-clone;
+    }
+    .btn-idas-manage-project-task-review {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-review;
+    }
+    .btn-idas-manage-task-progress-status {
+      color: $idas-color-whitesmoke;
+      background-color: $idas-color-action-progress;
+    }
+  }

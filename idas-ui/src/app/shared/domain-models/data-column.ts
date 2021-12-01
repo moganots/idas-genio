@@ -11,9 +11,9 @@ export class DataColumn {
   isRequired: boolean;
   controlType: string;
   selectOptionControlType: string;
-  lookupValues: any[];
+  lookupValues = [];
   filteredLookupValues: Observable<any>;
-  value: any;
+  value = null;
 
   constructor(dataColumn: any) {
     this.id = dataColumn.id;
@@ -26,7 +26,5 @@ export class DataColumn {
     this.isRequired = dataColumn.isRequired;
     this.controlType = dataColumn.controlType;
     this.selectOptionControlType = dataColumn.selectOptionControlType;
-    this.lookupValues = dataColumn.lookupValues;
-    this.value = dataColumn.value;
   }
 }

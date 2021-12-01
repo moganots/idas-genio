@@ -139,7 +139,7 @@ export class CommonComponent {
     return this.getLookupValueById(id).Value;
   }
   hasItems(items: any[]) {
-    return items && typeof items !== 'undefined' && items.slice() !== undefined;
+    return GeneralUtils.hasItems(items);
   }
   appendLeadingZero(value: number) {
     return GeneralUtils.appendLeadingZero(value);
@@ -148,6 +148,9 @@ export class CommonComponent {
     const hours = this.appendLeadingZero(date.getHours() - 2);
     const minutes = this.appendLeadingZero(date.getMinutes());
     return `${hours}:${minutes}`;
+  }
+  removeHashtag(value: any): string{
+    return String(value).replace('#', '').trim();
   }
   toggleGoHome() {
     this.router.navigate(['/']);

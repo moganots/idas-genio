@@ -56,6 +56,12 @@ export class BaseService {
   toLocaleLowerCaseTrim(value: any){
     return String(value || ``).toLocaleLowerCase().trim();
   }
+  isObjectSet(value: any) {
+    return GeneralUtils.isObjectSet(value);
+  }
+  isStringSet(value: string) {
+    return GeneralUtils.isStringSet(value);
+  }
   protected _handleError(error: HttpErrorResponse | any): Observable<any> {
     // tslint:disable-next-line:max-line-length
     const errorMsg = [error.message || 'Error: Unable to complete request.', JSON.stringify(error)].filter((message) => !(message === null)).join(`\r\n`);

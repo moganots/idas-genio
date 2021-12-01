@@ -88,7 +88,7 @@
                     }"
                   >
                     <i
-                      class="material-icons icon-mat-option {{
+                      class="material-icons icon-mat-option rounded {{
                         value.cssClassCategory
                       }} {{ value.cssClass }}"
                       [title]="value.title"
@@ -103,7 +103,7 @@
                           : 'inline'
                     }"
                   >
-                    <img class="img-mat-option" src="{{ value.image }}" />
+                    <img class="img-mat-option img23 rounded" src="{{ value.image }}" />
                   </span>
                   <p class="display-value">{{ value.displayValue }}</p>
                 </mat-option>
@@ -199,7 +199,6 @@
         btn-idas-dialog-float-right
       "
       type="button"
-      [disabled]="frmGroup.invalid"
       (click)="onClickSave()"
       [mat-dialog-close]="selected"
       title="Save Changes"

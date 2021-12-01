@@ -3,29 +3,29 @@ import {
   ClientComponent,
   ClientsComponent,
   ClientsConfiguration,
-} from 'app/modules/clients/clients.module';
+} from 'app/modules/clients/app-modules-clients.module';
 import {
   DashboardComponent,
   DashboardConfiguration,
-} from 'app/modules/dashboard/dashboard.module';
+} from 'app/modules/dashboard/app-modules-dashboard.module';
 import {
   EmployeeComponent,
   EmployeesComponent,
   EmployeesConfiguration,
-} from 'app/modules/employees/employees.module';
+} from 'app/modules/employees/app-modules-employees.module';
 import {
   ProjectComponent,
   ProjectsComponent,
-  ProjectsConfiguration,
+  ProjectConfiguration,
   TaskComponent,
   TasksComponent,
-  TasksConfiguration,
-} from 'app/modules/projects/projects.module';
+  TaskConfiguration,
+} from 'app/modules/projects/app-modules-projects.module';
 import {
   SupplierComponent,
   SuppliersComponent,
   SuppliersConfiguration,
-} from 'app/modules/suppliers/suppliers.module';
+} from 'app/modules/suppliers/app-modules-suppliers.module';
 import {
   UserInboxComponent,
   UserInboxConfiguration,
@@ -37,7 +37,7 @@ import {
   CalendarEventConfiguration,
   UsersComponent,
   UsersConfiguration,
-} from 'app/modules/user/users.module';
+} from 'app/modules/user/app-modules-users.module';
 import { AppLoginConfiguration } from './app-main-login/app-login-configuration';
 import { AppMainLoginComponent } from './app-main-login/app-main-login.component';
 
@@ -73,22 +73,22 @@ export const AppMainRoutes: Routes = [
     component: UserMeetingCalendarComponent,
   },
   {
-    path: ProjectsConfiguration.pageRoute,
+    path: ProjectConfiguration.pageRoute,
     pathMatch: 'full',
     component: ProjectsComponent,
   },
   {
-    path: ProjectsConfiguration.pageRoute.concat('/project/:id'),
+    path: ProjectConfiguration.pageRoute.concat('/project/:id'),
     pathMatch: 'full',
     component: ProjectComponent,
   },
   {
-    path: TasksConfiguration.pageRoute,
+    path: TaskConfiguration.pageRoute,
     pathMatch: 'full',
     component: TasksComponent,
   },
   {
-    path: TasksConfiguration.pageRoute.concat('/task/:id'),
+    path: TaskConfiguration.pageRoute.concat('/task/:id'),
     pathMatch: 'full',
     component: TaskComponent,
   },

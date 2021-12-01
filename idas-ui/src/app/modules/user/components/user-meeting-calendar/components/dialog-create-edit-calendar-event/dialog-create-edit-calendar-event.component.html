@@ -91,26 +91,26 @@
               <span *ngSwitchCase="'select'">
                 <mat-form-field>
                   <input
-                    matInput
-                    type="text"
+                  matInput
+                  type="text"
+                  id="{{ fidc.name }}"
+                  name="{{ fidc.name }}"
+                  [formControl]="frmGroupFields.controls[fidc.name]"
+                  class=""
+                  placeholder="{{ fidc.displayName }}"
+                  [matAutocomplete]="i"
+                />
+                <mat-autocomplete
+                  id="{{ fidc.name }}"
+                  #i="matAutocomplete"
+                  [displayWith]="getDisplayWithValue"
+                >
+                  <mat-option
                     id="{{ fidc.name }}"
-                    name="{{ fidc.name }}"
-                    [formControl]="frmGroupFields.controls[fidc.name]"
-                    class=""
-                    placeholder="{{ fidc.displayName }}"
-                    [matAutocomplete]="i"
-                  />
-                  <mat-autocomplete
-                    id="{{ fidc.name }}"
-                    #i="matAutocomplete"
-                    [displayWith]="getDisplayWithValue"
-                  >
-                    <mat-option
-                      id="{{ fidc.name }}"
-                      *ngFor="let value of fidc.filteredLookupValues | async"
-                      [value]="value"
-                      (onSelectionChange)="onSelectedValueChanged($event)"
-                      matSort
+                    *ngFor="let value of fidc.filteredLookupValues | async"
+                    [value]="value"
+                    (onSelectionChange)="onSelectedValueChanged($event)"
+                    matSort
                     >
                       <span
                         [ngStyle]="{
@@ -121,7 +121,7 @@
                         }"
                       >
                         <i
-                          class="material-icons icon-mat-option {{
+                          class="material-icons icon-mat-option rounded {{
                             value?.cssClassCategory
                           }} {{ value?.cssClass }}"
                           [title]="value?.title"
@@ -136,7 +136,7 @@
                               : 'inline'
                         }"
                       >
-                        <img class="img-mat-option" src="{{ value?.image }}" />
+                        <img class="img-mat-option img23 rounded" src="{{ value?.image }}" />
                       </span>
                       <p class="display-value">{{ value?.displayValue }}</p>
                     </mat-option>
@@ -280,7 +280,7 @@
                     }"
                   >
                     <i
-                      class="material-icons icon-mat-option {{
+                      class="material-icons icon-mat-option rounded {{
                         user?.UserType?.CssClassCategory
                       }} {{ user?.UserType?.CssClass }}"
                       [title]="user?.UserType?.Value"
@@ -295,7 +295,7 @@
                           : 'inline'
                     }"
                   >
-                    <img class="img-mat-option" src="{{ user?.Avatar }}" />
+                    <img class="img-mat-option img23 rounded" src="{{ user?.Avatar }}" />
                   </span>
                   <p class="display-value">{{ user?.DisplayName }}</p>
                 </mat-option>

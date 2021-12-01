@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticationService, DataService } from 'app/shared/shared.module';
+import { AuthenticationService, DataService } from 'app/shared/app-shared.module';
 import { DashboardConfiguration } from '../dashboard-configuration';
 
 @Injectable({

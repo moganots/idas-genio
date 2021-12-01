@@ -10,10 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { AppMainRoutes } from './app-main.routing';
-import { ModulesModule } from 'app/modules/modules.module';
-import { DialogCreateEditDataComponent } from 'app/modules/_shared/shared-modules.module';
+import { AppModulesModule } from 'app/modules/app-modules.module';
+import { DialogCreateEditDataComponent } from 'app/modules/_shared/app-modules-shared.module';
 import { MatIconModule } from '@angular/material/icon';
-import { DialogProjectAssignmentComponent } from 'app/modules/projects/projects.module';
+import { DialogProjectAssignmentComponent } from 'app/modules/projects/app-modules-projects.module';
 
 export { AppMainLoginComponent } from './app-main-login/app-main-login.component';
 export { AppLoginConfiguration } from './app-main-login/app-login-configuration';
@@ -33,7 +33,7 @@ export { AppMainComponent } from './app-main.component';
     MatSelectModule,
     MatTooltipModule,
     MatDialogModule,
-    ModulesModule
+    AppModulesModule
   ],
   declarations: [],
   entryComponents: [

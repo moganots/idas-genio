@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
-  AlertifyService
-  , AuthenticationService
-  , LookupValueService
-   } from 'app/shared/shared.module';
-import { PageComponent, ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
-import { ProjectsService } from './services/projects.service';
-import { ProjectsConfiguration } from './projects-configuration';
+  AlertifyService,
+  AuthenticationService,
+  LookupValueService,
+} from 'app/shared/app-shared.module';
+import {
+  PageComponent,
+  ReferenceValueService,
+} from 'app/modules/_shared/app-modules-shared.module';
+import { ProjectConfiguration } from './project-configuration';
 import { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
+import { FormBuilder } from '@angular/forms';
+import { ProjectService } from './services/project-service/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -20,40 +27,53 @@ import { DialogProjectAssignmentComponent } from './components/dialog-project-as
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
-    ProjectsService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
-  ]
+    ProjectService,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
+  ],
 })
 export class ProjectsComponent extends PageComponent implements OnInit {
-
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public projectsService: ProjectsService
-    ) {
-      super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
-      this.pageIcon = ProjectsConfiguration.pageIcon;
-      this.pageTitle = ProjectsConfiguration.pageTitle;
-      this.pageName = ProjectsConfiguration.pageName;
-      this.dataService = projectsService;
-      this.entityName = ProjectsConfiguration.identifier;
-      this.sourceDataColumns = ProjectsConfiguration.dataColumns;
+    public projectService: ProjectService
+  ) {
+    super(
+      router,
+      matDialog,
+      formBuilder,
+      alertifyService,
+      authenticationService,
+      lookupValueService,
+      referenceValueService
+    );
+    this.pageIcon = ProjectConfiguration.pageIcon;
+    this.pageTitle = ProjectConfiguration.pageTitle;
+    this.pageName = ProjectConfiguration.pageName;
+    this.dataService = projectService;
+    this.entityName = ProjectConfiguration.identifier;
+    this.sourceDataColumns = ProjectConfiguration.dataColumns;
   }
   onClickProjectAssignments(element: any, index?: number) {
     super.openDialog(
-      DialogProjectAssignmentComponent, {
-        selected : element || this.selected,
-        selectedIndex : index || this.selectedIndex
-      }, () => { this.onDataRefresh(); }, '90vh', '67.3vw');
+      DialogProjectAssignmentComponent,
+      {
+        selected: element || this.selected,
+        selectedIndex: index || this.selectedIndex,
+      },
+      () => {
+        this.onDataRefresh();
+      },
+      '90vh',
+      '67.3vw'
+    );
   }
   onClickProjectTasks(element: any, index?: number) {
-
+    this.router.navigate([`${this.removeHashtag(element.element.RouterLink)}`])
   }
-  onClickProjectReInstate(element: any, index?: number) {
-
-  }
+  onClickProjectReInstate(element: any, index?: number) {}
 }

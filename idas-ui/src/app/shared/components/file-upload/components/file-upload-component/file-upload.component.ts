@@ -36,12 +36,12 @@ export class FileUploadComponent extends CommonComponent implements OnInit {
     public lookupValueService: LookupValueService,
     private fileAttachmentService: FileAttachmentService,
     private fileSizePipe: FileSizePipe,
-    private frmBuilder: FormBuilder
+    private formBuilder: FormBuilder
   ) {
     super(router, alertifyService, authenticationService, lookupValueService);
   }
   ngOnInit(): void {
-    this.frmGroup = this.frmBuilder.group({
+    this.frmGroup = this.formBuilder.group({
       file: [null, Validators.required],
     });
   }

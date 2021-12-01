@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/app-shared.module';
 
 @Component({
   selector: 'app-footer',

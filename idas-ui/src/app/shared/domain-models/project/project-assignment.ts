@@ -1,4 +1,4 @@
-import { Project } from 'app/shared/shared.module';
+import { Project } from 'app/shared/app-shared.module';
 import { BaseAssignment } from '../base/base-assignment';
 import { LookupValue } from '../lookups/lookup-value';
 export class ProjectAssignment extends BaseAssignment {

@@ -4,7 +4,7 @@ import 'rxjs/add/operator/filter';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from 'jquery';
-import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/shared.module';
+import { AlertifyService, AuthenticationService, CommonComponent, LookupValueService } from 'app/shared/app-shared.module';
 
 @Component({
   selector: 'app-main',

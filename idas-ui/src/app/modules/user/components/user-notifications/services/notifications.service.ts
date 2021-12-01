@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticationService, DataService, NotificationMessage } from 'app/shared/shared.module';
+import { AuthenticationService, DataService, NotificationMessage } from 'app/shared/app-shared.module';
 import { UserNotificationsConfiguration } from '../user-notifications-configuration';
 
 @Injectable({

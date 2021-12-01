@@ -3,10 +3,10 @@ import { ClientsService } from 'app/modules/clients/services/clients.service';
 import { EmployeesService } from 'app/modules/employees/services/employees.service';
 import { ProjectAssignmentsService } from 'app/modules/projects/components/dialog-project-assignment/services/project-assignments.service';
 import { TaskAssignmentsService } from 'app/modules/projects/components/tasks/components/dialog-task-assignment/services/task-assignments.service';
-import { TasksService } from 'app/modules/projects/components/tasks/services/tasks.service';
-import { ProjectsService } from 'app/modules/projects/services/projects.service';
+import { TaskService } from 'app/modules/projects/components/tasks/services/task-service/task.service';
+import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
 import { SuppliersService } from 'app/modules/suppliers/services/suppliers.service';
-import { UsersService } from 'app/modules/user/services/users.service';
+import { UserService } from 'app/modules/user/services/users.service';
 import {
   Client,
   DataColumn,
@@ -16,8 +16,8 @@ import {
   Supplier,
   Task,
   User,
-} from 'app/shared/shared.module';
-import { SharedModulesModuleConfiguration } from '../../shared-modules-configuration';
+} from 'app/shared/app-shared.module';
+import { AppModulesSharedModuleConfiguration } from '../../shared-modules-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -26,19 +26,19 @@ export class ReferenceValueService {
   constructor(
     public clientsService: ClientsService,
     public employeesService: EmployeesService,
-    public projectsService: ProjectsService,
+    public projectService: ProjectService,
     public projectAssignmentsService: ProjectAssignmentsService,
-    public tasksService: TasksService,
+    public taskService: TaskService,
     public taskAssignmentsService: TaskAssignmentsService,
     public suppliersService: SuppliersService,
-    public usersService: UsersService
+    public UserService: UserService
   ) {}
   setFieldLookupValues(fieldName: string, field: DataColumn) {
     switch (fieldName) {
       case `Assignee`:
       case `PreviousAssignee`:
       case `User`:
-        this.usersService.getAll<User>().subscribe((users) => {
+        this.UserService.getAll<User>().subscribe((users) => {
           this.addFieldLookupValues(
             field,
             users.map((user) => this.mapValuesUser(user))
@@ -63,7 +63,7 @@ export class ReferenceValueService {
         });
         break;
       case `Project`:
-        this.projectsService.getAll<Project>().subscribe((values) => {
+        this.projectService.getAll<Project>().subscribe((values) => {
           this.addFieldLookupValues(
             field,
             values.map((value) => this.mapValuesProject(value))
@@ -79,7 +79,7 @@ export class ReferenceValueService {
         });
         break;
       case `Task`:
-        this.tasksService.getAll<Task>().subscribe((values) => {
+        this.taskService.getAll<Task>().subscribe((values) => {
           this.addFieldLookupValues(
             field,
             values.map((value) => this.mapValuesTask(value))
@@ -90,7 +90,7 @@ export class ReferenceValueService {
       case `EndDateTime`:
         this.addFieldLookupValues(
           field,
-          SharedModulesModuleConfiguration.scheduleTimes.map((time, index) => ({
+          AppModulesSharedModuleConfiguration.scheduleTimes.map((time, index) => ({
             id: index,
             displayValue: time,
           }))

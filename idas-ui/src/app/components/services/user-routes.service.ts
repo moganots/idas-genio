@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseService } from 'app/shared/shared.module';
+import { BaseService } from 'app/shared/app-shared.module';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 

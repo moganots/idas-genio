@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -8,18 +10,14 @@ import {
   AuthenticationService,
   DataColumn,
   Employee,
-  GeneralUtils,
-  LookupValue,
   LookupValueService,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { UserProfileConfiguration } from './user-profile-configuration';
-import { UsersService } from '../../services/users.service';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 import {
   PageComponent,
   ReferenceValueService,
-} from 'app/modules/_shared/shared-modules.module';
+} from 'app/modules/_shared/app-modules-shared.module';
 
 @Component({
   selector: 'app-user-profile',
@@ -30,7 +28,7 @@ import {
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
-    UsersService,
+    UserService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
   ],
 })
@@ -43,16 +41,17 @@ export class UserProfileComponent extends PageComponent implements OnInit {
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public usersService: UsersService,
-    private frmBuilder: FormBuilder
+    public userService: UserService
   ) {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
@@ -61,68 +60,15 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     this.pageIcon = UserProfileConfiguration.pageIcon;
     this.pageTitle = UserProfileConfiguration.pageTitle;
     this.pageName = UserProfileConfiguration.pageName;
-    this.dataService = usersService;
+    this.dataService = UserService;
     this.entityName = UserProfileConfiguration.identifier;
     this.sourceDataColumns = UserProfileConfiguration.dataColumns;
+    this.selected = this.currentUser;
+    this.setDataSourceColumns();
   }
   ngOnInit() {
     this.action = `Edit`;
-    this.setDataSourceColumns();
-    this.initFormGroupAndFields(null);
-    if (GeneralUtils.isObjectSet(this.currentUser)) {
-      this.lookupValueService
-        .getAll<LookupValue>()
-        .toPromise()
-        .then((lookupValues) => {
-          this.referenceValueService.employeesService
-            .getAll<Employee>()
-            .toPromise()
-            .then((employees) => {
-              this.dataSourceColumns
-                .filter((dsc) => dsc.controlType === 'select')
-                .forEach((dsc) => {
-                  const searchValue = {
-                    cesValue: (this.currentUser.Client ||
-                      this.currentUser.Employee ||
-                      this.currentUser.Supplier ||
-                      {})[dsc.name],
-                    cdValue: (this.currentUser.ContactDetail || {})[dsc.name],
-                    uValue: this.currentUser[dsc.name],
-                  };
-                  // tslint:disable-next-line:radix
-                  const searchBy =
-                    searchValue.cesValue ||
-                      searchValue.cdValue ||
-                      searchValue.uValue;
-                  let displayValue = searchBy;
-                  switch (dsc.selectOptionControlType) {
-                    // tslint:disable-next-line:radix
-                    case 'lookupIcon':
-                    case 'lookupImage':
-                    case 'lookupValue':
-                      displayValue = (
-                        lookupValues.find(
-                          // tslint:disable-next-line:radix
-                          (lv) => lv._id === parseInt(searchBy)
-                        ) || {}
-                      ).Value;
-                      break;
-                    case 'referenceValue':
-                      displayValue = (
-                        // tslint:disable-next-line:radix
-                        employees.find((e) => e._id === parseInt(searchBy)) ||
-                        {}
-                      ).DisplayName;
-                      break;
-                  }
-                  this.frmGroupFields.controls[dsc.name].setValue(displayValue);
-                });
-            });
-        });
-    }
-    this.frmGroup = this.frmBuilder.group({
-      frmFields: this.frmGroupFields,
-    });
+    this.initFormGroupAndFields();
     this.fieldsPersonalDetails = this.dataSourceColumns.filter(
       (column) => column.id >= 1 && column.id <= 21
     );

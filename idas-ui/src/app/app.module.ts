@@ -8,9 +8,9 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { ComponentsModule } from './components/components.module';
-import { ClientsModule, DashboardModule, EmployeesModule, ModulesModule, SuppliersModule, UsersModule } from './modules/modules.module';
-import { SharedModulesModule } from './modules/_shared/shared-modules.module';
-import { SharedModule } from './shared/shared.module';
+import { AppModulesModule } from './modules/app-modules.module';
+import { AppModulesSharedModule } from './modules/_shared/app-modules-shared.module';
+import { AppSharedModule } from './shared/app-shared.module';
 import { AppMainComponent, AppMainLoginComponent } from './layouts/app-main/app-main.module';
 
 @NgModule({
@@ -22,10 +22,10 @@ import { AppMainComponent, AppMainLoginComponent } from './layouts/app-main/app-
     RouterModule,
     MatFormFieldModule,
     MatInputModule,
-    SharedModule,
+    AppSharedModule,
     ComponentsModule,
-    SharedModulesModule,
-    ModulesModule,
+    AppModulesSharedModule,
+    AppModulesModule,
     AppRoutingModule
   ],
   declarations: [

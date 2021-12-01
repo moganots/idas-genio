@@ -18,128 +18,18 @@
             </p>
           </div>
         </div>
-        <div class="mat-elevation-z4 idas-manage-project-task-toolbar">
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-edit
-            "
-            type="button"
-            title="Edit"
-          >
-            <i class="material-icons idas-button-icon">edit</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-comment
-            "
-            type="button"
-            title="Comment"
-          >
-            <i class="material-icons idas-button-icon">comment</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-log-work
-            "
-            type="button"
-            title="Log Work"
-          >
-            <i class="material-icons idas-button-icon">pending_actions</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-assign
-            "
-            type="button"
-            title="Assign"
-          >
-            <i class="material-icons idas-button-icon">assignment_ind</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-attach-file
-            "
-            type="button"
-            title="Attach File(s)"
-          >
-            <i class="material-icons idas-button-icon">upload_file</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-project-task-create-sub
-            "
-            type="button"
-            title="Create Sub-{{ capitalizeFirstLetter(entityName) }}"
-          >
-            <i class="material-icons idas-button-icon">dns</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-project-task-copy
-            "
-            type="button"
-            title="Clone or Copy {{ capitalizeFirstLetter(entityName) }}"
-          >
-            <i class="material-icons idas-button-icon">launch</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-project-task-review
-            "
-            type="button"
-            title="Review"
-          >
-            <i class="material-icons idas-button-icon">rate_review</i>
-          </button>
-        </div>
+        <app-manage-project-task-toolbar
+          [dataService]="dataService"
+          [entityName]="entityName"
+          (edit)="onButtonClicked('Edit', project?._id, project)"
+          (comment)="onButtonClicked('Comment', project?._id, project)"
+          (logWork)="onButtonClicked('LogWork', project?._id, project)"
+          (assign)="onButtonClicked('Assign', project?._id, project)"
+          (attach)="onButtonClicked('Attach', project?._id, project)"
+          (createSub)="onButtonClicked('CreateSub', project?._id, project)"
+          (cloneCopy)="onButtonClicked('CloneCopy', project?._id, project)"
+          (review)="onButtonClicked('Review', project?._id, project)"
+        ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">
           <div class="idas-manage-project-task-content-child row">
@@ -382,7 +272,7 @@
                   [hidden]="project?.LinkedProjects?.length === 0"
                 >
                   <mat-expansion-panel-header class="mat-elevation-z0">
-                    <mat-panel-title> Linked Project(s) </mat-panel-title>
+                    <mat-panel-title> Related Project(s) </mat-panel-title>
                   </mat-expansion-panel-header>
                   <div
                     class="mat-elevation-z1 idas-project-task-card-main"
@@ -541,6 +431,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Activity </mat-panel-title>
                   </mat-expansion-panel-header>
+                  <mat-tab-group animationDuration="2000ms">
+                    <mat-tab label="Comments"></mat-tab>
+                    <mat-tab label="Work Log"></mat-tab>
+                    <mat-tab label="Status Transtion(s)"></mat-tab>
+                    <mat-tab label="Time in Status"></mat-tab>
+                  </mat-tab-group>
                 </mat-expansion-panel>
               </mat-accordion>
             </div>

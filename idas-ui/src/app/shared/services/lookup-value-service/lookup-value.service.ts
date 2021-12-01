@@ -33,31 +33,30 @@ export class LookupValueService extends DataService {
       this.lookupCategories.find(
         (category) => category?._id === lookupValue?.LookupCategoryId
       ) || DefaultObjectUtil.noLookupCategory();
-      lookupValue.CssColorCategory = this.getCssColorCategory(lookupValue);
-      lookupValue.CssClassCategory = this.getCssClassCategory(lookupValue);
-      lookupValue.CssColorValue = this.getCssColorValue(lookupValue);
-      lookupValue.CssClass = this.getCssClass(lookupValue);
-      lookupValue.Icon = lookupValue.Icon;
+    lookupValue.CssColorCategory = this.getCssColorCategory(lookupValue);
+    lookupValue.CssClassCategory = this.getCssClassCategory(lookupValue);
+    lookupValue.CssColorValue = this.getCssColorValue(lookupValue);
+    lookupValue.CssClass = this.getCssClass(lookupValue);
+    lookupValue.Icon = lookupValue.Icon;
     return lookupValue;
+  }
+  getCssClassCategory(value: LookupValue) {
+    return !this.isStringSet(value?.LookupCategory?.Name)
+      ? null
+      : this.toLocaleLowerCaseTrim(
+          value?.LookupCategory?.Name?.split(' ').join('-')
+        );
   }
   getCssColorCategory(value: LookupValue) {
     return `$idas-color-${this.getCssClassCategory(value)}`;
   }
-  getCssClassCategory(value: LookupValue) {
-    return GeneralUtils.toLocalLowerCaseWithTrim(
-      (value.LookupCategory || {}).Name
-    )
-      .split(' ')
-      .join('-');
+  getCssClass(value: LookupValue) {
+    const lookupValue = value?.Value || value?.Value2 || value?.Value3;
+    return !this.isStringSet(lookupValue)
+      ? null
+      : this.toLocaleLowerCaseTrim(lookupValue.split(' ').join('-'));
   }
   getCssColorValue(value: LookupValue) {
     return `${this.getCssColorCategory(value)}-${this.getCssClass(value)}`;
-  }
-  getCssClass(value: LookupValue) {
-    return GeneralUtils.toLocalLowerCaseWithTrim(
-      value.Value || value.Value2 || value.Value3
-    )
-      .split(' ')
-      .join('-');
   }
 }

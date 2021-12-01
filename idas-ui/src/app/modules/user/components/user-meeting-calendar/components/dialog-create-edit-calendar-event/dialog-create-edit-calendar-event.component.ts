@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base-dialog/base-dialog.component';
 import {
   ReferenceValueService,
-  SharedModulesModuleConfiguration,
-} from 'app/modules/_shared/shared-modules.module';
+  AppModulesSharedModuleConfiguration,
+} from 'app/modules/_shared/app-modules-shared.module';
 import { CalendarConfiguration } from 'app/shared/components/calendar/calendar.module';
 import {
   AlertifyService,
@@ -20,7 +20,7 @@ import {
   FileAttachmentService,
   LookupValueService,
   User,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MeetingCalendarAttendeeService } from '../../services/meeting-calendar-attendee/meeting-calendar-attendee.service';
@@ -46,13 +46,13 @@ export class DialogCreateEditCalendarEventComponent
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogCreateEditCalendarEventComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public frmBuilder: FormBuilder,
     public meetingCalendarAttendeeService: MeetingCalendarAttendeeService,
     public meetingCalendarService: MeetingCalendarService,
     public fileAttachmentService: FileAttachmentService
@@ -60,13 +60,13 @@ export class DialogCreateEditCalendarEventComponent
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,
       referenceValueService,
       dialogRef,
-      data,
-      frmBuilder
+      data
     );
     this.pageTitle = `${this.capitalizeFirstLetter(
       this.action
@@ -76,22 +76,18 @@ export class DialogCreateEditCalendarEventComponent
       .join(` `)}`;
     this.sourceDataColumns = CalendarEventConfiguration.dataColumns;
     this.calendarEventScheduleTimes =
-      SharedModulesModuleConfiguration.scheduleTimes.map((time, index) => ({
+      AppModulesSharedModuleConfiguration.scheduleTimes.map((time, index) => ({
         id: index,
         value: time,
         displayValue: time,
       }));
       this.selected.StartDateTime = this.getTimeValue(`StartDateTime`);
       this.selected.EndDateTime = this.getTimeValue(`EndDateTime`);
-      console.log(this.selected)
+      this.setDataSourceColumns();
   }
   ngOnInit() {
-    this.setDataSourceColumns();
-    this.initFormGroupAndFields(null);
-    this.frmGroup = this.frmBuilder.group({
-      frmFields: this.frmGroupFields,
-    });
-    this.referenceValueService.usersService
+    this.initFormGroupAndFields();
+    this.referenceValueService.UserService
       .getAll<User>()
       .toPromise()
       .then((users) => {

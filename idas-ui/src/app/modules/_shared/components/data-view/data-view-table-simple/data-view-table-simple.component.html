@@ -3,7 +3,10 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger idas-main-card-header" style="padding: 17px 0 0 0;">
+          <div
+            class="card-header card-header-danger idas-main-card-header"
+            style="padding: 17px 0 0 0"
+          >
             <i class="material-icons">{{ pageIcon }}</i>
             <h4 class="card-title">{{ pageTitle }}</h4>
             <p class="category"></p>
@@ -77,7 +80,7 @@
                                   column,
                                   element[column.name]
                                 )
-                              }}"
+                              }} rounded"
                               [title]="
                                 getColumnDisplayTitleById(
                                   column,
@@ -94,7 +97,7 @@
                           </span>
                           <span *ngSwitchCase="'lookupImage'">
                             <img
-                              class="img-in-grid img-rounded"
+                              class="img-in-grid img30 rounded"
                               src="{{
                                 getColumnDisplayImageById(
                                   column,
@@ -129,7 +132,7 @@
                       </span>
                       <span *ngSwitchCase="'image'">
                         <img
-                          class="img-in-grid img-rounded"
+                          class="img-in-grid img30 rounded"
                           src="{{
                             getColumnDisplayImageById(
                               column,
@@ -274,6 +277,32 @@
                         <i class="material-icons idas-button-icon"
                           >assignment</i
                         >
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="
+                          btn
+                          btn-white
+                          btn-round
+                          btn-just-icon
+                          btn-idas-float-right
+                        "
+                        type="button"
+                        (click)="
+                          onClickViewProjectProgressButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleViewProjectProgressButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideViewProjectProgressButton(element)"
+                      >
+                        <i class="material-icons idas-button-icon">open_in_new</i>
                       </button>
                       <button
                         mat-icon-button

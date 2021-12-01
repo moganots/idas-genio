@@ -97,7 +97,7 @@ export class GeneralUtils {
     return String(value).toLocaleUpperCase().trim();
   }
   public static hasItems(array: any[]) {
-    return !(array === null && array === undefined && array.length === 0);
+    return !(array === null || array === undefined || array.length === 0);
   }
   public static getFirstItem(array: any[]) {
     return this.hasItems(array) ? array[0] : null;

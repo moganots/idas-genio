@@ -13,7 +13,7 @@ import {
   AuthenticationService,
   DataColumn,
   LookupValueService,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { BaseDataViewComponent } from '../../data-view/base-data-view/base-data-view.component';
 
 @Component({
@@ -34,6 +34,7 @@ export class BaseDialogComponent
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
@@ -50,12 +51,12 @@ export class BaseDialogComponent
       dataColumns: [],
       selected: {},
       selectedIndex: -1,
-    },
-    public frmBuilder: FormBuilder
+    }
   ) {
     super(
       router,
       matDialog,
+      formBuilder,
       alertifyService,
       authenticationService,
       lookupValueService,

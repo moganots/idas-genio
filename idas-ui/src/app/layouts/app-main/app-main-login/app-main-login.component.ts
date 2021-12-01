@@ -6,7 +6,7 @@ import {
   , AuthenticationResult
   , AuthenticationService
   , CommonComponent,
-  LookupValueService} from 'app/shared/shared.module';
+  LookupValueService} from 'app/shared/app-shared.module';
 
 @Component({
   selector: 'app-main-login',

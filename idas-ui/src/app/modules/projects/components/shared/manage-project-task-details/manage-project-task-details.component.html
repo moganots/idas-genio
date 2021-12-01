@@ -1,0 +1,102 @@
+<div class="row gutters idas-container-manage-project-task-details">
+  <span class="resize">
+    <p class="label-title priority">Priority</p>
+    <button
+      mat-icon-button
+      class="
+                                  btn
+                                  btn-white
+                                  btn-round
+                                  btn-just-icon btn-idas {{
+        selected?.Priority?.CssClassCategory
+      }} {{ selected?.Priority?.CssClass }}
+                                "
+      type="button"
+      [matMenuTriggerFor]="priorityMenu"
+    >
+      <i
+        class="material-icons btn-idas btn-idas-detail {{
+          selected?.Priority?.CssClassCategory
+        }} {{ selected?.Priority?.CssClass }}"
+        >{{ selected?.Priority?.Icon }}</i
+      >
+    </button>
+    <p
+      class="label-detail {{ selected?.Priority?.CssClassCategory }} {{
+        selected?.Priority?.CssClass
+      }} priority"
+    >
+      {{ selected?.Priority?.Value }}
+    </p>
+    <mat-menu
+      #priorityMenu="matMenu"
+      xPosition="after"
+      yPosition="below"
+      class=""
+    >
+      <button
+        *ngFor="let priority of priorities"
+        class=""
+        mat-menu-item
+        (click)="onButtonClicked('priority', priority)"
+      >
+        <i
+          class="material-icons {{ priority?.CssClassCategory }} {{
+            priority?.CssClass
+          }}"
+          >{{ priority?.Icon }}</i
+        >{{ priority?.Value }}
+      </button>
+    </mat-menu>
+  </span>
+  <span class="resize">
+    <p class="label-title status">Status</p>
+    <button
+      mat-icon-button
+      class="
+                                  btn
+                                  btn-white
+                                  btn-round
+                                  btn-just-icon btn-idas {{
+        selected?.Status?.CssClassCategory
+      }} {{ selected?.Status?.CssClass }}
+                                "
+      type="button"
+      [matMenuTriggerFor]="statusMenu"
+    >
+      <i
+        class="material-icons btn-idas btn-idas-detail {{
+          selected?.Status?.CssClassCategory
+        }} {{ selected?.Status?.CssClass }}"
+        >{{ selected?.Status?.Icon }}</i
+      >
+    </button>
+    <p
+      class="label-detail {{ selected?.Status?.CssClassCategory }} {{
+        selected?.Status?.CssClass
+      }} status"
+    >
+      {{ selected?.Status?.Value }}
+    </p>
+    <mat-menu
+      #statusMenu="matMenu"
+      xPosition="after"
+      yPosition="below"
+      class=""
+    >
+      <button
+        *ngFor="let status of statuses"
+        class=""
+        mat-menu-item
+        (click)="onButtonClicked('status', status)"
+      >
+        <i
+          class="material-icons {{ status?.CssClassCategory }} {{
+            status?.CssClass
+          }}"
+          >{{ status?.Icon }}</i
+        >{{ status?.Value }}
+      </button>
+    </mat-menu>
+  </span>
+</div>

@@ -10,13 +10,12 @@ import {
   AuthenticationService,
   DataColumn,
   DateUtils,
-  GeneralUtils,
   LookupValue,
   LookupValueService,
-} from 'app/shared/shared.module';
+} from 'app/shared/app-shared.module';
 import { map, startWith } from 'rxjs/operators';
 import { ReferenceValueService } from '../../services/reference-value-service/reference-value.service';
-import { SharedModulesModuleConfiguration } from '../../shared-modules-configuration';
+import { AppModulesSharedModuleConfiguration } from '../../shared-modules-configuration';
 import { BaseComponent } from '../base-component/base.component';
 
 @Component({
@@ -72,19 +71,18 @@ export class BaseDataComponent extends BaseComponent {
   setDataSourceColumnCanEditOrIsRequiredFlags() {
     this.dataSourceColumns.forEach((cn) => {
       cn.isRequired = !(
-        SharedModulesModuleConfiguration.cannotEditColumns.includes(cn.name) ||
-        SharedModulesModuleConfiguration.optionalColumns.includes(cn.name)
+        AppModulesSharedModuleConfiguration.cannotEditColumns.includes(cn.name) ||
+        AppModulesSharedModuleConfiguration.optionalColumns.includes(cn.name)
       );
       // Set canEdit flag
       // ToDo: Check current user's access permissions
-      cn.canEdit = !SharedModulesModuleConfiguration.cannotEditColumns.includes(
+      cn.canEdit = !AppModulesSharedModuleConfiguration.cannotEditColumns.includes(
         cn.name
       );
     });
   }
   setDataSourceColumnControlTypes() {
     this.dataSourceColumns.forEach((cn) => {
-      cn.lookupValues = [];
       if (this.isUseCheckbox(cn)) {
         cn.controlType = 'checkbox';
       } else if (this.isDateField(cn)) {
@@ -111,8 +109,8 @@ export class BaseDataComponent extends BaseComponent {
     });
   }
   setTimePickerLookupValues(cn: DataColumn) {
-    SharedModulesModuleConfiguration.scheduleTimes
-      .map((time, index) => ({ id: index, displayValue: time }))
+    AppModulesSharedModuleConfiguration.scheduleTimes
+      .map((time, index) => ({ id: index, title: time, value: time, displayValue: time }))
       .forEach((value) => cn.lookupValues.push(value));
   }
   setDataSourceColumnLookupOrReferenceValues() {
@@ -144,12 +142,12 @@ export class BaseDataComponent extends BaseComponent {
         }
       });
   }
-  mapLookupValue(value: LookupValue) {
+  mapLookupValue(value: LookupValue): any {
     const name = `${value.Value || value.Value2 || value.Value3 || ``}`;
     return {
-      id: value._id,
-      displayValue: name,
+      id: value?._id,
       title: name,
+      displayValue: name,
       cssClassCategory: value.CssClassCategory,
       cssClass: value.CssClass,
       icon: value.Icon,
@@ -252,16 +250,19 @@ export class BaseDataComponent extends BaseComponent {
     return column.canEdit ? Validators.required : null;
   }
   getFieldValue(column: DataColumn, dataObject: any) {
-    const columnValue = dataObject[column.name];
-    const lookupValue = (column.lookupValues || []).find(
-      (lv) => lv.id === columnValue
-    ) || { displayValue: undefined };
-    return (
-      lookupValue.displayValue || columnValue || this.getTimeValue(column.name)
-    );
+    const columnValue = (dataObject || {})[column.name];
+    const lookupValue = column.lookupValues.find(lv => parseFloat(lv.id) === parseFloat(columnValue));
+    return lookupValue?.displayValue || columnValue;
+  }
+  findById(value: any, findValue: any) {
+    return parseFloat(value.id || value._id) === parseFloat(findValue);
+  }
+  findByDisplayValue(value: any, findValue: any) {
+    return String(value?.displayValue || value?.title).includes(this.toLocaleLowerCaseTrim(findValue));
   }
   getTimeValue(name: string) {
-    if(!SharedModulesModuleConfiguration.timeColumns.includes(name)) return null;
+    if (!AppModulesSharedModuleConfiguration.timeColumns.includes(name))
+      return null;
     const hours = String(this.appendLeadingZero(new Date().getHours()));
     const minutes = String(this.appendLeadingZero(new Date().getMinutes()));
     switch (name) {
@@ -320,18 +321,18 @@ export class BaseDataComponent extends BaseComponent {
     ).includes(this.toLocaleLowerCaseTrim(filterValue));
   }
   getDisplayWithValue(event: any) {
-    if (event) {
-      return (
-        event.displayValue ||
-        event.Name ||
-        event.name ||
-        event.DisplayName ||
-        event.title ||
-        event.Title ||
-        event
-      );
-    }
-    return null;
+    return (
+      event?.displayValue ||
+      event?.title ||
+      event?.name ||
+      event?.Title ||
+      event?.Name ||
+      event?.DisplayName ||
+      event?._id ||
+      event?.id ||
+      event ||
+      null
+    );
   }
   onValueChanged(event: any) {
     if (event && event.target) {

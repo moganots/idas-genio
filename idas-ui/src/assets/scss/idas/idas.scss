@@ -52,9 +52,21 @@ body {
 
 p {
   display: inline-block;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
   text-align: left;
   vertical-align: middle;
 
+  &.display-value {
+    font-size: 1.1em;
+    margin: 0 0 0 5px;
+    padding: 0 0 0 0;
+  }
+  &.display-name-check-box {
+    font-size: 0.9em;
+    margin: 0 0 0 3px;
+    padding: 0 0 0 0;
+  }
   &.idas-task-assign-to-me {
     color: $idas-color-main-links-active;
     display: inline;
@@ -66,7 +78,8 @@ p {
   &.projecttype,
   &.tasktype,
   &.status,
-  &.priority {
+  &.priority,
+  &.calendareventtype {
     border-radius: 8px;
     color: $idas-color-body-background-main;
     font-family: $OpenSans_Light;
@@ -297,32 +310,27 @@ p {
       }
     }
   }
-  &.display-value {
-    padding: 16px 0 0 8px;
-    font-size: 0.85em;
-  }
-  &.display-name-check-box {
-    font-size: 0.9em;
-    padding: 15px 0 0 0;
-  }
 }
 
 i {
   display: inline-block;
   height: auto;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
   width: 30px;
   text-align: left;
   vertical-align: middle;
 
-  &.idas-button-icon {
-    padding: 0 0 0 5px;
+  &.rounded {
+    border-radius: 12px;
   }
-
+  &.idas-button-icon {
+    padding: 0 0 0 10px;
+  }
   &.icon-mat-option {
     margin: 0 0 0 5px;
     padding: 0 0 0 0;
   }
-
   &.btn-idas-task-assign-to-me {
     color: $idas-color-main-links-active;
   }
@@ -406,7 +414,7 @@ i {
     &.reposition {
       display: inline-block;
       margin: 0 0 0 0;
-      // padding: 5px 0 0 5px;
+      padding: 0 0 0 0;
     }
   }
 
@@ -568,7 +576,7 @@ img {
   text-align: left;
   vertical-align: middle;
 
-  &.img-rounded {
+  &.rounded {
     border-radius: 12px;
   }
 
@@ -580,6 +588,12 @@ img {
   }
   &.img20 {
     width: 20px;
+  }
+  &.img22 {
+    width: 22px;
+  }
+  &.img23 {
+    width: 23px;
   }
   &.img25 {
     width: 25px;
@@ -598,23 +612,16 @@ img {
   }
   &.img-in-grid {
     margin: 0 0 17px 0;
-    width: 30px;
+    padding: 0 0 0 0;
   }
   &.img-mat-option {
-    border-radius: 12px;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 0;
     padding: 0 0 0 0;
-    width: 25px;
   }
   &.img-manage-task-toolbar {
     margin: 0 0 0 5px;
     padding: 0 0 0 0;
     width: 30px;
-  }
-  &.img-task-avatar {
-    border-radius: 12px;
-    float: right;
-    margin: 2px 0 0 0;
   }
 }
 
@@ -636,7 +643,7 @@ img {
     height: auto;
     width: 35px;
     margin: 0 0 0 0;
-    padding: 0 0 25px 10px;
+    padding: 0 0 20px 10px;
     text-align: left;
     vertical-align: middle;
   }
@@ -646,7 +653,7 @@ img {
     display: inline-block;
     font-family: $OpenSans_Bold;
     font-size: 1.55em;
-    padding: 0 0 25px 15px;
+    padding: 0 0 15px 15px;
     text-align: left;
     vertical-align: middle;
   }

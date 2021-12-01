@@ -1,4 +1,4 @@
-export class SharedModulesModuleConfiguration {
+export class AppModulesSharedModuleConfiguration {
   public static ignoreColumns = [`UserId`];
   public static cannotEditColumns = [
     `_id`,
@@ -94,6 +94,7 @@ export class SharedModulesModuleConfiguration {
     `BudgetCodeId`,
     `CalendarEventTypeId`,
     `CapacityId`,
+    `ConfigurationTypeId`,
     `CountryId`,
     `DepartmentId`,
     `EmploymentTypeId`,

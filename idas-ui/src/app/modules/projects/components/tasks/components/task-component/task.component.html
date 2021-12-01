@@ -17,128 +17,18 @@
             <p class="task type">({{ task?.TaskType?.Value }})</p>
           </div>
         </div>
-        <div class="mat-elevation-z4 idas-manage-project-task-toolbar">
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-edit
-            "
-            type="button"
-            title="Edit"
-          >
-            <i class="material-icons idas-button-icon">edit</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-comment
-            "
-            type="button"
-            title="Comment"
-          >
-            <i class="material-icons idas-button-icon">comment</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-log-work
-            "
-            type="button"
-            title="Log Work"
-          >
-            <i class="material-icons idas-button-icon">pending_actions</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-assign
-            "
-            type="button"
-            title="Assign"
-          >
-            <i class="material-icons idas-button-icon">assignment_ind</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-task-attach-file
-            "
-            type="button"
-            title="Attach File(s)"
-          >
-            <i class="material-icons idas-button-icon">upload_file</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-project-task-create-sub
-            "
-            type="button"
-            title="Create Sub-{{ capitalizeFirstLetter(entityName) }}"
-          >
-            <i class="material-icons idas-button-icon">dns</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-project-task-copy
-            "
-            type="button"
-            title="Clone or Copy {{ capitalizeFirstLetter(entityName) }}"
-          >
-            <i class="material-icons idas-button-icon">launch</i>
-          </button>
-          <button
-            mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-dialog-float-left
-              btn-idas-manage-project-task-review
-            "
-            type="button"
-            title="Review"
-          >
-            <i class="material-icons idas-button-icon">rate_review</i>
-          </button>
-        </div>
+        <app-manage-project-task-toolbar
+          [dataService]="dataService"
+          [entityName]="entityName"
+          (edit)="onButtonClicked('Edit', task?._id, task)"
+          (comment)="onButtonClicked('Comment', task?._id, task)"
+          (logWork)="onButtonClicked('LogWork', task?._id, task)"
+          (assign)="onButtonClicked('Assign', task?._id, task)"
+          (attach)="onButtonClicked('Attach', task?._id, task)"
+          (createSub)="onButtonClicked('CreateSub', task?._id, task)"
+          (cloneCopy)="onButtonClicked('CloneCopy', task?._id, task)"
+          (review)="onButtonClicked('Review', task?._id, task)"
+        ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">
           <div class="idas-manage-project-task-content-child row">
@@ -152,108 +42,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Details </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div class="row gutters">
-                    <span class="resize">
-                      <p class="label-title priority">Priority</p>
-                      <button
-                        mat-icon-button
-                        class="
-                                  btn
-                                  btn-white
-                                  btn-round
-                                  btn-just-icon btn-idas {{
-                          task?.Priority?.CssClassCategory
-                        }} {{ task?.Priority?.CssClass }}
-                                "
-                        type="button"
-                        [matMenuTriggerFor]="priorityMenu"
-                      >
-                        <i
-                          class="material-icons btn-idas btn-idas-detail {{
-                            task?.Priority?.CssClassCategory
-                          }} {{ task?.Priority?.CssClass }}"
-                          >{{ task?.Priority?.Icon }}</i
-                        >
-                      </button>
-                      <p
-                        class="label-detail {{
-                          task?.Priority?.CssClassCategory
-                        }} {{ task?.Priority?.CssClass }} priority"
-                      >
-                        {{ task?.Priority?.Value }}
-                      </p>
-                      <mat-menu
-                        #priorityMenu="matMenu"
-                        xPosition="after"
-                        yPosition="below"
-                        class=""
-                      >
-                        <button
-                          *ngFor="let priority of priorities"
-                          class=""
-                          mat-menu-item
-                          (click)="onClickChangePriority(priority)"
-                        >
-                          <i
-                            class="material-icons {{
-                              priority?.CssClassCategory
-                            }} {{ priority?.CssClass }}"
-                            >{{ priority?.Icon }}</i
-                          >{{ priority?.Value }}
-                        </button>
-                      </mat-menu>
-                    </span>
-                    <span class="resize">
-                      <p class="label-title status">Status</p>
-                      <button
-                        mat-icon-button
-                        class="
-                                  btn
-                                  btn-white
-                                  btn-round
-                                  btn-just-icon btn-idas {{
-                          task?.Status?.CssClassCategory
-                        }} {{ task?.Status?.CssClass }}
-                                "
-                        type="button"
-                        [matMenuTriggerFor]="statusMenu"
-                      >
-                        <i
-                          class="material-icons btn-idas btn-idas-detail {{
-                            task?.Status?.CssClassCategory
-                          }} {{ task?.Status?.CssClass }}"
-                          >{{ task?.Status?.Icon }}</i
-                        >
-                      </button>
-                      <p
-                        class="label-detail {{
-                          task?.Status?.CssClassCategory
-                        }} {{ task?.Status?.CssClass }} status"
-                      >
-                        {{ task?.Status?.Value }}
-                      </p>
-                      <mat-menu
-                        #statusMenu="matMenu"
-                        xPosition="after"
-                        yPosition="below"
-                        class=""
-                      >
-                        <button
-                          *ngFor="let status of statuses"
-                          class=""
-                          mat-menu-item
-                          (click)="onClickChangeStatus(status)"
-                        >
-                          <i
-                            class="material-icons {{
-                              status?.CssClassCategory
-                            }} {{ status?.CssClass }}"
-                            >{{ status?.Icon }}</i
-                          >{{ status?.Value }}
-                        </button>
-                      </mat-menu>
-                    </span>
-                  </div>
+                  <app-manage-project-task-details
+                    [entityName]="entityName"
+                    [dataService]="TaskService"
+                    [sourceDataColumns]="sourceDataColumns"
+                    [selected]="task"
+                  ></app-manage-project-task-details>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"
@@ -437,9 +231,9 @@
                       }"
                     />
                     <p
-                      class="task status {{ subTask?.Status?.CssClassCategory }} {{
-                        subTask?.Status?.CssClass
-                      }}"
+                      class="task status {{
+                        subTask?.Status?.CssClassCategory
+                      }} {{ subTask?.Status?.CssClass }}"
                     >
                       {{ subTask?.Status?.Value }}
                     </p>
@@ -453,6 +247,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Activity </mat-panel-title>
                   </mat-expansion-panel-header>
+                  <app-manage-project-task-activity
+                  [entityName]="entityName"
+                  [dataService]="TaskService"
+                  [sourceDataColumns]="sourceDataColumns"
+                  [selected]="task"
+                  ></app-manage-project-task-activity>
                 </mat-expansion-panel>
               </mat-accordion>
             </div>

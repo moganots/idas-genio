@@ -62,4 +62,5 @@ CROSS JOIN (
 		([lv].[LookupCategoryId] = [lc].[_id])
 		AND ([lc].[Name] = 'CalendarEventType')
 ) AS [cet]
-OPTION (MAXRECURSION 9999);
+OPTION (MAXRECURSION 9999)
+FOR JSON PATH;

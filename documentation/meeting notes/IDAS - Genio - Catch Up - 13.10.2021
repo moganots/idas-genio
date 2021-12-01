@@ -1,0 +1,46 @@
+:: IDAS - Genio
+> Application Server Requirements
+	> Database server (VM x 1)
+		> MS SQL
+		> MongoDB
+	> Application / Web server (VM x 1)
+		> API
+		> UI
+> Licensing
+	*> Development Costs
+	*> Support costs
+	*> Maintenance costs
+	*> Deployment costs
+	*> Training costs
+
+	> Client
+		> Project(s)
+			> User(s)
+		> Components / Features
+			> Dashboard
+			> Inbox / Messaging / Notification
+			> Schedule
+			> Project
+			> Task
+			> Employee Management
+			> Client Management
+			> Supplier Management
+			> User Management
+			> Reporting
+			> ***
+		** Time-based
+			
+> SaaS
+	> VMs (HA)
+		> Database server(s)
+			** Handle the costs for the database (licensing)
+			** As the service provider, setup/maintenance/usage/transactions
+		> App/Web server(s)
+> Self-hosted (On-premise)
+	> VMs
+		> Database server(s)
+			** Handle the costs for the database (licensing)
+				> 35% off cost
+			** As the service provider, setup/maintenance/usage/transactions
+				> Standard/call-out costs
+		> App/Web server(s)

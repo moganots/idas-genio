@@ -1,8 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { FormBuilder } from '@angular/forms';
+import {
+  MatDialog,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { PageComponent, ReferenceValueService } from 'app/modules/_shared/shared-modules.module';
-import { AlertifyService, AuthenticationService, LookupValueService } from 'app/shared/shared.module';
+import {
+  PageComponent,
+  ReferenceValueService,
+} from 'app/modules/_shared/app-modules-shared.module';
+import {
+  AlertifyService,
+  AuthenticationService,
+  LookupValueService,
+} from 'app/shared/app-shared.module';
 import { ClientsConfiguration } from './clients-configuration';
 import { ClientsService } from './services/clients.service';
 
@@ -16,26 +27,34 @@ import { ClientsService } from './services/clients.service';
     LookupValueService,
     ReferenceValueService,
     ClientsService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { }}
-  ]
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
+  ],
 })
 export class ClientsComponent extends PageComponent implements OnInit {
-
   constructor(
     public router: Router,
     public matDialog: MatDialog,
+    public formBuilder: FormBuilder,
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public clientsService: ClientsService
-    ) {
-      super(router, matDialog, alertifyService, authenticationService, lookupValueService, referenceValueService);
-      this.pageIcon = ClientsConfiguration.pageIcon;
-      this.pageTitle = ClientsConfiguration.pageTitle;
-      this.pageName = ClientsConfiguration.pageName;
-      this.dataService = clientsService;
-      this.entityName = ClientsConfiguration.identifier;
-      this.sourceDataColumns = ClientsConfiguration.dataColumns;
+  ) {
+    super(
+      router,
+      matDialog,
+      formBuilder,
+      alertifyService,
+      authenticationService,
+      lookupValueService,
+      referenceValueService
+    );
+    this.pageIcon = ClientsConfiguration.pageIcon;
+    this.pageTitle = ClientsConfiguration.pageTitle;
+    this.pageName = ClientsConfiguration.pageName;
+    this.dataService = clientsService;
+    this.entityName = ClientsConfiguration.identifier;
+    this.sourceDataColumns = ClientsConfiguration.dataColumns;
   }
 }
