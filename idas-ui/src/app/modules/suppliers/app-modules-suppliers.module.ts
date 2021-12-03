@@ -4,12 +4,11 @@ import { CommonModule } from '@angular/common';
 import { AppModulesSharedModule } from '../_shared/app-modules-shared.module';
 import { AppSharedModule } from 'app/shared/app-shared.module';
 
-import { SuppliersConfiguration } from './suppliers-configuration';
 import { SuppliersComponent } from './suppliers.component';
 import { SuppliersService } from './services/suppliers.service';
 import { SupplierComponent } from './components/supplier/supplier.component';
 
-export { SuppliersConfiguration } from './suppliers-configuration';
+export { SupplierConfiguration } from './supplier-configuration';
 export { SuppliersComponent } from './suppliers.component';
 export { SupplierComponent } from './components/supplier/supplier.component';
 
@@ -26,7 +25,6 @@ export { SuppliersService } from './services/suppliers.service';
     SupplierComponent
   ],
   exports: [
-    SuppliersConfiguration,
     SuppliersComponent
   ],
   providers: [

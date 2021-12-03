@@ -1,4 +1,4 @@
-export class SuppliersConfiguration {
+export class SupplierConfiguration {
   public static identifier = 'supplier';
   public static pageIcon = 'reduce_capacity';
   public static pageRoute = 'suppliers';

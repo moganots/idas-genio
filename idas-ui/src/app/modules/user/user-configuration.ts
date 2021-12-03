@@ -1,4 +1,4 @@
-export class UsersConfiguration {
+export class UserConfiguration {
   public static identifier = 'user';
   public static pageIcon = 'manage_accounts';
   public static pageRoute = 'users';

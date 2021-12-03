@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import {
   AlertifyService,
   AuthenticationService,
@@ -19,7 +20,6 @@ import {
 } from 'app/modules/_shared/app-modules-shared.module';
 import { TaskConfiguration } from './task-configuration';
 import { DialogCreateNewTaskComponent } from './components/dialog-create-new-task/dialog-create-new-task.component';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-tasks',

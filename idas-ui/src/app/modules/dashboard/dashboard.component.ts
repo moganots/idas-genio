@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -14,8 +16,6 @@ import {
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
 import { DashboardService } from './services/dashboard.service';
-import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',

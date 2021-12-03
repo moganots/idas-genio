@@ -61,6 +61,6 @@ SELECT
 		END
 FROM [cte]
 WHERE
-	([EntityName] = 'taskstatus')
+	([EntityName] = 'projectcomment')
 ORDER BY
 	[ColumnId]

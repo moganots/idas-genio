@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import {
   PageComponent,
   ReferenceValueService,
@@ -14,7 +14,7 @@ import {
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { ClientsConfiguration } from './clients-configuration';
+import { ClientConfiguration } from './client-configuration';
 import { ClientsService } from './services/clients.service';
 
 @Component({
@@ -50,11 +50,11 @@ export class ClientsComponent extends PageComponent implements OnInit {
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = ClientsConfiguration.pageIcon;
-    this.pageTitle = ClientsConfiguration.pageTitle;
-    this.pageName = ClientsConfiguration.pageName;
+    this.pageIcon = ClientConfiguration.pageIcon;
+    this.pageTitle = ClientConfiguration.pageTitle;
+    this.pageName = ClientConfiguration.pageName;
     this.dataService = clientsService;
-    this.entityName = ClientsConfiguration.identifier;
-    this.sourceDataColumns = ClientsConfiguration.dataColumns;
+    this.entityName = ClientConfiguration.identifier;
+    this.sourceDataColumns = ClientConfiguration.dataColumns;
   }
 }

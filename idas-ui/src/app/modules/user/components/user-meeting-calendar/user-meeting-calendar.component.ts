@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -17,12 +19,10 @@ import {
   LookupValue,
   User,
 } from 'app/shared/app-shared.module';
-import { Router } from '@angular/router';
 import { CalendarService } from 'app/shared/components/calendar/calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
 import { MeetingCalendarService } from './services/meeting-calendar-service/meeting-calendar.service';
 import { MeetingCalendarAttendeeService } from './services/meeting-calendar-attendee/meeting-calendar-attendee.service';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-meeting-calendar',

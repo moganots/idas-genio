@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -7,15 +9,13 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { UsersConfiguration } from './users-configuration';
+import { UserConfiguration } from './user-configuration';
 import { UserService } from './services/user.service';
 import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -50,11 +50,11 @@ export class UsersComponent extends PageComponent implements OnInit {
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = UsersConfiguration.pageIcon;
-    this.pageTitle = UsersConfiguration.pageTitle;
-    this.pageName = UsersConfiguration.pageName;
+    this.pageIcon = UserConfiguration.pageIcon;
+    this.pageTitle = UserConfiguration.pageTitle;
+    this.pageName = UserConfiguration.pageName;
     this.dataService = userService;
-    this.entityName = UsersConfiguration.identifier;
-    this.sourceDataColumns = UsersConfiguration.dataColumns;
+    this.entityName = UserConfiguration.identifier;
+    this.sourceDataColumns = UserConfiguration.dataColumns;
   }
 }

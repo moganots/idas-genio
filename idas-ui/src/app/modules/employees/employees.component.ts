@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import {
   PageComponent,
   ReferenceValueService,
@@ -14,7 +14,7 @@ import {
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { EmployeesConfiguration } from './employees-configuration';
+import { EmployeeConfiguration } from './employee-configuration';
 import { EmployeesService } from './services/employees.service';
 
 @Component({
@@ -50,11 +50,11 @@ export class EmployeesComponent extends PageComponent implements OnInit {
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = EmployeesConfiguration.pageIcon;
-    this.pageTitle = EmployeesConfiguration.pageTitle;
-    this.pageName = EmployeesConfiguration.pageName;
+    this.pageIcon = EmployeeConfiguration.pageIcon;
+    this.pageTitle = EmployeeConfiguration.pageTitle;
+    this.pageName = EmployeeConfiguration.pageName;
     this.dataService = employeesService;
-    this.entityName = EmployeesConfiguration.identifier;
-    this.sourceDataColumns = EmployeesConfiguration.dataColumns;
+    this.entityName = EmployeeConfiguration.identifier;
+    this.sourceDataColumns = EmployeeConfiguration.dataColumns;
   }
 }

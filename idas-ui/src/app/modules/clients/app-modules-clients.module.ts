@@ -4,12 +4,11 @@ import { CommonModule } from '@angular/common';
 import { AppModulesSharedModule } from '../_shared/app-modules-shared.module';
 import { AppSharedModule } from 'app/shared/app-shared.module';
 
-import { ClientsConfiguration } from './clients-configuration';
 import { ClientsComponent } from './clients.component';
 import { ClientsService } from './services/clients.service';
 import { ClientComponent } from './components/client/client.component';
 
-export { ClientsConfiguration } from './clients-configuration';
+export { ClientConfiguration } from './client-configuration';
 export { ClientsComponent } from './clients.component';
 export { ClientComponent } from './components/client/client.component';
 
@@ -26,7 +25,6 @@ export { ClientsService } from './services/clients.service';
     ClientComponent
   ],
   exports: [
-    ClientsConfiguration,
     ClientsComponent
   ],
   providers: [

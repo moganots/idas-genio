@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { RouterModule } from '@angular/router';
 
 import { AppModulesSharedModule } from '../_shared/app-modules-shared.module';
 import { AppSharedModule } from 'app/shared/app-shared.module';
@@ -28,7 +29,6 @@ import { DialogProjectAssignmentComponent } from './components/dialog-project-as
 import { DialogTaskAssignmentComponent } from './components/tasks/components/dialog-task-assignment/dialog-task-assignment.component';
 import { TaskComponent } from './components/tasks/components/task-component/task.component';
 import { DialogCreateNewTaskComponent } from './components/tasks/components/dialog-create-new-task/dialog-create-new-task.component';
-import { RouterModule } from '@angular/router';
 import {
   ManageProjectTaskActivityComponent
 } from './components/shared/manage-project-task-activity/manage-project-task-activity.component';

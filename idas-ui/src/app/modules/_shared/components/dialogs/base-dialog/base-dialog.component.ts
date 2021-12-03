@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -11,7 +11,6 @@ import { ReferenceValueService } from 'app/modules/_shared/services/reference-va
 import {
   AlertifyService,
   AuthenticationService,
-  DataColumn,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { BaseDataViewComponent } from '../../data-view/base-data-view/base-data-view.component';

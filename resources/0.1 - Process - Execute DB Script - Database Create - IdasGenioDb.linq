@@ -67,7 +67,7 @@ void Main()
 	// Create database
 	string file01CreateDatabase = System.IO.Path.Combine(directoryResourcesDatabase, "0.1. Create Database - IdasGenioDb.sql");
 	// Insert test data
-	string file02CreateDatabase = System.IO.Path.Combine(directoryResourcesDatabase, "0.2. Insert Test Data - IdasGenioDb.sql");
+	string file02InsertTestData = System.IO.Path.Combine(directoryResourcesDatabase, "0.2. Insert Test Data - IdasGenioDb.sql");
 	// ===================== Database ConnectionString(s) ======================================================================================
 	string connectionStringMaster = "server=.; database=master; integrated security = true";
 	string connectionStringIdasGenioDb = "server=.; database=IdasGenioDb; integrated security = true";

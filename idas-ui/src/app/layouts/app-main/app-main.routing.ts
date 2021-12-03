@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import {
   ClientComponent,
   ClientsComponent,
-  ClientsConfiguration,
+  ClientConfiguration,
 } from 'app/modules/clients/app-modules-clients.module';
 import {
   DashboardComponent,
@@ -11,7 +11,7 @@ import {
 import {
   EmployeeComponent,
   EmployeesComponent,
-  EmployeesConfiguration,
+  EmployeeConfiguration,
 } from 'app/modules/employees/app-modules-employees.module';
 import {
   ProjectComponent,
@@ -24,7 +24,7 @@ import {
 import {
   SupplierComponent,
   SuppliersComponent,
-  SuppliersConfiguration,
+  SupplierConfiguration,
 } from 'app/modules/suppliers/app-modules-suppliers.module';
 import {
   UserInboxComponent,
@@ -36,7 +36,7 @@ import {
   UserMeetingCalendarComponent,
   CalendarEventConfiguration,
   UsersComponent,
-  UsersConfiguration,
+  UserConfiguration,
 } from 'app/modules/user/app-modules-users.module';
 import { AppLoginConfiguration } from './app-main-login/app-login-configuration';
 import { AppMainLoginComponent } from './app-main-login/app-main-login.component';
@@ -93,42 +93,42 @@ export const AppMainRoutes: Routes = [
     component: TaskComponent,
   },
   {
-    path: EmployeesConfiguration.pageRoute,
+    path: EmployeeConfiguration.pageRoute,
     pathMatch: 'full',
     component: EmployeesComponent,
   },
   {
-    path: EmployeesConfiguration.pageRoute.concat('/employee/:id'),
+    path: EmployeeConfiguration.pageRoute.concat('/employee/:id'),
     pathMatch: 'full',
     component: EmployeeComponent,
   },
   {
-    path: ClientsConfiguration.pageRoute,
+    path: ClientConfiguration.pageRoute,
     pathMatch: 'full',
     component: ClientsComponent,
   },
   {
-    path: ClientsConfiguration.pageRoute.concat('/client/:id'),
+    path: ClientConfiguration.pageRoute.concat('/client/:id'),
     pathMatch: 'full',
     component: ClientComponent,
   },
   {
-    path: SuppliersConfiguration.pageRoute,
+    path: SupplierConfiguration.pageRoute,
     pathMatch: 'full',
     component: SuppliersComponent,
   },
   {
-    path: SuppliersConfiguration.pageRoute.concat('/supplier/:id'),
+    path: SupplierConfiguration.pageRoute.concat('/supplier/:id'),
     pathMatch: 'full',
     component: SupplierComponent,
   },
   {
-    path: UsersConfiguration.pageRoute,
+    path: UserConfiguration.pageRoute,
     pathMatch: 'full',
     component: UsersComponent,
   },
   {
-    path: UsersConfiguration.pageRoute.concat('/user/:id'),
+    path: UserConfiguration.pageRoute.concat('/user/:id'),
     pathMatch: 'full',
     component: UserProfileComponent,
   },

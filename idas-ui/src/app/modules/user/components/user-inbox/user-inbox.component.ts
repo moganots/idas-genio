@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -14,8 +16,6 @@ import {
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-inbox',

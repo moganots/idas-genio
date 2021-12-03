@@ -1,4 +1,4 @@
-export class ClientsConfiguration {
+export class ClientConfiguration {
   public static identifier = 'client';
   public static pageIcon = 'stream';
   public static pageRoute = 'clients';

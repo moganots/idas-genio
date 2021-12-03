@@ -1,4 +1,4 @@
-export class EmployeesConfiguration {
+export class EmployeeConfiguration {
   public static identifier = 'employee';
   public static pageIcon = 'groups';
   public static pageRoute = 'employees';

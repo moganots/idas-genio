@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
@@ -7,15 +9,13 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { SuppliersConfiguration } from './suppliers-configuration';
+import { SupplierConfiguration } from './supplier-configuration';
 import { SuppliersService } from './services/suppliers.service';
 import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-suppliers',
@@ -50,11 +50,11 @@ export class SuppliersComponent extends PageComponent implements OnInit {
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = SuppliersConfiguration.pageIcon;
-    this.pageTitle = SuppliersConfiguration.pageTitle;
-    this.pageName = SuppliersConfiguration.pageName;
+    this.pageIcon = SupplierConfiguration.pageIcon;
+    this.pageTitle = SupplierConfiguration.pageTitle;
+    this.pageName = SupplierConfiguration.pageName;
     this.dataService = suppliersService;
-    this.entityName = SuppliersConfiguration.identifier;
-    this.sourceDataColumns = SuppliersConfiguration.dataColumns;
+    this.entityName = SupplierConfiguration.identifier;
+    this.sourceDataColumns = SupplierConfiguration.dataColumns;
   }
 }

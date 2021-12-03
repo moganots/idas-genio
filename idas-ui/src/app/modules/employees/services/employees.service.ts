@@ -8,7 +8,7 @@ import {
   LookupValue,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { EmployeesConfiguration } from '../employees-configuration';
+import { EmployeeConfiguration } from '../employee-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class EmployeesService extends DataService {
     public lookupValueService: LookupValueService
   ) {
     super(httpEmployee, authenticationService);
-    this.entityName = EmployeesConfiguration.identifier;
+    this.entityName = EmployeeConfiguration.identifier;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise().then((lookupValues) => {

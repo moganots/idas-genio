@@ -14,7 +14,7 @@ import {
   Supplier,
   User,
 } from 'app/shared/app-shared.module';
-import { UsersConfiguration } from '../users-configuration';
+import { UserConfiguration } from '../user-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,7 @@ export class UserService extends DataService {
     public lookupValueService: LookupValueService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = UsersConfiguration.identifier;
+    this.entityName = UserConfiguration.identifier;
     this.clientsService.getAll<Client>().toPromise().then((clients) => {
       this.clients = clients;
     });

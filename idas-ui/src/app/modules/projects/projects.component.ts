@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import {
   AlertifyService,
   AuthenticationService,
@@ -15,7 +16,6 @@ import {
 } from 'app/modules/_shared/app-modules-shared.module';
 import { ProjectConfiguration } from './project-configuration';
 import { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
-import { FormBuilder } from '@angular/forms';
 import { ProjectService } from './services/project-service/project.service';
 
 @Component({
