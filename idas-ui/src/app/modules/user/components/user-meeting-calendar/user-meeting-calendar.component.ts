@@ -79,7 +79,7 @@ export class UserMeetingCalendarComponent
       .getAll<LookupValue>()
       .toPromise()
       .then((lookupValues) => {
-        this.referenceValueService.UserService
+        this.referenceValueService.userService
           .getAll<User>()
           .toPromise()
           .then((users) => {

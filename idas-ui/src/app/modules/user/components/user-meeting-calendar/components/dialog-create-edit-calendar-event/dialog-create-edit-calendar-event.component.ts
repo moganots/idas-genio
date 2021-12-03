@@ -87,7 +87,7 @@ export class DialogCreateEditCalendarEventComponent
   }
   ngOnInit() {
     this.initFormGroupAndFields();
-    this.referenceValueService.UserService
+    this.referenceValueService.userService
       .getAll<User>()
       .toPromise()
       .then((users) => {

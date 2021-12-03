@@ -39,7 +39,7 @@ export class UsersComponent extends PageComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public UserService: UserService
+    public userService: UserService
   ) {
     super(
       router,
@@ -53,7 +53,7 @@ export class UsersComponent extends PageComponent implements OnInit {
     this.pageIcon = UsersConfiguration.pageIcon;
     this.pageTitle = UsersConfiguration.pageTitle;
     this.pageName = UsersConfiguration.pageName;
-    this.dataService = UserService;
+    this.dataService = userService;
     this.entityName = UsersConfiguration.identifier;
     this.sourceDataColumns = UsersConfiguration.dataColumns;
   }

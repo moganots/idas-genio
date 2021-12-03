@@ -1,45 +1,39 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserService } from "app/modules/user/app-modules-users.module";
-import {
-  AuthenticationService,
-  LookupValueService,
-  TaskWorkLog,
-} from "app/shared/app-shared.module";
+import { DataService, LookupValue, User, AuthenticationService, LookupValueService, TaskWorkLog } from "app/shared/app-shared.module";
+import { TaskWorkLogConfiguration } from "../task-work-log-service/task-work-log-configuration";
 
 @Injectable({
   providedIn: "root",
 })
-export class TaskWorkLogService {
+export class TaskWorkLogService extends DataService {
+  lookupValues: LookupValue[];
+  users: User[];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
-    public lookupValues: LookupValueService,
-    public users: UserService
+    public lookupValueService: LookupValueService,
+    public userService: UserService
   ) {
-    this.entityName = TaskConfiguration.identifier;
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
-    this.UserService.getAll<User>().subscribe(users => { this.users = users; });}
+    super(httpClient, authenticationService);
+    this.entityName = TaskWorkLogConfiguration.identifier;
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .toPromise()
+      .then((lookupValues) => {
+        this.lookupValues = lookupValues;
+      });
+    this.userService.getAll<User>().subscribe((users) => {
+      this.users = users;
+    });
+  }
   mapValues(taskWorkLog: TaskWorkLog) {
-    taskWorkLog.Task = this.projects.find(
-      (project) => project._id === task.ProjectId
-    );
-    taskWorkLog.Assignee = this.users.find(
-      (user) => user._id === task.AssigneeId
-    );
-    taskWorkLog.TaskType = this.lookupValues.find(
-      (value) => value._id === task.TaskTypeId
-    );
-    taskWorkLog.Priority = this.lookupValues.find(
-      (value) => value._id === task.PriorityId
-    );
-    taskWorkLog.Status = this.lookupValues.find(
-      (value) => value._id === task.StatusId
-    );
     taskWorkLog.createdBy = this.users.find(
-      (user) => user._id === task.CreatedBy
+      (user) => user._id === taskWorkLog.CreatedBy
     );
     taskWorkLog.modifiedBy = this.users.find(
-      (user) => user._id === task.ModifiedBy
+      (user) => user._id === taskWorkLog.ModifiedBy
     );
     return taskWorkLog;
   }

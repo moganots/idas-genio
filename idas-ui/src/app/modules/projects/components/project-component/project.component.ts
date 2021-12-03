@@ -72,7 +72,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.UserService
+    this.referenceValueService.userService
       .getAll<User>()
       .toPromise()
       .then((users) => {
@@ -81,7 +81,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
           .toPromise()
           .then((lookupValues) => {
             // Get (Set) - Current project
-            this.referenceValueService.ProjectService
+            this.referenceValueService.projectService
               .getFirstById<Project>(this.projectId)
               .toPromise()
               .then((project) => {
@@ -100,7 +100,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
                     project.ProjectAssignees = projectAssignees;
                   });
                 // Get (Set) - Parent Project for the current project
-                this.referenceValueService.ProjectService
+                this.referenceValueService.projectService
                   .getFirstById<Project>(project?.ParentProjectId)
                   .toPromise()
                   .then((parentProject) => {
@@ -109,7 +109,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
                     project.ParentProject = parentProject;
                   });
                 // Get (Set) - Child / Linked Project(s) for the current project
-                this.referenceValueService.ProjectService
+                this.referenceValueService.projectService
                   .getBy<Project>({ ParentProjectId: project?._id })
                   .toPromise()
                   .then((linkedProjects) => {
@@ -120,7 +120,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
                     project.LinkedProjects = linkedProjects;
                   });
                 // Get (Set) - Task(s) for the current project
-                this.referenceValueService.TaskService
+                this.referenceValueService.taskService
                   .getBy<Task>({ ProjectId: project?._id })
                   .toPromise()
                   .then((tasks) => {

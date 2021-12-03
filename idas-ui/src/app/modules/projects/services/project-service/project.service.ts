@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from 'app/modules/user/services/users.service';
+import { UserService } from 'app/modules/user/services/user.service';
 import {
   AuthenticationService,
   DataService,
@@ -21,12 +21,12 @@ export class ProjectService extends DataService {
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
-    public UserService: UserService
+    public userService: UserService
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectConfiguration.identifier;
     this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
-    this.UserService.getAll<User>().subscribe(users => { this.users = users; });
+    this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(project: Project) {
     project.ProjectType = this.lookupValues.find(value => value._id === project.ProjectTypeId);

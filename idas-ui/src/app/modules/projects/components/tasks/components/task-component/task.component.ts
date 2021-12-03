@@ -72,7 +72,7 @@ export class TaskComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.UserService
+    this.referenceValueService.userService
       .getAll<User>()
       .toPromise()
       .then((users) => {

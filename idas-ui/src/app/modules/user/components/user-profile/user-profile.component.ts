@@ -60,7 +60,7 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     this.pageIcon = UserProfileConfiguration.pageIcon;
     this.pageTitle = UserProfileConfiguration.pageTitle;
     this.pageName = UserProfileConfiguration.pageName;
-    this.dataService = UserService;
+    this.dataService = userService;
     this.entityName = UserProfileConfiguration.identifier;
     this.sourceDataColumns = UserProfileConfiguration.dataColumns;
     this.selected = this.currentUser;

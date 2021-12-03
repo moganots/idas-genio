@@ -68,7 +68,7 @@ export class TasksComponent extends PageComponent implements OnInit {
     this.onRefreshView();
   }
   private onRefreshView() {
-    this.referenceValueService.UserService
+    this.referenceValueService.userService
       .getAll<User>()
       .toPromise()
       .then((users) => {

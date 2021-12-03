@@ -48,7 +48,7 @@ export class DialogCreateNewTaskComponent
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public UserService: UserService,
+    public userService: UserService,
     public dialogRef: MatDialogRef<DialogCreateNewTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {

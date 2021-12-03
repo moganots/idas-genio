@@ -6,7 +6,7 @@ import { TaskAssignmentsService } from 'app/modules/projects/components/tasks/co
 import { TaskService } from 'app/modules/projects/components/tasks/services/task-service/task.service';
 import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
 import { SuppliersService } from 'app/modules/suppliers/services/suppliers.service';
-import { UserService } from 'app/modules/user/services/users.service';
+import { UserService } from 'app/modules/user/services/user.service';
 import {
   Client,
   DataColumn,
@@ -31,14 +31,14 @@ export class ReferenceValueService {
     public taskService: TaskService,
     public taskAssignmentsService: TaskAssignmentsService,
     public suppliersService: SuppliersService,
-    public UserService: UserService
+    public userService: UserService
   ) {}
   setFieldLookupValues(fieldName: string, field: DataColumn) {
     switch (fieldName) {
       case `Assignee`:
       case `PreviousAssignee`:
       case `User`:
-        this.UserService.getAll<User>().subscribe((users) => {
+        this.userService.getAll<User>().subscribe((users) => {
           this.addFieldLookupValues(
             field,
             users.map((user) => this.mapValuesUser(user))

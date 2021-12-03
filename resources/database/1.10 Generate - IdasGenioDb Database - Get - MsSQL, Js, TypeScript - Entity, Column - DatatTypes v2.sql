@@ -45,8 +45,22 @@ SELECT
 	,[ColumnName] + ': ['''', ' + CASE WHEN [IsRequired] = 1 THEN 'Validators.required' ELSE 'null' END + '],' AS [FormField]
 	,[ColumnName] + ': ' + [ColumnJsDataType] + ';' AS [JsClassField]
 	,[ColumnName] + '?: ' + [ColumnJsDataType] + ',' AS [JsClassConstructorField]
+	,LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + 
+		CASE
+			WHEN [ColumnName] LIKE '%Id'
+				THEN LEFT([ColumnName], LEN([ColumnName]) - 2)
+			WHEN [ColumnName] IN ('CreatedBy', 'ModifiedBy')
+				THEN LOWER(LEFT([ColumnName], 1)) + RIGHT([ColumnName], LEN([ColumnName]) - 1)
+			ELSE [ColumnName]
+		END + ' = ' +
+		CASE
+			WHEN [ColumnName] IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'AttendeeId')
+				THEN 'this.users.find((user) => user._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+			WHEN LEFT([ColumnName], LEN([ColumnName]) - 2) IN (SELECT [name] FROM [dbo].[LookupCategory])
+				THEN 'this.lookupValues.find((lookupValue) => lookupValue._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+		END
 FROM [cte]
 WHERE
-	([EntityName] = 'CalendarEvent')
+	([EntityName] = 'taskstatus')
 ORDER BY
 	[ColumnId]
