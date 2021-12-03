@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
-import { ComponentsModule } from './components/components.module';
+import { AppComponentsModule } from './components/app-components.module';
 import { AppMainComponent } from './layouts/app-main/app-main.component';
 import { AppMainLoginComponent } from './layouts/app-main/app-main.module';
 import { AppModulesModule } from './modules/app-modules.module';
@@ -21,10 +21,10 @@ import { AppSharedModule } from './shared/app-shared.module';
     RouterModule,
     MatFormFieldModule,
     MatInputModule,
-    AppSharedModule,
-    ComponentsModule,
+    AppComponentsModule,
     AppModulesSharedModule,
     AppModulesModule,
+    AppSharedModule,
     AppRoutingModule
   ],
   declarations: [

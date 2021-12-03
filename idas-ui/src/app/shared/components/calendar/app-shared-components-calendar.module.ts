@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { CalendarConfiguration } from './shared/calendar-configuration/calendar-configuration';
 import { ViewByOption } from './shared/calendar-interfaces/view-by-option';
@@ -12,7 +13,6 @@ import { CalendarViewByWeekComponent } from './calendar-view-by-week/calendar-vi
 import { CalendarViewByWorkWeekComponent } from './calendar-view-by-work-week/calendar-view-by-work-week.component';
 import { CalendarViewByDayComponent } from './calendar-view-by-day/calendar-view-by-day.component';
 import { ChunkPipe } from './shared/pipes/chunk.pipe';
-import { MatMenuModule } from '@angular/material/menu';
 
 export { CalendarConfiguration } from './shared/calendar-configuration/calendar-configuration';
 export { ViewByOption } from './shared/calendar-interfaces/view-by-option';
@@ -48,4 +48,4 @@ export { ChunkPipe } from './shared/pipes/chunk.pipe';
   ],
   providers: [ChunkPipe, DatePipe, CalendarService],
 })
-export class CalendarModule {}
+export class AppSharedComponentsCalendarModule {}

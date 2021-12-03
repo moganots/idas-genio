@@ -19,7 +19,7 @@ import {
   LookupValue,
   User,
 } from 'app/shared/app-shared.module';
-import { CalendarService } from 'app/shared/components/calendar/calendar.module';
+import { CalendarService } from 'app/shared/components/calendar/app-shared-components-calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
 import { MeetingCalendarService } from './services/meeting-calendar-service/meeting-calendar.service';
 import { MeetingCalendarAttendeeService } from './services/meeting-calendar-attendee/meeting-calendar-attendee.service';

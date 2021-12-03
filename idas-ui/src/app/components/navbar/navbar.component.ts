@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import {
   AlertifyService,
   AuthenticationService,
-  CommonComponent,
   GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
+import { CommonComponent } from 'app/shared/components/app-shared-components.module';
 
 @Component({
   selector: 'app-navbar',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonComponent } from 'app/shared/components/common/common.component';
 import { SharedConfiguration } from 'app/shared/configuration/shared-configuration';
@@ -28,7 +28,6 @@ export class FileUploadComponent extends CommonComponent implements OnInit {
   @Input() TaskId?: number;
   @Input() CalendarEventId?: number;
   @Input() files: FileAttachment[] = [];
-  frmGroup: FormGroup;
   constructor(
     public router: Router,
     public alertifyService: AlertifyService,

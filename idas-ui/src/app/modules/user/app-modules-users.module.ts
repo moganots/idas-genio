@@ -28,7 +28,7 @@ import { UsersComponent } from './users.component';
 import { InboxService } from './components/user-inbox/services/inbox.service';
 import { NotificationsService } from './components/user-notifications/services/notifications.service';
 import { UserService } from './services/user.service';
-import { CalendarModule } from 'app/shared/components/calendar/calendar.module';
+import { AppSharedComponentsCalendarModule } from 'app/shared/components/calendar/app-shared-components-calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/user-meeting-calendar/components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
 import { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar-service/meeting-calendar.service';
 import { MeetingCalendarAttendeeService } from './components/user-meeting-calendar/services/meeting-calendar-attendee/meeting-calendar-attendee.service';
@@ -75,7 +75,7 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     MatRadioModule,
     AppModulesSharedModule,
     AppSharedModule,
-    CalendarModule,
+    AppSharedComponentsCalendarModule,
   ],
   declarations: [
     UserInboxComponent,

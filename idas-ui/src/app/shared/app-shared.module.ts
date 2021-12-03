@@ -1,19 +1,15 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /**
  * Shared Components
  */
-import { CommonComponent } from './components/common/common.component';
-import { FileDragDropDirective } from './components/file-upload/directives/file-drag-drop/file-drag-drop.directive';
+import { AppSharedComponentsModule } from './components/app-shared-components.module';
 
-export { CommonComponent } from './components/common/common.component';
-export { FileDragDropDirective } from './components/file-upload/directives/file-drag-drop/file-drag-drop.directive';
-export { FileUploadComponent } from './components/file-upload/components/file-upload-component/file-upload.component';
-
+export { AppSharedComponentsModule } from './components/app-shared-components.module';
 
 export { SharedConfiguration } from './configuration/shared-configuration';
-
 
 export { BaseModel } from './domain-models/base/base-model';
 export { BaseAssignment } from './domain-models/base/base-assignment';
@@ -21,26 +17,20 @@ export { BaseComment } from './domain-models/base/base-comment';
 export { BaseWorkLog } from './domain-models/base/base-work-log';
 export { Entity } from './domain-models/base/entity';
 
-
 export { User } from './domain-models/user/user';
 export { ContactDetail } from './domain-models/user/contact-detail';
 export { InboxMessage } from './domain-models/user/inbox-message';
 export { NotificationMessage } from './domain-models/user/notification-message';
 
-
 export { LookupCategory } from './domain-models/lookups/lookup-category';
 export { LookupValue } from './domain-models/lookups/lookup-value';
 
-
 export { Client } from './domain-models/client/client';
-
 
 export { Employee } from './domain-models/employee/employee';
 export { EmployeeSalary } from './domain-models/employee/employee-salary';
 
-
 export { Supplier } from './domain-models/supplier/supplier';
-
 
 export { Project } from './domain-models/project/project';
 export { ProjectAssignment } from './domain-models/project/project-assignment';
@@ -48,22 +38,18 @@ export { ProjectComment } from './domain-models/project/project-comment';
 export { ProjectStatus } from './domain-models/project/project-status';
 export { ProjectWorkLog } from './domain-models/project/project-work-log';
 
-
 export { Task } from './domain-models/task/task';
 export { TaskAssignment } from './domain-models/task/task-assignment';
 export { TaskComment } from './domain-models/task/task-comment';
 export { TaskStatus } from './domain-models/task/task-status';
 export { TaskWorkLog } from './domain-models/task/task-work-log';
 
-
 export { CalendarDay } from './domain-models/scheduling/calendar-day';
 export { CalendarEvent } from './domain-models/scheduling/calendar-event';
 export { CalendarEventAttendee } from './domain-models/scheduling/calendar-event-attendee';
 
-
 export { AuthenticationResult } from './domain-models/http/authentication-result';
 export { ResponseResult } from './domain-models/http/response-result';
-
 
 export { DataColumn } from './domain-models/data-column';
 export { FileAttachment } from './domain-models/file-attachment';
@@ -87,7 +73,6 @@ export { LookupCategoryService } from './services/lookup-category-service/lookup
 export { LookupValueService } from './services/lookup-value-service/lookup-value.service';
 export { SortingService } from './services/sorting-service/sorting.service';
 
-
 export { SortParameters } from './types/classes/sort-parameters';
 export { SortParametersFor } from './types/classes/sort-parameters-for';
 export { LookupValuesFilterByCategoryId } from './types/interfaces/lookup-values-filter-by-category-id';
@@ -95,7 +80,6 @@ export { LookupValuesFilterByCategoryName } from './types/interfaces/lookup-valu
 export { RouteInfo } from './types/interfaces/route-info';
 
 import { FileSizePipe } from './utilities/filesize.pipe';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export { DateUtils } from './utilities/date-utils';
 export { DefaultObjectUtil } from './utilities/default-object-util';
@@ -106,7 +90,7 @@ export { GeneralUtils } from './utilities/general-utils';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  declarations: [CommonComponent, FileDragDropDirective],
+  declarations: [],
   providers: [
     DatePipe,
     AlertifyService,
@@ -118,8 +102,7 @@ export { GeneralUtils } from './utilities/general-utils';
     LookupValueService,
     SortingService,
     FileSizePipe,
-    FileDragDropDirective,
   ],
-  exports: [CommonComponent, FileDragDropDirective],
+  exports: [AppSharedComponentsModule],
 })
 export class AppSharedModule {}

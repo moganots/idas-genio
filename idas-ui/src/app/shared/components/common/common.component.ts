@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'app/shared/services/authentication-service/authentication.service';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
@@ -21,6 +22,7 @@ export class CommonComponent {
   @Input() public companyName: string;
   @Input() public applicationName: string;
   @Input() public applicationHostName: string;
+  frmGroup: FormGroup;
   public lookupValues: LookupValue[] = [];
   public currentUser: User;
   public currentUserType: LookupValue;

@@ -13,12 +13,12 @@ import { first } from 'rxjs/operators';
 import {
   AlertifyService,
   AuthenticationService,
-  CommonComponent,
   DataService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { AppModulesSharedModuleConfiguration } from '../../shared-modules-configuration';
 import { ReferenceValueService } from '../../services/reference-value-service/reference-value.service';
+import { CommonComponent } from 'app/shared/components/app-shared-components.module';
 
 @Component({
   selector: 'app-base',

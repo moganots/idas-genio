@@ -11,7 +11,7 @@ import {
   ReferenceValueService,
   AppModulesSharedModuleConfiguration,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { CalendarConfiguration } from 'app/shared/components/calendar/calendar.module';
+import { CalendarConfiguration } from 'app/shared/components/calendar/app-shared-components-calendar.module';
 import {
   AlertifyService,
   AuthenticationService,
