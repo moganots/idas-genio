@@ -1,4 +1,4 @@
-import { RouteInfo } from 'app/shared/types/interfaces/route-info';
+import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { BaseModel } from '../base/base-model';
 import { Client } from '../client/client';
 import { Employee } from '../employee/employee';

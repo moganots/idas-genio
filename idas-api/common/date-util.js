@@ -59,7 +59,7 @@ const ThmsZ0200 = () => {
 }
 const hmsms = () => {
     const dp = dateParts();
-    return [[dp.hour, dp.minutes, dp.seconds].join(':').trim(), dp.ms].join('.').trim();
+    return [hms(), dp.ms].join('.').trim();
 }
 const Thmsms = () => {
     return `T${hmsms()}`.trim();

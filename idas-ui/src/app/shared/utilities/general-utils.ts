@@ -194,4 +194,7 @@ export class GeneralUtils {
       fileReader.readAsDataURL(inputFile);
     });
   }
+  public static getPredicateParams(predicate?: any) {
+    return (predicate) ? Object.keys(predicate).map((key) => `${key}=${predicate[key]}`).join('&') : null;
+  }
 }

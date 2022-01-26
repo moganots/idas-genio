@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { BaseService } from '../base-service/base.service';
@@ -6,7 +6,7 @@ import { ResponseResult } from 'app/shared/domain-models/http/response-result';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { User } from 'app/shared/domain-models/user/user';
-import { LookupValue, TaskStatus } from 'app/shared/app-shared.module';
+import { GeneralUtils } from 'app/shared/utilities/general-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +17,6 @@ export class DataService extends BaseService {
     public authenticationService: AuthenticationService
   ) {
     super(httpClient);
-    this.authenticationService.getCurrentUser().subscribe((user: User) => {
-      this.currentUser = user;
-    });
   }
 
   create<T>(entity: T): Observable<T> {
@@ -60,7 +57,7 @@ export class DataService extends BaseService {
       .pipe(
         map(
           (responseResult: ResponseResult) =>
-          (responseResult.data || [] as unknown as T[]).map(value => this.mapValues(value))
+            (responseResult.data || [] as unknown as T[]).map(value => this.mapValues(value))
         ),
         catchError((error) => this._handleError(error))
       );
@@ -119,7 +116,7 @@ export class DataService extends BaseService {
       .pipe(
         map(
           (responseResult: ResponseResult) =>
-          this.mapValues(responseResult.data as unknown as T)
+            this.mapValues(responseResult.data as unknown as T)
         ),
         catchError((error) => this._handleError(error))
       );
@@ -134,17 +131,25 @@ export class DataService extends BaseService {
   }
   isCreate(action: string) {
     return ['add', 'create', 'new'].includes(
-      this.toLocaleLowerCaseTrim(action)
+      GeneralUtils.toLocalLowerCaseWithTrim(action)
     );
   }
   isUpdate(action: string) {
     return ['change', 'edit', 'update'].includes(
-      this.toLocaleLowerCaseTrim(action)
+      GeneralUtils.toLocalLowerCaseWithTrim(action)
     );
   }
   isDelete(action: string) {
     return [`archive`, 'delete', 'remove', 'deactivate'].includes(
-      this.toLocaleLowerCaseTrim(action)
+      GeneralUtils.toLocalLowerCaseWithTrim(action)
     );
+  }
+  getQueryParams(predicate?: any) {
+    const fromStringOptions = [
+      GeneralUtils.StringNullIf(`uid=${this.authenticationService.getCurrentUserId}`),
+      GeneralUtils.getPredicateParams(predicate)]
+      .filter((fromStringOption) =>
+        !(fromStringOption === null || fromStringOption === undefined)).join('&');
+    return { params: new HttpParams({ fromString: fromStringOptions }) };
   }
 }

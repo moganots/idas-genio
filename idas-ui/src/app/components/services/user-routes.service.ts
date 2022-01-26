@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseService } from 'app/shared/app-shared.module';
+import { AuthenticationService, DataService } from 'app/shared/app-shared.module';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserRoutesService extends BaseService {
+export class UserRoutesService extends DataService {
 
-  constructor(httpClient: HttpClient) {
-    super(httpClient);
+  constructor(httpClient: HttpClient, authenticationService: AuthenticationService) {
+    super(httpClient, authenticationService);
     this.anchorName = `user`;
   }
 

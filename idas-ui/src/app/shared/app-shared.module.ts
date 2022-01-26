@@ -81,6 +81,7 @@ export { RouteInfo } from './types/interfaces/route-info';
 
 import { FileSizePipe } from './utilities/filesize.pipe';
 
+export { AuthenticationUtils } from './utilities/authentication-utils';
 export { DateUtils } from './utilities/date-utils';
 export { DefaultObjectUtil } from './utilities/default-object-util';
 export { EmployeesUtil } from './utilities/employees-util';

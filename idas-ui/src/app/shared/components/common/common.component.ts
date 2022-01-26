@@ -43,25 +43,20 @@ export class CommonComponent {
       .then((values) => {
         this.lookupValues = values;
       });
-    this.getCurrentUser();
+    this.currentUser = this.authenticationService.getCurrentUser;
+    this.setCurrentUserMenuItems();
     this.getCurrentAuthenticationMessage();
   }
-  getCurrentUser() {
-    this.authenticationService
-      .getCurrentUser()
-      .pipe(first())
-      .subscribe((user: User) => {
-        this.currentUser = user;
-        this.menuItems = user.MenuItems.map(
-          (menuItem) =>
-            ({
-              path: menuItem.Path,
-              title: menuItem.Title,
-              icon: menuItem.Icon,
-              class: menuItem.CssClass,
-            } as unknown as RouteInfo)
-        );
-      });
+  setCurrentUserMenuItems() {
+    this.menuItems = this.currentUser?.MenuItems?.map(
+      (menuItem) =>
+      ({
+        path: menuItem.Path,
+        title: menuItem.Title,
+        icon: menuItem.Icon,
+        class: menuItem.CssClass,
+      } as unknown as RouteInfo)
+    );
   }
   getCurrentAuthenticationMessage() {
     this.authenticationService
@@ -151,7 +146,7 @@ export class CommonComponent {
     const minutes = this.appendLeadingZero(date.getMinutes());
     return `${hours}:${minutes}`;
   }
-  removeHashtag(value: any): string{
+  removeHashtag(value: any): string {
     return String(value).replace('#', '').trim();
   }
   toggleGoHome() {
@@ -174,7 +169,7 @@ export class CommonComponent {
         this.currentAuthenticationMessage = (error.error || error).message;
         this.alertifyService.error(this.currentAuthenticationMessage);
       },
-      () => {}
+      () => { }
     );
   }
 }

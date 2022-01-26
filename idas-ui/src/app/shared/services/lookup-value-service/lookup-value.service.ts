@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { LookupCategory } from 'app/shared/domain-models/lookups/lookup-category';
 import { LookupValue } from 'app/shared/domain-models/lookups/lookup-value';
 import { DefaultObjectUtil } from 'app/shared/utilities/default-object-util';
-import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { AuthenticationService } from 'app/shared/services/authentication-service/authentication.service';
 import { DataService } from 'app/shared/services/data-service/data.service';
 import { LookupCategoryService } from 'app/shared/services/lookup-category-service/lookup-category.service';
 import { LookupValueConfiguration } from './lookup-value-configuration';
+import { GeneralUtils } from 'app/shared/utilities/general-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -41,9 +41,9 @@ export class LookupValueService extends DataService {
     return lookupValue;
   }
   getCssClassCategory(value: LookupValue) {
-    return !this.isStringSet(value?.LookupCategory?.Name)
+    return !GeneralUtils.isStringSet(value?.LookupCategory?.Name)
       ? null
-      : this.toLocaleLowerCaseTrim(
+      : GeneralUtils.toLocalLowerCaseWithTrim(
           value?.LookupCategory?.Name?.split(' ').join('-')
         );
   }
@@ -52,9 +52,9 @@ export class LookupValueService extends DataService {
   }
   getCssClass(value: LookupValue) {
     const lookupValue = value?.Value || value?.Value2 || value?.Value3;
-    return !this.isStringSet(lookupValue)
+    return !GeneralUtils.isStringSet(lookupValue)
       ? null
-      : this.toLocaleLowerCaseTrim(lookupValue.split(' ').join('-'));
+      : GeneralUtils.toLocalLowerCaseWithTrim(lookupValue.split(' ').join('-'));
   }
   getCssColorValue(value: LookupValue) {
     return `${this.getCssColorCategory(value)}-${this.getCssClass(value)}`;

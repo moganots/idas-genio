@@ -1851,6 +1851,7 @@ BEGIN
 			,[u].[SessionToken] AS 'User.SessionToken'
 			,LTRIM(RTRIM(COALESCE((SELECT [dbo].[ValueJoin](' ', [e].[Name], [e].[MiddleName], [e].[Surname], NULL, NULL, NULL, NULL, NULL, NULL, NULL)), (SELECT [dbo].[ValueJoin](' ', [c].[Name], COALESCE([c].[Surname], [c].[CompanyName], [c].[RegistrationNumber]), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)), (SELECT [dbo].[ValueJoin](' ', [s].[Name], COALESCE([s].[Surname], [s].[CompanyName], [s].[RegistrationNumber]), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)), [u].[EmailAddress]))) AS 'User.DisplayName'
 			,[u].[IsActive] AS 'User.IsActive'
+			,[u].[PasswordHash] AS 'User.PasswordHash'
 			,[u].[CreatedBy] AS 'User.CreatedBy'
 			,[u].[DateCreated] AS 'User.DateCreated'
 			,[u].[ModifiedBy] AS 'User.ModifiedBy'

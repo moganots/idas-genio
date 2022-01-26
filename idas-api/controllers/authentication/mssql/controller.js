@@ -65,6 +65,7 @@ const Controller = () => {
         null,
         null,
         (error, data) => {
+          console.log(data);
           if (error) {
             return onHttpError(__filename, request, response, {
               error: error,
@@ -92,7 +93,7 @@ const userProfile = UserProfile.fromComponents(
               const sessionToken = createJwtUserSessionToken(uid);
               if (hasSessionToken(sessionToken)) {
                 userProfile.User.DateLastLoggedIn =
-                  yyyymmddhmsmsWithDashSeparator();
+                yyyymmddhmsmsWithDashSeparator();
                 userProfile.User.SessionToken = sessionToken;
                 UserRepository.onSuccessfulLogin(
                   userProfile.User._id,
