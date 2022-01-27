@@ -64,6 +64,7 @@ export class AppMainLoginComponent extends CommonComponent {
   async onClickLogin() {
     this.isBusy = true;
     this.authError = false;
+    this.currentAuthenticationMessage = null;
     this.authenticationService.login(this.uid, this.password).subscribe(
       (response: AuthenticationResult) => {
         this.currentUser = response.User;
@@ -81,7 +82,7 @@ export class AppMainLoginComponent extends CommonComponent {
       },
       () => {}
     );
-    this.sleep(60000);
+    this.sleep(5000);
   }
   sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));

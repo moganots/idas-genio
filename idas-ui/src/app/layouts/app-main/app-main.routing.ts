@@ -150,10 +150,10 @@ export const AppMainRoutes: Routes = [
     component: UserProfileComponent,
     // canActivate: [AuthenticationGuardService],
   },
-/*   {
-    path: LogoutConfiguration.pageRoute,
-    pathMatch: 'full',
-    component: LogoutComponent,
-    // canActivate: [AuthenticationGuardService],
-  }, */
+  /*   {
+      path: LogoutConfiguration.pageRoute,
+      pathMatch: 'full',
+      component: LogoutComponent,
+      // canActivate: [AuthenticationGuardService],
+    }, */
 ];

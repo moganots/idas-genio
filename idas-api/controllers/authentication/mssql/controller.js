@@ -65,7 +65,6 @@ const Controller = () => {
         null,
         null,
         (error, data) => {
-          console.log(data);
           if (error) {
             return onHttpError(__filename, request, response, {
               error: error,
@@ -75,29 +74,24 @@ const Controller = () => {
           const dataItem0 = getElementAt(data, null);
           const dataItem0AsJson = JSON.parse(dataItem0.data);
           const userProfile = dataItem0AsJson.UserProfile[0];
-          /*
-const userProfile = UserProfile.fromComponents(
-                    dataItem0AsJsonUserProfile.User
-                    , dataItem0AsJsonUserProfile.Employee
-                    , dataItem0AsJsonUserProfile.Client
-                    , dataItem0AsJsonUserProfile.Supplier); */
-          if (hasSessionToken(userProfile.User.SessionToken)) {
+          if (hasSessionToken(userProfile.SessionToken)) {
             return onHttpError(__filename, request, response, {
               message: `User: ${uid} is already logged in and still has a valid authentication session token`,
               data: userProfile,
             });
           } else {
-            const passwordHash = userProfile.User.PasswordHash;
+            const passwordHash = userProfile.PasswordHash;
             const validPassword = validateHash(password, decrypt(passwordHash));
             if (validPassword) {
               const sessionToken = createJwtUserSessionToken(uid);
               if (hasSessionToken(sessionToken)) {
-                userProfile.User.DateLastLoggedIn =
-                yyyymmddhmsmsWithDashSeparator();
-                userProfile.User.SessionToken = sessionToken;
                 UserRepository.onSuccessfulLogin(
-                  userProfile.User._id,
-                  userProfile,
+                  uid,
+                  {
+                    _id: userProfile._id,
+                    DateLastLoggedIn: yyyymmddhmsmsWithDashSeparator(),
+                    SessionToken: sessionToken,
+                  },
                   (error) => {
                     if (error) {
                       return onHttpError(__filename, request, response, {
@@ -106,7 +100,7 @@ const userProfile = UserProfile.fromComponents(
                       });
                     }
                     return onHttpSuccess(__filename, request, response, {
-                      message: `User: ${userProfile.User.EmailAddress} authenticated successfully`,
+                      message: `User: ${userProfile.EmailAddress} authenticated successfully`,
                       data: userProfile,
                     });
                   }
@@ -138,19 +132,19 @@ const userProfile = UserProfile.fromComponents(
       if (request.body) {
         const userProfile = UserProfile.fromComponents(request.body.User);
         if (userProfile && userProfile.User) {
-          userProfile.User.SessionToken = null;
+          userProfile.SessionToken = null;
           UserRepository.onSuccessfulLogout(
-            userProfile.User._id,
+            userProfile._id,
             userProfile,
             (error) => {
               if (error) {
                 return onHttpError(__filename, request, response, {
                   error: error,
-                  message: `Unable to logout User: ${userProfile.User.EmailAddress}. Reason: ${error.message}`,
+                  message: `Unable to logout User: ${userProfile.EmailAddress}. Reason: ${error.message}`,
                 });
               } else {
                 return onHttpSuccess(__filename, request, response, {
-                  message: `User: ${userProfile.User.EmailAddress} logged out successfully`,
+                  message: `User: ${userProfile.EmailAddress} logged out successfully`,
                   data: userProfile,
                 });
               }

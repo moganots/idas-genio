@@ -1838,24 +1838,24 @@ AS
 BEGIN
 	DECLARE @UserProfile NVARCHAR(MAX) = (
 		SELECT
-			[u].[_id] AS 'User._id'
-			,[u].[EmployeeId] AS 'User.EmployeeId'
-			,[u].[ClientId] AS 'User.ClientId'
-			,[u].[SupplierId] AS 'User.SupplierId'
-			,[u].[EmailAddress] AS 'User.EmailAddress'
-			,[u].[UserTypeId] AS 'User.UserTypeId'
-			,[u].[IsAdmin] AS 'User.IsAdmin'
-			,[u].[IsLocked] AS 'User.IsLocked'
-			,[u].[Avatar] AS 'User.Avatar'
-			,[u].[DateLastLoggedIn] AS 'User.DateLastLoggedIn'
-			,[u].[SessionToken] AS 'User.SessionToken'
-			,LTRIM(RTRIM(COALESCE((SELECT [dbo].[ValueJoin](' ', [e].[Name], [e].[MiddleName], [e].[Surname], NULL, NULL, NULL, NULL, NULL, NULL, NULL)), (SELECT [dbo].[ValueJoin](' ', [c].[Name], COALESCE([c].[Surname], [c].[CompanyName], [c].[RegistrationNumber]), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)), (SELECT [dbo].[ValueJoin](' ', [s].[Name], COALESCE([s].[Surname], [s].[CompanyName], [s].[RegistrationNumber]), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)), [u].[EmailAddress]))) AS 'User.DisplayName'
-			,[u].[IsActive] AS 'User.IsActive'
-			,[u].[PasswordHash] AS 'User.PasswordHash'
-			,[u].[CreatedBy] AS 'User.CreatedBy'
-			,[u].[DateCreated] AS 'User.DateCreated'
-			,[u].[ModifiedBy] AS 'User.ModifiedBy'
-			,[u].[DateModified] AS 'User.DateModified'
+			[u].[_id] AS '_id'
+			,[u].[EmployeeId] AS 'EmployeeId'
+			,[u].[ClientId] AS 'ClientId'
+			,[u].[SupplierId] AS 'SupplierId'
+			,[u].[EmailAddress] AS 'EmailAddress'
+			,[u].[UserTypeId] AS 'UserTypeId'
+			,[u].[IsAdmin] AS 'IsAdmin'
+			,[u].[IsLocked] AS 'IsLocked'
+			,[u].[Avatar] AS 'Avatar'
+			,[u].[DateLastLoggedIn] AS 'DateLastLoggedIn'
+			,[u].[SessionToken] AS 'SessionToken'
+			,LTRIM(RTRIM(COALESCE((SELECT [dbo].[ValueJoin](' ', [e].[Name], [e].[MiddleName], [e].[Surname], NULL, NULL, NULL, NULL, NULL, NULL, NULL)), (SELECT [dbo].[ValueJoin](' ', [c].[Name], COALESCE([c].[Surname], [c].[CompanyName], [c].[RegistrationNumber]), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)), (SELECT [dbo].[ValueJoin](' ', [s].[Name], COALESCE([s].[Surname], [s].[CompanyName], [s].[RegistrationNumber]), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)), [u].[EmailAddress]))) AS 'DisplayName'
+			,[u].[IsActive] AS 'IsActive'
+			,[u].[PasswordHash] AS 'PasswordHash'
+			,[u].[CreatedBy] AS 'CreatedBy'
+			,[u].[DateCreated] AS 'DateCreated'
+			,[u].[ModifiedBy] AS 'ModifiedBy'
+			,[u].[DateModified] AS 'DateModified'
 			,[e].[_id] AS 'Employee._id'
 			,[e].[SalutationId] AS 'Employee.SalutationId'
 			,[e].[Name] AS 'Employee.Name'
@@ -2674,6 +2674,39 @@ END
 
 CLOSE Cursor_Table_Names
 DEALLOCATE Cursor_Table_Names
+
+GO
+
+-- ======================================================================================================================
+-- Author:		Thabang Mogano
+-- Create date: 2022-01-26
+-- Description:	Stored procedure to handle all authentication updates for authentication log in or out ([dbo].[User])
+-- ======================================================================================================================
+CREATE PROCEDURE [dbo].[spAuthentication_OnSuccessfulLoginOrLogout]
+(
+	@_id [bigint],
+	@EmailAddress [nvarchar](640) = NULL,
+	@DateLastLoggedIn [datetime] = NULL,
+	@SessionToken [varchar](255) = NULL,
+	@ModifiedBy [nvarchar](640) = NULL
+)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	UPDATE [dbo].[User]
+	SET
+		[DateLastLoggedIn] = @DateLastLoggedIn,
+		[SessionToken] = @SessionToken,
+		[DateModified] = GETDATE(),
+		[ModifiedBy] = (SELECT TOP 1 [_id] FROM [dbo].[User] WHERE ([_id] = CASE WHEN ISNUMERIC(@ModifiedBy) = 1 THEN @ModifiedBy ELSE NULL END OR [EmailAddress] = @ModifiedBy))
+	WHERE
+		(@_id IS NULL OR [_id] = @_id)
+		AND (@EmailAddress IS NULL OR [EmailAddress] = @EmailAddress)
+	SELECT * FROM [dbo].[User] WHERE (@_id IS NULL OR [_id] = @_id) AND (@EmailAddress IS NULL OR [EmailAddress] = @EmailAddress)
+END
+GO
+PRINT ('>> Completed > Create > Stored Procedure > [dbo].[spAuthentication_OnSuccessfulLoginOrLogout]')
+GO
 
 PRINT ('>> Completed > Create store procedures')
 GO

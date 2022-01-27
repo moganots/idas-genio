@@ -11,6 +11,8 @@ import { first } from 'rxjs/operators';
 import { LookupValueService } from 'app/shared/services/lookup-value-service/lookup-value.service';
 import { DefaultObjectUtil } from 'app/shared/utilities/default-object-util';
 import { RouteInfo } from 'app/shared/types/interfaces/route-info';
+import { AuthenticationUtils } from 'app/shared/utilities/authentication-utils';
+import { AuthenticationResult } from 'app/shared/domain-models/http/authentication-result';
 
 @Component({
   selector: 'app-common',
@@ -66,26 +68,8 @@ export class CommonComponent {
         this.currentAuthenticationMessage = authenticationMessage;
       });
   }
-  isUserProfileSet() {
-    return (
-      this.isObjectSet(this.currentUser) && this.isObjectSet(this.currentUser)
-    );
-  }
-  isValidUserProfile() {
-    return (
-      this.isUserProfileSet() &&
-      this.currentUser.IsActive &&
-      !this.currentUser.IsLocked
-    );
-  }
   isLoggedIn() {
-    return this.isValidUserProfile() && this.hasSessionToken();
-  }
-  hasSessionToken() {
-    return (
-      this.isUserProfileSet() &&
-      this.isNotEmptyString(this.currentUser.SessionToken)
-    );
+    return AuthenticationUtils.isLoggedIn(this.currentUser);
   }
   isObjectSet(value: any) {
     return GeneralUtils.isObjectSet(value);
@@ -160,10 +144,12 @@ export class CommonComponent {
   }
   toggleLogout() {
     this.authenticationService.logout(this.currentUser).subscribe(
-      (response: any) => {
-        this.currentUser = response.userProfile;
-        this.currentAuthenticationMessage = response.message;
+      (response: AuthenticationResult) => {
+        console.log(response);
+        this.currentUser = response.User;
+        this.currentAuthenticationMessage = response.Message;
         this.alertifyService.success(this.currentAuthenticationMessage);
+        this.router.navigate(['login']);
       },
       (error) => {
         this.currentAuthenticationMessage = (error.error || error).message;
