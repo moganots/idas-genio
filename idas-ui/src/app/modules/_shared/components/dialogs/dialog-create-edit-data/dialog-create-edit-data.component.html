@@ -2,7 +2,7 @@
   <div class="card-header card-header-danger header">
     <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
     <h4 class="card-title">{{ pageTitle }}</h4>
-    <p class="category"></p>
+    <p class="category">{{ pageSubTitle }}</p>
     <span>
       <button
         mat-icon-button
@@ -189,7 +189,7 @@
       "
       type="button"
       (click)="onClickSave()"
-      [mat-dialog-close]="selected"
+      [mat-dialog-close]="selectedElement"
       title="Save Changes"
     >
       <i class="material-icons idas-button-icon">save</i>

@@ -17,7 +17,7 @@ import { AuthenticationResult } from 'app/shared/domain-models/http/authenticati
 @Component({
   selector: 'app-common',
   templateUrl: './common.component.html',
-  styleUrls: ['./common.component.css'],
+  styleUrls: ['./common.component.scss'],
   providers: [AlertifyService, AuthenticationService, LookupValueService],
 })
 export class CommonComponent {

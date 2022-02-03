@@ -21,7 +21,7 @@ import { BaseComponent } from '../base-component/base.component';
 @Component({
   selector: 'app-base-data',
   templateUrl: './base-data.component.html',
-  styleUrls: ['./base-data.component.css'],
+  styleUrls: ['./base-data.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,

@@ -116,7 +116,7 @@ export class DialogCreateEditCalendarEventComponent
   ngAfterViewInit() {}
   onClickEventAttendeResponse(option): void {}
   onValueChanged(event) {
-    if (event && event.source && event.source.value) {
+    if (event && event.source && event?.source?.value) {
       this.newEventAttendee = event?.source?.value;
       super.onValueChanged(event);
     } else {
@@ -124,7 +124,7 @@ export class DialogCreateEditCalendarEventComponent
     }
   }
   onSelectedValueChanged(event) {
-    if (event && event.source && event.source.value) {
+    if (event && event.source && event?.source?.value) {
       this.newEventAttendee = event?.source?.value;
       super.onSelectedValueChanged(event);
     } else {
@@ -132,7 +132,6 @@ export class DialogCreateEditCalendarEventComponent
     }
   }
   onClickEventAttendeeAdd(): void {
-    console.log(this.frmGroup.controls);
     this.newEventAttendee = undefined;
   }
   onClickEventAttendeeRemove(
@@ -141,7 +140,7 @@ export class DialogCreateEditCalendarEventComponent
   ) {}
   filterByValue(value: any): any {
     value = String(value || '').toLocaleLowerCase();
-    const filteredValues = this.users.filter(
+    const filteredValues = this.users?.filter(
       (user) =>
         String(user?._id).includes(value) ||
         String(user?.DisplayName || '')

@@ -2,7 +2,7 @@
   <div class="card-header card-header-danger header">
     <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
     <h4 class="card-title">{{ pageTitle }}</h4>
-    <p class="category"></p>
+    <p class="category">{{ pageSubTitle }}</p>
     <span>
       <button
         mat-icon-button
@@ -32,7 +32,7 @@
             class="event organiser"
             [ngStyle]="{
               display:
-                selected.createdBy === null || selected.createdBy === undefined
+                selectedElement.createdBy === null || selectedElement.createdBy === undefined
                   ? 'none'
                   : 'inline'
             }"
@@ -41,17 +41,17 @@
             <p class="label">Organiser</p>
             <i
               class="material-icons organiser-type {{
-                selected?.createdBy?.UserType?.CssClassCategory
-              }} {{ selected?.createdBy?.UserType?.CssClass }}"
-              [title]="selected?.createdBy?.UserType?.Value"
-              >{{ selected?.createdBy?.UserType?.Icon }}</i
+                selectedElement?.createdBy?.UserType?.CssClassCategory
+              }} {{ selectedElement?.createdBy?.UserType?.CssClass }}"
+              [title]="selectedElement?.createdBy?.UserType?.Value"
+              >{{ selectedElement?.createdBy?.UserType?.Icon }}</i
             >
-            <img src="{{ selected?.createdBy?.Avatar }}" />
-            <p class="created-by">{{ selected?.createdBy?.DisplayName }}</p>
+            <img src="{{ selectedElement?.createdBy?.Avatar }}" />
+            <p class="created-by">{{ selectedElement?.createdBy?.DisplayName }}</p>
             <i class="material-icons">schedule</i>
             <p class="label">Date Created</p>
             <p class="date-created">
-              {{ selected?.createdBy?.DateCreated | date: "EEEE, MMMM d, y" }}
+              {{ selectedElement?.createdBy?.DateCreated | date: "EEEE, MMMM d, y" }}
             </p>
             <br />
             <br />
@@ -189,13 +189,13 @@
                     formControlName="{{ fidc.name }}Time"
                     [(ngModel)]="
                       fidc.name === 'StartDate'
-                        ? selected.StartDateTime
-                        : selected.EndDateTime
+                        ? selectedElement.StartDateTime
+                        : selectedElement.EndDateTime
                     "
                     [(value)]="
                       fidc.name === 'StartDate'
-                        ? selected.StartDateTime
-                        : selected.EndDateTime
+                        ? selectedElement.StartDateTime
+                        : selectedElement.EndDateTime
                     "
                     placeholder="Time"
                   >
@@ -322,7 +322,7 @@
           </button>
           <div
             *ngFor="
-              let eventAttendee of selected?.EventAttendees;
+              let eventAttendee of selectedElement?.EventAttendees;
               let i = index
             "
             class="event attendee"
@@ -385,8 +385,8 @@
         <mat-tab label="Event Attachment(s)">
           <br />
           <app-file-upload
-            [CalendarEventId]="selected?._id"
-            [files]="selected?.Files"
+            [CalendarEventId]="selectedElement?._id"
+            [files]="selectedElement?.Files"
             appFileDragDrop
           ></app-file-upload>
         </mat-tab>
@@ -398,7 +398,7 @@
       *ngFor="let option of eventAttendeeResponses; let i = index"
       [ngStyle]="{
         display:
-          selected?._id === null || selected?._id === undefined
+          selectedElement?._id === null || selectedElement?._id === undefined
             ? 'none'
             : 'inline'
       }"
@@ -428,7 +428,7 @@
       "
       type="button"
       (click)="onClickSave()"
-      [mat-dialog-close]="selected"
+      [mat-dialog-close]="selectedElement"
       title="Save Changes"
     >
       <i class="material-icons idas-button-icon">save</i>

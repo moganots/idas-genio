@@ -85,7 +85,7 @@ export class UserMeetingCalendarComponent
           .then((users) => {
             this.meetingCalendarAttendeeService
               .getBy<CalendarEventAttendee>({
-                AttendeeId: this.currentUser._id,
+                AttendeeId: this.currentUser?._id,
               })
               .toPromise()
               .then((attendeeEvents) => {
@@ -101,7 +101,7 @@ export class UserMeetingCalendarComponent
                   });
               });
             this.calendarEvents.forEach((calendarEvent) => {
-              calendarEvent.CalendarEventType = lookupValues.find(
+              calendarEvent.CalendarEventType = lookupValues?.find(
                 (lv) => lv._id === calendarEvent.CalendarEventTypeId
               );
             });
@@ -118,19 +118,19 @@ export class UserMeetingCalendarComponent
   onClickCreateEditCalendarEvent(event: CalendarEvent): void {
     this.openDialog(`Edit`, event);
   }
-  openDialog(handleAction: string, event: CalendarEvent) {
+  openDialog(eventAction: string, event: CalendarEvent) {
     super.openDialog(
       DialogCreateEditCalendarEventComponent,
       {
-        action: handleAction,
+        action: eventAction,
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
         pageName: this.pageName,
         pageTitle: this.pageTitle,
         dataColumns: this.sourceDataColumns,
-        selected: event,
-        selectedIndex: -1,
+        selectedElement: event,
+        selectedElementIndex: -1,
       },
       () => {
         this.onDataRefresh();
@@ -156,7 +156,7 @@ export class UserMeetingCalendarComponent
       IsAllDayEvent: isAllDayEvent,
       Location: location,
       Description: description,
-      CreatedBy: this.currentUser._id,
+      CreatedBy: this.currentUser?._id,
       EventAttendees: ([] = []),
       Files: ([] = []),
     } as unknown as CalendarEvent;

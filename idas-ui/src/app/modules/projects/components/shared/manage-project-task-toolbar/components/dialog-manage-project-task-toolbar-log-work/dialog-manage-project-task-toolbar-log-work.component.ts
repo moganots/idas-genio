@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-dialog-manage-project-task-toolbar-log-work',
   templateUrl: './dialog-manage-project-task-toolbar-log-work.component.html',
-  styleUrls: ['./dialog-manage-project-task-toolbar-log-work.component.css'],
+  styleUrls: ['./dialog-manage-project-task-toolbar-log-work.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,

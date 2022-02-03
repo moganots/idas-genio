@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-dialog-manage-project-task-toolbar-comment',
   templateUrl: './dialog-manage-project-task-toolbar-comment.component.html',
-  styleUrls: ['./dialog-manage-project-task-toolbar-comment.component.css'],
+  styleUrls: ['./dialog-manage-project-task-toolbar-comment.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,

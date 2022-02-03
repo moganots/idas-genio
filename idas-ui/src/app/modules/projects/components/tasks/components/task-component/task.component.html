@@ -18,8 +18,9 @@
           </div>
         </div>
         <app-manage-project-task-toolbar
-          [dataService]="dataService"
+          [dataService]="taskService"
           [entityName]="entityName"
+          [pageIcon]="task?.TaskType?.Icon"
           [sourceDataColumns]="this.sourceDataColumns"
           [entityId]="task?._id"
           [selectedElement]="task"

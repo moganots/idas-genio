@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-dialog-manage-project-task-toolbar-edit',
   templateUrl: './dialog-manage-project-task-toolbar-edit.component.html',
-  styleUrls: ['./dialog-manage-project-task-toolbar-edit.component.css'],
+  styleUrls: ['./dialog-manage-project-task-toolbar-edit.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -55,5 +55,7 @@ export class DialogManageProjectTaskToolbarEditComponent
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data)
+  }
 }

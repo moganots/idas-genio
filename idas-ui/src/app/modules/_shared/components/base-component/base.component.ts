@@ -37,6 +37,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   @Input() public pageIcon: string;
   @Input() public pageName: string;
   @Input() public pageTitle: string;
+  @Input() public pageSubTitle: string;
   @Input() public entityName: string;
   @Input() public entityId: any;
   @Input() public dataService: DataService;

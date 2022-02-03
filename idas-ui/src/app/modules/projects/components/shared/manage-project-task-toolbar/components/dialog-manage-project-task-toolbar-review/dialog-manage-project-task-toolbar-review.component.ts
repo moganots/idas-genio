@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-dialog-manage-project-task-toolbar-review',
   templateUrl: './dialog-manage-project-task-toolbar-review.component.html',
-  styleUrls: ['./dialog-manage-project-task-toolbar-review.component.css'],
+  styleUrls: ['./dialog-manage-project-task-toolbar-review.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,
