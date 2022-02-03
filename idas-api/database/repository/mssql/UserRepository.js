@@ -167,17 +167,16 @@ const Repository = () => {
     } finally {
     }
   };
-  const callOnSuccessfulLoginOrLogout = (uid, userProfile, callback) => {
+  const callOnSuccessfulLoginOrLogout = (entity, callback) => {
     try {
       dbContext.executeStoredProcedure(
         `dbo`,
         "spAuthentication_OnSuccessfulLoginOrLogout",
         {
-          _id: userProfile._id,
-          EmailAddress: userProfile.EmailAddress,
-          DateLastLoggedIn: userProfile.DateLastLoggedIn,
-          SessionToken: userProfile.SessionToken,
-          ModifiedBy: uid
+          _id: entity._id,
+          DateLastLoggedIn: entity.DateLastLoggedIn,
+          SessionToken: entity.SessionToken,
+          ModifiedBy: entity.ModifiedBy || entity._id
         },
         false,
         callback

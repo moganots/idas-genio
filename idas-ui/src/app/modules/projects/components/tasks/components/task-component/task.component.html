@@ -20,14 +20,10 @@
         <app-manage-project-task-toolbar
           [dataService]="dataService"
           [entityName]="entityName"
-          (edit)="onButtonClicked('Edit', task?._id, task)"
-          (comment)="onButtonClicked('Comment', task?._id, task)"
-          (logWork)="onButtonClicked('LogWork', task?._id, task)"
-          (assign)="onButtonClicked('Assign', task?._id, task)"
-          (attach)="onButtonClicked('Attach', task?._id, task)"
-          (createSub)="onButtonClicked('CreateSub', task?._id, task)"
-          (cloneCopy)="onButtonClicked('CloneCopy', task?._id, task)"
-          (review)="onButtonClicked('Review', task?._id, task)"
+          [sourceDataColumns]="this.sourceDataColumns"
+          [entityId]="task?._id"
+          [selectedElement]="task"
+          [selectedElementIndex]="this.selectedElementIndex"
         ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">
@@ -44,9 +40,9 @@
                   </mat-expansion-panel-header>
                   <app-manage-project-task-details
                     [entityName]="entityName"
-                    [dataService]="TaskService"
+                    [dataService]="taskService"
                     [sourceDataColumns]="sourceDataColumns"
-                    [selected]="task"
+                    [selectedElement]="task"
                   ></app-manage-project-task-details>
                 </mat-expansion-panel>
                 <mat-expansion-panel
@@ -77,7 +73,7 @@
                     <mat-panel-title> Attachments </mat-panel-title>
                   </mat-expansion-panel-header>
                   <app-file-upload
-                    [ProjectId]="projectId"
+                    [ProjectId]="task?._id"
                     [files]="task?.Files"
                     appFileDragDrop
                   ></app-file-upload>
@@ -249,9 +245,9 @@
                   </mat-expansion-panel-header>
                   <app-manage-project-task-activity
                   [entityName]="entityName"
-                  [dataService]="TaskService"
+                  [dataService]="taskService"
                   [sourceDataColumns]="sourceDataColumns"
-                  [selected]="task"
+                  [selectedElement]="task"
                   ></app-manage-project-task-activity>
                 </mat-expansion-panel>
               </mat-accordion>

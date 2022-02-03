@@ -63,7 +63,7 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     this.dataService = userService;
     this.entityName = UserProfileConfiguration.identifier;
     this.sourceDataColumns = UserProfileConfiguration.dataColumns;
-    this.selected = this.currentUser;
+    this.selectedElement = this.currentUser;
     this.setDataSourceColumns();
   }
   ngOnInit() {

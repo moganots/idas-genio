@@ -56,7 +56,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
     this.setFormInputDataColumns(useColumns);
     this.frmGroupFields = new FormGroup({});
     this.formInputDataColumns.forEach((column) => {
-      column.value = this.getFieldValue(column, this.selected || {});
+      column.value = this.getFieldValue(column, this.selectedElement || {});
       const control = new FormControl(
         {
           value: column.value,
@@ -133,7 +133,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
   }
   onClickCreate(): void {
     this.action = 'create';
-    this.selected = {};
+    this.selectedElement = {};
   }
   onClickEdit(element: any, index?: number): void {
     this.action = 'edit';
@@ -144,7 +144,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
     this.setSelectedElementAndIndex(element, index);
   }
   setSelectedElementAndIndex(element: any, index?: number) {
-    this.selected = element;
-    this.selectedIndex = index || this.getElementIndex(element);
+    this.selectedElement = element;
+    this.selectedElementIndex = index || this.getElementIndex(element);
   }
 }

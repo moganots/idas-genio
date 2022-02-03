@@ -2,63 +2,66 @@ import { Client } from 'app/shared/domain-models/client/client';
 import { Employee } from 'app/shared/domain-models/employee/employee';
 import { Supplier } from 'app/shared/domain-models/supplier/supplier';
 import { ContactDetail } from 'app/shared/domain-models/user/contact-detail';
-import { User } from 'app/shared/domain-models/user/user';
+import { DateUtils } from 'app/shared/utilities/date-utils';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
 export class TestUsers {
   public static Root() {
     return {
-      _id: 3,
+      _id: 1,
       EmailAddress: 'root@genio.idas.co.za',
       UserTypeId: 741,
       IsAdmin: true,
       IsLocked: false,
       Avatar: './assets/img/avatars/avatar-16.png',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-27T16:53:59.067',
       ModifiedBy: 1,
       DateModified: '2021-07-27T16:54:00.107',
       SessionToken: GeneralUtils.generateRandomString(320),
       MenuItems: this.getMenuItems('Root'),
-    } as unknown as User;
+    };
   }
   public static Admin() {
     return {
-      _id: 1,
+      _id: 2,
       EmailAddress: 'admin@genio.idas.co.za',
       UserTypeId: 737,
       IsAdmin: true,
       IsLocked: false,
       Avatar: './assets/img/avatars/avatar-27.png',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-27T16:53:59.067',
       ModifiedBy: 1,
       DateModified: '2021-07-27T16:54:00.107',
       SessionToken: GeneralUtils.generateRandomString(320),
       MenuItems: this.getMenuItems('Admin'),
-    } as unknown as User;
+    };
   }
   public static General() {
     return {
-      _id: 2,
+      _id: 3,
       EmailAddress: 'general@genio.idas.co.za',
       UserTypeId: 740,
       IsAdmin: false,
       IsLocked: false,
       Avatar: './assets/img/avatars/avatar-7.png',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-27T16:53:59.067',
       ModifiedBy: 1,
       DateModified: '2021-07-27T16:54:00.107',
       SessionToken: GeneralUtils.generateRandomString(320),
       MenuItems: this.getMenuItems('General'),
-    } as unknown as User;
+    };
   }
   public static ClientUser() {
     return {
-      _id: 3,
+      _id: 4,
       ClientId: 1,
       EmailAddress: 'info@closecorporation.co.za',
       UserTypeId: 737,
@@ -67,6 +70,7 @@ export class TestUsers {
       Avatar: './assets/img/avatars/avatar-14.png',
       DisplayName: 'Close Corporation',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-22T09:22:39.270',
       SessionToken: GeneralUtils.generateRandomString(320),
@@ -80,6 +84,7 @@ export class TestUsers {
         IdNumber: 7707288001087,
         RegistrationNumber: '2009/222222/23',
         IsActive: true,
+        DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
         CreatedBy: 1,
         DateCreated: '2021-07-22T09:22:39.187',
       } as unknown as Client,
@@ -102,11 +107,11 @@ export class TestUsers {
         DateCreated: '2021-07-22T09:22:39.240',
       } as unknown as ContactDetail,
       MenuItems: this.getMenuItems('Client'),
-    } as unknown as User;
+    };
   }
   public static EmployeeManager() {
     return {
-      _id: 7,
+      _id: 8,
       EmployeeId: 1,
       EmailAddress: 'Jane.Doe@genio.idas.co.za',
       UserTypeId: 738,
@@ -115,6 +120,7 @@ export class TestUsers {
       Avatar: './assets/img/avatars/avatar-20.png',
       DisplayName: 'Jane Doe',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-22T09:22:39.270',
       SessionToken: GeneralUtils.generateRandomString(320),
@@ -156,11 +162,11 @@ export class TestUsers {
         DateCreated: '2021-07-22T09:22:39.240',
       } as unknown as ContactDetail,
       MenuItems: this.getMenuItems('Employee-Manager'),
-    } as unknown as User;
+    };
   }
   public static EmployeeActive() {
     return {
-      _id: 6,
+      _id: 7,
       EmployeeId: 2,
       EmailAddress: 'Good.Job@genio.idas.co.za',
       UserTypeId: 738,
@@ -169,6 +175,7 @@ export class TestUsers {
       Avatar: './assets/img/avatars/avatar-22.png',
       DisplayName: 'Good Job',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-22T09:22:39.270',
       SessionToken: GeneralUtils.generateRandomString(320),
@@ -210,11 +217,11 @@ export class TestUsers {
         DateCreated: '2021-07-22T09:22:39.240',
       } as unknown as ContactDetail,
       MenuItems: this.getMenuItems('Employee-Active'),
-    } as unknown as User;
+    };
   }
   public static EmployeeInActive() {
     return {
-      _id: 5,
+      _id: 6,
       EmployeeId: 4,
       EmailAddress: 'Bad.Job@genio.idas.co.za',
       UserTypeId: 738,
@@ -223,6 +230,7 @@ export class TestUsers {
       Avatar: './assets/img/avatars/avatar-19.png',
       DisplayName: 'Bad Job',
       IsActive: false,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-22T09:22:39.270',
       SessionToken: GeneralUtils.generateRandomString(320),
@@ -265,11 +273,11 @@ export class TestUsers {
         DateCreated: '2021-07-22T09:22:39.240',
       } as unknown as ContactDetail,
       MenuItems: this.getMenuItems('Employee-Inactive'),
-    } as unknown as User;
+    };
   }
   public static Supplier() {
     return {
-      _id: 10,
+      _id: 11,
       SupplierId: 1,
       EmailAddress: 'info@thandindabaattorneys.co.za',
       UserTypeId: 741,
@@ -278,6 +286,7 @@ export class TestUsers {
       Avatar: './assets/img/avatars/avatar-8.png',
       DisplayName: 'Thandi Ndaba',
       IsActive: true,
+      DateLastLoggedIn: DateUtils.yyyymmddThmsmsDashSeparator(),
       CreatedBy: 1,
       DateCreated: '2021-07-22T09:22:39.270',
       Supplier: {
@@ -314,7 +323,7 @@ export class TestUsers {
         DateCreated: '2021-07-22T09:22:39.240',
       } as unknown as ContactDetail,
       MenuItems: this.getMenuItems('Supplier'),
-    } as unknown as User;
+    };
   }
   public static getMenuItems(userType) {
     const menuItems = [

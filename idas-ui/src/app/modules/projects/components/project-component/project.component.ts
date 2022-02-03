@@ -201,31 +201,32 @@ export class ProjectComponent extends PageComponent implements OnInit {
     );
   }
 
-  onButtonClicked(action: string, index?: number, element?: any): void {
+  onButtonClicked(action: string, element?: any): void {
+    const elementId = element?._id;
     switch (this.toLocaleLowerCaseTrim(action)) {
       case 'edit':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'comment':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'logwork':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'assign':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'attach':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'createsub':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'clonecopy':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
       case 'review':
-        this.onClickLog(action, index, element);
+        this.onClickLog(action, elementId, element);
         break;
     }
   }

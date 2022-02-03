@@ -86,11 +86,11 @@ const Controller = () => {
               const sessionToken = createJwtUserSessionToken(uid);
               if (hasSessionToken(sessionToken)) {
                 UserRepository.onSuccessfulLogin(
-                  uid,
                   {
                     _id: userProfile._id,
                     DateLastLoggedIn: yyyymmddhmsmsWithDashSeparator(),
                     SessionToken: sessionToken,
+                    ModifiedBy: userProfile._id || uid
                   },
                   (error) => {
                     if (error) {
@@ -130,13 +130,19 @@ const Controller = () => {
     try {
       onHttpRequestStarted(__filename, request);
       if (request.body) {
-        const userProfile = UserProfile.fromComponents(request.body.User);
-        if (userProfile && userProfile.User) {
+        const userProfile = {
+          _id: request.body._id,
+          EmailAddress: request.body.EmailAddress,
+          DateLastLoggedIn: request.body.DateLastLoggedIn,
+          SessionToken: request.body.SessionToken,
+          ModifiedBy: request.body._id || request.body.EmailAddress
+        };
+        if (userProfile && userProfile.SessionToken) {
           userProfile.SessionToken = null;
           UserRepository.onSuccessfulLogout(
-            userProfile._id,
             userProfile,
             (error) => {
+              console.log(userProfile);
               if (error) {
                 return onHttpError(__filename, request, response, {
                   error: error,
@@ -152,7 +158,7 @@ const Controller = () => {
           );
         } else {
           return onHttpError(__filename, request, response, {
-            message: `Unable to complete user logout request. Reason: UserProfile was not specified`,
+            message: `Unable to complete user logout request. Reason: Invalid User Profile specified`,
           });
         }
       } else {

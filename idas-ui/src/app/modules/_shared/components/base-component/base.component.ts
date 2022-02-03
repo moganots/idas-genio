@@ -38,12 +38,13 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   @Input() public pageName: string;
   @Input() public pageTitle: string;
   @Input() public entityName: string;
+  @Input() public entityId: any;
   @Input() public dataService: DataService;
   @Input() public sourceData: any[] = [];
   @Input() public sourceDataColumns: any[];
   @Input() public action: string;
-  @Input() public selected: any = {};
-  @Input() public selectedIndex: number;
+  @Input() public selectedElement: any = {};
+  @Input() public selectedElementIndex: number;
   public dataSource: MatTableDataSource<any[]>;
   public updates: { [key: string]: any } = {};
   public form = new FormControl();
@@ -219,7 +220,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     if (this.hasChanges() && this.dataService) {
       this.setChanges();
       this.dataService
-        .CreateUpdateDelete(this.action, this.selected)
+        .CreateUpdateDelete(this.action, this.selectedElement)
         .pipe(first())
         .subscribe({
           next: (result) => {
@@ -241,7 +242,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   }
   setChanges() {
     Object.keys(this.updates).forEach(
-      (key) => (this.selected[key] = this.updates[key])
+      (key) => (this.selectedElement[key] = this.updates[key])
     );
   }
   onDataRefresh(): void {

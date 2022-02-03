@@ -1,17 +1,34 @@
 USE [IdasGenioDb]
 GO
 
-DECLARE @_id [bigint] = 1;
-DECLARE @EmailAddress [nvarchar](640) = NULL; --'root@genio.idas.co.za';
+DECLARE @uid [nvarchar](320) = 8; --'root@genio.idas.co.za'; -- 8;
 DECLARE @DateLastLoggedIn [datetime] = GETDATE();
-DECLARE @SessionToken [varchar](255) = NEWID();
+DECLARE @SessionToken [nvarchar](255) = NULL;
+DECLARE @ModifiedBy [nvarchar](320) = 3; -- 'admin@genio.idas.co.za'; --8;
+
+IF(ISNUMERIC(@uid) <> 1)
+BEGIN
+	SET @uid = (SELECT [_id] FROM [dbo].[User] WHERE ([EmailAddress] = CAST(@uid AS [nvarchar](MAX))));
+END
+
+IF(ISNUMERIC(@ModifiedBy) <> 1)
+BEGIN
+	SET @ModifiedBy = ISNULL((SELECT [_id] FROM [dbo].[User] WHERE ([EmailAddress] = CAST(@ModifiedBy AS [nvarchar](MAX)))), @uid);
+END
 
 UPDATE [dbo].[User]
 SET
-	[DateLastLoggedIn] = @DateLastLoggedIn,
+	[DateLastLoggedIn] = ISNULL(@DateLastLoggedIn, [DateLastLoggedIn]),
 	[SessionToken] = @SessionToken,
-	[DateModified] = GETDATE()
+	[DateModified] = GETDATE(),
+	[ModifiedBy] = @ModifiedBy
 WHERE
-	(@_id IS NULL OR [_id] = @_id)
-	AND (@EmailAddress IS NULL OR [EmailAddress] = @EmailAddress)
-SELECT * FROM [dbo].[User] WHERE (@_id IS NULL OR [_id] = @_id) AND (@EmailAddress IS NULL OR [EmailAddress] = @EmailAddress)
+	([_id] = @uid)
+
+SELECT * FROM [dbo].[User] WHERE ([_id] = @uid)
+
+--EXECUTE [dbo].[spAuthentication_OnSuccessfulLoginOrLogout]
+--	@uid,
+--	@DateLastLoggedIn,
+--	@SessionToken,
+--	@ModifiedBy

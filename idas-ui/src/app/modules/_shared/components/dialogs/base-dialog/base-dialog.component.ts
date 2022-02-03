@@ -48,8 +48,8 @@ export class BaseDialogComponent
       pageName: 'no page name',
       pageTitle: 'no page title',
       dataColumns: [],
-      selected: {},
-      selectedIndex: -1,
+      selectedElement: {},
+      selectedElementIndex: -1,
     }
   ) {
     super(
@@ -61,15 +61,15 @@ export class BaseDialogComponent
       lookupValueService,
       referenceValueService
     );
-    this.action = data.action;
-    this.dataService = data.dataService;
-    this.entityName = data.entityName;
-    this.pageIcon = data.pageIcon;
-    this.pageName = data.pageName;
-    this.pageTitle = data.pageTitle;
-    this.dataSourceColumns = data.dataColumns;
-    this.selected = data.selected || {};
-    this.selectedIndex = data.selectedIndex;
+    this.action = data?.action;
+    this.dataService = data?.dataService;
+    this.entityName = data?.entityName;
+    this.pageIcon = data?.pageIcon;
+    this.pageName = data?.pageName;
+    this.pageTitle = data?.pageTitle;
+    this.dataSourceColumns = data?.dataColumns;
+    this.selectedElement = data?.selectedElement || {};
+    this.selectedElementIndex = data?.selectedElementIndex;
   }
   onClickDialogClose() {
     this.dialogRef.close();

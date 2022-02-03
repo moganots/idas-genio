@@ -259,8 +259,8 @@ export class DataViewTableSimpleComponent
         pageName: this.pageName,
         pageTitle: this.pageTitle,
         dataColumns: this.dataSourceColumns,
-        selected: element || {},
-        selectedIndex: index || this.selectedIndex,
+        selectedElement: element || {},
+        selectedElementIndex: index || this.selectedElementIndex,
       },
       () => {
         this.onDataRefresh();

@@ -81,8 +81,8 @@ export class DialogCreateEditCalendarEventComponent
         value: time,
         displayValue: time,
       }));
-      this.selected.StartDateTime = this.getTimeValue(`StartDateTime`);
-      this.selected.EndDateTime = this.getTimeValue(`EndDateTime`);
+      this.selectedElement.StartDateTime = this.getTimeValue(`StartDateTime`);
+      this.selectedElement.EndDateTime = this.getTimeValue(`EndDateTime`);
       this.setDataSourceColumns();
   }
   ngOnInit() {
@@ -98,19 +98,19 @@ export class DialogCreateEditCalendarEventComponent
       map((value) => this.filterByValue(value))
     );
     this.meetingCalendarAttendeeService
-      .getBy<CalendarEventAttendee>({ CalendarEventId: this.selected?._id })
+      .getBy<CalendarEventAttendee>({ CalendarEventId: this.selectedElement?._id })
       .toPromise()
       .then((eventAttendees) => {
-        this.selected.EventAttendees = eventAttendees;
+        this.selectedElement.EventAttendees = eventAttendees;
         this.currentEventAttendee = eventAttendees.find(
           (ea) => ea?.AttendeeId === this.currentUser?._id
         );
       });
     this.fileAttachmentService
-      .getBy<FileAttachment>({ CalendarEventId: this.selected?._id })
+      .getBy<FileAttachment>({ CalendarEventId: this.selectedElement?._id })
       .toPromise()
       .then((files) => {
-        this.selected.Files = files;
+        this.selectedElement.Files = files;
       });
   }
   ngAfterViewInit() {}

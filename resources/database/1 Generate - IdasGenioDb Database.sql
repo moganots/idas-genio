@@ -2684,25 +2684,35 @@ GO
 -- ======================================================================================================================
 CREATE PROCEDURE [dbo].[spAuthentication_OnSuccessfulLoginOrLogout]
 (
-	@_id [bigint],
-	@EmailAddress [nvarchar](640) = NULL,
+	@uid [nvarchar](320),
 	@DateLastLoggedIn [datetime] = NULL,
 	@SessionToken [varchar](255) = NULL,
-	@ModifiedBy [nvarchar](640) = NULL
+	@ModifiedBy [nvarchar](320) = NULL
 )
 AS
 BEGIN
 	SET NOCOUNT ON;
+
+	IF(ISNUMERIC(@uid) <> 1)
+	BEGIN
+		SET @uid = (SELECT [_id] FROM [dbo].[User] WHERE ([EmailAddress] = CAST(@uid AS [nvarchar](MAX))));
+	END
+
+	IF(ISNUMERIC(@ModifiedBy) <> 1)
+	BEGIN
+		SET @ModifiedBy = ISNULL((SELECT [_id] FROM [dbo].[User] WHERE ([EmailAddress] = CAST(@ModifiedBy AS [nvarchar](MAX)))), @uid);
+	END
+
 	UPDATE [dbo].[User]
 	SET
-		[DateLastLoggedIn] = @DateLastLoggedIn,
+		[DateLastLoggedIn] = ISNULL(@DateLastLoggedIn, [DateLastLoggedIn]),
 		[SessionToken] = @SessionToken,
 		[DateModified] = GETDATE(),
-		[ModifiedBy] = (SELECT TOP 1 [_id] FROM [dbo].[User] WHERE ([_id] = CASE WHEN ISNUMERIC(@ModifiedBy) = 1 THEN @ModifiedBy ELSE NULL END OR [EmailAddress] = @ModifiedBy))
+		[ModifiedBy] = @ModifiedBy
 	WHERE
-		(@_id IS NULL OR [_id] = @_id)
-		AND (@EmailAddress IS NULL OR [EmailAddress] = @EmailAddress)
-	SELECT * FROM [dbo].[User] WHERE (@_id IS NULL OR [_id] = @_id) AND (@EmailAddress IS NULL OR [EmailAddress] = @EmailAddress)
+		([_id] = @uid)
+
+	SELECT * FROM [dbo].[User] WHERE ([_id] = @uid)
 END
 GO
 PRINT ('>> Completed > Create > Stored Procedure > [dbo].[spAuthentication_OnSuccessfulLoginOrLogout]')

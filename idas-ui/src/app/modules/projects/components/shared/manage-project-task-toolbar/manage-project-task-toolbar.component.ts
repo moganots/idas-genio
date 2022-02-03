@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DialogCreateEditDataComponent, ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
+import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
 import { BaseDataComponent } from 'app/modules/_shared/components/base-data-component/base-data.component';
 import {
   AlertifyService,
@@ -9,6 +9,14 @@ import {
   DataService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
+import { DialogManageProjectTaskToolbarAssignComponent } from './components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
+import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
+import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/dialog-manage-project-task-toolbar-clone-copy/dialog-manage-project-task-toolbar-clone-copy.component';
+import { DialogManageProjectTaskToolbarCommentComponent } from './components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
+import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/dialog-manage-project-task-toolbar-create-sub/dialog-manage-project-task-toolbar-create-sub.component';
+import { DialogManageProjectTaskToolbarEditComponent } from './components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
+import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
+import { DialogManageProjectTaskToolbarReviewComponent } from './components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
 
 @Component({
   selector: 'app-manage-project-task-toolbar',
@@ -68,51 +76,49 @@ export class ManageProjectTaskToolbarComponent
     }
   }
 
-  onButtonClicked(action: string, index?: number, element?: any): void {
+  onButtonClicked(action: string): void {
     switch (this.toLocaleLowerCaseTrim(action)) {
       case 'edit':
-        this.edit.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarEditComponent, action);
         break;
       case 'comment':
-        this.comment.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarCommentComponent, action);
         break;
       case 'logwork':
-        this.logWork.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarLogWorkComponent, action);
         break;
       case 'assign':
-        this.assign.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarAssignComponent, action);
         break;
       case 'attach':
-        this.attach.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarAttachFilesComponent, action);
         break;
       case 'createsub':
-        this.createSub.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarCreateSubComponent, action);
         break;
       case 'clonecopy':
-        this.cloneCopy.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarCloneCopyComponent, action);
         break;
       case 'review':
-        this.review.emit({ action, index, element });
+        this.openDialog(DialogManageProjectTaskToolbarReviewComponent, action);
         break;
     }
   }
-  onOpenCreateEditDialog(element?: any, index?: number) {
+  openDialog(dialogComponent: any, action: string) {
     super.openDialog(
-      DialogCreateEditDataComponent,
+      dialogComponent,
       {
-        action: this.action,
+        action: `Edit`,
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
         pageName: this.pageName,
         pageTitle: this.pageTitle,
         dataColumns: this.dataSourceColumns,
-        selected: element || {},
-        selectedIndex: index || this.selectedIndex,
+        selectedElement: this.selectedElement || {},
+        // selectedElementIndex: index || this.selectedElementIndex,
       },
-      () => {
-        this.onDataRefresh();
-      }
+      () => { }
     );
   }
 }

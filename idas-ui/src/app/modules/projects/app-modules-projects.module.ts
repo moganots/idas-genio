@@ -44,6 +44,14 @@ import { ProjectCommentService } from './services/project-comment-service/projec
 import { ProjectService } from './services/project-service/project.service';
 import { ProjectStatusService } from './services/project-status-service/project-status.service';
 import { ProjectWorkLogService } from './services/project-work-log-service/project-work-log.service';
+import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
+import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-create-sub/dialog-manage-project-task-toolbar-create-sub.component';
+import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-clone-copy/dialog-manage-project-task-toolbar-clone-copy.component';
+import { DialogManageProjectTaskToolbarReviewComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
+import { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
+import { DialogManageProjectTaskToolbarEditComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
+import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
+import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 
 export { ProjectConfiguration } from './project-configuration';
 export { TaskConfiguration } from './components/tasks/task-configuration';
@@ -71,6 +79,14 @@ export { TaskAssignmentsService } from './components/tasks/components/dialog-tas
     ManageProjectTaskToolbarComponent,
     ManageProjectTaskActivityComponent,
     ManageProjectTaskDetailsComponent,
+    DialogManageProjectTaskToolbarLogWorkComponent,
+    DialogManageProjectTaskToolbarCreateSubComponent,
+    DialogManageProjectTaskToolbarCloneCopyComponent,
+    DialogManageProjectTaskToolbarReviewComponent,
+    DialogManageProjectTaskToolbarCommentComponent,
+    DialogManageProjectTaskToolbarEditComponent,
+    DialogManageProjectTaskToolbarAttachFilesComponent,
+    DialogManageProjectTaskToolbarAssignComponent,
   ],
   imports: [
     CommonModule,

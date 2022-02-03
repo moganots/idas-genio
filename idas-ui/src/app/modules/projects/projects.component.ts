@@ -62,8 +62,8 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     super.openDialog(
       DialogProjectAssignmentComponent,
       {
-        selected: element || this.selected,
-        selectedIndex: index || this.selectedIndex,
+        selectedElement: element || this.selectedElement,
+        selectedElementIndex: index || this.selectedElementIndex,
       },
       () => {
         this.onDataRefresh();

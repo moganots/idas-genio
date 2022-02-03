@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatOptionSelectionChange } from '@angular/material/core';
@@ -30,7 +30,7 @@ import { BaseComponent } from '../base-component/base.component';
   ],
 })
 export class BaseDataComponent extends BaseComponent {
-  public dataSourceColumns: DataColumn[];
+  @Input() public dataSourceColumns: DataColumn[];
   public dataSourceColumnNames: string[];
   public dataSourceDisplayColumns: DataColumn[];
   public groupByColumnNames: string[];
@@ -236,14 +236,14 @@ export class BaseDataComponent extends BaseComponent {
     if (
       this.isEdit() &&
       column.name === 'IdNumber' &&
-      this.isObjectSet(this.selected.RegistrationNumber)
+      this.isObjectSet(this.selectedElement?.RegistrationNumber)
     ) {
       return null;
     }
     if (
       this.isEdit() &&
       column.name === 'RegistrationNumber' &&
-      this.isObjectSet(this.selected.IdNumber)
+      this.isObjectSet(this.selectedElement?.IdNumber)
     ) {
       return null;
     }
@@ -269,14 +269,14 @@ export class BaseDataComponent extends BaseComponent {
       case `StartDateTime`:
         return this.isCreate()
           ? `${hours}:00`
-          : this.selected?.StartDate
-          ? this.getHourMinuteFromDate(new Date(this.selected?.StartDate))
+          : this.selectedElement?.StartDate
+          ? this.getHourMinuteFromDate(new Date(this.selectedElement?.StartDate))
           : `${hours}:00`;
       case `EndDateTime`:
         return this.isCreate()
           ? `${hours}:30`
-          : this.selected?.EndDate
-          ? this.getHourMinuteFromDate(new Date(this.selected?.EndDate))
+          : this.selectedElement?.EndDate
+          ? this.getHourMinuteFromDate(new Date(this.selectedElement?.EndDate))
           : `${hours}:30`;
       default:
         return `${hours}:${minutes}`;

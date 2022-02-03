@@ -143,6 +143,7 @@ export class CommonComponent {
     this.router.navigate(['login']);
   }
   toggleLogout() {
+    console.log(this.currentUser);
     this.authenticationService.logout(this.currentUser).subscribe(
       (response: AuthenticationResult) => {
         console.log(response);

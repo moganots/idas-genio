@@ -67,8 +67,8 @@ export class DialogCreateNewTaskComponent
     this.pageTitle = `${this.capitalizeFirstLetter(
       this.action
     )} New Project Task`;
-    this.projectName = this.selected.Name;
-    this.selected = { ProjectId: this.selected._id };
+    this.projectName = this.selectedElement?.Name;
+    this.selectedElement = { ProjectId: this.selectedElement?._id };
     this.sourceDataColumns = data.dataColumns;
     this.setDataSourceColumns();
   }

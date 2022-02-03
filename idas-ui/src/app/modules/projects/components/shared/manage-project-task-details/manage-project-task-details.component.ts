@@ -64,14 +64,14 @@ export class ManageProjectTaskDetailsComponent
   onButtonClicked(option: string, value: any): void {
     switch (this.toLocaleLowerCaseTrim(option)) {
       case 'priority':
-        this.selected.Priority = value;
+        this.selectedElement.Priority = value;
         break;
       case 'status':
-        this.selected.Status = value;
+        this.selectedElement.Status = value;
         break;
     }
     console.log(this.dataService)
-    this.dataService.CreateUpdateDelete(`update`, this.selected).subscribe(
+    this.dataService.CreateUpdateDelete(`update`, this.selectedElement).subscribe(
       (updated) => {
         this.alertifyService.success(`Task ${option}, updated successfully`);
       },
@@ -80,6 +80,5 @@ export class ManageProjectTaskDetailsComponent
       }
     );
     console.log(`After: Update`);
-    console.log(this.selected);
   }
 }
