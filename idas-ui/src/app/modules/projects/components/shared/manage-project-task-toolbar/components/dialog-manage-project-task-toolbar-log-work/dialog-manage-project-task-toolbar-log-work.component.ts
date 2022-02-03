@@ -55,5 +55,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initFormGroupAndFields();
+  }
 }

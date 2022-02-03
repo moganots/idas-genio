@@ -56,6 +56,6 @@ export class DialogManageProjectTaskToolbarEditComponent
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    this.initFormGroupAndFields();
   }
 }

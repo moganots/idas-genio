@@ -251,7 +251,7 @@ export class BaseDataComponent extends BaseComponent {
   }
   getFieldValue(column: DataColumn, dataObject: any) {
     const columnValue = (dataObject || {})[column.name];
-    const lookupValue = column.lookupValues.find(lv => parseFloat(lv.id) === parseFloat(columnValue));
+    const lookupValue = column?.lookupValues?.find(lv => parseFloat(lv.id) === parseFloat(columnValue));
     return lookupValue?.displayValue || columnValue;
   }
   findById(value: any, findValue: any) {

@@ -55,5 +55,7 @@ export class DialogManageProjectTaskToolbarCommentComponent
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initFormGroupAndFields();
+  }
 }
