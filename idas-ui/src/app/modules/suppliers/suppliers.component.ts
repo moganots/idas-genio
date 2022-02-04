@@ -55,6 +55,6 @@ export class SuppliersComponent extends PageComponent implements OnInit {
     this.pageName = SupplierConfiguration.pageName;
     this.dataService = suppliersService;
     this.entityName = SupplierConfiguration.identifier;
-    this.sourceDataColumns = SupplierConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(SupplierConfiguration.dataColumns);
   }
 }

@@ -50,9 +50,10 @@ export class BaseDataViewComponent extends BaseDataComponent {
     this.currentMinutes = this.appendLeadingZero(new Date().getMinutes());
   }
   hasData(): boolean {
-    return this.dataSource && this.dataSource.data !== null;
+    return this.matTableDataSource && this.matTableDataSource.data !== null;
   }
   initFormGroupAndFields(useColumns: DataColumn[] = null) {
+    this.setDataSourceColumns();
     this.setFormInputDataColumns(useColumns);
     this.frmGroupFields = new FormGroup({});
     this.formInputDataColumns.forEach((column) => {
@@ -128,7 +129,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
   }
   onApplyFilter(filterValue) {
     if (this.hasData()) {
-      this.dataSource.filter = this.toLocaleLowerCaseTrim(filterValue);
+      this.matTableDataSource.filter = this.toLocaleLowerCaseTrim(filterValue);
     }
   }
   onClickCreate(): void {

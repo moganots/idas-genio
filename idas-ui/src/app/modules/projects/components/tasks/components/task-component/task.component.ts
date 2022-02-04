@@ -63,7 +63,7 @@ export class TaskComponent extends PageComponent implements OnInit {
       referenceValueService
     );
     this.entityName = TaskConfiguration.identifier;
-    this.sourceDataColumns = TaskConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(TaskConfiguration.dataColumns);
     // tslint:disable-next-line:only-arrow-functions
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;

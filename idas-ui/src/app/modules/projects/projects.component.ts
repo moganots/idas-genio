@@ -56,7 +56,7 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     this.pageName = ProjectConfiguration.pageName;
     this.dataService = projectService;
     this.entityName = ProjectConfiguration.identifier;
-    this.sourceDataColumns = ProjectConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(ProjectConfiguration.dataColumns);
   }
   onClickProjectAssignments(element: any, index?: number) {
     super.openDialog(

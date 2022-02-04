@@ -74,7 +74,7 @@ export class DialogCreateEditCalendarEventComponent
       .split(`-`)
       .map((en) => this.capitalizeFirstLetter(en))
       .join(` `)}`;
-    this.sourceDataColumns = CalendarEventConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(CalendarEventConfiguration.dataColumns);
     this.calendarEventScheduleTimes =
       AppModulesSharedModuleConfiguration.scheduleTimes.map((time, index) => ({
         id: index,
@@ -83,7 +83,7 @@ export class DialogCreateEditCalendarEventComponent
       }));
       this.selectedElement.StartDateTime = this.getTimeValue(`StartDateTime`);
       this.selectedElement.EndDateTime = this.getTimeValue(`EndDateTime`);
-      this.setDataSourceColumns();
+      // this.setDataSourceColumns();
   }
   ngOnInit() {
     this.initFormGroupAndFields();

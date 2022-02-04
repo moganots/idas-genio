@@ -57,7 +57,7 @@
             <br />
           </span>
           <div
-            *ngFor="let fidc of getCanShowFormInputDataColumns(); let i = index"
+            *ngFor="let fidc of canShowFormInputDataColumns; let i = index"
           >
             <span [ngSwitch]="fidc.controlType">
               <span *ngSwitchCase="'textbox'">

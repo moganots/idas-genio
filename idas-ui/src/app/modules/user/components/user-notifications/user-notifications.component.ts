@@ -58,6 +58,6 @@ export class UserNotificationsComponent
     this.pageName = UserNotificationsConfiguration.pageName;
     this.dataService = notificationsService;
     this.entityName = UserNotificationsConfiguration.identifier;
-    this.sourceDataColumns = UserNotificationsConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(UserNotificationsConfiguration.dataColumns);
   }
 }

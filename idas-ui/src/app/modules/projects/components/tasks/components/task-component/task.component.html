@@ -21,10 +21,10 @@
           [dataService]="taskService"
           [entityName]="entityName"
           [pageIcon]="task?.TaskType?.Icon"
-          [sourceDataColumns]="this.sourceDataColumns"
+          [dataSourceColumns]="dataSourceColumns"
           [entityId]="task?._id"
           [selectedElement]="task"
-          [selectedElementIndex]="this.selectedElementIndex"
+          [selectedElementIndex]="selectedElementIndex"
         ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">
@@ -42,7 +42,7 @@
                   <app-manage-project-task-details
                     [entityName]="entityName"
                     [dataService]="taskService"
-                    [sourceDataColumns]="sourceDataColumns"
+                    [dataSourceColumns]="dataSourceColumns"
                     [selectedElement]="task"
                   ></app-manage-project-task-details>
                 </mat-expansion-panel>
@@ -247,7 +247,7 @@
                   <app-manage-project-task-activity
                   [entityName]="entityName"
                   [dataService]="taskService"
-                  [sourceDataColumns]="sourceDataColumns"
+                  [dataSourceColumns]="dataSourceColumns"
                   [selectedElement]="task"
                   ></app-manage-project-task-activity>
                 </mat-expansion-panel>

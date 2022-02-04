@@ -25,7 +25,7 @@
     </div>
     <form [formGroup]="frmGroup">
       <div class="content" formGroupName="frmFields">
-        <div *ngFor="let fidc of getCanShowFormInputDataColumns(); let i = index">
+        <div *ngFor="let fidc of canShowFormInputDataColumns; let i = index">
           <span [ngSwitch]="fidc.controlType">
             <span *ngSwitchCase="'textbox'">
               <mat-form-field>

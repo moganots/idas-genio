@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {
   MatDialog,
@@ -29,7 +29,9 @@ import { BaseDataViewComponent } from '../../data-view/base-data-view/base-data-
 })
 export class BaseDialogComponent
   extends BaseDataViewComponent
+  implements OnInit
 {
+  useColumns: any[];
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -47,6 +49,7 @@ export class BaseDialogComponent
       pageIcon: 'report_problem',
       pageName: 'no page name',
       pageTitle: 'no page title',
+      pageSubTitle: 'no page title',
       dataColumns: [],
       selectedElement: {},
       selectedElementIndex: -1,
@@ -67,9 +70,13 @@ export class BaseDialogComponent
     this.pageIcon = data?.pageIcon;
     this.pageName = data?.pageName;
     this.pageTitle = data?.pageTitle;
+    this.pageSubTitle = data?.pageSubTitle;
     this.dataSourceColumns = data?.dataColumns;
     this.selectedElement = data?.selectedElement || {};
     this.selectedElementIndex = data?.selectedElementIndex;
+  }
+  ngOnInit(): void {
+    // this.setDataSourceColumns();
   }
   onClickDialogClose() {
     this.dialogRef.close();

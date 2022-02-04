@@ -115,7 +115,7 @@ export class ManageProjectTaskToolbarComponent
         pageName: `${this.capitalizeFirstLetter(action)} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageTitle: `${this.capitalizeFirstLetter(action)} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: `${this.selectedElement?.Name}`,
-        dataColumns: this.sourceDataColumns,
+        dataColumns: this.dataSourceColumns,
         selectedElement: this.selectedElement || {},
         // selectedElementIndex: index || this.selectedElementIndex,
       },

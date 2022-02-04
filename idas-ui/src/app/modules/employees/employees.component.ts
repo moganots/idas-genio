@@ -55,6 +55,6 @@ export class EmployeesComponent extends PageComponent implements OnInit {
     this.pageName = EmployeeConfiguration.pageName;
     this.dataService = employeesService;
     this.entityName = EmployeeConfiguration.identifier;
-    this.sourceDataColumns = EmployeeConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(EmployeeConfiguration.dataColumns);
   }
 }

@@ -69,11 +69,11 @@ export class DialogCreateNewTaskComponent
     )} New Project Task`;
     this.projectName = this.selectedElement?.Name;
     this.selectedElement = { ProjectId: this.selectedElement?._id };
-    this.sourceDataColumns = data.dataColumns;
-    this.setDataSourceColumns();
+    this.dataSourceColumns = this.mapDataSourceColumns(data.dataColumns);
+    // this.setDataSourceColumns();
   }
   ngOnInit() {
-    this.initFormGroupAndFields(this.dataSourceColumns.filter((dsc) => this.useColumns.includes(dsc.name)));
+    this.initFormGroupAndFields(this.dataSourceColumns?.filter((dsc) => this.useColumns.includes(dsc.name)));
   }
   onClickAssignToMe() {
     this.frmGroupFields.controls.AssigneeId.setValue(this.currentUser.DisplayName);

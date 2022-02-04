@@ -30,11 +30,11 @@ import { BaseComponent } from '../base-component/base.component';
   ],
 })
 export class BaseDataComponent extends BaseComponent {
-  @Input() public dataSourceColumns: DataColumn[];
   public dataSourceColumnNames: string[];
   public dataSourceDisplayColumns: DataColumn[];
   public groupByColumnNames: string[];
   public formInputDataColumns: DataColumn[];
+  public canShowFormInputDataColumns: DataColumn[];
 
   constructor(
     public router: Router,
@@ -53,36 +53,44 @@ export class BaseDataComponent extends BaseComponent {
       referenceValueService
     );
   }
+  mapDataSourceColumns(columns: any[]) {
+    return columns?.map((sdc) => {
+      return new DataColumn(sdc);
+    });
+  }
   setDataSourceColumns(): void {
-    this.getDataSourceColumns();
+    // this.getDataSourceColumns();
+    this.setDataSourceColumnNames();
     this.setDataSourceColumnCanEditOrIsRequiredFlags();
     this.setDataSourceColumnControlTypes();
     this.setDataSourceColumnLookupOrReferenceValues();
-    this.setDataSourceColumnNames();
     this.setGridViewDataSourceColumns();
     this.setGridViewGroupByDataSourceColumnNames();
     this.addGridViewActionButtonsColumn();
   }
-  getDataSourceColumns() {
-    this.dataSourceColumns = this.sourceDataColumns.map((sdc) => {
+  /*   getDataSourceColumns() {
+    this.dataSourceColumns = (this.sourceDataColumns || [])??.map((sdc) => {
       return new DataColumn(sdc);
     });
-  }
+  } */
   setDataSourceColumnCanEditOrIsRequiredFlags() {
-    this.dataSourceColumns.forEach((cn) => {
+    this.dataSourceColumns?.forEach((cn) => {
       cn.isRequired = !(
-        AppModulesSharedModuleConfiguration.cannotEditColumns.includes(cn.name) ||
+        AppModulesSharedModuleConfiguration.cannotEditColumns.includes(
+          cn.name
+        ) ||
         AppModulesSharedModuleConfiguration.optionalColumns.includes(cn.name)
       );
       // Set canEdit flag
       // ToDo: Check current user's access permissions
-      cn.canEdit = !AppModulesSharedModuleConfiguration.cannotEditColumns.includes(
-        cn.name
-      );
+      cn.canEdit =
+        !AppModulesSharedModuleConfiguration.cannotEditColumns.includes(
+          cn.name
+        );
     });
   }
   setDataSourceColumnControlTypes() {
-    this.dataSourceColumns.forEach((cn) => {
+    this.dataSourceColumns?.forEach((cn) => {
       if (this.isUseCheckbox(cn)) {
         cn.controlType = 'checkbox';
       } else if (this.isDateField(cn)) {
@@ -110,12 +118,17 @@ export class BaseDataComponent extends BaseComponent {
   }
   setTimePickerLookupValues(cn: DataColumn) {
     AppModulesSharedModuleConfiguration.scheduleTimes
-      .map((time, index) => ({ id: index, title: time, value: time, displayValue: time }))
+      ?.map((time, index) => ({
+        id: index,
+        title: time,
+        value: time,
+        displayValue: time,
+      }))
       .forEach((value) => cn.lookupValues.push(value));
   }
   setDataSourceColumnLookupOrReferenceValues() {
     this.dataSourceColumns
-      .filter((cn) => cn.controlType === `select`)
+      ?.filter((cn) => cn.controlType === `select`)
       .forEach((cn) => {
         switch (cn.selectOptionControlType) {
           case 'lookupIcon':
@@ -127,7 +140,7 @@ export class BaseDataComponent extends BaseComponent {
               })
               .subscribe((values) => {
                 values
-                  .map((value) => this.mapLookupValue(value))
+                  ?.map((value) => this?.mapLookupValue(value))
                   .forEach((value) => {
                     cn.lookupValues.push(value);
                   });
@@ -156,22 +169,22 @@ export class BaseDataComponent extends BaseComponent {
   }
   setDataSourceColumnNames() {
     this.dataSourceColumnNames = this.dataSourceColumns
-      .filter((column) => column.canShow)
-      .map((column) => column.name);
+      ?.filter((column) => column.canShow)
+      ?.map((column) => column.name);
   }
   setGridViewDataSourceColumns() {
-    this.dataSourceDisplayColumns = this.dataSourceColumns.filter(
+    this.dataSourceDisplayColumns = this.dataSourceColumns?.filter(
       (column) => column.canShow
     );
   }
   setGridViewGroupByDataSourceColumnNames() {
     this.groupByColumnNames = this.dataSourceColumns
-      .filter((column) => column.canShow && column.canGroup)
-      .map((column) => column.name);
+      ?.filter((column) => column.canShow && column.canGroup)
+      ?.map((column) => column.name);
   }
   addGridViewActionButtonsColumn() {
-    if (!this.dataSourceColumnNames.find((cn) => cn === 'buttons')) {
-      this.dataSourceColumnNames.push('buttons');
+    if (!this.dataSourceColumnNames?.find((cn) => cn === 'buttons')) {
+      this.dataSourceColumnNames?.push('buttons');
     }
   }
   setControlFilterValues(column: DataColumn, control: FormControl) {
@@ -182,8 +195,9 @@ export class BaseDataComponent extends BaseComponent {
       );
     }
   }
-  setFormInputDataColumns(useColumns: DataColumn[]) {
+  setFormInputDataColumns(useColumns: DataColumn[] = null) {
     this.formInputDataColumns = useColumns || this.dataSourceColumns || [];
+    this.canShowFormInputDataColumns = this.getCanShowFormInputDataColumns();
   }
   getCanShowFormInputDataColumns() {
     return (this.formInputDataColumns || []).filter((column) => column.canShow);
@@ -251,14 +265,18 @@ export class BaseDataComponent extends BaseComponent {
   }
   getFieldValue(column: DataColumn, dataObject: any) {
     const columnValue = (dataObject || {})[column.name];
-    const lookupValue = column?.lookupValues?.find(lv => parseFloat(lv.id) === parseFloat(columnValue));
+    const lookupValue = column?.lookupValues?.find(
+      (lv) => parseFloat(lv.id) === parseFloat(columnValue)
+    );
     return lookupValue?.displayValue || columnValue;
   }
   findById(value: any, findValue: any) {
     return parseFloat(value.id || value._id) === parseFloat(findValue);
   }
   findByDisplayValue(value: any, findValue: any) {
-    return String(value?.displayValue || value?.title).includes(this.toLocaleLowerCaseTrim(findValue));
+    return String(value?.displayValue || value?.title).includes(
+      this.toLocaleLowerCaseTrim(findValue)
+    );
   }
   getTimeValue(name: string) {
     if (!AppModulesSharedModuleConfiguration.timeColumns.includes(name))
@@ -270,7 +288,9 @@ export class BaseDataComponent extends BaseComponent {
         return this.isCreate()
           ? `${hours}:00`
           : this.selectedElement?.StartDate
-          ? this.getHourMinuteFromDate(new Date(this.selectedElement?.StartDate))
+          ? this.getHourMinuteFromDate(
+              new Date(this.selectedElement?.StartDate)
+            )
           : `${hours}:00`;
       case `EndDateTime`:
         return this.isCreate()
@@ -295,7 +315,7 @@ export class BaseDataComponent extends BaseComponent {
     );
     const hasValues = !filteredValues.every((value) => value === undefined);
     return hasValues
-      ? Array.from(new Set(filteredValues.map((value) => value))).sort(
+      ? Array.from(new Set(filteredValues?.map((value) => value))).sort(
           (value) => value.displayValue
         )
       : [];

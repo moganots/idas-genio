@@ -57,5 +57,6 @@ export class DialogManageProjectTaskToolbarEditComponent
 
   ngOnInit(): void {
     this.initFormGroupAndFields();
+    console.log(this.canShowFormInputDataColumns);
   }
 }

@@ -62,20 +62,20 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     this.pageName = UserProfileConfiguration.pageName;
     this.dataService = userService;
     this.entityName = UserProfileConfiguration.identifier;
-    this.sourceDataColumns = UserProfileConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(UserProfileConfiguration.dataColumns);
     this.selectedElement = this.currentUser;
-    this.setDataSourceColumns();
+    // this.setDataSourceColumns();
   }
   ngOnInit() {
     this.action = `Edit`;
     this.initFormGroupAndFields();
-    this.fieldsPersonalDetails = this.dataSourceColumns.filter(
+    this.fieldsPersonalDetails = this.dataSourceColumns?.filter(
       (column) => column.id >= 1 && column.id <= 21
     );
-    this.fieldsContactDetails = this.dataSourceColumns.filter(
+    this.fieldsContactDetails = this.dataSourceColumns?.filter(
       (column) => column.id >= 22 && column.id <= 40
     );
-    this.fieldsUserAccountDetails = this.dataSourceColumns.filter(
+    this.fieldsUserAccountDetails = this.dataSourceColumns?.filter(
       (column) => column.id >= 41
     );
   }

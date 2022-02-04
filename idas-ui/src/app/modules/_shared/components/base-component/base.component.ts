@@ -13,6 +13,7 @@ import { first } from 'rxjs/operators';
 import {
   AlertifyService,
   AuthenticationService,
+  DataColumn,
   DataService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
@@ -41,12 +42,12 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   @Input() public entityName: string;
   @Input() public entityId: any;
   @Input() public dataService: DataService;
-  @Input() public sourceData: any[] = [];
-  @Input() public sourceDataColumns: any[];
+  @Input() public dataSource: any[] = [];
+  @Input() public dataSourceColumns: DataColumn[];
   @Input() public action: string;
   @Input() public selectedElement: any = {};
   @Input() public selectedElementIndex: number;
-  public dataSource: MatTableDataSource<any[]>;
+  public matTableDataSource: MatTableDataSource<any[]>;
   public updates: { [key: string]: any } = {};
   public form = new FormControl();
   public frmGroup: FormGroup;
@@ -70,9 +71,9 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     super(router, alertifyService, authenticationService, lookupValueService);
   }
   ngAfterViewInit() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    if (this.matTableDataSource) {
+      this.matTableDataSource.paginator = this.paginator;
+      this.matTableDataSource.sort = this.sort;
     }
   }
   isUseCheckbox(field: any) {
@@ -163,7 +164,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
       : columnName;
   }
   getElementIndex(element: any): number {
-    return ((this.dataSource || { data: this.sourceData }).data || []).indexOf(
+    return ((this.matTableDataSource || { data: this.dataSource }).data || []).indexOf(
       element
     );
   }
@@ -248,15 +249,15 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   }
   onDataRefresh(): void {
     this.isLoading = true;
-    this.sourceData = [];
+    this.dataSource = [];
     this.dataService
       .getAll()
       .toPromise()
       .then((data) => {
-        this.dataSource = new MatTableDataSource<any[]>();
-        this.dataSource.data = data || this.sourceData;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.matTableDataSource = new MatTableDataSource<any[]>();
+        this.matTableDataSource.data = data || this.dataSource;
+        this.matTableDataSource.paginator = this.paginator;
+        this.matTableDataSource.sort = this.sort;
       });
     this.isLoading = false;
   }

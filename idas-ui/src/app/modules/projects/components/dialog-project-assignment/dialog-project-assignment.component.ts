@@ -68,11 +68,11 @@ export class DialogProjectAssignmentComponent
     this.pageIcon = ProjectAssignmentConfiguration.pageIcon;
     this.pageName = `${ProjectAssignmentConfiguration.pageName}`;
     this.pageTitle = `${ProjectAssignmentConfiguration.pageTitle}`;
-    this.sourceDataColumns = ProjectAssignmentConfiguration.dataColumns;
-    this.setDataSourceColumns();
+    this.dataSourceColumns = this.mapDataSourceColumns(ProjectAssignmentConfiguration.dataColumns);
+    // this.setDataSourceColumns();
   }
   ngOnInit() {
-    this.formInputDataColumns = this.dataSourceColumns.filter((column) => this.useInputColumnNames.includes(column.name));
+    this.formInputDataColumns = this.dataSourceColumns?.filter((column) => this.useInputColumnNames.includes(column.name));
     this.initFormGroupAndFields(this.formInputDataColumns);
     this.onDataRefresh();
     this.onApplyFilter(this.projectId);

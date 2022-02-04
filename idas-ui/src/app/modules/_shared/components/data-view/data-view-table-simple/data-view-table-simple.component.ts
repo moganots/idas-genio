@@ -63,13 +63,14 @@ export class DataViewTableSimpleComponent
     );
   }
   ngOnInit() {
-    this.setDataSourceColumns();
+    // this.setDataSourceColumns();
+    this.initFormGroupAndFields();
     this.onDataRefresh();
   }
   ngAfterViewInit() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    if (this.matTableDataSource) {
+      this.matTableDataSource.paginator = this.paginator;
+      this.matTableDataSource.sort = this.sort;
     }
   }
   onClickCreate(): void {

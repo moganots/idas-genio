@@ -63,7 +63,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
       referenceValueService
     );
     this.entityName = ProjectConfiguration.identifier;
-    this.sourceDataColumns = ProjectConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(ProjectConfiguration.dataColumns);
     // tslint:disable-next-line:only-arrow-functions
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;

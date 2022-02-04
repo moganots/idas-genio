@@ -71,7 +71,7 @@ export class UserMeetingCalendarComponent
     this.pageName = CalendarEventConfiguration.pageName;
     this.dataService = meetingCalendarService;
     this.entityName = CalendarEventConfiguration.identifier;
-    this.sourceDataColumns = CalendarEventConfiguration.dataColumns;
+    this.dataSourceColumns = this.mapDataSourceColumns(CalendarEventConfiguration.dataColumns);
   }
   ngOnInit() {
     this.calendarEvents = [];
@@ -128,7 +128,7 @@ export class UserMeetingCalendarComponent
         pageIcon: this.pageIcon,
         pageName: this.pageName,
         pageTitle: this.pageTitle,
-        dataColumns: this.sourceDataColumns,
+        dataColumns: this.dataSourceColumns,
         selectedElement: event,
         selectedElementIndex: -1,
       },
