@@ -128,6 +128,7 @@ export class UserMeetingCalendarComponent
         pageIcon: this.pageIcon,
         pageName: this.pageName,
         pageTitle: this.pageTitle,
+        pageSubTitle: event.Title,
         dataColumns: this.dataSourceColumns,
         selectedElement: event,
         selectedElementIndex: -1,

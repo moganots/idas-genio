@@ -19,6 +19,7 @@ import {
   User,
 } from 'app/shared/app-shared.module';
 import { ProjectConfiguration } from '../../project-configuration';
+import { ProjectService } from '../../services/project-service/project.service';
 import { ProjectAssignmentsService } from '../dialog-project-assignment/services/project-assignments.service';
 
 @Component({
@@ -30,6 +31,7 @@ import { ProjectAssignmentsService } from '../dialog-project-assignment/services
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
+    ProjectService,
     ProjectAssignmentsService,
     FileAttachmentService,
   ],
@@ -49,6 +51,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
+    public projectService: ProjectService,
     public projectAssignmentsService: ProjectAssignmentsService,
     public fileAttachmentService: FileAttachmentService,
     private activatedRoute: ActivatedRoute

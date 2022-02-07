@@ -355,9 +355,15 @@ export class BaseDataComponent extends BaseComponent {
     );
   }
   onValueChanged(event: any) {
-    if (event && event.target) {
+    if (event && event?.target?.id) {
       this.updates[event.target.id] =
-        event.target.value.id || event.target.value._id || event.target.value;
+        event?.target?.value?.id || event?.target?.value?._id || event?.target?.value;
+    }
+    return;
+  }
+  onDivValueChanged(event: any){
+    if (event && event?.target?.id) {
+      this.updates[event.target.id] = event?.srcElement?.innerText;
     }
     return;
   }

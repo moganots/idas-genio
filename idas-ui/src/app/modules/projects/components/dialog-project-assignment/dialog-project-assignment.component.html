@@ -174,7 +174,27 @@
                 />
               </span>
               <span *ngSwitchCase="'textarea'">
-                {{ element[column.name] }}
+                <span>{{ fidc.displayName }}</span>
+                <div
+                  id="{{ fidc.name }}"
+                  contenteditable="true"
+                  class="textarea-editor"
+                  (keyup)="onDivValueChanged($event)"
+                >
+                  {{ frmGroupFields.controls[fidc.name].value }}
+                </div>
+                <!-- <mat-form-field>
+                    <textarea
+                      matInput
+                      type="textarea"
+                      id="{{ fidc.name }}"
+                      name="{{ fidc.name }}"
+                      [formControl]="frmGroupFields.controls[fidc.name]"
+                      class=""
+                      placeholder="{{ fidc.displayName }}"
+                      (keyup)="onValueChanged($event)"
+                    ></textarea>
+                  </mat-form-field> -->
               </span>
               <span *ngSwitchCase="'textbox'">
                 {{ element[column.name] }}

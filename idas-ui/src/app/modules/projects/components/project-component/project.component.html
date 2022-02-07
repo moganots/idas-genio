@@ -19,16 +19,13 @@
           </div>
         </div>
         <app-manage-project-task-toolbar
-          [dataService]="dataService"
+          [dataService]="projectService"
           [entityName]="entityName"
-          (edit)="onButtonClicked('Edit', project)"
-          (comment)="onButtonClicked('Comment', project)"
-          (logWork)="onButtonClicked('LogWork', project)"
-          (assign)="onButtonClicked('Assign', project)"
-          (attach)="onButtonClicked('Attach', project)"
-          (createSub)="onButtonClicked('CreateSub', project)"
-          (cloneCopy)="onButtonClicked('CloneCopy', project)"
-          (review)="onButtonClicked('Review', project)"
+          [pageIcon]="project?.ProjectType?.Icon"
+          [dataSourceColumns]="dataSourceColumns"
+          [entityId]="project?._id"
+          [selectedElement]="project"
+          [selectedElementIndex]="selectedElementIndex"
         ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">

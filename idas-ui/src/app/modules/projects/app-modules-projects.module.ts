@@ -52,6 +52,7 @@ import { DialogManageProjectTaskToolbarCommentComponent } from './components/sha
 import { DialogManageProjectTaskToolbarEditComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
 import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
+import { TextEditorComponent } from 'app/shared/components/text-editor/text-editor.component';
 
 export { ProjectConfiguration } from './project-configuration';
 export { TaskConfiguration } from './components/tasks/task-configuration';
@@ -110,7 +111,7 @@ export { TaskAssignmentsService } from './components/tasks/components/dialog-tas
     TextFieldModule,
     MatTabsModule,
     AppModulesSharedModule,
-    AppSharedModule,
+    AppSharedModule
   ],
   entryComponents: [
     DialogProjectAssignmentComponent,
