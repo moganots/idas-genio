@@ -9,7 +9,7 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { UserConfiguration } from './user-configuration';
+import { UserConfiguration } from './services/user-configuration';
 import { UserService } from './services/user.service';
 import {
   AlertifyService,

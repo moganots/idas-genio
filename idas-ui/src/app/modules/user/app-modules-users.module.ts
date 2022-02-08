@@ -43,7 +43,7 @@ export { UserInboxConfiguration } from './components/user-inbox/user-inbox-confi
 export { UserNotificationsConfiguration } from './components/user-notifications/user-notifications-configuration';
 export { UserProfileConfiguration } from './components/user-profile/user-profile-configuration';
 export { CalendarEventConfiguration } from './components/user-meeting-calendar/services/meeting-calendar-service/calendar-event-configuration';
-export { UserConfiguration } from './user-configuration';
+export { UserConfiguration } from './services/user-configuration';
 export { CalendarEventAttendeeConfiguration } from './components/user-meeting-calendar/services/meeting-calendar-attendee/calendar-event-attendee-configuration';
 
 export { InboxService } from './components/user-inbox/services/inbox.service';

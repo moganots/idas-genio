@@ -14,7 +14,7 @@ import {
   Supplier,
   User,
 } from 'app/shared/app-shared.module';
-import { UserConfiguration } from '../user-configuration';
+import { UserConfiguration } from './user-configuration';
 
 @Injectable({
   providedIn: 'root',
