@@ -35,6 +35,7 @@ export { Supplier } from './domain-models/supplier/supplier';
 export { Project } from './domain-models/project/project';
 export { ProjectAssignment } from './domain-models/project/project-assignment';
 export { ProjectComment } from './domain-models/project/project-comment';
+export { ProjectReview } from './domain-models/project/project-review';
 export { ProjectStatus } from './domain-models/project/project-status';
 export { ProjectWorkLog } from './domain-models/project/project-work-log';
 

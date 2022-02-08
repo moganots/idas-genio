@@ -7,6 +7,8 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TaskService } from 'app/modules/projects/components/tasks/services/task-service/task.service';
+import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
 import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
 import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base-dialog/base-dialog.component';
 import {
@@ -40,7 +42,9 @@ export class DialogManageProjectTaskToolbarEditComponent
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogManageProjectTaskToolbarEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data
+    @Inject(MAT_DIALOG_DATA) public data,
+    public projecstService: ProjectService,
+    public tasksService: TaskService
   ) {
     super(
       router,

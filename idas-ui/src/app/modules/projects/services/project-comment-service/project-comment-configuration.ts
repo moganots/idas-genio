@@ -1,6 +1,6 @@
 export class ProjectCommentConfiguration {
   public static identifier = 'project-comment';
-  public static pageIcon = 'tune';
+  public static pageIcon = 'comment';
   public static pageRoute = 'Projects';
   public static pageRouteTitle = 'My Project Comment(s)';
   public static pageRouteCssClass = ``;

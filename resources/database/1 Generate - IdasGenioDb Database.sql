@@ -321,6 +321,13 @@ BEGIN
 END
 GO
 
+IF (OBJECT_ID(N'[dbo].[ProjectReview]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[ProjectReview];
+	PRINT ('>> Completed > Drop > Table > [dbo].[ProjectReview]')
+END
+GO
+
 IF (OBJECT_ID(N'[dbo].[ProjectWorkLog]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[ProjectWorkLog];
@@ -885,6 +892,25 @@ CREATE TABLE [dbo].[ProjectComment](
 ) ON [PRIMARY]
 GO
 PRINT ('>> Completed > Create > Table > [dbo].[ProjectComment]')
+GO
+
+-- Create the [dbo].[ProjectReview] table
+CREATE TABLE [dbo].[ProjectReview](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [bigint] NOT NULL,
+	[Review] [nvarchar] (max) NOT NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [bigint] NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_ProjectReview] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create > Table > [dbo].[ProjectReview]')
 GO
 
 -- Create the [dbo].[ProjectWorkLog] table
@@ -4195,7 +4221,7 @@ PRINT ('>> Completed > INSERT >> Test Data > Project, Task > @TestAssignees')
 -- Setup >> Test >> Project Assignment(s)
 -- ==============================================================================================================================
 INSERT INTO [dbo].[ProjectAssignment] ([ProjectId],[ProjectAssignmentTypeId],[AssigneeId],[CreatedBy],[DateCreated])
-SELECT
+SELECT DISTINCT
 	[p].[_id] AS [ProjectId]
 	,[ProjectAssignmentTypeId]
 	,[pa].[UserId] AS [AssigneeId]

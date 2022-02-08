@@ -1,11 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { UserService } from "app/modules/user/app-modules-users.module";
-import { DataService, LookupValue, User, AuthenticationService, LookupValueService, TaskWorkLog } from "app/shared/app-shared.module";
-import { TaskWorkLogConfiguration } from "../task-work-log-service/task-work-log-configuration";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserService } from 'app/modules/user/app-modules-users.module';
+import { DataService, LookupValue, User, AuthenticationService, LookupValueService, TaskWorkLog } from 'app/shared/app-shared.module';
+import { TaskWorkLogConfiguration } from './task-work-log-configuration';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class TaskWorkLogService extends DataService {
   lookupValues: LookupValue[];

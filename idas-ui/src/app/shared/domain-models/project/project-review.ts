@@ -1,17 +1,18 @@
 import { Project } from 'app/shared/app-shared.module';
-import { BaseComment } from '../base/base-comment';
-export class ProjectComment extends BaseComment {
+import { BaseModel } from '../base/base-model';
+export class ProjectReview extends BaseModel {
   ProjectId: number;
+  Review: string;
   Project: Project;
   constructor(
     id?: number,
     ProjectId?: number,
-    Comment?: string,
+    Review?: string,
     IsActive?: boolean,
     CreatedBy?: number,
     DateCreated?: Date,
     ModifiedBy?: number,
-    DateModified?: Date
+    DateModified?: Date,
   ) {
     super(
       id,
@@ -25,6 +26,6 @@ export class ProjectComment extends BaseComment {
       DateModified
     );
     this.ProjectId = ProjectId;
-    this.Comment = Comment;
+    this.Review = Review;
   }
 }

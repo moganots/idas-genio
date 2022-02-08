@@ -1,47 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from 'app/modules/user/app-modules-users.module';
+import { UserService } from 'app/modules/user/services/user.service';
 import {
-  DataService,
-  LookupValue,
-  User,
   AuthenticationService,
-  LookupValueService,
+  DataService,
+  Project,
   ProjectComment,
+  User,
 } from 'app/shared/app-shared.module';
-import { ProjectCommentConfiguration } from '../project-comment-service/project-comment-configuration';
+import { ProjectService } from '../project-service/project.service';
+import { ProjectCommentConfiguration } from './project-comment-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectCommentService extends DataService {
-  lookupValues: LookupValue[];
-  users: User[];
+  projects: Project[] = [];
+  users: User[] = [];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
-    public lookupValueService: LookupValueService,
+    public projectService: ProjectService,
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectCommentConfiguration.identifier;
-    this.lookupValueService
-      .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
-        this.lookupValues = lookupValues;
-      });
-    this.userService.getAll<User>().subscribe((users) => {
-      this.users = users;
-    });
+    this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
+    this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectComment: ProjectComment) {
-    projectComment.createdBy = this.users.find(
-      (user) => user._id === projectComment.CreatedBy
-    );
-    projectComment.modifiedBy = this.users.find(
-      (user) => user._id === projectComment.ModifiedBy
-    );
+    projectComment.Project = this.projects.find(value => value._id === projectComment.ProjectId);
+    projectComment.createdBy = this.users.find(user => user._id === projectComment.CreatedBy);
+    projectComment.modifiedBy = this.users.find(user => user._id === projectComment.ModifiedBy);
     return projectComment;
   }
 }

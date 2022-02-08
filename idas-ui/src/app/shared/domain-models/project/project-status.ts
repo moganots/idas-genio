@@ -6,4 +6,28 @@ export class ProjectStatus extends BaseModel {
   StatusId: number;
   Project: Project;
   Status: LookupValue;
+  constructor(
+    id?: number,
+    ProjectId?: number,
+    StatusId?: number,
+    IsActive?: boolean,
+    CreatedBy?: number,
+    DateCreated?: Date,
+    ModifiedBy?: number,
+    DateModified?: Date,
+  ) {
+    super(
+      id,
+      IsActive,
+      null,
+      null,
+      null,
+      CreatedBy,
+      DateCreated,
+      ModifiedBy,
+      DateModified
+    );
+    this.ProjectId = ProjectId;
+    this.StatusId = StatusId;
+  }
 }

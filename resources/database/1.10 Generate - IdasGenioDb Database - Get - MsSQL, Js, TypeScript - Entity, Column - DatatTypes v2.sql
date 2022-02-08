@@ -45,6 +45,11 @@ SELECT
 	,[ColumnName] + ': ['''', ' + CASE WHEN [IsRequired] = 1 THEN 'Validators.required' ELSE 'null' END + '],' AS [FormField]
 	,[ColumnName] + ': ' + [ColumnJsDataType] + ';' AS [JsClassField]
 	,[ColumnName] + '?: ' + [ColumnJsDataType] + ',' AS [JsClassConstructorField]
+	,CASE
+		WHEN [ColumnName] NOT IN ('_id', 'IsActive', 'Code', 'Name', 'Description', 'CreatedBy', 'DateCreated', 'ModifiedBy', 'DateModified')
+			THEN 'this.' + [ColumnName] + ' = ' + [ColumnName] + ';'
+			ELSE NULL
+		END AS [JsClassConstructorInitialisation]
 	,LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + 
 		CASE
 			WHEN [ColumnName] LIKE '%Id'
@@ -58,9 +63,13 @@ SELECT
 				THEN 'this.users.find((user) => user._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
 			WHEN LEFT([ColumnName], LEN([ColumnName]) - 2) IN (SELECT [name] FROM [dbo].[LookupCategory])
 				THEN 'this.lookupValues.find((lookupValue) => lookupValue._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
-		END
+			WHEN [ColumnName] IN ('ProjectId')
+				THEN 'this.projects.find((value) => value._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+			WHEN [ColumnName] IN ('TaskId')
+				THEN 'this.tasks.find((value) => value._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+		END AS [ReferenceValueInitialiser]
 FROM [cte]
 WHERE
-	([EntityName] = 'projectcomment')
+	([EntityName] = 'projectassignment')
 ORDER BY
 	[ColumnId]

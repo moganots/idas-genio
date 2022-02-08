@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import 'jasmine';
-import { TaskWorkLogService } from './task-work-log.service';
+import { TaskWorkLogService } from './task-work-log-service';
 
 describe('TaskWorkLogService', () => {
   let service: TaskWorkLogService;

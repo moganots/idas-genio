@@ -38,7 +38,7 @@ import { TaskAssignmentService } from './components/tasks/services/task-assignme
 import { TaskCommentService } from './components/tasks/services/task-comment-service/task-comment.service';
 import { TaskService } from './components/tasks/services/task-service/task.service';
 import { TaskStatusService } from './components/tasks/services/task-status-service/task-status.service';
-import { TaskWorkLogService } from './components/tasks/services/task-work-log-service/task-work-log.service';
+import { TaskWorkLogService } from './components/tasks/services/task-work-log-service/task-work-log-service';
 import { ProjectAssignmentService } from './services/project-assignment-service/project-assignment.service';
 import { ProjectCommentService } from './services/project-comment-service/project-comment.service';
 import { ProjectService } from './services/project-service/project.service';
@@ -53,6 +53,7 @@ import { DialogManageProjectTaskToolbarEditComponent } from './components/shared
 import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 import { TextEditorComponent } from 'app/shared/components/text-editor/text-editor.component';
+import { DialogManageProjectTaskToolbarComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar/dialog-manage-project-task-toolbar.component';
 
 export { ProjectConfiguration } from './project-configuration';
 export { TaskConfiguration } from './components/tasks/task-configuration';
@@ -88,6 +89,7 @@ export { TaskAssignmentsService } from './components/tasks/components/dialog-tas
     DialogManageProjectTaskToolbarEditComponent,
     DialogManageProjectTaskToolbarAttachFilesComponent,
     DialogManageProjectTaskToolbarAssignComponent,
+    DialogManageProjectTaskToolbarComponent,
   ],
   imports: [
     CommonModule,

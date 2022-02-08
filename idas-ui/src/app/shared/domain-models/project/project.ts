@@ -20,7 +20,28 @@ export class Project extends BaseModel {
   LinkedProjects: Project[] = [];
   Files: FileAttachment[] = [];
 
-  constructor(id, IsActive, Name, Description, CreatedBy, DateCreated, ModifiedBy, DateModified) {
-    super(id, IsActive, null, Name, Description, CreatedBy, DateCreated, ModifiedBy, DateModified);
+  constructor(
+    id?: number,
+    Name?: string,
+    Code?: string,
+    Description?: string,
+    ProjectTypeId?: number,
+    PriorityId?: number,
+    StartDate?: Date,
+    EndDate?: Date,
+    MaximumHoursAllocated?: number,
+    ParentProjectId?: number,
+    IsActive?: boolean,
+    CreatedBy?: number,
+    DateCreated?: Date,
+    ModifiedBy?: number,
+    DateModified?: Date,) {
+    super(id, IsActive, Code, Name, Description, CreatedBy, DateCreated, ModifiedBy, DateModified);
+    this.ProjectTypeId = ProjectTypeId;
+    this.PriorityId = PriorityId;
+    this.StartDate = StartDate;
+    this.EndDate = EndDate;
+    this.MaximumHoursAllocated = MaximumHoursAllocated;
+    this.ParentProjectId = ParentProjectId;
   }
 }

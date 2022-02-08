@@ -17,7 +17,10 @@ import {
   Project,
   FileAttachment,
 } from 'app/shared/app-shared.module';
+import { TaskAssignmentService } from '../../services/task-assignment-service/task-assignment.service';
+import { TaskCommentService } from '../../services/task-comment-service/task-comment.service';
 import { TaskService } from '../../services/task-service/task.service';
+import { TaskWorkLogService } from '../../services/task-work-log-service/task-work-log-service';
 import { TaskConfiguration } from '../../task-configuration';
 
 @Component({
@@ -29,8 +32,11 @@ import { TaskConfiguration } from '../../task-configuration';
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
+    TaskService,
+    TaskCommentService,
+    TaskWorkLogService,
+    TaskAssignmentService,
     FileAttachmentService,
-    TaskService
   ],
 })
 export class TaskComponent extends PageComponent implements OnInit {
@@ -49,8 +55,11 @@ export class TaskComponent extends PageComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public fileAttachmentService: FileAttachmentService,
     public taskService: TaskService,
+    public taskCommentService: TaskCommentService,
+    public taskWorkLogService: TaskWorkLogService,
+    public taskAssignmentService: TaskAssignmentService,
+    public fileAttachmentService: FileAttachmentService,
     private activatedRoute: ActivatedRoute
   ) {
     super(

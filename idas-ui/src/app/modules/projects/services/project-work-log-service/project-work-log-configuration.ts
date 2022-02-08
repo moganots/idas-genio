@@ -1,6 +1,6 @@
 export class ProjectWorkLogConfiguration {
   public static identifier = 'project-work-log';
-  public static pageIcon = 'tune';
+  public static pageIcon = 'pending_actions';
   public static pageRoute = 'Projects';
   public static pageRouteTitle = 'My Project Work Log(s)';
   public static pageRouteCssClass = ``;

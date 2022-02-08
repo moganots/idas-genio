@@ -4,34 +4,39 @@ import { UserService } from 'app/modules/user/services/user.service';
 import {
   AuthenticationService,
   DataService,
+  LookupValue,
+  LookupValueService,
   Project,
-  ProjectWorkLog,
+  ProjectReview,
   User,
 } from 'app/shared/app-shared.module';
 import { ProjectService } from '../project-service/project.service';
-import { ProjectWorkLogConfiguration } from './project-work-log-configuration';
+import { ProjectReviewConfiguration } from './project-review-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectWorkLogService extends DataService {
+export class ProjectReviewService extends DataService {
   projects: Project[] = [];
+  lookupValues: LookupValue[] = [];
   users: User[] = [];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
     public projectService: ProjectService,
+    public lookupValueService: LookupValueService,
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = ProjectWorkLogConfiguration.identifier;
+    this.entityName = ProjectReviewConfiguration.identifier;
     this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
+    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
-  mapValues(projectWorkLog: ProjectWorkLog) {
-    projectWorkLog.Project = this.projects.find(value => value._id === projectWorkLog.ProjectId);
-    projectWorkLog.createdBy = this.users.find(user => user._id === projectWorkLog.CreatedBy);
-    projectWorkLog.modifiedBy = this.users.find(user => user._id === projectWorkLog.ModifiedBy);
-    return projectWorkLog;
+  mapValues(projectReview: ProjectReview) {
+    projectReview.Project = this.projects.find((value) => value._id === projectReview.ProjectId);
+    projectReview.createdBy = this.users.find((user) => user._id === projectReview.CreatedBy);
+    projectReview.modifiedBy = this.users.find((user) => user._id === projectReview.ModifiedBy);
+    return projectReview;
   }
 }
