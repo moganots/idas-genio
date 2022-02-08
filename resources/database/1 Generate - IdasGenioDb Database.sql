@@ -321,17 +321,17 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[ProjectReview]', 'U') IS NOT NULL)
-BEGIN
-    DROP TABLE [dbo].[ProjectReview];
-	PRINT ('>> Completed > Drop > Table > [dbo].[ProjectReview]')
-END
-GO
-
 IF (OBJECT_ID(N'[dbo].[ProjectWorkLog]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[ProjectWorkLog];
 	PRINT ('>> Completed > Drop > Table > [dbo].[ProjectWorkLog]')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[ProjectReview]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[ProjectReview];
+	PRINT ('>> Completed > Drop > Table > [dbo].[ProjectReview]')
 END
 GO
 
@@ -367,6 +367,13 @@ IF (OBJECT_ID(N'[dbo].[TaskWorkLog]', 'U') IS NOT NULL)
 BEGIN
     DROP TABLE [dbo].[TaskWorkLog];
 	PRINT ('>> Completed > Drop > Table > [dbo].[TaskWorkLog]')
+END
+GO
+
+IF (OBJECT_ID(N'[dbo].[TaskReview]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[TaskReview];
+	PRINT ('>> Completed > Drop > Table > [dbo].[TaskReview]')
 END
 GO
 
@@ -894,25 +901,6 @@ GO
 PRINT ('>> Completed > Create > Table > [dbo].[ProjectComment]')
 GO
 
--- Create the [dbo].[ProjectReview] table
-CREATE TABLE [dbo].[ProjectReview](
-	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[ProjectId] [bigint] NOT NULL,
-	[Review] [nvarchar] (max) NOT NULL,
-	[IsActive] [bit] NULL,
-	[CreatedBy] [bigint] NOT NULL,
-	[DateCreated] [datetime] NOT NULL,
-	[ModifiedBy] [bigint] NULL,
-	[DateModified] [datetime] NULL,
- CONSTRAINT [PK_ProjectReview] PRIMARY KEY CLUSTERED 
-(
-	[_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-PRINT ('>> Completed > Create > Table > [dbo].[ProjectReview]')
-GO
-
 -- Create the [dbo].[ProjectWorkLog] table
 CREATE TABLE [dbo].[ProjectWorkLog](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
@@ -932,6 +920,25 @@ CREATE TABLE [dbo].[ProjectWorkLog](
 ) ON [PRIMARY]
 GO
 PRINT ('>> Completed > Create > Table > [dbo].[ProjectWorkLog]')
+GO
+
+-- Create the [dbo].[ProjectReview] table
+CREATE TABLE [dbo].[ProjectReview](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [bigint] NOT NULL,
+	[Review] [nvarchar] (max) NOT NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [bigint] NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_ProjectReview] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create > Table > [dbo].[ProjectReview]')
 GO
 
 -- Create the [dbo].[ProjectStatus] table
@@ -1034,6 +1041,25 @@ CREATE TABLE [dbo].[TaskWorkLog](
 ) ON [PRIMARY]
 GO
 PRINT ('>> Completed > Create > Table > [dbo].[TaskWorkLog]')
+GO
+
+-- Create the [dbo].[TaskReview] table
+CREATE TABLE [dbo].[TaskReview](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TaskId] [bigint] NOT NULL,
+	[Review] [nvarchar] (max) NOT NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [bigint] NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_TaskReview] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create > Table > [dbo].[TaskReview]')
 GO
 
 -- Create the [dbo].[TaskStatus] table

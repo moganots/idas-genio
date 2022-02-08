@@ -11,12 +11,12 @@ import {
   User,
 } from 'app/shared/app-shared.module';
 import { ProjectService } from '../project-service/project.service';
-import { ProjectAssignmentConfiguration } from './project-assignment-configuration';
+import { ProjectAssignConfiguration } from './project-assign-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectAssignmentService extends DataService {
+export class ProjectAssignService extends DataService {
   lookupValues: LookupValue[] = [];
   projects: Project[] = [];
   users: User[] = [];
@@ -28,7 +28,7 @@ export class ProjectAssignmentService extends DataService {
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = ProjectAssignmentConfiguration.identifier;
+    this.entityName = ProjectAssignConfiguration.identifier;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()

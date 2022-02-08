@@ -42,6 +42,7 @@ export { ProjectWorkLog } from './domain-models/project/project-work-log';
 export { Task } from './domain-models/task/task';
 export { TaskAssignment } from './domain-models/task/task-assignment';
 export { TaskComment } from './domain-models/task/task-comment';
+export { TaskReview } from './domain-models/task/task-review';
 export { TaskStatus } from './domain-models/task/task-status';
 export { TaskWorkLog } from './domain-models/task/task-work-log';
 

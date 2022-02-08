@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProjectCloneCopyServiceService } from './project-clone-copy-service.service';
+import { ProjectCloneCopyService } from './project-clone-copy-service.service';
 
-describe('ProjectCloneCopyServiceService', () => {
-  let service: ProjectCloneCopyServiceService;
+describe('ProjectCloneCopyService', () => {
+  let service: ProjectCloneCopyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ProjectCloneCopyServiceService);
+    service = TestBed.inject(ProjectCloneCopyService);
   });
 
   it('should be created', () => {

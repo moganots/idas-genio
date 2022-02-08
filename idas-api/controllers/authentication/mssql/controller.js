@@ -34,7 +34,6 @@ const { yyyymmddhmsmsWithDashSeparator } = require("../../../common/date-util");
 |------------------------------------------------------------------------------------------------------------------
  */
 const Controller = () => {
-  const UserProfile = _UserProfile();
   const UserRepository = _UserRepository();
   const login = (request, response) => {
     try {

@@ -71,7 +71,7 @@ export class UserMeetingCalendarComponent
     this.pageName = CalendarEventConfiguration.pageName;
     this.dataService = meetingCalendarService;
     this.entityName = CalendarEventConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(CalendarEventConfiguration.dataColumns);
+    this.dataSourceColumns = CalendarEventConfiguration.dataColumns;
   }
   ngOnInit() {
     this.calendarEvents = [];

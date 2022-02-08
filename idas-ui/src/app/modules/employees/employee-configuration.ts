@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class EmployeeConfiguration {
   public static identifier = 'employee';
   public static pageIcon = 'groups';
@@ -33,5 +35,7 @@ export class EmployeeConfiguration {
     {id: 20, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
     {id: 21, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
     */
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

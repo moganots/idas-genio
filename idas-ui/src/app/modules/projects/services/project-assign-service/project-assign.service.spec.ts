@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import 'jasmine';
-import { ProjectAssignmentService } from './project-assignment.service';
+import { ProjectAssignService } from './project-assign.service';
 
-describe('ProjectAssignmentService', () => {
-  let service: ProjectAssignmentService;
+describe('ProjectAssignService', () => {
+  let service: ProjectAssignService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ProjectAssignmentService);
+    service = TestBed.inject(ProjectAssignService);
   });
 
   it('should be created', () => {

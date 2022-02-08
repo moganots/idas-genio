@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class UserProfileConfiguration {
   public static identifier = 'user-profile';
   public static pageIcon = 'manage_accounts';
@@ -62,5 +64,7 @@ export class UserProfileConfiguration {
     {id: 45, name: 'IsAdmin', canShow: true, canSort: true, canGroup: false},
     {id: 46, name: 'IsLocked', canShow: true, canSort: true, canGroup: false},
     {id: 47, name: 'DateLastLoggedIn', canShow: true, canSort: true, canGroup: false}
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

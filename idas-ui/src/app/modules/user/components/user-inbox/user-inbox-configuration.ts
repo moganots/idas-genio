@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class UserInboxConfiguration {
   public static identifier = 'inbox-message';
   public static pageIcon = 'mail_outline';
@@ -10,5 +12,7 @@ export class UserInboxConfiguration {
   public static graphHeading = ``;
   public static buildingBlockLabel = ``;
   public static dataColumns = [
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

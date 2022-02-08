@@ -53,11 +53,6 @@ export class BaseDataComponent extends BaseComponent {
       referenceValueService
     );
   }
-  mapDataSourceColumns(columns: any[]) {
-    return columns?.map((sdc) => {
-      return new DataColumn(sdc);
-    });
-  }
   setDataSourceColumns(): void {
     // this.getDataSourceColumns();
     this.setDataSourceColumnNames();

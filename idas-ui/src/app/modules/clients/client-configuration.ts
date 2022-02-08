@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class ClientConfiguration {
   public static identifier = 'client';
   public static pageIcon = 'stream';
@@ -26,5 +28,7 @@ export class ClientConfiguration {
     {id: 13, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
     {id: 14, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
     */
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

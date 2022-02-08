@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/domain-models/data-column';
+
 export class LookupValueConfiguration {
   public static identifier = 'lookup-value';
   public static pageIcon = 'manage_accounts';
@@ -24,5 +26,7 @@ export class LookupValueConfiguration {
     {id: 11, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
     {id: 12, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
     */
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

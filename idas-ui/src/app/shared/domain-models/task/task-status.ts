@@ -6,4 +6,28 @@ export class TaskStatus extends BaseModel {
   StatusId: number;
   Task: Task;
   Status: LookupValue;
+  constructor(
+    id?: number,
+    TaskId?: number,
+    StatusId?: number,
+    IsActive?: boolean,
+    CreatedBy?: number,
+    DateCreated?: Date,
+    ModifiedBy?: number,
+    DateModified?: Date,
+  ) {
+    super(
+      id,
+      IsActive,
+      null,
+      null,
+      null,
+      CreatedBy,
+      DateCreated,
+      ModifiedBy,
+      DateModified
+    );
+    this.TaskId = TaskId;
+    this.StatusId = StatusId;
+  }
 }

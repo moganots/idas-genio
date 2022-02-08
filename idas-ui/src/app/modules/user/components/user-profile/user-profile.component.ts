@@ -62,7 +62,7 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     this.pageName = UserProfileConfiguration.pageName;
     this.dataService = userService;
     this.entityName = UserProfileConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(UserProfileConfiguration.dataColumns);
+    this.dataSourceColumns = UserProfileConfiguration.dataColumns;
     this.selectedElement = this.currentUser;
     // this.setDataSourceColumns();
   }

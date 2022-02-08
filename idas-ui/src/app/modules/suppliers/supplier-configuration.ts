@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class SupplierConfiguration {
   public static identifier = 'supplier';
   public static pageIcon = 'reduce_capacity';
@@ -64,5 +66,7 @@ export class SupplierConfiguration {
     {id: 15, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
     {id: 16, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
     */
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

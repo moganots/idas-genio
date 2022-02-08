@@ -55,6 +55,6 @@ export class ClientsComponent extends PageComponent implements OnInit {
     this.pageName = ClientConfiguration.pageName;
     this.dataService = clientsService;
     this.entityName = ClientConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(ClientConfiguration.dataColumns);
+    this.dataSourceColumns = ClientConfiguration.dataColumns;
   }
 }

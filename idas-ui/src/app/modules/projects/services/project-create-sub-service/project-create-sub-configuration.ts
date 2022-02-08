@@ -1,4 +1,6 @@
-export class ProjectConfiguration {
+import { DataColumn } from 'app/shared/app-shared.module';
+
+export class ProjectCreateSubConfiguration {
   public static identifier = 'project';
   public static pageIcon = 'dns';
   public static pageRoute = 'projects';
@@ -13,7 +15,7 @@ export class ProjectConfiguration {
     {id: 1, name: `_id` , canShow: false, canSort: true, canGroup: false},
     {id: 2, name: `Name` , canShow: true, canSort: true, canGroup: false},
     {id: 3, name: `Code` , canShow: false, canSort: true, canGroup: false},
-    {id: 4, name: `Description` , canShow: false, canSort: true, canGroup: false},
+    {id: 4, name: `Description` , canShow: true, canSort: true, canGroup: false},
     {id: 5, name: `ProjectTypeId` , canShow: true, canSort: true, canGroup: false},
     {id: 6, name: `PriorityId` , canShow: true, canSort: true, canGroup: false},
     {id: 7, name: `StartDate` , canShow: true, canSort: true, canGroup: false},
@@ -21,10 +23,12 @@ export class ProjectConfiguration {
     {id: 9, name: `MaximumHoursAllocated` , canShow: true, canSort: true, canGroup: false},
     {id: 10, name: `ParentProjectId` , canShow: true, canSort: true, canGroup: false},
     {id: 11, name: `StatusId` , canShow: true, canSort: true, canGroup: false},
-    {id: 12, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
+    {id: 12, name: `IsActive` , canShow: true, canSort: true, canGroup: false},
     {id: 13, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 14, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
     {id: 15, name: `ModifiedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 16, name: `DateModified` , canShow: false, canSort: true, canGroup: false},
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

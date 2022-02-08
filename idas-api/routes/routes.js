@@ -1,7 +1,7 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
-| Create date:  2021-08-31
+| Create date:  2022-02-08
 | Description:  IDAS - Genio - API - routes utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
@@ -23,7 +23,6 @@ function eRoutes() {
     const router = express.Router();
     var root = require(`./root`)(router, config);
     var authentication = require(`./authentication/api`)(router, config);
-    var routeFileAttachment = require(`./file-attachment/api`)(router, config);
     var routeUser = require(`./user/api`)(router, config);
     var routeConfigurationSetting = require(`./configuration-setting/api`)(router, config);
     var routeLookupCategory = require(`./lookup-category/api`)(router, config);
@@ -40,11 +39,13 @@ function eRoutes() {
     var routeProjectAssignment = require(`./project-assignment/api`)(router, config);
     var routeProjectComment = require(`./project-comment/api`)(router, config);
     var routeProjectWorkLog = require(`./project-work-log/api`)(router, config);
+    var routeProjectReview = require(`./project-review/api`)(router, config);
     var routeProjectStatus = require(`./project-status/api`)(router, config);
     var routeTask = require(`./task/api`)(router, config);
     var routeTaskAssignment = require(`./task-assignment/api`)(router, config);
     var routeTaskComment = require(`./task-comment/api`)(router, config);
     var routeTaskWorkLog = require(`./task-work-log/api`)(router, config);
+    var routeTaskReview = require(`./task-review/api`)(router, config);
     var routeTaskStatus = require(`./task-status/api`)(router, config);
     var routeUserGroup = require(`./user-group/api`)(router, config);
     var routeUserGroupCapacity = require(`./user-group-capacity/api`)(router, config);
@@ -57,6 +58,7 @@ function eRoutes() {
     var routeUserTypeMenuItem = require(`./user-type-menu-item/api`)(router, config);
     var routeNotificationMessage = require(`./notification-message/api`)(router, config);
     var routeInboxMessage = require(`./inbox-message/api`)(router, config);
+    var routeFileAttachment = require(`./file-attachment/api`)(router, config);
     var routevwRandomEmployeeNumber = require(`./vw-random-employee-number/api`)(router, config);
     return router;
 }

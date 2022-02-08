@@ -40,7 +40,7 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public projectService: ProjectService
+    public projectService: ProjectService,
   ) {
     super(
       router,
@@ -56,7 +56,7 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     this.pageName = ProjectConfiguration.pageName;
     this.dataService = projectService;
     this.entityName = ProjectConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(ProjectConfiguration.dataColumns);
+    this.dataSourceColumns = ProjectConfiguration.dataColumns;
   }
   onClickProjectAssignments(element: any, index?: number) {
     super.openDialog(
@@ -73,7 +73,7 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     );
   }
   onClickProjectTasks(element: any, index?: number) {
-    this.router.navigate([`${this.removeHashtag(element.element.RouterLink)}`])
+    this.router.navigate([`${this.removeHashtag(element.element.RouterLink)}`]);
   }
   onClickProjectReInstate(element: any, index?: number) {}
 }

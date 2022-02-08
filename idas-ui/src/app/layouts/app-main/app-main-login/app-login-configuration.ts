@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class AppLoginConfiguration {
   public static identifier = 'login';
   public static pageIcon = '../assets/img/idas/izz-logo-icon-only.png';
@@ -10,5 +12,7 @@ export class AppLoginConfiguration {
   public static graphHeading = ``;
   public static buildingBlockLabel = ``;
   public static dataColumns = [
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

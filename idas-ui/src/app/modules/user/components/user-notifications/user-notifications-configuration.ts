@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class UserNotificationsConfiguration {
   public static identifier = 'notification-message';
   public static pageIcon = 'circle_notifications';
@@ -10,5 +12,7 @@ export class UserNotificationsConfiguration {
   public static graphHeading = ``;
   public static buildingBlockLabel = ``;
   public static dataColumns = [
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/domain-models/data-column';
+
 export class LookupCategoryConfiguration {
   public static identifier = 'lookup-category';
   public static pageIcon = 'manage_accounts';
@@ -21,5 +23,7 @@ export class LookupCategoryConfiguration {
     {id: 8, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
     {id: 9, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
     */
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

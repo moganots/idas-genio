@@ -61,7 +61,7 @@ export class TasksComponent extends PageComponent implements OnInit {
     this.pageTitle = TaskConfiguration.pageTitle;
     this.pageName = TaskConfiguration.pageName;
     this.entityName = TaskConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(TaskConfiguration.dataColumns);
+    this.dataSourceColumns = TaskConfiguration.dataColumns;
   }
   ngOnInit() {
     this.onRefreshView();

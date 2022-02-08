@@ -40,22 +40,6 @@ body {
   }
 }
 
-div {
-  height: auto;
-  &.textarea-editor {
-    color: black;
-    outline: none;
-    min-height: 8rem;
-    padding: 0.8rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    &:focus {
-      box-shadow: inset 0 0 0 0.009rem black;
-    }
-  }
-}
-
 ::ng-deep .mat-menu-content,
 .mat-tab-group-content,
 .mat-tab-content {

@@ -14,7 +14,7 @@ import {
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { ProjectAssignmentConfiguration } from './project-assignment-configuration';
+import { ProjectAssignConfiguration } from './project-assignment-configuration';
 import { ProjectAssignmentsService } from './services/project-assignments.service';
 
 @Component({
@@ -48,7 +48,7 @@ export class DialogProjectAssignmentComponent
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogProjectAssignmentComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public projectAssignmentService: ProjectAssignmentsService
+    public ProjectAssignService: ProjectAssignmentsService
   ) {
     super(
       router,
@@ -61,14 +61,14 @@ export class DialogProjectAssignmentComponent
       dialogRef,
       data
     );
-    this.dataService = projectAssignmentService;
+    this.dataService = ProjectAssignService;
     this.projectId = data.selected.element._id;
     this.projectName = data.selected.element.Name;
-    this.entityName = `${ProjectAssignmentConfiguration.identifier}`;
-    this.pageIcon = ProjectAssignmentConfiguration.pageIcon;
-    this.pageName = `${ProjectAssignmentConfiguration.pageName}`;
-    this.pageTitle = `${ProjectAssignmentConfiguration.pageTitle}`;
-    this.dataSourceColumns = this.mapDataSourceColumns(ProjectAssignmentConfiguration.dataColumns);
+    this.entityName = `${ProjectAssignConfiguration.identifier}`;
+    this.pageIcon = ProjectAssignConfiguration.pageIcon;
+    this.pageName = `${ProjectAssignConfiguration.pageName}`;
+    this.pageTitle = `${ProjectAssignConfiguration.pageTitle}`;
+    this.dataSourceColumns = ProjectAssignConfiguration.dataColumns;
     // this.setDataSourceColumns();
   }
   ngOnInit() {

@@ -17,8 +17,11 @@ import {
   Project,
   FileAttachment,
 } from 'app/shared/app-shared.module';
-import { TaskAssignmentService } from '../../services/task-assignment-service/task-assignment-service';
+import { TaskAssignService } from '../../services/task-assign-service/task-assign-service';
+import { TaskCloneCopyService } from '../../services/task-clone-copy-service/task-clone-copy.service';
 import { TaskCommentService } from '../../services/task-comment-service/task-comment.service';
+import { TaskCreateSubService } from '../../services/task-create-sub-service/task-create-sub.service';
+import { TaskReviewService } from '../../services/task-review-service/task-review.service';
 import { TaskConfiguration } from '../../services/task-service/task-configuration';
 import { TaskService } from '../../services/task-service/task.service';
 import { TaskWorkLogService } from '../../services/task-work-log-service/task-work-log.service';
@@ -35,7 +38,10 @@ import { TaskWorkLogService } from '../../services/task-work-log-service/task-wo
     TaskService,
     TaskCommentService,
     TaskWorkLogService,
-    TaskAssignmentService,
+    TaskAssignService,
+    TaskCreateSubService,
+    TaskCloneCopyService,
+    TaskReviewService,
     FileAttachmentService,
   ],
 })
@@ -58,7 +64,10 @@ export class TaskComponent extends PageComponent implements OnInit {
     public taskService: TaskService,
     public taskCommentService: TaskCommentService,
     public taskWorkLogService: TaskWorkLogService,
-    public taskAssignmentService: TaskAssignmentService,
+    public taskAssignService: TaskAssignService,
+    public taskCreateSubService: TaskCreateSubService,
+    public taskCloneCopyService: TaskCloneCopyService,
+    public taskReviewService: TaskReviewService,
     public fileAttachmentService: FileAttachmentService,
     private activatedRoute: ActivatedRoute
   ) {
@@ -72,7 +81,7 @@ export class TaskComponent extends PageComponent implements OnInit {
       referenceValueService
     );
     this.entityName = TaskConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(TaskConfiguration.dataColumns);
+    this.dataSourceColumns = TaskConfiguration.dataColumns;
     // tslint:disable-next-line:only-arrow-functions
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -179,38 +188,5 @@ export class TaskComponent extends PageComponent implements OnInit {
   setCreatedModifiedUser(users: User[], value: any) {
     value.createdBy = users.find((user) => user._id === value?.CreatedBy);
     value.modifiedBy = users.find((user) => user._id === value?.ModifiedBy);
-  }
-
-  onButtonClicked(action: string, index?: number, element?: any): void {
-    switch (this.toLocaleLowerCaseTrim(action)) {
-      case 'edit':
-        this.onClickLog(action, index, element);
-        break;
-      case 'comment':
-        this.onClickLog(action, index, element);
-        break;
-      case 'logwork':
-        this.onClickLog(action, index, element);
-        break;
-      case 'assign':
-        this.onClickLog(action, index, element);
-        break;
-      case 'attach':
-        this.onClickLog(action, index, element);
-        break;
-      case 'createsub':
-        this.onClickLog(action, index, element);
-        break;
-      case 'clonecopy':
-        this.onClickLog(action, index, element);
-        break;
-      case 'review':
-        this.onClickLog(action, index, element);
-        break;
-    }
-  }
-  onClickLog(action: string, index: number, element: any) {
-    console.log(`action=${action}, index=${index}`);
-    console.log(element);
   }
 }

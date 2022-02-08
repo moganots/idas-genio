@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProjectCreateSubServiceService } from './project-create-sub-service.service';
+import { ProjectCreateSubService } from './project-create-sub-service.service';
 
-describe('ProjectCreateSubServiceService', () => {
-  let service: ProjectCreateSubServiceService;
+describe('ProjectCreateSubService', () => {
+  let service: ProjectCreateSubService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ProjectCreateSubServiceService);
+    service = TestBed.inject(ProjectCreateSubService);
   });
 
   it('should be created', () => {

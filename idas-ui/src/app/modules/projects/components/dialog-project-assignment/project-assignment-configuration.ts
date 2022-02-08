@@ -1,4 +1,6 @@
-export class ProjectAssignmentConfiguration {
+import { DataColumn } from 'app/shared/app-shared.module';
+
+export class ProjectAssignConfiguration {
   public static identifier = 'project-assignment';
   public static pageIcon = 'assignment';
   public static pageRoute = 'project-assignment';
@@ -21,5 +23,7 @@ export class ProjectAssignmentConfiguration {
     {id: 8, name: 'ModifiedBy', canShow: false, canSort: true, canGroup: false},
     {id: 9, name: 'DateModified', canShow: false, canSort: true, canGroup: false},
     */
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

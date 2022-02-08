@@ -55,6 +55,6 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     this.pageName = UserInboxConfiguration.pageName;
     this.dataService = inboxService;
     this.entityName = UserInboxConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(UserInboxConfiguration.dataColumns);
+    this.dataSourceColumns = UserInboxConfiguration.dataColumns;
   }
 }

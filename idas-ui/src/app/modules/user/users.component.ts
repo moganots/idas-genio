@@ -55,6 +55,6 @@ export class UsersComponent extends PageComponent implements OnInit {
     this.pageName = UserConfiguration.pageName;
     this.dataService = userService;
     this.entityName = UserConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(UserConfiguration.dataColumns);
+    this.dataSourceColumns = UserConfiguration.dataColumns;
   }
 }

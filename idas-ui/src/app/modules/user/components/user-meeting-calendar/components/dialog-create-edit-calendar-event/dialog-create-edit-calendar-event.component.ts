@@ -74,7 +74,7 @@ export class DialogCreateEditCalendarEventComponent
       .split(`-`)
       .map((en) => this.capitalizeFirstLetter(en))
       .join(` `)}`;
-    this.dataSourceColumns = this.mapDataSourceColumns(CalendarEventConfiguration.dataColumns);
+    this.dataSourceColumns = CalendarEventConfiguration.dataColumns;
     this.calendarEventScheduleTimes =
       AppModulesSharedModuleConfiguration.scheduleTimes.map((time, index) => ({
         id: index,

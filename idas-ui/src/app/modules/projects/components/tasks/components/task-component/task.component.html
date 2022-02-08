@@ -18,7 +18,13 @@
           </div>
         </div>
         <app-manage-project-task-toolbar
-          [dataService]="taskService"
+          [editService]="taskService"
+          [commentService]="taskCommentService"
+          [workLogService]="taskWorkLogService"
+          [assignService]="taskAssignService"
+          [createSubService]="taskCreateSubService"
+          [cloneCopyService]="taskCloneCopyService"
+          [reviewService]="taskReviewService"
           [entityName]="entityName"
           [pageIcon]="task?.TaskType?.Icon"
           [dataSourceColumns]="dataSourceColumns"

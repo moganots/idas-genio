@@ -19,13 +19,19 @@
           </div>
         </div>
         <app-manage-project-task-toolbar
-          [dataService]="projectService"
-          [entityName]="entityName"
-          [pageIcon]="project?.ProjectType?.Icon"
-          [dataSourceColumns]="dataSourceColumns"
-          [entityId]="project?._id"
-          [selectedElement]="project"
-          [selectedElementIndex]="selectedElementIndex"
+        [editService]="projectService"
+        [commentService]="projectCommentService"
+        [workLogService]="projectWorkLogService"
+        [assignService]="projectAssignService"
+        [createSubService]="projectCreateSubService"
+        [cloneCopyService]="projectCloneCopyService"
+        [reviewService]="projectReviewService"
+        [entityName]="entityName"
+        [pageIcon]="project?.ProjectType?.Icon"
+        [dataSourceColumns]="dataSourceColumns"
+        [entityId]="project?._id"
+        [selectedElement]="project"
+        [selectedElementIndex]="selectedElementIndex"
         ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">

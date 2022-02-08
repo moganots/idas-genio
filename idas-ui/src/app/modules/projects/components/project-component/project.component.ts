@@ -18,8 +18,14 @@ import {
   Task,
   User,
 } from 'app/shared/app-shared.module';
+import { ProjectAssignService } from '../../services/project-assign-service/project-assign.service';
+import { ProjectCloneCopyService } from '../../services/project-clone-copy-service/project-clone-copy.service';
+import { ProjectCommentService } from '../../services/project-comment-service/project-comment.service';
+import { ProjectCreateSubService } from '../../services/project-create-sub-service/project-create-sub.service';
+import { ProjectReviewService } from '../../services/project-review-service/project-review.service';
 import { ProjectConfiguration } from '../../services/project-service/project-configuration';
 import { ProjectService } from '../../services/project-service/project.service';
+import { ProjectWorkLogService } from '../../services/project-work-log-service/project-work-log.service';
 import { ProjectAssignmentsService } from '../dialog-project-assignment/services/project-assignments.service';
 
 @Component({
@@ -52,7 +58,12 @@ export class ProjectComponent extends PageComponent implements OnInit {
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
     public projectService: ProjectService,
-    public projectAssignmentsService: ProjectAssignmentsService,
+    public projectCommentService: ProjectCommentService,
+    public projectWorkLogService: ProjectWorkLogService,
+    public projectAssignService: ProjectAssignService,
+    public projectCreateSubService: ProjectCreateSubService,
+    public projectCloneCopyService: ProjectCloneCopyService,
+    public projectReviewService: ProjectReviewService,
     public fileAttachmentService: FileAttachmentService,
     private activatedRoute: ActivatedRoute
   ) {
@@ -66,7 +77,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
       referenceValueService
     );
     this.entityName = ProjectConfiguration.identifier;
-    this.dataSourceColumns = this.mapDataSourceColumns(ProjectConfiguration.dataColumns);
+    this.dataSourceColumns = ProjectConfiguration.dataColumns;
     // tslint:disable-next-line:only-arrow-functions
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -90,7 +101,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
               .toPromise()
               .then((project) => {
                 // Get (Set) - Assignee(s) for the current project
-                this.projectAssignmentsService
+                this.projectAssignService
                   .getBy<ProjectAssignment>({ ProjectId: project?._id })
                   .toPromise()
                   .then((projectAssignees) => {
@@ -203,39 +214,5 @@ export class ProjectComponent extends PageComponent implements OnInit {
     task.Status = lookupValues.find(
       (lookupValue) => lookupValue._id === task?.StatusId
     );
-  }
-
-  onButtonClicked(action: string, element?: any): void {
-    const elementId = element?._id;
-    switch (this.toLocaleLowerCaseTrim(action)) {
-      case 'edit':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'comment':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'logwork':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'assign':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'attach':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'createsub':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'clonecopy':
-        this.onClickLog(action, elementId, element);
-        break;
-      case 'review':
-        this.onClickLog(action, elementId, element);
-        break;
-    }
-  }
-  onClickLog(action: string, index: number, element: any) {
-    console.log(`action=${action}, index=${index}`);
-    console.log(element);
   }
 }

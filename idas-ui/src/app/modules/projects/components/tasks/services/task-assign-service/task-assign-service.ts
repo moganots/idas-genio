@@ -11,12 +11,12 @@ import {
   User,
 } from 'app/shared/app-shared.module';
 import { TaskService } from '../task-service/task.service';
-import { TaskAssignmentConfiguration } from './task-assignment-configuration';
+import { TaskAssignConfiguration } from './task-assign-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TaskAssignmentService extends DataService {
+export class TaskAssignService extends DataService {
   lookupValues: LookupValue[] = [];
   tasks: Task[] = [];
   users: User[] = [];
@@ -28,7 +28,7 @@ export class TaskAssignmentService extends DataService {
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = TaskAssignmentConfiguration.identifier;
+    this.entityName = TaskAssignConfiguration.identifier;
     this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
     this.taskService.getAll<Task>().toPromise().then((tasks) => { this.tasks = tasks});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });

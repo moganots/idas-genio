@@ -1,3 +1,5 @@
+import { DataColumn } from 'app/shared/app-shared.module';
+
 export class DashboardConfiguration {
   public static identifier = 'dashboard';
   public static pageIcon = 'dashboard';
@@ -10,5 +12,7 @@ export class DashboardConfiguration {
   public static graphHeading = ``;
   public static buildingBlockLabel = ``;
   public static dataColumns = [
-  ];
+  ].map((sdc) => {
+    return new DataColumn(sdc);
+  });
 }

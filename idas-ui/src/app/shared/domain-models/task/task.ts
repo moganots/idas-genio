@@ -16,4 +16,38 @@ export class Task extends BaseModel {
   Assignee: User;
   Status: LookupValue;
   Files: any[];
+  constructor(
+    id?: number,
+    ProjectId?: number,
+    Name?: string,
+    Description?: string,
+    TaskTypeId?: number,
+    PriorityId?: number,
+    ParentTaskId?: number,
+    AssigneeId?: number,
+    StatusId?: number,
+    IsActive?: boolean,
+    CreatedBy?: number,
+    DateCreated?: Date,
+    ModifiedBy?: number,
+    DateModified?: Date,
+  ) {
+    super(
+      id,
+      IsActive,
+      null,
+      Name,
+      Description,
+      CreatedBy,
+      DateCreated,
+      ModifiedBy,
+      DateModified
+    );
+    this.ProjectId = ProjectId;
+    this.TaskTypeId = TaskTypeId;
+    this.PriorityId = PriorityId;
+    this.ParentTaskId = ParentTaskId;
+    this.AssigneeId = AssigneeId;
+    this.StatusId = StatusId;
+  }
 }

@@ -7,7 +7,7 @@ import {
   ProjectAssignment,
   User,
 } from 'app/shared/app-shared.module';
-import { ProjectAssignmentConfiguration } from '../project-assignment-configuration';
+import { ProjectAssignConfiguration } from '../project-assignment-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class ProjectAssignmentsService extends DataService {
     private userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = ProjectAssignmentConfiguration.identifier;
+    this.entityName = ProjectAssignConfiguration.identifier;
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectAssignment: ProjectAssignment) {

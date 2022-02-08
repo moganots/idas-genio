@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { TaskCloneCopyServiceService } from './task-clone-copy.service';
+import { TaskCloneCopyService } from './task-clone-copy.service';
 
 
-describe('TaskCloneCopyServiceService', () => {
-  let service: TaskCloneCopyServiceService;
+describe('TaskCloneCopyService', () => {
+  let service: TaskCloneCopyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TaskCloneCopyServiceService);
+    service = TestBed.inject(TaskCloneCopyService);
   });
 
   it('should be created', () => {

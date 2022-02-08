@@ -69,7 +69,7 @@ export class DialogCreateNewTaskComponent
     )} New Project Task`;
     this.projectName = this.selectedElement?.Name;
     this.selectedElement = { ProjectId: this.selectedElement?._id };
-    this.dataSourceColumns = this.mapDataSourceColumns(data.dataColumns);
+    this.dataSourceColumns = data.dataColumns;
     // this.setDataSourceColumns();
   }
   ngOnInit() {
