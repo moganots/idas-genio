@@ -4,6 +4,7 @@ import { LookupValue } from '../lookups/lookup-value';
 export class ProjectAssignment extends BaseAssignment {
   ProjectId: number;
   ProjectAssignmentTypeId: number;
+  AssigneeId: number;
   Project: Project;
   ProjectAssignmentType: LookupValue;
   constructor(
@@ -15,7 +16,7 @@ export class ProjectAssignment extends BaseAssignment {
     CreatedBy?: number,
     DateCreated?: Date,
     ModifiedBy?: number,
-    DateModified?: Date
+    DateModified?: Date,
   ) {
     super(id, IsActive, null, null, null, CreatedBy, DateCreated, ModifiedBy, DateModified);
     this.ProjectId = ProjectId;
