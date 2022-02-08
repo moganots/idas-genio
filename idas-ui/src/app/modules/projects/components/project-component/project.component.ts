@@ -18,7 +18,7 @@ import {
   Task,
   User,
 } from 'app/shared/app-shared.module';
-import { ProjectConfiguration } from '../../project-configuration';
+import { ProjectConfiguration } from '../../services/project-service/project-configuration';
 import { ProjectService } from '../../services/project-service/project.service';
 import { ProjectAssignmentsService } from '../dialog-project-assignment/services/project-assignments.service';
 

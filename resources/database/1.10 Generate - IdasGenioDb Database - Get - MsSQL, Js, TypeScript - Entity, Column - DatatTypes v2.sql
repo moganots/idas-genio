@@ -70,6 +70,6 @@ SELECT
 		END AS [ReferenceValueInitialiser]
 FROM [cte]
 WHERE
-	([EntityName] = 'projectassignment')
+	([EntityName] = 'projectreview')
 ORDER BY
 	[ColumnId]

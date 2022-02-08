@@ -1,7 +1,7 @@
 export class TaskAssignmentConfiguration {
   public static identifier = 'task-assignment';
-  public static pageIcon = 'tune';
-  public static pageRoute = 'tasks';
+  public static pageIcon = 'assignment_ind';
+  public static pageRoute = 'tasks/task/:taskId/assignments';
   public static pageRouteTitle = 'My Task Assignment(s)';
   public static pageRouteCssClass = ``;
   public static pageTitle = `Manage Task Assignment(s)`;

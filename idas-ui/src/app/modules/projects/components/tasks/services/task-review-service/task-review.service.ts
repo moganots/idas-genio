@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
 import { UserService } from 'app/modules/user/services/user.service';
 import {
   AuthenticationService,
@@ -10,13 +11,12 @@ import {
   ProjectReview,
   User,
 } from 'app/shared/app-shared.module';
-import { ProjectService } from '../project-service/project.service';
-import { ProjectReviewConfiguration } from './project-review-configuration';
+import { TaskReviewConfiguration } from './task-review-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectReviewService extends DataService {
+export class TaskReviewService extends DataService {
   projects: Project[] = [];
   lookupValues: LookupValue[] = [];
   users: User[] = [];
@@ -28,9 +28,9 @@ export class ProjectReviewService extends DataService {
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = ProjectReviewConfiguration.identifier;
-    this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
+    this.entityName = TaskReviewConfiguration.identifier;
     this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
+    this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectReview: ProjectReview) {

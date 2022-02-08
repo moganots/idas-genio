@@ -17,11 +17,11 @@ import {
   Project,
   FileAttachment,
 } from 'app/shared/app-shared.module';
-import { TaskAssignmentService } from '../../services/task-assignment-service/task-assignment.service';
+import { TaskAssignmentService } from '../../services/task-assignment-service/task-assignment-service';
 import { TaskCommentService } from '../../services/task-comment-service/task-comment.service';
+import { TaskConfiguration } from '../../services/task-service/task-configuration';
 import { TaskService } from '../../services/task-service/task.service';
-import { TaskWorkLogService } from '../../services/task-work-log-service/task-work-log-service';
-import { TaskConfiguration } from '../../task-configuration';
+import { TaskWorkLogService } from '../../services/task-work-log-service/task-work-log.service';
 
 @Component({
   selector: 'app-task',

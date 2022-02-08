@@ -14,7 +14,7 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { ProjectConfiguration } from './project-configuration';
+import { ProjectConfiguration } from './services/project-service/project-configuration';
 import { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
 import { ProjectService } from './services/project-service/project.service';
 

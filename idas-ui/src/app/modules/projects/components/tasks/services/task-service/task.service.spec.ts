@@ -1,13 +1,12 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
-import 'jasmine';
 import { TaskService } from './task.service';
 
-describe('Service: Task', () => {
+describe('Service: Tasks', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TaskService],
+      providers: [TaskService]
     });
   });
 

@@ -5,16 +5,16 @@ import {
   AuthenticationService,
   DataService,
   Task,
-  TaskComment,
+  TaskWorkLog,
   User,
 } from 'app/shared/app-shared.module';
 import { TaskService } from '../task-service/task.service';
-import { TaskCommentConfiguration } from './task-comment-configuration';
+import { TaskWorkLogConfiguration } from './task-work-log-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TaskCommentService extends DataService {
+export class TaskWorkLogService extends DataService {
   tasks: Task[] = [];
   users: User[] = [];
   constructor(
@@ -24,14 +24,14 @@ export class TaskCommentService extends DataService {
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = TaskCommentConfiguration.identifier;
-    this.taskService.getAll<Task>().toPromise().then((tasks) => { this.tasks = tasks});
+    this.entityName = TaskWorkLogConfiguration.identifier;
+    this.taskService.getAll<Task>().toPromise().then((Tasks) => { this.tasks = Tasks});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
-  mapValues(taskComment: TaskComment) {
-    taskComment.Task = this.tasks.find((value) => value._id === taskComment.TaskId);
-    taskComment.createdBy = this.users.find((user) => user._id === taskComment.CreatedBy);
-    taskComment.modifiedBy = this.users.find((user) => user._id === taskComment.ModifiedBy);
-    return TaskComment;
+  mapValues(taskWorkLog: TaskWorkLog) {
+    taskWorkLog.Task = this.tasks.find((value) => value._id === taskWorkLog.TaskId);
+    taskWorkLog.createdBy = this.users.find((user) => user._id === taskWorkLog.CreatedBy);
+    taskWorkLog.modifiedBy = this.users.find((user) => user._id === taskWorkLog.ModifiedBy);
+    return taskWorkLog;
   }
 }

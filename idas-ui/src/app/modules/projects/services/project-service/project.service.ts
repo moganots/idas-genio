@@ -9,7 +9,7 @@ import {
   Project,
   User,
 } from 'app/shared/app-shared.module';
-import { ProjectConfiguration } from '../../project-configuration';
+import { ProjectConfiguration } from './project-configuration';
 
 @Injectable({
   providedIn: 'root',

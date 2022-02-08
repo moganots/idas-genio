@@ -29,16 +29,39 @@ export class ProjectAssignmentService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectAssignmentConfiguration.identifier;
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
-    this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
-    this.userService.getAll<User>().subscribe(users => { this.users = users; });
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .toPromise()
+      .then((lookupValues) => {
+        this.lookupValues = lookupValues;
+      });
+    this.projectService
+      .getAll<Project>()
+      .toPromise()
+      .then((projects) => {
+        this.projects = projects;
+      });
+    this.userService.getAll<User>().subscribe((users) => {
+      this.users = users;
+    });
   }
   mapValues(projectAssignment: ProjectAssignment) {
-    projectAssignment.Project = this.projects.find(value => value._id === projectAssignment.ProjectId);
-    projectAssignment.ProjectAssignmentType = this.lookupValues.find(value => value._id === projectAssignment.ProjectAssignmentTypeId);
-    projectAssignment.Assignee = this.users.find(user => user._id === projectAssignment.AssigneeId);
-    projectAssignment.createdBy = this.users.find(user => user._id === projectAssignment.CreatedBy);
-    projectAssignment.modifiedBy = this.users.find(user => user._id === projectAssignment.ModifiedBy);
+    projectAssignment.Project = this.projects.find(
+      (value) => value._id === projectAssignment.ProjectId
+    );
+    projectAssignment.ProjectAssignmentType = this.lookupValues.find(
+      (lookupValue) =>
+        lookupValue._id === projectAssignment.ProjectAssignmentTypeId
+    );
+    projectAssignment.Assignee = this.users.find(
+      (user) => user._id === projectAssignment.AssigneeId
+    );
+    projectAssignment.createdBy = this.users.find(
+      (user) => user._id === projectAssignment.CreatedBy
+    );
+    projectAssignment.modifiedBy = this.users.find(
+      (user) => user._id === projectAssignment.ModifiedBy
+    );
     return projectAssignment;
   }
 }

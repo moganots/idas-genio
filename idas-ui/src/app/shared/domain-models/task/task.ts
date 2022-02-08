@@ -12,7 +12,7 @@ export class Task extends BaseModel {
   TaskType: LookupValue;
   Priority: LookupValue;
   ParentTask: Task;
-  SubTasks: Task[];
+  SubTasks: Task[] = [];
   Assignee: User;
   Status: LookupValue;
   Files: any[];

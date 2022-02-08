@@ -11,36 +11,36 @@ import {
   Task,
   User,
 } from 'app/shared/app-shared.module';
-import { TaskConfiguration } from '../../task-configuration';
+import { TaskConfiguration } from './task-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService extends DataService {
+  projects: Project[] = [];
   lookupValues: LookupValue[] = [];
   users: User[] = [];
-  projects: Project[] = [];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
+    public projectService: ProjectService,
     public lookupValueService: LookupValueService,
-    public userService: UserService,
-    public projectService: ProjectService
+    public userService: UserService
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskConfiguration.identifier;
+    this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
     this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
-    this.projectService.getAll<Project>().subscribe(projects => { this.projects = projects; });
   }
   mapValues(task: Task) {
-    task.Project = this.projects.find(project => project._id === task.ProjectId);
-    task.Assignee = this.users.find(user => user._id === task.AssigneeId);
-    task.TaskType = this.lookupValues.find(value => value._id === task.TaskTypeId);
-    task.Priority = this.lookupValues.find(value => value._id === task.PriorityId);
-    task.Status = this.lookupValues.find(value => value._id === task.StatusId);
-    task.createdBy = this.users.find(user => user._id === task.CreatedBy);
-    task.modifiedBy = this.users.find(user => user._id === task.ModifiedBy);
+    task.Project = this.projects.find((value) => value._id === task.ProjectId);
+    task.TaskType = this.lookupValues.find((lookupValue) => lookupValue._id === task.TaskTypeId);
+    task.Priority = this.lookupValues.find((lookupValue) => lookupValue._id === task.PriorityId);
+    task.Assignee = this.users.find((user) => user._id === task.AssigneeId);
+    task.Status = this.lookupValues.find((lookupValue) => lookupValue._id === task.StatusId);
+    task.createdBy = this.users.find((user) => user._id === task.CreatedBy);
+    task.modifiedBy = this.users.find((user) => user._id === task.ModifiedBy);
     return task;
   }
 }

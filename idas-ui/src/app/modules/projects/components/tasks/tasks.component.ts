@@ -18,8 +18,8 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { TaskConfiguration } from './task-configuration';
 import { DialogCreateNewTaskComponent } from './components/dialog-create-new-task/dialog-create-new-task.component';
+import { TaskConfiguration } from './services/task-service/task-configuration';
 
 @Component({
   selector: 'app-tasks',

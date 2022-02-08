@@ -55,7 +55,7 @@ import { DialogManageProjectTaskToolbarAssignComponent } from './components/shar
 import { TextEditorComponent } from 'app/shared/components/text-editor/text-editor.component';
 import { DialogManageProjectTaskToolbarComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar/dialog-manage-project-task-toolbar.component';
 
-export { ProjectConfiguration } from './project-configuration';
+export { ProjectConfiguration } from './services/project-service/project-configuration';
 export { TaskConfiguration } from './components/tasks/task-configuration';
 
 export { ProjectsComponent } from './projects.component';
@@ -123,7 +123,10 @@ export { TaskAssignmentsService } from './components/tasks/components/dialog-tas
   providers: [
     ProjectService,
     ProjectAssignmentService,
+    ProjectCloneCopyService,
     ProjectCommentService,
+    ProjectCreateSubService,
+    ProjectReviewService,
     ProjectStatusService,
     ProjectWorkLogService,
     TaskService,

@@ -41,7 +41,6 @@ constructor(
     dialogRef,
     data
   );
-  this.data.dataService
 }
 
 }
