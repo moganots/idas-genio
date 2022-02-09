@@ -11,6 +11,7 @@ export class NotificationsService extends DataService {
   constructor(public httpClient: HttpClient, public authenticationService: AuthenticationService) {
     super(httpClient, authenticationService);
     this.entityName = UserNotificationsConfiguration.identifier;
+    this.dataColumns = UserNotificationsConfiguration.dataColumns;
   }
 
   create(entity: any): any {

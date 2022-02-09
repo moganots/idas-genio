@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { DataColumnUtils } from '../utilities/data-column-utils';
 import { GeneralUtils } from '../utilities/general-utils';
 export class DataColumn {
   id: number;
@@ -19,12 +20,12 @@ export class DataColumn {
     this.id = dataColumn.id;
     this.name = dataColumn.name;
     this.canShow = dataColumn.canShow;
-    this.canEdit = dataColumn.canEdit;
+    this.canEdit = DataColumnUtils.setCanEdit(this.name);
     this.canGroup = dataColumn.canGroup;
     this.canSort = dataColumn.canSort;
     this.displayName = GeneralUtils.formatDisplayColumnName(this.name);
-    this.isRequired = dataColumn.isRequired;
-    this.controlType = dataColumn.controlType;
-    this.selectOptionControlType = dataColumn.selectOptionControlType;
+    this.isRequired = DataColumnUtils.setIsRequired(this.name);
+    this.controlType = DataColumnUtils.setControlType(this.name);
+    this.selectOptionControlType = DataColumnUtils.setSelectOptionControlType(this.name);
   }
 }

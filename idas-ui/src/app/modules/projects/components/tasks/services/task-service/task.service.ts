@@ -29,6 +29,7 @@ export class TaskService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskConfiguration.identifier;
+    this.dataColumns = TaskConfiguration.dataColumns;
     this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
     this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });

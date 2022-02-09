@@ -22,6 +22,7 @@ export class SuppliersService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = SupplierConfiguration.identifier;
+    this.dataColumns = SupplierConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise().then((lookupValues) => {

@@ -13,11 +13,11 @@ import {
   Employee,
   GeneralUtils,
   Project,
+  SharedConfiguration,
   Supplier,
   Task,
   User,
 } from 'app/shared/app-shared.module';
-import { AppModulesSharedModuleConfiguration } from '../../shared-modules-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -90,7 +90,7 @@ export class ReferenceValueService {
       case `EndDateTime`:
         this.addFieldLookupValues(
           field,
-          AppModulesSharedModuleConfiguration.scheduleTimes.map((time, index) => ({
+          SharedConfiguration.scheduleTimes.map((time, index) => ({
             id: index,
             displayValue: time,
           }))

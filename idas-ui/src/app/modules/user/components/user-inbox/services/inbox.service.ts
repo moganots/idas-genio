@@ -11,6 +11,7 @@ export class InboxService extends DataService {
   constructor(public httpClient: HttpClient, public authenticationService: AuthenticationService) {
     super(httpClient, authenticationService);
     this.entityName = UserInboxConfiguration.identifier;
+    this.dataColumns = UserInboxConfiguration.dataColumns;
   }
 
   create(entity: any): any {

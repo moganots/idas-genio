@@ -11,6 +11,7 @@ export class DashboardService extends DataService {
   constructor(public httpClient: HttpClient, public authenticationService: AuthenticationService) {
     super(httpClient, authenticationService);
     this.entityName = DashboardConfiguration.identifier;
+    this.dataColumns = DashboardConfiguration.dataColumns;
   }
 
 }

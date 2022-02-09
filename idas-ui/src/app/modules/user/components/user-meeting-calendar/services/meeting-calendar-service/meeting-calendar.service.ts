@@ -29,6 +29,7 @@ export class MeetingCalendarService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = CalendarEventConfiguration.identifier;
+    this.dataColumns = CalendarEventConfiguration.dataColumns;
     this.lookupValueService.getAll<LookupValue>().toPromise()
       .then((lookupValues) => {
       this.lookupValues = lookupValues;

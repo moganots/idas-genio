@@ -25,6 +25,7 @@ export class TaskWorkLogService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskWorkLogConfiguration.identifier;
+    this.dataColumns = TaskWorkLogConfiguration.dataColumns;
     this.taskService.getAll<Task>().toPromise().then((Tasks) => { this.tasks = Tasks});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }

@@ -25,6 +25,7 @@ export class ProjectService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectConfiguration.identifier;
+    this.dataColumns = ProjectConfiguration.dataColumns;
     this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }

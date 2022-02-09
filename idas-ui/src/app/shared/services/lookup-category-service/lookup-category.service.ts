@@ -13,6 +13,7 @@ export class LookupCategoryService extends DataService {
   constructor(public httpClient: HttpClient, public authenticationService: AuthenticationService) {
     super(httpClient, authenticationService);
     this.entityName = LookupCategoryConfiguration.identifier;
+    this.dataColumns = LookupCategoryConfiguration.dataColumns;
   }
   mapValues(category: LookupCategory) {
     return category;

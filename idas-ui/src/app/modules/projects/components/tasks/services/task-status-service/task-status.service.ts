@@ -29,6 +29,7 @@ export class TaskStatusService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskStatusConfiguration.identifier;
+    this.dataColumns = TaskStatusConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()

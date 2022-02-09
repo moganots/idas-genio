@@ -12,10 +12,10 @@ import {
   DateUtils,
   LookupValue,
   LookupValueService,
+  SharedConfiguration,
 } from 'app/shared/app-shared.module';
 import { map, startWith } from 'rxjs/operators';
 import { ReferenceValueService } from '../../services/reference-value-service/reference-value.service';
-import { AppModulesSharedModuleConfiguration } from '../../shared-modules-configuration';
 import { BaseComponent } from '../base-component/base.component';
 
 @Component({
@@ -54,72 +54,11 @@ export class BaseDataComponent extends BaseComponent {
     );
   }
   setDataSourceColumns(): void {
-    // this.getDataSourceColumns();
     this.setDataSourceColumnNames();
-    this.setDataSourceColumnCanEditOrIsRequiredFlags();
-    this.setDataSourceColumnControlTypes();
     this.setDataSourceColumnLookupOrReferenceValues();
     this.setGridViewDataSourceColumns();
     this.setGridViewGroupByDataSourceColumnNames();
     this.addGridViewActionButtonsColumn();
-  }
-  /*   getDataSourceColumns() {
-    this.dataSourceColumns = (this.sourceDataColumns || [])??.map((sdc) => {
-      return new DataColumn(sdc);
-    });
-  } */
-  setDataSourceColumnCanEditOrIsRequiredFlags() {
-    this.dataSourceColumns?.forEach((cn) => {
-      cn.isRequired = !(
-        AppModulesSharedModuleConfiguration.cannotEditColumns.includes(
-          cn.name
-        ) ||
-        AppModulesSharedModuleConfiguration.optionalColumns.includes(cn.name)
-      );
-      // Set canEdit flag
-      // ToDo: Check current user's access permissions
-      cn.canEdit =
-        !AppModulesSharedModuleConfiguration.cannotEditColumns.includes(
-          cn.name
-        );
-    });
-  }
-  setDataSourceColumnControlTypes() {
-    this.dataSourceColumns?.forEach((cn) => {
-      if (this.isUseCheckbox(cn)) {
-        cn.controlType = 'checkbox';
-      } else if (this.isDateField(cn)) {
-        cn.controlType = 'datetimepicker';
-      } else if (this.isNumberField(cn)) {
-        cn.controlType = 'number';
-      } else if (this.isTextAreaField(cn)) {
-        cn.controlType = 'textarea';
-      } else if (this.isMaskedField(cn)) {
-        cn.controlType = 'password';
-      } else if (this.isUseBreakOrNewlineOrSection(cn)) {
-        cn.controlType = 'break';
-      } else if (this.isLookupOrReferenceValueField(cn)) {
-        cn.controlType = 'select';
-        this.setSelectOptionControlType(cn);
-      } else if (this.isTimeField(cn)) {
-        cn.controlType = 'timepicker';
-        this.setTimePickerLookupValues(cn);
-      } else if (this.isUseImage(cn)) {
-        cn.controlType = 'image';
-      } else {
-        cn.controlType = 'textbox';
-      }
-    });
-  }
-  setTimePickerLookupValues(cn: DataColumn) {
-    AppModulesSharedModuleConfiguration.scheduleTimes
-      ?.map((time, index) => ({
-        id: index,
-        title: time,
-        value: time,
-        displayValue: time,
-      }))
-      .forEach((value) => cn.lookupValues.push(value));
   }
   setDataSourceColumnLookupOrReferenceValues() {
     this.dataSourceColumns
@@ -274,7 +213,7 @@ export class BaseDataComponent extends BaseComponent {
     );
   }
   getTimeValue(name: string) {
-    if (!AppModulesSharedModuleConfiguration.timeColumns.includes(name))
+    if (!SharedConfiguration.timeColumns.includes(name))
       return null;
     const hours = String(this.appendLeadingZero(new Date().getHours()));
     const minutes = String(this.appendLeadingZero(new Date().getMinutes()));

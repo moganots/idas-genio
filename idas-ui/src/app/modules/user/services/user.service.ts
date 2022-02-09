@@ -34,6 +34,7 @@ export class UserService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = UserConfiguration.identifier;
+    this.dataColumns = UserConfiguration.dataColumns;
     this.clientsService.getAll<Client>().toPromise().then((clients) => {
       this.clients = clients;
     });

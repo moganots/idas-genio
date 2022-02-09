@@ -25,6 +25,7 @@ export class ProjectWorkLogService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectWorkLogConfiguration.identifier;
+    this.dataColumns = ProjectWorkLogConfiguration.dataColumns;
     this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }

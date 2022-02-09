@@ -112,6 +112,7 @@ export class ManageProjectTaskToolbarComponent
     }
   }
   openDialog(dialogComponent: any, action: string) {
+    console.log(this.dataService)
     super.openDialog(
       dialogComponent,
       {
@@ -122,22 +123,11 @@ export class ManageProjectTaskToolbarComponent
         pageName: `${this.splitCamelCase(this.capitalizeFirstLetter(action))} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageTitle: `${this.splitCamelCase(this.capitalizeFirstLetter(action))} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: `${this.selectedElement?.Name}`,
-        dataColumns: this.getActionEntityNameDataColumns(action),
+        dataColumns: this.dataService.dataColumns,
         selectedElement: this.selectedElement || {},
         // selectedElementIndex: index || this.selectedElementIndex,
       },
       () => { }
     );
-  }
-  getActionEntityNameDataService(action: string) {
-    switch(this.toLocaleLowerCaseTrim(this.entityName)){
-      case `project`:
-        switch(this.toLocaleLowerCaseTrim(action)){
-          case `edit`:
-        }
-    }
-  }
-  getActionEntityNameDataColumns(action: string) {
-
   }
 }

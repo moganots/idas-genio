@@ -25,6 +25,7 @@ export class ProjectCommentService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectCommentConfiguration.identifier;
+    this.dataColumns = ProjectCommentConfiguration.dataColumns;
     this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }

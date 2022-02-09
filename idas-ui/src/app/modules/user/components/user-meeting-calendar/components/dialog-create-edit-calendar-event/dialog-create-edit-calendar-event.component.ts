@@ -9,7 +9,6 @@ import {
 import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base-dialog/base-dialog.component';
 import {
   ReferenceValueService,
-  AppModulesSharedModuleConfiguration,
 } from 'app/modules/_shared/app-modules-shared.module';
 import { CalendarConfiguration } from 'app/shared/components/calendar/app-shared-components-calendar.module';
 import {
@@ -19,6 +18,7 @@ import {
   FileAttachment,
   FileAttachmentService,
   LookupValueService,
+  SharedConfiguration,
   User,
 } from 'app/shared/app-shared.module';
 import { Observable } from 'rxjs';
@@ -76,7 +76,7 @@ export class DialogCreateEditCalendarEventComponent
       .join(` `)}`;
     this.dataSourceColumns = CalendarEventConfiguration.dataColumns;
     this.calendarEventScheduleTimes =
-      AppModulesSharedModuleConfiguration.scheduleTimes.map((time, index) => ({
+      SharedConfiguration.scheduleTimes.map((time, index) => ({
         id: index,
         value: time,
         displayValue: time,

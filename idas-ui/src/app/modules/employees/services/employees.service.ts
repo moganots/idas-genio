@@ -22,6 +22,7 @@ export class EmployeesService extends DataService {
   ) {
     super(httpEmployee, authenticationService);
     this.entityName = EmployeeConfiguration.identifier;
+    this.dataColumns = EmployeeConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise().then((lookupValues) => {

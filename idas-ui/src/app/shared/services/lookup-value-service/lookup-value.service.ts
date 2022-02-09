@@ -21,6 +21,7 @@ export class LookupValueService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = LookupValueConfiguration.identifier;
+    this.dataColumns = LookupValueConfiguration.dataColumns;
     this.lookupCategoryService
       .getAll<LookupCategory>()
       .toPromise()

@@ -90,6 +90,7 @@ export { EmployeesUtil } from './utilities/employees-util';
 export { PreviousOrNext } from './utilities/enum-previous-next';
 export { FileSizePipe } from './utilities/filesize.pipe';
 export { GeneralUtils } from './utilities/general-utils';
+export { DataColumnUtils } from './utilities/data-column-utils';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],

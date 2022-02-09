@@ -1,17 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { BaseService } from '../base-service/base.service';
 import { ResponseResult } from 'app/shared/domain-models/http/response-result';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
-import { User } from 'app/shared/domain-models/user/user';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
+import { DataColumn } from 'app/shared/domain-models/data-column';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService extends BaseService {
+  @Input() public dataColumns: DataColumn[];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService

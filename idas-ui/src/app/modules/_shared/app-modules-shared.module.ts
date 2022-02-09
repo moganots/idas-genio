@@ -25,8 +25,6 @@ import { BaseDataComponent } from './components/base-data-component/base-data.co
 import { MetricDetailComponent } from './components/metric-detail/metric-detail.component';
 import { ReferenceValueService } from './services/reference-value-service/reference-value.service';
 
-export { AppModulesSharedModuleConfiguration } from './shared-modules-configuration';
-
 export { PageComponent } from './components/page/page.component';
 export { DataViewTableSimpleComponent } from './components/data-view/data-view-table-simple/data-view-table-simple.component';
 export { DialogCreateEditDataComponent } from './components/dialogs/dialog-create-edit-data/dialog-create-edit-data.component';

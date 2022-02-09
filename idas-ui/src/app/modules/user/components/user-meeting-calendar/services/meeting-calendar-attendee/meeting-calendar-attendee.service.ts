@@ -16,6 +16,7 @@ export class MeetingCalendarAttendeeService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = CalendarEventAttendeeConfiguration.identifier;
+    this.dataColumns = CalendarEventAttendeeConfiguration.dataColumns;
     this.userService.getAll<User>().toPromise().then((users) => {
       this.users = users;
     });

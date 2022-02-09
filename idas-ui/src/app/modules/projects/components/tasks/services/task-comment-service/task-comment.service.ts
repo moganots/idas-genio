@@ -25,6 +25,7 @@ export class TaskCommentService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskCommentConfiguration.identifier;
+    this.dataColumns = TaskCommentConfiguration.dataColumns;
     this.taskService.getAll<Task>().toPromise().then((tasks) => { this.tasks = tasks});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }

@@ -29,6 +29,7 @@ export class ProjectAssignService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectAssignConfiguration.identifier;
+    this.dataColumns = ProjectAssignConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()

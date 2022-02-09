@@ -18,6 +18,7 @@ export class FileAttachmentService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = FileAttachmentConfiguration.identifier;
+    this.dataColumns = FileAttachmentConfiguration.dataColumns;
   }
   download(file: FileAttachment): Observable<FileAttachment> {
     this.resourceType = `download`;

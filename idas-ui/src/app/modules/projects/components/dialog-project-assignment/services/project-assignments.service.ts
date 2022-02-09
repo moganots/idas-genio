@@ -22,6 +22,7 @@ export class ProjectAssignmentsService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ProjectAssignConfiguration.identifier;
+    this.dataColumns = ProjectAssignConfiguration.dataColumns;
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectAssignment: ProjectAssignment) {

@@ -22,6 +22,7 @@ export class ClientsService extends DataService {
   ) {
     super(httpClient, authenticationService);
     this.entityName = ClientConfiguration.identifier;
+    this.dataColumns = ClientConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise().then((lookupValues) => {

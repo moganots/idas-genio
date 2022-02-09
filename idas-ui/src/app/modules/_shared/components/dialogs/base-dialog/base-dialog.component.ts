@@ -76,7 +76,7 @@ export class BaseDialogComponent
     this.selectedElementIndex = data?.selectedElementIndex;
   }
   ngOnInit(): void {
-    // this.setDataSourceColumns();
+    this.setDataSourceColumns();
   }
   onClickDialogClose() {
     this.dialogRef.close();
