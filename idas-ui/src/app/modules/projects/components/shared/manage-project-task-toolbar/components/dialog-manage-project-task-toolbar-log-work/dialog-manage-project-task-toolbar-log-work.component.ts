@@ -38,10 +38,10 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
   extends BaseDialogComponent
   implements OnInit
 {
-  timeSpent: string;
+  timeSpent: string = null;
   dateStarted: Date = new Date();
-  dateCompleted: Date;
-  description: string;
+  dateCompleted: Date = new Date();
+  description: string = null;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -80,11 +80,6 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
         Validators.required
       ),
     });
-  }
-  onDescriptionChanged(event) {
-    if (event && event?.srcElement && event?.srcElement?.id) {
-      this.description = event?.srcElement?.innerText;
-    }
   }
   onClickSave(): void {
     if (

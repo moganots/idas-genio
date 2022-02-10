@@ -42,22 +42,18 @@ export class LookupValueService extends DataService {
     return lookupValue;
   }
   getCssClassCategory(value: LookupValue) {
-    return !GeneralUtils.isStringSet(value?.LookupCategory?.Name)
-      ? null
-      : GeneralUtils.toLocalLowerCaseWithTrim(
-          value?.LookupCategory?.Name?.split(' ').join('-')
-        );
+    return this.getCssClassFrom(value?.LookupCategory?.Name);
   }
   getCssColorCategory(value: LookupValue) {
     return `$idas-color-${this.getCssClassCategory(value)}`;
   }
   getCssClass(value: LookupValue) {
-    const lookupValue = value?.Value || value?.Value2 || value?.Value3;
-    return !GeneralUtils.isStringSet(lookupValue)
-      ? null
-      : GeneralUtils.toLocalLowerCaseWithTrim(lookupValue.split(' ').join('-'));
+    return this.getCssClassFrom(value?.Value || value?.Value2 || value?.Value3);
   }
   getCssColorValue(value: LookupValue) {
     return `${this.getCssColorCategory(value)}-${this.getCssClass(value)}`;
+  }
+  getCssClassFrom(value: string) {
+    return GeneralUtils.toLocalLowerCaseWithTrim(value?.split(' ')?.join('-'));
   }
 }

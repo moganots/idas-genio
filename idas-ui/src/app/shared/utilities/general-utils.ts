@@ -9,10 +9,10 @@ export class GeneralUtils {
     return !(obj === null || obj === undefined);
   }
   public static isStringSet(str: string) {
-    return !(str && String(str).length === 0);
+    return this.isObjectSet(str) && String(str).trim().length !== 0;
   }
   public static isNotEmptyString(str: string) {
-    return this.isStringSet(str) && String(str).trim().length !== 0;
+    return !this.isStringSet(str);
   }
   public static isNumber = (value: any) => {
     return value && typeof value === 'number';
@@ -156,7 +156,7 @@ export class GeneralUtils {
     return this.isObjectSet(value) ? value : null;
   }
   public static StringNullIf(value: string) {
-    return this.isNotEmptyString(value) ? value : null;
+    return this.isStringSet(value) ? value : null;
   }
   public static EmptyStringIfNull(value: any) {
     return String(value || ``);
