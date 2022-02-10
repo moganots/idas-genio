@@ -215,8 +215,7 @@ export class BaseDataComponent extends BaseComponent {
     );
   }
   getTimeValue(name: string) {
-    if (!SharedConfiguration.timeColumns.includes(name))
-      return null;
+    if (!SharedConfiguration.timeColumns.includes(name)) return null;
     const hours = String(this.appendLeadingZero(new Date().getHours()));
     const minutes = String(this.appendLeadingZero(new Date().getMinutes()));
     switch (name) {
@@ -243,16 +242,18 @@ export class BaseDataComponent extends BaseComponent {
     filterValue = String(this.getFilterValue(filterValue, column))
       .toLocaleLowerCase()
       .trim();
-    // tslint:disable-next-line:max-line-length
-    const filteredValues = values.filter(
+      return this.filterValuesBy(values, filterValue);
+  }
+  filterValuesBy(values: any[], filterValue: any) {
+    const filteredValues = values?.filter(
       (value) =>
         this.filterById(value, filterValue) ||
         this.filterByDisplayValue(value, filterValue)
     );
-    const hasValues = !filteredValues.every((value) => value === undefined);
+    const hasValues = !filteredValues?.every((value) => value === undefined);
     return hasValues
       ? Array.from(new Set(filteredValues?.map((value) => value))).sort(
-          (value) => value.displayValue
+          (value) => value?.displayValue || value
         )
       : [];
   }
@@ -267,13 +268,13 @@ export class BaseDataComponent extends BaseComponent {
     ).value;
   }
   filterById(value: any, filterValue: any): unknown {
-    return String(value.id || value._id || ``).includes(
+    return String(value?.id || value?._id || ``).includes(
       this.toLocaleLowerCaseTrim(filterValue)
     );
   }
   filterByDisplayValue(value: any, filterValue: any): unknown {
     return this.toLocaleLowerCaseTrim(
-      String(value.displayValue || value || ``)
+      String(value?.displayValue || value || ``)
     ).includes(this.toLocaleLowerCaseTrim(filterValue));
   }
   getDisplayWithValue(event: any) {
@@ -294,11 +295,13 @@ export class BaseDataComponent extends BaseComponent {
   onValueChanged(event: any) {
     if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
       this.updates[event?.target?.id] =
-        event?.target?.value?.id || event?.target?.value?._id || event?.target?.value;
+        event?.target?.value?.id ||
+        event?.target?.value?._id ||
+        event?.target?.value;
     }
     return;
   }
-  onDivValueChanged(event: any){
+  onDivValueChanged(event: any) {
     if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
       this.updates[event?.target?.id] = event?.srcElement?.innerText;
     }
@@ -311,23 +314,31 @@ export class BaseDataComponent extends BaseComponent {
       GeneralUtils.isStringSet(event?.source?.id) &&
       event.source.value &&
       !(
-        event.source.value === 'No option value(s)' ||
-        event.source.value.displayValue === 'No option value(s)'
+        event?.source?.value === 'No option value(s)' ||
+        event?.source?.value?.displayValue === 'No option value(s)'
       )
     ) {
       this.updates[event?.source?.id] =
-        event.source.value.id || event.source.value._id || event.source.value;
+        event?.source?.value?.id || event?.source?.value?._id || event.source.value;
     }
     return;
   }
   onDateTimePickerChanged(event: MatDatetimePickerInputEvent<Date>) {
-    if (event && event.targetElement && GeneralUtils.isStringSet(event?.targetElement?.id)) {
+    if (
+      event &&
+      event.targetElement &&
+      GeneralUtils.isStringSet(event?.targetElement?.id)
+    ) {
       this.updates[event?.targetElement?.id] = new Date(event.target.value);
     }
     return;
   }
   onDatePickerChanged(event: MatDatepickerInputEvent<Date>) {
-    if (event && event.targetElement && GeneralUtils.isStringSet(event?.targetElement?.id)) {
+    if (
+      event &&
+      event.targetElement &&
+      GeneralUtils.isStringSet(event?.targetElement?.id)
+    ) {
       this.updates[event?.targetElement?.id] = new Date(event.target.value);
     }
     return;

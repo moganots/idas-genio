@@ -8,25 +8,25 @@
                                   btn-white
                                   btn-round
                                   btn-just-icon btn-idas {{
-        selected?.Priority?.CssClassCategory
-      }} {{ selected?.Priority?.CssClass }}
+        selectedElement?.Priority?.CssClassCategory
+      }} {{ selectedElement?.Priority?.CssClass }}
                                 "
       type="button"
       [matMenuTriggerFor]="priorityMenu"
     >
       <i
         class="material-icons btn-idas btn-idas-detail {{
-          selected?.Priority?.CssClassCategory
-        }} {{ selected?.Priority?.CssClass }}"
-        >{{ selected?.Priority?.Icon }}</i
+          selectedElement?.Priority?.CssClassCategory
+        }} {{ selectedElement?.Priority?.CssClass }}"
+        >{{ selectedElement?.Priority?.Icon }}</i
       >
     </button>
     <p
-      class="label-detail {{ selected?.Priority?.CssClassCategory }} {{
-        selected?.Priority?.CssClass
+      class="label-detail {{ selectedElement?.Priority?.CssClassCategory }} {{
+        selectedElement?.Priority?.CssClass
       }} priority"
     >
-      {{ selected?.Priority?.Value }}
+      {{ selectedElement?.Priority?.Value }}
     </p>
     <mat-menu
       #priorityMenu="matMenu"
@@ -58,25 +58,25 @@
                                   btn-white
                                   btn-round
                                   btn-just-icon btn-idas {{
-        selected?.Status?.CssClassCategory
-      }} {{ selected?.Status?.CssClass }}
+        selectedElement?.Status?.CssClassCategory
+      }} {{ selectedElement?.Status?.CssClass }}
                                 "
       type="button"
       [matMenuTriggerFor]="statusMenu"
     >
       <i
         class="material-icons btn-idas btn-idas-detail {{
-          selected?.Status?.CssClassCategory
-        }} {{ selected?.Status?.CssClass }}"
-        >{{ selected?.Status?.Icon }}</i
+          selectedElement?.Status?.CssClassCategory
+        }} {{ selectedElement?.Status?.CssClass }}"
+        >{{ selectedElement?.Status?.Icon }}</i
       >
     </button>
     <p
-      class="label-detail {{ selected?.Status?.CssClassCategory }} {{
-        selected?.Status?.CssClass
+      class="label-detail {{ selectedElement?.Status?.CssClassCategory }} {{
+        selectedElement?.Status?.CssClass
       }} status"
     >
-      {{ selected?.Status?.Value }}
+      {{ selectedElement?.Status?.Value }}
     </p>
     <mat-menu
       #statusMenu="matMenu"

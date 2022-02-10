@@ -105,19 +105,19 @@ export class CommonComponent {
     );
   }
   getLookupValueCategoryAsCssClassById(id?: number) {
-    return this.getLookupValueById(id).CssClassCategory;
+    return this.getLookupValueById(id)?.CssClassCategory;
   }
   getLookupValueAsCssClassById(id?: number) {
-    return this.getLookupValueById(id).CssClass;
+    return this.getLookupValueById(id)?.CssClass;
   }
   getLookupValueIconById(id?: number) {
-    return this.getLookupValueById(id).Icon;
+    return this.getLookupValueById(id)?.Icon;
   }
   getLookupValueImageById(id?: number) {
-    return this.getLookupValueById(id).Image;
+    return this.getLookupValueById(id)?.Image;
   }
   getLookupValueAsTitleById(id?: number) {
-    return this.getLookupValueById(id).Value;
+    return this.getLookupValueById(id)?.Value;
   }
   hasItems(items: any[]) {
     return GeneralUtils.hasItems(items);
