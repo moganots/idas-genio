@@ -1,3 +1,4 @@
+import { MatDatetimePickerInputEvent } from '@angular-material-components/datetime-picker';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -10,6 +11,7 @@ import {
   AuthenticationService,
   DataColumn,
   DateUtils,
+  GeneralUtils,
   LookupValue,
   LookupValueService,
   SharedConfiguration,
@@ -284,20 +286,21 @@ export class BaseDataComponent extends BaseComponent {
       event?.DisplayName ||
       event?._id ||
       event?.id ||
+      event?.value ||
       event ||
       null
     );
   }
   onValueChanged(event: any) {
-    if (event && event?.target?.id) {
-      this.updates[event.target.id] =
+    if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
+      this.updates[event?.target?.id] =
         event?.target?.value?.id || event?.target?.value?._id || event?.target?.value;
     }
     return;
   }
   onDivValueChanged(event: any){
-    if (event && event?.target?.id) {
-      this.updates[event.target.id] = event?.srcElement?.innerText;
+    if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
+      this.updates[event?.target?.id] = event?.srcElement?.innerText;
     }
     return;
   }
@@ -305,27 +308,33 @@ export class BaseDataComponent extends BaseComponent {
     if (
       event &&
       event.source &&
+      GeneralUtils.isStringSet(event?.source?.id) &&
       event.source.value &&
       !(
         event.source.value === 'No option value(s)' ||
         event.source.value.displayValue === 'No option value(s)'
       )
     ) {
-      this.updates[event.source.id] =
+      this.updates[event?.source?.id] =
         event.source.value.id || event.source.value._id || event.source.value;
     }
     return;
   }
-  onDateChanged(event: MatDatepickerInputEvent<Date>) {
-    if (event && event.targetElement) {
-      this.updates[event.targetElement.id] =
-        DateUtils.formatDateYYMMDDWithDashSeparator(event.value);
+  onDateTimePickerChanged(event: MatDatetimePickerInputEvent<Date>) {
+    if (event && event.targetElement && GeneralUtils.isStringSet(event?.targetElement?.id)) {
+      this.updates[event?.targetElement?.id] = new Date(event.target.value);
+    }
+    return;
+  }
+  onDatePickerChanged(event: MatDatepickerInputEvent<Date>) {
+    if (event && event.targetElement && GeneralUtils.isStringSet(event?.targetElement?.id)) {
+      this.updates[event?.targetElement?.id] = new Date(event.target.value);
     }
     return;
   }
   onCheckboxClicked(event: MatCheckboxChange) {
-    if (event && event.source) {
-      this.updates[event.source.id] = event.checked;
+    if (event && event.source && GeneralUtils.isStringSet(event?.source?.id)) {
+      this.updates[event?.source?.id] = event.checked;
     }
     return;
   }

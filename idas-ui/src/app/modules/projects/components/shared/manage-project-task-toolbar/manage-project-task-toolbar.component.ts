@@ -112,7 +112,6 @@ export class ManageProjectTaskToolbarComponent
     }
   }
   openDialog(dialogComponent: any, action: string) {
-    console.log(this.dataService)
     super.openDialog(
       dialogComponent,
       {
@@ -125,6 +124,7 @@ export class ManageProjectTaskToolbarComponent
         pageSubTitle: `${this.selectedElement?.Name}`,
         dataColumns: this.dataService.dataColumns,
         selectedElement: this.selectedElement || {},
+        selectedElementId: this.selectedElement?._id || this.selectedElement?.id,
         // selectedElementIndex: index || this.selectedElementIndex,
       },
       () => { }

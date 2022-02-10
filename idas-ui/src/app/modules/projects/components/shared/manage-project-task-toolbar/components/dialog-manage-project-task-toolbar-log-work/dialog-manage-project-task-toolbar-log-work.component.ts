@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -12,6 +17,8 @@ import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base
 import {
   AlertifyService,
   AuthenticationService,
+  DateUtils,
+  GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 
@@ -31,6 +38,10 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
   extends BaseDialogComponent
   implements OnInit
 {
+  timeSpent: string;
+  dateStarted: Date = new Date();
+  dateCompleted: Date;
+  description: string;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -54,8 +65,80 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
       data
     );
   }
-
   ngOnInit(): void {
-    this.initFormGroupAndFields();
+    this.frmGroup = new FormGroup({
+      timeSpent: new FormControl(
+        { value: null, disabled: false },
+        Validators.required
+      ),
+      dateStarted: new FormControl(
+        { value: new Date(), disabled: false },
+        Validators.required
+      ),
+      description: new FormControl(
+        { value: null, disabled: false },
+        Validators.required
+      ),
+    });
+  }
+  onDescriptionChanged(event) {
+    if (event && event?.srcElement && event?.srcElement?.id) {
+      this.description = event?.srcElement?.innerText;
+    }
+  }
+  onClickSave(): void {
+    if (
+      GeneralUtils.isStringSet(this.timeSpent) &&
+      this.dataService &&
+      // tslint:disable-next-line:use-isnan
+      (this.selectedElementId && this.selectedElementId !== NaN && this.selectedElementId !== 0)
+    ) {
+      this.dateStarted = this.updates?.dateStarted || this.dateStarted;
+      console.log(`dateStarted=${this.dateStarted}`)
+      this.setDateCompleted();
+      this.dataService
+        .CreateUpdateDelete('Create', this.getWorkLog())
+        .subscribe(
+          (updated) => {
+            this.alertifyService.success(
+              `${this.entityName}, work log added successfully`
+            );
+          },
+          (error) => {
+            this.alertifyService.error(
+              `${this.entityName}, work log was not added`
+            );
+          }
+        );
+    }
+  }
+  setDateCompleted() {
+    this.dateCompleted = this.dateStarted || new Date();
+    const tsItems = this.timeSpent?.split(` `);
+    const tsObject = { y: 0, m: 0, d: 0, w: 0, h: 0, min: 0, s: 0, ms: 0 };
+    Object.keys(tsObject).map((key, index) => {
+      tsObject[key] = GeneralUtils.toNumber(
+        tsItems
+          ?.find((ts) => ts.replace(/\d+/g, '') === key)
+          ?.replace(/\D/g, '')
+          ?.trim()
+      );
+    });
+    Object.keys(tsObject).forEach((key) => {
+      this.dateCompleted = DateUtils.add(
+        this.dateCompleted,
+        key,
+        tsObject[key]
+      );
+    });
+  }
+  getWorkLog(): any {
+    return {
+      ProjectId: this.selectedElementId,
+      TaskId: this.selectedElementId,
+      DateStarted: this.dateStarted,
+      DateCompleted: this.dateCompleted,
+      Description: this.updates?.description
+    }
   }
 }

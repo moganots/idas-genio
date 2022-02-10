@@ -70,7 +70,6 @@ export class ManageProjectTaskDetailsComponent
         this.selectedElement.Status = value;
         break;
     }
-    console.log(this.dataService)
     this.dataService.CreateUpdateDelete(`update`, this.selectedElement).subscribe(
       (updated) => {
         this.alertifyService.success(`Task ${option}, updated successfully`);
@@ -79,6 +78,5 @@ export class ManageProjectTaskDetailsComponent
         this.alertifyService.error(`Task ${option}, not updated`);
       }
     );
-    console.log(`After: Update`);
   }
 }

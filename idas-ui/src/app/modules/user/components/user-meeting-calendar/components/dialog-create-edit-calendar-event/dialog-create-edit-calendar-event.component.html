@@ -169,8 +169,8 @@
                     name="{{ fidc.name }}"
                     [formControl]="frmGroupFields.controls[fidc.name]"
                     placeholder="{{ fidc.displayName }}"
-                    (dateInput)="onDateChanged($event)"
-                    (dateChange)="onDateChanged($event)"
+                    (dateInput)="onDatePickerChanged($event)"
+                    (dateChange)="onDatePickerChanged($event)"
                   />
                   <mat-datepicker-toggle
                     id="{{ fidc.name }}"

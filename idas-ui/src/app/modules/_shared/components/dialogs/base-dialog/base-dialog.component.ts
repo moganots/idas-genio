@@ -44,15 +44,16 @@ export class BaseDialogComponent
     @Inject(MAT_DIALOG_DATA)
     public data: any = {
       action: null,
-      dataService: null,
       entityName: null,
+      dataService: null,
       pageIcon: 'report_problem',
       pageName: 'no page name',
       pageTitle: 'no page title',
       pageSubTitle: 'no page title',
       dataColumns: [],
-      selectedElement: {},
       selectedElementIndex: -1,
+      selectedElementId: -1,
+      selectedElement: {},
     }
   ) {
     super(
@@ -65,15 +66,16 @@ export class BaseDialogComponent
       referenceValueService
     );
     this.action = data?.action;
-    this.dataService = data?.dataService;
     this.entityName = data?.entityName;
+    this.dataService = data?.dataService;
     this.pageIcon = data?.pageIcon;
     this.pageName = data?.pageName;
     this.pageTitle = data?.pageTitle;
     this.pageSubTitle = data?.pageSubTitle;
     this.dataSourceColumns = data?.dataColumns;
-    this.selectedElement = data?.selectedElement || {};
+    this.selectedElementId = data?.selectedElement?._id || data?.selectedElement?.id;
     this.selectedElementIndex = data?.selectedElementIndex;
+    this.selectedElement = data?.selectedElement || {};
   }
   ngOnInit(): void {
     this.setDataSourceColumns();

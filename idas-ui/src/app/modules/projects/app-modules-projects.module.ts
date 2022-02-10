@@ -18,6 +18,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { RouterModule } from '@angular/router';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
 
 import { AppModulesSharedModule } from '../_shared/app-modules-shared.module';
 import { AppSharedModule } from 'app/shared/app-shared.module';
@@ -152,6 +157,9 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     MatMenuModule,
     TextFieldModule,
     MatTabsModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule,
     AppModulesSharedModule,
     AppSharedModule,
   ],

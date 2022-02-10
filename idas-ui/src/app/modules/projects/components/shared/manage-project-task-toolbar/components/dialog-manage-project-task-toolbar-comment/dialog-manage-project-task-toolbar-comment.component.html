@@ -18,6 +18,15 @@
     </div>
     <form [formGroup]="frmGroup">
       <div class="content" formGroupName="frmFields">
+        <span>Comment</span>
+        <div
+          id="comment"
+          contenteditable="true"
+          class="textarea-editor comment"
+          (keyup)="onDivValueChanged($event)"
+        >
+          {{ frmGroupFields.controls["Comment"].value }}
+        </div>
       </div>
     </form>
     <footer class="footer">

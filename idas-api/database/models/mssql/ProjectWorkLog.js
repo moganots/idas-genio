@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-08
+| Create date:	2022-02-09
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[ProjectWorkLog] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -13,13 +13,14 @@
  */
 const ProjectWorkLog = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.ProjectId, entity.StartDate, entity.Description, entity.HoursWorked, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.ProjectId, entity.DateStarted, entity.DateCompleted, entity.Description, entity.HoursWorked, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, ProjectId, StartDate, Description, HoursWorked, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, ProjectId, DateStarted, DateCompleted, Description, HoursWorked, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			ProjectId: ProjectId,
-			StartDate: StartDate,
+			DateStarted: DateStarted,
+			DateCompleted: DateCompleted,
 			Description: Description,
 			HoursWorked: HoursWorked,
 			IsActive: IsActive,

@@ -221,8 +221,8 @@
                                     currentUser.Supplier ||
                                     {})[fidc.name]
                                 "
-                                (dateInput)="onDateChanged($event)"
-                                (dateChange)="onDateChanged($event)"
+                                (dateInput)="onDatePickerChanged($event)"
+                                (dateChange)="onDatePickerChanged($event)"
                               />
                               <mat-datepicker-toggle
                                 id="{{ fidc.name }}"
@@ -447,8 +447,8 @@
                                 [(ngModel)]="
                                   (currentUser.ContactDetail || {})[fidc.name]
                                 "
-                                (dateInput)="onDateChanged($event)"
-                                (dateChange)="onDateChanged($event)"
+                                (dateInput)="onDatePickerChanged($event)"
+                                (dateChange)="onDatePickerChanged($event)"
                               />
                               <mat-datepicker-toggle
                                 id="{{ fidc.name }}"
@@ -660,8 +660,8 @@
                                 class=""
                                 placeholder="{{ fidc.displayName }}"
                                 [(ngModel)]="(currentUser || {})[fidc.name]"
-                                (dateInput)="onDateChanged($event)"
-                                (dateChange)="onDateChanged($event)"
+                                (dateInput)="onDatePickerChanged($event)"
+                                (dateChange)="onDatePickerChanged($event)"
                               />
                               <mat-datepicker-toggle
                                 id="{{ fidc.name }}"

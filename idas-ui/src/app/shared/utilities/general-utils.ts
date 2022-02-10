@@ -197,4 +197,8 @@ export class GeneralUtils {
   public static getPredicateParams(predicate?: any) {
     return (predicate) ? Object.keys(predicate).map((key) => `${key}=${predicate[key]}`).join('&') : null;
   }
+  public static toNumber = (value: any) => {
+    // tslint:disable-next-line:radix
+    return parseInt(value) || 0;
+  }
 }

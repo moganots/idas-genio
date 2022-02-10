@@ -13,6 +13,7 @@ import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
+  TaskComment,
 } from 'app/shared/app-shared.module';
 
 @Component({
@@ -31,6 +32,7 @@ export class DialogManageProjectTaskToolbarCommentComponent
   extends BaseDialogComponent
   implements OnInit
 {
+  comment: any;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -54,8 +56,26 @@ export class DialogManageProjectTaskToolbarCommentComponent
       data
     );
   }
-
   ngOnInit(): void {
     this.initFormGroupAndFields();
+  }
+  onClickSave(): void {
+      if(this.dataService && this.selectedElementId && this.selectedElementId > 0 && this.isNotEmptyString(this.updates?.Comment)){
+        this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
+          (updated) => {
+            this.alertifyService.success(`${this.entityName}, comment added successfully`);
+          },
+          (error) => {
+            this.alertifyService.error(`${this.entityName}, comment was not added`);
+          }
+        );
+      }
+  }
+  getComment(): any {
+    return {
+      ProjectId: this.selectedElementId,
+      TaskId: this.selectedElementId,
+      Comment: this.updates?.comment
+    }
   }
 }

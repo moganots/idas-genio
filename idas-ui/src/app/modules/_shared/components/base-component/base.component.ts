@@ -45,8 +45,9 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   @Input() public dataSource: any[] = [];
   @Input() public dataSourceColumns: DataColumn[];
   @Input() public action: string;
-  @Input() public selectedElement: any = {};
   @Input() public selectedElementIndex: number;
+  @Input() public selectedElementId: number;
+  @Input() public selectedElement: any = {};
   public matTableDataSource: MatTableDataSource<any[]>;
   public updates: { [key: string]: any } = {};
   public form = new FormControl();

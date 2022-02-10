@@ -17,119 +17,115 @@ export class DateUtils {
       ),
       dow: date.getDay(),
     };
-  }
+  };
   public static yyyymmdd = () => {
     const dp = DateUtils.DateParts();
     return `${dp.year}${dp.month}${dp.day}`.trim();
-  }
+  };
   public static yyyymmddDashSeparator = () => {
     const dp = DateUtils.DateParts();
     return [dp.year, dp.month, dp.day].join('-').trim();
-  }
+  };
   public static yyyymmddDotSeparator = () => {
     const dp = DateUtils.DateParts();
     return [dp.year, dp.month, dp.day].join('.').trim();
-  }
+  };
   public static hms = () => {
     const dp = DateUtils.DateParts();
     return [dp.hour, dp.minutes, dp.seconds].join(':').trim();
-  }
+  };
   public static Thms = () => {
     return `T${DateUtils.hms()}`.trim();
-  }
+  };
   public static ThmsZ0200 = () => {
     return `${DateUtils.Thms()}+0200`.trim();
-  }
+  };
   public static hmsms = () => {
     const dp = DateUtils.DateParts();
     return [[dp.hour, dp.minutes, dp.seconds].join(':').trim(), dp.ms]
       .join('.')
       .trim();
-  }
+  };
   public static Thmsms = () => {
     return `T${DateUtils.hmsms()}`.trim();
-  }
+  };
   public static ThmsmsZ0200 = () => {
     return `${DateUtils.Thmsms()}+0200`.trim();
-  }
+  };
   public static yyyymmddhms = () => {
     return [DateUtils.yyyymmdd(), DateUtils.hms()].join(' ').trim();
-  }
+  };
   public static yyyymmddhmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.hms()]
       .join(' ')
       .trim();
-  }
+  };
   public static yyyymmddhmsDotSeparator = () => {
-    return [DateUtils.yyyymmddDotSeparator(), DateUtils.hms()]
-      .join(' ')
-      .trim();
-  }
+    return [DateUtils.yyyymmddDotSeparator(), DateUtils.hms()].join(' ').trim();
+  };
   public static yyyymmddhmsms = () => {
     return [DateUtils.yyyymmdd(), DateUtils.hmsms()].join(' ').trim();
-  }
+  };
   public static yyyymmddhmsmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.hmsms()]
       .join(' ')
       .trim();
-  }
+  };
   public static yyyymmddhmsmsDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.hmsms()]
       .join(' ')
       .trim();
-  }
+  };
   public static yyyymmddThms = () => {
     return [DateUtils.yyyymmdd(), DateUtils.Thms()].join(``).trim();
-  }
+  };
   public static yyyymmddThmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.Thms()]
       .join(``)
       .trim();
-  }
+  };
   public static yyyymmddThmsDotSeparator = () => {
-    return [DateUtils.yyyymmddDotSeparator(), DateUtils.Thms()]
-      .join(``)
-      .trim();
-  }
+    return [DateUtils.yyyymmddDotSeparator(), DateUtils.Thms()].join(``).trim();
+  };
   public static yyyymmddThmsms = () => {
     return [DateUtils.yyyymmdd(), DateUtils.Thmsms()].join(``).trim();
-  }
+  };
   public static yyyymmddThmsmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.Thmsms()]
       .join(``)
       .trim();
-  }
+  };
   public static yyyymmddThmsmsDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.Thmsms()]
       .join(``)
       .trim();
-  }
+  };
   public static yyyymmddThmsZ0200 = () => {
     return [DateUtils.yyyymmdd(), DateUtils.ThmsZ0200()].join(``).trim();
-  }
+  };
   public static yyyymmddThmsZDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.ThmsZ0200()]
       .join(``)
       .trim();
-  }
+  };
   public static yyyymmddThmsZDotSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.ThmsZ0200()]
       .join(``)
       .trim();
-  }
+  };
   public static yyyymmddThmsmsZ0200 = () => {
     return [DateUtils.yyyymmdd(), DateUtils.ThmsmsZ0200()].join(``).trim();
-  }
+  };
   public static yyyymmddThmsmsZDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.ThmsmsZ0200()]
       .join(``)
       .trim();
-  }
+  };
   public static yyyymmddThmsmsZDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.ThmsmsZ0200()]
       .join(``)
       .trim();
-  }
+  };
   public static dateDiffInDays(startDate: any, endDate: any): number {
     return (Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60 / 24;
   }
@@ -147,20 +143,70 @@ export class DateUtils {
     const diff =
       nDate.getDate() - nDate.getDay() + (nDate.getDay() === 0 ? -6 : 1);
     return new Date(nDate.setDate(diff));
-  }
+  };
   public static endOfWeek = (date) => {
     return new Date(DateUtils.addDays(DateUtils.startOfWeek(date), 6));
+  };
+  public static add = (date: Date, datePart: string, increment: number = 0) => {
+    switch (GeneralUtils.toLocalLowerCaseWithTrim(datePart)) {
+      case `y`:
+      case `year`:
+        return DateUtils.addYears(date, increment);
+      case `m`:
+      case `month`:
+        return DateUtils.addMonths(date, increment);
+      case `d`:
+      case `day`:
+        return DateUtils.addDays(date, increment);
+      case `w`:
+      case `week`:
+        return DateUtils.addWeeks(date, increment);
+      case `h`:
+      case `hour`:
+        return DateUtils.addHours(date, increment);
+      case `min`:
+      case `minute`:
+        return DateUtils.addMinutes(date, increment);
+      case `s`:
+      case `ss`:
+      case `second`:
+        return DateUtils.addSeconds(date, increment);
+      case `ms`:
+      case `millisecond`:
+        return DateUtils.addMilliseconds(date, increment);
+      default:
+        return date;
+    }
   }
   public static addYears(date: Date, years: number): Date {
-    return new Date(date.setDate(date.getFullYear() + years));
+    return new Date(date.setFullYear(date.getFullYear() + years));
+  }
+  public static addMonths(date: Date, months: number): Date {
+    return new Date(date.setMonth(date.getMonth() + months));
   }
   public static addDays(date: Date, days: number): Date {
     return new Date(date.setDate(date.getDate() + days));
   }
-  public static addMonths(date: Date, months: number): Date {
-    return new Date(date.setDate(date.getMonth() + months));
+  public static addWeeks(date: Date, weeks: number): Date {
+    return new Date(date.setDate(date.getDate() + 7 * weeks));
   }
-  public static getFirst(date: Date, weekDay: WeekDay, previousNext: PreviousOrNext): Date {
+  public static addHours(date: Date, hours: number): Date {
+    return new Date(date.setHours(date.getHours() + hours));
+  }
+  public static addMinutes(date: Date, minutes: number): Date {
+    return new Date(date.setMinutes(date.getMinutes() + minutes));
+  }
+  public static addSeconds(date: Date, seconds: number): Date {
+    return new Date(date.setSeconds(date.getSeconds() + seconds));
+  }
+  public static addMilliseconds(date: Date, milliseconds: number): Date {
+    return new Date(date.setMilliseconds(date.getMilliseconds() + milliseconds));
+  }
+  public static getFirst(
+    date: Date,
+    weekDay: WeekDay,
+    previousNext: PreviousOrNext
+  ): Date {
     return DateUtils.getDayOfWeek(date, weekDay, previousNext);
   }
   public static getDayOfWeek(
@@ -188,13 +234,9 @@ export class DateUtils {
   }
   public static getFirstDayOfMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth(), 1);
-  }
+  };
   public static getFirstDayOfWeek(date: Date, weekDay: WeekDay): Date {
-    return DateUtils.getDayOfWeek(
-      date,
-      weekDay,
-      PreviousOrNext.Previous
-    );
+    return DateUtils.getDayOfWeek(date, weekDay, PreviousOrNext.Previous);
   }
   public static getFirstDayOfWorkWeek(date: Date): Date {
     return DateUtils.getDayOfWeek(
@@ -205,7 +247,7 @@ export class DateUtils {
   }
   public static getLastDayOfMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  }
+  };
   public static getLastDayOfWeek(date: Date, weekDay: WeekDay): Date {
     return DateUtils.getDayOfWeek(date, weekDay, PreviousOrNext.Next);
   }
@@ -275,7 +317,7 @@ export class DateUtils {
     ]
       .join('-')
       .trim();
-  }
+  };
   public static formatDateMMDDYYWithDashSeparator = (date: Date) => {
     return [
       GeneralUtils.appendLeadingZero(date.getMonth() + 1),
@@ -284,7 +326,7 @@ export class DateUtils {
     ]
       .join('-')
       .trim();
-  }
+  };
   public static formatDateYYMMDDWithDotSeparator = (date: Date) => {
     return [
       date.getFullYear(),
@@ -293,7 +335,7 @@ export class DateUtils {
     ]
       .join('.')
       .trim();
-  }
+  };
   public static formatDateMMDDYYWithDotSeparator = (date: Date) => {
     return [
       GeneralUtils.appendLeadingZero(date.getMonth() + 1),
@@ -302,7 +344,7 @@ export class DateUtils {
     ]
       .join('.')
       .trim();
-  }
+  };
   public static formatDateYYMMDDWithSlashSeparator = (date: Date) => {
     return [
       date.getFullYear(),
@@ -311,7 +353,7 @@ export class DateUtils {
     ]
       .join('/')
       .trim();
-  }
+  };
   public static formatDateMMDDYYWithSlashSeparator = (date: Date) => {
     return [
       GeneralUtils.appendLeadingZero(date.getMonth() + 1),
@@ -320,5 +362,22 @@ export class DateUtils {
     ]
       .join('/')
       .trim();
-  }
+  };
+  public static formatDateYYYYMMDDHMSDashSeparator = (date: Date) => {
+    return [
+      DateUtils.formatDateMMDDYYWithDashSeparator(date),
+      DateUtils.formatDateHMS(date),
+    ]
+      .join(' ')
+      .trim();
+  };
+  public static formatDateHMS = (date: Date) => {
+    return [
+      GeneralUtils.appendLeadingZero(date.getHours()),
+      GeneralUtils.appendLeadingZero(date.getMinutes()),
+      GeneralUtils.appendLeadingZero(date.getSeconds()),
+    ]
+      .join(':')
+      .trim();
+  };
 }

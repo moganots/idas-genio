@@ -1,36 +1,95 @@
 <div class="idas-dialog open">
-    <div class="card-header card-header-danger header">
-      <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-      <h4 class="card-title">{{ pageTitle }}</h4>
-      <p class="category">{{ pageSubTitle }}</p>
-      <span>
-        <button
-          mat-icon-button
-          class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
-          type="button"
-          data-dismiss="modal"
-          (click)="onClickDialogClose()"
-          title="Close"
-        >
-          <i class="material-icons header.buttons">close</i>
-        </button>
-      </span>
-    </div>
-    <form [formGroup]="frmGroup">
-      <div class="content" formGroupName="frmFields">
-      </div>
-    </form>
-    <footer class="footer">
+  <div class="card-header card-header-danger header">
+    <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+    <h4 class="card-title">{{ pageTitle }}</h4>
+    <p class="category">{{ pageSubTitle }}</p>
+    <span>
       <button
         mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
         type="button"
-        (click)="onClickSave()"
-        [mat-dialog-close]="selectedElement"
-        title="Save Changes"
+        data-dismiss="modal"
+        (click)="onClickDialogClose()"
+        title="Close"
       >
-        <i class="material-icons idas-button-icon">save</i>
+        <i class="material-icons header.buttons">close</i>
       </button>
-    </footer>
+    </span>
   </div>
-  
+  <form [formGroup]="frmGroup">
+    <div class="content">
+      <span>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="timeSpent"
+            name="timeSpent"
+            formControlName="timeSpent"
+            class=""
+            placeholder="Time Spent (e.g. 1y 1m 1d 1w 1h 30min)"
+            [(ngModel)]="timeSpent"
+            (change)="onValueChanged($event)"
+          />
+        </mat-form-field>
+        <span>
+          An estimate of how much time you have spent working on the
+          <span style="font-weight: bold">{{
+            capitalizeFirstLetter(entityName)
+          }}</span
+          >. <br />Where
+          <span style="font-weight: bold"
+            >y = Year, m = Month, d = Day, w = Week, h = Hour, min =
+            Minutes.</span
+          >
+          <br />
+          <br />
+        </span>
+      </span>
+      <span>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="dateStarted"
+            name="dateStarted"
+            formControlName="dateStarted"
+            placeholder="Date Started"
+            class=""
+            [ngxMatDatetimePicker]="picker"
+            (dateInput)="onDateTimePickerChanged($event)"
+            (dateChange)="onDateTimePickerChanged($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [enableMeridian]="true"></ngx-mat-datetime-picker>
+        </mat-form-field>
+      </span>
+      <span>
+        <span>Work Description</span>
+        <div
+          id="description"
+          contenteditable="true"
+          class="textarea-editor work-description"
+          (keyup)="onDivValueChanged($event)"
+        >
+          {{ frmGroup.controls["description"].value }}
+        </div>
+      </span>
+    </div>
+  </form>
+  <footer class="footer">
+    <button
+      mat-icon-button
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+      type="button"
+      (click)="onClickSave()"
+      [mat-dialog-close]="selectedElement"
+      title="Save Changes"
+    >
+      <i class="material-icons idas-button-icon">save</i>
+    </button>
+  </footer>
+</div>
