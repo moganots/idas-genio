@@ -89,6 +89,7 @@
             class=""
             [matAutocomplete]="macProjectAssignmentType"
             [(ngModel)]="projectAssignmentType"
+            
           />
           <mat-autocomplete
             id="projectAssignmentType"
@@ -144,7 +145,6 @@
           class="textarea-editor work-description"
           (keyup)="onDivValueChanged($event)"
         >
-          {{ frmGroup.controls["comment"].value }}
         </div>
       </span>
     </div>
@@ -157,6 +157,7 @@
       (click)="onClickSave()"
       [mat-dialog-close]="selectedElement"
       title="Save Changes"
+      [disabled]="frmGroup.invalid"
     >
       <i class="material-icons idas-button-icon">save</i>
     </button>

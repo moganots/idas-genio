@@ -94,22 +94,41 @@ export class DialogManageProjectTaskToolbarAssignComponent
       });
   }
   ngOnInit(): void {
-    this.frmGroup = new FormGroup({
-      assignee: new FormControl('', [Validators.required]),
-      projectAssignmentType: new FormControl('', [
+    this.frmGroup = this.formBuilder.group({
+      assignee: [
+        {
+          value: ``,
+          disabled: this.conditionControlIsDisabled(),
+          hidden: this.conditionControlIsHidden(),
+        },
+        Validators.required,
+      ],
+      projectAssignmentType: [
+        {
+          value: ``,
+          disabled: this.conditionControlIsDisabled(),
+          hidden: this.conditionControlIsHidden(),
+        },
         this.conditionalControlIsRequired(),
-      ]),
-      comment: new FormControl('', [Validators.required]),
+      ],
+      comment: [
+        {
+          value: ``,
+          disabled: this.conditionControlIsDisabled(),
+          hidden: this.conditionControlIsHidden(),
+        },
+        Validators.required,
+      ],
     });
-    this.filteredAssignees = this.frmGroup.controls[
+    this.filteredAssignees = this.frmGroup?.controls[
       `assignee`
-    ].valueChanges.pipe(
+    ]?.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterValuesBy(this.assignees, value))
     );
-    this.filteredProjectAssignmentTypes = this.frmGroup.controls[
+    this.filteredProjectAssignmentTypes = this.frmGroup?.controls[
       `projectAssignmentType`
-    ].valueChanges.pipe(
+    ]?.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterValuesBy(this.projectAssignmentTypes, value))
     );
@@ -158,27 +177,33 @@ export class DialogManageProjectTaskToolbarAssignComponent
     };
   }
   onClickSave(): void {
-    console.clear();
     if (
       this.dataService &&
-      GeneralUtils.isNumberSet(this.selectedElementId) &&
-      GeneralUtils.isNumberSet(this.assignee?._id) &&
-      GeneralUtils.toLocalLowerCaseWithTrim(this.entityName) === `project` &&
-      GeneralUtils.isNumberSet(this.projectAssignmentType?._id)
+        GeneralUtils.isNumberSet(this.selectedElementId)
     ) {
-      console.log(`this.assignee\r\n`);
-      console.log(this.assignee);
-      console.log(`\r\nthis.projectAssignmentType\r\n`);
-      console.log(this.projectAssignmentType);
-      console.log(`\r\nthis.comment=${this.updates?.comment}`);
+      this.dataService
+        .CreateUpdateDelete('Create', this.getAssignment())
+        .subscribe(
+          (updated) => {
+            this.alertifyService.success(
+              `${this.entityName}, assignment added successfully`
+            );
+          },
+          (error) => {
+            this.alertifyService.error(
+              `${this.entityName}, assignment was not added`
+            );
+          }
+        );
     }
   }
   getAssignment(): any {
     return {
       ProjectId: this.selectedElementId,
       TaskId: this.selectedElementId,
-      ProjectAssignmentTypeId: (this.projectAssignmentType?.id || this.projectAssignmentType?._id),
-      AssigneeId: (this.assignee?.id || this.assignee?._id),
+      ProjectAssignmentTypeId:
+        this.projectAssignmentType?.id || this.projectAssignmentType?._id,
+      AssigneeId: this.assignee?.id || this.assignee?._id,
       Comment: this.updates?.comment,
     };
   }
