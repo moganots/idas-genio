@@ -16,7 +16,11 @@ export class GeneralUtils {
   }
   public static isNumber = (value: any) => {
     return value && typeof value === 'number';
-  };
+  }
+  public static isNumberSet = (value: number) => {
+    // tslint:disable-next-line:use-isnan
+    return value && value !== NaN && value !== 0;
+  }
   public static getEmployeeDisplayName(employee: Employee) {
     return `${this.EmptyStringIfNull(employee?.Name)} ${this.EmptyStringIfNull(
       employee?.Surname
@@ -174,10 +178,10 @@ export class GeneralUtils {
       fileReader.onerror = () => {
         fileReader.abort();
         reject(new DOMException('Problem parsing input file.'));
-      };
+      }
       fileReader.onload = () => {
         resolve(fileReader.result);
-      };
+      }
       fileReader.readAsText(inputFile);
     });
   }
@@ -187,10 +191,10 @@ export class GeneralUtils {
       fileReader.onerror = () => {
         fileReader.abort();
         reject(new DOMException('Problem parsing input file.'));
-      };
+      }
       fileReader.onload = () => {
         resolve(fileReader.result);
-      };
+      }
       fileReader.readAsDataURL(inputFile);
     });
   }

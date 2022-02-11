@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-09
+| Create date:	2022-02-10
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[TaskAssignment] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -13,13 +13,14 @@
  */
 const TaskAssignment = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.TaskId, entity.AssigneeId, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.TaskId, entity.AssigneeId, entity.Comment, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, TaskId, AssigneeId, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, TaskId, AssigneeId, Comment, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			TaskId: TaskId,
 			AssigneeId: AssigneeId,
+			Comment: Comment,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
 			DateCreated: DateCreated,

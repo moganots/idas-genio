@@ -11,10 +11,7 @@ import {
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
-import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
-import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/dialog-manage-project-task-toolbar-clone-copy/dialog-manage-project-task-toolbar-clone-copy.component';
 import { DialogManageProjectTaskToolbarCommentComponent } from './components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
-import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/dialog-manage-project-task-toolbar-create-sub/dialog-manage-project-task-toolbar-create-sub.component';
 import { DialogManageProjectTaskToolbarEditComponent } from './components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
 import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
 import { DialogManageProjectTaskToolbarReviewComponent } from './components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
@@ -95,15 +92,15 @@ export class ManageProjectTaskToolbarComponent
         break;
       case 'attachfiles':
         this.dataService = this.fileAttachmentService;
-        this.openDialog(DialogManageProjectTaskToolbarAttachFilesComponent, action);
+        // this.openDialog(DialogManageProjectTaskToolbarAttachFilesComponent, action);
         break;
       case 'createsub':
         this.dataService = this.editService;
-        this.openDialog(DialogManageProjectTaskToolbarCreateSubComponent, action);
+        // this.openDialog(DialogManageProjectTaskToolbarCreateSubComponent, action);
         break;
       case 'clonecopy':
         this.dataService = this.editService;
-        this.openDialog(DialogManageProjectTaskToolbarCloneCopyComponent, action);
+        // this.openDialog(DialogManageProjectTaskToolbarCloneCopyComponent, action);
         break;
       case 'review':
         this.dataService = this.reviewService;

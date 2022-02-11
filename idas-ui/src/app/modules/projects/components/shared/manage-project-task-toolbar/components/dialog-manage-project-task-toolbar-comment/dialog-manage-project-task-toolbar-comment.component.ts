@@ -12,6 +12,7 @@ import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValueService,
   TaskComment,
 } from 'app/shared/app-shared.module';
@@ -60,7 +61,7 @@ export class DialogManageProjectTaskToolbarCommentComponent
     this.initFormGroupAndFields();
   }
   onClickSave(): void {
-      if(this.dataService && this.selectedElementId && this.selectedElementId > 0 && this.isNotEmptyString(this.updates?.Comment)){
+      if(this.dataService && GeneralUtils.isNumberSet(this.selectedElementId) && this.isNotEmptyString(this.updates?.Comment)){
         this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
           (updated) => {
             this.alertifyService.success(`${this.entityName}, comment added successfully`);

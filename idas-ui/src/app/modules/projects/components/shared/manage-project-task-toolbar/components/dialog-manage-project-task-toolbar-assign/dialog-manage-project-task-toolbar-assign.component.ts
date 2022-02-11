@@ -17,6 +17,7 @@ import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValue,
   LookupValueService,
   User,
@@ -40,8 +41,8 @@ export class DialogManageProjectTaskToolbarAssignComponent
   extends BaseDialogComponent
   implements OnInit
 {
-  assigneeId: number;
-  projectAssignmentTypeId: number;
+  assignee: any;
+  projectAssignmentType: any;
   comment: string;
   assignees: any[] = [];
   filteredAssignees: Observable<any[]>;
@@ -94,20 +95,20 @@ export class DialogManageProjectTaskToolbarAssignComponent
   }
   ngOnInit(): void {
     this.frmGroup = new FormGroup({
-      assigneeId: new FormControl('', [Validators.required]),
-      projectAssignmentTypeId: new FormControl('', [
+      assignee: new FormControl('', [Validators.required]),
+      projectAssignmentType: new FormControl('', [
         this.conditionalControlIsRequired(),
       ]),
       comment: new FormControl('', [Validators.required]),
     });
     this.filteredAssignees = this.frmGroup.controls[
-      `assigneeId`
+      `assignee`
     ].valueChanges.pipe(
       startWith(''),
       map((value) => this.filterValuesBy(this.assignees, value))
     );
     this.filteredProjectAssignmentTypes = this.frmGroup.controls[
-      `projectAssignmentTypeId`
+      `projectAssignmentType`
     ].valueChanges.pipe(
       startWith(''),
       map((value) => this.filterValuesBy(this.projectAssignmentTypes, value))
@@ -158,10 +159,27 @@ export class DialogManageProjectTaskToolbarAssignComponent
   }
   onClickSave(): void {
     console.clear();
-    console.log(`this.assigneeId\r\n`);
-    console.log(this.assigneeId);
-    console.log(`\r\nthis.projectAssignmentTypeId\r\n`);
-    console.log(this.projectAssignmentTypeId);
-    console.log(`\r\nthis.comment=${this.updates?.comment}`);
+    if (
+      this.dataService &&
+      GeneralUtils.isNumberSet(this.selectedElementId) &&
+      GeneralUtils.isNumberSet(this.assignee?._id) &&
+      GeneralUtils.toLocalLowerCaseWithTrim(this.entityName) === `project` &&
+      GeneralUtils.isNumberSet(this.projectAssignmentType?._id)
+    ) {
+      console.log(`this.assignee\r\n`);
+      console.log(this.assignee);
+      console.log(`\r\nthis.projectAssignmentType\r\n`);
+      console.log(this.projectAssignmentType);
+      console.log(`\r\nthis.comment=${this.updates?.comment}`);
+    }
+  }
+  getAssignment(): any {
+    return {
+      ProjectId: this.selectedElementId,
+      TaskId: this.selectedElementId,
+      ProjectAssignmentTypeId: (this.projectAssignmentType?.id || this.projectAssignmentType?._id),
+      AssigneeId: (this.assignee?.id || this.assignee?._id),
+      Comment: this.updates?.comment,
+    };
   }
 }

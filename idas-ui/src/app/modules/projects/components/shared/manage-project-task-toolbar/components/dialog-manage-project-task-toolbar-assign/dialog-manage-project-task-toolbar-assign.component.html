@@ -23,21 +23,21 @@
           <input
             matInput
             type="text"
-            id="assigneeId"
-            name="assigneeId"
-            formControlName="assigneeId"
+            id="assignee"
+            name="assignee"
+            formControlName="assignee"
             placeholder="Assignee"
             class=""
-            [matAutocomplete]="macAssigneeId"
-            [(ngModel)]="assigneeId"
+            [matAutocomplete]="macAssignee"
+            [(ngModel)]="assignee"
           />
           <mat-autocomplete
-            id="assigneeId"
-            #macAssigneeId="matAutocomplete"
+            id="assignee"
+            #macAssignee="matAutocomplete"
             [displayWith]="getDisplayWithValue"
           >
             <mat-option
-              id="assigneeId"
+              id="assignee"
               *ngFor="let value of filteredAssignees | async"
               [value]="value"
               (onSelectionChange)="onSelectedValueChanged($event)"
@@ -82,21 +82,21 @@
           <input
             matInput
             type="text"
-            id="projectAssignmentTypeId"
-            name="projectAssignmentTypeId"
-            formControlName="projectAssignmentTypeId"
+            id="projectAssignmentType"
+            name="projectAssignmentType"
+            formControlName="projectAssignmentType"
             placeholder="Project Assignment Type"
             class=""
-            [matAutocomplete]="macProjectAssignmentTypeId"
-            [(ngModel)]="projectAssignmentTypeId"
+            [matAutocomplete]="macProjectAssignmentType"
+            [(ngModel)]="projectAssignmentType"
           />
           <mat-autocomplete
-            id="projectAssignmentTypeId"
-            #macProjectAssignmentTypeId="matAutocomplete"
+            id="projectAssignmentType"
+            #macProjectAssignmentType="matAutocomplete"
             [displayWith]="getDisplayWithValue"
           >
             <mat-option
-              id="projectAssignmentTypeId"
+              id="projectAssignmentType"
               *ngFor="let value of filteredProjectAssignmentTypes | async"
               [value]="value"
               (onSelectionChange)="onSelectedValueChanged($event)"

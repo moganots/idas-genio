@@ -83,13 +83,12 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
   }
   onClickSave(): void {
     if (
-      GeneralUtils.isStringSet(this.timeSpent) &&
       this.dataService &&
+      GeneralUtils.isStringSet(this.timeSpent) &&
       // tslint:disable-next-line:use-isnan
-      (this.selectedElementId && this.selectedElementId !== NaN && this.selectedElementId !== 0)
+      GeneralUtils.isNumberSet(this.selectedElementId)
     ) {
       this.dateStarted = this.updates?.dateStarted || this.dateStarted;
-      console.log(`dateStarted=${this.dateStarted}`)
       this.setDateCompleted();
       this.dataService
         .CreateUpdateDelete('Create', this.getWorkLog())

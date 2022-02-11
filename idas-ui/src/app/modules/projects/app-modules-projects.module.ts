@@ -34,10 +34,7 @@ import {
 } from './components/shared/manage-project-task-activity/manage-project-task-activity.component';
 import { ManageProjectTaskDetailsComponent } from './components/shared/manage-project-task-details/manage-project-task-details.component';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
-import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
-import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-clone-copy/dialog-manage-project-task-toolbar-clone-copy.component';
 import { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
-import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-create-sub/dialog-manage-project-task-toolbar-create-sub.component';
 import { DialogManageProjectTaskToolbarEditComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
 import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
 import { DialogManageProjectTaskToolbarReviewComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
@@ -71,10 +68,7 @@ export {
 } from './components/shared/manage-project-task-activity/manage-project-task-activity.component';
 export { ManageProjectTaskDetailsComponent } from './components/shared/manage-project-task-details/manage-project-task-details.component';
 export { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
-export { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach-files/dialog-manage-project-task-toolbar-attach-files.component';
-export { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-clone-copy/dialog-manage-project-task-toolbar-clone-copy.component';
 export { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
-export { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-create-sub/dialog-manage-project-task-toolbar-create-sub.component';
 export { DialogManageProjectTaskToolbarEditComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
 export { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
 export { DialogManageProjectTaskToolbarReviewComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
@@ -128,12 +122,9 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     DialogTaskAssignmentComponent,
     DialogCreateNewTaskComponent,
     DialogManageProjectTaskToolbarLogWorkComponent,
-    DialogManageProjectTaskToolbarCreateSubComponent,
-    DialogManageProjectTaskToolbarCloneCopyComponent,
     DialogManageProjectTaskToolbarReviewComponent,
     DialogManageProjectTaskToolbarCommentComponent,
     DialogManageProjectTaskToolbarEditComponent,
-    DialogManageProjectTaskToolbarAttachFilesComponent,
     DialogManageProjectTaskToolbarAssignComponent,
   ],
   imports: [
@@ -168,12 +159,9 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     DialogTaskAssignmentComponent,
     DialogCreateNewTaskComponent,
     DialogManageProjectTaskToolbarLogWorkComponent,
-    DialogManageProjectTaskToolbarCreateSubComponent,
-    DialogManageProjectTaskToolbarCloneCopyComponent,
     DialogManageProjectTaskToolbarReviewComponent,
     DialogManageProjectTaskToolbarCommentComponent,
     DialogManageProjectTaskToolbarEditComponent,
-    DialogManageProjectTaskToolbarAttachFilesComponent,
     DialogManageProjectTaskToolbarAssignComponent,
   ],
   providers: [
