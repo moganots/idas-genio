@@ -13,13 +13,15 @@
  */
 const ProjectReview = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.ProjectId, entity.Review, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.ProjectId, entity.Review, entity.Approved, entity.Rejected, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, ProjectId, Review, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, ProjectId, Review, Approved, Rejected, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			ProjectId: ProjectId,
 			Review: Review,
+			Approved: Approved,
+			Rejected: Rejected,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
 			DateCreated: DateCreated,

@@ -66,7 +66,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
       ],
       reviewRapproveReject: [
         {
-          value: `approve`,
+          value: null,
         },
         Validators.required,
       ],
@@ -101,18 +101,18 @@ export class DialogManageProjectTaskToolbarReviewComponent
     return this.reviewIsSet && this.f?.reviewRapproveReject?.touched;
   }
   onClickSave(): void {
-      if(this.dataService && GeneralUtils.isNumberSet(this.selectedElementId) && this.isNotEmptyString(this.updates?.Comment)){
-        this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
+      if(this.dataService && GeneralUtils.isNumberSet(this.selectedElementId)){
+        this.dataService.CreateUpdateDelete('Create', this.getReview()).subscribe(
           (updated) => {
-            this.alertifyService.success(`${this.entityName}, comment added successfully`);
+            this.alertifyService.success(`${this.entityName}, review added successfully`);
           },
           (error) => {
-            this.alertifyService.error(`${this.entityName}, comment was not added`);
+            this.alertifyService.error(`${this.entityName}, review was not added`);
           }
         );
       }
   }
-  getComment(): any {
+  getReview(): any {
     return {
       ProjectId: this.selectedElementId,
       TaskId: this.selectedElementId,
