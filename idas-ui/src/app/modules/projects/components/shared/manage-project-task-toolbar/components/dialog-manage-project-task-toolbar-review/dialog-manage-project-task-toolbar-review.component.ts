@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -12,6 +12,7 @@ import { BaseDialogComponent } from 'app/modules/_shared/components/dialogs/base
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 
@@ -56,6 +57,68 @@ export class DialogManageProjectTaskToolbarReviewComponent
   }
 
   ngOnInit(): void {
-    this.initFormGroupAndFields();
+    this.frmGroup = this.formBuilder.group({
+      review: [
+        {
+          value: ``,
+        },
+        Validators.required,
+      ],
+      reviewRapproveReject: [
+        {
+          value: `approve`,
+        },
+        Validators.required,
+      ],
+    });
+  }
+  get f() {
+    return this.frmGroup.controls;
+  }
+  get review() {
+    return document.getElementById(`review`);
+  }
+  get reviewIsSet() {
+    return GeneralUtils.isStringSet(this.review.innerText);
+  }
+  get reviewApproved() {
+    return (
+      this.f?.reviewRapproveReject?.touched &&
+      GeneralUtils.toLocalLowerCaseWithTrim(
+        this.f?.reviewRapproveReject?.value
+      ) === `approve`
+    );
+  }
+  get reviewRejected() {
+    return (
+      this.f?.reviewRapproveReject?.touched &&
+      GeneralUtils.toLocalLowerCaseWithTrim(
+        this.f?.reviewRapproveReject?.value
+      ) === `reject`
+    );
+  }
+  get canSave() {
+    return this.reviewIsSet && this.f?.reviewRapproveReject?.touched;
+  }
+  onClickSave(): void {
+      if(this.dataService && GeneralUtils.isNumberSet(this.selectedElementId) && this.isNotEmptyString(this.updates?.Comment)){
+        this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
+          (updated) => {
+            this.alertifyService.success(`${this.entityName}, comment added successfully`);
+          },
+          (error) => {
+            this.alertifyService.error(`${this.entityName}, comment was not added`);
+          }
+        );
+      }
+  }
+  getComment(): any {
+    return {
+      ProjectId: this.selectedElementId,
+      TaskId: this.selectedElementId,
+      Review: this.review.innerText,
+      Approved: this.reviewApproved,
+      Rejected: this.reviewRejected,
+    }
   }
 }

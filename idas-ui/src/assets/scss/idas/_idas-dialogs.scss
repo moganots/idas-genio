@@ -255,7 +255,7 @@ mat-tab {
   border: 2px solid rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
   margin-bottom: 1rem;
-  &.comment {
+  &.comment, &.review {
     min-height: 20rem;
   }
   &.work-description {

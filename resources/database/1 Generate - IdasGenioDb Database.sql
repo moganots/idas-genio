@@ -1052,6 +1052,8 @@ CREATE TABLE [dbo].[TaskReview](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[TaskId] [bigint] NOT NULL,
 	[Review] [nvarchar] (max) NOT NULL,
+	[Approved] [bit] NULL,
+	[Rejected] [bit] NULL,
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NOT NULL,
 	[DateCreated] [datetime] NOT NULL,

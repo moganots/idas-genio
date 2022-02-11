@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-10
+| Create date:	2022-02-11
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[TaskReview] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -13,13 +13,15 @@
  */
 const TaskReview = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.TaskId, entity.Review, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.TaskId, entity.Review, entity.Approve, entity.Reject, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, TaskId, Review, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, TaskId, Review, Approve, Reject, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			TaskId: TaskId,
 			Review: Review,
+			Approve: Approve,
+			Reject: Reject,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
 			DateCreated: DateCreated,
