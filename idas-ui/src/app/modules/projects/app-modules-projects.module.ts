@@ -60,6 +60,9 @@ import { ProjectReviewService } from './services/project-review-service/project-
 import { ProjectService } from './services/project-service/project.service';
 import { ProjectStatusService } from './services/project-status-service/project-status.service';
 import { ProjectWorkLogService } from './services/project-work-log-service/project-work-log.service';
+import { DialogManageProjectTaskToolbarAttachComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach/dialog-manage-project-task-toolbar-attach.component';
+import { DialogManageProjectTaskToolbarCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
+import { DialogManageProjectTaskToolbarSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
 
 export { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
 export { ProjectComponent } from './components/project-component/project.component';
@@ -126,6 +129,9 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     DialogManageProjectTaskToolbarCommentComponent,
     DialogManageProjectTaskToolbarEditComponent,
     DialogManageProjectTaskToolbarAssignComponent,
+    DialogManageProjectTaskToolbarAttachComponent,
+    DialogManageProjectTaskToolbarCopyComponent,
+    DialogManageProjectTaskToolbarSubComponent,
   ],
   imports: [
     CommonModule,
