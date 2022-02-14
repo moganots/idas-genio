@@ -87,7 +87,41 @@ export class ProjectComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.userService
+    this.referenceValueService.projectService
+      .getAll<Project>()
+      .toPromise()
+      .then((projects) => {
+        // 1. Get this.project
+        this.project = projects?.find((p) => p?._id === this.projectId);
+        // 2. Get this.project?.ProjectAssignees
+        this.projectAssignService.getAll<ProjectAssignment>().toPromise().then((projectAssignees) => {
+          this.project.ProjectAssignees = projectAssignees.filter((pa) => pa?.ProjectId === this.project?._id);
+        });
+        // 3. Get this.project
+        this.project.LinkedProjects = projects?.filter((p) => p?.ParentProjectId === this.projectId);
+        // 4. Get this.project?.Tasks
+        this.referenceValueService.taskService
+          .getAll<Task>()
+          .toPromise()
+          .then((tasks) => {
+            this.project.Tasks = tasks?.filter(
+              (t) => t?.ProjectId === this.projectId
+            );
+          });
+      });
+    this.lookupValueService
+      .getAll<LookupValue>()
+      .toPromise()
+      .then((lookupValues) => {
+        // Get (Set) Status / Priority dropdown value(s)
+        this.statuses = lookupValues.filter(
+          (value) => value.LookupCategory.Name === 'Status'
+        );
+        this.priorities = lookupValues.filter(
+          (value) => value.LookupCategory.Name === 'Priority'
+        );
+      });
+    /* this.referenceValueService.userService
       .getAll<User>()
       .toPromise()
       .then((users) => {
@@ -168,7 +202,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
               (value) => value.LookupCategory.Name === 'Priority'
             );
           });
-      });
+      }); */
   }
   setProjectAssignee(users: User[], projectAssignee: ProjectAssignment) {
     projectAssignee.Assignee = users.find(

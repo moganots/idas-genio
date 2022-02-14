@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogManageProjectTaskToolbarAttachComponent } from './dialog-manage-project-task-toolbar-attach.component';
+import { DialogManageProjectTaskToolbarAttachFilesComponent } from './dialog-manage-project-task-toolbar-attach.component';
 
-describe('DialogManageProjectTaskToolbarAttachComponent', () => {
-  let component: DialogManageProjectTaskToolbarAttachComponent;
-  let fixture: ComponentFixture<DialogManageProjectTaskToolbarAttachComponent>;
+describe('DialogManageProjectTaskToolbarAttachFilesComponent', () => {
+  let component: DialogManageProjectTaskToolbarAttachFilesComponent;
+  let fixture: ComponentFixture<DialogManageProjectTaskToolbarAttachFilesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogManageProjectTaskToolbarAttachComponent ]
+      declarations: [ DialogManageProjectTaskToolbarAttachFilesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogManageProjectTaskToolbarAttachComponent);
+    fixture = TestBed.createComponent(DialogManageProjectTaskToolbarAttachFilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

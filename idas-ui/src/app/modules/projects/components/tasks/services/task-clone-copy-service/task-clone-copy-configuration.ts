@@ -22,7 +22,7 @@ export class TaskCloneCopyConfiguration
     {id: 7, name: `ParentTaskId` , canShow: true, canSort: true, canGroup: false},
     {id: 8, name: `AssigneeId` , canShow: true, canSort: true, canGroup: false},
     {id: 9, name: `StatusId` , canShow: true, canSort: true, canGroup: false},
-    {id: 10, name: `IsActive` , canShow: true, canSort: true, canGroup: false},
+    {id: 10, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
     {id: 11, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 12, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
     {id: 13, name: `ModifiedBy` , canShow: false, canSort: true, canGroup: false},

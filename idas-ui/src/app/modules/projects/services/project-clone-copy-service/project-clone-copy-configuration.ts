@@ -23,7 +23,7 @@ export class ProjectCloneCopyConfiguration {
     {id: 9, name: `MaximumHoursAllocated` , canShow: true, canSort: true, canGroup: false},
     {id: 10, name: `ParentProjectId` , canShow: true, canSort: true, canGroup: false},
     {id: 11, name: `StatusId` , canShow: true, canSort: true, canGroup: false},
-    {id: 12, name: `IsActive` , canShow: true, canSort: true, canGroup: false},
+    {id: 12, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
     {id: 13, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 14, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
     {id: 15, name: `ModifiedBy` , canShow: false, canSort: true, canGroup: false},

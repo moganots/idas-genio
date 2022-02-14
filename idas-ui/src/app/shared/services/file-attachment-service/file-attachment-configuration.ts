@@ -18,7 +18,7 @@ export class FileAttachmentConfiguration {
     {id: 4, name: `CalendarEventId` , canShow: true, canSort: true, canGroup: false},
     {id: 5, name: `FileName` , canShow: true, canSort: true, canGroup: false},
     {id: 6, name: `FileSize` , canShow: true, canSort: true, canGroup: false},
-    {id: 7, name: `IsActive` , canShow: true, canSort: true, canGroup: false},
+    {id: 7, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
     /*
     {id: 8, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 9, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},

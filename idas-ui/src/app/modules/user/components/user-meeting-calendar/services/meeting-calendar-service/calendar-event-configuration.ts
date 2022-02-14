@@ -22,7 +22,7 @@ export class CalendarEventConfiguration {
     {id: 8, name: `Location` , canShow: true, canSort: true, canGroup: false},
     {id: 9, name: `Description` , canShow: true, canSort: true, canGroup: false},
     {id: 10, name: `IsAllDayEvent` , canShow: true, canSort: true, canGroup: false},
-    {id: 11, name: `IsActive` , canShow: true, canSort: false, canGroup: false},
+    {id: 11, name: `IsActive` , canShow: false, canSort: false, canGroup: false},
     /*
     {id: 12, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 13, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogManageProjectTaskToolbarSubComponent } from './dialog-manage-project-task-toolbar-sub.component';
+import { DialogManageProjectTaskToolbarCreateSubComponent } from './dialog-manage-project-task-toolbar-sub.component';
 
-describe('DialogManageProjectTaskToolbarSubComponent', () => {
-  let component: DialogManageProjectTaskToolbarSubComponent;
-  let fixture: ComponentFixture<DialogManageProjectTaskToolbarSubComponent>;
+describe('DialogManageProjectTaskToolbarCreateSubComponent', () => {
+  let component: DialogManageProjectTaskToolbarCreateSubComponent;
+  let fixture: ComponentFixture<DialogManageProjectTaskToolbarCreateSubComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogManageProjectTaskToolbarSubComponent ]
+      declarations: [ DialogManageProjectTaskToolbarCreateSubComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogManageProjectTaskToolbarSubComponent);
+    fixture = TestBed.createComponent(DialogManageProjectTaskToolbarCreateSubComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

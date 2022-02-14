@@ -43,8 +43,6 @@ export class DialogManageProjectTaskToolbarEditComponent
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogManageProjectTaskToolbarEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public projecstService: ProjectService,
-    public tasksService: TaskService
   ) {
     super(
       router,

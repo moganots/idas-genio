@@ -16,7 +16,7 @@ export class ProjectAssignConfiguration {
     {id: 2, name: `ProjectId` , canShow: true, canSort: true, canGroup: false},
     {id: 3, name: `ProjectAssignmentTypeId` , canShow: true, canSort: true, canGroup: false},
     {id: 4, name: `AssigneeId` , canShow: true, canSort: true, canGroup: false},
-    {id: 5, name: `IsActive` , canShow: true, canSort: true, canGroup: false},
+    {id: 5, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
     {id: 6, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 7, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
     {id: 8, name: `ModifiedBy` , canShow: false, canSort: true, canGroup: false},

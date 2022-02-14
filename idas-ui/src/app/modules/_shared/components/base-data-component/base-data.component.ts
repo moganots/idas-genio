@@ -161,6 +161,7 @@ export class BaseDataComponent extends BaseComponent {
           case 'ProjectId':
           case 'TaskId':
           case 'ParentTaskId':
+          case 'StatusId':
             return true;
           default:
             return !column.canEdit;
@@ -242,7 +243,7 @@ export class BaseDataComponent extends BaseComponent {
     filterValue = String(this.getFilterValue(filterValue, column))
       .toLocaleLowerCase()
       .trim();
-      return this.filterValuesBy(values, filterValue);
+    return this.filterValuesBy(values, filterValue);
   }
   filterValuesBy(values: any[], filterValue: any) {
     const filteredValues = values?.filter(
@@ -319,7 +320,9 @@ export class BaseDataComponent extends BaseComponent {
       )
     ) {
       this.updates[event?.source?.id] =
-        event?.source?.value?.id || event?.source?.value?._id || event.source.value;
+        event?.source?.value?.id ||
+        event?.source?.value?._id ||
+        event.source.value;
     }
     return;
   }

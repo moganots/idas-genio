@@ -12,10 +12,6 @@ import {
   LookupValue,
   LookupValueService,
   Task,
-  FileAttachmentService,
-  User,
-  Project,
-  FileAttachment,
 } from 'app/shared/app-shared.module';
 import { TaskAssignService } from '../../services/task-assign-service/task-assign-service';
 import { TaskCloneCopyService } from '../../services/task-clone-copy-service/task-clone-copy.service';
@@ -42,7 +38,6 @@ import { TaskWorkLogService } from '../../services/task-work-log-service/task-wo
     TaskCreateSubService,
     TaskCloneCopyService,
     TaskReviewService,
-    FileAttachmentService,
   ],
 })
 export class TaskComponent extends PageComponent implements OnInit {
@@ -68,7 +63,6 @@ export class TaskComponent extends PageComponent implements OnInit {
     public taskCreateSubService: TaskCreateSubService,
     public taskCloneCopyService: TaskCloneCopyService,
     public taskReviewService: TaskReviewService,
-    public fileAttachmentService: FileAttachmentService,
     private activatedRoute: ActivatedRoute
   ) {
     super(
@@ -91,102 +85,32 @@ export class TaskComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.userService
-      .getAll<User>()
+    this.lookupValueService
+      .getAll<LookupValue>()
       .toPromise()
-      .then((users) => {
-        this.lookupValueService
-          .getAll<LookupValue>()
+      .then((lookupValues) => {
+        this.referenceValueService.taskService
+          .getAll<Task>()
           .toPromise()
-          .then((lookupValues) => {
-            this.referenceValueService.taskService
-              .getFirstById<Task>(this.taskId)
-              .toPromise()
-              .then((task) => {
-                // Get (Set) - Task FileAttachment(s)
-                this.fileAttachmentService
-                  .getBy<FileAttachment>({ TaskId: task?._id })
-                  .toPromise()
-                  .then((files) => {
-                    files.forEach((file) => {
-                      this.setCreatedModifiedUser(users, file);
-                    });
-                    task.Files = files;
-                  });
-                // Get (Set) - Parent Project
-                this.referenceValueService.projectService
-                  .getFirstById<Project>(task?.ProjectId)
-                  .toPromise()
-                  .then((project) => {
-                    this.setProjectLookups(lookupValues, project);
-                    this.setCreatedModifiedUser(users, project);
-                    task.Project = project;
-                  });
-                // Get (Set) - Sub Task(s)
-                this.referenceValueService.taskService
-                  .getBy<Task>({ ParentTaskId: task?._id })
-                  .toPromise()
-                  .then((subTasks) => {
-                    subTasks.forEach((subTask) => {
-                      // Get (Set) - Parent Project
-                      this.referenceValueService.projectService
-                        .getFirstById<Project>(subTask?.ProjectId)
-                        .toPromise()
-                        .then((project) => {
-                          this.setProjectLookups(lookupValues, project);
-                          this.setCreatedModifiedUser(users, project);
-                          subTask.Project = project;
-                        });
-                      // (Set) - Sub Task
-                      this.setTaskAssignee(users, subTask);
-                      this.setTaskLookups(lookupValues, subTask);
-                      this.setCreatedModifiedUser(users, subTask);
-                    });
-                    task.SubTasks = subTasks;
-                  });
-                // (Set) - Task
-                this.setTaskAssignee(users, task);
-                this.setTaskLookups(lookupValues, task);
-                this.setCreatedModifiedUser(users, task);
-                this.task = task;
-              });
-            // Get (Set) Status / Priority dropdown value(s)
-            this.statuses = lookupValues.filter(
-              (value) => value.LookupCategory.Name === 'Status'
+          .then((tasks) => {
+            // 1. Get this.task
+            this.task = tasks.find((t) => t?._id === this.taskId);
+            // 2. Get this.task?.ParentTask
+            this.task.ParentTask = tasks.find(
+              (t) => t?._id === this.task?.ParentTaskId
             );
-            this.priorities = lookupValues.filter(
-              (value) => value.LookupCategory.Name === 'Priority'
+            // 3. Get this.task?.SubTasks
+            this.task.SubTasks = tasks.filter(
+              (t) => t?.ParentTaskId === this.task?._id
             );
           });
+        // Get (Set) Status / Priority dropdown value(s)
+        this.statuses = lookupValues.filter(
+          (value) => value.LookupCategory.Name === 'Status'
+        );
+        this.priorities = lookupValues.filter(
+          (value) => value.LookupCategory.Name === 'Priority'
+        );
       });
-  }
-  setTaskAssignee(users: User[], task: Task) {
-    task.Assignee = users.find((user) => user._id === task?.AssigneeId);
-  }
-  setTaskLookups(lookupValues: LookupValue[], task: Task) {
-    task.TaskType = lookupValues.find(
-      (lookupValue) => lookupValue._id === task?.TaskTypeId
-    );
-    task.Priority = lookupValues.find(
-      (lookupValue) => lookupValue._id === task?.PriorityId
-    );
-    task.Status = lookupValues.find(
-      (lookupValue) => lookupValue._id === task?.StatusId
-    );
-  }
-  setProjectLookups(lookupValues: LookupValue[], project: Project) {
-    project.ProjectType = lookupValues.find(
-      (lookupValue) => lookupValue._id === project?.ProjectTypeId
-    );
-    project.Priority = lookupValues.find(
-      (lookupValue) => lookupValue._id === project?.PriorityId
-    );
-    project.Status = lookupValues.find(
-      (lookupValue) => lookupValue._id === project?.StatusId
-    );
-  }
-  setCreatedModifiedUser(users: User[], value: any) {
-    value.createdBy = users.find((user) => user._id === value?.CreatedBy);
-    value.modifiedBy = users.find((user) => user._id === value?.ModifiedBy);
   }
 }

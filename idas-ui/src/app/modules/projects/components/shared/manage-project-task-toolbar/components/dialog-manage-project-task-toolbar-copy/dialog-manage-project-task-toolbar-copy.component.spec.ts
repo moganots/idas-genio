@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogManageProjectTaskToolbarCopyComponent } from './dialog-manage-project-task-toolbar-copy.component';
+import { DialogManageProjectTaskToolbarCloneCopyComponent } from './dialog-manage-project-task-toolbar-copy.component';
 
-describe('DialogManageProjectTaskToolbarCopyComponent', () => {
-  let component: DialogManageProjectTaskToolbarCopyComponent;
-  let fixture: ComponentFixture<DialogManageProjectTaskToolbarCopyComponent>;
+describe('DialogManageProjectTaskToolbarCloneCopyComponent', () => {
+  let component: DialogManageProjectTaskToolbarCloneCopyComponent;
+  let fixture: ComponentFixture<DialogManageProjectTaskToolbarCloneCopyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogManageProjectTaskToolbarCopyComponent ]
+      declarations: [ DialogManageProjectTaskToolbarCloneCopyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogManageProjectTaskToolbarCopyComponent);
+    fixture = TestBed.createComponent(DialogManageProjectTaskToolbarCloneCopyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

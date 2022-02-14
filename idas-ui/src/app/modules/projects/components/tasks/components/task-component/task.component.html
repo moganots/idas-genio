@@ -169,6 +169,82 @@
                   class="mat-elevation-z0"
                   [expanded]="true"
                   [togglePosition]="'before'"
+                  [hidden]="task?.ParentTask === undefined"
+                >
+                  <mat-expansion-panel-header class="mat-elevation-z0">
+                    <mat-panel-title> Parent Task</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div
+                    class="mat-elevation-z1 idas-project-task-card-main"
+                  >
+                    <i
+                      class="material-icons type {{
+                        task?.ParentTask?.TaskType?.CssClassCategory
+                      }} {{ task?.ParentTask?.TaskType?.CssClass }}"
+                      [title]="task?.ParentTask?.TaskType?.Value"
+                      [ngStyle]="{
+                        display:
+                          task?.ParentTask?.TaskType?.Icon === null ||
+                          task?.ParentTask?.TaskType?.Icon === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                      >{{ task?.ParentTask?.TaskType?.Icon || "report_problem" }}</i
+                    >
+                    <i
+                      class="material-icons priority {{
+                        task?.ParentTask?.Priority?.CssClassCategory
+                      }} {{ task?.ParentTask?.Priority?.CssClass }}"
+                      [title]="task?.ParentTask?.Priority?.Value"
+                      [ngStyle]="{
+                        display:
+                          task?.ParentTask?.Priority?.Icon === null ||
+                          task?.ParentTask?.Priority?.Icon === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                      >{{ task?.ParentTask?.Priority?.Icon || "report_problem" }}</i
+                    >
+                    <a class="" href="['#/tasks/task/{{ task?.ParentTask?._id }}"
+                      >{{ task?.ParentTask?.Project?.Code }} / {{ task?.ParentTask?._id }}</a
+                    >
+                    <p class="name">
+                      {{ task?.ParentTask?.Name }}
+                    </p>
+                    <img
+                      class="btn-idas avatar assignee"
+                      src="{{
+                        task?.ParentTask?.Assignee?.Avatar ||
+                          './assets/img/avatars/avatar-0.png'
+                      }}"
+                      [title]="
+                        (
+                          task?.ParentTask?.Assignee || {
+                            DisplayName: 'Unassigned'
+                          }
+                        ).DisplayName
+                      "
+                      [ngStyle]="{
+                        display:
+                          task?.ParentTask?.Assignee?.Avatar === null ||
+                          task?.ParentTask?.Assignee?.Avatar === undefined
+                            ? 'none'
+                            : 'inline'
+                      }"
+                    />
+                    <p
+                      class="task {{ task?.ParentTask?.Status?.CssClassCategory }} {{
+                        task?.ParentTask?.Status?.CssClass
+                      }}"
+                    >
+                      {{ task?.ParentTask?.Status?.Value }}
+                    </p>
+                  </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  class="mat-elevation-z0"
+                  [expanded]="true"
+                  [togglePosition]="'before'"
                   [hidden]="task?.SubTasks?.length === 0"
                 >
                   <mat-expansion-panel-header class="mat-elevation-z0">
@@ -234,7 +310,7 @@
                       }"
                     />
                     <p
-                      class="task status {{
+                      class="task {{
                         subTask?.Status?.CssClassCategory
                       }} {{ subTask?.Status?.CssClass }}"
                     >

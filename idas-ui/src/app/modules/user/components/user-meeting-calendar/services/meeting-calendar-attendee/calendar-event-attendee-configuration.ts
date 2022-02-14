@@ -18,7 +18,7 @@ export class CalendarEventAttendeeConfiguration {
     {id: 4, name: `IsAccepted` , canShow: true, canSort: true, canGroup: false},
     {id: 5, name: `IsRejected` , canShow: true, canSort: true, canGroup: false},
     {id: 6, name: `IsTentative` , canShow: true, canSort: true, canGroup: false},
-    {id: 7, name: `IsActive` , canShow: true, canSort: true, canGroup: false},
+    {id: 7, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
     /*
     {id: 8, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 9, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
