@@ -1,5 +1,39 @@
 <mat-tab-group animationDuration="2000ms">
-  <mat-tab label="Comments"></mat-tab>
+  <mat-tab label="Comments">
+    <div *ngFor="let comment of selectedElement?.Comments">
+      <span
+        ><i
+          [ngStyle]="{
+            display:
+              comment?.createdBy?.UserType?.Icon === null ||
+              comment?.createdBy?.UserType?.Icon === undefined
+                ? 'none'
+                : 'inline'
+          }"
+          class="material-icons comment-createdBy {{
+            comment?.createdBy?.UserType?.CssClassCategory
+          }} {{ comment?.createdBy?.UserType?.CssClass }}"
+          [title]="comment?.createdBy?.UserType?.Value"
+          >{{ comment?.createdBy?.UserType?.Icon || "report_problem" }}</i
+        >
+        <img
+          [ngStyle]="{
+            display:
+              comment?.createdBy?.Avatar === null ||
+              comment?.createdBy?.Avatar === undefined
+                ? 'none'
+                : 'inline'
+          }"
+          class="btn-idas avatar comment-createdBy"
+          src="{{ comment?.createdBy?.Avatar }}"
+          [title]="comment?.createdBy?.DisplayName"
+        />
+        <p class="label-detail comment-createdBy-displayName">
+          {{ comment?.createdBy?.DisplayName }}
+        </p></span
+      >
+    </div>
+  </mat-tab>
   <mat-tab label="Work Log"></mat-tab>
   <mat-tab label="Status Transtion(s)"></mat-tab>
   <mat-tab label="Time in Status"></mat-tab>

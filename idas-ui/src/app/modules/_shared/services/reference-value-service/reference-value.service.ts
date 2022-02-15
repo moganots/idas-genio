@@ -62,7 +62,10 @@ export class ReferenceValueService {
           );
         });
         break;
+      case `ChildProject`:
+      case `ParentProject`:
       case `Project`:
+      case `SubProject`:
         this.projectService.getAll<Project>().subscribe((values) => {
           this.addFieldLookupValues(
             field,
@@ -78,6 +81,9 @@ export class ReferenceValueService {
           );
         });
         break;
+      case `ChildTask`:
+      case `ParentTask`:
+      case `SubTask`:
       case `Task`:
         this.taskService.getAll<Task>().subscribe((values) => {
           this.addFieldLookupValues(
@@ -130,7 +136,7 @@ export class ReferenceValueService {
     const name = `${GeneralUtils.EmptyStringIfNull(value?.Name)}`.trim();
     return {
       id: value?._id,
-      displayValue: name,
+      displayValue: [name, value?._id].filter((val) => !(val === null || val === undefined || String(val).length === 0)).join(` / `),
       title: name,
       cssClassCategory: value?.ProjectType?.CssClassCategory,
       cssClass: value?.ProjectType?.CssClass,
@@ -156,7 +162,7 @@ export class ReferenceValueService {
     const name = `${GeneralUtils.EmptyStringIfNull(value?.Name)}`.trim();
     return {
       id: value?._id,
-      displayValue: name,
+      displayValue: [name, value?._id].filter((val) => !(val === null || val === undefined || String(val).length === 0)).join(` / `),
       title: name,
       cssClassCategory: value?.TaskType?.CssClassCategory,
       cssClass: value?.TaskType?.CssClass,

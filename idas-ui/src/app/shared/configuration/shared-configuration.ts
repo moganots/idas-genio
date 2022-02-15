@@ -205,6 +205,8 @@ export class SharedConfiguration {
     `UserGroupId`,
     `UserId`,
     `EventAttendeeId`,
+    `ParentProjectId`,
+    `ParentTaskId`,
   ];
   public static lookupValueColumns = [
     `BankId`,

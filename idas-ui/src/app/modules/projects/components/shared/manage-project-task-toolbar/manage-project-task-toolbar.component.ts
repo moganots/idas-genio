@@ -129,10 +129,10 @@ export class ManageProjectTaskToolbarComponent
         entityName: this.entityName,
         pageIcon: this.pageIcon,
         pageName: `${this.splitCamelCase(
-          this.capitalizeFirstLetter(action)
+          this.capitalizeFirstLetter(this.getProjectDialogName(action))
         )} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageTitle: `${this.splitCamelCase(
-          this.capitalizeFirstLetter(action)
+          this.capitalizeFirstLetter(this.getProjectDialogName(action))
         )} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: `${this.selectedElement?.Name}`,
         dataColumns: this.dataService.dataColumns,
@@ -143,6 +143,9 @@ export class ManageProjectTaskToolbarComponent
       },
       () => {}
     );
+  }
+  getProjectDialogName(action: string): string {
+    return (this.isProject) ? action.replace(`sub`, `child`) : action;
   }
   getDialogAction(action: string) {
     return [`createsub`, `clonecopy`].includes(
@@ -162,5 +165,11 @@ export class ManageProjectTaskToolbarComponent
           Name: ``
         }
       : this.selectedElement || {};
+  }
+  get isProject() {
+    return this.toLocaleLowerCaseTrim(this.entityName) === `project`;
+  }
+  get isTask() {
+    return this.toLocaleLowerCaseTrim(this.entityName) === `task`;
   }
 }

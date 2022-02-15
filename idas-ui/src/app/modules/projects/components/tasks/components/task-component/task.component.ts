@@ -112,5 +112,6 @@ export class TaskComponent extends PageComponent implements OnInit {
           (value) => value.LookupCategory.Name === 'Priority'
         );
       });
+      console.log(this.task)
   }
 }

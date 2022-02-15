@@ -16,6 +16,8 @@ export class Task extends BaseModel {
   Assignee: User;
   Status: LookupValue;
   Files: any[];
+  Comments: import("c:/Users/A236978/Documents/Personal/Projects/Izingodla/idas-genio/idas-ui/src/app/shared/app-shared.module").TaskComment[];
+  WorkLogs: import("c:/Users/A236978/Documents/Personal/Projects/Izingodla/idas-genio/idas-ui/src/app/shared/app-shared.module").TaskWorkLog[];
   constructor(
     id?: number,
     ProjectId?: number,

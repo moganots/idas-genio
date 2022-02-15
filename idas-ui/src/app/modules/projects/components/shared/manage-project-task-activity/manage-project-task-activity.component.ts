@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
@@ -42,7 +42,10 @@ export class ManageProjectTaskActivityComponent
       lookupValueService,
       referenceValueService
     );
+    console.log(this.selectedElement);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.selectedElement);
+  }
 }
