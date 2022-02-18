@@ -97,13 +97,13 @@ export class TasksComponent extends PageComponent implements OnInit {
                 .then((tasks) => {
                   tasks.forEach((task) => {
                     task.TaskType = values.find(
-                      (value) => value._id === task.TaskTypeId
+                      (value) => value._id === task?.TaskTypeId
                     );
                     task.Priority = values.find(
-                      (value) => value._id === task.PriorityId
+                      (value) => value._id === task?.PriorityId
                     );
                     task.Status = values.find(
-                      (value) => value._id === task.StatusId
+                      (value) => value._id === task?.StatusId
                     );
                   });
                   project.Tasks = tasks;

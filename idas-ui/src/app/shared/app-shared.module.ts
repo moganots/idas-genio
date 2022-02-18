@@ -14,7 +14,7 @@ export { SharedConfiguration } from './configuration/shared-configuration';
 export { BaseModel } from './domain-models/base/base-model';
 export { BaseAssignment } from './domain-models/base/base-assignment';
 export { BaseComment } from './domain-models/base/base-comment';
-export { BaseWorkLog } from './domain-models/base/base-work-log';
+export { BaseWorklog } from './domain-models/base/base-worklog';
 export { Entity } from './domain-models/base/entity';
 
 export { User } from './domain-models/user/user';
@@ -37,14 +37,14 @@ export { ProjectAssignment } from './domain-models/project/project-assignment';
 export { ProjectComment } from './domain-models/project/project-comment';
 export { ProjectReview } from './domain-models/project/project-review';
 export { ProjectStatus } from './domain-models/project/project-status';
-export { ProjectWorkLog } from './domain-models/project/project-worklog';
+export { ProjectWorklog } from './domain-models/project/project-worklog';
 
 export { Task } from './domain-models/task/task';
 export { TaskAssignment } from './domain-models/task/task-assignment';
 export { TaskComment } from './domain-models/task/task-comment';
 export { TaskReview } from './domain-models/task/task-review';
 export { TaskStatus } from './domain-models/task/task-status';
-export { TaskWorkLog } from './domain-models/task/task-worklog';
+export { TaskWorklog } from './domain-models/task/task-worklog';
 
 export { CalendarDay } from './domain-models/scheduling/calendar-day';
 export { CalendarEvent } from './domain-models/scheduling/calendar-event';

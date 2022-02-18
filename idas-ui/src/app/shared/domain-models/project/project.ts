@@ -3,6 +3,9 @@ import { FileAttachment } from '../file-attachment';
 import { LookupValue } from '../lookups/lookup-value';
 import { Task } from '../task/task';
 import { ProjectAssignment } from './project-assignment';
+import { ProjectComment } from './project-comment';
+import { ProjectReview } from './project-review';
+import { ProjectWorklog } from './project-worklog';
 export class Project extends BaseModel {
   ProjectTypeId: number;
   PriorityId: number;
@@ -16,9 +19,12 @@ export class Project extends BaseModel {
   Status: LookupValue;
   ProjectAssignees: ProjectAssignment[] = [];
   ParentProject: Project;
-  Tasks: Task[] = [];
-  LinkedProjects: Project[] = [];
   Files: FileAttachment[] = [];
+  LinkedProjects: Project[] = [];
+  Tasks: Task[] = [];
+  Comments: ProjectComment[] = [];
+  Worklogs: ProjectWorklog[] = [];
+  Reviews: ProjectReview[] = [];
 
   constructor(
     id?: number,

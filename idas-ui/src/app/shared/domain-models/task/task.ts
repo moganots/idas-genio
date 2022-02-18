@@ -1,6 +1,11 @@
-import { Project, User } from 'app/shared/app-shared.module';
 import { BaseModel } from '../base/base-model';
+import { FileAttachment } from '../file-attachment';
 import { LookupValue } from '../lookups/lookup-value';
+import { Project } from '../project/project';
+import { User } from '../user/user';
+import { TaskComment } from './task-comment';
+import { TaskReview } from './task-review';
+import { TaskWorklog } from './task-worklog';
 export class Task extends BaseModel {
   ProjectId: number;
   TaskTypeId: number;
@@ -12,12 +17,13 @@ export class Task extends BaseModel {
   TaskType: LookupValue;
   Priority: LookupValue;
   ParentTask: Task;
-  SubTasks: Task[] = [];
   Assignee: User;
   Status: LookupValue;
-  Files: any[];
-  Comments: import("c:/Users/A236978/Documents/Personal/Projects/Izingodla/idas-genio/idas-ui/src/app/shared/app-shared.module").TaskComment[];
-  WorkLogs: import("c:/Users/A236978/Documents/Personal/Projects/Izingodla/idas-genio/idas-ui/src/app/shared/app-shared.module").TaskWorkLog[];
+  Files: FileAttachment[] = [];
+  SubTasks: Task[] = [];
+  Comments: TaskComment[] = [];
+  Worklogs: TaskWorklog[] = [];
+  Reviews: TaskReview[] = [];
   constructor(
     id?: number,
     ProjectId?: number,

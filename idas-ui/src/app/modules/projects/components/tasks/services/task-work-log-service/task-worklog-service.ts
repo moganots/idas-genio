@@ -4,15 +4,15 @@ import { UserService } from 'app/modules/user/services/user.service';
 import {
   AuthenticationService,
   DataService,
-  TaskWorkLog,
+  TaskWorklog,
   User,
 } from 'app/shared/app-shared.module';
-import { TaskWorkLogConfiguration } from './task-worklog-configuration';
+import { TaskWorklogConfiguration } from './task-worklog-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TaskWorkLogService extends DataService {
+export class TaskWorklogService extends DataService {
   users: User[] = [];
   constructor(
     public httpClient: HttpClient,
@@ -20,13 +20,13 @@ export class TaskWorkLogService extends DataService {
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = TaskWorkLogConfiguration.identifier;
-    this.dataColumns = TaskWorkLogConfiguration.dataColumns;
+    this.entityName = TaskWorklogConfiguration.identifier;
+    this.dataColumns = TaskWorklogConfiguration.dataColumns;
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
-  mapValues(taskWorkLog: TaskWorkLog) {
-    taskWorkLog.createdBy = this.users.find((user) => user?._id === taskWorkLog?.CreatedBy);
-    taskWorkLog.modifiedBy = this.users.find((user) => user?._id === taskWorkLog?.ModifiedBy);
-    return taskWorkLog;
+  mapValues(taskWorklog: TaskWorklog) {
+    taskWorklog.createdBy = this.users.find((user) => user?._id === taskWorklog?.CreatedBy);
+    taskWorklog.modifiedBy = this.users.find((user) => user?._id === taskWorklog?.ModifiedBy);
+    return taskWorklog;
   }
 }

@@ -1,6 +1,6 @@
 import { DataColumn } from 'app/shared/app-shared.module';
 
-export class TaskWorkLogConfiguration {
+export class TaskWorklogConfiguration {
   public static identifier = 'task-worklog';
   public static pageIcon = 'pending_actions';
   public static pageRoute = 'tasks/task/:taskId/work-logs';

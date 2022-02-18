@@ -58,11 +58,11 @@ import { ProjectCreateSubService } from './services/project-create-sub-service/p
 import { ProjectReviewService } from './services/project-review-service/project-review.service';
 import { ProjectService } from './services/project-service/project.service';
 import { ProjectStatusService } from './services/project-status-service/project-status.service';
-import { ProjectWorkLogService } from './services/project-worklog-service/project-worklog.service';
+import { ProjectWorklogService } from './services/project-worklog-service/project-worklog.service';
 import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach/dialog-manage-project-task-toolbar-attach.component';
 import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
 import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
-import { TaskWorkLogService } from './components/tasks/services/task-work-log-service/task-worklog-service';
+import { TaskWorklogService } from './components/tasks/services/task-work-log-service/task-worklog-service';
 
 export { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
 export { ProjectComponent } from './components/project-component/project.component';
@@ -95,7 +95,7 @@ export { ProjectCreateSubService } from './services/project-create-sub-service/p
 export { ProjectReviewService } from './services/project-review-service/project-review.service';
 export { ProjectService } from './services/project-service/project.service';
 export { ProjectStatusService } from './services/project-status-service/project-status.service';
-export { ProjectWorkLogService } from './services/project-worklog-service/project-worklog.service';
+export { ProjectWorklogService } from './services/project-worklog-service/project-worklog.service';
 export { ProjectAssignConfiguration } from './components/dialog-project-assignment/project-assignment-configuration';
 export { TaskAssignConfiguration } from './components/tasks/services/task-assign-service/task-assign-configuration';
 export { TaskCloneCopyConfiguration } from './components/tasks/services/task-clone-copy-service/task-clone-copy-configuration';
@@ -106,7 +106,7 @@ export { TaskConfiguration } from './components/tasks/services/task-service/task
 export { ProjectCommentConfiguration } from './services/project-comment-service/project-comment-configuration';
 export { ProjectReviewConfiguration } from './services/project-review-service/project-review-configuration';
 export { ProjectConfiguration } from './services/project-service/project-configuration';
-export { ProjectWorkLogConfiguration } from './services/project-worklog-service/project-worklog-configuration';
+export { ProjectWorklogConfiguration } from './services/project-worklog-service/project-worklog-configuration';
 export { ProjectCloneCopyConfiguration } from './services/project-clone-copy-service/project-clone-copy-configuration';
 export { ProjectCreateSubConfiguration } from './services/project-create-sub-service/project-create-sub-configuration';
 
@@ -176,7 +176,7 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     ProjectReviewService,
     ProjectService,
     ProjectStatusService,
-    ProjectWorkLogService,
+    ProjectWorklogService,
     TaskAssignService,
     TaskCloneCopyService,
     TaskCommentService,
@@ -184,7 +184,7 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     TaskReviewService,
     TaskService,
     TaskStatusService,
-    TaskWorkLogService,
+    TaskWorklogService,
   ],
 })
 export class AppModulesProjectsModule {}

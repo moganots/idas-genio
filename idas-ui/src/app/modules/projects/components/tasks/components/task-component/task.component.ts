@@ -22,7 +22,7 @@ import { TaskCreateSubService } from '../../services/task-create-sub-service/tas
 import { TaskReviewService } from '../../services/task-review-service/task-review.service';
 import { TaskConfiguration } from '../../services/task-service/task-configuration';
 import { TaskService } from '../../services/task-service/task.service';
-import { TaskWorkLogService } from '../../services/task-work-log-service/task-worklog-service';
+import { TaskWorklogService } from '../../services/task-work-log-service/task-worklog-service';
 
 @Component({
   selector: 'app-task',
@@ -35,7 +35,7 @@ import { TaskWorkLogService } from '../../services/task-work-log-service/task-wo
     ReferenceValueService,
     TaskService,
     TaskCommentService,
-    TaskWorkLogService,
+    TaskWorklogService,
     TaskAssignService,
     TaskCreateSubService,
     TaskCloneCopyService,
@@ -58,7 +58,7 @@ export class TaskComponent extends PageComponent implements OnInit {
     public referenceValueService: ReferenceValueService,
     public taskService: TaskService,
     public taskCommentService: TaskCommentService,
-    public taskWorkLogService: TaskWorkLogService,
+    public taskWorklogService: TaskWorklogService,
     public taskAssignService: TaskAssignService,
     public taskCreateSubService: TaskCreateSubService,
     public taskCloneCopyService: TaskCloneCopyService,

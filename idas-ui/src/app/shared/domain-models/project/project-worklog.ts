@@ -1,12 +1,7 @@
 import { Project } from 'app/shared/app-shared.module';
-import { BaseWorkLog } from '../base/base-work-log';
-export class ProjectWorkLog extends BaseWorkLog {
+import { BaseWorklog } from '../base/base-worklog';
+export class ProjectWorklog extends BaseWorklog {
   ProjectId: number;
-  TimeSpent: string;
-  DateStarted: Date;
-  DateCompleted: Date;
-  Comment: string;
-  HoursWorked: number;
   Project: Project;
   constructor(
     id?: number,

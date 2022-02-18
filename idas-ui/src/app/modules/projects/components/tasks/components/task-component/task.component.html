@@ -24,7 +24,7 @@
           [dataSourceColumns]="dataSourceColumns"
           [editService]="taskService"
           [commentService]="taskCommentService"
-          [workLogService]="taskWorkLogService"
+          [workLogService]="taskWorklogService"
           [assignService]="taskAssignService"
           [createSubService]="taskCreateSubService"
           [cloneCopyService]="taskCloneCopyService"
@@ -332,7 +332,7 @@
                     <mat-panel-title> Activity </mat-panel-title>
                   </mat-expansion-panel-header>
                   <mat-tab-group animationDuration="2000ms">
-                    <mat-tab label="Comments">
+                    <mat-tab label="Comment(s)">
                       <div
                         *ngFor="let comment of task?.Comments"
                         class="div comment"
@@ -369,26 +369,25 @@
                         <span class="displayName">
                           {{ comment?.createdBy?.DisplayName }}
                         </span>
-                        <span class="text">
-                          added a comment
-                        </span>
+                        <span class="text"> added a comment </span>
                         <span class="timeElapsed">
                           {{ timeElapsedComment(comment) }}
                         </span>
                         <br />
+                        <br />
                         <span class="comment">{{ comment?.Comment }}</span>
                       </div>
                     </mat-tab>
-                    <mat-tab label="Work Log">                      
+                    <mat-tab label="Work Log(s)">
                       <div
-                        *ngFor="let worklog of task?.WorkLogs"
+                        *ngFor="let worklog of task?.Worklogs"
                         class="div worklog"
                       >
                         <i
                           [ngStyle]="{
                             display:
-                            worklog?.createdBy?.UserType?.Icon === null ||
-                            worklog?.createdBy?.UserType?.Icon === undefined
+                              worklog?.createdBy?.UserType?.Icon === null ||
+                              worklog?.createdBy?.UserType?.Icon === undefined
                                 ? 'none'
                                 : 'inline'
                           }"
@@ -404,8 +403,8 @@
                         <img
                           [ngStyle]="{
                             display:
-                            worklog?.createdBy?.Avatar === null ||
-                            worklog?.createdBy?.Avatar === undefined
+                              worklog?.createdBy?.Avatar === null ||
+                              worklog?.createdBy?.Avatar === undefined
                                 ? 'none'
                                 : 'inline'
                           }"
@@ -416,18 +415,74 @@
                         <span class="displayName">
                           {{ worklog?.createdBy?.DisplayName }}
                         </span>
-                        <span class="text">
-                          logged work
-                        </span>
+                        <span class="text"> logged work </span>
                         <span class="timeElapsed">
-                          {{ timeElapsedComment(comment) }}
+                          {{ worklog?.DateCreated }}
                         </span>
                         <br />
-                        <span class="comment">{{ comment?.Comment }}</span>
+                        <br />
+                        <span class="timeSpent">Time Spent:</span>
+                        <span class="text">{{ worklog?.TimeSpent }}</span>
+                        <br />
+                        <br />
+                        <span class="text">{{ worklog?.Comment }}</span>
                       </div>
                     </mat-tab>
-                    <mat-tab label="Status Transtion(s)"></mat-tab>
-                    <mat-tab label="Time in Status"></mat-tab>
+                    <mat-tab label="Review(s)">
+                      <div
+                        *ngFor="let review of task?.Reviews"
+                        class="div review"
+                      >
+                        <i
+                          [ngStyle]="{
+                            display:
+                              review?.createdBy?.UserType?.Icon === null ||
+                              review?.createdBy?.UserType?.Icon === undefined
+                                ? 'none'
+                                : 'inline'
+                          }"
+                          class="material-icons {{
+                            review?.createdBy?.UserType?.CssClassCategory
+                          }} {{ review?.createdBy?.UserType?.CssClass }}"
+                          [title]="review?.createdBy?.UserType?.Value"
+                          >{{
+                            review?.createdBy?.UserType?.Icon ||
+                              "report_problem"
+                          }}</i
+                        >
+                        <img
+                          [ngStyle]="{
+                            display:
+                              review?.createdBy?.Avatar === null ||
+                              review?.createdBy?.Avatar === undefined
+                                ? 'none'
+                                : 'inline'
+                          }"
+                          class="btn-idas avatar"
+                          src="{{ review?.createdBy?.Avatar }}"
+                          [title]="review?.createdBy?.DisplayName"
+                        />
+                        <span class="displayName">
+                          {{ review?.createdBy?.DisplayName }}
+                        </span>
+                        <span class="text"> logged a review </span>
+                        <span class="dateCreated">
+                          {{ review?.DateCreated }}
+                        </span>
+                        <!-- <span>
+                          <div>
+                            <input id="approve" type="radio" value="{{review?.Approved}}">
+                            <label for="approve">Approved</label>
+                            <input id="reject" type="radio" value="{{review?.Rejected}}">
+                            <label for="reject">Rejected</label>
+                         </div>
+                        </span> -->
+                        <br />
+                        <br />
+                        <span class="text">{{ review?.Review }}</span>
+                      </div></mat-tab
+                    >
+                    <!--                                         <mat-tab label="Time in Status"></mat-tab> -->
                   </mat-tab-group>
                 </mat-expansion-panel>
               </mat-accordion>

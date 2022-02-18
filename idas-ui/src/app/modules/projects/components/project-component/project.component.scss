@@ -363,6 +363,48 @@ img {
   padding: 10px;
   width: 100%;
 }
+div.comment, div.worklog {
+  border-bottom: 0.1em solid #d3d3d3;
+  border-radius: 8px;
+  padding: 1em;
+  width: 100%;
+  i,
+  img,
+  span {
+    height: auto;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  i,
+  img {
+    font-size: 1.3em;
+    font-weight: bold;
+    width: 20px;
+  }
+  img {
+    background-size: cover;
+  }
+  span {
+    &.displayName, &.timeElapsed {
+      font-weight: bold;
+    }
+    &.text {
+      font-weight: normal;
+    }
+    &.timeSpent {
+      margin: 5px 45px 5px 0;
+    }
+    &.comment {
+      min-width: 100%;
+      width: max-content;
+      margin-top: 15px;
+      padding-top: 20px;
+    }
+  }
+}
 a,
 a:link,
 a:active,

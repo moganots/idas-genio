@@ -11,12 +11,16 @@ import {
   LookupValueService,
   Project,
   Task,
+  TaskAssignment,
   TaskComment,
-  TaskWorkLog,
+  TaskReview,
+  TaskWorklog,
   User,
 } from 'app/shared/app-shared.module';
+import { TaskAssignService } from '../task-assign-service/task-assign-service';
 import { TaskCommentService } from '../task-comment-service/task-comment.service';
-import { TaskWorkLogService } from '../task-work-log-service/task-worklog-service';
+import { TaskReviewService } from '../task-review-service/task-review.service';
+import { TaskWorklogService } from '../task-work-log-service/task-worklog-service';
 import { TaskConfiguration } from './task-configuration';
 
 @Injectable({
@@ -28,7 +32,9 @@ export class TaskService extends DataService {
   users: User[] = [];
   files: FileAttachment[] = [];
   comments: TaskComment[] = [];
-  workLogs: TaskWorkLog[] = [];
+  worklogs: TaskWorklog[] = [];
+  assignments: TaskAssignment[] = [];
+  reviews: TaskReview[] = [];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
@@ -37,7 +43,9 @@ export class TaskService extends DataService {
     public userService: UserService,
     public fileAttachmentService: FileAttachmentService,
     public taskCommentService: TaskCommentService,
-    public taskWorkLogService: TaskWorkLogService,
+    public taskWorklogService: TaskWorklogService,
+    public taskAssignService: TaskAssignService,
+    public taskReviewService: TaskReviewService,
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskConfiguration.identifier;
@@ -47,19 +55,22 @@ export class TaskService extends DataService {
     this.userService.getAll<User>().toPromise().then(users => { this.users = users; });
     this.fileAttachmentService.getAll<FileAttachment>().toPromise().then(files => { this.files = files; });
     this.taskCommentService.getAll<TaskComment>().toPromise().then(comments => { this.comments = comments; });
-    this.taskWorkLogService.getAll<TaskWorkLog>().toPromise().then(workLogs => { this.workLogs = workLogs; });
+    this.taskWorklogService.getAll<TaskWorklog>().toPromise().then(worklogs => { this.worklogs = worklogs; });
+    this.taskAssignService.getAll<TaskAssignment>().toPromise().then(assignments => { this.assignments = assignments; });
+    this.taskReviewService.getAll<TaskReview>().toPromise().then(reviews => { this.reviews = reviews; });
   }
   mapValues(task: Task) {
-    task.Project = this.projects.find((project) => project?._id === task.ProjectId);
-    task.TaskType = this.lookupValues.find((lookupValue) => lookupValue?._id === task.TaskTypeId);
-    task.Priority = this.lookupValues.find((lookupValue) => lookupValue?._id === task.PriorityId);
-    task.Assignee = this.users.find((user) => user?._id === task.AssigneeId);
-    task.Status = this.lookupValues.find((lookupValue) => lookupValue?._id === task.StatusId);
+    task.Project = this.projects.find((project) => project?._id === task?.ProjectId);
+    task.TaskType = this.lookupValues.find((lookupValue) => lookupValue?._id === task?.TaskTypeId);
+    task.Priority = this.lookupValues.find((lookupValue) => lookupValue?._id === task?.PriorityId);
+    task.Status = this.lookupValues.find((lookupValue) => lookupValue?._id === task?.StatusId);
+    task.Assignee = this.users.find((user) => user?._id === task?.AssigneeId);
     task.Files = this.files.filter((file) => file?.TaskId === task?._id);
     task.Comments = this.comments.filter((comment) => comment?.TaskId === task?._id);
-    task.WorkLogs = this.workLogs.filter((workLog) => workLog?.TaskId === task?._id);
-    task.createdBy = this.users.find((user) => user?._id === task.CreatedBy);
-    task.modifiedBy = this.users.find((user) => user?._id === task.ModifiedBy);
+    task.Worklogs = this.worklogs.filter((workLog) => workLog?.TaskId === task?._id);
+    task.Reviews = this.reviews.filter((review) => review?.TaskId === task?._id);
+    task.createdBy = this.users.find((user) => user?._id === task?.CreatedBy);
+    task.modifiedBy = this.users.find((user) => user?._id === task?.ModifiedBy);
     return task;
   }
 }

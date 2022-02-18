@@ -9,11 +9,13 @@ import {
 import {
   AlertifyService,
   AuthenticationService,
+  DateUtils,
   FileAttachmentService,
   LookupValue,
   LookupValueService,
   Project,
   ProjectAssignment,
+  ProjectComment,
   Task,
 } from 'app/shared/app-shared.module';
 import { ProjectAssignService } from '../../services/project-assign-service/project-assign.service';
@@ -23,7 +25,7 @@ import { ProjectCreateSubService } from '../../services/project-create-sub-servi
 import { ProjectReviewService } from '../../services/project-review-service/project-review.service';
 import { ProjectConfiguration } from '../../services/project-service/project-configuration';
 import { ProjectService } from '../../services/project-service/project.service';
-import { ProjectWorkLogService } from '../../services/project-worklog-service/project-worklog.service';
+import { ProjectWorklogService } from '../../services/project-worklog-service/project-worklog.service';
 import { ProjectAssignmentsService } from '../dialog-project-assignment/services/project-assignments.service';
 
 @Component({
@@ -57,7 +59,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
     public referenceValueService: ReferenceValueService,
     public projectService: ProjectService,
     public projectCommentService: ProjectCommentService,
-    public projectWorkLogService: ProjectWorkLogService,
+    public projectWorklogService: ProjectWorklogService,
     public projectAssignService: ProjectAssignService,
     public projectCreateSubService: ProjectCreateSubService,
     public projectCloneCopyService: ProjectCloneCopyService,
@@ -91,13 +93,9 @@ export class ProjectComponent extends PageComponent implements OnInit {
       .then((projects) => {
         // 1. Get this.project
         this.project = projects?.find((p) => p?._id === this.projectId);
-        // 2. Get this.project?.ProjectAssignees
-        this.projectAssignService.getAll<ProjectAssignment>().toPromise().then((projectAssignees) => {
-          this.project.ProjectAssignees = projectAssignees.filter((pa) => pa?.ProjectId === this.project?._id);
-        });
-        // 3. Get this.project
+        // 2. Get this.project
         this.project.LinkedProjects = projects?.filter((p) => p?.ParentProjectId === this.projectId);
-        // 4. Get this.project?.Tasks
+        // 3. Get this.project?.Tasks
         this.referenceValueService.taskService
           .getAll<Task>()
           .toPromise()
@@ -119,5 +117,8 @@ export class ProjectComponent extends PageComponent implements OnInit {
           (value) => value.LookupCategory.Name === 'Priority'
         );
       });
+  }
+  timeElapsedComment(comment: ProjectComment) {
+    return DateUtils.timeAgo(DateUtils.add(new Date(comment?.DateCreated), `hour`, -2));
   }
 }

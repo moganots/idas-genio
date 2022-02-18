@@ -4,35 +4,29 @@ import { UserService } from 'app/modules/user/services/user.service';
 import {
   AuthenticationService,
   DataService,
-  Project,
-  ProjectWorkLog,
+  ProjectWorklog,
   User,
 } from 'app/shared/app-shared.module';
-import { ProjectService } from '../project-service/project.service';
-import { ProjectWorkLogConfiguration } from './project-worklog-configuration';
+import { ProjectWorklogConfiguration } from './project-worklog-configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectWorkLogService extends DataService {
-  projects: Project[] = [];
+export class ProjectWorklogService extends DataService {
   users: User[] = [];
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
-    public projectService: ProjectService,
     public userService: UserService
   ) {
     super(httpClient, authenticationService);
-    this.entityName = ProjectWorkLogConfiguration.identifier;
-    this.dataColumns = ProjectWorkLogConfiguration.dataColumns;
-    this.projectService.getAll<Project>().toPromise().then((projects) => { this.projects = projects});
+    this.entityName = ProjectWorklogConfiguration.identifier;
+    this.dataColumns = ProjectWorklogConfiguration.dataColumns;
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
-  mapValues(projectWorkLog: ProjectWorkLog) {
-    projectWorkLog.Project = this.projects.find(project => project?._id === projectWorkLog?.ProjectId);
-    projectWorkLog.createdBy = this.users.find(user => user?._id === projectWorkLog?.CreatedBy);
-    projectWorkLog.modifiedBy = this.users.find(user => user?._id === projectWorkLog?.ModifiedBy);
-    return projectWorkLog;
+  mapValues(projectWorklog: ProjectWorklog) {
+    projectWorklog.createdBy = this.users.find(user => user?._id === projectWorklog?.CreatedBy);
+    projectWorklog.modifiedBy = this.users.find(user => user?._id === projectWorklog?.ModifiedBy);
+    return projectWorklog;
   }
 }
