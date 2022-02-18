@@ -1,7 +1,7 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
-| Create date:  2022-02-11
+| Create date:  2022-02-18
 | Description:  IDAS - Genio - API - routes utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
@@ -38,13 +38,13 @@ function eRoutes() {
     var routeProject = require(`./project/api`)(router, config);
     var routeProjectAssignment = require(`./project-assignment/api`)(router, config);
     var routeProjectComment = require(`./project-comment/api`)(router, config);
-    var routeProjectWorkLog = require(`./project-work-log/api`)(router, config);
+    var routeProjectWorklog = require(`./project-worklog/api`)(router, config);
     var routeProjectReview = require(`./project-review/api`)(router, config);
     var routeProjectStatus = require(`./project-status/api`)(router, config);
     var routeTask = require(`./task/api`)(router, config);
     var routeTaskAssignment = require(`./task-assignment/api`)(router, config);
     var routeTaskComment = require(`./task-comment/api`)(router, config);
-    var routeTaskWorkLog = require(`./task-work-log/api`)(router, config);
+    var routeTaskWorklog = require(`./task-worklog/api`)(router, config);
     var routeTaskReview = require(`./task-review/api`)(router, config);
     var routeTaskStatus = require(`./task-status/api`)(router, config);
     var routeUserGroup = require(`./user-group/api`)(router, config);

@@ -25,16 +25,17 @@ const { getHttpRequestPacket } = require(`./../http-helper`);
 const {
   companyName,
   applicationName,
-  apiLogDirectory,
-  apiLogFile,
+} = require(`./../../config/config`);
+const {
+  api,
 } = require(`./../../config/config`);
 const logDirectory = toLocaleLowerCaseTrim(
-  StringFormat(apiLogDirectory, [companyName, applicationName, yyyymmdd()])
+  StringFormat(api.logging.directory, [companyName, applicationName, yyyymmdd()])
 );
-const logFile = toLocaleLowerCaseTrim(
-  StringFormat(apiLogFile, [companyName, applicationName, yyyymmdd()])
+const logFilename = toLocaleLowerCaseTrim(
+  StringFormat(api.logging.filename, [companyName, applicationName, yyyymmdd()])
 );
-const logFileFullName = `${logDirectory}/${logFile}`;
+const logFileFullName = `${logDirectory}/${logFilename}`;
 const fs = require("fs");
 let defaultCaller = __filename;
 let message = ``;

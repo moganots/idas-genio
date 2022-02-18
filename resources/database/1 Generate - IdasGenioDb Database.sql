@@ -321,10 +321,10 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[ProjectWorkLog]', 'U') IS NOT NULL)
+IF (OBJECT_ID(N'[dbo].[ProjectWorklog]', 'U') IS NOT NULL)
 BEGIN
-    DROP TABLE [dbo].[ProjectWorkLog];
-	PRINT ('>> Completed > Drop > Table > [dbo].[ProjectWorkLog]')
+    DROP TABLE [dbo].[ProjectWorklog];
+	PRINT ('>> Completed > Drop > Table > [dbo].[ProjectWorklog]')
 END
 GO
 
@@ -363,10 +363,10 @@ BEGIN
 END
 GO
 
-IF (OBJECT_ID(N'[dbo].[TaskWorkLog]', 'U') IS NOT NULL)
+IF (OBJECT_ID(N'[dbo].[TaskWorklog]', 'U') IS NOT NULL)
 BEGIN
-    DROP TABLE [dbo].[TaskWorkLog];
-	PRINT ('>> Completed > Drop > Table > [dbo].[TaskWorkLog]')
+    DROP TABLE [dbo].[TaskWorklog];
+	PRINT ('>> Completed > Drop > Table > [dbo].[TaskWorklog]')
 END
 GO
 
@@ -902,26 +902,27 @@ GO
 PRINT ('>> Completed > Create > Table > [dbo].[ProjectComment]')
 GO
 
--- Create the [dbo].[ProjectWorkLog] table
-CREATE TABLE [dbo].[ProjectWorkLog](
+-- Create the [dbo].[ProjectWorklog] table
+CREATE TABLE [dbo].[ProjectWorklog](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[ProjectId] [bigint] NOT NULL,
+	[TimeSpent] [nvarchar] (35) NOT NULL,
 	[DateStarted] [datetime] NOT NULL,
 	[DateCompleted] [datetime] NOT NULL,
-	[Description] [nvarchar] (max) NULL,
+	[Comment] [nvarchar] (max) NULL,
 	[HoursWorked] AS (CAST(DATEDIFF(HOUR, [DateStarted], [DateCompleted]) AS FLOAT)),
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NOT NULL,
 	[DateCreated] [datetime] NOT NULL,
 	[ModifiedBy] [bigint] NULL,
 	[DateModified] [datetime] NULL,
- CONSTRAINT [PK_ProjectWorkLog] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_ProjectWorklog] PRIMARY KEY CLUSTERED 
 (
 	[_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-PRINT ('>> Completed > Create > Table > [dbo].[ProjectWorkLog]')
+PRINT ('>> Completed > Create > Table > [dbo].[ProjectWorklog]')
 GO
 
 -- Create the [dbo].[ProjectReview] table
@@ -1027,26 +1028,27 @@ GO
 PRINT ('>> Completed > Create > Table > [dbo].[TaskComment]')
 GO
 
--- Create the [dbo].[TaskWorkLog] table
-CREATE TABLE [dbo].[TaskWorkLog](
+-- Create the [dbo].[TaskWorklog] table
+CREATE TABLE [dbo].[TaskWorklog](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[TaskId] [bigint] NOT NULL,
+	[TimeSpent] [nvarchar] (35) NOT NULL,
 	[DateStarted] [datetime] NOT NULL,
 	[DateCompleted] [datetime] NOT NULL,
-	[Description] [nvarchar] (max) NULL,
+	[Comment] [nvarchar] (max) NULL,
 	[HoursWorked] AS (CAST(DATEDIFF(HOUR, [DateStarted], [DateCompleted]) AS FLOAT)),
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NOT NULL,
 	[DateCreated] [datetime] NOT NULL,
 	[ModifiedBy] [bigint] NULL,
 	[DateModified] [datetime] NULL,
- CONSTRAINT [PK_TaskWorkLog] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_TaskWorklog] PRIMARY KEY CLUSTERED 
 (
 	[_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-PRINT ('>> Completed > Create > Table > [dbo].[TaskWorkLog]')
+PRINT ('>> Completed > Create > Table > [dbo].[TaskWorklog]')
 GO
 
 -- Create the [dbo].[TaskReview] table
@@ -3698,9 +3700,9 @@ SELECT 'ConfigurationType' AS [LookupCategory], 'Email' AS [Value], NULL AS [Ima
 SELECT 'ConfigurationType' AS [LookupCategory], 'SMS' AS [Value], NULL AS [Image], 'chat' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'License' AS [Value], NULL AS [Image], 'qr_code_2' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'Application ID' AS [Value], NULL AS [Image], 'app_registration' AS [Icon], NULL AS [Color]  UNION
-SELECT 'ConfigurationType' AS [LookupCategory], 'Application Name' AS [Value], NULL AS [Image], 'app_registration' AS [Icon], NULL AS [Color]  UNION
+SELECT 'ConfigurationType' AS [LookupCategory], 'Application Name' AS [Value], NULL AS [Image], 'description' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'Company Name' AS [Value], NULL AS [Image], 'domain' AS [Icon], NULL AS [Color]  UNION
-SELECT 'ConfigurationType' AS [LookupCategory], 'Security Key' AS [Value], NULL AS [Image], 'screen_lock_portrait' AS [Icon], NULL AS [Color]  UNION
+SELECT 'ConfigurationType' AS [LookupCategory], 'Security Key' AS [Value], NULL AS [Image], 'fingerprint' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'Path File' AS [Value], NULL AS [Image], 'feed' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'Password' AS [Value], NULL AS [Image], 'pattern' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'General' AS [Value], NULL AS [Image], 'widgets' AS [Icon], NULL AS [Color]  UNION
@@ -3709,7 +3711,9 @@ SELECT 'ConfigurationType' AS [LookupCategory], 'Default Time Zone' AS [Value], 
 SELECT 'ConfigurationType' AS [LookupCategory], 'Caching' AS [Value], NULL AS [Image], 'settings_system_daydream' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'Network Protocol' AS [Value], NULL AS [Image], 'network_check' AS [Icon], NULL AS [Color]  UNION
 SELECT 'ConfigurationType' AS [LookupCategory], 'Api Host' AS [Value], NULL AS [Image], 'api' AS [Icon], NULL AS [Color]  UNION
-SELECT 'ConfigurationType' AS [LookupCategory], 'Api Port' AS [Value], NULL AS [Image], 'nfc' AS [Icon], NULL AS [Color]
+SELECT 'ConfigurationType' AS [LookupCategory], 'Api Port' AS [Value], NULL AS [Image], 'nfc' AS [Icon], NULL AS [Color]  UNION
+SELECT 'ConfigurationType' AS [LookupCategory], 'Api Path' AS [Value], NULL AS [Image], 'more_horiz' AS [Icon], NULL AS [Color]  UNION
+SELECT 'ConfigurationType' AS [LookupCategory], 'SMTP' AS [Value], NULL AS [Image], 'admin_panel_settings' AS [Icon], NULL AS [Color]
 )
 INSERT INTO [dbo].[LookupValue]([LookupCategoryId], [Value], [Image], [Icon], [CreatedBy])
 SELECT DISTINCT
@@ -3731,23 +3735,31 @@ GO
 -- INSERT >> Default >> [dbo].[ConfigurationSetting]
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ;WITH [cte] AS (
+SELECT 'Security Key' AS [ConfigurationType], 'AppEncryptionKey' AS [Name], '0x390044003600300031003300390046002D0038004600450045002D0034003100300044002D0042003800360036002D00410045003200330044003300330044003100320044003300310044004000530020002D002000470033004E003100300020002D002000320020005400680065007300730061006C006F006E00690061006E007300200033003A003300' AS [Value] UNION
+SELECT 'Security Key' AS [ConfigurationType], 'AppEncryptionSaltCount' AS [Name], '10' AS [Value] UNION
 SELECT 'Company Name' AS [ConfigurationType], 'CompanyName' AS [Name], 'IDAS' AS [Value] UNION
 SELECT 'Application Name' AS [ConfigurationType], 'ApplicationName' AS [Name], 'Genio' AS [Value] UNION
-SELECT 'Network Protocol' AS [ConfigurationType], 'AppProtocol' AS [Name], 'http' AS [Value] UNION
-SELECT 'Api Host' AS [ConfigurationType], 'AppHost' AS [Name], 'localhost' AS [Value] UNION
-SELECT 'Api Port' AS [ConfigurationType], 'AppPort' AS [Name], '4237' AS [Value] UNION
+SELECT 'SMTP' AS [ConfigurationType], 'SmtpHost' AS [Name], 'smtp.gmail.com' AS [Value] UNION
+SELECT 'SMTP' AS [ConfigurationType], 'SmtpPort' AS [Name], '587' AS [Value] UNION
+SELECT 'SMTP' AS [ConfigurationType], 'SmtpUid' AS [Name], 'idas.genio@gmail.com' AS [Value] UNION
+SELECT 'SMTP' AS [ConfigurationType], 'SmtpPassword' AS [Name], '1d@2G3n10' AS [Value] UNION
+SELECT 'SMTP' AS [ConfigurationType], 'SmtpSenderName' AS [Name], 'idas.genio@gmail.com' AS [Value] UNION
+SELECT 'SMTP' AS [ConfigurationType], 'SmtpSenderEmail' AS [Name], 'idas.genio@gmail.com' AS [Value] UNION
 SELECT 'Network Protocol' AS [ConfigurationType], 'ApiProtocol' AS [Name], 'http' AS [Value] UNION
 SELECT 'Api Host' AS [ConfigurationType], 'ApiHost' AS [Name], 'localhost' AS [Value] UNION
 SELECT 'Api Port' AS [ConfigurationType], 'ApiPort' AS [Name], '4238' AS [Value] UNION
-SELECT 'Security Key' AS [ConfigurationType], 'AppEncryptionKey' AS [Name], '0x390044003600300031003300390046002D0038004600450045002D0034003100300044002D0042003800360036002D00410045003200330044003300330044003100320044003300310044004000530020002D002000470033004E003100300020002D002000320020005400680065007300730061006C006F006E00690061006E007300200033003A003300' AS [Value] UNION
-SELECT 'Security Key' AS [ConfigurationType], 'AppEncryptionSaltCount' AS [Name], '10' AS [Value] UNION
+SELECT 'Api Path' AS [ConfigurationType], 'ApiPath' AS [Name], 'api' AS [Value] UNION
 SELECT 'Path Directory' AS [ConfigurationType], 'ApiLogDirectory' AS [Name], '/data/{0}/{1}/api/logs/{2}' AS [Value] UNION
 SELECT 'Path File' AS [ConfigurationType], 'ApiLogFile' AS [Name], '{0}.{1}.api.{2}.log' AS [Value] UNION
+SELECT 'Network Protocol' AS [ConfigurationType], 'AppProtocol' AS [Name], 'http' AS [Value] UNION
+SELECT 'Api Host' AS [ConfigurationType], 'AppHost' AS [Name], 'localhost' AS [Value] UNION
+SELECT 'Api Port' AS [ConfigurationType], 'AppPort' AS [Name], '4237' AS [Value] UNION
+SELECT 'Api Path' AS [ConfigurationType], 'AppPath' AS [Name], '#' AS [Value] UNION
 SELECT 'Path Directory' AS [ConfigurationType], 'AppLogDirectory' AS [Name], '/data/{0}/{1}/app/logs/{2}' AS [Value] UNION
 SELECT 'Path File' AS [ConfigurationType], 'AppLogFile' AS [Name], '{0}.{1}.app.{2}.log' AS [Value] UNION
 SELECT 'Path Directory' AS [ConfigurationType], 'AppAttachmentsDirectory' AS [Name], '/data/{0}/{1}/secure/attachments' AS [Value] UNION
 SELECT 'Path File' AS [ConfigurationType], 'AppAttachmentsRouterLink' AS [Name], '#/secure/attachments' AS [Value] UNION
-SELECT 'File Size' AS [ConfigurationType], 'MaximumFileSize' AS [Name], '9994.24' AS [Value]
+SELECT 'File Size' AS [ConfigurationType], 'MaxFileSize' AS [Name], '9994.24' AS [Value]
 )
 INSERT INTO [dbo].[ConfigurationSetting]([ConfigurationTypeId], [Name], [Value], [CreatedBy])
 SELECT
@@ -4466,6 +4478,95 @@ LEFT JOIN (
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[ProjectStatus]')
 
 -- ==============================================================================================================================
+-- Setup >> Test >> Project Comment(s)
+-- ==============================================================================================================================
+
+;WITH [cte] AS (
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT 'Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.' AS [Comment] UNION
+SELECT 'Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Comment] UNION
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.
+
+Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.
+
+Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Comment]
+)
+INSERT INTO [dbo].[ProjectComment] ([ProjectId], [Comment], [CreatedBy])
+SELECT
+	[_id] AS [ProjectId]
+	,[Comment]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[Project]
+CROSS JOIN [cte];
+
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[ProjectComment]')
+
+-- ==============================================================================================================================
+-- Setup >> Test >> Project Worklog(s)
+-- ==============================================================================================================================
+
+;WITH [timeSpentComment] AS (
+SELECT '1y' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '12m' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '365d' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '24h' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '60min' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '60sec' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment]
+)
+,[timeSpentCommentDates] AS (
+SELECT
+	[TimeSpent]
+	,[Comment]
+	,CASE
+		WHEN [TimeSpent] LIKE '%y' THEN DATEADD(YEAR, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'y', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%m' THEN DATEADD(MONTH, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'m', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%d' THEN DATEADD(DAY, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'d', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%h' THEN DATEADD(HOUR, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'h', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%min' THEN DATEADD(MINUTE, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'min', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%sec' THEN DATEADD(SECOND, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'sec', ''))) AS BIGINT) * -1), GETDATE())
+		ELSE GETDATE()
+	END AS [DateStarted]
+	, GETDATE() AS [DateCompleted]
+FROM [timeSpentComment]
+)
+INSERT INTO [dbo].[ProjectWorklog] ([ProjectId], [TimeSpent], [DateStarted], [DateCompleted], [Comment], [CreatedBy])
+SELECT
+	[_id] AS [ProjectId]
+	,[TimeSpent]
+	,[DateStarted]
+	,[DateCompleted]
+	,[Comment]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[Project]
+CROSS JOIN [timeSpentCommentDates];
+
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[ProjectWorklog]')
+
+-- ==============================================================================================================================
+-- Setup >> Test >> Project Review(s)
+-- ==============================================================================================================================
+
+;WITH [cte] AS (
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Review] UNION
+SELECT 'Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.' AS [Review] UNION
+SELECT 'Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Review] UNION
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.
+
+Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.
+
+Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Review]
+)
+INSERT INTO [dbo].[ProjectReview] ([ProjectId], [Review], [CreatedBy])
+SELECT
+	[_id] AS [ProjectId]
+	,[Review]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[Project]
+CROSS JOIN [cte];
+
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[ProjectReview]')
+
+-- ==============================================================================================================================
 -- Setup >> Test >> Project Task(s)
 -- ==============================================================================================================================
 INSERT INTO [dbo].[Task] ([ProjectId],[Name],[Description],[TaskTypeId],[PriorityId],[CreatedBy],[DateCreated])
@@ -4526,6 +4627,95 @@ JOIN [dbo].[TaskAssignment] AS [tska] ON ([tsk].[_id] = [tska].[TaskId])
 JOIN [dbo].[ProjectStatus] AS [psts] ON ([tsk].[ProjectId] = [psts].[ProjectId]);
 
 PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskStatus]')
+
+-- ==============================================================================================================================
+-- Setup >> Test >> Task Comment(s)
+-- ==============================================================================================================================
+
+;WITH [cte] AS (
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT 'Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.' AS [Comment] UNION
+SELECT 'Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Comment] UNION
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.
+
+Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.
+
+Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Comment]
+)
+INSERT INTO [dbo].[TaskComment] ([TaskId], [Comment], [CreatedBy])
+SELECT
+	[_id] AS [TaskId]
+	,[Comment]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[Task]
+CROSS JOIN [cte];
+
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskComment]')
+
+-- ==============================================================================================================================
+-- Setup >> Test >> Task Worklog(s)
+-- ==============================================================================================================================
+
+;WITH [timeSpentComment] AS (
+SELECT '1y' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '12m' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '365d' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '24h' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '60min' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment] UNION
+SELECT '60sec' AS [TimeSpent], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Comment]
+)
+,[timeSpentCommentDates] AS (
+SELECT
+	[TimeSpent]
+	,[Comment]
+	,CASE
+		WHEN [TimeSpent] LIKE '%y' THEN DATEADD(YEAR, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'y', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%m' THEN DATEADD(MONTH, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'m', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%d' THEN DATEADD(DAY, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'d', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%h' THEN DATEADD(HOUR, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'h', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%min' THEN DATEADD(MINUTE, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'min', ''))) AS BIGINT) * -1), GETDATE())
+		WHEN [TimeSpent] LIKE '%sec' THEN DATEADD(SECOND, (CAST(LTRIM(RTRIM(REPLACE([TimeSpent],'sec', ''))) AS BIGINT) * -1), GETDATE())
+		ELSE GETDATE()
+	END AS [DateStarted]
+	, GETDATE() AS [DateCompleted]
+FROM [timeSpentComment]
+)
+INSERT INTO [dbo].[TaskWorklog] ([TaskId], [TimeSpent], [DateStarted], [DateCompleted], [Comment], [CreatedBy])
+SELECT
+	[_id] AS [TaskId]
+	,[TimeSpent]
+	,[DateStarted]
+	,[DateCompleted]
+	,[Comment]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[Task]
+CROSS JOIN [timeSpentCommentDates];
+
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskWorklog]')
+
+-- ==============================================================================================================================
+-- Setup >> Test >> Task Review(s)
+-- ==============================================================================================================================
+
+;WITH [cte] AS (
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Review] UNION
+SELECT 'Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.' AS [Review] UNION
+SELECT 'Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Review] UNION
+SELECT 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.
+
+Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.
+
+Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Review]
+)
+INSERT INTO [dbo].[TaskReview] ([TaskId], [Review], [CreatedBy])
+SELECT
+	[_id] AS [TaskId]
+	,[Review]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[Task]
+CROSS JOIN [cte];
+
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[TaskReview]')
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Test >> Calendar Event(s) > ([dbo].[CalendarEvent])

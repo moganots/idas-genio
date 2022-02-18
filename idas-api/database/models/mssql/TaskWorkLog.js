@@ -1,8 +1,8 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-11
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[TaskWorkLog] Table
+| Create date:	2022-02-18
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[TaskWorklog] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,17 +11,18 @@
 | Function(s)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const TaskWorkLog = () => {
+const TaskWorklog = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.TaskId, entity.DateStarted, entity.DateCompleted, entity.Description, entity.HoursWorked, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.TaskId, entity.TimeSpent, entity.DateStarted, entity.DateCompleted, entity.Comment, entity.HoursWorked, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, TaskId, DateStarted, DateCompleted, Description, HoursWorked, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, TaskId, TimeSpent, DateStarted, DateCompleted, Comment, HoursWorked, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			TaskId: TaskId,
+			TimeSpent: TimeSpent,
 			DateStarted: DateStarted,
 			DateCompleted: DateCompleted,
-			Description: Description,
+			Comment: Comment,
 			HoursWorked: HoursWorked,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
@@ -41,4 +42,4 @@ const TaskWorkLog = () => {
 | module.exports
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-module.exports = TaskWorkLog;
+module.exports = TaskWorklog;

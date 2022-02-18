@@ -1,8 +1,8 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-11
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[ProjectWorkLog] Table
+| Create date:	2022-02-18
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[ProjectWorklog] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,8 +11,8 @@
 | Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const entityName = `ProjectWorkLog`;
-const _ProjectWorkLog = require(`./../../models/mssql/ProjectWorkLog`);
+const entityName = `ProjectWorklog`;
+const _ProjectWorklog = require(`./../../models/mssql/ProjectWorklog`);
 const _dbContext = require(`./../../db-context/mssql/mssql-idas-genio-db-context`);
 const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);
 const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-helper`);
@@ -23,12 +23,12 @@ const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-he
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 const Repository = () => {
-    const ProjectWorkLog = _ProjectWorkLog();
+    const ProjectWorklog = _ProjectWorklog();
     const dbContext = _dbContext();
     const create = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = ProjectWorkLog.fromEntity(request.body);
+            const entity = ProjectWorklog.fromEntity(request.body);
             dbContext.create(uid, entityName, entity, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -70,7 +70,7 @@ const Repository = () => {
     const update = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = ProjectWorkLog.fromEntity(request.body);
+            const entity = ProjectWorklog.fromEntity(request.body);
             dbContext.update(uid, entityName, entity, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -81,7 +81,7 @@ const Repository = () => {
     const _delete = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = ProjectWorkLog.fromEntity(request.body);
+            const entity = ProjectWorklog.fromEntity(request.body);
             dbContext.delete(uid, entityName, entity._id, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });

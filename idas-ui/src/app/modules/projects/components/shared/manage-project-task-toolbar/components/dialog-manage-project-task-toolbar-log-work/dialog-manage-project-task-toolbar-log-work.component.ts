@@ -86,7 +86,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
       this.dataService &&
       GeneralUtils.isStringSet(this.timeSpent) &&
       // tslint:disable-next-line:use-isnan
-      GeneralUtils.isNumberSet(this.selectedElementId)
+      GeneralUtils.isNumberSet(this.entityId)
     ) {
       this.dateStarted = this.updates?.dateStarted || this.dateStarted;
       this.setDateCompleted();
@@ -128,8 +128,8 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
   }
   getWorkLog(): any {
     return {
-      ProjectId: this.selectedElementId,
-      TaskId: this.selectedElementId,
+      ProjectId: this.entityId,
+      TaskId: this.entityId,
       DateStarted: this.dateStarted,
       DateCompleted: this.dateCompleted,
       Description: this.updates?.description

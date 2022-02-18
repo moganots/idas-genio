@@ -2,14 +2,19 @@ import { Project } from 'app/shared/app-shared.module';
 import { BaseWorkLog } from '../base/base-work-log';
 export class ProjectWorkLog extends BaseWorkLog {
   ProjectId: number;
-  StartDate: Date;
+  TimeSpent: string;
+  DateStarted: Date;
+  DateCompleted: Date;
+  Comment: string;
   HoursWorked: number;
   Project: Project;
   constructor(
     id?: number,
     ProjectId?: number,
-    StartDate?: Date,
-    Description?: string,
+    TimeSpent?: string,
+    DateStarted?: Date,
+    DateCompleted?: Date,
+    Comment?: string,
     HoursWorked?: number,
     IsActive?: boolean,
     CreatedBy?: number,
@@ -22,14 +27,16 @@ export class ProjectWorkLog extends BaseWorkLog {
       IsActive,
       null,
       null,
-      Description,
+      Comment,
       CreatedBy,
       DateCreated,
       ModifiedBy,
       DateModified
     );
     this.ProjectId = ProjectId;
-    this.StartDate = StartDate;
+    this.TimeSpent = TimeSpent;
+    this.DateStarted = DateStarted;
+    this.DateCompleted = DateCompleted;
     this.HoursWorked = HoursWorked;
   }
 }

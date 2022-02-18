@@ -1,8 +1,8 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-11
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[ProjectWorkLog] Table
+| Create date:	2022-02-18
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[ProjectWorklog] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,17 +11,18 @@
 | Function(s)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const ProjectWorkLog = () => {
+const ProjectWorklog = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.ProjectId, entity.DateStarted, entity.DateCompleted, entity.Description, entity.HoursWorked, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.ProjectId, entity.TimeSpent, entity.DateStarted, entity.DateCompleted, entity.Comment, entity.HoursWorked, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, ProjectId, DateStarted, DateCompleted, Description, HoursWorked, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, ProjectId, TimeSpent, DateStarted, DateCompleted, Comment, HoursWorked, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			ProjectId: ProjectId,
+			TimeSpent: TimeSpent,
 			DateStarted: DateStarted,
 			DateCompleted: DateCompleted,
-			Description: Description,
+			Comment: Comment,
 			HoursWorked: HoursWorked,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
@@ -41,4 +42,4 @@ const ProjectWorkLog = () => {
 | module.exports
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-module.exports = ProjectWorkLog;
+module.exports = ProjectWorklog;

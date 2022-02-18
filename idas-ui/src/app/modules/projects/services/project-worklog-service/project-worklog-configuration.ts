@@ -1,19 +1,19 @@
 import { DataColumn } from 'app/shared/app-shared.module';
 
-export class TaskWorkLogConfiguration {
-  public static identifier = 'task-work-log';
+export class ProjectWorkLogConfiguration {
+  public static identifier = 'project-worklog';
   public static pageIcon = 'pending_actions';
-  public static pageRoute = 'tasks/task/:taskId/work-logs';
-  public static pageRouteTitle = 'My Task Work Log(s)';
+  public static pageRoute = 'projects/project/:projectId/work-logs';
+  public static pageRouteTitle = 'My Project Work Log(s)';
   public static pageRouteCssClass = ``;
-  public static pageTitle = `Manage Task Work Log(s)`;
-  public static pageName = `Manage Task Work Log(s)`;
-  public static tableHeading = 'Manage Task Work Log(s)';
+  public static pageTitle = `Manage Project Work Log(s)`;
+  public static pageName = `Manage Project Work Log(s)`;
+  public static tableHeading = 'Manage Project Work Log(s)';
   public static graphHeading = ``;
   public static buildingBlockLabel = ``;
   public static dataColumns = [
     {id: 1, name: `_id` , canShow: false, canSort: true, canGroup: false},
-    {id: 2, name: `TaskId` , canShow: true, canSort: true, canGroup: false},
+    {id: 2, name: `ProjectId` , canShow: true, canSort: true, canGroup: false},
     {id: 3, name: `TimeSpent` , canShow: true, canSort: true, canGroup: false},
     {id: 4, name: `DateStarted` , canShow: true, canSort: true, canGroup: false},
     {id: 5, name: `DateCompleted` , canShow: true, canSort: true, canGroup: false},

@@ -18,6 +18,10 @@
           </div>
         </div>
         <app-manage-project-task-toolbar
+          [entityName]="entityName"
+          [entityId]="task?._id"
+          [pageIcon]="task?.TaskType?.Icon"
+          [dataSourceColumns]="dataSourceColumns"
           [editService]="taskService"
           [commentService]="taskCommentService"
           [workLogService]="taskWorkLogService"
@@ -25,10 +29,6 @@
           [createSubService]="taskCreateSubService"
           [cloneCopyService]="taskCloneCopyService"
           [reviewService]="taskReviewService"
-          [entityName]="entityName"
-          [pageIcon]="task?.TaskType?.Icon"
-          [dataSourceColumns]="dataSourceColumns"
-          [entityId]="task?._id"
           [selectedElement]="task"
           [selectedElementIndex]="selectedElementIndex"
         ></app-manage-project-task-toolbar>
@@ -174,9 +174,7 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Parent Task</mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div
-                    class="mat-elevation-z1 idas-project-task-card-main"
-                  >
+                  <div class="mat-elevation-z1 idas-project-task-card-main">
                     <i
                       class="material-icons type {{
                         task?.ParentTask?.TaskType?.CssClassCategory
@@ -189,7 +187,9 @@
                             ? 'none'
                             : 'inline'
                       }"
-                      >{{ task?.ParentTask?.TaskType?.Icon || "report_problem" }}</i
+                      >{{
+                        task?.ParentTask?.TaskType?.Icon || "report_problem"
+                      }}</i
                     >
                     <i
                       class="material-icons priority {{
@@ -203,10 +203,15 @@
                             ? 'none'
                             : 'inline'
                       }"
-                      >{{ task?.ParentTask?.Priority?.Icon || "report_problem" }}</i
+                      >{{
+                        task?.ParentTask?.Priority?.Icon || "report_problem"
+                      }}</i
                     >
-                    <a class="" href="['#/tasks/task/{{ task?.ParentTask?._id }}"
-                      >{{ task?.ParentTask?.Project?.Code }} / {{ task?.ParentTask?._id }}</a
+                    <a
+                      class=""
+                      href="['#/tasks/task/{{ task?.ParentTask?._id }}"
+                      >{{ task?.ParentTask?.Project?.Code }} /
+                      {{ task?.ParentTask?._id }}</a
                     >
                     <p class="name">
                       {{ task?.ParentTask?.Name }}
@@ -233,9 +238,9 @@
                       }"
                     />
                     <p
-                      class="task {{ task?.ParentTask?.Status?.CssClassCategory }} {{
-                        task?.ParentTask?.Status?.CssClass
-                      }}"
+                      class="task {{
+                        task?.ParentTask?.Status?.CssClassCategory
+                      }} {{ task?.ParentTask?.Status?.CssClass }}"
                     >
                       {{ task?.ParentTask?.Status?.Value }}
                     </p>
@@ -310,9 +315,9 @@
                       }"
                     />
                     <p
-                      class="task {{
-                        subTask?.Status?.CssClassCategory
-                      }} {{ subTask?.Status?.CssClass }}"
+                      class="task {{ subTask?.Status?.CssClassCategory }} {{
+                        subTask?.Status?.CssClass
+                      }}"
                     >
                       {{ subTask?.Status?.Value }}
                     </p>
@@ -326,12 +331,104 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Activity </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <app-manage-project-task-activity
-                  [entityName]="entityName"
-                  [dataService]="taskService"
-                  [dataSourceColumns]="dataSourceColumns"
-                  [selectedElement]="task"
-                  ></app-manage-project-task-activity>
+                  <mat-tab-group animationDuration="2000ms">
+                    <mat-tab label="Comments">
+                      <div
+                        *ngFor="let comment of task?.Comments"
+                        class="div comment"
+                      >
+                        <i
+                          [ngStyle]="{
+                            display:
+                              comment?.createdBy?.UserType?.Icon === null ||
+                              comment?.createdBy?.UserType?.Icon === undefined
+                                ? 'none'
+                                : 'inline'
+                          }"
+                          class="material-icons {{
+                            comment?.createdBy?.UserType?.CssClassCategory
+                          }} {{ comment?.createdBy?.UserType?.CssClass }}"
+                          [title]="comment?.createdBy?.UserType?.Value"
+                          >{{
+                            comment?.createdBy?.UserType?.Icon ||
+                              "report_problem"
+                          }}</i
+                        >
+                        <img
+                          [ngStyle]="{
+                            display:
+                              comment?.createdBy?.Avatar === null ||
+                              comment?.createdBy?.Avatar === undefined
+                                ? 'none'
+                                : 'inline'
+                          }"
+                          class="btn-idas avatar"
+                          src="{{ comment?.createdBy?.Avatar }}"
+                          [title]="comment?.createdBy?.DisplayName"
+                        />
+                        <span class="displayName">
+                          {{ comment?.createdBy?.DisplayName }}
+                        </span>
+                        <span class="text">
+                          added a comment
+                        </span>
+                        <span class="timeElapsed">
+                          {{ timeElapsedComment(comment) }}
+                        </span>
+                        <br />
+                        <span class="comment">{{ comment?.Comment }}</span>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Work Log">                      
+                      <div
+                        *ngFor="let worklog of task?.WorkLogs"
+                        class="div worklog"
+                      >
+                        <i
+                          [ngStyle]="{
+                            display:
+                            worklog?.createdBy?.UserType?.Icon === null ||
+                            worklog?.createdBy?.UserType?.Icon === undefined
+                                ? 'none'
+                                : 'inline'
+                          }"
+                          class="material-icons {{
+                            worklog?.createdBy?.UserType?.CssClassCategory
+                          }} {{ worklog?.createdBy?.UserType?.CssClass }}"
+                          [title]="worklog?.createdBy?.UserType?.Value"
+                          >{{
+                            worklog?.createdBy?.UserType?.Icon ||
+                              "report_problem"
+                          }}</i
+                        >
+                        <img
+                          [ngStyle]="{
+                            display:
+                            worklog?.createdBy?.Avatar === null ||
+                            worklog?.createdBy?.Avatar === undefined
+                                ? 'none'
+                                : 'inline'
+                          }"
+                          class="btn-idas avatar"
+                          src="{{ worklog?.createdBy?.Avatar }}"
+                          [title]="worklog?.createdBy?.DisplayName"
+                        />
+                        <span class="displayName">
+                          {{ worklog?.createdBy?.DisplayName }}
+                        </span>
+                        <span class="text">
+                          logged work
+                        </span>
+                        <span class="timeElapsed">
+                          {{ timeElapsedComment(comment) }}
+                        </span>
+                        <br />
+                        <span class="comment">{{ comment?.Comment }}</span>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Status Transtion(s)"></mat-tab>
+                    <mat-tab label="Time in Status"></mat-tab>
+                  </mat-tab-group>
                 </mat-expansion-panel>
               </mat-accordion>
             </div>

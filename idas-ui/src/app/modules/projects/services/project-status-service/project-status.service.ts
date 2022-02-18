@@ -35,10 +35,10 @@ export class ProjectStatusService extends DataService {
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectStatus: ProjectStatus) {
-    projectStatus.Project = this.projects.find((value) => value._id === projectStatus.ProjectId);
-    projectStatus.Status = this.lookupValues.find((lookupValue) => lookupValue._id === projectStatus.StatusId);
-    projectStatus.createdBy = this.users.find((user) => user._id === projectStatus.CreatedBy);
-    projectStatus.modifiedBy = this.users.find((user) => user._id === projectStatus.ModifiedBy);
+    projectStatus.Project = this.projects.find((project) => project?._id === projectStatus?.ProjectId);
+    projectStatus.Status = this.lookupValues.find((lookupValue) => lookupValue?._id === projectStatus?.StatusId);
+    projectStatus.createdBy = this.users.find((user) => user?._id === projectStatus?.CreatedBy);
+    projectStatus.modifiedBy = this.users.find((user) => user?._id === projectStatus?.ModifiedBy);
     return projectStatus;
   }
 }

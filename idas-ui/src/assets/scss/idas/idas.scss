@@ -673,7 +673,6 @@ img {
 
   span {
     float: right;
-    padding: 0 10px 25px 0;
 
     i {
       display: inline-block;
@@ -721,6 +720,7 @@ mat-select,
 select {
   font-family: $OpenSans_Light;
   font-size: 1em;
+  margin: 0 0 0 0;
   padding: 0 0 0 0;
 }
 

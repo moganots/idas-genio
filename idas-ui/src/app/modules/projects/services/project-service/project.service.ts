@@ -35,12 +35,12 @@ export class ProjectService extends DataService {
     this.fileAttachmentService.getAll<FileAttachment>().toPromise().then(files => { this.files = files; });
   }
   mapValues(project: Project) {
-    project.ProjectType = this.lookupValues.find(value => value._id === project.ProjectTypeId);
-    project.Priority = this.lookupValues.find(value => value._id === project.PriorityId);
-    project.Status = this.lookupValues.find(value => value._id === project.StatusId);
-    project.Files = this.files.filter((p) => p?.ProjectId === project?._id);
-    project.createdBy = this.users.find(user => user._id === project.CreatedBy);
-    project.modifiedBy = this.users.find(user => user._id === project.ModifiedBy);
+    project.ProjectType = this.lookupValues.find(lookupValue => lookupValue?._id === project?.ProjectTypeId);
+    project.Priority = this.lookupValues.find(lookupValue => lookupValue?._id === project?.PriorityId);
+    project.Status = this.lookupValues.find(lookupValue => lookupValue?._id === project?.StatusId);
+    project.Files = this.files.filter((file) => file?.ProjectId === project?._id);
+    project.createdBy = this.users.find(user => user?._id === project?.CreatedBy);
+    project.modifiedBy = this.users.find(user => user?._id === project?.ModifiedBy);
     return project;
   }
 }

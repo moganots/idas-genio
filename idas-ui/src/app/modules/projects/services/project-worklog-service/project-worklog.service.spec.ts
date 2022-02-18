@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import 'jasmine';
-import { TaskWorkLogService } from './task-work-log.service';
+import { ProjectWorkLogService } from './project-worklog.service';
 
-describe('TaskWorkLogService', () => {
-  let service: TaskWorkLogService;
+describe('ProjectWorkLogService', () => {
+  let service: ProjectWorkLogService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TaskWorkLogService);
+    service = TestBed.inject(ProjectWorkLogService);
   });
 
   it('should be created', () => {

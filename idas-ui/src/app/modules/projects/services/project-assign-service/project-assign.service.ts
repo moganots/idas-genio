@@ -48,20 +48,20 @@ export class ProjectAssignService extends DataService {
   }
   mapValues(projectAssignment: ProjectAssignment) {
     projectAssignment.Project = this.projects.find(
-      (value) => value._id === projectAssignment.ProjectId
+      (project) => project?._id === projectAssignment?.ProjectId
     );
     projectAssignment.ProjectAssignmentType = this.lookupValues.find(
       (lookupValue) =>
-        lookupValue._id === projectAssignment.ProjectAssignmentTypeId
+        lookupValue?._id === projectAssignment?.ProjectAssignmentTypeId
     );
     projectAssignment.Assignee = this.users.find(
-      (user) => user._id === projectAssignment.AssigneeId
+      (user) => user?._id === projectAssignment?.AssigneeId
     );
     projectAssignment.createdBy = this.users.find(
-      (user) => user._id === projectAssignment.CreatedBy
+      (user) => user?._id === projectAssignment?.CreatedBy
     );
     projectAssignment.modifiedBy = this.users.find(
-      (user) => user._id === projectAssignment.ModifiedBy
+      (user) => user?._id === projectAssignment?.ModifiedBy
     );
     return projectAssignment;
   }

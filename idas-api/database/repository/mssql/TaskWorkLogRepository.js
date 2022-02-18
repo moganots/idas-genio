@@ -1,8 +1,8 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-11
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[TaskWorkLog] Table
+| Create date:	2022-02-18
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[TaskWorklog] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,8 +11,8 @@
 | Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const entityName = `TaskWorkLog`;
-const _TaskWorkLog = require(`./../../models/mssql/TaskWorkLog`);
+const entityName = `TaskWorklog`;
+const _TaskWorklog = require(`./../../models/mssql/TaskWorklog`);
 const _dbContext = require(`./../../db-context/mssql/mssql-idas-genio-db-context`);
 const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);
 const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-helper`);
@@ -23,12 +23,12 @@ const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-he
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 const Repository = () => {
-    const TaskWorkLog = _TaskWorkLog();
+    const TaskWorklog = _TaskWorklog();
     const dbContext = _dbContext();
     const create = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = TaskWorkLog.fromEntity(request.body);
+            const entity = TaskWorklog.fromEntity(request.body);
             dbContext.create(uid, entityName, entity, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -70,7 +70,7 @@ const Repository = () => {
     const update = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = TaskWorkLog.fromEntity(request.body);
+            const entity = TaskWorklog.fromEntity(request.body);
             dbContext.update(uid, entityName, entity, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -81,7 +81,7 @@ const Repository = () => {
     const _delete = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = TaskWorkLog.fromEntity(request.body);
+            const entity = TaskWorklog.fromEntity(request.body);
             dbContext.delete(uid, entityName, entity._id, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });

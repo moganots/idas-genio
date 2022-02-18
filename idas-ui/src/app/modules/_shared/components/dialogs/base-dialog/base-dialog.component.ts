@@ -45,6 +45,7 @@ export class BaseDialogComponent
     public data: any = {
       action: null,
       entityName: null,
+      entityId: null,
       dataService: null,
       pageIcon: 'report_problem',
       pageName: 'no page name',
@@ -52,7 +53,6 @@ export class BaseDialogComponent
       pageSubTitle: 'no page title',
       dataColumns: [],
       selectedElementIndex: -1,
-      selectedElementId: -1,
       selectedElement: {},
     }
   ) {
@@ -73,7 +73,7 @@ export class BaseDialogComponent
     this.pageTitle = data?.pageTitle;
     this.pageSubTitle = data?.pageSubTitle;
     this.dataSourceColumns = data?.dataColumns;
-    this.selectedElementId = data?.selectedElement?._id || data?.selectedElement?.id;
+    this.entityId = data?.selectedElement?._id || data?.selectedElement?.id;
     this.selectedElementIndex = data?.selectedElementIndex;
     this.selectedElement = data?.selectedElement || {};
   }

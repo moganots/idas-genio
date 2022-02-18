@@ -19,7 +19,7 @@ const bodyParser = require(`body-parser`);
 const methodOverride = require(`method-override`);
 const cors = require(`cors`);
 const responseTime = require(`response-time`);
-const { apiProtocol, apiHost, apiPort } = require(`./config/config`);
+const { api } = require(`./config/config`);
 const { companyName, applicationName } = require(`./config/config`);
 const apiName = `${companyName} - ${applicationName} API`;
 const { error, info } = require(`./common/logging/logger`);
@@ -48,7 +48,7 @@ app.use(cors());
 app.use(responseTime());
 
 // Set API port
-const port = process.env.PORT || apiPort;
+const port = process.env.PORT || api.port;
 app.set(`port`, port);
 
 /*
@@ -98,6 +98,6 @@ server.listen(port, function () {
   info(
     __filename,
     `server.listen`,
-    `${apiName} listening on ${apiProtocol}://${apiHost}:${port}`
+    `${apiName} listening on ${api.protocol}://${api.host}:${port}/${api.path}`
   );
 });

@@ -7,7 +7,6 @@ import {
   AlertifyService,
   AuthenticationService,
   DataService,
-  FileAttachmentService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
@@ -28,7 +27,6 @@ import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/d
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
-    FileAttachmentService,
   ],
 })
 export class ManageProjectTaskToolbarComponent
@@ -49,8 +47,7 @@ export class ManageProjectTaskToolbarComponent
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
-    public referenceValueService: ReferenceValueService,
-    public fileAttachmentService: FileAttachmentService
+    public referenceValueService: ReferenceValueService
   ) {
     super(
       router,
@@ -62,7 +59,8 @@ export class ManageProjectTaskToolbarComponent
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   getDependentElementName() {
     switch (this.toLocaleLowerCaseTrim(this.entityName)) {
@@ -94,7 +92,6 @@ export class ManageProjectTaskToolbarComponent
         this.openDialog(DialogManageProjectTaskToolbarAssignComponent, action);
         break;
       case 'attachfiles':
-        this.dataService = this.fileAttachmentService;
         this.openDialog(
           DialogManageProjectTaskToolbarAttachFilesComponent,
           action
@@ -127,6 +124,7 @@ export class ManageProjectTaskToolbarComponent
         action: this.getDialogAction(action),
         dataService: this.dataService,
         entityName: this.entityName,
+        entityId: this.entityId || this.selectedElement?._id || this.selectedElement?.id,
         pageIcon: this.pageIcon,
         pageName: `${this.splitCamelCase(
           this.capitalizeFirstLetter(this.getProjectDialogName(action))
@@ -137,9 +135,6 @@ export class ManageProjectTaskToolbarComponent
         pageSubTitle: `${this.selectedElement?.Name}`,
         dataColumns: this.dataService.dataColumns,
         selectedElement: this.getSelectedElement(action),
-        selectedElementId:
-          this.selectedElement?._id || this.selectedElement?.id,
-        // selectedElementIndex: index || this.selectedElementIndex,
       },
       () => {}
     );

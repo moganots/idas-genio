@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
-import { BaseComponent } from 'app/modules/_shared/components/base-component/base.component';
+import { BaseDataComponent } from 'app/modules/_shared/components/base-data-component/base-data.component';
 import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
-  DataService,
 } from 'app/shared/app-shared.module';
 
 @Component({
@@ -18,11 +17,11 @@ import {
     AlertifyService,
     AuthenticationService,
     LookupValueService,
-    DataService,
+    ReferenceValueService,
   ],
 })
 export class ManageProjectTaskActivityComponent
-  extends BaseComponent
+  extends BaseDataComponent
   implements OnInit
 {
   constructor(
@@ -31,8 +30,7 @@ export class ManageProjectTaskActivityComponent
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
-    public referenceValueService: ReferenceValueService,
-    public dataService: DataService
+    public referenceValueService: ReferenceValueService
   ) {
     super(
       router,
@@ -42,10 +40,12 @@ export class ManageProjectTaskActivityComponent
       lookupValueService,
       referenceValueService
     );
-    console.log(this.selectedElement);
   }
 
   ngOnInit(): void {
+    console.log(`this.entityName=${this.entityName}, this.entityId=${this.entityId}`);
+    console.log(this.dataService);
+    console.log(this.dataSourceColumns);
     console.log(this.selectedElement);
   }
 }

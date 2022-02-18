@@ -16,7 +16,7 @@ import {
   User,
 } from 'app/shared/app-shared.module';
 import { TaskCommentService } from '../task-comment-service/task-comment.service';
-import { TaskWorkLogService } from '../task-work-log-service/task-work-log.service';
+import { TaskWorkLogService } from '../task-work-log-service/task-worklog-service';
 import { TaskConfiguration } from './task-configuration';
 
 @Injectable({
@@ -38,8 +38,6 @@ export class TaskService extends DataService {
     public fileAttachmentService: FileAttachmentService,
     public taskCommentService: TaskCommentService,
     public taskWorkLogService: TaskWorkLogService,
-/*     public fileAttachmentService: FileAttachmentService,
-    public fileAttachmentService: FileAttachmentService */
   ) {
     super(httpClient, authenticationService);
     this.entityName = TaskConfiguration.identifier;
@@ -52,16 +50,16 @@ export class TaskService extends DataService {
     this.taskWorkLogService.getAll<TaskWorkLog>().toPromise().then(workLogs => { this.workLogs = workLogs; });
   }
   mapValues(task: Task) {
-    task.Project = this.projects.find((value) => value._id === task.ProjectId);
-    task.TaskType = this.lookupValues.find((lookupValue) => lookupValue._id === task.TaskTypeId);
-    task.Priority = this.lookupValues.find((lookupValue) => lookupValue._id === task.PriorityId);
-    task.Assignee = this.users.find((user) => user._id === task.AssigneeId);
-    task.Status = this.lookupValues.find((lookupValue) => lookupValue._id === task.StatusId);
-    task.Files = this.files.filter((t) => t?.TaskId === task?._id);
-    task.Comments = this.comments.filter((t) => t?.TaskId === task?._id);
-    task.WorkLogs = this.workLogs.filter((t) => t?.TaskId === task?._id);
-    task.createdBy = this.users.find((user) => user._id === task.CreatedBy);
-    task.modifiedBy = this.users.find((user) => user._id === task.ModifiedBy);
+    task.Project = this.projects.find((project) => project?._id === task.ProjectId);
+    task.TaskType = this.lookupValues.find((lookupValue) => lookupValue?._id === task.TaskTypeId);
+    task.Priority = this.lookupValues.find((lookupValue) => lookupValue?._id === task.PriorityId);
+    task.Assignee = this.users.find((user) => user?._id === task.AssigneeId);
+    task.Status = this.lookupValues.find((lookupValue) => lookupValue?._id === task.StatusId);
+    task.Files = this.files.filter((file) => file?.TaskId === task?._id);
+    task.Comments = this.comments.filter((comment) => comment?.TaskId === task?._id);
+    task.WorkLogs = this.workLogs.filter((workLog) => workLog?.TaskId === task?._id);
+    task.createdBy = this.users.find((user) => user?._id === task.CreatedBy);
+    task.modifiedBy = this.users.find((user) => user?._id === task.ModifiedBy);
     return task;
   }
 }

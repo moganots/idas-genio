@@ -1,8 +1,8 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
-| Create date:  2022-02-11
-| Description:  IDAS - Genio - API - Routes utility class for the [dbo].[ProjectWorkLog] table
+| Create date:  2022-02-18
+| Description:  IDAS - Genio - API - Routes utility class for the [dbo].[ProjectWorklog] table
 |------------------------------------------------------------------------------------------------------------------
  */
 
@@ -12,7 +12,7 @@
 |------------------------------------------------------------------------------------------------------------------
  */
 const _hearbeat = require(`./../heartbeat`);
-const _repository = require(`./../../database/repository/mssql/ProjectWorkLogRepository`);
+const _repository = require(`./../../database/repository/mssql/ProjectWorklogRepository`);
 
 /*
 |------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ const _repository = require(`./../../database/repository/mssql/ProjectWorkLogRep
 |------------------------------------------------------------------------------------------------------------------
  */
 module.exports = function(router, config) {
-  const apiAnchorName = `project-work-log`;
+  const apiAnchorName = `project-worklog`;
   const heartbeat = _hearbeat(config);
   const repository = _repository();
 

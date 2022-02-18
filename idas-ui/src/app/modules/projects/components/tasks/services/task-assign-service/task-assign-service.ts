@@ -34,10 +34,10 @@ export class TaskAssignService extends DataService {
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(taskAssignment: TaskAssignment) {
-    taskAssignment.Task = this.tasks.find((value) => value._id === taskAssignment.TaskId);
-    taskAssignment.Assignee = this.users.find((user) => user._id === taskAssignment.AssigneeId);
-    taskAssignment.createdBy = this.users.find((user) => user._id === taskAssignment.CreatedBy);
-    taskAssignment.modifiedBy = this.users.find((user) => user._id === taskAssignment.ModifiedBy);
+    taskAssignment.Task = this.tasks.find((task) => task?._id === taskAssignment?.TaskId);
+    taskAssignment.Assignee = this.users.find((user) => user?._id === taskAssignment?.AssigneeId);
+    taskAssignment.createdBy = this.users.find((user) => user?._id === taskAssignment?.CreatedBy);
+    taskAssignment.modifiedBy = this.users.find((user) => user?._id === taskAssignment?.ModifiedBy);
     return taskAssignment;
   }
 }

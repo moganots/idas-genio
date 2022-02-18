@@ -35,9 +35,9 @@ export class ProjectReviewService extends DataService {
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectReview: ProjectReview) {
-    projectReview.Project = this.projects.find((value) => value._id === projectReview.ProjectId);
-    projectReview.createdBy = this.users.find((user) => user._id === projectReview.CreatedBy);
-    projectReview.modifiedBy = this.users.find((user) => user._id === projectReview.ModifiedBy);
+    projectReview.Project = this.projects.find((project) => project?._id === projectReview?.ProjectId);
+    projectReview.createdBy = this.users.find((user) => user?._id === projectReview?.CreatedBy);
+    projectReview.modifiedBy = this.users.find((user) => user?._id === projectReview?.ModifiedBy);
     return projectReview;
   }
 }

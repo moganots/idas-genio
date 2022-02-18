@@ -25,8 +25,8 @@ export class TaskCommentService extends DataService {
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(taskComment: TaskComment) {
-    taskComment.createdBy = this.users.find((user) => user._id === taskComment.CreatedBy);
-    taskComment.modifiedBy = this.users.find((user) => user._id === taskComment.ModifiedBy);
-    return TaskComment;
+    taskComment.createdBy = this.users.find((user) => user?._id === taskComment?.CreatedBy);
+    taskComment.modifiedBy = this.users.find((user) => user?._id === taskComment?.ModifiedBy);
+    return taskComment;
   }
 }

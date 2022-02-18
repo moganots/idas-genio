@@ -44,10 +44,10 @@ export class TaskStatusService extends DataService {
     });
   }
   mapValues(taskStatus: TaskStatus) {
-    taskStatus.Task = this.tasks.find((value) => value._id === taskStatus.TaskId);
-    taskStatus.Status = this.lookupValues.find((lookupValue) => lookupValue._id === taskStatus.StatusId);
-    taskStatus.createdBy = this.users.find((user) => user._id === taskStatus.CreatedBy);
-    taskStatus.modifiedBy = this.users.find((user) => user._id === taskStatus.ModifiedBy);
+    taskStatus.Task = this.tasks.find((task) => task?._id === taskStatus?.TaskId);
+    taskStatus.Status = this.lookupValues.find((lookupValue) => lookupValue?._id === taskStatus.StatusId);
+    taskStatus.createdBy = this.users.find((user) => user?._id === taskStatus?.CreatedBy);
+    taskStatus.modifiedBy = this.users.find((user) => user?._id === taskStatus?.ModifiedBy);
     return taskStatus;
   }
 }

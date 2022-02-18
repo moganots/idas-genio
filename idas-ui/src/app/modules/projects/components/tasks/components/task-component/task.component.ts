@@ -9,9 +9,11 @@ import {
 import {
   AlertifyService,
   AuthenticationService,
+  DateUtils,
   LookupValue,
   LookupValueService,
   Task,
+  TaskComment,
 } from 'app/shared/app-shared.module';
 import { TaskAssignService } from '../../services/task-assign-service/task-assign-service';
 import { TaskCloneCopyService } from '../../services/task-clone-copy-service/task-clone-copy.service';
@@ -20,7 +22,7 @@ import { TaskCreateSubService } from '../../services/task-create-sub-service/tas
 import { TaskReviewService } from '../../services/task-review-service/task-review.service';
 import { TaskConfiguration } from '../../services/task-service/task-configuration';
 import { TaskService } from '../../services/task-service/task.service';
-import { TaskWorkLogService } from '../../services/task-work-log-service/task-work-log.service';
+import { TaskWorkLogService } from '../../services/task-work-log-service/task-worklog-service';
 
 @Component({
   selector: 'app-task',
@@ -43,8 +45,6 @@ import { TaskWorkLogService } from '../../services/task-work-log-service/task-wo
 export class TaskComponent extends PageComponent implements OnInit {
   taskId?: number;
   task: Task;
-  taskAssignees: any[] = [];
-  lookupValues: LookupValue[] = [];
   statuses: LookupValue[] = [];
   priorities: LookupValue[] = [];
 
@@ -85,25 +85,25 @@ export class TaskComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.referenceValueService.taskService
+      .getAll<Task>()
+      .toPromise()
+      .then((tasks) => {
+        // 1. Get this.task
+        this.task = tasks.find((t) => t?._id === this.taskId);
+        // 2. Get this.task?.ParentTask
+        this.task.ParentTask = tasks.find(
+          (t) => t?._id === this.task?.ParentTaskId
+        );
+        // 3. Get this.task?.SubTasks
+        this.task.SubTasks = tasks.filter(
+          (t) => t?.ParentTaskId === this.task?._id
+        );
+      });
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()
       .then((lookupValues) => {
-        this.referenceValueService.taskService
-          .getAll<Task>()
-          .toPromise()
-          .then((tasks) => {
-            // 1. Get this.task
-            this.task = tasks.find((t) => t?._id === this.taskId);
-            // 2. Get this.task?.ParentTask
-            this.task.ParentTask = tasks.find(
-              (t) => t?._id === this.task?.ParentTaskId
-            );
-            // 3. Get this.task?.SubTasks
-            this.task.SubTasks = tasks.filter(
-              (t) => t?.ParentTaskId === this.task?._id
-            );
-          });
         // Get (Set) Status / Priority dropdown value(s)
         this.statuses = lookupValues.filter(
           (value) => value.LookupCategory.Name === 'Status'
@@ -112,6 +112,8 @@ export class TaskComponent extends PageComponent implements OnInit {
           (value) => value.LookupCategory.Name === 'Priority'
         );
       });
-      console.log(this.task)
+  }
+  timeElapsedComment(comment: TaskComment) {
+    return DateUtils.timeAgo(DateUtils.add(new Date(comment?.DateCreated), `hour`, -2));
   }
 }

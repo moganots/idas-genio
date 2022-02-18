@@ -7,7 +7,7 @@ import {
   TaskWorkLog,
   User,
 } from 'app/shared/app-shared.module';
-import { TaskWorkLogConfiguration } from './task-work-log-configuration';
+import { TaskWorkLogConfiguration } from './task-worklog-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +25,8 @@ export class TaskWorkLogService extends DataService {
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(taskWorkLog: TaskWorkLog) {
-    taskWorkLog.createdBy = this.users.find((user) => user._id === taskWorkLog.CreatedBy);
-    taskWorkLog.modifiedBy = this.users.find((user) => user._id === taskWorkLog.ModifiedBy);
+    taskWorkLog.createdBy = this.users.find((user) => user?._id === taskWorkLog?.CreatedBy);
+    taskWorkLog.modifiedBy = this.users.find((user) => user?._id === taskWorkLog?.ModifiedBy);
     return taskWorkLog;
   }
 }

@@ -19,19 +19,19 @@
           </div>
         </div>
         <app-manage-project-task-toolbar
-        [editService]="projectService"
-        [commentService]="projectCommentService"
-        [workLogService]="projectWorkLogService"
-        [assignService]="projectAssignService"
-        [createSubService]="projectCreateSubService"
-        [cloneCopyService]="projectCloneCopyService"
-        [reviewService]="projectReviewService"
-        [entityName]="entityName"
-        [pageIcon]="project?.ProjectType?.Icon"
-        [dataSourceColumns]="dataSourceColumns"
-        [entityId]="project?._id"
-        [selectedElement]="project"
-        [selectedElementIndex]="selectedElementIndex"
+          [entityName]="entityName"
+          [entityId]="project?._id"
+          [pageIcon]="project?.ProjectType?.Icon"
+          [dataSourceColumns]="dataSourceColumns"
+          [editService]="projectService"
+          [commentService]="projectCommentService"
+          [workLogService]="projectWorkLogService"
+          [assignService]="projectAssignService"
+          [createSubService]="projectCreateSubService"
+          [cloneCopyService]="projectCloneCopyService"
+          [reviewService]="projectReviewService"
+          [selectedElement]="project"
+          [selectedElementIndex]="selectedElementIndex"
         ></app-manage-project-task-toolbar>
         <br />
         <div class="idas-manage-project-task-container">
@@ -473,7 +473,9 @@
                         [title]="projectAssignee?.Assignee?.DisplayName"
                       />
                       <p class="label-detail assignee">
-                        {{ projectAssignee?.Assignee?.DisplayName }} ({{ projectAssignee?.ProjectAssignmentType?.Value }})
+                        {{ projectAssignee?.Assignee?.DisplayName }} ({{
+                          projectAssignee?.ProjectAssignmentType?.Value
+                        }})
                       </p>
                     </li>
                   </ul>

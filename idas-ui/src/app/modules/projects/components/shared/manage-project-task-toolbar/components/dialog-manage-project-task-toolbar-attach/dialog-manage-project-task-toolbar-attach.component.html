@@ -18,8 +18,8 @@
     </div>
     <div class="content">
       <app-file-upload
-      [ProjectId]="(isProject) ? selectedElementId : null"
-      [TaskId]="(isTask) ? selectedElementId : null"
+      [ProjectId]="(isProject) ? entityId : null"
+      [TaskId]="(isTask) ? entityId : null"
       [files]="selectedElement?.Files"
       appFileDragDrop
     >
