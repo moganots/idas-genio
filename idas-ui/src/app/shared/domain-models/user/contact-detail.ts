@@ -25,6 +25,7 @@ export class ContactDetail extends BaseModel {
   UseOfficeTelephoneNumber: boolean;
   UseMobileTelephoneNumber: boolean;
   UsePostalAddress: boolean;
+
   Employee: Employee;
   Client: Client;
   Supplier: Supplier;
@@ -33,8 +34,7 @@ export class ContactDetail extends BaseModel {
   PreferredLanguage: LookupValue;
 
   constructor(
-    id: number,
-    IsActive: boolean,
+    _id?: number,
     EmployeeId?: number,
     ClientId?: number,
     SupplierId?: number,
@@ -56,31 +56,43 @@ export class ContactDetail extends BaseModel {
     UseOfficeTelephoneNumber?: boolean,
     UseMobileTelephoneNumber?: boolean,
     UsePostalAddress?: boolean,
+    IsActive?: boolean,
     CreatedBy?: number,
     DateCreated?: Date,
     ModifiedBy?: number,
-    DateModified?: Date){
-    super(id, IsActive, null, null, null, CreatedBy, DateCreated, ModifiedBy, DateModified);
-      this.EmployeeId = EmployeeId;
-      this.ClientId = ClientId;
-      this.SupplierId = SupplierId;
-      this.RecipientsName = RecipientsName;
-      this.EmailAddress = EmailAddress;
-      this.HomeTelephoneNumber = HomeTelephoneNumber;
-      this.OfficeTelephoneNumber = OfficeTelephoneNumber;
-      this.MobileTelephoneNumber = MobileTelephoneNumber;
-      this.Website = Website;
-      this.AddressLine1 = AddressLine1;
-      this.AddressLine2 = AddressLine2;
-      this.City = City;
-      this.ProvinceId = ProvinceId;
-      this.PostalCode = PostalCode;
-      this.CountryId = CountryId;
-      this.PreferredLanguageId = PreferredLanguageId;
-      this.UseEmailAddress = UseEmailAddress;
-      this.UseHomeTelephoneNumber = UseHomeTelephoneNumber;
-      this.UseOfficeTelephoneNumber = UseOfficeTelephoneNumber;
-      this.UseMobileTelephoneNumber = UseMobileTelephoneNumber;
-      this.UsePostalAddress = UsePostalAddress;
-    }
+    DateModified?: Date
+  ) {
+    super(
+      _id,
+      IsActive,
+      null,
+      null,
+      null,
+      CreatedBy,
+      DateCreated,
+      ModifiedBy,
+      DateModified
+    );
+    this.EmployeeId = EmployeeId;
+    this.ClientId = ClientId;
+    this.SupplierId = SupplierId;
+    this.RecipientsName = RecipientsName;
+    this.EmailAddress = EmailAddress;
+    this.HomeTelephoneNumber = HomeTelephoneNumber;
+    this.OfficeTelephoneNumber = OfficeTelephoneNumber;
+    this.MobileTelephoneNumber = MobileTelephoneNumber;
+    this.Website = Website;
+    this.AddressLine1 = AddressLine1;
+    this.AddressLine2 = AddressLine2;
+    this.City = City;
+    this.ProvinceId = ProvinceId;
+    this.PostalCode = PostalCode;
+    this.CountryId = CountryId;
+    this.PreferredLanguageId = PreferredLanguageId;
+    this.UseEmailAddress = UseEmailAddress;
+    this.UseHomeTelephoneNumber = UseHomeTelephoneNumber;
+    this.UseOfficeTelephoneNumber = UseOfficeTelephoneNumber;
+    this.UseMobileTelephoneNumber = UseMobileTelephoneNumber;
+    this.UsePostalAddress = UsePostalAddress;
+  }
 }

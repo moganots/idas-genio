@@ -8,7 +8,7 @@ import { SuppliersComponent } from './suppliers.component';
 import { SuppliersService } from './services/suppliers.service';
 import { SupplierComponent } from './components/supplier/supplier.component';
 
-export { SupplierConfiguration } from './supplier-configuration';
+export { SupplierConfiguration } from './services/supplier-configuration';
 export { SuppliersComponent } from './suppliers.component';
 export { SupplierComponent } from './components/supplier/supplier.component';
 

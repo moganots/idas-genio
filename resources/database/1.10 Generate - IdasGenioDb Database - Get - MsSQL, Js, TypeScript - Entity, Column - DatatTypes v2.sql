@@ -60,16 +60,23 @@ SELECT
 		END + ' = ' +
 		CASE
 			WHEN [ColumnName] IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'AttendeeId')
-				THEN 'this.users.find((user) => user._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+				THEN 'this.users.find((user) => user?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
 			WHEN LEFT([ColumnName], LEN([ColumnName]) - 2) IN (SELECT [name] FROM [dbo].[LookupCategory])
-				THEN 'this.lookupValues.find((lookupValue) => lookupValue._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+				THEN 'this.lookupValues.find((lookupValue) => lookupValue?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
 			WHEN [ColumnName] IN ('ProjectId')
-				THEN 'this.projects.find((value) => value._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+				THEN 'this.projects.find((project) => project?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
 			WHEN [ColumnName] IN ('TaskId')
-				THEN 'this.tasks.find((value) => value._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '.' + [ColumnName] + ');'
+				THEN 'this.tasks.find((task) => task?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
+			WHEN [ColumnName] IN ('EmployeeId')
+				THEN 'this.employees.find((employee) => employee?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
+			WHEN [ColumnName] IN ('ClientId')
+				THEN 'this.clients.find((client) => client?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
+			WHEN [ColumnName] IN ('SupplierId')
+				THEN 'this.suppliers.find((supplier) => supplier?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
 		END AS [ReferenceValueInitialiser]
 FROM [cte]
 WHERE
-	([EntityName] = 'projectassignment')
+	([EntityName] = 'user')
+	--AND ([ColumnName] LIKE '%Id')
 ORDER BY
 	[ColumnId]

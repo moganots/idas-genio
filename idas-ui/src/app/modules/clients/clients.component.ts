@@ -14,7 +14,7 @@ import {
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { ClientConfiguration } from './client-configuration';
+import { ClientConfiguration } from './services/client-configuration';
 import { ClientsService } from './services/clients.service';
 
 @Component({

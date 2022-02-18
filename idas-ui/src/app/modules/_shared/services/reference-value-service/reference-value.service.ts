@@ -6,7 +6,7 @@ import { TaskAssignmentsService } from 'app/modules/projects/components/tasks/co
 import { TaskService } from 'app/modules/projects/components/tasks/services/task-service/task.service';
 import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
 import { SuppliersService } from 'app/modules/suppliers/services/suppliers.service';
-import { UserService } from 'app/modules/user/services/user.service';
+import { UserService } from 'app/modules/user/services/user-service/user.service';
 import {
   Client,
   DataColumn,

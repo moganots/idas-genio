@@ -1,5 +1,6 @@
 import { BaseModel } from '../base/base-model';
 import { LookupValue } from '../lookups/lookup-value';
+import { ContactDetail } from '../user/contact-detail';
 export class Client extends BaseModel {
   SalutationId: number;
   Surname: string;
@@ -10,6 +11,7 @@ export class Client extends BaseModel {
   VATNumber: number;
   Salutation: LookupValue;
   IndustryType: LookupValue;
+  ContactDetail: ContactDetail;
 
   constructor(
     id: number,

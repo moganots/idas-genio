@@ -13,11 +13,11 @@ import {
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { UserProfileConfiguration } from './user-profile-configuration';
-import { UserService } from '../../services/user.service';
 import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-user-profile',

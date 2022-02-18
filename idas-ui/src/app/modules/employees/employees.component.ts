@@ -14,7 +14,7 @@ import {
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
-import { EmployeeConfiguration } from './employee-configuration';
+import { EmployeeConfiguration } from './services/employee-configuration';
 import { EmployeesService } from './services/employees.service';
 
 @Component({

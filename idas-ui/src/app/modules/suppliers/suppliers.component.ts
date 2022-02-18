@@ -9,7 +9,7 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { SupplierConfiguration } from './supplier-configuration';
+import { SupplierConfiguration } from './services/supplier-configuration';
 import { SuppliersService } from './services/suppliers.service';
 import {
   AlertifyService,

@@ -1,5 +1,6 @@
 import { BaseModel } from '../base/base-model';
 import { LookupValue } from '../lookups/lookup-value';
+import { ContactDetail } from '../user/contact-detail';
 export class Employee extends BaseModel {
   SalutationId: number;
   MiddleName: string;
@@ -20,7 +21,8 @@ export class Employee extends BaseModel {
   EmploymentType: LookupValue;
   Position: LookupValue;
   Department: LookupValue;
-  Manager: LookupValue;
+  Manager: Employee;
+  ContactDetail: ContactDetail;
 
   constructor(
     id: number,

@@ -1,5 +1,6 @@
 import { BaseModel } from '../base/base-model';
 import { LookupValue } from '../lookups/lookup-value';
+import { ContactDetail } from '../user/contact-detail';
 export class Supplier extends BaseModel {
   SalutationId: number;
   Surname: string;
@@ -13,6 +14,7 @@ export class Supplier extends BaseModel {
   Salutation: LookupValue;
   IndustryType: LookupValue;
   Bank: LookupValue;
+  ContactDetail: ContactDetail;
 
   constructor(
     id: number,

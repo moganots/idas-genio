@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from 'app/modules/user/services/user.service';
+import { UserService } from 'app/modules/user/services/user-service/user.service';
 import {
   AuthenticationService,
   DataService,
@@ -58,6 +58,7 @@ export class ProjectService extends DataService {
     project.ProjectType = this.lookupValues.find(lookupValue => lookupValue?._id === project?.ProjectTypeId);
     project.Priority = this.lookupValues.find(lookupValue => lookupValue?._id === project?.PriorityId);
     project.Status = this.lookupValues.find((lookupValue) => lookupValue?._id === project?.StatusId);
+    this.getBy<Project>({ProjectId: project?._id}).toPromise().then((linkedProjects) => { project.LinkedProjects = linkedProjects });
     project.Files = this.files.filter((file) => file?.ProjectId === project?._id);
     project.Comments = this.comments.filter((comment) => comment?.ProjectId === project?._id);
     project.Worklogs = this.worklogs.filter((workLog) => workLog?.ProjectId === project?._id);

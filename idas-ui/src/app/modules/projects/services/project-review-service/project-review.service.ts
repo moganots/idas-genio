@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from 'app/modules/user/services/user.service';
+import { UserService } from 'app/modules/user/services/user-service/user.service';
 import {
   AuthenticationService,
   DataService,

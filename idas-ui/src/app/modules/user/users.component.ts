@@ -9,13 +9,13 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { UserConfiguration } from './services/user-configuration';
-import { UserService } from './services/user.service';
+import { UserConfiguration } from './services/user-service/user-configuration';
 import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
+import { UserService } from './services/user-service/user.service';
 
 @Component({
   selector: 'app-users',

@@ -363,7 +363,7 @@ img {
   padding: 10px;
   width: 100%;
 }
-div.comment, div.worklog {
+div.comment, div.worklog, div.review {
   border-bottom: 0.1em solid #d3d3d3;
   border-radius: 8px;
   padding: 1em;
@@ -388,7 +388,7 @@ div.comment, div.worklog {
     background-size: cover;
   }
   span {
-    &.displayName, &.timeElapsed {
+    &.displayName, &.timeElapsed, &.dateCreated {
       font-weight: bold;
     }
     &.text {
@@ -403,6 +403,11 @@ div.comment, div.worklog {
       margin-top: 15px;
       padding-top: 20px;
     }
+  }
+  label {
+    font-size: 1.1em;
+    padding: 0px 5px 0px 5px;
+    vertical-align: middle;
   }
 }
 a,

@@ -49,16 +49,12 @@ export class UserService extends DataService {
     });
   }
   mapValues(user: User) {
-    user.Client = this.clients.find((client) => client._id === user?.ClientId);
-    user.Employee = this.employees.find(
-      (employee) => employee._id === user?.EmployeeId
-    );
-    user.Supplier = this.suppliers.find(
-      (supplier) => supplier._id === user?.SupplierId
-    );
-    user.UserType = this.lookupValues.find(
-      (lookupValue) => lookupValue._id === user?.UserTypeId
-    );
+    user.Employee = this.employees.find((employee) => employee?._id === user?.EmployeeId);
+    user.Client = this.clients.find((client) => client?._id === user?.ClientId);
+    user.Supplier = this.suppliers.find((supplier) => supplier?._id === user?.SupplierId);
+    user.UserType = this.lookupValues.find((lookupValue) => lookupValue?._id === user?.UserTypeId);
+    this.getFirstById<User>(user?.CreatedBy).toPromise().then((createdBy) => user.createdBy = createdBy);
+    this.getFirstById<User>(user?.ModifiedBy).toPromise().then((modifiedBy) => user.modifiedBy = modifiedBy);
     user.DisplayName = GeneralUtils.getUserDisplayName(user);
     user.Avatar = user?.Avatar || './assets/img/avatars/avatar-0.png';
     return user;

@@ -27,11 +27,12 @@ import { UserMeetingCalendarComponent } from './components/user-meeting-calendar
 import { UsersComponent } from './users.component';
 import { InboxService } from './components/user-inbox/services/inbox.service';
 import { NotificationsService } from './components/user-notifications/services/notifications.service';
-import { UserService } from './services/user.service';
 import { AppSharedComponentsCalendarModule } from 'app/shared/components/calendar/app-shared-components-calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/user-meeting-calendar/components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
 import { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar-service/meeting-calendar.service';
 import { MeetingCalendarAttendeeService } from './components/user-meeting-calendar/services/meeting-calendar-attendee/meeting-calendar-attendee.service';
+import { UserService } from './services/user-service/user.service';
+import { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -43,12 +44,13 @@ export { UserInboxConfiguration } from './components/user-inbox/user-inbox-confi
 export { UserNotificationsConfiguration } from './components/user-notifications/user-notifications-configuration';
 export { UserProfileConfiguration } from './components/user-profile/user-profile-configuration';
 export { CalendarEventConfiguration } from './components/user-meeting-calendar/services/meeting-calendar-service/calendar-event-configuration';
-export { UserConfiguration } from './services/user-configuration';
+export { UserConfiguration } from './services/user-service/user-configuration';
 export { CalendarEventAttendeeConfiguration } from './components/user-meeting-calendar/services/meeting-calendar-attendee/calendar-event-attendee-configuration';
 
+export { UserService } from './services/user-service/user.service';
+export { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
 export { InboxService } from './components/user-inbox/services/inbox.service';
 export { NotificationsService } from './components/user-notifications/services/notifications.service';
-export { UserService } from './services/user.service';
 export { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar-service/meeting-calendar.service';
 export { MeetingCalendarAttendeeService } from './components/user-meeting-calendar/services/meeting-calendar-attendee/meeting-calendar-attendee.service';
 
@@ -91,6 +93,7 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     InboxService,
     MeetingCalendarService,
     MeetingCalendarAttendeeService,
+    ContactDetailService
   ],
 })
 export class AppModulesUsersModule {}

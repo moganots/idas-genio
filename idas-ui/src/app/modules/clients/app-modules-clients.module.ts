@@ -8,7 +8,7 @@ import { ClientsComponent } from './clients.component';
 import { ClientsService } from './services/clients.service';
 import { ClientComponent } from './components/client/client.component';
 
-export { ClientConfiguration } from './client-configuration';
+export { ClientConfiguration } from './services/client-configuration';
 export { ClientsComponent } from './clients.component';
 export { ClientComponent } from './components/client/client.component';
 

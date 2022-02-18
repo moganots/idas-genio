@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
-import { UserService } from 'app/modules/user/services/user.service';
+import { UserService } from 'app/modules/user/services/user-service/user.service';
 import {
   AuthenticationService,
   DataService,
