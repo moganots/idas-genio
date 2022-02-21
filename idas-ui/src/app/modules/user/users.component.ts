@@ -64,6 +64,9 @@ export class UsersComponent extends PageComponent implements OnInit {
     this.dataSourceColumns = UserConfiguration.dataColumns;
   }
   ngOnInit(): void {
+    this.onLoadRefreshData();
+  }
+  private onLoadRefreshData() {
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()
@@ -83,6 +86,7 @@ export class UsersComponent extends PageComponent implements OnInit {
           });
       });
   }
+
   getUserAvatarTitle(user: User) {
     return `${user?.DisplayName || user?.EmailAddress || ``}`;
   }
@@ -107,7 +111,45 @@ export class UsersComponent extends PageComponent implements OnInit {
         selectedElement: user || {},
       },
       () => {
-        this.onDataRefresh();
+        this.onLoadRefreshData();
+      }
+    );
+  }
+  onClickDeActivate(user: User) {
+    user.IsActive = !user?.IsActive;
+    this.dataService.CreateUpdateDelete<User>(`update`, user).subscribe(
+      (result) => {
+        user = result;
+        this.alertifyService.success(
+          `User: ${user?.DisplayName}, (de)Activated successfully`
+        );
+      },
+      (error) => {
+        this.alertifyService.error(
+          `Failed to (de)Activate user: ${user?.DisplayName}`
+        );
+      },
+      () => {
+        this.onLoadRefreshData();
+      }
+    );
+  }
+  onClickUnLock(user: User) {
+    user.IsLocked = !user?.IsLocked;
+    this.dataService.CreateUpdateDelete<User>(`update`, user).subscribe(
+      (result) => {
+        user = result;
+        this.alertifyService.success(
+          `User: ${user?.DisplayName}, (un)Locked successfully`
+        );
+      },
+      (error) => {
+        this.alertifyService.error(
+          `Failed to (un)Locked user: ${user?.DisplayName}`
+        );
+      },
+      () => {
+        this.onLoadRefreshData();
       }
     );
   }

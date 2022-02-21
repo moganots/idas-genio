@@ -155,13 +155,14 @@ export class BaseDataComponent extends BaseComponent {
           case 'DateCreated':
           case 'DateModified':
           case 'GenderId':
-          case 'UserTypeId':
+          // case 'UserTypeId':
           case 'EmployeeClientSupplierId':
           case 'UserId':
           case 'ProjectId':
           case 'TaskId':
           case 'ParentTaskId':
-          case 'StatusId':
+          case 'ParentProjectId':
+            // case 'StatusId':
             return true;
           default:
             return !column.canEdit;

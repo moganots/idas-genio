@@ -505,7 +505,6 @@ CREATE TABLE [dbo].[User](
 	[EmailAddress] [nvarchar] (320) NOT NULL,
 	[PasswordHash] [varchar] (255) NOT NULL,
 	[UserTypeId] [bigint] NULL,
-	[IsAdmin] [bit] NULL,
 	[IsLocked] [bit] NULL,
 	[Avatar] [varchar] (255) NULL,
 	[DateLastLoggedIn] [datetime] NULL,
@@ -1906,7 +1905,6 @@ BEGIN
 			,[u].[SupplierId] AS 'SupplierId'
 			,[u].[EmailAddress] AS 'EmailAddress'
 			,[u].[UserTypeId] AS 'UserTypeId'
-			,[u].[IsAdmin] AS 'IsAdmin'
 			,[u].[IsLocked] AS 'IsLocked'
 			,[u].[Avatar] AS 'Avatar'
 			,[u].[DateLastLoggedIn] AS 'DateLastLoggedIn'
@@ -2064,7 +2062,7 @@ RETURNS TABLE
 AS
 RETURN 
 (
-	WITH [cte] ([_id], [EmployeeClientSupplierId], [UserTypeId], [EmailAddress], [PasswordHash], [IsAdmin], [IsActive], [IsLocked], [DateLastLoggedIn], [CreatedBy], [DateCreated], [ModifiedBy], [DateModified]) AS (
+	WITH [cte] ([_id], [EmployeeClientSupplierId], [UserTypeId], [EmailAddress], [PasswordHash], [IsActive], [IsLocked], [DateLastLoggedIn], [CreatedBy], [DateCreated], [ModifiedBy], [DateModified]) AS (
 	SELECT
 		[_id]
 		, COALESCE([EmployeeId], [ClientId], [SupplierId]) AS [EmployeeClientSupplierId]
@@ -2077,7 +2075,6 @@ RETURN
 			ELSE 'General' END AS [UserTypeId]
 		, [EmailAddress]
 		, [PasswordHash]
-		, [IsAdmin]
 		, [IsActive]
 		, [IsLocked]
 		, [DateLastLoggedIn]
@@ -2093,7 +2090,6 @@ RETURN
 		, (SELECT [lvpa].[_id] FROM [dbo].[LookupValue] AS [lvpa] JOIN [dbo].[LookupCategory] AS [lc] ON [lvpa].[LookupCategoryId] = [lc].[_id] WHERE [lc].[Name] = 'UserType' AND [lvpa].[Value] = [cte].[UserTypeId]) AS [UserTypeId]
 		, [EmailAddress]
 		, [PasswordHash]
-		, [IsAdmin]
 		, [IsActive]
 		, [IsLocked]
 		, [DateLastLoggedIn]
@@ -2792,18 +2788,17 @@ GO
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Default >> Root (Super) and Admin user ([dbo].[User])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT [dbo].[User] ([EmailAddress],[PasswordHash],[IsAdmin],[IsLocked],[Avatar],[CreatedBy])
+INSERT [dbo].[User] ([EmailAddress],[PasswordHash],[IsLocked],[Avatar],[CreatedBy])
 SELECT
 	[EmailAddress]
 	,[PasswordHash]
-	,[IsAdmin]
 	,[IsLocked]
 	,[Avatar]
 	,1 AS [CreatedBy]
 FROM (
-SELECT 1 AS [id], 'root@genio.idas.co.za' AS [EmailAddress], '3b9a10e881e7329cfa4e478615fce90c/d4441ad5f5def0f519ee3b669e521ea40c0291522c26484cfdb3a6a8081e4d239633b183adbc208fa5e4fce4eaa049a9cd453f465586e92dff52ffa8ebc29e74' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-16.png' AS [Avatar] UNION
-SELECT 2 AS [id], 'admin@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 1 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-27.png' AS [Avatar] UNION
-SELECT 3 AS [id], 'general@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 0 AS [IsAdmin], 0 AS [IsLocked], './assets/img/avatars/avatar-7.png' AS [Avatar]
+SELECT 1 AS [id], 'root@genio.idas.co.za' AS [EmailAddress], '3b9a10e881e7329cfa4e478615fce90c/d4441ad5f5def0f519ee3b669e521ea40c0291522c26484cfdb3a6a8081e4d239633b183adbc208fa5e4fce4eaa049a9cd453f465586e92dff52ffa8ebc29e74' AS [PasswordHash], 0 AS [IsLocked], './assets/img/avatars/avatar-16.png' AS [Avatar] UNION
+SELECT 2 AS [id], 'admin@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 0 AS [IsLocked], './assets/img/avatars/avatar-27.png' AS [Avatar] UNION
+SELECT 3 AS [id], 'general@genio.idas.co.za' AS [EmailAddress], '66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash], 0 AS [IsLocked], './assets/img/avatars/avatar-7.png' AS [Avatar]
 ) AS [u]
 ORDER BY
 	[id]
@@ -4077,7 +4072,7 @@ GO
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Test >> Users(s) > Employee, Client, Supplier > [dbo].[User]
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT [dbo].[User] ([EmployeeId], [ClientId], [SupplierId], [EmailAddress],[PasswordHash],[UserTypeId],[IsAdmin],[IsLocked],[Avatar],[IsActive],[CreatedBy])
+INSERT [dbo].[User] ([EmployeeId], [ClientId], [SupplierId], [EmailAddress],[PasswordHash],[UserTypeId],[IsLocked],[Avatar],[IsActive],[CreatedBy])
 SELECT
 	[e].[_id] AS [EmployeeId]
 	,[c].[_id] AS [ClientId]
@@ -4085,7 +4080,6 @@ SELECT
 	,[EmailAddress]
 	,'66c7ba6b2e0c67e2c88bd054334996e0/fc5d35d618c0a2b71a9a9a9719962b9b17ebae00516de2304ea72a160aef742d812cf169c154722659ffe3d0e49e085b365af7a8e4442ed77bf5a74992f0e2b4' AS [PasswordHash]
 	,[UserTypeId]
-	,0 AS [IsAdmin]
 	,ISNULL([e].[IsTerminated], 0) AS [IsLocked]
 	,CASE
 		WHEN [EmailAddress] IN ('info@thandindabaattorneys.co.za') THEN './assets/img/avatars/avatar-8.png'

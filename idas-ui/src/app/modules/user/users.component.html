@@ -94,7 +94,7 @@
                             title="{{
                               user?.IsActive ? 'De-Activate' : 'Activate'
                             }} User"
-                            (click)="onClickEdit(user)"
+                            (click)="onClickDeActivate(user)"
                           >
                             <i class="material-icons idas-button-icon">{{
                               getUserDeActivateIcon(user)
@@ -107,7 +107,7 @@
                             title="{{
                               user?.IsLocked ? 'Unlock' : 'Lock'
                             }} User"
-                            (click)="onClickEdit(user)"
+                            (click)="onClickUnLock(user)"
                           >
                             <i class="material-icons idas-button-icon">{{
                               getUserUnLockIcon(user)

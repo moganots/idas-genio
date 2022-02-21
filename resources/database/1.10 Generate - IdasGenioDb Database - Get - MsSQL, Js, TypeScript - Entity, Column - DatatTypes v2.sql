@@ -63,9 +63,9 @@ SELECT
 				THEN 'this.users.find((user) => user?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
 			WHEN LEFT([ColumnName], LEN([ColumnName]) - 2) IN (SELECT [name] FROM [dbo].[LookupCategory])
 				THEN 'this.lookupValues.find((lookupValue) => lookupValue?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
-			WHEN [ColumnName] IN ('ProjectId')
+			WHEN [ColumnName] IN ('ProjectId', 'ParentProjectId')
 				THEN 'this.projects.find((project) => project?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
-			WHEN [ColumnName] IN ('TaskId')
+			WHEN [ColumnName] IN ('TaskId', 'ParentTaskId')
 				THEN 'this.tasks.find((task) => task?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
 			WHEN [ColumnName] IN ('EmployeeId')
 				THEN 'this.employees.find((employee) => employee?._id === ' + LOWER(LEFT([EntityName], 1)) + RIGHT([EntityName], LEN([EntityName]) - 1) + '?.' + [ColumnName] + ');'
@@ -76,7 +76,7 @@ SELECT
 		END AS [ReferenceValueInitialiser]
 FROM [cte]
 WHERE
-	([EntityName] = 'supplier')
+	([EntityName] = 'task')
 	--AND ([ColumnName] LIKE '%Id')
 ORDER BY
 	[ColumnId]
