@@ -6,6 +6,7 @@ import {
   DataService,
   FileAttachment,
   FileAttachmentService,
+  GeneralUtils,
   LookupValue,
   LookupValueService,
   Project,
@@ -89,13 +90,14 @@ export class ProjectService extends DataService {
       .then((reviews) => {
         this.reviews = reviews;
       });
-      this.getAll<Project>()
-        .toPromise()
-        .then((projects) => {
-          this.projects = projects;
-        });
+    this.getAll<Project>()
+      .toPromise()
+      .then((projects) => {
+        this.projects = projects;
+      });
   }
   mapValues(project: Project) {
+    if (!GeneralUtils.isObjectSet(project)) return project;
     project.ProjectType = this.lookupValues.find(
       (lookupValue) => lookupValue?._id === project?.ProjectTypeId
     );
@@ -106,7 +108,7 @@ export class ProjectService extends DataService {
       (lookupValue) => lookupValue?._id === project?.StatusId
     );
     project.LinkedProjects = this.projects.filter(
-      (linkedProject) => linkedProject?.ParentProjectId === project?._id
+      (cp) => cp?.ParentProjectId === project?._id
     );
     project.Files = this.files.filter(
       (file) => file?.ProjectId === project?._id

@@ -1,2 +1,32 @@
-@import '../../../assets/scss/idas/colors.scss';
-@import '../../../assets/scss/idas/fonts.scss';
+@import "../../../assets/scss/idas/colors.scss";
+@import "../../../assets/scss/idas/fonts.scss";
+
+div {
+  width: 100%;
+  table {
+    width: 100%;
+  }
+  table,
+  thead,
+  tr,
+  th,
+  td {
+    font-size: 0.9em;
+    padding: 0.5em;
+    text-align: left;
+    vertical-align: middle;
+  }
+  thead {
+    background-color: #808080;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: bold;
+    height: 4em;
+  }
+  td {
+    img {
+      margin: 0.7em 0 0.5em 0.5em;
+      text-align: center;
+    }
+  }
+}

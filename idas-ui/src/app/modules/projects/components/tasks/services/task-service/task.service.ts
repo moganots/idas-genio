@@ -29,8 +29,8 @@ import { TaskConfiguration } from './task-configuration';
 export class TaskService extends DataService {
   lookupValues: LookupValue[] = [];
   tasks: Task[] = [];
-  projects: Project[] = [];
   users: User[] = [];
+  projects: Project[] = [];
   files: FileAttachment[] = [];
   comments: TaskComment[] = [];
   worklogs: TaskWorklog[] = [];
@@ -39,9 +39,9 @@ export class TaskService extends DataService {
   constructor(
     public httpClient: HttpClient,
     public authenticationService: AuthenticationService,
-    public projectService: ProjectService,
     public lookupValueService: LookupValueService,
     public userService: UserService,
+    public projectService: ProjectService,
     public fileAttachmentService: FileAttachmentService,
     public taskCommentService: TaskCommentService,
     public taskWorklogService: TaskWorklogService,
@@ -57,17 +57,17 @@ export class TaskService extends DataService {
       .then((lookupValues) => {
         this.lookupValues = lookupValues;
       });
-    this.projectService
-      .getAll<Project>()
-      .toPromise()
-      .then((projects) => {
-        this.projects = projects;
-      });
     this.userService
       .getAll<User>()
       .toPromise()
       .then((users) => {
         this.users = users;
+      });
+    this.projectService
+      .getAll<Project>()
+      .toPromise()
+      .then((projects) => {
+        this.projects = projects;
       });
     this.fileAttachmentService
       .getAll<FileAttachment>()
@@ -99,11 +99,11 @@ export class TaskService extends DataService {
       .then((reviews) => {
         this.reviews = reviews;
       });
-      this.getAll<Task>()
-        .toPromise()
-        .then((tasks) => {
-          this.tasks = tasks;
-        });
+    this.getAll<Task>()
+      .toPromise()
+      .then((tasks) => {
+        this.tasks = tasks;
+      });
   }
   mapValues(task: Task) {
     task.Project = this.projects.find(
@@ -119,14 +119,12 @@ export class TaskService extends DataService {
       (lookupValue) => lookupValue?._id === task?.StatusId
     );
     task.Assignee = this.users.find((user) => user?._id === task?.AssigneeId);
-    task.ParentTask = this.mapValues(
-      this.tasks.find((parentTask) => parentTask?._id === task?.ParentTaskId)
+    task.ParentTask = this.tasks.find(
+      (parentTask) => parentTask?._id === task?.ParentTaskId
     );
-    task.SubTasks = this.tasks
-      ?.filter((SubTask) => SubTask?.ParentTaskId === task?._id)
-      ?.map((subTask) => {
-        return this.mapValues(subTask);
-      });
+    task.SubTasks = this.tasks.filter(
+      (subTask) => subTask?.ParentTaskId === task?._id
+    );
     task.Files = this.files.filter((file) => file?.TaskId === task?._id);
     task.Comments = this.comments.filter(
       (comment) => comment?.TaskId === task?._id

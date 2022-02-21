@@ -4,7 +4,9 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger idas-main-card-header" style="padding: 17px 0 0 0;">
+          <div
+            class="card-header card-header-danger idas-main-card-header"
+          >
             <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
             <h4 class="card-title">{{ pageTitle }}</h4>
             <p class="category">{{ pageSubTitle }}</p>
@@ -94,8 +96,8 @@
                     }"
                     >{{ task?.Priority?.Icon || "report_problem" }}</i
                   >
-                  <a class="" href="#/tasks/task/{{task?._id}}"
-                    >{{ task?.Project?.Code }} / {{ task?._id }}</a
+                  <a class="" href="#/tasks/task/{{ task?._id }}"
+                    >{{ project?.Code }} / {{ task?._id }}</a
                   >
                   <p class="task name">
                     {{ task?.Name }}
@@ -132,9 +134,7 @@
                 <div class="idas-tasks-footer-action-buttons">
                   <button
                     mat-icon-button
-                    class="
-                      btn btn-white btn-round btn-just-icon btn-idas-float-right
-                    "
+                    class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                     type="button"
                     (click)="onClickAddNewProjectTask(project)"
                     title="Add New Task"

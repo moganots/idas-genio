@@ -33,6 +33,7 @@ import { MeetingCalendarService } from './components/user-meeting-calendar/servi
 import { MeetingCalendarAttendeeService } from './components/user-meeting-calendar/services/meeting-calendar-attendee/meeting-calendar-attendee.service';
 import { UserService } from './services/user-service/user.service';
 import { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -57,6 +58,7 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
 @NgModule({
   imports: [
     CommonModule,
+    MatExpansionModule,
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,

@@ -181,14 +181,15 @@ export class DataViewTableSimpleComponent
       this.getLookupValueById(element[`StatusId`]).Value || ``
     );
     return !(
-      ['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``)) &&
+      ['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``))
+ /*      &&
       [
         'created',
         'not started',
         'started',
         're-started',
         'in progress',
-      ].includes(status)
+      ].includes(status) */
     );
   }
   onClickManageProjectAssignmentButton(element: any, index?: number): void {

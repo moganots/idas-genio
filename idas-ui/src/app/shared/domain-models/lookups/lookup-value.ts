@@ -15,15 +15,28 @@ export class LookupValue extends BaseModel {
   CssClass: string;
   constructor(
     id: number,
-    isActive: boolean,
+    IsActive: boolean,
     LookupCategoryId: number,
     Value: string,
     Value2: string,
     Value3: string,
     Image: string,
-    Icon: string
+    Icon: string,
+    CreatedBy?: number,
+    DateCreated?: Date,
+    ModifiedBy?: number,
+    DateModified?: Date
     ) {
-    super(id, isActive);
+    super(
+      id,
+      IsActive,
+      null,
+      Value,
+      null,
+      CreatedBy,
+      DateCreated,
+      ModifiedBy,
+      DateModified);
     this.LookupCategoryId = LookupCategoryId;
     this.Value = Value;
     this.Value2 = Value2;

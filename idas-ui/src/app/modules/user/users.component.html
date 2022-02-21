@@ -1,1 +1,156 @@
-<app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [dataSource]="dataSource" [dataSourceColumns]="dataSourceColumns"></app-data-view-table-simple>
+<!-- <app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [dataSource]="dataSource" [dataSourceColumns]="dataSourceColumns"></app-data-view-table-simple> -->
+<div class="main-content idas-main-content">
+  <div class="container-fluid">
+    <div class="element">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger idas-main-card-header">
+            <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+            <h4 class="card-title">{{ pageTitle }}</h4>
+            <p class="category">{{ pageSubTitle }}</p>
+          </div>
+          <div class="card-body">
+            <mat-accordion>
+              <mat-expansion-panel
+                class="mat-elevation-z0"
+                [expanded]="i === 0"
+                [togglePosition]="'before'"
+                *ngFor="let userType of userTypes; let i = index"
+              >
+                <mat-expansion-panel-header
+                  class="mat-elevation-z2 idas-userType-task-panel-header"
+                >
+                  <i
+                    class="material-icons userType {{
+                      userType?.CssClassCategory
+                    }} {{ userType?.CssClass }}"
+                    [title]="userType?.Value"
+                    [ngStyle]="{
+                      display:
+                        userType?.Icon === null || userType?.Icon === undefined
+                          ? 'none'
+                          : 'inline'
+                    }"
+                    >{{ userType?.Icon }}</i
+                  >
+                  <p
+                    class="userType"
+                    style="font-weight: bold; padding: 0.4em 0.2em"
+                  >
+                    {{
+                      userType?.Value || userType?.Value2 || userType?.Value3
+                    }}
+                  </p>
+                </mat-expansion-panel-header>
+                <div>
+                  <br />
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Avatar</th>
+                        <th>Display Name</th>
+                        <th>Email Address</th>
+                        <th>Date Last Logged In</th>
+                        <th>Is Locked</th>
+                        <th>Is Active</th>
+                        <th>&nbsp;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let user of userType?.Users">
+                        <td>
+                          <img
+                            class="img-in-grid img30 rounded"
+                            src="{{ user?.Avatar }}"
+                            [title]="getUserAvatarTitle(user)"
+                          />
+                        </td>
+                        <td>
+                          {{ user?.DisplayName || user?.EmailAddress }}
+                        </td>
+                        <td>
+                          {{ user?.EmailAddress }}
+                        </td>
+                        <td>
+                          {{ user?.DateLastLoggedIn }}
+                        </td>
+                        <td>
+                          <mat-checkbox
+                            [checked]="user?.IsLocked"
+                            disabled
+                          ></mat-checkbox>
+                        </td>
+                        <td>
+                          <mat-checkbox
+                            [checked]="user?.IsActive"
+                            disabled
+                          ></mat-checkbox>
+                        </td>
+                        <td>
+                          <button
+                            mat-icon-button
+                            class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                            type="button"
+                            title="{{
+                              user?.IsActive ? 'De-Activate' : 'Activate'
+                            }} User"
+                            (click)="onClickEdit(user)"
+                          >
+                            <i class="material-icons idas-button-icon">{{
+                              getUserDeActivateIcon(user)
+                            }}</i>
+                          </button>
+                          <button
+                            mat-icon-button
+                            class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                            type="button"
+                            title="{{
+                              user?.IsLocked ? 'Unlock' : 'Lock'
+                            }} User"
+                            (click)="onClickEdit(user)"
+                          >
+                            <i class="material-icons idas-button-icon">{{
+                              getUserUnLockIcon(user)
+                            }}</i>
+                          </button>
+                          <button
+                            mat-icon-button
+                            class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                            type="button"
+                            title="Edit User"
+                            (click)="onClickEdit(user)"
+                          >
+                            <i class="material-icons idas-button-icon">edit</i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <button
+                  mat-icon-button
+                  class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                  type="button"
+                  title="Add New {{ userType?.Value}} User"
+                  (click)="onClickAddUser(userType)"
+                >
+                  <i class="material-icons idas-button-icon">person_add</i>
+                </button>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-data-view-table-simple
+  [pageIcon]="pageIcon"
+  [pageTitle]="pageTitle"
+  [pageName]="pageName"
+  [dataService]="dataService"
+  [entityName]="entityName"
+  [dataSource]="dataSource"
+  [dataSourceColumns]="dataSourceColumns"
+></app-data-view-table-simple> -->

@@ -336,6 +336,8 @@ i {
   }
 
   &.usertype {
+    display: inline-block;
+    padding: .1em;
     &.admin {
       color: $idas-color-usertype-admin;
     }
