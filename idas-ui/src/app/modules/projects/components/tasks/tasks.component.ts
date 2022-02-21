@@ -38,6 +38,7 @@ export class TasksComponent extends PageComponent implements OnInit {
   assigneeId?: number;
   users: User[] = [];
   projects: Project[] = [];
+  tasks: Task[] = [];
 
   constructor(
     public router: Router,
@@ -62,9 +63,34 @@ export class TasksComponent extends PageComponent implements OnInit {
     this.pageName = TaskConfiguration.pageName;
     this.entityName = TaskConfiguration.identifier;
     this.dataSourceColumns = TaskConfiguration.dataColumns;
+    this.referenceValueService.userService
+      .getAll<User>()
+      .toPromise()
+      .then((users) => {
+        this.users = users;
+      });
+    this.referenceValueService.projectService
+      .getAll<Project>()
+      .toPromise()
+      .then((projects) => {
+        this.projects = projects;
+        this.referenceValueService.taskService
+          .getAll<Task>()
+          .toPromise()
+          .then((tasks) => {
+            this.projects.forEach((project) => {
+              project.Tasks = tasks?.filter((task) => task?.ProjectId === project?._id);
+            });
+          });
+      });
   }
   ngOnInit() {
-    this.onRefreshView();
+    // this.onRefreshView();
+  }
+  getProjectTasks(project: Project, tasks: Task[] = []) {
+    console.log(project);
+    console.log(tasks);
+    return this.tasks?.filter((task) => task?.ProjectId === project?._id);
   }
   private onRefreshView() {
     this.referenceValueService.userService

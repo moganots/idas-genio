@@ -18,6 +18,7 @@ import { EmployeeConfiguration } from './employee-configuration';
 export class EmployeesService extends DataService {
   lookupValues: LookupValue[] = [];
   contactDetails: ContactDetail[] = [];
+  employees: Employee[] = [];
   constructor(
     public httpEmployee: HttpClient,
     public authenticationService: AuthenticationService,
@@ -39,6 +40,7 @@ export class EmployeesService extends DataService {
       .then((contactDetails) => {
         this.contactDetails = contactDetails;
       });
+      this.getAll<Employee>().toPromise().then((employees) => { this.employees = employees;});
   }
   mapValues(employee: Employee) {
     employee.Salutation = this.lookupValues.find(
@@ -59,12 +61,8 @@ export class EmployeesService extends DataService {
     employee.ContactDetail = this.contactDetails.find(
       (contactDetail) => contactDetail?._id === employee?._id
     );
-    this.getFirstById<Employee>(employee?.ManagerId)
-      .toPromise()
-      .then((manager) => {
-        employee.Manager = manager;
-      });
     employee.DisplayName = GeneralUtils.getEmployeeDisplayName(employee);
+    employee.Manager = this.employees.find((manager) => manager?._id === employee?.ManagerId);
     return employee;
   }
 }

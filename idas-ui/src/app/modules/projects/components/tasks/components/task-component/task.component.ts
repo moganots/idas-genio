@@ -91,14 +91,6 @@ export class TaskComponent extends PageComponent implements OnInit {
       .then((tasks) => {
         // 1. Get this.task
         this.task = tasks.find((t) => t?._id === this.taskId);
-        // 2. Get this.task?.ParentTask
-        this.task.ParentTask = tasks.find(
-          (t) => t?._id === this.task?.ParentTaskId
-        );
-        // 3. Get this.task?.SubTasks
-        this.task.SubTasks = tasks.filter(
-          (t) => t?.ParentTaskId === this.task?._id
-        );
       });
     this.lookupValueService
       .getAll<LookupValue>()
