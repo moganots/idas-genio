@@ -64,9 +64,9 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.Client ||
-                                    currentUser?.Employee ||
-                                    currentUser?.Supplier ||
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
                                     {})[fidc?.name]
                                 "
                                 (change)="onValueChanged($event)"
@@ -86,9 +86,9 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.Client ||
-                                    currentUser?.Employee ||
-                                    currentUser?.Supplier ||
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
                                     {})[fidc?.name]
                                 "
                                 (keyup)="onValueChanged($event)"
@@ -108,9 +108,9 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.Client ||
-                                    currentUser?.Employee ||
-                                    currentUser?.Supplier ||
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
                                     {})[fidc?.name]
                                 "
                                 [matAutocomplete]="i"
@@ -145,7 +145,7 @@
                                       class="material-icons {{
                                         value?.cssClassCategory
                                       }} {{ value?.cssClass }}"
-                                      [title]="value?.tooltip || value?.title"
+                                      [title]="value?.title"
                                       [ngStyle]="{
                                         display:
                                           value?.icon === null ||
@@ -190,9 +190,9 @@
                               name="{{ fidc?.name }}"
                               [formControl]="frmGroupFields.controls[fidc?.name]"
                               [(ngModel)]="
-                                (currentUser?.Client ||
-                                  currentUser?.Employee ||
-                                  currentUser?.Supplier ||
+                                (currentUser.Client ||
+                                  currentUser.Employee ||
+                                  currentUser.Supplier ||
                                   {})[fidc?.name]
                               "
                               (change)="onCheckboxClicked($event)"
@@ -216,9 +216,9 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.Client ||
-                                    currentUser?.Employee ||
-                                    currentUser?.Supplier ||
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
                                     {})[fidc?.name]
                                 "
                                 (dateInput)="onDatePickerChanged($event)"
@@ -248,9 +248,9 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.Client ||
-                                    currentUser?.Employee ||
-                                    currentUser?.Supplier ||
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
                                     {})[fidc?.name]
                                 "
                                 (keyup)="onValueChanged($event)"
@@ -270,9 +270,9 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.Client ||
-                                    currentUser?.Employee ||
-                                    currentUser?.Supplier ||
+                                  (currentUser.Client ||
+                                    currentUser.Employee ||
+                                    currentUser.Supplier ||
                                     {})[fidc?.name]
                                 "
                                 (keyup)="onValueChanged($event)"
@@ -305,7 +305,7 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.ContactDetail || {})[fidc?.name]
+                                  (currentUser.ContactDetail || {})[fidc?.name]
                                 "
                                 (change)="onValueChanged($event)"
                               />
@@ -324,7 +324,7 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.ContactDetail || {})[fidc?.name]
+                                  (currentUser.ContactDetail || {})[fidc?.name]
                                 "
                                 (keyup)="onValueChanged($event)"
                               />
@@ -343,7 +343,7 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.ContactDetail || {})[fidc?.name]
+                                  (currentUser.ContactDetail || {})[fidc?.name]
                                 "
                                 [matAutocomplete]="i"
                               />
@@ -377,7 +377,7 @@
                                       class="material-icons {{
                                         value?.cssClassCategory
                                       }} {{ value?.cssClass }}"
-                                      [title]="value?.tooltip || value?.title"
+                                      [title]="value?.title"
                                       [ngStyle]="{
                                         display:
                                           value?.icon === null ||
@@ -422,7 +422,7 @@
                               name="{{ fidc?.name }}"
                               [formControl]="frmGroupFields.controls[fidc?.name]"
                               [(ngModel)]="
-                                (currentUser?.ContactDetail || {})[fidc?.name]
+                                (currentUser.ContactDetail || {})[fidc?.name]
                               "
                               (change)="onCheckboxClicked($event)"
                               class=""
@@ -445,7 +445,7 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.ContactDetail || {})[fidc?.name]
+                                  (currentUser.ContactDetail || {})[fidc?.name]
                                 "
                                 (dateInput)="onDatePickerChanged($event)"
                                 (dateChange)="onDatePickerChanged($event)"
@@ -474,7 +474,7 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.ContactDetail || {})[fidc?.name]
+                                  (currentUser.ContactDetail || {})[fidc?.name]
                                 "
                                 (keyup)="onValueChanged($event)"
                               />
@@ -493,7 +493,7 @@
                                 class=""
                                 placeholder="{{ fidc?.displayName }}"
                                 [(ngModel)]="
-                                  (currentUser?.ContactDetail || {})[fidc?.name]
+                                  (currentUser.ContactDetail || {})[fidc?.name]
                                 "
                                 (keyup)="onValueChanged($event)"
                               ></textarea>
@@ -594,7 +594,7 @@
                                       class="material-icons {{
                                         value?.cssClassCategory
                                       }} {{ value?.cssClass }}"
-                                      [title]="value?.tooltip || value?.title"
+                                      [title]="value?.title"
                                       [ngStyle]="{
                                         display:
                                           value?.icon === null ||

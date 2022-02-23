@@ -152,8 +152,8 @@ export class UserMeetingCalendarComponent
     return {
       CalendarEventTypeId: calendarEventTypeId,
       Title: title,
-      StartDate: startDate,
-      EndDate: endDate,
+      StartDate: startDate || new Date(),
+      EndDate: endDate || startDate || new Date(),
       IsAllDayEvent: isAllDayEvent,
       Location: location,
       Description: description,

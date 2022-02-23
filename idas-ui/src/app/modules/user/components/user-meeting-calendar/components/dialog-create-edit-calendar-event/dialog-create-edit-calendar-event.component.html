@@ -6,14 +6,7 @@
     <span>
       <button
         mat-icon-button
-        class="
-          btn
-          btn-white
-          btn-round
-          btn-just-icon
-          btn-idas-dialog-no
-          btn-idas-dialog-float-right
-        "
+        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
         type="button"
         data-dismiss="modal"
         (click)="onClickDialogClose()"
@@ -32,7 +25,8 @@
             class="event organiser"
             [ngStyle]="{
               display:
-                selectedElement.createdBy === null || selectedElement.createdBy === undefined
+                selectedElement.createdBy === null ||
+                selectedElement.createdBy === undefined
                   ? 'none'
                   : 'inline'
             }"
@@ -47,18 +41,21 @@
               >{{ selectedElement?.createdBy?.UserType?.Icon }}</i
             >
             <img src="{{ selectedElement?.createdBy?.Avatar }}" />
-            <p class="created-by">{{ selectedElement?.createdBy?.DisplayName }}</p>
+            <p class="created-by">
+              {{ selectedElement?.createdBy?.DisplayName }}
+            </p>
             <i class="material-icons">schedule</i>
             <p class="label">Date Created</p>
             <p class="date-created">
-              {{ selectedElement?.createdBy?.DateCreated | date: "EEEE, MMMM d, y" }}
+              {{
+                selectedElement?.createdBy?.DateCreated
+                  | date: "EEEE, MMMM d, y"
+              }}
             </p>
             <br />
             <br />
           </span>
-          <div
-            *ngFor="let fidc of canShowFormInputDataColumns; let i = index"
-          >
+          <div *ngFor="let fidc of canShowFormInputDataColumns; let i = index">
             <span [ngSwitch]="fidc?.controlType">
               <span *ngSwitchCase="'textbox'">
                 <mat-form-field>
@@ -91,26 +88,26 @@
               <span *ngSwitchCase="'select'">
                 <mat-form-field>
                   <input
-                  matInput
-                  type="text"
-                  id="{{ fidc?.name }}"
-                  name="{{ fidc?.name }}"
-                  [formControl]="frmGroupFields.controls[fidc?.name]"
-                  class=""
-                  placeholder="{{ fidc?.displayName }}"
-                  [matAutocomplete]="i"
-                />
-                <mat-autocomplete
-                  id="{{ fidc?.name }}"
-                  #i="matAutocomplete"
-                  [displayWith]="getDisplayWithValue"
-                >
-                  <mat-option
+                    matInput
+                    type="text"
                     id="{{ fidc?.name }}"
-                    *ngFor="let value of fidc?.filteredLookupValues | async"
-                    [value]="value"
-                    (onSelectionChange)="onSelectedValueChanged($event)"
-                    matSort
+                    name="{{ fidc?.name }}"
+                    [formControl]="frmGroupFields.controls[fidc?.name]"
+                    class=""
+                    placeholder="{{ fidc?.displayName }}"
+                    [matAutocomplete]="i"
+                  />
+                  <mat-autocomplete
+                    id="{{ fidc?.name }}"
+                    #i="matAutocomplete"
+                    [displayWith]="getDisplayWithValue"
+                  >
+                    <mat-option
+                      id="{{ fidc?.name }}"
+                      *ngFor="let value of fidc?.filteredLookupValues | async"
+                      [value]="value"
+                      (onSelectionChange)="onSelectedValueChanged($event)"
+                      matSort
                     >
                       <span
                         [ngStyle]="{
@@ -136,7 +133,10 @@
                               : 'inline'
                         }"
                       >
-                        <img class="img-mat-option img23 rounded" src="{{ value?.image }}" />
+                        <img
+                          class="img-mat-option img23 rounded"
+                          src="{{ value?.image }}"
+                        />
                       </span>
                       <p class="display-value">{{ value?.displayValue }}</p>
                     </mat-option>
@@ -161,7 +161,29 @@
                 >
               </span>
               <span *ngSwitchCase="'datetimepicker'" class="datetimepicker">
-                <mat-form-field class="date">
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="text"
+                    id="{{ fidc?.name }}"
+                    name="{{ fidc?.name }}"
+                    formControlName="{{ fidc?.name }}"
+                    placeholder="{{ fidc?.displayName }}"
+                    class=""
+                    [ngxMatDatetimePicker]="picker"
+                    (dateInput)="onDateTimePickerChanged($event)"
+                    (dateChange)="onDateTimePickerChanged($event)"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker
+                    #picker
+                    [enableMeridian]="true"
+                  ></ngx-mat-datetime-picker>
+                </mat-form-field>
+                <!--                 <mat-form-field class="date">
                   <input
                     matInput
                     [matDatepicker]="picker"
@@ -206,7 +228,7 @@
                       <p class="display-value">{{ value?.displayValue }}</p>
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
               </span>
               <span *ngSwitchCase="'password'">
                 <mat-form-field>
@@ -298,7 +320,10 @@
                           : 'inline'
                     }"
                   >
-                    <img class="img-mat-option img23 rounded" src="{{ user?.Avatar }}" />
+                    <img
+                      class="img-mat-option img23 rounded"
+                      src="{{ user?.Avatar }}"
+                    />
                   </span>
                   <p class="display-value">{{ user?.DisplayName }}</p>
                 </mat-option>
@@ -307,13 +332,7 @@
           </span>
           <button
             mat-icon-button
-            class="
-              btn
-              btn-white
-              btn-round
-              btn-just-icon
-              btn-idas-calendar-event-add-attendee
-            "
+            class="btn btn-white btn-round btn-just-icon btn-idas-calendar-event-add-attendee"
             type="button"
             [disabled]="
               newEventAttendee === null || newEventAttendee === undefined
@@ -421,14 +440,7 @@
     </button>
     <button
       mat-icon-button
-      class="
-        btn
-        btn-white
-        btn-round
-        btn-just-icon
-        btn-idas-dialog-yes
-        btn-idas-dialog-float-right
-      "
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
       (click)="onClickSave()"
       [mat-dialog-close]="selectedElement"
