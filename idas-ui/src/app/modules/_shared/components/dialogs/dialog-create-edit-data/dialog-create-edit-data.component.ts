@@ -53,7 +53,7 @@ export class DialogCreateEditDataComponent
       dialogRef,
       data
     );
-    this.pageTitle = `${this.capitalizeFirstLetter(
+    this.pageTitle = this.pageTitle || `${this.capitalizeFirstLetter(
       this.action
     )} ${this.capitalizeFirstLetter(this.entityName)}`;
   }

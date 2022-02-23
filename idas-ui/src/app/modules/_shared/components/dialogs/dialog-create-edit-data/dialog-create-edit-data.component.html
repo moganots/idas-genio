@@ -82,30 +82,30 @@
                   <span
                     [ngStyle]="{
                       display:
-                        value.icon === null || value.icon === undefined
+                        value?.icon === null || value?.icon === undefined
                           ? 'none'
                           : 'inline'
                     }"
                   >
                     <i
-                      class="material-icons icon-mat-option rounded {{ value.cssClassCategory }} {{
-                        value.cssClass
+                      class="material-icons icon-mat-option rounded {{ value?.cssClassCategory }} {{
+                        value?.cssClass
                       }}"
-                      [title]="value.title"
-                      >{{ value.icon }}</i
+                      [title]="value?.tooltip || value?.title"
+                      >{{ value?.icon }}</i
                     >
                   </span>
                   <span
                     [ngStyle]="{
                       display:
-                        value.image === null || value.image === undefined
+                        value?.image === null || value?.image === undefined
                           ? 'none'
                           : 'inline'
                     }"
                   >
-                    <img class="img-mat-option img23 rounded" src="{{ value.image }}" />
+                    <img class="img-mat-option img23 rounded" src="{{ value?.image }}" />
                   </span>
-                  <p class="display-value">{{ value.displayValue }}</p>
+                  <p class="display-value">{{ value?.displayValue }}</p>
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>

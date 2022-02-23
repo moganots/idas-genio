@@ -13,16 +13,14 @@ import {
   Employee,
   GeneralUtils,
   Project,
-  ProjectAssignment,
   SharedConfiguration,
   Supplier,
   Task,
-  TaskAssignment,
   User,
 } from 'app/shared/app-shared.module';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: `root`,
 })
 export class ReferenceValueService {
   users: User[] = [];
@@ -47,8 +45,15 @@ export class ReferenceValueService {
   }
   setFieldLookupValues(fieldName: string, field: DataColumn) {
     switch (fieldName) {
+      case `AssigneeId`:
+      case `AttendeeId`:
+      case `CreatedBy`:
+      case `ModifiedBy`:
+      case `UserId`:
       case `Assignee`:
-      case `PreviousAssignee`:
+      case `Attendee`:
+      case `CreatedBy`:
+      case `ModifiedBy`:
       case `User`:
         this.userService.getAll<User>().subscribe((users) => {
           this.addFieldLookupValues(
@@ -65,6 +70,8 @@ export class ReferenceValueService {
           );
         });
         break;
+      case `EmployeeId`:
+      case `ManagerId`:
       case `Employee`:
       case `Manager`:
         this.employeesService.getAll<Employee>().subscribe((values) => {
@@ -74,6 +81,10 @@ export class ReferenceValueService {
           );
         });
         break;
+      case `ChildProjectId`:
+      case `ParentProjectId`:
+      case `ProjectId`:
+      case `SubProjectId`:
       case `ChildProject`:
       case `ParentProject`:
       case `Project`:
@@ -93,6 +104,10 @@ export class ReferenceValueService {
           );
         });
         break;
+      case `ChildTaskId`:
+      case `ParentTaskId`:
+      case `SubTaskId`:
+      case `TaskId`:
       case `ChildTask`:
       case `ParentTask`:
       case `SubTask`:
@@ -123,11 +138,14 @@ export class ReferenceValueService {
       id: client?._id,
       displayValue: name,
       title: name,
-      tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
-      cssClassCategory: user?.UserType?.CssClassCategory || 'usertype',
-      cssClass: user?.UserType?.CssClass || 'client',
-      icon: user?.UserType?.Icon || 'reduce_capacity',
-      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
+      tooltip:
+        user?.UserType?.Value ||
+        user?.UserType?.Value2 ||
+        user?.UserType?.Value3,
+      cssClassCategory: user?.UserType?.CssClassCategory || `usertype`,
+      cssClass: user?.UserType?.CssClass || `client`,
+      icon: user?.UserType?.Icon || `reduce_capacity`,
+      image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
     };
   }
   mapValuesEmployee(employee: Employee): any {
@@ -137,11 +155,14 @@ export class ReferenceValueService {
       id: employee?._id,
       displayValue: name,
       title: name,
-      tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
-      cssClassCategory: user?.UserType?.CssClassCategory || 'usertype',
-      cssClass: user?.UserType?.CssClass || 'employee',
-      icon: user?.UserType?.Icon || 'groups',
-      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
+      tooltip:
+        user?.UserType?.Value ||
+        user?.UserType?.Value2 ||
+        user?.UserType?.Value3,
+      cssClassCategory: user?.UserType?.CssClassCategory || `usertype`,
+      cssClass: user?.UserType?.CssClass || `employee`,
+      icon: user?.UserType?.Icon || `groups`,
+      image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
     };
   }
   mapValuesProject(project: Project): any {
@@ -168,11 +189,14 @@ export class ReferenceValueService {
       id: supplier?._id,
       displayValue: name,
       title: name,
-      tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
-      cssClassCategory: user?.UserType?.CssClassCategory || 'usertype',
-      cssClass: user?.UserType?.CssClass || 'supplier',
-      icon: user?.UserType?.Icon || 'connect_without_contact',
-      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
+      tooltip:
+        user?.UserType?.Value ||
+        user?.UserType?.Value2 ||
+        user?.UserType?.Value3,
+      cssClassCategory: user?.UserType?.CssClassCategory || `usertype`,
+      cssClass: user?.UserType?.CssClass || `supplier`,
+      icon: user?.UserType?.Icon || `connect_without_contact`,
+      image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
     };
   }
   mapValuesTask(task: Task): any {
@@ -201,15 +225,17 @@ export class ReferenceValueService {
         user?.UserType?.Value2 ||
         user?.UserType?.Value3 ||
         ``,
-        tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
+      tooltip:
+        user?.UserType?.Value ||
+        user?.UserType?.Value2 ||
+        user?.UserType?.Value3,
       cssClassCategory: user?.UserType?.CssClassCategory,
       cssClass: user?.UserType?.CssClass,
       icon: user?.UserType?.Icon,
-      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
+      image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
     };
   }
   addFieldLookupValues(field: DataColumn, values: any[] = []) {
-    console.log(values);
     field.lookupValues = [];
     values.forEach((value) => {
       field.lookupValues.push(value);

@@ -97,6 +97,7 @@ export class BaseDataComponent extends BaseComponent {
       id: value?._id,
       title: name,
       displayValue: name,
+      tooltip: name,
       cssClassCategory: value?.CssClassCategory,
       cssClass: value?.CssClass,
       icon: value?.Icon,
