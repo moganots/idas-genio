@@ -153,4 +153,23 @@ export class UsersComponent extends PageComponent implements OnInit {
       }
     );
   }
+  onClickAddUser(userType: UserType) {
+    this.action = 'create';
+    super.openDialog(
+      DialogCreateEditDataComponent,
+      {
+        action: this.action,
+        dataService: this.dataService,
+        entityName: this.entityName,
+        pageIcon: this.pageIcon,
+        pageName: this.pageName,
+        pageTitle: this.pageTitle,
+        dataColumns: this.dataSourceColumns,
+        selectedElement: { UserTypeId: userType?._id } || {},
+      },
+      () => {
+        this.onLoadRefreshData();
+      }
+    );
+  }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ClientsService } from 'app/modules/clients/services/clients.service';
 import { EmployeesService } from 'app/modules/employees/services/employees.service';
-import { ProjectAssignmentsService } from 'app/modules/projects/components/dialog-project-assignment/services/project-assignments.service';
-import { TaskAssignmentsService } from 'app/modules/projects/components/tasks/components/dialog-task-assignment/services/task-assignments.service';
+import { TaskAssignService } from 'app/modules/projects/components/tasks/services/task-assign-service/task-assign-service';
 import { TaskService } from 'app/modules/projects/components/tasks/services/task-service/task.service';
+import { ProjectAssignService } from 'app/modules/projects/services/project-assign-service/project-assign.service';
 import { ProjectService } from 'app/modules/projects/services/project-service/project.service';
 import { SuppliersService } from 'app/modules/suppliers/services/suppliers.service';
 import { UserService } from 'app/modules/user/services/user-service/user.service';
@@ -13,9 +13,11 @@ import {
   Employee,
   GeneralUtils,
   Project,
+  ProjectAssignment,
   SharedConfiguration,
   Supplier,
   Task,
+  TaskAssignment,
   User,
 } from 'app/shared/app-shared.module';
 
@@ -23,16 +25,26 @@ import {
   providedIn: 'root',
 })
 export class ReferenceValueService {
+  users: User[] = [];
   constructor(
     public clientsService: ClientsService,
     public employeesService: EmployeesService,
     public projectService: ProjectService,
-    public projectAssignmentsService: ProjectAssignmentsService,
+    public projectAssignService: ProjectAssignService,
     public taskService: TaskService,
-    public taskAssignmentsService: TaskAssignmentsService,
+    public taskAssignService: TaskAssignService,
     public suppliersService: SuppliersService,
     public userService: UserService
-  ) {}
+  ) {
+    this.userService
+      .getAll<User>()
+      .toPromise()
+      .then((users) => {
+        users.forEach((user) => {
+          this.users.push(user);
+        });
+      });
+  }
   setFieldLookupValues(fieldName: string, field: DataColumn) {
     switch (fieldName) {
       case `Assignee`:
@@ -104,69 +116,80 @@ export class ReferenceValueService {
         break;
     }
   }
-  mapValuesClient(value: Client): any {
-    const name = `${GeneralUtils.EmptyStringIfNull(
-      value?.Name
-    )} ${GeneralUtils.EmptyStringIfNull(
-      value?.Surname || value?.CompanyName
-    )}`.trim();
+  mapValuesClient(client: Client): any {
+    const name = GeneralUtils.getClientDisplayName(client);
+    const user = this.users?.find((usr) => usr?.ClientId === client?._id);
     return {
-      id: value?._id,
+      id: client?._id,
       displayValue: name,
       title: name,
-      cssClassCategory: 'usertype',
-      cssClass: 'client',
-      // icon: 'reduce_capacity'
+      tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
+      cssClassCategory: user?.UserType?.CssClassCategory || 'usertype',
+      cssClass: user?.UserType?.CssClass || 'client',
+      icon: user?.UserType?.Icon || 'reduce_capacity',
+      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
     };
   }
-  mapValuesEmployee(value: Employee): any {
-    const name = `${GeneralUtils.EmptyStringIfNull(
-      value?.Name
-    )} ${GeneralUtils.EmptyStringIfNull(value?.Surname)}`.trim();
+  mapValuesEmployee(employee: Employee): any {
+    const name = GeneralUtils.getEmployeeDisplayName(employee);
+    const user = this.users?.find((usr) => usr?.EmployeeId === employee?._id);
     return {
-      id: value?._id,
+      id: employee?._id,
       displayValue: name,
       title: name,
-      cssClassCategory: 'usertype',
-      cssClass: 'employee',
-      // icon: 'groups'
+      tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
+      cssClassCategory: user?.UserType?.CssClassCategory || 'usertype',
+      cssClass: user?.UserType?.CssClass || 'employee',
+      icon: user?.UserType?.Icon || 'groups',
+      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
     };
   }
-  mapValuesProject(value: Project): any {
-    const name = `${GeneralUtils.EmptyStringIfNull(value?.Name)}`.trim();
+  mapValuesProject(project: Project): any {
+    const name = `${GeneralUtils.EmptyStringIfNull(project?.Name)}`.trim();
     return {
-      id: value?._id,
-      displayValue: [name, value?._id].filter((val) => !(val === null || val === undefined || String(val).length === 0)).join(` / `),
+      id: project?._id,
+      displayValue: [name, project?._id]
+        .filter(
+          (val) =>
+            !(val === null || val === undefined || String(val).length === 0)
+        )
+        .join(` / `),
       title: name,
-      cssClassCategory: value?.ProjectType?.CssClassCategory,
-      cssClass: value?.ProjectType?.CssClass,
-      icon: value?.ProjectType?.Icon,
+      tooltip: project?.ProjectType?.Value,
+      cssClassCategory: project?.ProjectType?.CssClassCategory,
+      cssClass: project?.ProjectType?.CssClass,
+      icon: project?.ProjectType?.Icon,
     };
   }
-  mapValuesSupplier(value: Supplier): any {
-    const name = `${GeneralUtils.EmptyStringIfNull(
-      value?.Name
-    )} ${GeneralUtils.EmptyStringIfNull(
-      value?.Surname || value?.CompanyName
-    )}`.trim();
+  mapValuesSupplier(supplier: Supplier): any {
+    const name = GeneralUtils.getSupplierDisplayName(supplier);
+    const user = this.users?.find((usr) => usr?.SupplierId === supplier?._id);
     return {
-      id: value?._id,
+      id: supplier?._id,
       displayValue: name,
       title: name,
-      cssClassCategory: 'usertype',
-      cssClass: 'supplier',
-      // icon: 'connect_without_contact'
+      tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
+      cssClassCategory: user?.UserType?.CssClassCategory || 'usertype',
+      cssClass: user?.UserType?.CssClass || 'supplier',
+      icon: user?.UserType?.Icon || 'connect_without_contact',
+      image: user?.Avatar || './assets/img/avatars/avatar-0.png',
     };
   }
-  mapValuesTask(value: Task): any {
-    const name = `${GeneralUtils.EmptyStringIfNull(value?.Name)}`.trim();
+  mapValuesTask(task: Task): any {
+    const name = `${GeneralUtils.EmptyStringIfNull(task?.Name)}`.trim();
     return {
-      id: value?._id,
-      displayValue: [name, value?._id].filter((val) => !(val === null || val === undefined || String(val).length === 0)).join(` / `),
+      id: task?._id,
+      displayValue: [name, task?._id]
+        .filter(
+          (val) =>
+            !(val === null || val === undefined || String(val).length === 0)
+        )
+        .join(` / `),
       title: name,
-      cssClassCategory: value?.TaskType?.CssClassCategory,
-      cssClass: value?.TaskType?.CssClass,
-      icon: value?.TaskType?.Icon,
+      tooltip: task?.TaskType?.Value,
+      cssClassCategory: task?.TaskType?.CssClassCategory,
+      cssClass: task?.TaskType?.CssClass,
+      icon: task?.TaskType?.Icon,
     };
   }
   mapValuesUser(user: User): any {
@@ -178,6 +201,7 @@ export class ReferenceValueService {
         user?.UserType?.Value2 ||
         user?.UserType?.Value3 ||
         ``,
+        tooltip: user?.UserType?.Value || user?.UserType?.Value2 || user?.UserType?.Value3,
       cssClassCategory: user?.UserType?.CssClassCategory,
       cssClass: user?.UserType?.CssClass,
       icon: user?.UserType?.Icon,
@@ -185,6 +209,7 @@ export class ReferenceValueService {
     };
   }
   addFieldLookupValues(field: DataColumn, values: any[] = []) {
+    console.log(values);
     field.lookupValues = [];
     values.forEach((value) => {
       field.lookupValues.push(value);

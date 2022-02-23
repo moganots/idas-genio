@@ -19,17 +19,17 @@
   <form [formGroup]="frmGroup">
     <div class="content" formGroupName="frmFields">
       <div *ngFor="let fidc of canShowFormInputDataColumns; let i = index">
-        <span [ngSwitch]="fidc.controlType">
+        <span [ngSwitch]="fidc?.controlType">
           <span *ngSwitchCase="'textbox'">
             <mat-form-field>
               <input
                 matInput
                 type="text"
-                id="{{ fidc.name }}"
-                name="{{ fidc.name }}"
-                [formControl]="frmGroupFields.controls[fidc.name]"
+                id="{{ fidc?.name }}"
+                name="{{ fidc?.name }}"
+                [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
-                placeholder="{{ fidc.displayName }}"
+                placeholder="{{ fidc?.displayName }}"
                 (change)="onValueChanged($event)"
               />
             </mat-form-field>
@@ -39,11 +39,11 @@
               <input
                 matInput
                 type="number"
-                id="{{ fidc.name }}"
-                name="{{ fidc.name }}"
-                [formControl]="frmGroupFields.controls[fidc.name]"
+                id="{{ fidc?.name }}"
+                name="{{ fidc?.name }}"
+                [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
-                placeholder="{{ fidc.displayName }}"
+                placeholder="{{ fidc?.displayName }}"
                 (keyup)="onValueChanged($event)"
               />
             </mat-form-field>
@@ -53,21 +53,21 @@
               <input
                 matInput
                 type="text"
-                id="{{ fidc.name }}"
-                name="{{ fidc.name }}"
-                [formControl]="frmGroupFields.controls[fidc.name]"
+                id="{{ fidc?.name }}"
+                name="{{ fidc?.name }}"
+                [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
-                placeholder="{{ fidc.displayName }}"
+                placeholder="{{ fidc?.displayName }}"
                 [matAutocomplete]="i"
               />
               <mat-autocomplete
-                id="{{ fidc.name }}"
+                id="{{ fidc?.name }}"
                 #i="matAutocomplete"
                 [displayWith]="getDisplayWithValue"
               >
                 <mat-option
-                  id="{{ fidc.name }}"
-                  *ngFor="let value of fidc.filteredLookupValues | async"
+                  id="{{ fidc?.name }}"
+                  *ngFor="let value of fidc?.filteredLookupValues | async"
                   [value]="value"
                   (onSelectionChange)="onSelectedValueChanged($event)"
                   matSort
@@ -84,7 +84,7 @@
                       class="material-icons icon-mat-option rounded {{
                         value?.cssClassCategory
                       }} {{ value?.cssClass }}"
-                      [title]="value?.title"
+                      [title]="value?.tooltip || value?.title"
                       >{{ value?.icon }}</i
                     >
                   </span>
@@ -108,36 +108,36 @@
           </span>
           <span *ngSwitchCase="'checkbox'">
             <mat-checkbox
-              id="{{ fidc.name }}"
-              name="{{ fidc.name }}"
-              [formControl]="frmGroupFields.controls[fidc.name]"
+              id="{{ fidc?.name }}"
+              name="{{ fidc?.name }}"
+              [formControl]="frmGroupFields.controls[fidc?.name]"
               (change)="onCheckboxClicked($event)"
               class=""
               ><p class="display-name-check-box">
-                {{ fidc.displayName }}
+                {{ fidc?.displayName }}
               </p></mat-checkbox
             >
           </span>
           <span *ngSwitchCase="'datetimepicker'">
             <mat-form-field>
-              <mat-label>{{ fidc.displayName }}</mat-label>
+              <mat-label>{{ fidc?.displayName }}</mat-label>
               <input
                 matInput
                 [matDatepicker]="picker"
-                id="{{ fidc.name }}"
-                name="{{ fidc.name }}"
-                [formControl]="frmGroupFields.controls[fidc.name]"
+                id="{{ fidc?.name }}"
+                name="{{ fidc?.name }}"
+                [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
-                placeholder="{{ fidc.displayName }}"
+                placeholder="{{ fidc?.displayName }}"
                 (dateInput)="onDatePickerChanged($event)"
                 (dateChange)="onDatePickerChanged($event)"
               />
               <mat-datepicker-toggle
-                id="{{ fidc.name }}"
+                id="{{ fidc?.name }}"
                 matSuffix
                 [for]="picker"
               ></mat-datepicker-toggle>
-              <mat-datepicker id="{{ fidc.name }}" #picker></mat-datepicker>
+              <mat-datepicker id="{{ fidc?.name }}" #picker></mat-datepicker>
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'password'">
@@ -145,34 +145,34 @@
               <input
                 matInput
                 type="password"
-                id="{{ fidc.name }}"
-                name="{{ fidc.name }}"
-                [formControl]="frmGroupFields.controls[fidc.name]"
+                id="{{ fidc?.name }}"
+                name="{{ fidc?.name }}"
+                [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
-                placeholder="{{ fidc.displayName }}"
+                placeholder="{{ fidc?.displayName }}"
                 (keyup)="onValueChanged($event)"
               />
             </mat-form-field>
           </span>
           <span *ngSwitchCase="'textarea'">
-            <span>{{ fidc.displayName }}</span>
+            <span>{{ fidc?.displayName }}</span>
             <div
-              id="{{ fidc.name }}"
+              id="{{ fidc?.name }}"
               contenteditable="true"
               class="textarea-editor"
               (keyup)="onDivValueChanged($event)"
             >
-              {{ frmGroupFields.controls[fidc.name].value }}
+              {{ frmGroupFields.controls[fidc?.name].value }}
             </div>
             <!-- <mat-form-field>
                 <textarea
                   matInput
                   type="textarea"
-                  id="{{ fidc.name }}"
-                  name="{{ fidc.name }}"
-                  [formControl]="frmGroupFields.controls[fidc.name]"
+                  id="{{ fidc?.name }}"
+                  name="{{ fidc?.name }}"
+                  [formControl]="frmGroupFields.controls[fidc?.name]"
                   class=""
-                  placeholder="{{ fidc.displayName }}"
+                  placeholder="{{ fidc?.displayName }}"
                   (keyup)="onValueChanged($event)"
                 ></textarea>
               </mat-form-field> -->

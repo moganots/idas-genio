@@ -14,6 +14,8 @@ export class BaseModel {
   image: string;
   DisplayName: string;
   RouterLink: string;
+  CssClassCategory: string;
+  CssClass: string;
 
   constructor(
     id: number,

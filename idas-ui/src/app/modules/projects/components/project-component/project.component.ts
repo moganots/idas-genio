@@ -14,7 +14,6 @@ import {
   LookupValue,
   LookupValueService,
   Project,
-  ProjectAssignment,
   ProjectComment,
   Task,
 } from 'app/shared/app-shared.module';
@@ -26,7 +25,6 @@ import { ProjectReviewService } from '../../services/project-review-service/proj
 import { ProjectConfiguration } from '../../services/project-service/project-configuration';
 import { ProjectService } from '../../services/project-service/project.service';
 import { ProjectWorklogService } from '../../services/project-worklog-service/project-worklog.service';
-import { ProjectAssignmentsService } from '../dialog-project-assignment/services/project-assignments.service';
 
 @Component({
   selector: 'app-project',
@@ -38,7 +36,7 @@ import { ProjectAssignmentsService } from '../dialog-project-assignment/services
     LookupValueService,
     ReferenceValueService,
     ProjectService,
-    ProjectAssignmentsService,
+    ProjectAssignService,
     FileAttachmentService,
   ],
 })

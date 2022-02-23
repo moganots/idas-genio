@@ -15,7 +15,7 @@ import {
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { ProjectAssignConfiguration } from './project-assignment-configuration';
-import { ProjectAssignmentsService } from './services/project-assignments.service';
+import { ProjectAssignService } from '../../services/project-assign-service/project-assign.service';
 
 @Component({
   selector: 'app-dialog-project-assignment',
@@ -26,7 +26,7 @@ import { ProjectAssignmentsService } from './services/project-assignments.servic
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
-    ProjectAssignmentsService,
+    ProjectAssignService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
   ],
 })
@@ -48,7 +48,7 @@ export class DialogProjectAssignmentComponent
     public referenceValueService: ReferenceValueService,
     public dialogRef: MatDialogRef<DialogProjectAssignmentComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public ProjectAssignService: ProjectAssignmentsService
+    public projectAssignService: ProjectAssignService
   ) {
     super(
       router,
@@ -61,7 +61,7 @@ export class DialogProjectAssignmentComponent
       dialogRef,
       data
     );
-    this.dataService = ProjectAssignService;
+    this.dataService = projectAssignService;
     this.projectId = data.selected.element._id;
     this.projectName = data.selected.element.Name;
     this.entityName = `${ProjectAssignConfiguration.identifier}`;

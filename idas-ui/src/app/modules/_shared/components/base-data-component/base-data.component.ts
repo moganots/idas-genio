@@ -92,15 +92,15 @@ export class BaseDataComponent extends BaseComponent {
       });
   }
   mapLookupValue(value: LookupValue): any {
-    const name = `${value.Value || value.Value2 || value.Value3 || ``}`;
+    const name = `${value?.Value || value?.Value2 || value?.Value3 || ``}`;
     return {
       id: value?._id,
       title: name,
       displayValue: name,
-      cssClassCategory: value.CssClassCategory,
-      cssClass: value.CssClass,
-      icon: value.Icon,
-      image: value.Image,
+      cssClassCategory: value?.CssClassCategory,
+      cssClass: value?.CssClass,
+      icon: value?.Icon,
+      image: value?.Image,
     };
   }
   setDataSourceColumnNames() {
@@ -209,7 +209,7 @@ export class BaseDataComponent extends BaseComponent {
     return lookupValue?.displayValue || columnValue;
   }
   findById(value: any, findValue: any) {
-    return parseFloat(value.id || value._id) === parseFloat(findValue);
+    return parseFloat(value?.id || value?._id) === parseFloat(findValue);
   }
   findByDisplayValue(value: any, findValue: any) {
     return String(value?.displayValue || value?.title).includes(
@@ -281,12 +281,12 @@ export class BaseDataComponent extends BaseComponent {
   }
   getDisplayWithValue(event: any) {
     return (
+      event?.DisplayName ||
       event?.displayValue ||
       event?.title ||
       event?.name ||
       event?.Title ||
       event?.Name ||
-      event?.DisplayName ||
       event?._id ||
       event?.id ||
       event?.value ||
