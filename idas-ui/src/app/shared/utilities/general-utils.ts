@@ -205,4 +205,10 @@ export class GeneralUtils {
     // tslint:disable-next-line:radix
     return parseInt(value) || 0;
   }
+  public static StringJoin(values: any[], delimiter: string) {
+    return values?.filter((value) => !(value === null && value === undefined && String(value).length === 0))?.join(delimiter);
+  }
+  public static splitJoin(value: string, separator: string = ` `, delimiter: string = `-`) {
+    return value?.split(separator)?.join(delimiter);
+  }
 }

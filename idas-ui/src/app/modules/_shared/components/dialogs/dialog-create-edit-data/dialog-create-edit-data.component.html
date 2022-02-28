@@ -6,14 +6,7 @@
     <span>
       <button
         mat-icon-button
-        class="
-          btn
-          btn-white
-          btn-round
-          btn-just-icon
-          btn-idas-dialog-no
-          btn-idas-dialog-float-right
-        "
+        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
         type="button"
         data-dismiss="modal"
         (click)="onClickDialogClose()"
@@ -23,10 +16,19 @@
       </button>
     </span>
   </div>
-  <form [formGroup]="frmGroup">
+  <div class="content">
+    <app-common-switch-case-data-input
+      [action]="action"
+      [entity]="selectedElement"
+      [columns]="dataSourceColumns"
+      [updates]="updates"
+    ></app-common-switch-case-data-input>
+  </div>
+  <!-- <form [formGroup]="frmGroup">
     <div class="content" formGroupName="frmFields">
       <div *ngFor="let fidc of canShowFormInputDataColumns; let i = index">
         <span [ngSwitch]="fidc?.controlType">
+          <span *ngSwitchCase="'break' || 'new line' || 'newline' || 'section'"><br /></span>
           <span *ngSwitchCase="'textbox'">
             <mat-form-field>
               <input
@@ -34,6 +36,7 @@
                 type="text"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
+                formControlName="{{ fidc?.name }}"
                 [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
@@ -48,6 +51,7 @@
                 type="number"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
+                formControlName="{{ fidc?.name }}"
                 [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
@@ -62,6 +66,7 @@
                 type="text"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
+                formControlName="{{ fidc?.name }}"
                 [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
@@ -70,12 +75,12 @@
               <mat-autocomplete
                 id="{{ fidc?.name }}"
                 #i="matAutocomplete"
-                [displayWith]="getDisplayWithValue"
+                [displayWith]="displayWithFn(fidc?.filteredLookupValues | async)"
               >
                 <mat-option
                   id="{{ fidc?.name }}"
                   *ngFor="let value of fidc?.filteredLookupValues | async"
-                  [value]="value"
+                  [value]="value?.id"
                   (onSelectionChange)="onSelectedValueChanged($event)"
                   matSort
                 >
@@ -114,6 +119,7 @@
             <mat-checkbox
               id="{{ fidc?.name }}"
               name="{{ fidc?.name }}"
+              formControlName="{{ fidc?.name }}"
               [formControl]="frmGroupFields.controls[fidc?.name]"
               (change)="onCheckboxClicked($event)"
               class=""
@@ -130,6 +136,7 @@
                 [matDatepicker]="picker"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
+                formControlName="{{ fidc?.name }}"
                 [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
@@ -151,6 +158,7 @@
                 type="password"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
+                formControlName="{{ fidc?.name }}"
                 [formControl]="frmGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
@@ -179,23 +187,16 @@
                   placeholder="{{ fidc?.displayName }}"
                   (keyup)="onValueChanged($event)"
                 ></textarea>
-              </mat-form-field> -->
+              </mat-form-field>
           </span>
         </span>
       </div>
     </div>
-  </form>
+  </form> -->
   <footer class="footer">
     <button
       mat-icon-button
-      class="
-        btn
-        btn-white
-        btn-round
-        btn-just-icon
-        btn-idas-dialog-yes
-        btn-idas-dialog-float-right
-      "
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
       (click)="onClickSave()"
       [mat-dialog-close]="selectedElement"

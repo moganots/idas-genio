@@ -57,13 +57,15 @@ export class UserProfileConfiguration {
     {id: 40, name: 'UsePostalAddress', canShow: true, canSort: true, canGroup: false},
 
     // Fields : User Account
-    {id: 41, name: 'UserTypeId', canShow: true, canSort: true, canGroup: false},
+    {id: 41, name: 'Avatar', canShow: true, canSort: true, canGroup: false},
     {id: 42, name: 'Break', canShow: true, canSort: true, canGroup: false},
-    {id: 43, name: 'Password', canShow: true, canSort: true, canGroup: false},
-    {id: 44, name: 'ConfirmPassword', canShow: true, canSort: true, canGroup: false},
-    {id: 45, name: 'IsAdmin', canShow: true, canSort: true, canGroup: false},
-    {id: 46, name: 'IsLocked', canShow: true, canSort: true, canGroup: false},
-    {id: 47, name: 'DateLastLoggedIn', canShow: true, canSort: true, canGroup: false}
+    {id: 43, name: 'UserTypeId', canShow: true, canSort: true, canGroup: false},
+    {id: 44, name: 'Break', canShow: true, canSort: true, canGroup: false},
+    {id: 46, name: 'Password', canShow: true, canSort: true, canGroup: false},
+    {id: 47, name: 'ConfirmPassword', canShow: true, canSort: true, canGroup: false},
+    {id: 48, name: 'IsAdmin', canShow: false, canSort: true, canGroup: false},
+    {id: 49, name: 'IsLocked', canShow: true, canSort: true, canGroup: false},
+    {id: 50, name: 'DateLastLoggedIn', canShow: true, canSort: true, canGroup: false}
   ].map((sdc) => {
     return new DataColumn(sdc);
   });

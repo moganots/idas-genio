@@ -34,12 +34,12 @@
           <mat-autocomplete
             id="assignee"
             #macAssignee="matAutocomplete"
-            [displayWith]="getDisplayWithValue"
+            [displayWith]="displayWithFn(filteredAssignees | async)"
           >
             <mat-option
               id="assignee"
               *ngFor="let value of filteredAssignees | async"
-              [value]="value"
+              [value]="value?.id"
               (onSelectionChange)="onSelectedValueChanged($event)"
               matSort
             >
@@ -94,12 +94,12 @@
           <mat-autocomplete
             id="projectAssignmentType"
             #macProjectAssignmentType="matAutocomplete"
-            [displayWith]="getDisplayWithValue"
+            [displayWith]="displayWithFn(filteredProjectAssignmentTypes | async)"
           >
             <mat-option
               id="projectAssignmentType"
               *ngFor="let value of filteredProjectAssignmentTypes | async"
-              [value]="value"
+              [value]="value?.id"
               (onSelectionChange)="onSelectedValueChanged($event)"
               matSort
             >

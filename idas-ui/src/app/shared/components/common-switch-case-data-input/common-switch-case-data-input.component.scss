@@ -1,0 +1,145 @@
+@import "./../../../../assets/scss/idas/colors.scss";
+@import "./../../../../assets/scss/idas/fonts.scss";
+
+.container {
+  margin: 0 0 0 0 !important;
+  overflow-y: auto;
+  padding: 5px !important;
+}
+span,
+mat-form-field,
+input,
+mat-input,
+mat-select,
+mat-option,
+mat-autocomplete,
+mat-checkbox,
+select {
+  font-size: 1em;
+  margin: 0 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+}
+span {
+  mat-form-field {
+    mat-autocomplete {
+      mat-select {
+        mat-option {
+          margin: 0 0 0 2px !important;
+          padding: 0 0 0 2px !important;
+        }
+      }
+      mat-option {
+        margin: 0 0 0 2px !important;
+        padding: 0 0 0 2px !important;
+      }
+    }
+  }
+}
+mat-option,
+mat-select,
+select {
+  margin: 0 0 0 2px !important;
+  padding: 0 0 0 2px !important;
+}
+:host mat-option,
+mat-select,
+select {
+  margin: 0 0 0 2px !important;
+  padding: 0 0 0 2px !important;
+}
+mat-checkbox {
+  font-size: 0.9em;
+  margin: 0 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+}
+.mat-select-panel-wrap {
+  margin: 28px 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+  pointer-events: auto;
+}
+div,
+i,
+img,
+p {
+  display: inline-block;
+  height: auto;
+  margin: 0 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+  text-align: left;
+  width: 100%;
+  vertical-align: middle;
+}
+div {
+  &.text-editor {
+    border-radius: 8px;
+    height: .5em;
+  }
+}
+i {
+  width: 35px;
+  &.icon-mat-option {
+    margin: 0 0 0 2px !important;
+    padding: 0 0 0 2px !important;
+  }
+  &.rounded {
+    border-radius: 8px;
+  }
+}
+img {
+  background-size: cover;
+  &.img-mat-option {
+    margin: 0 0 0 2px !important;
+    padding: 0 0 0 2px !important;
+  }
+  &.rounded {
+    border-radius: 8px;
+  }
+  &.img10 {
+    width: 10px;
+  }
+  &.img15 {
+    width: 15px;
+  }
+  &.img20 {
+    width: 20px;
+  }
+  &.img22 {
+    width: 22px;
+  }
+  &.img23 {
+    width: 23px;
+  }
+  &.img25 {
+    width: 25px;
+  }
+  &.img30 {
+    width: 30px;
+  }
+  &.img35 {
+    width: 35px;
+  }
+  &.img40 {
+    width: 40px;
+  }
+  &.img45 {
+    width: 45px;
+  }
+}
+p {
+  font-size: 1em;
+  &.column {
+    &.displayName,
+    &.displayValue,
+    &.title {
+      margin: 0 0 0 2px !important;
+      padding: 0 0 0 2px !important;
+    }
+    &.displayName,
+    &.title {
+      font-size: 0.8em;
+    }
+    &.displayValue {
+      font-size: 1em;
+    }
+  }
+}

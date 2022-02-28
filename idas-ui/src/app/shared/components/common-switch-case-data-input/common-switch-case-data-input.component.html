@@ -1,0 +1,192 @@
+<form [formGroup]="formGroup">
+  <div
+    *ngFor="let column of columns; let i = index"
+    class="container"
+    formGroupName="formFields"
+  >
+    <span [ngSwitch]="column?.controlType">
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'break'"><br /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'checkbox'">
+        <mat-checkbox
+          id="{{ column?.name }}"
+          name="{{ column?.name }}"
+          formControlName="{{ column?.name }}"
+          [formControl]="formGroupFields?.controls[column?.name]"
+          class=""
+          (change)="onCheckboxClicked($event)"
+          ><p class="column displayName">
+            {{ column?.displayName }}
+          </p></mat-checkbox
+        ></span
+      >
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'datetimepicker'">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="{{ column?.name }}"
+            name="{{ column?.name }}"
+            formControlName="{{ column?.name }}"
+            [formControl]="formGroupFields?.controls[column?.name]"
+            placeholder="{{ column?.displayName }}"
+            class=""
+            [ngxMatDatetimePicker]="datetimepicker"
+            (dateInput)="onDateTimePickerChanged($event)"
+            (dateChange)="onDateTimePickerChanged($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="datetimepicker"
+          ></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker
+            #datetimepicker
+            [enableMeridian]="true"
+          ></ngx-mat-datetime-picker> </mat-form-field
+      ></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'icon'"><i></i></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'image'"><img /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'newline'"><br /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'password'"
+        ><mat-form-field>
+          <input
+            matInput
+            type="password"
+            id="{{ column?.name }}"
+            name="{{ column?.name }}"
+            formControlName="{{ column?.name }}"
+            [formControl]="formGroupFields?.controls[column?.name]"
+            placeholder="{{ column?.displayName }}"
+            class=""
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          />
+          <!-- <mat-icon> visibility </mat-icon> -->
+        </mat-form-field></span
+      >
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'section'"><br /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'textarea'">
+        <span>{{ column?.displayName }}</span>
+        <div
+          id="{{ column?.name }}"
+          contenteditable="true"
+          class="textarea-editor"
+          (keyup)="onDivValueChanged($event)"
+        >
+          {{ formGroupFields?.controls[column?.name].value }}
+        </div></span
+      >
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'textbox'"
+        ><mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="{{ column?.name }}"
+            name="{{ column?.name }}"
+            formControlName="{{ column?.name }}"
+            [formControl]="formGroupFields?.controls[column?.name]"
+            placeholder="{{ column?.displayName }}"
+            class=""
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          /> </mat-form-field
+      ></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'timepicker'"
+        ><mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="{{ column?.name }}"
+            name="{{ column?.name }}"
+            formControlName="{{ column?.name }}"
+            [formControl]="formGroupFields?.controls[column?.name]"
+            placeholder="{{ column?.displayName }}"
+            class=""
+            [ngxMatTimepicker]="timePicker"
+            (dateInput)="onTimePickerChanged($event)"
+            (dateChange)="onTimePickerChanged($event)"
+            format="24"
+          />
+          <mat-icon matSuffix (click)="timePicker.open()">
+            watch_later
+          </mat-icon>
+        </mat-form-field>
+        <ngx-mat-timepicker color="accent" #timePicker></ngx-mat-timepicker
+      ></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'number'">
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            id="{{ column?.name }}"
+            name="{{ column?.name }}"
+            formControlName="{{ column?.name }}"
+            [formControl]="formGroupFields?.controls[column?.name]"
+            placeholder="{{ column?.displayName }}"
+            class=""
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          /> </mat-form-field
+      ></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'select'">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="{{ column?.name }}"
+            name="{{ column?.name }}"
+            formControlName="{{ column?.name }}"
+            [formControl]="formGroupFields?.controls[column?.name]"
+            class=""
+            placeholder="{{ column?.displayName }}"
+            [matAutocomplete]="i"
+          />
+          <mat-autocomplete
+            id="{{ column?.name }}"
+            #i="matAutocomplete"
+            [displayWith]="displayWithFn(column?.filteredLookupValues | async)"
+          >
+            <mat-option
+              id="{{ column?.name }}"
+              *ngFor="let value of column?.filteredLookupValues | async"
+              [value]="value?.id"
+              (onSelectionChange)="onSelectedValueChanged($event)"
+              matSort
+            >
+              <i
+                [ngStyle]="{
+                  display:
+                    value?.icon === null || value?.icon === undefined
+                      ? 'none'
+                      : 'inline'
+                }"
+                class="material-icons icon-mat-option rounded {{
+                  value?.cssClassCategory
+                }} {{ value?.cssClass }}"
+                [title]="value?.tooltip || value?.title"
+                >{{ value?.icon }}</i
+              >
+              <img
+                [ngStyle]="{
+                  display:
+                    value?.image === null || value?.image === undefined
+                      ? 'none'
+                      : 'inline'
+                }"
+                class="img-mat-option img23 rounded"
+                [title]="value?.displayName || value?.displayValue"
+                src="{{ value?.image }}"
+              />
+              <p class="column displayValue">
+                {{ value?.displayName || value?.displayValue }}
+              </p>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </span>
+      <!-- <span [hidden]="!column?.canShow" *ngSwitchCase="'lookupIcon'"><input type="text" /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'lookupImage'"><input type="text" /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'lookupValue'"><input type="text" /></span>
+      <span [hidden]="!column?.canShow" *ngSwitchCase="'referenceValue'"><input type="text" /></span> -->
+    </span>
+  </div>
+</form>

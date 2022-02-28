@@ -15,7 +15,6 @@ export class DataColumn {
   lookupValues = [];
   filteredLookupValues: Observable<any>;
   value = null;
-
   constructor(dataColumn: any) {
     this.id = dataColumn.id;
     this.name = dataColumn.name;

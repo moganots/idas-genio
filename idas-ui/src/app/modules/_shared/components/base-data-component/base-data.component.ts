@@ -75,11 +75,7 @@ export class BaseDataComponent extends BaseComponent {
                 LookupCategoryName: this.columnNameWithoutId(cn),
               })
               .subscribe((values) => {
-                values
-                  ?.map((value) => this?.mapLookupValue(value))
-                  .forEach((value) => {
-                    cn.lookupValues.push(value);
-                  });
+                cn.lookupValues = values?.map((value) => this.mapLookupValue(value));
               });
             break;
           case 'referenceValue':
@@ -280,21 +276,28 @@ export class BaseDataComponent extends BaseComponent {
       String(value?.displayValue || value || ``)
     ).includes(this.toLocaleLowerCaseTrim(filterValue));
   }
-  getDisplayWithValue(event: any) {
-    return (
-      event?.DisplayName ||
-      event?.displayValue ||
-      event?.title ||
-      event?.name ||
-      event?.Title ||
-      event?.Name ||
-      event?._id ||
-      event?.id ||
-      event?.value ||
-      event ||
-      null
-    );
+  displayWithFn(options: any[]): (id: number) => string | null {
+    return (id: number) => {
+      const correspondingOption = Array.isArray(options)
+        ? options.find((option) => option.id === id)
+        : null;
+      return correspondingOption ? correspondingOption.displayValue : id;
+    };
   }
+  /*     return (id: number) => {
+      const option = options?.find((opt) => opt?.id === id) || id;
+      return
+      option?.DisplayName ||
+        option?.displayValue ||
+        option?.title ||
+        option?.name ||
+        option?.Title ||
+        option?.Name ||
+        option?._id ||
+        option?.id ||
+        option?.value;
+    }
+  } */
   onValueChanged(event: any) {
     if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
       this.updates[event?.target?.id] =

@@ -56,17 +56,13 @@ export class ReferenceValueService {
       case `ModifiedBy`:
       case `User`:
         this.userService.getAll<User>().subscribe((users) => {
-          this.addFieldLookupValues(
-            field,
-            users.map((user) => this.mapValuesUser(user))
-          );
+          field.lookupValues = users.map((user) => this.mapValuesUser(user));
         });
         break;
       case `Client`:
-        this.clientsService.getAll<Client>().subscribe((values) => {
-          this.addFieldLookupValues(
-            field,
-            values.map((value) => this.mapValuesClient(value))
+        this.clientsService.getAll<Client>().subscribe((clients) => {
+          field.lookupValues = clients.map((client) =>
+            this.mapValuesClient(client)
           );
         });
         break;
@@ -74,10 +70,9 @@ export class ReferenceValueService {
       case `ManagerId`:
       case `Employee`:
       case `Manager`:
-        this.employeesService.getAll<Employee>().subscribe((values) => {
-          this.addFieldLookupValues(
-            field,
-            values.map((value) => this.mapValuesEmployee(value))
+        this.employeesService.getAll<Employee>().subscribe((employees) => {
+          field.lookupValues = employees.map((employee) =>
+            this.mapValuesEmployee(employee)
           );
         });
         break;
@@ -89,18 +84,16 @@ export class ReferenceValueService {
       case `ParentProject`:
       case `Project`:
       case `SubProject`:
-        this.projectService.getAll<Project>().subscribe((values) => {
-          this.addFieldLookupValues(
-            field,
-            values.map((value) => this.mapValuesProject(value))
+        this.projectService.getAll<Project>().subscribe((projects) => {
+          field.lookupValues = projects.map((project) =>
+            this.mapValuesProject(project)
           );
         });
         break;
       case `Supplier`:
-        this.suppliersService.getAll<Supplier>().subscribe((values) => {
-          this.addFieldLookupValues(
-            field,
-            values.map((value) => this.mapValuesSupplier(value))
+        this.suppliersService.getAll<Supplier>().subscribe((suppliers) => {
+          field.lookupValues = suppliers.map((supplier) =>
+            this.mapValuesSupplier(supplier)
           );
         });
         break;
@@ -112,21 +105,17 @@ export class ReferenceValueService {
       case `ParentTask`:
       case `SubTask`:
       case `Task`:
-        this.taskService.getAll<Task>().subscribe((values) => {
-          this.addFieldLookupValues(
-            field,
-            values.map((value) => this.mapValuesTask(value))
-          );
+        this.taskService.getAll<Task>().subscribe((tasks) => {
+          field.lookupValues = tasks.map((task) => this.mapValuesTask(task));
         });
         break;
       case `StartDateTime`:
       case `EndDateTime`:
-        this.addFieldLookupValues(
-          field,
-          SharedConfiguration.scheduleTimes.map((time, index) => ({
+        field.lookupValues = SharedConfiguration.scheduleTimes.map(
+          (time, index) => ({
             id: index,
             displayValue: time,
-          }))
+          })
         );
         break;
     }
@@ -169,12 +158,7 @@ export class ReferenceValueService {
     const name = `${GeneralUtils.EmptyStringIfNull(project?.Name)}`.trim();
     return {
       id: project?._id,
-      displayValue: [name, project?._id]
-        .filter(
-          (val) =>
-            !(val === null || val === undefined || String(val).length === 0)
-        )
-        .join(` / `),
+      displayValue: GeneralUtils.StringJoin([name, project?._id], ` / `),
       title: name,
       tooltip: project?.ProjectType?.Value,
       cssClassCategory: project?.ProjectType?.CssClassCategory,
@@ -203,12 +187,7 @@ export class ReferenceValueService {
     const name = `${GeneralUtils.EmptyStringIfNull(task?.Name)}`.trim();
     return {
       id: task?._id,
-      displayValue: [name, task?._id]
-        .filter(
-          (val) =>
-            !(val === null || val === undefined || String(val).length === 0)
-        )
-        .join(` / `),
+      displayValue: GeneralUtils.StringJoin([name, task?._id], ` / `),
       title: name,
       tooltip: task?.TaskType?.Value,
       cssClassCategory: task?.TaskType?.CssClassCategory,
@@ -234,11 +213,5 @@ export class ReferenceValueService {
       icon: user?.UserType?.Icon,
       image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
     };
-  }
-  addFieldLookupValues(field: DataColumn, values: any[] = []) {
-    field.lookupValues = [];
-    values.forEach((value) => {
-      field.lookupValues.push(value);
-    });
   }
 }

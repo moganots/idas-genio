@@ -40,56 +40,56 @@
             <div class="table-responsive">
               <table mat-table [dataSource]="matTableDataSource" matSort>
                 <ng-container
-                  [matColumnDef]="column.name"
+                  [matColumnDef]="column?.name"
                   *ngFor="let column of dataSourceDisplayColumns"
                 >
                   <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    {{ column.displayName }}
+                    {{ column?.displayName }}
                   </mat-header-cell>
                   <mat-cell
                     *matCellDef="let index; let element"
                     class="mat-cell"
                   >
-                    <span [ngSwitch]="column.controlType">
+                    <span [ngSwitch]="column?.controlType">
                       <span *ngSwitchCase="'break'"><br /></span>
                       <span *ngSwitchCase="'checkbox'">
                         <mat-checkbox
-                          [value]="element[column.name]"
-                          [(ngModel)]="element[column.name]"
+                          [value]="element[column?.name]"
+                          [(ngModel)]="element[column?.name]"
                         ></mat-checkbox>
                       </span>
                       <span *ngSwitchCase="'datetimepicker'">
-                        {{ element[column.name] }}
+                        {{ element[column?.name] }}
                       </span>
                       <span *ngSwitchCase="'number'">
-                        {{ element[column.name] }}
+                        {{ element[column?.name] }}
                       </span>
                       <span *ngSwitchCase="'password'"> </span>
                       <span *ngSwitchCase="'select'">
-                        <span [ngSwitch]="column.selectOptionControlType">
+                        <span [ngSwitch]="column?.selectOptionControlType">
                           <span *ngSwitchCase="'lookupIcon'">
                             <i
                               class="material-icons {{
                                 getColumnCssClassCategoryById(
                                   column,
-                                  element[column.name]
+                                  element[column?.name]
                                 )
                               }} {{
                                 getColumnCssClassById(
                                   column,
-                                  element[column.name]
+                                  element[column?.name]
                                 )
                               }} rounded"
                               [title]="
                                 getColumnDisplayTitleById(
                                   column,
-                                  element[column.name]
+                                  element[column?.name]
                                 )
                               "
                               >{{
                                 getColumnDisplayIconById(
                                   column,
-                                  element[column.name]
+                                  element[column?.name]
                                 )
                               }}</i
                             >
@@ -100,13 +100,13 @@
                               src="{{
                                 getColumnDisplayImageById(
                                   column,
-                                  element[column.name]
+                                  element[column?.name]
                                 )
                               }}"
                               [title]="
                                 getColumnDisplayTitleById(
                                   column,
-                                  element[column.name]
+                                  element[column?.name]
                                 )
                               "
                             />
@@ -115,7 +115,7 @@
                             {{
                               getColumnDisplayValueById(
                                 column,
-                                element[column.name]
+                                element[column?.name]
                               )
                             }}
                           </span>
@@ -123,7 +123,7 @@
                             {{
                               getColumnDisplayValueById(
                                 column,
-                                element[column.name]
+                                element[column?.name]
                               )
                             }}
                           </span>
@@ -135,22 +135,22 @@
                           src="{{
                             getColumnDisplayImageById(
                               column,
-                              element[column.name]
+                              element[column?.name]
                             )
                           }}"
                           [title]="
                             getColumnDisplayTitleById(
                               column,
-                              element[column.name]
+                              element[column?.name]
                             )
                           "
                         />
                       </span>
                       <span *ngSwitchCase="'textarea'">
-                        {{ element[column.name] }}
+                        {{ element[column?.name] }}
                       </span>
                       <span *ngSwitchCase="'textbox'">
-                        {{ element[column.name] }}
+                        {{ element[column?.name] }}
                       </span>
                     </span>
                   </mat-cell>

@@ -66,7 +66,6 @@ export class DataColumnUtils {
     } else if (this.isUseBreakOrNewlineOrSection(columnName)) {
       return 'break';
     } else if (this.isLookupOrReferenceValueField(columnName)) {
-      this.setSelectOptionControlType(columnName);
       return 'select';
     } else if (this.isTimeField(columnName)) {
       this.setTimePickerLookupValues(columnName);

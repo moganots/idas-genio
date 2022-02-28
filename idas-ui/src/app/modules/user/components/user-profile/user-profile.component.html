@@ -118,7 +118,7 @@
                               <mat-autocomplete
                                 id="{{ fidc?.name }}"
                                 #i="matAutocomplete"
-                                [displayWith]="getDisplayWithValue"
+                                [displayWith]="displayWithFn(fidc?.filteredLookupValues | async)"
                               >
                                 <mat-option
                                   id="{{ fidc?.name }}"
@@ -126,7 +126,7 @@
                                     let value of fidc?.filteredLookupValues
                                       | async
                                   "
-                                  [value]="value"
+                                  [value]="value?.id"
                                   (onSelectionChange)="
                                     onSelectedValueChanged($event)
                                   "
@@ -350,7 +350,7 @@
                               <mat-autocomplete
                                 id="{{ fidc?.name }}"
                                 #i="matAutocomplete"
-                                [displayWith]="getDisplayWithValue"
+                                [displayWith]="displayWithFn(fidc?.filteredLookupValues | async)"
                               >
                                 <mat-option
                                   id="{{ fidc?.name }}"
@@ -358,7 +358,7 @@
                                     let value of fidc?.filteredLookupValues
                                       | async
                                   "
-                                  [value]="value"
+                                  [value]="value?.id"
                                   (onSelectionChange)="
                                     onSelectedValueChanged($event)
                                   "
@@ -515,6 +515,7 @@
                         class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
                       >
                         <span [ngSwitch]="fidc?.controlType">
+                          <span *ngSwitchCase="'break'"><br /></span>
                           <span *ngSwitchCase="'textbox'">
                             <mat-form-field>
                               <input
@@ -567,7 +568,7 @@
                               <mat-autocomplete
                                 id="{{ fidc?.name }}"
                                 #i="matAutocomplete"
-                                [displayWith]="getDisplayWithValue"
+                                [displayWith]="displayWithFn(fidc?.filteredLookupValues | async)"
                               >
                                 <mat-option
                                   id="{{ fidc?.name }}"
@@ -575,7 +576,7 @@
                                     let value of fidc?.filteredLookupValues
                                       | async
                                   "
-                                  [value]="value"
+                                  [value]="value?.id"
                                   (onSelectionChange)="
                                     onSelectedValueChanged($event)
                                   "
@@ -707,6 +708,16 @@
                                 (keyup)="onValueChanged($event)"
                               ></textarea>
                             </mat-form-field>
+                          </span>
+                          <span *ngSwitchCase="'image'">
+                            <div style="border: 1px solid red;">
+                              <img src="{{ fidc?.value }}" style="border-radius: 8px; height: auto; width: 60px;" />
+                              <br />
+                              <br />
+                              <p>Profile Picture: {{ fidc?.value }}</p>
+                              <br />
+                              <br />
+                            </div>
                           </span>
                         </span>
                       </div>

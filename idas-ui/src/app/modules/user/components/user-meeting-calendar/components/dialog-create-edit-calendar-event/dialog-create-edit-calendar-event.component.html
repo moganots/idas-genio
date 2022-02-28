@@ -100,12 +100,12 @@
                   <mat-autocomplete
                     id="{{ fidc?.name }}"
                     #i="matAutocomplete"
-                    [displayWith]="getDisplayWithValue"
+                    [displayWith]="displayWithFn(fidc?.filteredLookupValues | async)"
                   >
                     <mat-option
                       id="{{ fidc?.name }}"
                       *ngFor="let value of fidc?.filteredLookupValues | async"
-                      [value]="value"
+                      [value]="value?.id"
                       (onSelectionChange)="onSelectedValueChanged($event)"
                       matSort
                     >
@@ -286,7 +286,7 @@
               <mat-autocomplete
                 id="eventAttendee"
                 #eventAttendee="matAutocomplete"
-                [displayWith]="getDisplayWithValue"
+                [displayWith]="displayWithFn(filteredEventAttendees | async)"
               >
                 <mat-option
                   id="eventAttendee"
