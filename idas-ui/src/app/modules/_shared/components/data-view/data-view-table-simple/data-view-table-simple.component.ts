@@ -15,6 +15,7 @@ import { ReferenceValueService } from 'app/modules/_shared/services/reference-va
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { DialogCreateEditDataComponent } from '../../dialogs/dialog-create-edit-data/dialog-create-edit-data.component';
@@ -251,6 +252,8 @@ export class DataViewTableSimpleComponent
   }
   onOpenCreateEditDialog(element?: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
+    const id = ((element || {})?._id || (element || {})?.id);
+    const name = (element || {})?.DisplayName;
     super.openDialog(
       DialogCreateEditDataComponent,
       {
@@ -258,8 +261,9 @@ export class DataViewTableSimpleComponent
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
-        pageName: this.pageName,
-        pageTitle: this.pageTitle,
+        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
         dataColumns: this.dataSourceColumns,
         selectedElement: element || {},
         selectedElementIndex: index || this.selectedElementIndex,

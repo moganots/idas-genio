@@ -51,7 +51,7 @@ export class SuppliersService extends DataService {
       (lookupValue) => lookupValue?._id === supplier?.BankId
     );
     supplier.ContactDetail = this.contactDetails.find(
-      (contactDetail) => contactDetail?._id === supplier?._id
+      (contactDetail) => contactDetail?.SupplierId === supplier?._id
     );
     supplier.DisplayName = GeneralUtils.getSupplierDisplayName(supplier);
     return supplier;

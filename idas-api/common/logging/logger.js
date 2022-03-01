@@ -19,8 +19,10 @@ const {
   isNotEmptyObject,
   toLocaleLowerCaseTrim,
   StringFormat,
-  createDirectory,
 } = require(`./../functions`);
+const {
+  createDirectory,
+} = require(`./../file-system-util`);
 const { getHttpRequestPacket } = require(`./../http-helper`);
 const {
   companyName,

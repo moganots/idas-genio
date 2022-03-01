@@ -4,7 +4,7 @@
 .container {
   margin: 0 0 0 0 !important;
   overflow-y: auto;
-  padding: 5px !important;
+  padding: 1px !important;
 }
 span,
 mat-form-field,
@@ -24,13 +24,19 @@ span {
     mat-autocomplete {
       mat-select {
         mat-option {
-          margin: 0 0 0 2px !important;
-          padding: 0 0 0 2px !important;
+          margin: 0 0 0 3px !important;
+          padding: 0 0 0 3px !important;
+          mat-list-option[aria-selected="true"] {
+            background: blue;
+          }
         }
       }
       mat-option {
-        margin: 0 0 0 2px !important;
-        padding: 0 0 0 2px !important;
+        margin: 0 0 0 3px !important;
+        padding: 0 0 0 3px !important;
+        mat-list-option[aria-selected="true"] {
+          background: blue;
+        }
       }
     }
   }
@@ -38,25 +44,28 @@ span {
 mat-option,
 mat-select,
 select {
-  margin: 0 0 0 2px !important;
-  padding: 0 0 0 2px !important;
+  margin: 0 0 0 3px !important;
+  padding: 0 0 0 3px !important;
 }
 :host mat-option,
 mat-select,
 select {
-  margin: 0 0 0 2px !important;
-  padding: 0 0 0 2px !important;
+  margin: 0 0 0 3px !important;
+  padding: 0 0 0 3px !important;
+}
+mat-list-option[aria-selected="true"] {
+  background: blue;
 }
 mat-checkbox {
   font-size: 0.9em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
 }
-.mat-select-panel-wrap {
+/* .mat-select-panel-wrap {
   margin: 28px 0 0 0 !important;
   padding: 0 0 0 0 !important;
   pointer-events: auto;
-}
+} */
 div,
 i,
 img,
@@ -70,16 +79,19 @@ p {
   vertical-align: middle;
 }
 div {
-  &.text-editor {
+  &.textarea-editor {
+    border: 1px solid #d9d9d9;
     border-radius: 8px;
-    height: .5em;
+    box-sizing: border-box;
+    height: 15em;
+    padding: 5px;
   }
 }
 i {
   width: 35px;
   &.icon-mat-option {
-    margin: 0 0 0 2px !important;
-    padding: 0 0 0 2px !important;
+    margin: 0 0 0 1px !important;
+    padding: 0 0 0 1px !important;
   }
   &.rounded {
     border-radius: 8px;
@@ -88,8 +100,8 @@ i {
 img {
   background-size: cover;
   &.img-mat-option {
-    margin: 0 0 0 2px !important;
-    padding: 0 0 0 2px !important;
+    margin: 0 0 0 1px !important;
+    padding: 0 0 0 1px !important;
   }
   &.rounded {
     border-radius: 8px;
@@ -131,8 +143,8 @@ p {
     &.displayName,
     &.displayValue,
     &.title {
-      margin: 0 0 0 2px !important;
-      padding: 0 0 0 2px !important;
+      margin: 0 0 0 1px !important;
+      padding: 0 0 0 1px !important;
     }
     &.displayName,
     &.title {

@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatOptionSelectionChange } from '@angular/material/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DataColumn } from 'app/shared/domain-models/data-column';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { map, startWith } from 'rxjs/operators';
@@ -19,15 +18,20 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class CommonSwitchCaseDataInputComponent implements OnInit {
   @Input() action: string;
+  @Input() entityId: any;
+  @Input() entityName: string;
   @Input() entity: any = {};
   @Input() columns: DataColumn[] = [];
+  @Input() columnsCssClass: string;
   @Input() updates: { [key: string]: any } = {};
+  useColumns: DataColumn[] = [];
   public formGroup: FormGroup;
   public formGroupFields: FormGroup;
   constructor(private formBuilder: FormBuilder) {}
   ngOnInit(): void {
+    this.useColumns = this.columns?.filter((column) => column?.canShow);
     this.formGroupFields = new FormGroup({});
-    this.columns?.forEach((column) => {
+    this.useColumns?.forEach((column) => {
       column.value = this.getFieldValue(column, this.entity);
       const control = new FormControl(
         {
@@ -166,7 +170,9 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       const correspondingOption = Array.isArray(options)
         ? options.find((option) => option.id === id)
         : null;
-      return correspondingOption?.displayValue || correspondingOption?.value || id;
+      return (
+        correspondingOption?.displayValue || correspondingOption?.value || id
+      );
     };
   }
   onValueChanged(event: any) {
@@ -212,7 +218,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
     }
     return;
   }
-  onDatePickerChanged(event: MatDatepickerInputEvent<Date>) {
+  onDatePickerChanged(event: any) {
     if (
       event &&
       event.targetElement &&
@@ -222,13 +228,15 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
     }
     return;
   }
-  onTimePickerChanged(event: MatDatepickerInputEvent<Date>) {
+  onTimePickerChanged(event: any) {
     if (
       event &&
       event.targetElement &&
       GeneralUtils.isStringSet(event?.targetElement?.id)
     ) {
-      this.updates[event?.targetElement?.id] = new Date(event.target.value).getTime();
+      this.updates[event?.targetElement?.id] = new Date(
+        event.target.value
+      ).getTime();
     }
     return;
   }

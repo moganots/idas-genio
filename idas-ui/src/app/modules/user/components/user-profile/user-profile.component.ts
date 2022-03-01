@@ -10,6 +10,7 @@ import {
   AuthenticationService,
   DataColumn,
   Employee,
+  ImagesService,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { UserProfileConfiguration } from './user-profile-configuration';
@@ -29,15 +30,17 @@ import { UserService } from '../../services/user-service/user.service';
     LookupValueService,
     ReferenceValueService,
     UserService,
+    ImagesService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
   ],
 })
 export class UserProfileComponent extends PageComponent implements OnInit {
+  columnsCssClass = 'col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12';
   fieldsPersonalDetails: DataColumn[] = [];
   fieldsContactDetails: DataColumn[] = [];
   fieldsUserAccountDetails: DataColumn[] = [];
-  employees: Employee[] = [];
-
+  defaultAvatar = UserProfileConfiguration.defaultAvatar;
+  imagesAvatars: any[] = [];
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -46,7 +49,8 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public userService: UserService
+    public userService: UserService,
+    public imagesService: ImagesService
   ) {
     super(
       router,
@@ -78,29 +82,11 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     this.fieldsUserAccountDetails = this.dataSourceColumns?.filter(
       (column) => column.id >= 41
     );
+    this.imagesService.getImagesAvatars().subscribe((imagesAvatars) => {
+      this.imagesAvatars = imagesAvatars;
+    });
   }
-  canShow(column: DataColumn) {
-    switch (this.currentUserType) {
-      default:
-        return true;
-    }
-  }
-  fieldDisabled(column: DataColumn) {
-    switch (column.name) {
-      case 'IsAdmin':
-      case 'IsLocked':
-        return true;
-      default:
-        return super.isFieldDisabled(column);
-    }
-  }
-  fieldConditionalIsRequired(column: DataColumn) {
-    switch (column.name) {
-      case 'IsAdmin':
-      case 'IsLocked':
-        return null;
-      default:
-        return super.getFieldConditionalIsRequired(column);
-    }
+  onClickChangeAvatar(imageAvatar) {
+    this.currentUser.Avatar = imageAvatar?.path
   }
 }

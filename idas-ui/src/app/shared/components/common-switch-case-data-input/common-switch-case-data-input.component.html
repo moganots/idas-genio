@@ -1,12 +1,12 @@
 <form [formGroup]="formGroup">
   <div
-    *ngFor="let column of columns; let i = index"
-    class="container"
+    *ngFor="let column of useColumns; let i = index"
+    class="container {{ columnsCssClass }}"
     formGroupName="formFields"
   >
     <span [ngSwitch]="column?.controlType">
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'break'"><br /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'checkbox'">
+      <span *ngSwitchCase="'break'"><br /></span>
+      <span *ngSwitchCase="'checkbox'">
         <mat-checkbox
           id="{{ column?.name }}"
           name="{{ column?.name }}"
@@ -19,7 +19,7 @@
           </p></mat-checkbox
         ></span
       >
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'datetimepicker'">
+      <span *ngSwitchCase="'datetimepicker'">
         <mat-form-field>
           <input
             matInput
@@ -43,10 +43,10 @@
             [enableMeridian]="true"
           ></ngx-mat-datetime-picker> </mat-form-field
       ></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'icon'"><i></i></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'image'"><img /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'newline'"><br /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'password'"
+      <span *ngSwitchCase="'icon'"><i></i></span>
+      <span *ngSwitchCase="'image'"><img /></span>
+      <span *ngSwitchCase="'newline'"><br /></span>
+      <span *ngSwitchCase="'password'"
         ><mat-form-field>
           <input
             matInput
@@ -63,19 +63,20 @@
           <!-- <mat-icon> visibility </mat-icon> -->
         </mat-form-field></span
       >
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'section'"><br /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'textarea'">
-        <span>{{ column?.displayName }}</span>
+      <span *ngSwitchCase="'section'"><br /></span>
+      <span *ngSwitchCase="'textarea'">
+        {{ column?.displayName }}
         <div
           id="{{ column?.name }}"
           contenteditable="true"
           class="textarea-editor"
+          (change)="onDivValueChanged($event)"
           (keyup)="onDivValueChanged($event)"
         >
           {{ formGroupFields?.controls[column?.name].value }}
-        </div></span
+        </div><br /><br /></span
       >
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'textbox'"
+      <span *ngSwitchCase="'textbox'"
         ><mat-form-field>
           <input
             matInput
@@ -90,7 +91,7 @@
             (keyup)="onValueChanged($event)"
           /> </mat-form-field
       ></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'timepicker'"
+      <span *ngSwitchCase="'timepicker'"
         ><mat-form-field>
           <input
             matInput
@@ -112,7 +113,7 @@
         </mat-form-field>
         <ngx-mat-timepicker color="accent" #timePicker></ngx-mat-timepicker
       ></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'number'">
+      <span *ngSwitchCase="'number'">
         <mat-form-field>
           <input
             matInput
@@ -127,7 +128,7 @@
             (keyup)="onValueChanged($event)"
           /> </mat-form-field
       ></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'select'">
+      <span *ngSwitchCase="'select'">
         <mat-form-field>
           <input
             matInput
@@ -176,17 +177,18 @@
                 [title]="value?.displayName || value?.displayValue"
                 src="{{ value?.image }}"
               />
-              <p class="column displayValue">
+              {{ value?.displayName || value?.displayValue }}
+              <p class="column">
                 {{ value?.displayName || value?.displayValue }}
               </p>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </span>
-      <!-- <span [hidden]="!column?.canShow" *ngSwitchCase="'lookupIcon'"><input type="text" /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'lookupImage'"><input type="text" /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'lookupValue'"><input type="text" /></span>
-      <span [hidden]="!column?.canShow" *ngSwitchCase="'referenceValue'"><input type="text" /></span> -->
+      <!-- <span *ngSwitchCase="'lookupIcon'"><input type="text" /></span>
+      <span *ngSwitchCase="'lookupImage'"><input type="text" /></span>
+      <span *ngSwitchCase="'lookupValue'"><input type="text" /></span>
+      <span *ngSwitchCase="'referenceValue'"><input type="text" /></span> -->
     </span>
   </div>
 </form>

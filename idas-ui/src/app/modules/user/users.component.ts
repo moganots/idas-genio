@@ -14,6 +14,7 @@ import { UserConfiguration } from './services/user-service/user-configuration';
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValue,
   LookupValueService,
   User,
@@ -96,19 +97,25 @@ export class UsersComponent extends PageComponent implements OnInit {
   getUserUnLockIcon(user: User) {
     return String(user?.IsLocked ? 'lock_open' : 'lock');
   }
-  onClickEdit(user: User, index?: number): void {
-    this.action = 'edit';
+  onOpenCreateEditDialog(dialogAction: string, user?: User, userType?: UserType, index?: number) {
+    const entity = this.getEntity(dialogAction, user, userType);
+    if(!GeneralUtils.isObjectSet(entity)) return;
+    this.setSelectedElementAndIndex(user, index);
+    const id = (entity || {})._id;
+    const name = (user || {})?.DisplayName;
     super.openDialog(
       DialogCreateEditDataComponent,
       {
-        action: this.action,
+        action: dialogAction,
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
-        pageName: this.pageName,
-        pageTitle: this.pageTitle,
+        pageName: `${this.capitalizeFirstLetter(dialogAction)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageTitle: `${this.capitalizeFirstLetter(dialogAction)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
         dataColumns: this.dataSourceColumns,
-        selectedElement: user || {},
+        selectedElement: this.getEntity(dialogAction, user, userType),
+        selectedElementIndex: index || this.selectedElementIndex,
       },
       () => {
         this.onLoadRefreshData();
@@ -153,23 +160,11 @@ export class UsersComponent extends PageComponent implements OnInit {
       }
     );
   }
-  onClickAddUser(userType: UserType) {
-    this.action = 'create';
-    super.openDialog(
-      DialogCreateEditDataComponent,
-      {
-        action: this.action,
-        dataService: this.dataService,
-        entityName: this.entityName,
-        pageIcon: this.pageIcon,
-        pageName: this.pageName,
-        pageTitle: this.pageTitle,
-        dataColumns: this.dataSourceColumns,
-        selectedElement: { UserTypeId: userType?._id } || {},
-      },
-      () => {
-        this.onLoadRefreshData();
-      }
-    );
+  getEntity(action: string, user: User, userType: UserType) {
+    switch(GeneralUtils.toLocalLowerCaseWithTrim(action)){
+      case `create`: return {_id: null, UserTypeId: userType?._id };
+      case `edit`: return user;
+      default: return null;
+    }
   }
 }

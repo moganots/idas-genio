@@ -11,6 +11,7 @@ export class UserProfileConfiguration {
   public static tableHeading = 'Manage Profile';
   public static graphHeading = ``;
   public static buildingBlockLabel = ``;
+  public static defaultAvatar = `assets/img/avatars/avatar-0.png`;
   public static dataColumns = [
     // Fields : Personal Details
     {id: 1, name: 'SalutationId', canShow: true, canSort: true, canGroup: false},

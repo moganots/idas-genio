@@ -252,6 +252,22 @@ module.exports = {
       filename: `{0}.{1}.api.{2}.log`,
       maxFilesize: 9994.24,
     },
+    attachments: {
+      directory: `/data/{0}/{1}/secure/attachments`,
+      routerLink: `#/secure/attachments`,
+    },
+    fileSystem: {
+      root: `idas-api`,
+      assets: `assets`,
+      assetsImg: `assets/img`,
+      assetsImgAvatars: `assets/img/avatars`,
+      assetsImgBanks: `assets/img/banks`,
+      assetsImgBanksIcon: `assets/img/banks/icon`,
+      assetsImgBanksMain: `assets/img/banks/main`,
+      assetsImgFileTypes: `assets/img/file-types`,
+      assetsImgIcons: `assets/img/icons`,
+      assetsImgIdas: `assets/img/idas`,
+    }
   },
   app: {
     protocol: `http`,
@@ -263,6 +279,10 @@ module.exports = {
       filename: `{0}.{1}.app.{2}.log`,
       maxFilesize: 9994.24,
     },
+    attachments: {
+      directory: `/data/{0}/{1}/secure/attachments`,
+      routerLink: `#/secure/attachments`,
+    }
   },
   appAttachmentsDirectory: `/data/{0}/{1}/secure/attachments`,
   appAttachmentsRouterLink: `#/secure/attachments`,

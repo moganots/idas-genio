@@ -2913,27 +2913,27 @@ GO
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ;WITH [cte] AS
 (
-SELECT 'Bank' AS [LookupCategory], 'Absa Bank Ltd' AS [Value], './assets/img/banks/icon/absa-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'Absa Bank Ltd' AS [Value], './assets/img/banks/icon/absa.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'African Bank Ltd' AS [Value], './assets/img/banks/icon/african-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'Albaraka Bank Limited' AS [Value], './assets/img/banks/icon/albaraka-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'BoE Private Clients' AS [Value], './assets/img/banks/icon/boe-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'Albaraka Bank Limited' AS [Value], './assets/img/banks/icon/al-baraka-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'BoE Private Clients' AS [Value], './assets/img/banks/icon/bank-of-england.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Bidvest Bank Limited' AS [Value], './assets/img/banks/icon/bidvest-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Capitec Bank Ltd' AS [Value], './assets/img/banks/icon/capitec-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'FirstRand Bank Ltd' AS [Value], './assets/img/banks/icon/fnb-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'FirstRand Bank Ltd' AS [Value], './assets/img/banks/icon/first-national-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Grindrod Bank' AS [Value], './assets/img/banks/icon/grindrod-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'Habib Overseas Bank Limited' AS [Value], './assets/img/banks/icon/habib-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'HBZ Bank Limited' AS [Value], './assets/img/banks/icon/hbz-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'Habib Overseas Bank Limited' AS [Value], './assets/img/banks/icon/bank-al-habib.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'HBZ Bank Limited' AS [Value], './assets/img/banks/icon/habib-bank-ag-zurich.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Investec Bank Ltd' AS [Value], './assets/img/banks/icon/investec-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Mercantile Bank Limited' AS [Value], './assets/img/banks/icon/mercantile-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'Nedbank Group Limited' AS [Value], './assets/img/banks/icon/ned-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'Nedbank Group Limited' AS [Value], './assets/img/banks/icon/nedbank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Rand Merchant Bank' AS [Value], './assets/img/banks/icon/rand-merchant-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'RMB Private Bank' AS [Value], './assets/img/banks/icon/rmb-private-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'South African Bank of Athens Limited' AS [Value], './assets/img/banks/icon/south-african-bank-of-athens-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'RMB Private Bank' AS [Value], './assets/img/banks/icon/rand-merchant-private-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'South African Bank of Athens Limited' AS [Value], './assets/img/banks/icon/south-african-bank-of-athens.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Sasfin Bank Ltd' AS [Value], './assets/img/banks/icon/sasfin-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Standard Bank of SA Ltd' AS [Value], './assets/img/banks/icon/standard-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Wesbank' AS [Value], './assets/img/banks/icon/wes-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Bank' AS [LookupCategory], 'Discovery Bank Ltd' AS [Value], './assets/img/banks/icon/discovery-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
-SELECT 'Bank' AS [LookupCategory], 'Standard Chartered Bank Ltd' AS [Value], './assets/img/banks/icon/standard-chartered-bank.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
+SELECT 'Bank' AS [LookupCategory], 'Standard Chartered Bank Ltd' AS [Value], './assets/img/banks/icon/standard-chartered.png' AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'BudgetCode' AS [LookupCategory], 'Other' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Capacity' AS [LookupCategory], 'Other' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION
 SELECT 'Country' AS [LookupCategory], 'Afghanistan' AS [Value], NULL AS [Image], NULL AS [Icon], NULL AS [Color] UNION

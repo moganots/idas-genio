@@ -157,6 +157,6 @@ export class NavbarComponent extends CommonComponent implements OnInit {
     }
   }
   getTitleCurrentUserDisplayName() {
-    return (GeneralUtils.isObjectSet(this.currentUser)) ? `User profile for ${this.currentUser?.DisplayName}` : `Unknown user logged in`;
+    return this.currentUser?.DisplayName || this.currentUser?.EmailAddress || `Unknown user logged in`;
   }
 }

@@ -34,6 +34,7 @@ import { MeetingCalendarAttendeeService } from './components/user-meeting-calend
 import { UserService } from './services/user-service/user.service';
 import { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -77,6 +78,7 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     NgxMatTimepickerModule,
     NgxMatMomentModule,
     MatRadioModule,
+    MatMenuModule,
     AppModulesSharedModule,
     AppSharedModule,
     AppSharedComponentsCalendarModule,

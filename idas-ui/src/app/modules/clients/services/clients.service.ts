@@ -48,7 +48,7 @@ export class ClientsService extends DataService {
       (lookupValue) => lookupValue?._id === client?.IndustryTypeId
     );
     client.ContactDetail = this.contactDetails.find(
-      (contactDetail) => contactDetail?._id === client?._id
+      (contactDetail) => contactDetail?.ClientId === client?._id
     );
     client.DisplayName = GeneralUtils.getClientDisplayName(client);
     return client;

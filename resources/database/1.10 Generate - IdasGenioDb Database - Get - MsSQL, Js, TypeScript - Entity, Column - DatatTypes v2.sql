@@ -76,7 +76,7 @@ SELECT
 		END AS [ReferenceValueInitialiser]
 FROM [cte]
 WHERE
-	([EntityName] = 'task')
+	([EntityName] = 'user')
 	--AND ([ColumnName] LIKE '%Id')
 ORDER BY
 	[ColumnId]

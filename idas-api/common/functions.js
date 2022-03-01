@@ -7,10 +7,10 @@
  */
 
 const {
-  appAttachmentsDirectory,
   companyName,
   applicationName,
 } = require(`../config/config`);
+const { directory } = require(`./../config/config`).api.attachments;
 const { error } = require(`../common/logging/logger`);
 const fs = require("fs");
 
@@ -87,18 +87,6 @@ const bytesToString = (byteArray) => {
 };
 const toBase64 = (valueToEncode) => {
   return Buffer.from(valueToEncode).toString(`base64`);
-};
-const createDirectory = (path) => {
-  if (isNotEmptyString(path)) {
-    const fs = require(`fs`);
-    path.split(`/`).reduce((directories, directory) => {
-      directories += `${directory}/`;
-      if (!fs.existsSync(directories)) {
-        fs.mkdirSync(directories);
-      }
-      return directories;
-    }, ``);
-  }
 };
 const toLocaleLowerCaseTrim = (value) => {
   return (value || ``).toString().toLocaleLowerCase().trim();
@@ -178,6 +166,14 @@ const StringFormat = (value, args) => {
   }
   return String(value || ``);
 };
+const splitString = (value, delimiter = ` `) => {
+  return String(value).split(delimiter);
+}
+const capitalizeFirstLetter = (value) => {
+  return (value || ``).trim().length === 0 || value === `of`
+    ? value
+    : value.charAt(0).toLocaleUpperCase() + value.slice(1);
+}
 const formatBytes = (bytes, decimals = 2) => {
   if (isNaN(bytes) || bytes <= 0) return `0 bytes`;
   const k = 1024;
@@ -185,47 +181,6 @@ const formatBytes = (bytes, decimals = 2) => {
   const sizes = [`bytes`, `KB`, `MB`, `GB`, `TB`, `PB`, `EB`, `ZB`, `YB`];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ` ` + sizes[i];
-};
-const writeFileAttachmentToDisc = (err, fileAttachment) => {
-  if (!isObjectSet(err) && isObjectSet(fileAttachment)) {
-    const objectName = fileAttachment.ProjectId
-      ? `project`
-      : fileAttachment.TaskId
-      ? `task`
-      : fileAttachment.CalendarEventId
-      ? `calendar-event`
-      : `file`;
-    const objectId =
-      fileAttachment.ProjectId ||
-      fileAttachment.TaskId ||
-      fileAttachment.CalendarEventId ||
-      fileAttachment._id;
-    const fileDirectory = toLocaleLowerCaseTrim(
-      StringFormat(`${appAttachmentsDirectory}/{2}/{3}{4}`, [
-        companyName,
-        applicationName,
-        objectName,
-        objectId,
-        objectName !== `file` ? `/${fileAttachment._id}` : ``,
-      ])
-    );
-    const filePath = `${fileDirectory}/${fileAttachment.FileName}`;
-    const fileContent = isNotEmptyString(fileAttachment.FileContent)
-      ? fileAttachment.FileContent
-      : null;
-    if (
-      isNotEmptyString(fileDirectory) &&
-      isNotEmptyString(filePath) &&
-      fileContent
-    ) {
-      createDirectory(fileDirectory);
-      fs.writeFile(filePath, fileContent, "base64", (err) => {
-        if (err) {
-          error(__filename, `writeFileAttachmentToDisc:fs.writeFile`, err);
-        }
-      });
-    }
-  }
 };
 
 /*
@@ -243,8 +198,7 @@ module.exports = {
   isEmptyString: isEmptyString,
   isNotEmptyString: isNotEmptyString,
   isNotNaN: isNotNaN,
-  IsSetReturn,
-  IsSetReturn,
+  IsSetReturn:IsSetReturn,
   ifNullReturn: ifNullReturn,
   hasValues: hasValues,
   onlyUniqueValues: onlyUniqueValues,
@@ -252,7 +206,6 @@ module.exports = {
   getBytes: getBytes,
   bytesToString: bytesToString,
   toBase64: toBase64,
-  createDirectory: createDirectory,
   getBaseUrl: getBaseUrl,
   useContentType: useContentType,
   formattedAction: formattedAction,
@@ -262,11 +215,11 @@ module.exports = {
   flattenArray: flattenArray,
   getFirst: getFirst,
   getElementAt: getElementAt,
-  getLast,
-  getLast,
+  getLast:getLast,
   toLocaleLowerCaseTrim: toLocaleLowerCaseTrim,
   NullIfEmptyObject: NullIfEmptyObject,
   StringFormat: StringFormat,
   formatBytes: formatBytes,
-  writeFileAttachmentToDisc: writeFileAttachmentToDisc,
+  splitString: splitString,
+  capitalizeFirstLetter: capitalizeFirstLetter
 };

@@ -118,7 +118,7 @@
                             class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                             type="button"
                             title="Edit User"
-                            (click)="onClickEdit(user)"
+                            (click)="onOpenCreateEditDialog('edit', user, user?.UserType)"
                           >
                             <i class="material-icons idas-button-icon">edit</i>
                           </button>
@@ -132,7 +132,7 @@
                   class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                   type="button"
                   title="Add New {{ userType?.Value}} User"
-                  (click)="onClickAddUser(userType)"
+                  (click)="onOpenCreateEditDialog('create', null, userType)"
                 >
                   <i class="material-icons idas-button-icon">person_add</i>
                 </button>

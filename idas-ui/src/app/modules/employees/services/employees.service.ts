@@ -59,7 +59,7 @@ export class EmployeesService extends DataService {
       (lookupValue) => lookupValue?._id === employee?.DepartmentId
     );
     employee.ContactDetail = this.contactDetails.find(
-      (contactDetail) => contactDetail?._id === employee?._id
+      (contactDetail) => contactDetail?.EmployeeId === employee?._id
     );
     employee.DisplayName = GeneralUtils.getEmployeeDisplayName(employee);
     employee.Manager = this.employees.find((manager) => manager?._id === employee?.ManagerId);

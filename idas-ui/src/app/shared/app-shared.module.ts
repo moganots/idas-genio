@@ -61,6 +61,7 @@ import { AuthenticationGuardService } from './services/authentication-guard-serv
 import { AuthenticationService } from './services/authentication-service/authentication.service';
 import { DataService } from './services/data-service/data.service';
 import { FileAttachmentService } from './services/file-attachment-service/file-attachment.service';
+import { ImagesService } from './services/images-service/images.service';
 import { LookupCategoryService } from './services/lookup-category-service/lookup-category.service';
 import { LookupValueService } from './services/lookup-value-service/lookup-value.service';
 import { SortingService } from './services/sorting-service/sorting.service';
@@ -71,6 +72,7 @@ export { AuthenticationGuardService } from './services/authentication-guard-serv
 export { AuthenticationService } from './services/authentication-service/authentication.service';
 export { DataService } from './services/data-service/data.service';
 export { FileAttachmentService } from './services/file-attachment-service/file-attachment.service';
+export { ImagesService } from './services/images-service/images.service';
 export { LookupCategoryService } from './services/lookup-category-service/lookup-category.service';
 export { LookupValueService } from './services/lookup-value-service/lookup-value.service';
 export { SortingService } from './services/sorting-service/sorting.service';
@@ -106,6 +108,7 @@ export { DataColumnUtils } from './utilities/data-column-utils';
     LookupValueService,
     SortingService,
     FileSizePipe,
+    ImagesService
   ],
   exports: [AppSharedComponentsModule],
 })
