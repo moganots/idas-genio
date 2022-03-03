@@ -117,7 +117,8 @@
     span {
       color: #000000;
       display: inline;
-      padding: 0 0 0 8px;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
       text-align: justify;
       vertical-align: middle;
     }
@@ -138,8 +139,8 @@
     i {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
-      &.created-by,
-      &.modified-by {
+      &.createdBy,
+      &.modifiedBy {
         margin: 0 0.2vw 0 0.6vw;
         padding: 0 0 0 0;
       }
@@ -158,8 +159,8 @@
         color: #000000;
         width: 95px;
         &.type,
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.priority,
         &.status {
           margin: 0 0 0 0;
@@ -174,8 +175,8 @@
           padding: 0 0 0 0;
           text-align: center;
         }
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.assignee {
           border: none;
           margin: 0 0 0 0.4vw;
@@ -290,11 +291,23 @@
       &.assignee {
         margin: 0 0.3vw 0 0;
         padding: 0 0 0 0;
+        width: 1.5em;
       }
-      &.created-by,
-      &.modified-by {
-        margin: 0 0.1vw 0 0;
+      &.createdBy,
+      &.modifiedBy {
+        margin: 0 0.3vw 0 0;
         padding: 0 0 0 0;
+        width: 1.5em;
+      }
+    }
+    img {
+      &.avatar,
+      &.assignee,
+      &.createdBy,
+      &.modifiedBy {
+        margin: 0 0.3vw 0 0;
+        padding: 0 0 0 0;
+        width: 1.5em;
       }
     }
     p {
@@ -303,26 +316,26 @@
       vertical-align: middle;
       &.label-title {
         border: none;
-        color: #000000;
         &.assignee,
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.date-created,
         &.date-modified {
+          font-size: 0.9em;
           margin: 0 0 0 0;
           padding: 0 0 0 0;
-          width: 6.2vw;
+          width: 7em;
         }
       }
       &.label-detail {
         border: none;
         &.assignee,
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.date-created,
         &.date-modified {
-          border: none;
-          margin: 0 0 0 0.4vw;
+          font-size: 0.9em;
+          margin: 0 0 0 0;
           padding: 0 0 0 0;
         }
       }
@@ -346,8 +359,8 @@ img {
     height: auto;
     margin: 0 5px 0 0;
     padding: 0 0 0 0;
-    &.created-by,
-    &.modified-by {
+    &.createdBy,
+    &.modifiedBy {
       margin: 0 0 0 0.2vw;
       padding: 0 0 0 0;
     }
@@ -362,53 +375,6 @@ img {
   height: auto;
   padding: 10px;
   width: 100%;
-}
-div.comment, div.worklog, div.review {
-  border-bottom: 0.1em solid #d3d3d3;
-  border-radius: 8px;
-  padding: 1em;
-  width: 100%;
-  i,
-  img,
-  span {
-    height: auto;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  i,
-  img {
-    font-size: 1.3em;
-    font-weight: bold;
-    width: 20px;
-  }
-  img {
-    background-size: cover;
-  }
-  span {
-    &.displayName, &.timeElapsed, &.dateCreated {
-      font-weight: bold;
-    }
-    &.text {
-      font-weight: normal;
-    }
-    &.timeSpent {
-      margin: 5px 45px 5px 0;
-    }
-    &.comment {
-      min-width: 100%;
-      width: max-content;
-      margin-top: 15px;
-      padding-top: 20px;
-    }
-  }
-  label {
-    font-size: 1.1em;
-    padding: 0px 5px 0px 5px;
-    vertical-align: middle;
-  }
 }
 a,
 a:link,

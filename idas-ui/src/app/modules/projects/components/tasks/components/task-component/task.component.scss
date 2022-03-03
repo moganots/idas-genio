@@ -93,8 +93,8 @@
     i {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
-      &.created-by,
-      &.modified-by {
+      &.createdBy,
+      &.modifiedBy {
         margin: 0 0.2vw 0 0.6vw;
         padding: 0 0 0 0;
       }
@@ -113,8 +113,8 @@
         color: #000000;
         width: 95px;
         &.type,
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.priority,
         &.status {
           margin: 0 0 0 0;
@@ -129,8 +129,8 @@
           padding: 0 0 0 0;
           text-align: center;
         }
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.assignee {
           border: none;
           margin: 0 0 0 0.4vw;
@@ -235,7 +235,7 @@
             padding: 0 0 0 0;
             position: relative;
             vertical-align: middle;
-            width: 3.5%;
+            width: 0.4em;
           }
         }
       }
@@ -261,11 +261,20 @@
       &.assignee {
         margin: 0 0.3vw 0 0;
         padding: 0 0 0 0;
+        width: 1.5em;
       }
-      &.created-by,
-      &.modified-by {
-        margin: 0 0.1vw 0 0;
+      &.createdBy,
+      &.modifiedBy {
+        margin: 0 0.3vw 0 0;
         padding: 0 0 0 0;
+        width: 1.5em;
+      }
+    }
+    img {
+      &.avatar, &.assignee, &.createdBy, &.modifiedBy {
+        margin: 0 0.3vw 0 0;
+        padding: 0 0 0 0;
+        width: 1.5em;
       }
     }
     p {
@@ -275,25 +284,27 @@
       &.label-title {
         border: none;
         &.assignee,
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.date-created,
         &.date-modified {
+          font-size: 0.9em;
           margin: 0 0 0 0;
           padding: 0 0 0 0;
-          width: 6.2vw;
+          width: 7em;
         }
       }
       &.label-detail {
         border: none;
         &.assignee,
-        &.created-by,
-        &.modified-by,
+        &.createdBy,
+        &.modifiedBy,
         &.date-created,
         &.date-modified {
-          border: none;
-          margin: 0 0 0 0.4vw;
+          font-size: 0.9em;
+          margin: 0 0 0 0;
           padding: 0 0 0 0;
+          width: 7em;
         }
       }
     }
@@ -316,14 +327,16 @@ img {
     height: auto;
     margin: 0 5px 0 0;
     padding: 0 0 0 0;
-    &.created-by,
-    &.modified-by {
+    &.createdBy,
+    &.modifiedBy {
       margin: 0 0 0 0.2vw;
       padding: 0 0 0 0;
+      width: 1.5em;
     }
     &.assignee {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
+      width: 1.5em;
     }
   }
 }

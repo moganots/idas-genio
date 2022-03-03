@@ -40,7 +40,8 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   @Input() public pageTitle: string;
   @Input() public pageSubTitle: string;
   @Input() public entityName: string;
-  @Input() public entityId: any;
+  @Input() public currentEntity: any;
+  @Input() public currentEntityId: any;
   @Input() public dataService: DataService;
   @Input() public dataSource: any[] = [];
   @Input() public dataSourceColumns: DataColumn[];

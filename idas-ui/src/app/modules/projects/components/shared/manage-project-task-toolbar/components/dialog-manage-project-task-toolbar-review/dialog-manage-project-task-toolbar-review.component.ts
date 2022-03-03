@@ -101,7 +101,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
     return this.reviewIsSet && this.f?.reviewRapproveReject?.touched;
   }
   onClickSave(): void {
-      if(this.dataService && GeneralUtils.isNumberSet(this.entityId)){
+      if(this.dataService && GeneralUtils.isNumberSet(this.currentEntityId)){
         this.dataService.CreateUpdateDelete('Create', this.getReview()).subscribe(
           (updated) => {
             this.alertifyService.success(`${this.entityName}, review added successfully`);
@@ -114,8 +114,8 @@ export class DialogManageProjectTaskToolbarReviewComponent
   }
   getReview(): any {
     return {
-      ProjectId: this.entityId,
-      TaskId: this.entityId,
+      ProjectId: this.currentEntityId,
+      TaskId: this.currentEntityId,
       Review: this.review.innerText,
       Approved: this.reviewApproved,
       Rejected: this.reviewRejected,

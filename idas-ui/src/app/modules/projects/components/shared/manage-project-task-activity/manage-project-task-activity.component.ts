@@ -6,6 +6,8 @@ import { BaseDataComponent } from 'app/modules/_shared/components/base-data-comp
 import {
   AlertifyService,
   AuthenticationService,
+  DateUtils,
+  GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 
@@ -41,11 +43,35 @@ export class ManageProjectTaskActivityComponent
       referenceValueService
     );
   }
-
-  ngOnInit(): void {
-    console.log(`this.entityName=${this.entityName}, this.entityId=${this.entityId}`);
-    console.log(this.dataService);
-    console.log(this.dataSourceColumns);
-    console.log(this.selectedElement);
+  ngOnInit(): void {}
+  formatTimeSpent(timeSpent: string) {
+    return timeSpent
+      ?.split(` `)
+      .map((ts) =>
+        ts?.split(/(\d+)/).filter((tse) => !(String(tse).trim().length === 0))
+      )
+      .map((ts) => this.getFormattedTimeSpent(ts))
+      .join(` `);
+  }
+  getFormattedTimeSpent(timeSpentElements?: string[]): any {
+    switch (this.toLocaleLowerCaseTrim(timeSpentElements[1])) {
+      case `y`:
+        return `${timeSpentElements[0]} year(s)`;
+      case `m`:
+        return `${timeSpentElements[0]} month(s)`;
+      case `d`:
+        return `${timeSpentElements[0]} day(s)`;
+      case `h`:
+        return `${timeSpentElements[0]} hour(s)`;
+      case `min`:
+        return `${timeSpentElements[0]} minute(s)`;
+      case `sec`:
+        return `${timeSpentElements[0]} second(s)`;
+    }
+  }
+  formattedTimeElapsed(date?: Date) {
+    return date
+      ? DateUtils.timeAgo(DateUtils.add(new Date(date), `hour`, -2))
+      : ``;
   }
 }

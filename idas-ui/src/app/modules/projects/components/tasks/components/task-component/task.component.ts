@@ -105,6 +105,20 @@ export class TaskComponent extends PageComponent implements OnInit {
         );
       });
   }
+  formatTimeSpent(timeSpent: string) {
+    return timeSpent?.split(` `).map((ts) => this.getFormattedTimeSpent(ts)).join(` `);
+  }
+  getFormattedTimeSpent(timeSpent: string): any {
+    const tsElements = timeSpent?.split(/(\d+)/).filter((ts) => !(String(ts).trim().length === 0));
+    switch(this.toLocaleLowerCaseTrim(tsElements[1])){
+      case `y`: return `${tsElements[0]} year(s)`;
+      case `m`: return `${tsElements[0]} month(s)`;
+      case `d`: return `${tsElements[0]} day(s)`;
+      case `h`: return `${tsElements[0]} hour(s)`;
+      case `min`: return `${tsElements[0]} minute(s)`;
+      case `sec`: return `${tsElements[0]} second(s)`;
+    }
+  }
   timeElapsedComment(comment: TaskComment) {
     return DateUtils.timeAgo(DateUtils.add(new Date(comment?.DateCreated), `hour`, -2));
   }

@@ -109,6 +109,9 @@ export class GeneralUtils {
   public static getLastItem(array: any[]) {
     return this.hasItems(array) ? array[array.length - 1] : null;
   }
+  public static flattenArray(array: any[]): any {
+    return [].concat.apply([], array);
+  }
   public static getFileAttachmentUrl(file: FileAttachment) {
     const parentType = this.getFileAttachmentParentType(file);
     const parentId = file.ProjectId || file.TaskId || file.CalendarEventId;

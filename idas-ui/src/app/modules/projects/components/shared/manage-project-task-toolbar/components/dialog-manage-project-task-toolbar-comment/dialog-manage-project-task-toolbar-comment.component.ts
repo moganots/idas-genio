@@ -61,7 +61,7 @@ export class DialogManageProjectTaskToolbarCommentComponent
     this.initFormGroupAndFields();
   }
   onClickSave(): void {
-      if(this.dataService && GeneralUtils.isNumberSet(this.entityId) && this.isNotEmptyString(this.updates?.Comment)){
+      if(this.dataService && GeneralUtils.isNumberSet(this.currentEntityId) && this.isNotEmptyString(this.updates?.Comment)){
         this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
           (updated) => {
             this.alertifyService.success(`${this.entityName}, comment added successfully`);
@@ -74,8 +74,8 @@ export class DialogManageProjectTaskToolbarCommentComponent
   }
   getComment(): any {
     return {
-      ProjectId: this.entityId,
-      TaskId: this.entityId,
+      ProjectId: this.currentEntityId,
+      TaskId: this.currentEntityId,
       Comment: this.updates?.comment
     }
   }

@@ -19,7 +19,7 @@
         </div>
         <app-manage-project-task-toolbar
           [entityName]="entityName"
-          [entityId]="task?._id"
+          [currentEntityId]="task?._id"
           [pageIcon]="task?.TaskType?.Icon"
           [dataSourceColumns]="dataSourceColumns"
           [editService]="taskService"
@@ -415,14 +415,14 @@
                         <span class="displayName">
                           {{ worklog?.createdBy?.DisplayName }}
                         </span>
-                        <span class="text"> logged work </span>
+                        <span class="text">logged work</span>
                         <span class="timeElapsed">
                           {{ worklog?.DateCreated }}
                         </span>
                         <br />
                         <br />
                         <span class="timeSpent">Time Spent:</span>
-                        <span class="text">{{ worklog?.TimeSpent }}</span>
+                        <span class="text">{{ formatTimeSpent(worklog?.TimeSpent) }}</span>
                         <br />
                         <br />
                         <span class="text">{{ worklog?.Comment }}</span>
@@ -465,7 +465,7 @@
                         <span class="displayName">
                           {{ review?.createdBy?.DisplayName }}
                         </span>
-                        <span class="text"> logged a review </span>
+                        <span class="text">logged a review</span>
                         <span class="dateCreated">
                           {{ review?.DateCreated }}
                         </span>
@@ -533,7 +533,7 @@
                       </p>
                     </li>
                     <li>
-                      <p class="label-title created-by">Created By</p>
+                      <p class="label-title createdBy">Created By</p>
                       <i
                         [ngStyle]="{
                           display:
@@ -542,7 +542,7 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="material-icons created-by {{
+                        class="material-icons createdBy {{
                           task?.createdBy?.UserType?.CssClassCategory
                         }} {{ task?.createdBy?.UserType?.CssClass }}"
                         [title]="task?.createdBy?.UserType?.Value"
@@ -558,16 +558,16 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="btn-idas avatar created-by"
+                        class="btn-idas avatar createdBy"
                         src="{{ task?.createdBy?.Avatar }}"
                         [title]="task?.createdBy?.DisplayName"
                       />
-                      <p class="label-detail created-by">
+                      <p class="label-detail createdBy">
                         {{ task?.createdBy?.DisplayName }}
                       </p>
                     </li>
                     <li>
-                      <p class="label-title modified-by">Modified By</p>
+                      <p class="label-title modifiedBy">Modified By</p>
                       <i
                         [ngStyle]="{
                           display:
@@ -576,7 +576,7 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="material-icons modified-by {{
+                        class="material-icons modifiedBy {{
                           task?.modifiedBy?.UserType?.CssClassCategory
                         }} {{ task?.modifiedBy?.UserType?.CssClass }}"
                         [title]="task?.modifiedBy?.UserType?.Value"
@@ -592,11 +592,11 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="btn-idas avatar modified-by"
+                        class="btn-idas avatar modifiedBy"
                         src="{{ task?.modifiedBy?.Avatar }}"
                         [title]="task?.modifiedBy?.DisplayName"
                       />
-                      <p class="label-detail modified-by">
+                      <p class="label-detail modifiedBy">
                         {{ task?.modifiedBy?.DisplayName }}
                       </p>
                     </li>

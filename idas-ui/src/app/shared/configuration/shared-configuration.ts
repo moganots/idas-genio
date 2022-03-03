@@ -295,4 +295,5 @@ export class SharedConfiguration {
     `23:00`,
     `23:30`,
   ];
+  public static timePeriods = [`Year`, `Month`, `Day`, `Week`, `Hour`, `Minute`, `Second`];
 }

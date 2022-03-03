@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
+import { DialogCreateEditDataComponent, ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
 import { BaseDataComponent } from 'app/modules/_shared/components/base-data-component/base-data.component';
 import {
   AlertifyService,
@@ -14,7 +14,6 @@ import { DialogManageProjectTaskToolbarAssignComponent } from './components/dial
 import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/dialog-manage-project-task-toolbar-attach/dialog-manage-project-task-toolbar-attach.component';
 import { DialogManageProjectTaskToolbarCommentComponent } from './components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
 import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
-import { DialogManageProjectTaskToolbarEditComponent } from './components/dialog-manage-project-task-toolbar-edit/dialog-manage-project-task-toolbar-edit.component';
 import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
 import { DialogManageProjectTaskToolbarReviewComponent } from './components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
 import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
@@ -78,7 +77,7 @@ export class ManageProjectTaskToolbarComponent
     switch (this.toLocaleLowerCaseTrim(action)) {
       case 'edit':
         this.dataService = this.editService;
-        this.openDialog(DialogManageProjectTaskToolbarEditComponent, action);
+        this.openDialog(DialogCreateEditDataComponent, action);
         break;
       case 'comment':
         this.dataService = this.commentService;
@@ -119,8 +118,9 @@ export class ManageProjectTaskToolbarComponent
     }
   }
   openDialog(dialogComponent: any, action: string) {
-    const id = this.entityId || this.selectedElement?._id || this.selectedElement?.id;
+    const id = this.currentEntityId || this.selectedElement?._id || this.selectedElement?.id;
     const name = this.selectedElement?.DisplayName || this.selectedElement?.Name;
+    const icon = (this.selectedElement?.ProjectType || this.selectedElement?.TaskType).Icon || this.pageIcon;
     super.openDialog(
       dialogComponent,
       {
@@ -128,7 +128,7 @@ export class ManageProjectTaskToolbarComponent
         dataService: this.dataService,
         entityName: this.entityName,
         entityId: id,
-        pageIcon: this.pageIcon,
+        pageIcon: icon,
         pageName: `${this.splitCamelCase(
           this.capitalizeFirstLetter(this.getProjectDialogName(action))
         )} / ${this.capitalizeFirstLetter(this.entityName)}`,

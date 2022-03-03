@@ -15,6 +15,8 @@ import {
   LookupValueService,
   Project,
   ProjectComment,
+  ProjectReview,
+  ProjectWorklog,
   Task,
 } from 'app/shared/app-shared.module';
 import { ProjectAssignService } from '../../services/project-assign-service/project-assign.service';
@@ -115,8 +117,5 @@ export class ProjectComponent extends PageComponent implements OnInit {
           (value) => value.LookupCategory.Name === 'Priority'
         );
       });
-  }
-  timeElapsedComment(comment: ProjectComment) {
-    return DateUtils.timeAgo(DateUtils.add(new Date(comment?.DateCreated), `hour`, -2));
   }
 }

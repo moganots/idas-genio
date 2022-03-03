@@ -27,7 +27,7 @@
             name="timeSpent"
             formControlName="timeSpent"
             class=""
-            placeholder="Time Spent (e.g. 1y 1m 1d 1w 1h 30min)"
+            placeholder="Time Spent (e.g. 1y 12m 365d 52w 24h 60min)"
             [(ngModel)]="timeSpent"
             (change)="onValueChanged($event)"
           />
@@ -56,6 +56,7 @@
             formControlName="dateStarted"
             placeholder="Date Started"
             class=""
+            [(ngModel)]="dateStarted"
             [ngxMatDatetimePicker]="picker"
             (dateInput)="onDateTimePickerChanged($event)"
             (dateChange)="onDateTimePickerChanged($event)"
@@ -68,14 +69,15 @@
         </mat-form-field>
       </span>
       <span>
-        <span>Work Description</span>
+        <span>Work Comment(s)</span>
         <div
-          id="description"
+          id="comment"
           contenteditable="true"
           class="textarea-editor work-description"
+          [(ngModel)]="comment"
           (keyup)="onDivValueChanged($event)"
         >
-          {{ frmGroup.controls["description"].value }}
+          {{ frmGroup.controls["comment"].value }}
         </div>
       </span>
     </div>

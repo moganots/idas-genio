@@ -73,7 +73,7 @@ export class BaseDialogComponent
     this.pageTitle = data?.pageTitle;
     this.pageSubTitle = data?.pageSubTitle;
     this.dataSourceColumns = data?.dataColumns;
-    this.entityId = data?.selectedElement?._id || data?.selectedElement?.id;
+    this.currentEntityId = data?.selectedElement?._id || data?.selectedElement?.id;
     this.selectedElementIndex = data?.selectedElementIndex;
     this.selectedElement = data?.selectedElement || {};
   }

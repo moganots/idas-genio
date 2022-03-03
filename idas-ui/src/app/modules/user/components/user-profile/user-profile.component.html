@@ -43,7 +43,7 @@
                     <div class="row gutters">
                       <app-common-switch-case-data-input
                         [action]="action"
-                        [entityId]="entityId"
+                        [currentEntityId]="entityId"
                         [entityName]="entityName"
                         [entity]="
                           currentUser?.Client ||
@@ -63,7 +63,7 @@
                     <div class="row gutters">
                       <app-common-switch-case-data-input
                         [action]="action"
-                        [entityId]="entityId"
+                        [currentEntityId]="entityId"
                         [entityName]="entityName"
                         [entity]="
                           currentUser?.Client?.ContactDetail ||
@@ -146,7 +146,7 @@
                       </div>
                       <app-common-switch-case-data-input
                         [action]="action"
-                        [entityId]="entityId"
+                        [currentEntityId]="entityId"
                         [entityName]="entityName"
                         [entity]="currentUser || {}"
                         [columns]="fieldsUserAccountDetails"

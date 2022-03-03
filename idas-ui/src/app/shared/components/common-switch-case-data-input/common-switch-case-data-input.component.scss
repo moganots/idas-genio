@@ -84,7 +84,10 @@ div {
     border-radius: 8px;
     box-sizing: border-box;
     height: 15em;
-    padding: 5px;
+    padding: 10px;
+    p {
+      padding: 10px;
+    }
   }
 }
 i {
@@ -153,5 +156,9 @@ p {
     &.displayValue {
       font-size: 1em;
     }
+  }
+  &.textarea-editor {
+    margin: 10px;
+    padding: 10px;
   }
 }

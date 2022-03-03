@@ -41,7 +41,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
   timeSpent: string = null;
   dateStarted: Date = new Date();
   dateCompleted: Date = new Date();
-  description: string = null;
+  comment: string = null;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -75,7 +75,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
         { value: new Date(), disabled: false },
         Validators.required
       ),
-      description: new FormControl(
+      comment: new FormControl(
         { value: null, disabled: false },
         Validators.required
       ),
@@ -86,7 +86,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
       this.dataService &&
       GeneralUtils.isStringSet(this.timeSpent) &&
       // tslint:disable-next-line:use-isnan
-      GeneralUtils.isNumberSet(this.entityId)
+      GeneralUtils.isNumberSet(this.currentEntityId)
     ) {
       this.dateStarted = this.updates?.dateStarted || this.dateStarted;
       this.setDateCompleted();
@@ -109,7 +109,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
   setDateCompleted() {
     this.dateCompleted = this.dateStarted || new Date();
     const tsItems = this.timeSpent?.split(` `);
-    const tsObject = { y: 0, m: 0, d: 0, w: 0, h: 0, min: 0, s: 0, ms: 0 };
+    const tsObject = { y: 0, m: 0, d: 0, w: 0, h: 0, min: 0, s: 0, sec: 0, ms: 0 };
     Object.keys(tsObject).map((key, index) => {
       tsObject[key] = GeneralUtils.toNumber(
         tsItems
@@ -122,17 +122,18 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
       this.dateCompleted = DateUtils.add(
         this.dateCompleted,
         key,
-        tsObject[key]
+        (tsObject[key] * -1)
       );
     });
   }
   getWorkLog(): any {
     return {
-      ProjectId: this.entityId,
-      TaskId: this.entityId,
+      ProjectId: this.currentEntityId,
+      TaskId: this.currentEntityId,
+      TimeSpent: this.timeSpent,
       DateStarted: this.dateStarted,
       DateCompleted: this.dateCompleted,
-      Description: this.updates?.description
+      Comment: this.updates?.comment
     }
   }
 }

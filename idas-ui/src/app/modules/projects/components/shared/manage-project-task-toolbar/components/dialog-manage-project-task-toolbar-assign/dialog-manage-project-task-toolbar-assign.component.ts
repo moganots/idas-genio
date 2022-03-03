@@ -179,7 +179,7 @@ export class DialogManageProjectTaskToolbarAssignComponent
   onClickSave(): void {
     if (
       this.dataService &&
-        GeneralUtils.isNumberSet(this.entityId)
+        GeneralUtils.isNumberSet(this.currentEntityId)
     ) {
       this.dataService
         .CreateUpdateDelete('Create', this.getAssignment())
@@ -199,8 +199,8 @@ export class DialogManageProjectTaskToolbarAssignComponent
   }
   getAssignment(): any {
     return {
-      ProjectId: this.entityId,
-      TaskId: this.entityId,
+      ProjectId: this.currentEntityId,
+      TaskId: this.currentEntityId,
       ProjectAssignmentTypeId:
         this.projectAssignmentType?.id || this.projectAssignmentType?._id,
       AssigneeId: this.assignee?.id || this.assignee?._id,

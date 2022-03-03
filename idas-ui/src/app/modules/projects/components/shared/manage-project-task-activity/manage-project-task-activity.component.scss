@@ -1,0 +1,70 @@
+div.comment,
+div.worklog,
+div.review {
+  border-bottom: 0.1em solid #d3d3d3;
+  border-radius: 8px;
+  padding: 1em;
+  width: 100%;
+  i,
+  img,
+  p,
+  span {
+    height: auto;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  i,
+  img {
+    font-size: 1.3em;
+    font-weight: bold;
+    width: 20px;
+  }
+  img {
+    background-size: cover;
+    border-radius: 8px;
+    margin: 0 2px 0 4px;
+  }
+  span {
+    font-size: 0.9em;
+    text-align: left;
+    vertical-align: middle;
+    &.dateCreated,
+    &.displayName,
+    &.timeElapsed {
+      font-weight: bold;
+    }
+    &.text {
+      font-weight: normal;
+      &.added-comment,
+      &.added-worklog,
+      &.added-review {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+      }
+      &.comment,
+      &.worklog,
+      &.review {
+        margin: 0 0 0 0;
+        padding: 20px 0 5px 0 !important;
+      }
+    }
+    &.timeSpent {
+      margin: 0 0 0 20px;
+      padding: 0 0 0 20px;
+    }
+    &.comment {
+      min-width: 100%;
+      width: max-content;
+      margin-top: 15px;
+      padding-top: 20px;
+    }
+  }
+  label {
+    font-size: 1.1em;
+    padding: 0px 5px 0px 5px;
+    vertical-align: middle;
+  }
+}

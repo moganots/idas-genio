@@ -20,7 +20,7 @@
         </div>
         <app-manage-project-task-toolbar
           [entityName]="entityName"
-          [entityId]="project?._id"
+          [currentEntityId]="project?._id"
           [pageIcon]="project?.ProjectType?.Icon"
           [dataSourceColumns]="dataSourceColumns"
           [editService]="projectService"
@@ -434,7 +434,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Activity </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <mat-tab-group animationDuration="2000ms">
+                  <app-manage-project-task-activity
+                    [entityName]="entityName"
+                    [currentEntityId]="project?._id"
+                    [currentEntity]="project"
+                  ></app-manage-project-task-activity>
+                  <!-- <mat-tab-group animationDuration="2000ms">
                     <mat-tab label="Comment(s)">
                       <div
                         *ngFor="let comment of project?.Comments"
@@ -474,7 +479,7 @@
                         </span>
                         <span class="text"> added a comment </span>
                         <span class="timeElapsed">
-                          {{ timeElapsedComment(comment) }}
+                          {{ formattedTimeElapsed(comment?.DateCreated) }}
                         </span>
                         <br />
                         <br />
@@ -511,21 +516,20 @@
                                 ? 'none'
                                 : 'inline'
                           }"
-                          class="btn-idas avatar"
                           src="{{ worklog?.createdBy?.Avatar }}"
                           [title]="worklog?.createdBy?.DisplayName"
                         />
                         <span class="displayName">
                           {{ worklog?.createdBy?.DisplayName }}
                         </span>
-                        <span class="text"> logged work </span>
+                        <span class="text">logged work</span>
                         <span class="timeElapsed">
-                          {{ worklog?.DateCreated }}
+                          {{ formattedTimeElapsed(worklog?.DateCreated) }}
                         </span>
                         <br />
                         <br />
-                        <span class="timeSpent">Time Spent:</span>
-                        <span class="text">{{ worklog?.TimeSpent }}</span>
+                        <span class="displayName">Time Spent:</span>
+                        <span class="timeSpent">{{ formatTimeSpent(worklog?.TimeSpent) }}</span>
                         <br />
                         <br />
                         <span class="text">{{ worklog?.Comment }}</span>
@@ -568,9 +572,9 @@
                         <span class="displayName">
                           {{ review?.createdBy?.DisplayName }}
                         </span>
-                        <span class="text"> logged a review </span>
+                        <span class="text">logged a review</span>
                         <span class="dateCreated">
-                          {{ review?.DateCreated }}
+                          {{ formattedTimeElapsed(review?.DateCreated) }}
                         </span>
                         <!-- <span>
                           <div>
@@ -579,14 +583,14 @@
                             <input id="reject" type="radio" value="{{review?.Rejected}}">
                             <label for="reject">Rejected</label>
                          </div>
-                        </span> -->
+                        </span> --
                         <br />
                         <br />
                         <span class="text">{{ review?.Review }}</span>
                       </div></mat-tab
                     >
-                    <!--                                         <mat-tab label="Time in Status"></mat-tab> -->
-                  </mat-tab-group>
+                    <!--                                         <mat-tab label="Time in Status"></mat-tab> -
+                  </mat-tab-group> -->
                 </mat-expansion-panel>
               </mat-accordion>
             </div>
@@ -637,7 +641,7 @@
                   </mat-expansion-panel-header>
                   <ul>
                     <li>
-                      <p class="label-title created-by">Created By</p>
+                      <p class="label-title createdBy">Created By</p>
                       <i
                         [ngStyle]="{
                           display:
@@ -646,7 +650,7 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="material-icons created-by {{
+                        class="material-icons createdBy {{
                           project?.createdBy?.UserType?.CssClassCategory
                         }} {{ project?.createdBy?.UserType?.CssClass }}"
                         [title]="project?.createdBy?.UserType?.Value"
@@ -662,16 +666,16 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="btn-idas avatar created-by"
+                        class="btn-idas avatar createdBy"
                         src="{{ project?.createdBy?.Avatar }}"
                         [title]="project?.createdBy?.DisplayName"
                       />
-                      <p class="label-detail created-by">
+                      <p class="label-detail createdBy">
                         {{ project?.createdBy?.DisplayName }}
                       </p>
                     </li>
                     <li>
-                      <p class="label-title modified-by">Modified By</p>
+                      <p class="label-title modifiedBy">Modified By</p>
                       <i
                         [ngStyle]="{
                           display:
@@ -680,7 +684,7 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="material-icons modified-by {{
+                        class="material-icons modifiedBy {{
                           project?.modifiedBy?.UserType?.CssClassCategory
                         }} {{ project?.modifiedBy?.UserType?.CssClass }}"
                         [title]="project?.modifiedBy?.UserType?.Value"
@@ -697,11 +701,11 @@
                               ? 'none'
                               : 'inline'
                         }"
-                        class="btn-idas avatar modified-by"
+                        class="btn-idas avatar modifiedBy"
                         src="{{ project?.modifiedBy?.Avatar }}"
                         [title]="project?.modifiedBy?.DisplayName"
                       />
-                      <p class="label-detail modified-by">
+                      <p class="label-detail modifiedBy">
                         {{ project?.modifiedBy?.DisplayName }}
                       </p>
                     </li>

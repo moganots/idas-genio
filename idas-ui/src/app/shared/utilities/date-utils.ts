@@ -168,8 +168,9 @@ export class DateUtils {
       case `minute`:
         return DateUtils.addMinutes(date, increment);
       case `s`:
-      case `ss`:
+      case `sec`:
       case `second`:
+      case `ss`:
         return DateUtils.addSeconds(date, increment);
       case `ms`:
       case `millisecond`:
