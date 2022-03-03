@@ -12,9 +12,9 @@ import {
 } from 'app/shared/app-shared.module';
 
 @Component({
-  selector: 'app-manage-project-task-activity',
-  templateUrl: './manage-project-task-activity.component.html',
-  styleUrls: ['./manage-project-task-activity.component.scss'],
+  selector: 'app-view-project-task-activity',
+  templateUrl: './view-project-task-activity.component.html',
+  styleUrls: ['./view-project-task-activity.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -22,7 +22,7 @@ import {
     ReferenceValueService,
   ],
 })
-export class ManageProjectTaskActivityComponent
+export class ViewProjectTaskActivityComponent
   extends BaseDataComponent
   implements OnInit
 {
