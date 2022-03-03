@@ -32,7 +32,7 @@ import { ProjectComponent } from './components/project-component/project.compone
 import {
   ViewProjectTaskActivityComponent
 } from './components/shared/view-project-task-activity/view-project-task-activity.component';
-import { ManageProjectTaskDetailsComponent } from './components/shared/manage-project-task-details/manage-project-task-details.component';
+import { ViewProjectTaskDetailsComponent } from './components/shared/view-project-task-details/view-project-task-details.component';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 import { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
 import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
@@ -69,7 +69,7 @@ export { ProjectComponent } from './components/project-component/project.compone
 export {
   ViewProjectTaskActivityComponent
 } from './components/shared/view-project-task-activity/view-project-task-activity.component';
-export { ManageProjectTaskDetailsComponent } from './components/shared/manage-project-task-details/manage-project-task-details.component';
+export { ViewProjectTaskDetailsComponent } from './components/shared/view-project-task-details/view-project-task-details.component';
 export { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 export { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
 export { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
@@ -117,7 +117,7 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     TaskComponent,
     ManageProjectTaskToolbarComponent,
     ViewProjectTaskActivityComponent,
-    ManageProjectTaskDetailsComponent,
+    ViewProjectTaskDetailsComponent,
     DialogProjectAssignmentComponent,
     DialogTaskAssignmentComponent,
     DialogCreateNewTaskComponent,

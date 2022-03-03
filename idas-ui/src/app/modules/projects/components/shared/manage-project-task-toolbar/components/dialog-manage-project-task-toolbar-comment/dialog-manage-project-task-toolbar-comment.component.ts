@@ -65,6 +65,7 @@ export class DialogManageProjectTaskToolbarCommentComponent
         this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
           (updated) => {
             this.alertifyService.success(`${this.entityName}, comment added successfully`);
+            this.selectedElement?.Comments?.push(updated);
           },
           (error) => {
             this.alertifyService.error(`${this.entityName}, comment was not added`);

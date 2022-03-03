@@ -46,108 +46,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Details </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div class="row gutters">
-                    <span class="resize">
-                      <p class="label-title priority">Priority</p>
-                      <button
-                        mat-icon-button
-                        class="
-                                  btn
-                                  btn-white
-                                  btn-round
-                                  btn-just-icon btn-idas {{
-                          project?.Priority?.CssClassCategory
-                        }} {{ project?.Priority?.CssClass }}
-                                "
-                        type="button"
-                        [matMenuTriggerFor]="priorityMenu"
-                      >
-                        <i
-                          class="material-icons btn-idas btn-idas-detail {{
-                            project?.Priority?.CssClassCategory
-                          }} {{ project?.Priority?.CssClass }}"
-                          >{{ project?.Priority?.Icon }}</i
-                        >
-                      </button>
-                      <p
-                        class="label-detail {{
-                          project?.Priority?.CssClassCategory
-                        }} {{ project?.Priority?.CssClass }} priority"
-                      >
-                        {{ project?.Priority?.Value }}
-                      </p>
-                      <mat-menu
-                        #priorityMenu="matMenu"
-                        xPosition="after"
-                        yPosition="below"
-                        class=""
-                      >
-                        <button
-                          *ngFor="let priority of priorities"
-                          class=""
-                          mat-menu-item
-                          (click)="onClickChangePriority(priority)"
-                        >
-                          <i
-                            class="material-icons {{
-                              priority?.CssClassCategory
-                            }} {{ priority?.CssClass }}"
-                            >{{ priority?.Icon }}</i
-                          >{{ priority?.Value }}
-                        </button>
-                      </mat-menu>
-                    </span>
-                    <span class="resize">
-                      <p class="label-title status">Status</p>
-                      <button
-                        mat-icon-button
-                        class="
-                                  btn
-                                  btn-white
-                                  btn-round
-                                  btn-just-icon btn-idas {{
-                          project?.Status?.CssClassCategory
-                        }} {{ project?.Status?.CssClass }}
-                                "
-                        type="button"
-                        [matMenuTriggerFor]="statusMenu"
-                      >
-                        <i
-                          class="material-icons btn-idas btn-idas-detail {{
-                            project?.Status?.CssClassCategory
-                          }} {{ project?.Status?.CssClass }}"
-                          >{{ project?.Status?.Icon }}</i
-                        >
-                      </button>
-                      <p
-                        class="label-detail {{
-                          project?.Status?.CssClassCategory
-                        }} {{ project?.Status?.CssClass }} status"
-                      >
-                        {{ project?.Status?.Value }}
-                      </p>
-                      <mat-menu
-                        #statusMenu="matMenu"
-                        xPosition="after"
-                        yPosition="below"
-                        class=""
-                      >
-                        <button
-                          *ngFor="let status of statuses"
-                          class=""
-                          mat-menu-item
-                          (click)="onClickChangeStatus(status)"
-                        >
-                          <i
-                            class="material-icons {{
-                              status?.CssClassCategory
-                            }} {{ status?.CssClass }}"
-                            >{{ status?.Icon }}</i
-                          >{{ status?.Value }}
-                        </button>
-                      </mat-menu>
-                    </span>
-                  </div>
+                  <app-view-project-task-details
+                    [entityName]="entityName"
+                    [dataService]="projectService"
+                    [dataSourceColumns]="dataSourceColumns"
+                    [selectedElement]="project"
+                  ></app-view-project-task-details>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"

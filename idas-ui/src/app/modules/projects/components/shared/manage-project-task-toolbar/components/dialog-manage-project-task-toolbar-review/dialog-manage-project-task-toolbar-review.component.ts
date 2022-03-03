@@ -105,6 +105,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
         this.dataService.CreateUpdateDelete('Create', this.getReview()).subscribe(
           (updated) => {
             this.alertifyService.success(`${this.entityName}, review added successfully`);
+            this.selectedElement?.Reviews?.push(updated);
           },
           (error) => {
             this.alertifyService.error(`${this.entityName}, review was not added`);

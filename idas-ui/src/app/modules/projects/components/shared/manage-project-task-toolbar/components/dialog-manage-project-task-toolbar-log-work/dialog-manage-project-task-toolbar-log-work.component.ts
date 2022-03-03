@@ -97,6 +97,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
             this.alertifyService.success(
               `${this.entityName}, work log added successfully`
             );
+            this.selectedElement?.Worklogs?.push(updated);
           },
           (error) => {
             this.alertifyService.error(

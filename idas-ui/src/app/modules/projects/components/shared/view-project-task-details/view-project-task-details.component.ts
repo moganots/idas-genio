@@ -12,9 +12,9 @@ import {
 } from 'app/shared/app-shared.module';
 
 @Component({
-  selector: 'app-manage-project-task-details',
-  templateUrl: './manage-project-task-details.component.html',
-  styleUrls: ['./manage-project-task-details.component.scss'],
+  selector: 'app-view-project-task-details',
+  templateUrl: './view-project-task-details.component.html',
+  styleUrls: ['./view-project-task-details.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -22,7 +22,7 @@ import {
     LookupValueService,
   ],
 })
-export class ManageProjectTaskDetailsComponent
+export class ViewProjectTaskDetailsComponent
   extends BaseComponent
   implements OnInit
 {
@@ -73,6 +73,7 @@ export class ManageProjectTaskDetailsComponent
     this.dataService.CreateUpdateDelete(`update`, this.selectedElement).subscribe(
       (updated) => {
         this.alertifyService.success(`Task ${option}, updated successfully`);
+        this.selectedElement = updated;
       },
       (error) => {
         this.alertifyService.error(`Task ${option}, not updated`);

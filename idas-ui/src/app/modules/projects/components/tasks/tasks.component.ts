@@ -73,4 +73,7 @@ export class TasksComponent extends PageComponent implements OnInit {
           });
       });
   }
+  onClickAddNewProjectTask(project: Project): void {
+
+  }
 }

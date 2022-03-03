@@ -177,10 +177,7 @@ export class DialogManageProjectTaskToolbarAssignComponent
     };
   }
   onClickSave(): void {
-    if (
-      this.dataService &&
-        GeneralUtils.isNumberSet(this.currentEntityId)
-    ) {
+    if (this.dataService && GeneralUtils.isNumberSet(this.currentEntityId)) {
       this.dataService
         .CreateUpdateDelete('Create', this.getAssignment())
         .subscribe(
@@ -188,6 +185,14 @@ export class DialogManageProjectTaskToolbarAssignComponent
             this.alertifyService.success(
               `${this.entityName}, assignment added successfully`
             );
+            switch (this.toLocaleLowerCaseTrim(this.entityName)) {
+              case `project`:
+                this.selectedElement?.ProjectAssignees?.push(updated);
+                break;
+              case `task`:
+                this.selectedElement.Assignee = updated;
+                break;
+            }
           },
           (error) => {
             this.alertifyService.error(
