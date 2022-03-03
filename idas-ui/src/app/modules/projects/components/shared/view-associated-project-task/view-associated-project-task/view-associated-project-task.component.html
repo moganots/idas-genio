@@ -1,0 +1,86 @@
+<div class="mat-elevation-z1 idas-project-task-card-main">
+  <i
+    class="material-icons {{
+      (currentEntity?.ProjectType || currentEntity?.TaskType)?.CssClassCategory
+    }} {{ (currentEntity?.ProjectType || currentEntity?.TaskType)?.CssClass }}"
+    [title]="(currentEntity?.ProjectType || currentEntity?.TaskType)?.Value"
+    [ngStyle]="{
+      display:
+        (currentEntity?.ProjectType || currentEntity?.TaskType)?.Icon ===
+          null ||
+        (currentEntity?.ProjectType || currentEntity?.TaskType)?.Icon ===
+          undefined
+          ? 'none'
+          : 'inline'
+    }"
+    >{{
+      (currentEntity?.ProjectType || currentEntity?.TaskType)?.Icon ||
+        "report_problem"
+    }}</i
+  >
+  <i
+    class="material-icons {{
+      currentEntity?.Priority?.CssClassCategory
+    }} {{ currentEntity?.Priority?.CssClass }}"
+    [title]="currentEntity?.Priority?.Value"
+    [ngStyle]="{
+      display:
+        currentEntity?.Priority?.Icon === null ||
+        currentEntity?.Priority?.Icon === undefined
+          ? 'none'
+          : 'inline'
+    }"
+    >{{ currentEntity?.Priority?.Icon || "report_problem" }}</i
+  >
+  <a
+    class=""
+    href="'#/{{ toLocaleLowerCaseTrim(entityName) }}s/{{
+      toLocaleLowerCaseTrim(entityName)
+    }}/{{ currentEntity?._id }}"
+    >{{
+      (
+        currentEntity?.ParentTask ||
+        currentEntity?.ParentProject ||
+        currentEntity?.Project ||
+        currentEntity
+      )?.Code
+    }}
+    / {{ currentEntity?._id }}</a
+  >
+  <p class="name">
+    {{ currentEntity?.Name }}
+  </p>
+  <img
+    class="avatar assignee"
+    src="{{
+      currentEntity?.Assignee?.Avatar || './assets/img/avatars/avatar-0.png'
+    }}"
+    [title]="
+      (
+        currentEntity?.Assignee || {
+          DisplayName: 'Unassigned'
+        }
+      ).DisplayName
+    "
+    [ngStyle]="{
+      display:
+        currentEntity?.Assignee?.Avatar === null ||
+        currentEntity?.Assignee?.Avatar === undefined
+          ? 'none'
+          : 'inline'
+    }"
+  />
+  <p
+    [ngStyle]="{
+      display:
+        currentEntity?.Status === null || currentEntity?.Status === undefined
+          ? 'none'
+          : 'inline'
+    }"
+    class="status {{ currentEntity?.Status?.CssClassCategory }} {{
+      currentEntity?.Status?.CssClass
+    }}"
+  >
+    {{ currentEntity?.Status?.Value }}
+  </p>
+</div>

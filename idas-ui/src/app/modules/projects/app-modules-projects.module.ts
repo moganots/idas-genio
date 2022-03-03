@@ -62,6 +62,7 @@ import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components
 import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
 import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
 import { TaskWorklogService } from './components/tasks/services/task-work-log-service/task-worklog-service';
+import { ViewAssociatedProjectTaskComponent } from './components/shared/view-associated-project-task/view-associated-project-task/view-associated-project-task.component';
 
 export { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
 export { ProjectComponent } from './components/project-component/project.component';
@@ -127,6 +128,7 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     DialogManageProjectTaskToolbarAttachFilesComponent,
     DialogManageProjectTaskToolbarCloneCopyComponent,
     DialogManageProjectTaskToolbarCreateSubComponent,
+    ViewAssociatedProjectTaskComponent,
   ],
   imports: [
     CommonModule,

@@ -162,8 +162,8 @@
                       matInput
                       cdkTextareaAutosize
                       #autosize="cdkTextareaAutosize"
-                      cdkAutosizeMinRows="1"
-                      cdkAutosizeMaxRows="5"
+                      cdkAutosizeMinRows="5"
+                      cdkAutosizeMaxRows="10"
                       [(ngModel)]="(project || {}).Description"
                     ></textarea>
                   </mat-form-field>
@@ -192,162 +192,27 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Parent Project </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div class="mat-elevation-z1 idas-project-task-card-main">
-                    <i
-                      class="material-icons type {{
-                        project?.ParentProject?.ProjectType?.CssClassCategory
-                      }} {{ project?.ParentProject?.ProjectType?.CssClass }}"
-                      [title]="project?.ParentProject?.ProjectType?.Value"
-                      [ngStyle]="{
-                        display:
-                          project?.ParentProject?.ProjectType?.Icon === null ||
-                          project?.ParentProject?.ProjectType?.Icon ===
-                            undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        project?.ParentProject?.ProjectType?.Icon ||
-                          "report_problem"
-                      }}</i
-                    >
-                    <i
-                      class="material-icons priority {{
-                        project?.ParentProject?.Priority?.CssClassCategory
-                      }} {{ project?.ParentProject?.Priority?.CssClass }}"
-                      [title]="project?.ParentProject?.Priority?.Value"
-                      [ngStyle]="{
-                        display:
-                          project?.ParentProject?.Priority?.Icon === null ||
-                          project?.ParentProject?.Priority?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        project?.ParentProject?.Priority?.Icon ||
-                          "report_problem"
-                      }}</i
-                    >
-                    <a
-                      class=""
-                      href="#/projects/project/{{
-                        project?.ParentProject?._id
-                      }}"
-                      >{{ project?.ParentProject?.Code }}</a
-                    >
-                    <p class="name">
-                      {{ project?.ParentProject?.Name }}
-                    </p>
-                    <img
-                      class="btn-idas avatar assignee"
-                      src="{{
-                        project?.ParentProject?.Assignee?.Avatar ||
-                          './assets/img/avatars/avatar-0.png'
-                      }}"
-                      [title]="
-                        (
-                          project?.ParentProject?.Assignee || {
-                            DisplayName: 'Unassigned'
-                          }
-                        ).DisplayName
-                      "
-                      [ngStyle]="{
-                        display:
-                          project?.ParentProject?.Assignee?.Avatar === null ||
-                          project?.ParentProject?.Assignee?.Avatar === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                    />
-                    <p
-                      class="status {{
-                        project?.ParentProject?.Status?.CssClassCategory
-                      }} {{ project?.ParentProject?.Status?.CssClass }}"
-                    >
-                      {{ project?.ParentProject?.Status?.Value }}
-                    </p>
-                  </div>
+                  <app-view-associated-project-task
+                    [entityName]="'project'"
+                    [currentEntity]="project?.ParentProject"
+                    [currentEntityId]="project?.ParentProject?._id"
+                  ></app-view-associated-project-task>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"
                   [expanded]="true"
                   [togglePosition]="'before'"
-                  [hidden]="project?.LinkedProjects?.length === 0"
+                  [hidden]="project?.AssociatedProjects?.length === 0"
                 >
                   <mat-expansion-panel-header class="mat-elevation-z0">
-                    <mat-panel-title> Related Project(s) </mat-panel-title>
+                    <mat-panel-title> Associated Project(s) </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div
-                    class="mat-elevation-z1 idas-project-task-card-main"
-                    *ngFor="let linkedProject of project?.LinkedProjects"
-                  >
-                    <i
-                      class="material-icons type {{
-                        linkedProject?.ProjectType?.CssClassCategory
-                      }} {{ linkedProject?.ProjectType?.CssClass }}"
-                      [title]="linkedProject?.ProjectType?.Value"
-                      [ngStyle]="{
-                        display:
-                          linkedProject?.ProjectType?.Icon === null ||
-                          linkedProject?.ProjectType?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        linkedProject?.ProjectType?.Icon || "report_problem"
-                      }}</i
-                    >
-                    <i
-                      class="material-icons priority {{
-                        linkedProject?.Priority?.CssClassCategory
-                      }} {{ linkedProject?.Priority?.CssClass }}"
-                      [title]="linkedProject?.Priority?.Value"
-                      [ngStyle]="{
-                        display:
-                          linkedProject?.Priority?.Icon === null ||
-                          linkedProject?.Priority?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        linkedProject?.Priority?.Icon || "report_problem"
-                      }}</i
-                    >
-                    <a class="" [routerLink]="['../', linkedProject?._id]"
-                      >{{ linkedProject?.Code }} / {{ linkedProject?._id }}</a
-                    >
-                    <p class="name">
-                      {{ linkedProject?.Name }}
-                    </p>
-                    <img
-                      class="btn-idas avatar assignee"
-                      src="{{
-                        linkedProject?.Assignee?.Avatar ||
-                          './assets/img/avatars/avatar-0.png'
-                      }}"
-                      [title]="
-                        (
-                          linkedProject?.Assignee || {
-                            DisplayName: 'Unassigned'
-                          }
-                        ).DisplayName
-                      "
-                      [ngStyle]="{
-                        display:
-                          linkedProject?.Assignee?.Avatar === null ||
-                          linkedProject?.Assignee?.Avatar === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                    />
-                    <p
-                      class="status {{
-                        linkedProject?.Status?.CssClassCategory
-                      }} {{ linkedProject?.Status?.CssClass }}"
-                    >
-                      {{ linkedProject?.Status?.Value }}
-                    </p>
-                  </div>
+                  <app-view-associated-project-task
+                    *ngFor="let associatedProject of project?.AssociatedProjects"
+                    [entityName]="'project'"
+                    [currentEntity]="associatedProject"
+                    [currentEntityId]="associatedProject?._id"
+                  ></app-view-associated-project-task>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"
@@ -358,73 +223,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Task(s) </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div
-                    class="mat-elevation-z1 idas-project-task-card-main"
+                  <app-view-associated-project-task
                     *ngFor="let task of project?.Tasks"
-                  >
-                    <i
-                      class="material-icons type {{
-                        task?.TaskType?.CssClassCategory
-                      }} {{ task?.TaskType?.CssClass }}"
-                      [title]="task?.TaskType?.Value"
-                      [ngStyle]="{
-                        display:
-                          task?.TaskType?.Icon === null ||
-                          task?.TaskType?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{ task?.TaskType?.Icon || "report_problem" }}</i
-                    >
-                    <i
-                      class="material-icons priority {{
-                        task?.Priority?.CssClassCategory
-                      }} {{ task?.Priority?.CssClass }}"
-                      [title]="task?.Priority?.Value"
-                      [ngStyle]="{
-                        display:
-                          task?.Priority?.Icon === null ||
-                          task?.Priority?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{ task?.Priority?.Icon || "report_problem" }}</i
-                    >
-                    <a class="" href="['#/tasks/task/{{ task?._id }}"
-                      >{{ task?.Project?.Code }} / {{ task?._id }}</a
-                    >
-                    <p class="name">
-                      {{ task?.Name }}
-                    </p>
-                    <img
-                      class="btn-idas avatar assignee"
-                      src="{{
-                        task?.Assignee?.Avatar ||
-                          './assets/img/avatars/avatar-0.png'
-                      }}"
-                      [title]="
-                        (
-                          task?.Assignee || {
-                            DisplayName: 'Unassigned'
-                          }
-                        ).DisplayName
-                      "
-                      [ngStyle]="{
-                        display:
-                          task?.Assignee?.Avatar === null ||
-                          task?.Assignee?.Avatar === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                    />
-                    <p
-                      class="status {{ task?.Status?.CssClassCategory }} {{
-                        task?.Status?.CssClass
-                      }}"
-                    >
-                      {{ task?.Status?.Value }}
-                    </p>
-                  </div>
+                    [entityName]="'task'"
+                    [currentEntity]="task"
+                    [currentEntityId]="task?._id"
+                  ></app-view-associated-project-task>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"

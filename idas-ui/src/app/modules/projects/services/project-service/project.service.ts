@@ -107,8 +107,14 @@ export class ProjectService extends DataService {
     project.Status = this.lookupValues.find(
       (lookupValue) => lookupValue?._id === project?.StatusId
     );
-    project.LinkedProjects = this.projects.filter(
-      (cp) => cp?.ParentProjectId === project?._id
+    project.ProjectAssignees = this.assignments.filter(
+      (assignment) => assignment?.ProjectId === project?._id
+    );
+    project.ParentProject = this.projects.find(
+      (parentProject) => parentProject?._id === project?.ParentProjectId
+    );
+    project.AssociatedProjects = this.projects.filter(
+      (associatedProject) => associatedProject?.ParentProjectId === project?._id
     );
     project.Files = this.files.filter(
       (file) => file?.ProjectId === project?._id
@@ -118,9 +124,6 @@ export class ProjectService extends DataService {
     );
     project.Worklogs = this.worklogs.filter(
       (workLog) => workLog?.ProjectId === project?._id
-    );
-    project.ProjectAssignees = this.assignments.filter(
-      (assignment) => assignment?.ProjectId === project?._id
     );
     project.Reviews = this.reviews.filter(
       (review) => review?.ProjectId === project?._id

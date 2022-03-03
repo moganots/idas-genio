@@ -1,0 +1,89 @@
+@import "./../../../../../../../assets/scss/idas/colors.scss";
+@import "./../../../../../../../assets/scss/idas/fonts.scss";
+
+.idas-project-task-card-main {
+  float: right;
+  font-size: 0.95em;
+  margin: 0 0 0 0;
+  padding: 8px 5px 5px 5px;
+  width: 100%;
+  /* i {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    &.project,
+    &.task {
+      &.type,
+      &.priority {
+        margin: 12px 0 0 0;
+        padding: 12px 0 0 0;
+      }
+    }
+  }
+  a {
+    display: inline;
+    vertical-align: middle;
+    &.project,
+    &.task {
+      &.code {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 0 0 0 0;
+        padding: 1px 0 0 3px;
+      }
+    }
+  } */
+  p {
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
+    &.name {
+      margin: 0 0 0 0;
+      padding: 2px 0 0 3px;
+      text-align: left;
+    }
+    &.status {
+      border: none;
+      color: $white;
+      float: right;
+      margin: 0 0.2vw 0 0;
+      padding: 4px;
+      position: relative;
+      text-align: center;
+      width: 100px;
+    }
+  }
+  img {
+    border-radius: 12px;
+    height: auto;
+    float: right;
+    &.avatar {
+      &.assignee {
+        margin: 0.2vh 0 0 0;
+        padding: 0 0 0 0;
+        position: relative;
+        vertical-align: middle;
+        width: 1.8em;
+      }
+    }
+  }
+  a,
+  a:link,
+  a:active,
+  a:visited {
+    color: $idas-color-main-links-link-active-visited;
+    cursor: pointer;
+    display: inline;
+    font-family: $OpenSans_Bold;
+    margin: 0 0 0 0;
+    padding: 1px 0 0 3px;
+    text-align: justify;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+  a:hover {
+    color: $idas-color-main-links-hover;
+  }
+}

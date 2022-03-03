@@ -65,8 +65,8 @@
                       matInput
                       cdkTextareaAutosize
                       #autosize="cdkTextareaAutosize"
-                      cdkAutosizeMinRows="1"
-                      cdkAutosizeMaxRows="5"
+                      cdkAutosizeMinRows="5"
+                      cdkAutosizeMaxRows="10"
                       [(ngModel)]="(task || {}).Description"
                     ></textarea>
                   </mat-form-field>
@@ -94,76 +94,11 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Project </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div class="mat-elevation-z1 idas-project-task-card-main">
-                    <i
-                      class="material-icons type {{
-                        task?.Project?.ProjectType?.CssClassCategory
-                      }} {{ task?.Project?.ProjectType?.CssClass }}"
-                      [title]="task?.Project?.ProjectType?.Value"
-                      [ngStyle]="{
-                        display:
-                          task?.Project?.ProjectType?.Icon === null ||
-                          task?.Project?.ProjectType?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        task?.Project?.ProjectType?.Icon || "report_problem"
-                      }}</i
-                    >
-                    <i
-                      class="material-icons priority {{
-                        task?.Project?.Priority?.CssClassCategory
-                      }} {{ task?.Project?.Priority?.CssClass }}"
-                      [title]="task?.Project?.Priority?.Value"
-                      [ngStyle]="{
-                        display:
-                          task?.Project?.Priority?.Icon === null ||
-                          task?.Project?.Priority?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        task?.Project?.Priority?.Icon || "report_problem"
-                      }}</i
-                    >
-                    <a
-                      class="project code"
-                      href="#/projects/project/{{ task?.Project?._id }}"
-                      >{{ task?.Project?.Code }}</a
-                    >
-                    <p class="project name">
-                      {{ task?.Project?.Name }}
-                    </p>
-                    <img
-                      class="btn-idas avatar assignee"
-                      src="{{
-                        task?.Project?.Assignee?.Avatar ||
-                          './assets/img/avatars/avatar-0.png'
-                      }}"
-                      [title]="
-                        (
-                          task?.Project?.Assignee || {
-                            DisplayName: 'Unassigned'
-                          }
-                        ).DisplayName
-                      "
-                      [ngStyle]="{
-                        display:
-                          task?.Project?.Assignee?.Avatar === null ||
-                          task?.Project?.Assignee?.Avatar === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                    />
-                    <p
-                      class="project status {{
-                        task?.Project?.Status?.CssClassCategory
-                      }} {{ task?.Project?.Status?.CssClass }}"
-                    >
-                      {{ task?.Project?.Status?.Value }}
-                    </p>
-                  </div>
+                  <app-view-associated-project-task
+                    [entityName]="'project'"
+                    [currentEntity]="task?.Project"
+                    [currentEntityId]="task?.Project?._id"
+                  ></app-view-associated-project-task>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"
@@ -174,77 +109,11 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Parent Task</mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div class="mat-elevation-z1 idas-project-task-card-main">
-                    <i
-                      class="material-icons type {{
-                        task?.ParentTask?.TaskType?.CssClassCategory
-                      }} {{ task?.ParentTask?.TaskType?.CssClass }}"
-                      [title]="task?.ParentTask?.TaskType?.Value"
-                      [ngStyle]="{
-                        display:
-                          task?.ParentTask?.TaskType?.Icon === null ||
-                          task?.ParentTask?.TaskType?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        task?.ParentTask?.TaskType?.Icon || "report_problem"
-                      }}</i
-                    >
-                    <i
-                      class="material-icons priority {{
-                        task?.ParentTask?.Priority?.CssClassCategory
-                      }} {{ task?.ParentTask?.Priority?.CssClass }}"
-                      [title]="task?.ParentTask?.Priority?.Value"
-                      [ngStyle]="{
-                        display:
-                          task?.ParentTask?.Priority?.Icon === null ||
-                          task?.ParentTask?.Priority?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{
-                        task?.ParentTask?.Priority?.Icon || "report_problem"
-                      }}</i
-                    >
-                    <a
-                      class=""
-                      href="['#/tasks/task/{{ task?.ParentTask?._id }}"
-                      >{{ task?.ParentTask?.Project?.Code }} /
-                      {{ task?.ParentTask?._id }}</a
-                    >
-                    <p class="name">
-                      {{ task?.ParentTask?.Name }}
-                    </p>
-                    <img
-                      class="btn-idas avatar assignee"
-                      src="{{
-                        task?.ParentTask?.Assignee?.Avatar ||
-                          './assets/img/avatars/avatar-0.png'
-                      }}"
-                      [title]="
-                        (
-                          task?.ParentTask?.Assignee || {
-                            DisplayName: 'Unassigned'
-                          }
-                        ).DisplayName
-                      "
-                      [ngStyle]="{
-                        display:
-                          task?.ParentTask?.Assignee?.Avatar === null ||
-                          task?.ParentTask?.Assignee?.Avatar === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                    />
-                    <p
-                      class="task {{
-                        task?.ParentTask?.Status?.CssClassCategory
-                      }} {{ task?.ParentTask?.Status?.CssClass }}"
-                    >
-                      {{ task?.ParentTask?.Status?.Value }}
-                    </p>
-                  </div>
+                  <app-view-associated-project-task
+                    [entityName]="'task'"
+                    [currentEntity]="task?.ParentTask"
+                    [currentEntityId]="task?.ParentTask?._id"
+                  ></app-view-associated-project-task>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"
@@ -255,73 +124,12 @@
                   <mat-expansion-panel-header class="mat-elevation-z0">
                     <mat-panel-title> Sub Task(s) </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div
-                    class="mat-elevation-z1 idas-project-task-card-main"
+                  <app-view-associated-project-task
                     *ngFor="let subTask of task?.SubTasks"
-                  >
-                    <i
-                      class="material-icons type {{
-                        subTask?.TaskType?.CssClassCategory
-                      }} {{ subTask?.TaskType?.CssClass }}"
-                      [title]="subTask?.TaskType?.Value"
-                      [ngStyle]="{
-                        display:
-                          subTask?.TaskType?.Icon === null ||
-                          subTask?.TaskType?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{ subTask?.TaskType?.Icon || "report_problem" }}</i
-                    >
-                    <i
-                      class="material-icons priority {{
-                        subTask?.Priority?.CssClassCategory
-                      }} {{ subTask?.Priority?.CssClass }}"
-                      [title]="subTask?.Priority?.Value"
-                      [ngStyle]="{
-                        display:
-                          subTask?.Priority?.Icon === null ||
-                          subTask?.Priority?.Icon === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                      >{{ subTask?.Priority?.Icon || "report_problem" }}</i
-                    >
-                    <a class="" [routerLink]="['../', subTask?._id]"
-                      >{{ subTask?.Project?.Code }} / {{ subTask?._id }}</a
-                    >
-                    <p class="task name">
-                      {{ subTask?.Name }}
-                    </p>
-                    <img
-                      class="btn-idas avatar assignee"
-                      src="{{
-                        subTask?.Assignee?.Avatar ||
-                          './assets/img/avatars/avatar-0.png'
-                      }}"
-                      [title]="
-                        (
-                          subTask?.Assignee || {
-                            DisplayName: 'Unassigned'
-                          }
-                        ).DisplayName
-                      "
-                      [ngStyle]="{
-                        display:
-                          subTask?.Assignee?.Avatar === null ||
-                          subTask?.Assignee?.Avatar === undefined
-                            ? 'none'
-                            : 'inline'
-                      }"
-                    />
-                    <p
-                      class="task {{ subTask?.Status?.CssClassCategory }} {{
-                        subTask?.Status?.CssClass
-                      }}"
-                    >
-                      {{ subTask?.Status?.Value }}
-                    </p>
-                  </div>
+                    [entityName]="'task'"
+                    [currentEntity]="subTask"
+                    [currentEntityId]="subTask?._id"
+                  ></app-view-associated-project-task>
                 </mat-expansion-panel>
                 <mat-expansion-panel
                   class="mat-elevation-z0"

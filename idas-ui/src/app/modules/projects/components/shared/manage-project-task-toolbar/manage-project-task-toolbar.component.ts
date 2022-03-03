@@ -143,7 +143,7 @@ export class ManageProjectTaskToolbarComponent
     );
   }
   getProjectDialogName(action: string): string {
-    return (this.isProject) ? action.replace(`sub`, `child`) : action;
+    return (this.isProject) ? this.toLocaleLowerCaseTrim(action).replace(`sub`, `Child`) : action;
   }
   getDialogAction(action: string) {
     return [`createsub`, `clonecopy`].includes(

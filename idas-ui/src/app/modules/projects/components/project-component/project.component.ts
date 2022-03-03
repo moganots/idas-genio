@@ -94,7 +94,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
         // 1. Get this.project
         this.project = projects?.find((p) => p?._id === this.projectId);
         // 2. Get this.project
-        // this.project.LinkedProjects = projects?.filter((p) => p?.ParentProjectId === this.projectId);
+        // this.project.AssociatedProjects = projects?.filter((p) => p?.ParentProjectId === this.projectId);
         // 3. Get this.project?.Tasks
         this.referenceValueService.taskService
           .getAll<Task>()
@@ -104,7 +104,9 @@ export class ProjectComponent extends PageComponent implements OnInit {
               (t) => t?.ProjectId === this.projectId
             );
           });
+          console.log(this.project);
       });
+      console.log(this.project);
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()

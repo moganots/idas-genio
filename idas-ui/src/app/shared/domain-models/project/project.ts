@@ -20,7 +20,7 @@ export class Project extends BaseModel {
   ProjectAssignees: ProjectAssignment[] = [];
   ParentProject: Project;
   Files: FileAttachment[] = [];
-  LinkedProjects: Project[] = [];
+  AssociatedProjects: Project[] = [];
   Tasks: Task[] = [];
   Comments: ProjectComment[] = [];
   Worklogs: ProjectWorklog[] = [];
