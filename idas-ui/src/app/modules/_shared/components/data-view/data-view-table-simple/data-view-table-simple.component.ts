@@ -253,7 +253,7 @@ export class DataViewTableSimpleComponent
   onOpenCreateEditDialog(element?: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
     const id = ((element || {})?._id || (element || {})?.id);
-    const name = (element || {})?.DisplayName;
+    const name = (element || {})?.DisplayName || (element || {})?.Name;
     super.openDialog(
       DialogCreateEditDataComponent,
       {

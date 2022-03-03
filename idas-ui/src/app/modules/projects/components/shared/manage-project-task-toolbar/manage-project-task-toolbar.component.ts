@@ -7,6 +7,7 @@ import {
   AlertifyService,
   AuthenticationService,
   DataService,
+  GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
@@ -118,13 +119,15 @@ export class ManageProjectTaskToolbarComponent
     }
   }
   openDialog(dialogComponent: any, action: string) {
+    const id = this.entityId || this.selectedElement?._id || this.selectedElement?.id;
+    const name = this.selectedElement?.DisplayName || this.selectedElement?.Name;
     super.openDialog(
       dialogComponent,
       {
         action: this.getDialogAction(action),
         dataService: this.dataService,
         entityName: this.entityName,
-        entityId: this.entityId || this.selectedElement?._id || this.selectedElement?.id,
+        entityId: id,
         pageIcon: this.pageIcon,
         pageName: `${this.splitCamelCase(
           this.capitalizeFirstLetter(this.getProjectDialogName(action))
@@ -132,7 +135,7 @@ export class ManageProjectTaskToolbarComponent
         pageTitle: `${this.splitCamelCase(
           this.capitalizeFirstLetter(this.getProjectDialogName(action))
         )} / ${this.capitalizeFirstLetter(this.entityName)}`,
-        pageSubTitle: `${this.selectedElement?.Name}`,
+        pageSubTitle: GeneralUtils.StringJoin([id, name], ` / `),
         dataColumns: this.dataService.dataColumns,
         selectedElement: this.getSelectedElement(action),
       },

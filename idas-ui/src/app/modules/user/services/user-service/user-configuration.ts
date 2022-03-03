@@ -23,7 +23,7 @@ export class UserConfiguration {
     {id: 9, name: `IsLocked` , canShow: true, canSort: true, canGroup: false},
     {id: 10, name: `Avatar` , canShow: true, canSort: true, canGroup: false},
     {id: 11, name: `DateLastLoggedIn` , canShow: true, canSort: true, canGroup: false},
-    {id: 12, name: `SessionToken` , canShow: true, canSort: true, canGroup: false},
+    {id: 12, name: `SessionToken` , canShow: false, canSort: true, canGroup: false},
     {id: 13, name: `IsActive` , canShow: false, canSort: true, canGroup: false},
     {id: 14, name: `CreatedBy` , canShow: false, canSort: true, canGroup: false},
     {id: 15, name: `DateCreated` , canShow: false, canSort: true, canGroup: false},
