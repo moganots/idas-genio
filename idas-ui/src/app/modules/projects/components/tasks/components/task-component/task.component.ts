@@ -14,7 +14,9 @@ import {
   LookupValueService,
   Task,
   TaskComment,
+  User,
 } from 'app/shared/app-shared.module';
+import { first } from 'rxjs/operators';
 import { TaskAssignService } from '../../services/task-assign-service/task-assign-service';
 import { TaskCloneCopyService } from '../../services/task-clone-copy-service/task-clone-copy.service';
 import { TaskCommentService } from '../../services/task-comment-service/task-comment.service';
@@ -47,7 +49,7 @@ export class TaskComponent extends PageComponent implements OnInit {
   task: Task;
   statuses: LookupValue[] = [];
   priorities: LookupValue[] = [];
-
+  users: User[] = [];
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -85,25 +87,7 @@ export class TaskComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.referenceValueService.taskService
-      .getAll<Task>()
-      .toPromise()
-      .then((tasks) => {
-        // 1. Get this.task
-        this.task = tasks.find((t) => t?._id === this.taskId);
-      });
-    this.lookupValueService
-      .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
-        // Get (Set) Status / Priority dropdown value(s)
-        this.statuses = lookupValues.filter(
-          (value) => value.LookupCategory.Name === 'Status'
-        );
-        this.priorities = lookupValues.filter(
-          (value) => value.LookupCategory.Name === 'Priority'
-        );
-      });
+    this.onLoadRefreshData();
   }
   formatTimeSpent(timeSpent: string) {
     return timeSpent?.split(` `).map((ts) => this.getFormattedTimeSpent(ts)).join(` `);
@@ -121,5 +105,47 @@ export class TaskComponent extends PageComponent implements OnInit {
   }
   timeElapsedComment(comment: TaskComment) {
     return DateUtils.timeAgo(DateUtils.add(new Date(comment?.DateCreated), `hour`, -2));
+  }
+  onLoadRefreshData() {
+    this.referenceValueService.taskService
+      .getAll<Task>()
+      // .toPromise()
+      .subscribe((tasks) => {
+        // 1. Get this.task
+        this.task = tasks.find((t) => t?._id === this.taskId);
+      });
+    this.referenceValueService.userService
+      .getAll<User>()
+      // .toPromise()
+      .subscribe((users) => {
+        this.users = users;
+      });
+    this.lookupValueService
+      .getAll<LookupValue>()
+      // .toPromise()
+      .subscribe((lookupValues) => {
+        // Get (Set) Status / Priority dropdown value(s)
+        this.statuses = lookupValues.filter(
+          (value) => value.LookupCategory.Name === 'Status'
+        );
+        this.priorities = lookupValues.filter(
+          (value) => value.LookupCategory.Name === 'Priority'
+        );
+      });
+  }
+  onClickAssignTo(user: User) {
+    this.taskAssignService.CreateUpdateDelete(`Create`, {TaskId: this.task?._id, AssigneeId: user?._id})
+    .pipe(first())
+    .subscribe({
+      next: (updated) => {
+        this.alertifyService.success(
+          `Task successfully assigned to ${user?.DisplayName || user?.EmailAddress}`
+        );
+      },
+      complete: () => { this.onLoadRefreshData(); },
+      error: (error) => {
+        this.alertifyService.error(error.message || error);
+      },
+    });
   }
 }

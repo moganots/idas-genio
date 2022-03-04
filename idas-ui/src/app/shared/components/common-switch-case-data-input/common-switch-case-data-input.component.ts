@@ -29,7 +29,9 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   public formGroupFields: FormGroup;
   constructor(private formBuilder: FormBuilder) {}
   ngOnInit(): void {
-    this.useColumns = this.columns?.filter((column) => column?.canShow);
+    this.useColumns = this.columns?.filter(
+      (column) => column?.canShow && !this.isFieldDisabled(column)
+    );
     this.formGroupFields = new FormGroup({});
     this.useColumns?.forEach((column) => {
       column.value = this.getFieldValue(column, this.entity);
@@ -73,12 +75,13 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
           case `GenderId`:
           // case `UserTypeId`:
           case `EmployeeClientSupplierId`:
+          case `IsActive`:
           case `UserId`:
           case `ProjectId`:
           case `TaskId`:
           case `ParentTaskId`:
           case `ParentProjectId`:
-            // case `StatusId`:
+          case `StatusId`:
             return true;
           default:
             return !column.canEdit;
@@ -197,8 +200,8 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       GeneralUtils.isStringSet(event?.source?.id) &&
       event.source.value &&
       !(
-        event?.source?.value === 'No option value(s)' ||
-        event?.source?.value?.displayValue === 'No option value(s)'
+        event?.source?.value === `No option value(s)` ||
+        event?.source?.value?.displayValue === `No option value(s)`
       )
     ) {
       this.updates[event?.source?.id] =

@@ -175,22 +175,54 @@
                         >{{
                           task?.Assignee?.UserType?.Icon || "report_problem"
                         }}</i
-                      >
+                      >                      
+                      <button
+                      mat-icon-button
+                      class="btn btn-white btn-round btn-just-icon btn-idas"
+                      type="button"
+                      [matMenuTriggerFor]="assigneesMenu"
+                    >
                       <img
-                        [ngStyle]="{
-                          display:
-                            task?.Assignee?.Avatar === null ||
-                            task?.Assignee?.Avatar === undefined
-                              ? 'none'
-                              : 'inline'
-                        }"
-                        class="btn-idas avatar assignee"
                         src="{{ task?.Assignee?.Avatar }}"
-                        [title]="task?.Assignee?.DisplayName"
+                        style="
+                          border-radius: 8px;
+                          height: auto;
+                          margin: 0 0 5px 0;
+                          padding: 0 0 0 0;
+                          width: 0.9em;
+                        "
                       />
-                      <p class="label-detail assignee">
+                    </button>
+                    <mat-menu
+                      #assigneesMenu="matMenu"
+                      xPosition="after"
+                      yPosition="below"
+                      class=""
+                    >
+                      <button
+                        *ngFor="let user of users"
+                        class=""
+                        mat-menu-item
+                        (click)="onClickAssignTo(user)"
+                      >
+                        <img
+                          src="{{ user?.Avatar || task?.Assignee?.Avatar }}"
+                          style="
+                            border-radius: 8px;
+                            height: auto;
+                            width: 1.5em;
+                          "
+                        />
+                        <p class="label-detail assignee" style="font-size: 0.8em; padding: 0 0 0 10px;">
+                          {{ user?.DisplayName || user?.EmailAddress }}
+                        </p>
+                      </button>
+                    </mat-menu>
+                      <p class="label-detail assignee" style="padding: 0 0 0 5px;">
                         {{ task?.Assignee?.DisplayName }}
                       </p>
+                      <br />
+                      <a class="assign-to-me" (click)="onClickAssignTo(currentUser)">Assign to me</a>
                     </li>
                     <li>
                       <p class="label-title createdBy">Created By</p>

@@ -217,8 +217,8 @@ private String templateMsSqlRepositoryIdasGenioDbApi(string createdBy, string da
 	sb.AppendLine("    const create = (request, response, next) => {");
 	sb.AppendLine("        try{");
 	sb.AppendLine("            const uid = request.query.uid;");
-	sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
-	sb.AppendLine("            dbContext.create(uid, entityName, entity, (error, data, message) => {");
+	//sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
+	sb.AppendLine("            dbContext.create(uid, entityName, request.body, (error, data, message) => {");
 	if(tableName.Equals("FileAttachment")){
 		sb.AppendLine("                writeFileAttachmentToDisc(error, data[0]);");
 	}
@@ -262,8 +262,8 @@ private String templateMsSqlRepositoryIdasGenioDbApi(string createdBy, string da
 	sb.AppendLine("    const update = (request, response, next) => {");
 	sb.AppendLine("        try{");
 	sb.AppendLine("            const uid = request.query.uid;");
-	sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
-	sb.AppendLine("            dbContext.update(uid, entityName, entity, (error, data, message) => {");
+	// sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
+	sb.AppendLine("            dbContext.update(uid, entityName, request.body, (error, data, message) => {");
 	sb.AppendLine("                return onHttpRequestCompleted(__filename, request, response, error, data, message);");
 	sb.AppendLine("            });");
 	sb.AppendLine("        }catch(error){");
@@ -273,8 +273,8 @@ private String templateMsSqlRepositoryIdasGenioDbApi(string createdBy, string da
 	sb.AppendLine("    const _delete = (request, response, next) => {");
 	sb.AppendLine("        try{");
 	sb.AppendLine("            const uid = request.query.uid;");
-	sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
-	sb.AppendLine("            dbContext.delete(uid, entityName, entity._id, (error, data, message) => {");
+	// sb.AppendLine("            const entity = " + tableName + ".fromEntity(request.body);");
+	sb.AppendLine("            dbContext.delete(uid, entityName, request.body._id, (error, data, message) => {");
 	sb.AppendLine("                return onHttpRequestCompleted(__filename, request, response, error, data, message);");
 	sb.AppendLine("            });");
 	sb.AppendLine("        }catch(error){");

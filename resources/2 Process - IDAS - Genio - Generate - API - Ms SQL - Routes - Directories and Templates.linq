@@ -88,7 +88,7 @@ private string CapitalizeFirstLetter(string value) {
 	else if (value.Length == 1)
 		return char.ToUpper(value[0]).ToString();
 	else
-		return (char.ToUpper(str[0]) + str.Substring(1));
+		return (char.ToUpper(value[0]) + value.Substring(1));
 }
 private void cleanAndDeleteDirectory(string path){
 	if(System.IO.Directory.Exists(path)){
@@ -217,7 +217,7 @@ private String templateRoutesIdasGenioApi(string createdBy, string dateCreated, 
 	sb.AppendLine("    const routeImages = require(`./images/api`)(router, config);");
 	
 	foreach(var route in routes){
-		sb.AppendLine("    const route" + CapitalizeFirstLetter(route.Key) + " = require(`" + route.Value + "`)(router, config);");
+		sb.AppendLine("    const " + route.Key + " = require(`" + route.Value + "`)(router, config);");
 	}
 	
 	sb.AppendLine("    return router;");

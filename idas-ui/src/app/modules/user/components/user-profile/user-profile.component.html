@@ -43,7 +43,7 @@
                     <div class="row gutters">
                       <app-common-switch-case-data-input
                         [action]="action"
-                        [currentEntityId]="entityId"
+                        [entityId]="currentUser?._id"
                         [entityName]="entityName"
                         [entity]="
                           currentUser?.Client ||
@@ -63,7 +63,7 @@
                     <div class="row gutters">
                       <app-common-switch-case-data-input
                         [action]="action"
-                        [currentEntityId]="entityId"
+                        [entityId]="currentUser?._id"
                         [entityName]="entityName"
                         [entity]="
                           currentUser?.Client?.ContactDetail ||
@@ -146,40 +146,13 @@
                       </div>
                       <app-common-switch-case-data-input
                         [action]="action"
-                        [currentEntityId]="entityId"
+                        [entityId]="currentUser?._id"
                         [entityName]="entityName"
                         [entity]="currentUser || {}"
                         [columns]="fieldsUserAccountDetails"
                         [columnsCssClass]="columnsCssClass"
                         [updates]="updates"
                       ></app-common-switch-case-data-input>
-                      <div
-                        *ngFor="
-                          let fidc of fieldsUserAccountDetails;
-                          let i = index
-                        "
-                        class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
-                      >
-                        <span [ngSwitch]="fidc?.controlType">
-                          <!--                           <span *ngSwitchCase="'image'">
-                            <div style="border: 1px solid red">
-                              <img
-                                src="{{ fidc?.value }}"
-                                style="
-                                  border-radius: 8px;
-                                  height: auto;
-                                  width: 60px;
-                                "
-                              />
-                              <br />
-                              <br />
-                              <p>Profile Picture: {{ fidc?.value }}</p>
-                              <br />
-                              <br />
-                            </div>
-                          </span> -->
-                        </span>
-                      </div>
                     </div>
                   </div>
                 </mat-tab>

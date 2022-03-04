@@ -2467,7 +2467,7 @@ BEGIN
 		SET @ExecQuery += CHAR(13) + CHAR(9) + 'EXEC [dbo].[spCreateOrInsert_' + @TableName + 'Status] @_id, @StatusId, @CreatedBy;'
 		SET @ExecQuery += CHAR(13) + CHAR(9) + 'IF(@AssigneeId IS NOT NULL)'
 		SET @ExecQuery += CHAR(13) + CHAR(9) + 'BEGIN'
-		SET @ExecQuery += CHAR(13) + CHAR(9) + CHAR(9) + 'EXEC [dbo].[spCreateOrInsert_' + @TableName + 'Assignment] @_id, @AssigneeId, @CreatedBy;'
+		SET @ExecQuery += CHAR(13) + CHAR(9) + CHAR(9) + 'EXEC [dbo].[spCreateOrInsert_' + @TableName + 'Assignment] @_id, @AssigneeId, ''A task has been assigned to you'', @CreatedBy;'
 		SET @ExecQuery += CHAR(13) + CHAR(9) + 'END'
 	END
 
@@ -2624,6 +2624,11 @@ BEGIN
 	SET @ExecQuery += CHAR(13) + 'CREATE PROCEDURE ' + @StoredProcedureName
 	SET @ExecQuery += CHAR(13) + '('
 	SET @ExecQuery += CHAR(13) + @StoredProcedureEditOrUpdateParameters
+
+	IF(@TableName IN ('Task'))
+	BEGIN
+		SET @ExecQuery += CHAR(13) + CHAR(9) + ',@AssigneeId [bigint] = NULL'
+	END
 	SET @ExecQuery += CHAR(13) + ')'
 	SET @ExecQuery += CHAR(13) + 'AS'
 	SET @ExecQuery += CHAR(13) + 'BEGIN'
@@ -2633,7 +2638,22 @@ BEGIN
 	SET @ExecQuery += CHAR(13) + @StoredProcedureEditOrUpdateColumnNames
 	SET @ExecQuery += CHAR(13) + CHAR(9) + 'WHERE'
 	SET @ExecQuery += CHAR(13) + CHAR(9) + CHAR(9) + '[_id] = @_id;'
+	SET @ExecQuery += CHAR(13)
+
+	IF(@TableName IN ('Task'))
+	BEGIN
+		SET @ExecQuery += CHAR(13) + CHAR(9) + 'IF(@AssigneeId IS NOT NULL)'
+		SET @ExecQuery += CHAR(13) + CHAR(9) + 'BEGIN'
+		SET @ExecQuery += CHAR(13) + CHAR(9) + CHAR(9) + 'EXEC [dbo].[spCreateOrInsert_' + @TableName + 'Assignment] @_id, @AssigneeId, ''A task has been assigned to you'', @ModifiedBy;'
+		SET @ExecQuery += CHAR(13) + CHAR(9) + 'END'
+	END
+
+	SET @ExecQuery += CHAR(13)
+
 	SET @ExecQuery += CHAR(13) + CHAR(9) + 'SELECT * FROM [dbo].[' + @TableName + '] WHERE [_id] = @_id;'
+
+	SET @ExecQuery += CHAR(13)
+
 	SET @ExecQuery += CHAR(13) + 'END';	
 
 	IF (OBJECT_ID(@StoredProcedureName, 'P') IS NOT NULL)

@@ -87,6 +87,6 @@ export class UserProfileComponent extends PageComponent implements OnInit {
     });
   }
   onClickChangeAvatar(imageAvatar) {
-    this.currentUser.Avatar = imageAvatar?.path
+    this.currentUser.Avatar = imageAvatar?.path;
   }
 }

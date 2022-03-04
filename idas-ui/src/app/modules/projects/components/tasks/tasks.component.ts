@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
+import { DialogCreateEditDataComponent, ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
 import { PageComponent } from 'app/modules/_shared/components/page/page.component';
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValueService,
   Project,
   Task,
@@ -74,6 +75,23 @@ export class TasksComponent extends PageComponent implements OnInit {
       });
   }
   onClickAddNewProjectTask(project: Project): void {
-
+    this.action = `Create`;
+    const id = project?._id;
+    const name = project?.DisplayName || project?.Name;
+    super.openDialog(
+      DialogCreateEditDataComponent,
+      {
+        action: this.action,
+        dataService: this.dataService,
+        entityName: this.entityName,
+        pageIcon: this.pageIcon,
+        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        dataColumns: this.dataSourceColumns,
+        selectedElement: {ProjectId: id},
+      },
+      () => {}
+    );
   }
 }

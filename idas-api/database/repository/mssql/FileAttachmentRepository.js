@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-02-21
+| Create date:	2022-03-04
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[FileAttachment] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -29,8 +29,7 @@ const Repository = () => {
     const create = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = FileAttachment.fromEntity(request.body);
-            dbContext.create(uid, entityName, entity, (error, data, message) => {
+            dbContext.create(uid, entityName, request.body, (error, data, message) => {
                 writeFileAttachmentToDisc(error, data[0]);
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
@@ -72,8 +71,7 @@ const Repository = () => {
     const update = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = FileAttachment.fromEntity(request.body);
-            dbContext.update(uid, entityName, entity, (error, data, message) => {
+            dbContext.update(uid, entityName, request.body, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
         }catch(error){
@@ -83,8 +81,7 @@ const Repository = () => {
     const _delete = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            const entity = FileAttachment.fromEntity(request.body);
-            dbContext.delete(uid, entityName, entity._id, (error, data, message) => {
+            dbContext.delete(uid, entityName, request.body._id, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });
         }catch(error){
