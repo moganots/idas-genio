@@ -74,8 +74,8 @@
           (change)="onDivValueChanged($event)"
           (keyup)="onDivValueChanged($event)"
         >
-          <p class="textarea-editor">
-            {{ formGroupFields?.controls[column?.name].value }}
+          <p class="textarea-editor" style="margin: 15px; padding: 15px;">
+            {{ formGroupFields?.controls[column?.name]?.value?.trim() }}
           </p>
         </div>
         <br /><br

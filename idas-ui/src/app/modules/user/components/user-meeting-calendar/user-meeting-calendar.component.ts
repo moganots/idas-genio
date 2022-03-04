@@ -74,41 +74,37 @@ export class UserMeetingCalendarComponent
     this.dataSourceColumns = CalendarEventConfiguration.dataColumns;
   }
   ngOnInit() {
+    this.onLoadRefreshData();
+  }
+  onLoadRefreshData() {
     this.calendarEvents = [];
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()
       .then((lookupValues) => {
-        this.referenceValueService.userService
-          .getAll<User>()
+        this.meetingCalendarAttendeeService
+          .getBy<CalendarEventAttendee>({
+            AttendeeId: this.currentUser?._id,
+          })
           .toPromise()
-          .then((users) => {
-            this.meetingCalendarAttendeeService
-              .getBy<CalendarEventAttendee>({
-                AttendeeId: this.currentUser?._id,
-              })
+          .then((attendeeEvents) => {
+            this.meetingCalendarService
+              .getAll<CalendarEvent>()
               .toPromise()
-              .then((attendeeEvents) => {
-                this.meetingCalendarService
-                  .getAll<CalendarEvent>()
-                  .toPromise()
-                  .then((calendarEvents) => {
-                    this.calendarEvents = calendarEvents.filter((ce) =>
-                      attendeeEvents
-                        .map((attendeeEvent) => attendeeEvent.CalendarEventId)
-                        .includes(ce._id)
-                    );
-                  });
+              .then((calendarEvents) => {
+                this.calendarEvents = calendarEvents.filter((ce) => attendeeEvents
+                  .map((attendeeEvent) => attendeeEvent.CalendarEventId)
+                  .includes(ce._id)
+                );
               });
-            this.calendarEvents.forEach((calendarEvent) => {
-              calendarEvent.CalendarEventType = lookupValues?.find(
-                (lv) => lv._id === calendarEvent.CalendarEventTypeId
-              );
-            });
           });
+        this.calendarEvents.forEach((calendarEvent) => {
+          calendarEvent.CalendarEventType = lookupValues?.find(
+            (lv) => lv._id === calendarEvent.CalendarEventTypeId
+          );
+        });
       });
   }
-  ngAfterViewInit() {}
   onClickCreateNewCalendarEvent(date: Date): void {
     this.openDialog(
       `Create`,

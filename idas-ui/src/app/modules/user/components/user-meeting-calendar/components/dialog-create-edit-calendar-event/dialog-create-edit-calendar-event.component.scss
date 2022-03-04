@@ -130,10 +130,12 @@ img {
     width: 23px;
   }
   p {
-    &.attendee-display-name {
-      font-size: 1.15em;
-      font-weight: normal;
-      width: 22vw;
+    &.attendee {
+      &.displayName {
+        font-size: 1.15em;
+        font-weight: normal;
+        width: 22vw;
+      }
     }
   }
   span {
@@ -210,72 +212,3 @@ img {
     width: 5vw;
   }
 }
-
-/*
-.event-attendee-tab {
-  margin: 0 8px 0 8px;
-  padding: 0 0 0 0;
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-  span,
-  button {
-    display: inline-block;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    i,
-    img {
-      margin: 0 0 0 10px;
-      padding: 0 0 0 0;
-    }
-  }
-  .event-attendee-field {
-    margin: 0 10px 0 0;
-    padding: 0 0 0 0;
-    text-align: left;
-    width: 30vw;
-    vertical-align: middle;
-    mat-form-field {
-      width: 100%;
-    }
-  }
-}
-.event.attendee {
-  border: 1px solid red;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  width: 100%;
-  i,
-  img,
-  p {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    text-align: left;
-    vertical-align: middle;
-  }
-  i,
-  img {
-    border-radius: 12px;
-    font-size: 23px;
-    margin: 0 5px 0 0;
-    width: 23px;
-  }
-  p {
-    &.attendee-display-name {
-      width: 100%;
-    }
-  }
-  mat-checkbox {
-    margin: 5px 0 0 0;
-    padding: 0 0 0 0;
-    text-align: left;
-    vertical-align: middle;
-    span {
-      font-family: $OpenSans_Light;
-      font-size: 0.8em;
-      margin: 0 5px 0 0;
-      padding: 0 0 0 0;
-    }
-  }
-}
- */
