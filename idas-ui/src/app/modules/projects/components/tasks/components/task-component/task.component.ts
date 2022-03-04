@@ -134,7 +134,7 @@ export class TaskComponent extends PageComponent implements OnInit {
       });
   }
   onClickAssignTo(user: User) {
-    this.taskAssignService.CreateUpdateDelete(`Create`, {TaskId: this.task?._id, AssigneeId: user?._id})
+    this.taskAssignService.CreateUpdateDelete(`Create`, {TaskId: this.task?._id, AssigneeId: user?._id, Comment: `Task [${this.task?._id}] has been assigned to you.`})
     .pipe(first())
     .subscribe({
       next: (updated) => {
