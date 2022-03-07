@@ -87,6 +87,9 @@ export class ProjectComponent extends PageComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.onDataLoadRefresh();
+  }
+  onDataLoadRefresh() {
     this.referenceValueService.projectService
       .getAll<Project>()
       .toPromise()
@@ -104,9 +107,7 @@ export class ProjectComponent extends PageComponent implements OnInit {
               (t) => t?.ProjectId === this.projectId
             );
           });
-          console.log(this.project);
       });
-      console.log(this.project);
     this.lookupValueService
       .getAll<LookupValue>()
       .toPromise()
