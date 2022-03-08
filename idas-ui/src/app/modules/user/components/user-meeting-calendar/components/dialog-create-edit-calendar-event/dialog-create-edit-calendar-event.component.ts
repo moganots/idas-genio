@@ -89,8 +89,8 @@ export class DialogCreateEditCalendarEventComponent
     this.initFormGroupAndFields();
     this.referenceValueService.userService
       .getAll<User>()
-      .toPromise()
-      .then((users) => {
+      // .toPromise()
+      .subscribe((users) => {
         this.users = users;
       });
     this.filteredEventAttendees = this.frmCtrlEventAttendees.valueChanges.pipe(
@@ -99,8 +99,8 @@ export class DialogCreateEditCalendarEventComponent
     );
     this.meetingCalendarAttendeeService
       .getBy<CalendarEventAttendee>({ CalendarEventId: this.selectedElement?._id })
-      .toPromise()
-      .then((eventAttendees) => {
+      // .toPromise()
+      .subscribe((eventAttendees) => {
         this.selectedElement.EventAttendees = eventAttendees;
         this.currentEventAttendee = eventAttendees.find(
           (ea) => ea?.AttendeeId === this.currentUser?._id
@@ -108,8 +108,8 @@ export class DialogCreateEditCalendarEventComponent
       });
     this.fileAttachmentService
       .getBy<FileAttachment>({ CalendarEventId: this.selectedElement?._id })
-      .toPromise()
-      .then((files) => {
+      // .toPromise()
+      .subscribe((files) => {
         this.selectedElement.Files = files;
       });
   }

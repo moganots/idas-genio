@@ -53,55 +53,55 @@ export class TaskService extends DataService {
     this.dataColumns = TaskConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.lookupValues = lookupValues;
       });
     this.userService
       .getAll<User>()
-      .toPromise()
-      .then((users) => {
+      // .toPromise()
+      .subscribe((users) => {
         this.users = users;
       });
     this.projectService
       .getAll<Project>()
-      .toPromise()
-      .then((projects) => {
+      // .toPromise()
+      .subscribe((projects) => {
         this.projects = projects;
       });
     this.fileAttachmentService
       .getAll<FileAttachment>()
-      .toPromise()
-      .then((files) => {
+      // .toPromise()
+      .subscribe((files) => {
         this.files = files;
       });
     this.taskCommentService
       .getAll<TaskComment>()
-      .toPromise()
-      .then((comments) => {
+      // .toPromise()
+      .subscribe((comments) => {
         this.comments = comments;
       });
     this.taskWorklogService
       .getAll<TaskWorklog>()
-      .toPromise()
-      .then((worklogs) => {
+      // .toPromise()
+      .subscribe((worklogs) => {
         this.worklogs = worklogs;
       });
     this.taskAssignService
       .getAll<TaskAssignment>()
-      .toPromise()
-      .then((assignments) => {
+      // .toPromise()
+      .subscribe((assignments) => {
         this.assignments = assignments;
       });
     this.taskReviewService
       .getAll<TaskReview>()
-      .toPromise()
-      .then((reviews) => {
+      // .toPromise()
+      .subscribe((reviews) => {
         this.reviews = reviews;
       });
     this.getAll<Task>()
-      .toPromise()
-      .then((tasks) => {
+      // .toPromise()
+      .subscribe((tasks) => {
         this.tasks = tasks;
       });
   }

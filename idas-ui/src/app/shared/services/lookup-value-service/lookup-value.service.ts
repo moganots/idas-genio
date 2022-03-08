@@ -24,8 +24,8 @@ export class LookupValueService extends DataService {
     this.dataColumns = LookupValueConfiguration.dataColumns;
     this.lookupCategoryService
       .getAll<LookupCategory>()
-      .toPromise()
-      .then((categories) => {
+      // .toPromise()
+      .subscribe((categories) => {
         this.lookupCategories = categories;
       });
   }

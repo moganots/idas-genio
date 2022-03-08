@@ -178,6 +178,10 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       );
     };
   }
+  getTextAreaValue(column: DataColumn) {
+    const value = String(this.formGroupFields?.controls[column?.name]?.value);
+    return GeneralUtils.StringNullIf(value).trim();
+  }
   onValueChanged(event: any) {
     if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
       this.updates[event?.target?.id] =

@@ -69,17 +69,15 @@
         <div
           id="{{ column?.name }}"
           contenteditable="true"
-          class="textarea-editor"
-          style="box-sizing: border-box; padding: 10px"
+          class="textarea"
           (change)="onDivValueChanged($event)"
           (keyup)="onDivValueChanged($event)"
         >
-          <p class="textarea-editor" style="margin: 15px; padding: 15px;">
-            {{ formGroupFields?.controls[column?.name]?.value?.trim() }}
+          <p>
+            {{ getTextAreaValue(column) }}
           </p>
-        </div>
-        <br /><br
-      /></span>
+        </div></span
+      >
       <span *ngSwitchCase="'textbox'"
         ><mat-form-field>
           <input
@@ -182,8 +180,8 @@
                 src="{{ value?.image }}"
               />
               {{ value?.displayName || value?.displayValue }}
-              <p class="column">
-                {{ value?.displayName || value?.displayValue }}
+              <p class="column displayValue">
+                {{ value?.displayValue }}
               </p>
             </mat-option>
           </mat-autocomplete>

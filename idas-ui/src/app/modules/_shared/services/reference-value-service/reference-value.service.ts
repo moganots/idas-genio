@@ -36,8 +36,8 @@ export class ReferenceValueService {
   ) {
     this.userService
       .getAll<User>()
-      .toPromise()
-      .then((users) => {
+      // .toPromise()
+      .subscribe((users) => {
         users.forEach((user) => {
           this.users.push(user);
         });

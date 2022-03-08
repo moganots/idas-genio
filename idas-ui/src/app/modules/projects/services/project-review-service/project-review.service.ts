@@ -26,7 +26,7 @@ export class ProjectReviewService extends DataService {
     super(httpClient, authenticationService);
     this.entityName = ProjectReviewConfiguration.identifier;
     this.dataColumns = ProjectReviewConfiguration.dataColumns;
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
+    this.lookupValueService.getAll<LookupValue>()// .toPromise().subscribe((lookupValues) => { this.lookupValues = lookupValues});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(projectReview: ProjectReview) {

@@ -18,22 +18,45 @@ select {
   font-size: 1em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
+  width: 100%;
 }
 span {
   mat-form-field {
     mat-autocomplete {
       mat-select {
         mat-option {
-          margin: 0 0 0 3px !important;
-          padding: 0 0 0 3px !important;
+          margin: 0 0 0 0.3em !important;
+          padding: 0 0 0 0 !important;
+          text-align: left;
+          vertical-align: middle;
+          i,
+          img,
+          p {
+            display: inline-block;
+            margin: 0 0.1em 0 0.2em !important;
+            padding: 0 0 0 0 !important;
+            text-align: left;
+            vertical-align: middle;
+          }
           mat-list-option[aria-selected="true"] {
             background: blue;
           }
         }
       }
       mat-option {
-        margin: 0 0 0 3px !important;
-        padding: 0 0 0 3px !important;
+        margin: 0 0 0 0.3em !important;
+        padding: 0 0 0 0 !important;
+        text-align: left;
+        vertical-align: middle;
+        i,
+        img,
+        p {
+          display: inline-block;
+          margin: 0 0.1em 0 0.2em !important;
+          padding: 0 0 0 0 !important;
+          text-align: left;
+          vertical-align: middle;
+        }
         mat-list-option[aria-selected="true"] {
           background: blue;
         }
@@ -44,8 +67,19 @@ span {
 mat-option,
 mat-select,
 select {
-  margin: 0 0 0 3px !important;
-  padding: 0 0 0 3px !important;
+  margin: 0 0 0 0.3em !important;
+  padding: 0 0 0 0 !important;
+  text-align: left;
+  vertical-align: middle;
+  i,
+  img,
+  p {
+    display: inline-block;
+    margin: 0 0.1em 0 0.2em !important;
+    padding: 0 0 0 0 !important;
+    text-align: left;
+    vertical-align: middle;
+  }
 }
 :host mat-option,
 mat-select,
@@ -61,12 +95,11 @@ mat-checkbox {
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
 }
-/* .mat-select-panel-wrap {
+.mat-select-panel-wrap {
   margin: 28px 0 0 0 !important;
   padding: 0 0 0 0 !important;
   pointer-events: auto;
-} */
-div,
+}
 i,
 img,
 p {
@@ -79,15 +112,14 @@ p {
   vertical-align: middle;
 }
 div {
-  &.textarea-editor {
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
+  &.textarea {
+    border: 1px solid #a6a6a6;
+    border-radius: 4px;
     box-sizing: border-box;
+    font-weight: 500;
     height: 15em;
-    padding: 10px;
-    p {
-      padding: 10px;
-    }
+    margin: 5px 0 7px 0;
+    padding: 5px;
   }
 }
 i {
@@ -156,9 +188,5 @@ p {
     &.displayValue {
       font-size: 1em;
     }
-  }
-  &.textarea-editor {
-    margin: 10px;
-    padding: 10px;
   }
 }

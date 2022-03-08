@@ -80,18 +80,18 @@ export class UserMeetingCalendarComponent
     this.calendarEvents = [];
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.meetingCalendarAttendeeService
           .getBy<CalendarEventAttendee>({
             AttendeeId: this.currentUser?._id,
           })
-          .toPromise()
-          .then((attendeeEvents) => {
+          // .toPromise()
+          .subscribe((attendeeEvents) => {
             this.meetingCalendarService
               .getAll<CalendarEvent>()
-              .toPromise()
-              .then((calendarEvents) => {
+              // .toPromise()
+              .subscribe((calendarEvents) => {
                 this.calendarEvents = calendarEvents.filter((ce) => attendeeEvents
                   .map((attendeeEvent) => attendeeEvent.CalendarEventId)
                   .includes(ce._id)

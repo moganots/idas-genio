@@ -6,7 +6,12 @@ import { Supplier } from '../domain-models/supplier/supplier';
 import { User } from '../domain-models/user/user';
 export class GeneralUtils {
   public static isObjectSet(obj: any) {
-    return !(obj === null || obj === undefined);
+    return !(
+      obj === null ||
+      obj === undefined ||
+      obj === `null` ||
+      obj === `undefined`
+    );
   }
   public static isStringSet(str: string) {
     return this.isObjectSet(str) && String(str).trim().length !== 0;
@@ -16,11 +21,11 @@ export class GeneralUtils {
   }
   public static isNumber = (value: any) => {
     return value && typeof value === 'number';
-  }
+  };
   public static isNumberSet = (value: number) => {
     // tslint:disable-next-line:use-isnan
     return value && value !== NaN && value !== 0;
-  }
+  };
   public static getEmployeeDisplayName(employee: Employee) {
     return `${this.EmptyStringIfNull(employee?.Name)} ${this.EmptyStringIfNull(
       employee?.Surname
@@ -101,7 +106,18 @@ export class GeneralUtils {
     return String(value).toLocaleUpperCase().trim();
   }
   public static hasItems(array: any[]) {
-    return !(array === null || array === undefined || array.length === 0);
+    return !(
+      array === null ||
+      array === undefined ||
+      array?.filter(
+        (item) =>
+          !(
+            item === null ||
+            item === undefined ||
+            String(item).trim().length === 0
+          )
+      )?.length === 0
+    );
   }
   public static getFirstItem(array: any[]) {
     return this.hasItems(array) ? array[0] : null;
@@ -163,7 +179,7 @@ export class GeneralUtils {
     return this.isObjectSet(value) ? value : null;
   }
   public static StringNullIf(value: string) {
-    return this.isStringSet(value) ? value : null;
+    return this.isStringSet(value) ? value : ``;
   }
   public static EmptyStringIfNull(value: any) {
     return String(value || ``);
@@ -181,10 +197,10 @@ export class GeneralUtils {
       fileReader.onerror = () => {
         fileReader.abort();
         reject(new DOMException('Problem parsing input file.'));
-      }
+      };
       fileReader.onload = () => {
         resolve(fileReader.result);
-      }
+      };
       fileReader.readAsText(inputFile);
     });
   }
@@ -194,24 +210,37 @@ export class GeneralUtils {
       fileReader.onerror = () => {
         fileReader.abort();
         reject(new DOMException('Problem parsing input file.'));
-      }
+      };
       fileReader.onload = () => {
         resolve(fileReader.result);
-      }
+      };
       fileReader.readAsDataURL(inputFile);
     });
   }
   public static getPredicateParams(predicate?: any) {
-    return (predicate) ? Object.keys(predicate).map((key) => `${key}=${predicate[key]}`).join('&') : null;
+    return predicate
+      ? Object.keys(predicate)
+          .map((key) => `${key}=${predicate[key]}`)
+          .join('&')
+      : null;
   }
   public static toNumber = (value: any) => {
     // tslint:disable-next-line:radix
     return parseInt(value) || 0;
-  }
+  };
   public static StringJoin(values: any[], delimiter: string) {
-    return values?.filter((value) => !(value === null && value === undefined && String(value).length === 0))?.join(delimiter);
+    return this.hasItems(values) ? values
+      ?.filter(
+        (value) =>
+          !(value === null && value === undefined && String(value).length === 0)
+      )
+      ?.join(delimiter) : ``;
   }
-  public static splitJoin(value: string, separator: string = ` `, delimiter: string = `-`) {
+  public static splitJoin(
+    value: string,
+    separator: string = ` `,
+    delimiter: string = `-`
+  ) {
     return value?.split(separator)?.join(delimiter);
   }
 }

@@ -50,49 +50,49 @@ export class ProjectService extends DataService {
     this.dataColumns = ProjectConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.lookupValues = lookupValues;
       });
     this.userService
       .getAll<User>()
-      .toPromise()
-      .then((users) => {
+      // .toPromise()
+      .subscribe((users) => {
         this.users = users;
       });
     this.fileAttachmentService
       .getAll<FileAttachment>()
-      .toPromise()
-      .then((files) => {
+      // .toPromise()
+      .subscribe((files) => {
         this.files = files;
       });
     this.projectCommentService
       .getAll<ProjectComment>()
-      .toPromise()
-      .then((comments) => {
+      // .toPromise()
+      .subscribe((comments) => {
         this.comments = comments;
       });
     this.projectWorklogService
       .getAll<ProjectWorklog>()
-      .toPromise()
-      .then((worklogs) => {
+      // .toPromise()
+      .subscribe((worklogs) => {
         this.worklogs = worklogs;
       });
     this.projectAssignService
       .getAll<ProjectAssignment>()
-      .toPromise()
-      .then((assignments) => {
+      // .toPromise()
+      .subscribe((assignments) => {
         this.assignments = assignments;
       });
     this.projectReviewService
       .getAll<ProjectReview>()
-      .toPromise()
-      .then((reviews) => {
+      // .toPromise()
+      .subscribe((reviews) => {
         this.reviews = reviews;
       });
     this.getAll<Project>()
-      .toPromise()
-      .then((projects) => {
+      // .toPromise()
+      .subscribe((projects) => {
         this.projects = projects;
       });
   }

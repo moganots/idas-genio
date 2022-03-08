@@ -70,15 +70,15 @@ export class UsersComponent extends PageComponent implements OnInit {
   private onLoadRefreshData() {
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.userTypes = lookupValues.filter(
           (lookupValue) => lookupValue.LookupCategory.Name === `UserType`
         ) as UserType[];
         this.referenceValueService.userService
           .getAll<User>()
-          .toPromise()
-          .then((users) => {
+          // .toPromise()
+          .subscribe((users) => {
             this.userTypes.forEach((userType) => {
               userType.Users = users.filter(
                 (user) => user?.UserTypeId === userType?._id

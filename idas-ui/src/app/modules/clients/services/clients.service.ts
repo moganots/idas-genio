@@ -29,14 +29,14 @@ export class ClientsService extends DataService {
     this.dataColumns = ClientConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.lookupValues = lookupValues;
       });
     this.contactDetailService
       .getAll<ContactDetail>()
-      .toPromise()
-      .then((contactDetails) => {
+      // .toPromise()
+      .subscribe((contactDetails) => {
         this.contactDetails = contactDetails;
       });
   }

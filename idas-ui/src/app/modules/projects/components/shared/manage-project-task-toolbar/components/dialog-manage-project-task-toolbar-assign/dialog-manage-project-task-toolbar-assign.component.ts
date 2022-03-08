@@ -72,8 +72,8 @@ export class DialogManageProjectTaskToolbarAssignComponent
     );
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         lookupValues
           ?.filter(
             (value) => value.LookupCategory.Name === 'ProjectAssignmentType'
@@ -86,8 +86,8 @@ export class DialogManageProjectTaskToolbarAssignComponent
       });
     this.referenceValueService.userService
       .getAll<User>()
-      .toPromise()
-      .then((assignees) => {
+      // .toPromise()
+      .subscribe((assignees) => {
         assignees?.forEach((assignee) => {
           this.assignees.push(this.mapLookupAssignee(assignee));
         });

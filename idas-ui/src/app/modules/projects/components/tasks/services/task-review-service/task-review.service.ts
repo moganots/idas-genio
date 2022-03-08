@@ -26,7 +26,7 @@ export class TaskReviewService extends DataService {
     super(httpClient, authenticationService);
     this.entityName = TaskReviewConfiguration.identifier;
     this.dataColumns = TaskReviewConfiguration.dataColumns;
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => { this.lookupValues = lookupValues});
+    this.lookupValueService.getAll<LookupValue>()// .toPromise().subscribe((lookupValues) => { this.lookupValues = lookupValues});
     this.userService.getAll<User>().subscribe(users => { this.users = users; });
   }
   mapValues(taskReview: TaskReview) {

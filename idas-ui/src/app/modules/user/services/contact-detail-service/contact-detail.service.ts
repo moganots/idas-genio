@@ -17,7 +17,7 @@ export class ContactDetailService extends DataService {
     super(httpClient, authenticationService);
     this.entityName = ContactDetailConfiguration.identifier;
     this.dataColumns = ContactDetailConfiguration.dataColumns;
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => {
+    this.lookupValueService.getAll<LookupValue>().subscribe((lookupValues) => {
       this.lookupValues = lookupValues;
     });
   }

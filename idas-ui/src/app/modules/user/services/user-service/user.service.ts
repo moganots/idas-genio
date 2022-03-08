@@ -35,24 +35,30 @@ export class UserService extends DataService {
     super(httpClient, authenticationService);
     this.entityName = UserConfiguration.identifier;
     this.dataColumns = UserConfiguration.dataColumns;
-    this.clientsService.getAll<Client>().toPromise().then((clients) => {
+    this.clientsService.getAll<Client>().subscribe((clients) => {
       this.clients = clients;
     });
-    this.employeesService.getAll<Employee>().toPromise().then((employees) => {
+    this.employeesService.getAll<Employee>().subscribe((employees) => {
       this.employees = employees;
     });
-    this.suppliersService.getAll<Supplier>().toPromise().then((suppliers) => {
+    this.suppliersService.getAll<Supplier>().subscribe((suppliers) => {
       this.suppliers = suppliers;
     });
-    this.lookupValueService.getAll<LookupValue>().toPromise().then((lookupValues) => {
+    this.lookupValueService.getAll<LookupValue>().subscribe((lookupValues) => {
       this.lookupValues = lookupValues;
     });
   }
   mapValues(user: User) {
-    user.Employee = this.employees.find((employee) => employee?._id === user?.EmployeeId);
+    user.Employee = this.employees.find(
+      (employee) => employee?._id === user?.EmployeeId
+    );
     user.Client = this.clients.find((client) => client?._id === user?.ClientId);
-    user.Supplier = this.suppliers.find((supplier) => supplier?._id === user?.SupplierId);
-    user.UserType = this.lookupValues.find((lookupValue) => lookupValue?._id === user?.UserTypeId);
+    user.Supplier = this.suppliers.find(
+      (supplier) => supplier?._id === user?.SupplierId
+    );
+    user.UserType = this.lookupValues.find(
+      (lookupValue) => lookupValue?._id === user?.UserTypeId
+    );
     user.DisplayName = GeneralUtils.getUserDisplayName(user);
     user.Avatar = user?.Avatar || './assets/img/avatars/avatar-0.png';
     return user;

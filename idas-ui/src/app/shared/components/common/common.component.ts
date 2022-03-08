@@ -41,8 +41,8 @@ export class CommonComponent {
     this.applicationName = SharedConfiguration.applicationName;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((values) => {
+      // .toPromise()
+      .subscribe((values) => {
         this.lookupValues = values;
       });
     this.currentUser = this.authenticationService.getCurrentUser;

@@ -30,17 +30,17 @@ export class EmployeesService extends DataService {
     this.dataColumns = EmployeeConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.lookupValues = lookupValues;
       });
     this.contactDetailService
       .getAll<ContactDetail>()
-      .toPromise()
-      .then((contactDetails) => {
+      // .toPromise()
+      .subscribe((contactDetails) => {
         this.contactDetails = contactDetails;
       });
-      this.getAll<Employee>().toPromise().then((employees) => { this.employees = employees;});
+      this.getAll<Employee>()// .toPromise().subscribe((employees) => { this.employees = employees;});
   }
   mapValues(employee: Employee) {
     employee.Salutation = this.lookupValues.find(

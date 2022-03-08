@@ -28,8 +28,8 @@ export class ProjectAssignService extends DataService {
     this.dataColumns = ProjectAssignConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.lookupValues = lookupValues;
       });
     this.userService.getAll<User>().subscribe((users) => {

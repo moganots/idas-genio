@@ -30,18 +30,18 @@ export class MeetingCalendarService extends DataService {
     super(httpClient, authenticationService);
     this.entityName = CalendarEventConfiguration.identifier;
     this.dataColumns = CalendarEventConfiguration.dataColumns;
-    this.lookupValueService.getAll<LookupValue>().toPromise()
-      .then((lookupValues) => {
+    this.lookupValueService.getAll<LookupValue>()// .toPromise()
+      .subscribe((lookupValues) => {
       this.lookupValues = lookupValues;
     });
-    this.userService.getAll<User>().toPromise()
-      .then((users) => {
+    this.userService.getAll<User>()// .toPromise()
+      .subscribe((users) => {
       this.users = users;
     });
     this.calendarEventAttendeeService
       .getAll<CalendarEventAttendee>()
-      .toPromise()
-      .then((attendees) => {
+      // .toPromise()
+      .subscribe((attendees) => {
         this.attendees = attendees;
       });
   }

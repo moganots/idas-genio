@@ -32,8 +32,8 @@ export class TaskStatusService extends DataService {
     this.dataColumns = TaskStatusConfiguration.dataColumns;
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.lookupValues = lookupValues;
       });
       this.taskService.getAll<Task>().subscribe((tasks) => {

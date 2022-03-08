@@ -253,8 +253,8 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     this.dataSource = [];
     this.dataService
       .getAll()
-      .toPromise()
-      .then((data) => {
+      // .toPromise()
+      .subscribe((data) => {
         this.matTableDataSource = new MatTableDataSource<any[]>();
         this.matTableDataSource.data = data || this.dataSource;
         this.matTableDataSource.paginator = this.paginator;

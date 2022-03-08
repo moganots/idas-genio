@@ -53,19 +53,19 @@ export class TasksComponent extends PageComponent implements OnInit {
   ngOnInit(): void {
     this.referenceValueService.userService
       .getAll<User>()
-      .toPromise()
-      .then((users) => {
+      // .toPromise()
+      .subscribe((users) => {
         this.users = users;
       });
     this.referenceValueService.projectService
       .getAll<Project>()
-      .toPromise()
-      .then((projects) => {
+      // .toPromise()
+      .subscribe((projects) => {
         this.projects = projects;
         this.referenceValueService.taskService
           .getAll<Task>()
-          .toPromise()
-          .then((tasks) => {
+          // .toPromise()
+          .subscribe((tasks) => {
             this.projects.forEach((project) => {
               project.Tasks = tasks?.filter(
                 (task) => task?.ProjectId === project?._id

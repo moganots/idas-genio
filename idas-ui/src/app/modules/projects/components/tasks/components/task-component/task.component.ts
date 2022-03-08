@@ -109,20 +109,20 @@ export class TaskComponent extends PageComponent implements OnInit {
   onLoadRefreshData() {
     this.referenceValueService.taskService
       .getAll<Task>()
-      // .toPromise()
+      // // .toPromise()
       .subscribe((tasks) => {
         // 1. Get this.task
         this.task = tasks.find((t) => t?._id === this.taskId);
       });
     this.referenceValueService.userService
       .getAll<User>()
-      // .toPromise()
+      // // .toPromise()
       .subscribe((users) => {
         this.users = users;
       });
     this.lookupValueService
       .getAll<LookupValue>()
-      // .toPromise()
+      // // .toPromise()
       .subscribe((lookupValues) => {
         // Get (Set) Status / Priority dropdown value(s)
         this.statuses = lookupValues.filter(

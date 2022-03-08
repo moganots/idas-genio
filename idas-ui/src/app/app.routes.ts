@@ -10,7 +10,7 @@ const routes: Routes = [
     component: AppMainComponent,
     children: [{
       path: ``,
-      // loadChildren: () => import('./layouts/app-main/app-main.module').then((m) => m.AppMainModule)
+      // loadChildren: () => import('./layouts/app-main/app-main.module').subscribe((m) => m.AppMainModule)
       loadChildren: './layouts/app-main/app-main.module#AppMainModule'
     }]
   }

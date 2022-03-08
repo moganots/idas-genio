@@ -51,8 +51,8 @@ export class ViewProjectTaskDetailsComponent
   ngOnInit(): void {
     this.lookupValueService
       .getAll<LookupValue>()
-      .toPromise()
-      .then((lookupValues) => {
+      // .toPromise()
+      .subscribe((lookupValues) => {
         this.statuses = lookupValues.filter(
           (value) => value.LookupCategory.Name === 'Status'
         );
