@@ -56,14 +56,14 @@ export class ReferenceValueService {
       case `ModifiedBy`:
       case `User`:
         this.userService.getAll<User>().subscribe((users) => {
-          field.lookupValues = users.map((user) => this.mapValuesUser(user));
+          this.addFieldLookupValues(field, users.map((user) => this.mapValuesUser(user)));
         });
         break;
       case `Client`:
         this.clientsService.getAll<Client>().subscribe((clients) => {
-          field.lookupValues = clients.map((client) =>
+          this.addFieldLookupValues(field, clients.map((client) =>
             this.mapValuesClient(client)
-          );
+          ));
         });
         break;
       case `EmployeeId`:
@@ -71,9 +71,9 @@ export class ReferenceValueService {
       case `Employee`:
       case `Manager`:
         this.employeesService.getAll<Employee>().subscribe((employees) => {
-          field.lookupValues = employees.map((employee) =>
+          this.addFieldLookupValues(field, employees.map((employee) =>
             this.mapValuesEmployee(employee)
-          );
+          ));
         });
         break;
       case `ChildProjectId`:
@@ -85,16 +85,16 @@ export class ReferenceValueService {
       case `Project`:
       case `SubProject`:
         this.projectService.getAll<Project>().subscribe((projects) => {
-          field.lookupValues = projects.map((project) =>
+          this.addFieldLookupValues(field, projects.map((project) =>
             this.mapValuesProject(project)
-          );
+          ));
         });
         break;
       case `Supplier`:
         this.suppliersService.getAll<Supplier>().subscribe((suppliers) => {
-          field.lookupValues = suppliers.map((supplier) =>
+          this.addFieldLookupValues(field, suppliers.map((supplier) =>
             this.mapValuesSupplier(supplier)
-          );
+          ));
         });
         break;
       case `ChildTaskId`:
@@ -106,17 +106,17 @@ export class ReferenceValueService {
       case `SubTask`:
       case `Task`:
         this.taskService.getAll<Task>().subscribe((tasks) => {
-          field.lookupValues = tasks.map((task) => this.mapValuesTask(task));
+          this.addFieldLookupValues(field, tasks.map((task) => this.mapValuesTask(task)));
         });
         break;
       case `StartDateTime`:
       case `EndDateTime`:
-        field.lookupValues = SharedConfiguration.scheduleTimes.map(
+        this.addFieldLookupValues(field, SharedConfiguration.scheduleTimes.map(
           (time, index) => ({
             id: index,
             displayValue: time,
           })
-        );
+        ));
         break;
     }
   }
@@ -213,5 +213,8 @@ export class ReferenceValueService {
       icon: user?.UserType?.Icon,
       image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
     };
+  }
+  addFieldLookupValues(field: DataColumn, values: any[] = []) {
+    field.lookupValues = values;
   }
 }

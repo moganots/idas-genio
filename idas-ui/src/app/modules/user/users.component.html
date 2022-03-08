@@ -13,8 +13,9 @@
             <mat-accordion>
               <mat-expansion-panel
                 class="mat-elevation-z0"
-                [expanded]="i === 0"
+                [expanded]="i === currentTabId"
                 [togglePosition]="'before'"
+                (opened)="setSelectedTab(i)"
                 *ngFor="let userType of userTypes; let i = index"
               >
                 <mat-expansion-panel-header

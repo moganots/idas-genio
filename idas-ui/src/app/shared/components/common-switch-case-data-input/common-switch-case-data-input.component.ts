@@ -18,8 +18,8 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class CommonSwitchCaseDataInputComponent implements OnInit {
   @Input() action: string;
-  @Input() entityId: any;
   @Input() entityName: string;
+  @Input() entityId: any;
   @Input() entity: any = {};
   @Input() columns: DataColumn[] = [];
   @Input() columnsCssClass: string;
@@ -52,7 +52,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   getFieldValue(column: DataColumn, dataObject: any) {
     const columnValue = (dataObject || {})[column.name];
     const lookupValue = column?.lookupValues?.find(
-      (lv) => parseFloat(lv.id) === parseFloat(columnValue)
+      (lv) => lv.id === columnValue
     );
     return lookupValue?.displayValue || columnValue;
   }

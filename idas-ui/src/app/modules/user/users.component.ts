@@ -36,6 +36,7 @@ import { UserType } from 'app/shared/domain-models/lookups/user-type';
   ],
 })
 export class UsersComponent extends PageComponent implements OnInit {
+  currentTabId = 0;
   userTypes: UserType[] = [];
   users: User[] = [];
   constructor(
@@ -87,7 +88,9 @@ export class UsersComponent extends PageComponent implements OnInit {
           });
       });
   }
-
+  setSelectedTab(tabId: number) {
+    this.currentTabId = tabId;
+  }
   getUserAvatarTitle(user: User) {
     return `${user?.DisplayName || user?.EmailAddress || ``}`;
   }
