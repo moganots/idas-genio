@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { MatDatetimePickerInputEvent } from '@angular-material-components/datetime-picker';
 import { Component, Input, OnInit } from '@angular/core';
 import {
@@ -8,9 +9,11 @@ import {
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatOptionSelectionChange } from '@angular/material/core';
+import { SharedConfiguration } from 'app/shared/configuration/shared-configuration';
 import { DataColumn } from 'app/shared/domain-models/data-column';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { map, startWith } from 'rxjs/operators';
+import { DateUtils } from 'app/shared/utilities/date-utils';
 @Component({
   selector: 'app-common-switch-case-data-input',
   templateUrl: './common-switch-case-data-input.component.html',
@@ -28,7 +31,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   public formGroup: FormGroup;
   public formGroupFields: FormGroup;
   constructor(private formBuilder: FormBuilder) {
-     console.log(`columnsCssClass=${this.columnsCssClass}`);
+    console.log(`columnsCssClass=${this.columnsCssClass}`);
   }
   ngOnInit(): void {
     console.log(`columnsCssClass=${this.columnsCssClass}`);
@@ -53,11 +56,28 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
     });
   }
   getFieldValue(column: DataColumn, dataObject: any) {
-    const columnValue = (dataObject || {})[column.name];
+    const columnValue = this.asDate(column, (dataObject || {})[column.name]);
     const lookupValue = column?.lookupValues?.find(
       (lv) => lv.id === columnValue
     );
+    console.log(`column.name=${column.name}=${columnValue}`);
     return lookupValue?.displayValue || columnValue;
+  }
+  asDate(column: DataColumn, value: any) {
+    const today = new Date();
+    if (
+      SharedConfiguration.dateColumns.includes(column.name) &&
+      !GeneralUtils.isObjectSet(value)
+    ) {
+      console.log(today);
+      return moment(today, DateUtils.DATE_FORMAT_YYYY_MMMM_DD_HH_MM_SS);
+    } else if (
+      SharedConfiguration.dateColumns.includes(column.name) &&
+      GeneralUtils.isObjectSet(value)
+    ) {
+      return new Date(value);
+    }
+    return value;
   }
   isFieldDisabled(column: DataColumn) {
     switch (GeneralUtils.toLocalLowerCaseWithTrim(this.action)) {
@@ -177,7 +197,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       const correspondingOption = Array.isArray(options)
         ? options.find((option) => option.id === id)
         : null;
-        console.log(correspondingOption);
+      console.log(correspondingOption);
       return (
         correspondingOption?.displayValue || correspondingOption?.value || id
       );
@@ -185,10 +205,9 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   }
   displayWith(column: DataColumn): (id: any) => string | null {
     return (id: any) => {
-      console.log(`id=${id}`);
-      console.log(column);
-      console.log(column?.lookupValues);
-      const lookupValue = column?.lookupValues?.find((lv) => (lv.id === id || lv.displayValue === id));
+      const lookupValue = column?.lookupValues?.find(
+        (lv) => lv.id === id || lv.displayValue === id
+      );
       console.log(lookupValue);
       return lookupValue?.displayValue || lookupValue?.id || id;
     };
