@@ -3,39 +3,18 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div
-            class="card-header card-header-danger idas-main-card-header"
-          >
-            <i class="material-icons">{{ pageIcon }}</i>
-            <h4 class="card-title">{{ pageTitle }}</h4>
-            <p class="category">{{ pageSubTitle }}</p>
-            <span>
-              <button
-                mat-icon-button
-                class="
-                  btn btn-white btn-round btn-just-icon btn-idas-float-right
-                "
-                type="button"
-                (click)="onDataRefresh()"
-                title="{{ getButtonTitleDataRefresh() }}"
-              >
-                <i class="material-icons">autorenew</i>
-              </button>
-              <button
-                mat-icon-button
-                class="
-                  btn btn-white btn-round btn-just-icon btn-idas-float-right
-                "
-                type="button"
-                data-toggle="modal"
-                data-target="#create-edit-modal-dialog"
-                (click)="onClickCreate()"
-                title="{{ getButtonTitleAdd() }}"
-              >
-                <i class="material-icons">add</i>
-              </button>
-            </span>
-          </div>
+          <app-page-header
+            [entityName]="entityName"
+            [pageIcon]="pageIcon"
+            [pageName]="pageName"
+            [pageTitle]="pageTitle"
+            [pageSubTitle]="pageSubTitle"
+            [hideButtonCreate]="false"
+            [hideButtonRefresh]="false"
+            [hideButtonSave]="true"
+            (create)="onClickCreate()"
+            (refresh)="onDataRefresh()"
+          ></app-page-header>
           <div class="card-body">
             <div class="table-responsive">
               <table mat-table [dataSource]="matTableDataSource" matSort>
@@ -168,13 +147,7 @@
                     <span>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickManageEmployeeButton(
@@ -199,13 +172,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickManageParentTaskButton(
@@ -225,13 +192,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickManageProjectTaskButton(
@@ -251,13 +212,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickManageProjectAssignmentButton(
@@ -279,13 +234,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickViewProjectProgressButton(
@@ -301,17 +250,13 @@
                         }}"
                         [hidden]="hideViewProjectProgressButton(element)"
                       >
-                        <i class="material-icons idas-button-icon">open_in_new</i>
+                        <i class="material-icons idas-button-icon"
+                          >open_in_new</i
+                        >
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickManageProjectReInstateButton(
@@ -331,13 +276,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickManageUserAccountButton(
@@ -362,14 +301,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-resize
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-resize btn-idas-float-right"
                         type="button"
                         (click)="
                           onClickDelete(element, getElementIndex(element))
@@ -388,13 +320,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="
-                          btn
-                          btn-white
-                          btn-round
-                          btn-just-icon
-                          btn-idas-float-right
-                        "
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                         type="button"
                         data-toggle="modal"
                         data-target="#create-edit-modal-dialog"

@@ -3,7 +3,6 @@
     *ngFor="let column of useColumns; let id = index"
     class="container {{ columnsCssClass }}"
     formGroupName="formFields"
-    style="border: 1px solid red;"
   >
     <span [ngSwitch]="column?.controlType">
       <span *ngSwitchCase="'break'"><br /></span>

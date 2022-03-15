@@ -22,7 +22,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   @Input() entityId: any;
   @Input() entity: any = {};
   @Input() columns: DataColumn[] = [];
-  @Input() columnsCssClass = 'col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12';
+  @Input() columnsCssClass: string;
   @Input() updates: { [key: string]: any } = {};
   useColumns: DataColumn[] = [];
   public formGroup: FormGroup;

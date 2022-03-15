@@ -4,7 +4,7 @@
 .container {
   margin: 0 0 0 0 !important;
   overflow-y: auto;
-  padding: 1px !important;
+  padding: 5px !important;
 }
 span,
 mat-form-field,
@@ -18,48 +18,19 @@ select {
   font-size: 1em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
-  text-align: left;
-  vertical-align: middle;
-  // width: 100%;
 }
 span {
   mat-form-field {
     mat-autocomplete {
       mat-select {
         mat-option {
-          text-align: left;
-          vertical-align: middle;
-          i,
-          img,
-          p {
-            display: inline-block;
-            margin: 0 0.1em 0 0.2em !important;
-            padding: 0 0 0 0 !important;
-            text-align: left;
-            vertical-align: middle;
-          }
-          mat-list-option[aria-selected="true"] {
-            background: blue;
-          }
+          margin: 0 0 0 3px !important;
+          padding: 0 0 0 3px !important;
         }
       }
       mat-option {
-        margin: 0 0.1em 0 0.2em !important;
-        padding: 0 0 0 0 !important;
-        text-align: left;
-        vertical-align: middle;
-        i,
-        img,
-        p {
-          display: inline-block;
-          margin: 0 0.1em 0 0.2em !important;
-          padding: 0 0 0 0 !important;
-          text-align: left;
-          vertical-align: middle;
-        }
-        mat-list-option[aria-selected="true"] {
-          background: blue;
-        }
+        margin: 0 0 0 3px !important;
+        padding: 0 0 0 3px !important;
       }
     }
   }
@@ -67,34 +38,26 @@ span {
 mat-option,
 mat-select,
 select {
-  margin: 0 0.1em 0 0.2em !important;
-  padding: 0 0 0 0 !important;
-  text-align: left;
-  vertical-align: middle;
-  i,
-  img,
-  p {
-    display: inline-block;
-    margin: 0 0.1em 0 0.2em !important;
-    padding: 0 0 0 0 !important;
-    text-align: left;
-    vertical-align: middle;
-  }
+  margin: 0 0 0 3px !important;
+  padding: 0 0 0 3px !important;
 }
 :host mat-option,
 mat-select,
 select {
-  margin: 0 0.0 0.1em !important;
-  padding: 0 0 0 0 !important;
-}
-mat-list-option[aria-selected="true"] {
-  background: blue;
+  margin: 0 0 0 3px !important;
+  padding: 0 0 0 3px !important;
 }
 mat-checkbox {
   font-size: 0.9em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
 }
+.mat-select-panel-wrap {
+  margin: 28px 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+  pointer-events: auto;
+}
+div,
 i,
 img,
 p {
@@ -107,21 +70,16 @@ p {
   vertical-align: middle;
 }
 div {
-  &.textarea {
-    border: 1px solid #a6a6a6;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-weight: 500;
-    height: 15em;
-    margin: 5px 0 7px 0;
-    padding: 5px;
+  &.text-editor {
+    border-radius: 8px;
+    height: .5em;
   }
 }
 i {
   width: 35px;
   &.icon-mat-option {
-    margin: 0 0 0 1px !important;
-    padding: 0 0 0 1px !important;
+    margin: 0 1px 0 2px !important;
+    padding: 0 1px 0 2px !important;
   }
   &.rounded {
     border-radius: 8px;
@@ -130,8 +88,8 @@ i {
 img {
   background-size: cover;
   &.img-mat-option {
-    margin: 0 0 0 1px !important;
-    padding: 0 0 0 1px !important;
+    margin: 0 1px 0 2px !important;
+    padding: 0 1px 0 2px !important;
   }
   &.rounded {
     border-radius: 8px;
@@ -173,8 +131,8 @@ p {
     &.displayName,
     &.displayValue,
     &.title {
-      margin: 0 0 0 1px !important;
-      padding: 0 0 0 1px !important;
+      margin: 0 0 0 2px !important;
+      padding: 0 0 0 2px !important;
     }
     &.displayName,
     &.title {

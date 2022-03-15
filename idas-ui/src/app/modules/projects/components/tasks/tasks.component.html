@@ -4,13 +4,16 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div
-            class="card-header card-header-danger idas-main-card-header"
-          >
-            <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-            <h4 class="card-title">{{ pageTitle }}</h4>
-            <p class="category">{{ pageSubTitle }}</p>
-          </div>
+          <app-page-header
+            [entityName]="entityName"
+            [pageIcon]="pageIcon"
+            [pageName]="pageName"
+            [pageTitle]="pageTitle"
+            [pageSubTitle]="pageSubTitle"
+            [hideButtonCreate]="true"
+            [hideButtonRefresh]="true"
+            [hideButtonSave]="true"
+          ></app-page-header>
           <div class="card-body">
             <div class="idas-project-task-card-main-toolbar mat-elevation-z4">
               <p>Filter By User:</p>

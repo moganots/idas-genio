@@ -4,11 +4,16 @@
     <div class="element">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger idas-main-card-header">
-            <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-            <h4 class="card-title">{{ pageTitle }}</h4>
-            <p class="category">{{ pageSubTitle }}</p>
-          </div>
+          <app-page-header
+            [entityName]="entityName"
+            [pageIcon]="pageIcon"
+            [pageName]="pageName"
+            [pageTitle]="pageTitle"
+            [pageSubTitle]="pageSubTitle"
+            [hideButtonCreate]="true"
+            [hideButtonRefresh]="true"
+            [hideButtonSave]="true"
+          ></app-page-header>
           <div class="card-body">
             <mat-accordion>
               <mat-expansion-panel
@@ -119,7 +124,13 @@
                             class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                             type="button"
                             title="Edit User"
-                            (click)="onOpenCreateEditDialog('edit', user, user?.UserType)"
+                            (click)="
+                              onOpenCreateEditDialog(
+                                'edit',
+                                user,
+                                user?.UserType
+                              )
+                            "
                           >
                             <i class="material-icons idas-button-icon">edit</i>
                           </button>
@@ -132,7 +143,7 @@
                   mat-icon-button
                   class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
                   type="button"
-                  title="Add New {{ userType?.Value}} User"
+                  title="Add New {{ userType?.Value }} User"
                   (click)="onOpenCreateEditDialog('create', null, userType)"
                 >
                   <i class="material-icons idas-button-icon">person_add</i>
