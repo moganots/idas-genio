@@ -18,15 +18,15 @@ select {
   font-size: 1em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
-  width: 100%;
+  text-align: left;
+  vertical-align: middle;
+  // width: 100%;
 }
 span {
   mat-form-field {
     mat-autocomplete {
       mat-select {
         mat-option {
-          margin: 0 0 0 0.3em !important;
-          padding: 0 0 0 0 !important;
           text-align: left;
           vertical-align: middle;
           i,
@@ -44,7 +44,7 @@ span {
         }
       }
       mat-option {
-        margin: 0 0 0 0.3em !important;
+        margin: 0 0.1em 0 0.2em !important;
         padding: 0 0 0 0 !important;
         text-align: left;
         vertical-align: middle;
@@ -67,7 +67,7 @@ span {
 mat-option,
 mat-select,
 select {
-  margin: 0 0 0 0.3em !important;
+  margin: 0 0.1em 0 0.2em !important;
   padding: 0 0 0 0 !important;
   text-align: left;
   vertical-align: middle;
@@ -84,8 +84,8 @@ select {
 :host mat-option,
 mat-select,
 select {
-  margin: 0 0 0 3px !important;
-  padding: 0 0 0 3px !important;
+  margin: 0 0.0 0.1em !important;
+  padding: 0 0 0 0 !important;
 }
 mat-list-option[aria-selected="true"] {
   background: blue;
@@ -94,11 +94,6 @@ mat-checkbox {
   font-size: 0.9em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
-}
-.mat-select-panel-wrap {
-  margin: 28px 0 0 0 !important;
-  padding: 0 0 0 0 !important;
-  pointer-events: auto;
 }
 i,
 img,

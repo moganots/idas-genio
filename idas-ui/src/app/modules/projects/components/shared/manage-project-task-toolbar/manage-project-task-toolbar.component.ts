@@ -120,7 +120,7 @@ export class ManageProjectTaskToolbarComponent
   openDialog(dialogComponent: any, action: string) {
     const id = this.currentEntityId || this.selectedElement?._id || this.selectedElement?.id;
     const name = this.selectedElement?.DisplayName || this.selectedElement?.Name;
-    const icon = (this.selectedElement?.ProjectType || this.selectedElement?.TaskType).Icon || this.pageIcon;
+    const icon = (this.selectedElement?.ProjectType || this.selectedElement?.TaskType)?.Icon || this.pageIcon;
     super.openDialog(
       dialogComponent,
       {
