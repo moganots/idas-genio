@@ -30,13 +30,10 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   useColumns: DataColumn[] = [];
   public formGroup: FormGroup;
   public formGroupFields: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
-    console.log(`columnsCssClass=${this.columnsCssClass}`);
-  }
+  constructor(private formBuilder: FormBuilder) { }
   ngOnInit(): void {
-    console.log(`columnsCssClass=${this.columnsCssClass}`);
     this.useColumns = this.columns?.filter(
-      (column) => column?.canShow && !this.isFieldDisabled(column)
+      (column) => column?.canShow /*&& !this.isFieldDisabled(column)*/
     );
     this.formGroupFields = new FormGroup({});
     this.useColumns?.forEach((column) => {
@@ -60,7 +57,6 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
     const lookupValue = column?.lookupValues?.find(
       (lv) => lv.id === columnValue
     );
-    console.log(`column.name=${column.name}=${columnValue}`);
     return lookupValue?.displayValue || columnValue;
   }
   asDate(column: DataColumn, value: any) {
@@ -69,7 +65,6 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       SharedConfiguration.dateColumns.includes(column.name) &&
       !GeneralUtils.isObjectSet(value)
     ) {
-      console.log(today);
       return moment(today, DateUtils.DATE_FORMAT_YYYY_MMMM_DD_HH_MM_SS);
     } else if (
       SharedConfiguration.dateColumns.includes(column.name) &&
@@ -193,11 +188,9 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   }
   displayWithFn(options: any[]): (id: number) => string | null {
     return (id: number) => {
-      console.log(`id=${id}`);
       const correspondingOption = Array.isArray(options)
         ? options.find((option) => option.id === id)
         : null;
-      console.log(correspondingOption);
       return (
         correspondingOption?.displayValue || correspondingOption?.value || id
       );
@@ -208,7 +201,6 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       const lookupValue = column?.lookupValues?.find(
         (lv) => lv.id === id || lv.displayValue === id
       );
-      console.log(lookupValue);
       return lookupValue?.displayValue || lookupValue?.id || id;
     };
   }
