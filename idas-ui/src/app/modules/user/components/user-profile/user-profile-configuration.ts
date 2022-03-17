@@ -64,7 +64,7 @@ export class UserProfileConfiguration {
     {id: 44, name: 'Break', canShow: true, canSort: true, canGroup: false},
     {id: 46, name: 'Password', canShow: true, canSort: true, canGroup: false},
     {id: 47, name: 'ConfirmPassword', canShow: true, canSort: true, canGroup: false},
-    {id: 48, name: 'IsAdmin', canShow: false, canSort: true, canGroup: false},
+    {id: 48, name: 'IsAdmin', canShow: true, canSort: true, canGroup: false},
     {id: 49, name: 'IsLocked', canShow: true, canSort: true, canGroup: false},
     {id: 50, name: 'DateLastLoggedIn', canShow: true, canSort: true, canGroup: false}
   ].map((sdc) => {

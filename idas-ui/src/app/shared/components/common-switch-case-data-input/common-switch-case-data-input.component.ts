@@ -30,7 +30,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   useColumns: DataColumn[] = [];
   public formGroup: FormGroup;
   public formGroupFields: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
   ngOnInit(): void {
     this.useColumns = this.columns?.filter(
       (column) => column?.canShow /*&& !this.isFieldDisabled(column)*/
@@ -40,7 +40,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       column.value = this.getFieldValue(column, this.entity);
       const control = new FormControl(
         {
-          value: column.value,
+          value: '', // column.value,
           disabled: this.isFieldDisabled(column),
         },
         this.getFieldConditionalIsRequired(column)

@@ -2,9 +2,9 @@
 @import "./../../../../assets/scss/idas/fonts.scss";
 
 .container {
-  margin: 0 0 0 0 !important;
+  margin: 1px 0 3px 0 !important;
   overflow-y: auto;
-  padding: 5px !important;
+  padding: 0 5px 0 0 !important;
 }
 span,
 mat-form-field,
@@ -18,6 +18,8 @@ select {
   font-size: 1em;
   margin: 0 0 0 0 !important;
   padding: 0 0 0 0 !important;
+  text-align: left;
+  vertical-align: middle;
 }
 span {
   mat-form-field {
@@ -76,12 +78,16 @@ div {
     box-sizing: border-box;
     font-weight: 500;
     height: 15em;
-    margin: 5px 0 7px 0;
+    margin: 5px 0 8px 0;
     padding: 5px;
-    p {
-      margin: 5px 0 7px 0;
-      padding: 5px;
-    }
+/*     p {
+      margin: 5px !important;
+      padding: 5px !important;
+    } */
+  }
+  p {
+    margin: 0 0 0 0 !important;
+    padding: 5px !important;
   }
 }
 i {

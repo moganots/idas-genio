@@ -12,6 +12,7 @@
           name="{{ column?.name }}"
           formControlName="{{ column?.name }}"
           [formControl]="formGroupFields?.controls[column?.name]"
+          [(ngModel)]="entity[column?.name]"
           class=""
           (change)="onCheckboxClicked($event)"
           ><p class="column displayName">
@@ -26,9 +27,10 @@
             type="text"
             id="{{ column?.name }}"
             name="{{ column?.name }}"
+            placeholder="{{ column?.displayName }}"
             formControlName="{{ column?.name }}"
             [formControl]="formGroupFields?.controls[column?.name]"
-            placeholder="{{ column?.displayName }}"
+            [(ngModel)]="entity[column?.name]"
             class=""
             [ngxMatDatetimePicker]="datetimepicker"
             (dateInput)="onDateTimePickerChanged($event)"
@@ -53,9 +55,10 @@
             type="password"
             id="{{ column?.name }}"
             name="{{ column?.name }}"
+            placeholder="{{ column?.displayName }}"
             formControlName="{{ column?.name }}"
             [formControl]="formGroupFields?.controls[column?.name]"
-            placeholder="{{ column?.displayName }}"
+            [(ngModel)]="entity[column?.name]"
             class=""
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
@@ -66,6 +69,8 @@
       <span *ngSwitchCase="'section'"><br /></span>
       <span *ngSwitchCase="'textarea'">
         {{ column?.displayName }}
+        <br />
+        <br />
         <div
           id="{{ column?.name }}"
           contenteditable="true"
@@ -73,11 +78,13 @@
           (change)="onDivValueChanged($event)"
           (keyup)="onDivValueChanged($event)"
         >
-          <p style="margin: 5px 0 7px 0; padding: 5px">
+          <p>
             {{ getTextAreaValue(column) }}
           </p>
-        </div></span
-      >
+        </div>
+        <br
+      />
+      <br /></span>
       <span *ngSwitchCase="'textbox'"
         ><mat-form-field>
           <input
@@ -85,9 +92,10 @@
             type="text"
             id="{{ column?.name }}"
             name="{{ column?.name }}"
+            placeholder="{{ column?.displayName }}"
             formControlName="{{ column?.name }}"
             [formControl]="formGroupFields?.controls[column?.name]"
-            placeholder="{{ column?.displayName }}"
+            [(ngModel)]="entity[column?.name]"
             class=""
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
@@ -100,9 +108,10 @@
             type="text"
             id="{{ column?.name }}"
             name="{{ column?.name }}"
+            placeholder="{{ column?.displayName }}"
             formControlName="{{ column?.name }}"
             [formControl]="formGroupFields?.controls[column?.name]"
-            placeholder="{{ column?.displayName }}"
+            [(ngModel)]="entity[column?.name]"
             class=""
             [ngxMatTimepicker]="timePicker"
             (dateInput)="onTimePickerChanged($event)"
@@ -122,9 +131,10 @@
             type="number"
             id="{{ column?.name }}"
             name="{{ column?.name }}"
+            placeholder="{{ column?.displayName }}"
             formControlName="{{ column?.name }}"
             [formControl]="formGroupFields?.controls[column?.name]"
-            placeholder="{{ column?.displayName }}"
+            [(ngModel)]="entity[column?.name]"
             class=""
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
@@ -137,10 +147,11 @@
             type="text"
             id="{{ column?.name }}"
             name="{{ column?.name }}"
+            placeholder="{{ column?.displayName }}"
             formControlName="{{ column?.name }}"
             [formControl]="formGroupFields?.controls[column?.name]"
+            [(ngModel)]="entity[column?.name]"
             class=""
-            placeholder="{{ column?.displayName }}"
             [matAutocomplete]="auto"
           />
           <mat-autocomplete

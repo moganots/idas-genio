@@ -94,6 +94,9 @@ export { FileSizePipe } from './utilities/filesize.pipe';
 export { GeneralUtils } from './utilities/general-utils';
 export { DataColumnUtils } from './utilities/data-column-utils';
 
+export { CustomDateOnlyAdapter } from './types/adapters/date/custom-date-only-adapter';
+export { CustomDateTimeAdapter } from './types/adapters/date/custom-date-time-adapter';
+
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   declarations: [],
