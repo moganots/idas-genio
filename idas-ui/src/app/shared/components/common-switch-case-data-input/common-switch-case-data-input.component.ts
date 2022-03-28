@@ -172,7 +172,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
     );
   }
   isCreate() {
-    return [`add`, `create`, `new`].includes(
+    return [`add`, `create`, `insert`, `new`].includes(
       GeneralUtils.toLocalLowerCaseWithTrim(this.action)
     );
   }
