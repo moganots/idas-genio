@@ -489,6 +489,13 @@ BEGIN
 END
 GO
 
+IF (OBJECT_ID(N'[dbo].[InboxMessageRecipient]', 'U') IS NOT NULL)
+BEGIN
+    DROP TABLE [dbo].[InboxMessageRecipient];
+	PRINT ('>> Completed > Drop > Table > [dbo].[InboxMessageRecipient]')
+END
+GO
+
 PRINT ('>> Completed > Drop existing tables')
 GO
 
@@ -1341,10 +1348,6 @@ GO
 -- Create the [dbo].[InboxMessage] table
 CREATE TABLE [dbo].[InboxMessage](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[From] [nvarchar] (max) NULL,
-	[To] [nvarchar] (max) NULL,
-	[Cc] [nvarchar] (max) NULL,
-	[Bcc] [nvarchar] (max) NULL,
 	[Subject] [nvarchar] (max) NULL,
 	[Message] [nvarchar] (max) NULL,
 	[IsActive] [bit] NULL,
@@ -1361,12 +1364,32 @@ GO
 PRINT ('>> Completed > Create > Table > [dbo].[InboxMessage]')
 GO
 
+-- Create the [dbo].[InboxMessageRecipient] table
+CREATE TABLE [dbo].[InboxMessageRecipient](
+	[_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[InboxMessageId] [bigint] NOT NULL,
+	[RecipientId] [bigint] NOT NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [bigint] NULL,
+	[DateCreated] [datetime] NULL,
+	[ModifiedBy] [bigint] NULL,
+	[DateModified] [datetime] NULL,
+ CONSTRAINT [PK_InboxMessageRecipient] PRIMARY KEY CLUSTERED 
+(
+	[_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+PRINT ('>> Completed > Create > Table > [dbo].[InboxMessageRecipient]')
+GO
+
 -- Create the [dbo].[FileAttachment] table
 CREATE TABLE [dbo].[FileAttachment](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[ProjectId] [bigint] NULL,
 	[TaskId] [bigint] NULL,
 	[CalendarEventId] [bigint] NULL,
+	[InboxMessageId] [bigint] NULL,
 	[FileName] [nvarchar] (max) NOT NULL,
 	[FileExtension] [nvarchar] (255) NULL,
 	[ContentType] [nvarchar] (255) NULL,
@@ -1453,7 +1476,7 @@ BEGIN
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
 		-- User
-		ELSE IF(@ColumnName IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'AttendeeId'))
+		ELSE IF(@ColumnName IN ('CreatedBy', 'ModifiedBy', 'UserId', 'AssigneeId', 'PreviousAssigneeId', 'LoggedBy', 'AttendeeId', 'RecipientId'))
 		BEGIN
 			SET @ReferenceTableName = 'User';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
@@ -1492,6 +1515,12 @@ BEGIN
 		ELSE IF(@ColumnName IN ('CalendarEventId'))
 		BEGIN
 			SET @ReferenceTableName = 'CalendarEvent';
+			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
+		END
+		-- InboxMessage
+		ELSE IF(@ColumnName IN ('InboxMessageId'))
+		BEGIN
+			SET @ReferenceTableName = 'InboxMessage';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
 		-- LookupCategory
@@ -4880,6 +4909,66 @@ PRINT ('>> Completed > INSERT >> Test Data > [dbo].[CalendarEventAttendee]')
 GO
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+-- INSERT >> Test >> Inbox Message(s) > ([dbo].[InboxMessage])
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+;WITH [cte] AS (
+SELECT 'Lorem ipsum dolor sit amet' AS [Subject], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.' AS [Message] UNION
+SELECT 'Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores' AS [Subject], 'Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.' AS [Message] UNION
+SELECT 'Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim' AS [Subject], 'Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Message] UNION
+SELECT 'Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum' AS [Subject], 'Lorem ipsum dolor sit amet. Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum. Ut iste quibusdam et ipsum rerum et impedit praesentium est blanditiis quaerat hic similique mollitia. Vel galisum itaque est illo minima ut veritatis voluptas? Non iure voluptatem et dolores numquam id impedit quod sit placeat nostrum vel reiciendis tempora aut illum unde.
+
+Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores! Quo atque magnam et suscipit ullam sed repellendus voluptatum ut illo Quis quo dolor sequi sit galisum consequatur.
+
+Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim. Aut maxime nihil vel nulla soluta 33 eveniet quia est dolore earum ea praesentium perferendis qui molestias officia. Ut dolore nulla qui voluptas vero et reprehenderit quis aut cupiditate officia sed voluptatum voluptatem id harum corrupti.' AS [Message]
+)
+INSERT INTO [dbo].[InboxMessage] ([Subject], [Message], [CreatedBy])
+SELECT
+	[Subject]
+	,[Message]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [cte]
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+-- INSERT >> Test >> Inbox Message(s), Inbox Message Recipient(s) > ([dbo].[InboxMessageRecipient])
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+;WITH [cte] AS (
+	SELECT
+		[im].[_id] AS [InboxMessageId]
+		,[u].[RecipientId]
+		,[im].[CreatedBy]	
+	FROM [dbo].[InboxMessage] AS [im]
+	LEFT JOIN (
+		SELECT
+			[_id] AS [RecipientId]
+			,[EmailAddress]
+		FROM [dbo].[User]
+	) AS [u] ON (
+		(
+			([im].[Subject] IN ('Lorem ipsum dolor sit amet'))
+			AND ([u].[EmailAddress] IN ('Jane.Doe@genio.idas.co.za', 'Bad.Job@genio.idas.co.za', 'info@closecorporation.co.za'))
+		)
+		OR (
+			([im].[Subject] IN ('Ut porro laudantium ab odio fugiat et obcaecati voluptatem qui expedita dolores'))
+			AND ([u].[EmailAddress] IN ('Jane.Doe@genio.idas.co.za', 'Bad.Job@genio.idas.co.za', 'info@closecorporation.co.za', 'Joe.Soap@genio.idas.co.za', 'John.Doe@genio.idas.co.za'))
+		)
+		OR (
+			([im].[Subject] IN ('Aut neque dolor vel inventore fugit vel iste nihil At vero quis ut voluptates enim'))
+			AND ([u].[EmailAddress] IN ('Jane.Doe@genio.idas.co.za', 'Bad.Job@genio.idas.co.za', 'John.Doe@genio.idas.co.za'))
+		)
+		OR (
+			([im].[Subject] IN ('Est asperiores eaque quo blanditiis error cum blanditiis quod qui necessitatibus animi At dolorem rerum'))
+			AND ([u].[EmailAddress] IN ('Jane.Doe@genio.idas.co.za', 'Joe.Soap@genio.idas.co.za', 'Good.Job@genio.idas.co.za'))
+		)
+	)
+)
+INSERT INTO [dbo].[InboxMessageRecipient] ([InboxMessageId], [RecipientId], [CreatedBy])
+SELECT
+	[InboxMessageId]
+	,[RecipientId]
+	,[CreatedBy]
+FROM [cte]
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Test >> File Attachment(s) > Project(s), Task(s), Calendar Event(s) > ([dbo].[FileAttachment])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ;WITH [files] AS (
@@ -4894,42 +4983,54 @@ SELECT 'Izingodla - Test Project Documentation (2).txt' AS [FileName], '.txt' AS
 )
 , [projectFiles] AS (
 	SELECT
-       [_id] AS [ProjectId]
+       [prj].[_id] AS [ProjectId]
       ,[FileName]
       ,[FileExtension]
       ,[ContentType]
       ,[FileSize]
 	  ,[CreatedBy]
-	FROM [dbo].[Project]
+	FROM [dbo].[Project] AS [prj]
 	CROSS JOIN [files]
 )
 , [taskFiles] AS (
 	SELECT
-       [_id] AS [TaskId]
+       [tsk].[_id] AS [TaskId]
       ,[FileName]
       ,[FileExtension]
       ,[ContentType]
       ,[FileSize]
 	  ,[CreatedBy]
-	FROM [dbo].[Task]
+	FROM [dbo].[Task] AS [tsk]
 	CROSS JOIN [files]
 )
 , [calendarEventFiles] AS (
 	SELECT
-       [_id] AS [CalendarEventId]
+       [ce].[_id] AS [CalendarEventId]
       ,[FileName]
       ,[FileExtension]
       ,[ContentType]
       ,[FileSize]
 	  ,[CreatedBy]
-	FROM [dbo].[CalendarEvent]
+	FROM [dbo].[CalendarEvent] AS [ce]
 	CROSS JOIN [files]
 )
-INSERT INTO [dbo].[FileAttachment]([ProjectId],[TaskId],[CalendarEventId],[FileName],[FileExtension],[ContentType],[FileSize],[CreatedBy])
+, [inboxMessageFiles] AS (
+	SELECT
+       [im].[_id] AS [InboxMessageId]
+      ,[FileName]
+      ,[FileExtension]
+      ,[ContentType]
+      ,[FileSize]
+	  ,[CreatedBy]
+	FROM [dbo].[InboxMessage] AS [im]
+	CROSS JOIN [files]
+)
+INSERT INTO [dbo].[FileAttachment]([ProjectId],[TaskId],[CalendarEventId],[InboxMessageId],[FileName],[FileExtension],[ContentType],[FileSize],[CreatedBy])
 SELECT
 	[ProjectId]
 	,[TaskId]
 	,[CalendarEventId]
+	,[InboxMessageId]
 	,[FileName]
 	,[FileExtension]
 	,[ContentType]
@@ -4940,6 +5041,7 @@ FROM (
 		[ProjectId]
 		,NULL AS [TaskId]
 		,NULL AS [CalendarEventId]
+		,NULL AS [InboxMessageId]
 		,[FileName]
 		,[FileExtension]
 		,[ContentType]
@@ -4951,6 +5053,7 @@ FROM (
 		NULL AS [ProjectId]
 		,[TaskId]
 		,NULL AS [CalendarEventId]
+		,NULL AS [InboxMessageId]
 		,[FileName]
 		,[FileExtension]
 		,[ContentType]
@@ -4962,12 +5065,25 @@ FROM (
 		NULL AS [ProjectId]
 		,NULL AS [TaskId]
 		,[CalendarEventId]
+		,NULL AS [InboxMessageId]
 		,[FileName]
 		,[FileExtension]
 		,[ContentType]
 		,[FileSize]
 		,[CreatedBy]
 	FROM [calendarEventFiles]
+	UNION ALL
+	SELECT
+		NULL AS [ProjectId]
+		,NULL AS [TaskId]
+		,NULL AS [CalendarEventId]
+		,[InboxMessageId]
+		,[FileName]
+		,[FileExtension]
+		,[ContentType]
+		,[FileSize]
+		,[CreatedBy]
+	FROM [inboxMessageFiles]
 ) AS [fileAttachments];
 
 GO
@@ -5041,6 +5157,8 @@ SELECT '[dbo].[TaskAssignment]' AS [TableName], * FROM [dbo].[TaskAssignment]
 SELECT '[dbo].[TaskStatus]' AS [TableName], * FROM [dbo].[TaskStatus]
 SELECT '[dbo].[CalendarEvent]' AS [TableName], * FROM [dbo].[CalendarEvent]
 SELECT '[dbo].[CalendarEventAttendee]' AS [TableName], * FROM [dbo].[CalendarEventAttendee]
+SELECT '[dbo].[InboxMessage]' AS [TableName], * FROM [dbo].[InboxMessage]
+SELECT '[dbo].[InboxMessageRecipient]' AS [TableName], * FROM [dbo].[InboxMessageRecipient]
 SELECT '[dbo].[FileAttachment]' AS [TableName], * FROM [dbo].[FileAttachment]
 SELECT '[dbo].[EntityChangeHistory]' AS [TableName], * FROM [dbo].[EntityChangeHistory]
 

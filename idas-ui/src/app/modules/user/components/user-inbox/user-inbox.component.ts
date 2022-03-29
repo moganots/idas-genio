@@ -14,6 +14,7 @@ import { InboxService } from './services/inbox.service';
 import {
   AlertifyService,
   AuthenticationService,
+  InboxMessage,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 
@@ -56,5 +57,11 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     this.dataService = inboxService;
     this.entityName = UserInboxConfiguration.identifier;
     this.dataSourceColumns = UserInboxConfiguration.dataColumns;
+  }
+  onClickMessageReply(message: InboxMessage, index?: number) {
+
+  }
+  onClickMessageReplyAll(message: InboxMessage, index?: number) {
+
   }
 }

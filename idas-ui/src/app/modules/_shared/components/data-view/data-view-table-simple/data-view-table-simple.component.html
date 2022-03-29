@@ -23,7 +23,7 @@
                   *ngFor="let column of dataSourceDisplayColumns"
                 >
                   <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    {{ column?.displayName }}
+                    {{ getFormattedColumnDisplayName(column) }}
                   </mat-header-cell>
                   <mat-cell
                     *matCellDef="let index; let element"
@@ -145,6 +145,28 @@
                     class="data-view-action-buttons-cell"
                   >
                     <span>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        type="button"
+                        data-toggle="modal"
+                        (click)="onClickReplyAll(element, getElementIndex(element))"
+                        title="Reply All"
+                        [hidden]="hideMessageReplyButtons()"
+                      >
+                        <i class="material-icons idas-button-icon">reply_all</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        type="button"
+                        data-toggle="modal"
+                        (click)="onClickMessageReply(element, getElementIndex(element))"
+                        title="Reply"
+                        [hidden]="hideMessageReplyButtons()"
+                      >
+                        <i class="material-icons idas-button-icon">reply</i>
+                      </button>
                       <button
                         mat-icon-button
                         class="btn btn-white btn-round btn-just-icon btn-idas-float-right"

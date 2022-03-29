@@ -189,7 +189,7 @@ export class SharedConfiguration {
     `VATNumber`,
   ];
   public static maskedColumns = [`Password`, `ConfirmPassword`];
-  public static textAreaColumns = [`Description`, `Summary`];
+  public static textAreaColumns = [`Description`, `Summary`, `Message`];
   public static useBreakNewlineSectionColumns = [`Break`, `Newline`, `Section`];
   public static referenceValueColumns = [
     `AssigneeId`,
@@ -207,6 +207,10 @@ export class SharedConfiguration {
     `EventAttendeeId`,
     `ParentProjectId`,
     `ParentTaskId`,
+    `CreatedBy`,
+    `ModifiedBy`,
+    `SentBy`,
+    `LoggedBy`,
   ];
   public static lookupValueColumns = [
     `BankId`,

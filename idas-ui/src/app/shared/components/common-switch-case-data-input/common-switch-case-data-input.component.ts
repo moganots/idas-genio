@@ -82,24 +82,27 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
           case `_id`:
           case `BirthDate`:
           case `Code`:
-          case `DateHired`:
-          case `DateTerminated`:
-          case `DateLastLoggedIn`:
-          case `DateLastLoggedOut`:
           case `DateAccounLocked`:
           case `DateAccounUnlocked`:
           case `DateCreated`:
+          case `DateHired`:
+          case `DateLastLoggedIn`:
+          case `DateLastLoggedOut`:
           case `DateModified`:
-          case `GenderId`:
-          // case `UserTypeId`:
+          case `DateTerminated`:
           case `EmployeeClientSupplierId`:
+          case `GenderId`:
           case `IsActive`:
-          case `UserId`:
-          case `ProjectId`:
-          case `TaskId`:
-          case `ParentTaskId`:
+          case `IsAdmin`:
+          case `IsLocked`:
+          case `IsTerminated`:
           case `ParentProjectId`:
+          case `ParentTaskId`:
+          case `ProjectId`:
           case `StatusId`:
+          case `TaskId`:
+          case `UserId`:
+          case `UserTypeId`:
             return true;
           default:
             return !column.canEdit;

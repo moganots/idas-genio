@@ -1,7 +1,7 @@
 /*
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
-| Create date:  2022-03-04
+| Create date:  2022-03-29
 | Description:  IDAS - Genio - API - routes utilities class
 |------------------------------------------------------------------------------------------------------------------
  */
@@ -59,6 +59,7 @@ function eRoutes() {
     const routeUserTypeMenuItem = require(`./user-type-menu-item/api`)(router, config);
     const routeNotificationMessage = require(`./notification-message/api`)(router, config);
     const routeInboxMessage = require(`./inbox-message/api`)(router, config);
+    const routeInboxMessageRecipient = require(`./inbox-message-recipient/api`)(router, config);
     const routeFileAttachment = require(`./file-attachment/api`)(router, config);
     const routevwRandomEmployeeNumber = require(`./vw-random-employee-number/api`)(router, config);
     return router;

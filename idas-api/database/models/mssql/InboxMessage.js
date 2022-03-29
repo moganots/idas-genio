@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-03-04
+| Create date:	2022-03-29
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[InboxMessage] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -13,15 +13,11 @@
  */
 const InboxMessage = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.From, entity.To, entity.Cc, entity.Bcc, entity.Subject, entity.Message, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.Subject, entity.Message, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, From, To, Cc, Bcc, Subject, Message, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, Subject, Message, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
-			From: From,
-			To: To,
-			Cc: Cc,
-			Bcc: Bcc,
 			Subject: Subject,
 			Message: Message,
 			IsActive: IsActive,

@@ -2,7 +2,7 @@
 |------------------------------------------------------------------------------------------------------------------
 | Author:	   TS MOGANO
 | Create date:  2022-03-29
-| Description:  IDAS - Genio - API - Routes utility class for the [dbo].[InboxMessage] table
+| Description:  IDAS - Genio - API - Routes utility class for the [dbo].[InboxMessageRecipient] table
 |------------------------------------------------------------------------------------------------------------------
  */
 
@@ -12,7 +12,7 @@
 |------------------------------------------------------------------------------------------------------------------
  */
 const _hearbeat = require(`./../heartbeat`);
-const _repository = require(`./../../database/repository/mssql/InboxMessageRepository`);
+const _repository = require(`./../../database/repository/mssql/InboxMessageRecipientRepository`);
 
 /*
 |------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ const _repository = require(`./../../database/repository/mssql/InboxMessageRepos
 |------------------------------------------------------------------------------------------------------------------
  */
 module.exports = function(router, config) {
-  const apiAnchorName = `inbox-message`;
+  const apiAnchorName = `inbox-message-recipient`;
   const heartbeat = _hearbeat(config);
   const repository = _repository();
 

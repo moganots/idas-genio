@@ -2,7 +2,7 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
 | Create date:	2022-03-29
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[EntityChangeHistory] Table
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) utility class for the [dbo].[InboxMessageRecipient] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,18 +11,15 @@
 | Function(s)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const EntityChangeHistory = () => {
+const InboxMessageRecipient = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.Operation, entity.EntityName, entity.id, entity.CurrentValue, entity.PreviousValue, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.InboxMessageId, entity.RecipientId, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, Operation, EntityName, id, CurrentValue, PreviousValue, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, InboxMessageId, RecipientId, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
-			Operation: Operation,
-			EntityName: EntityName,
-			id: id,
-			CurrentValue: CurrentValue,
-			PreviousValue: PreviousValue,
+			InboxMessageId: InboxMessageId,
+			RecipientId: RecipientId,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
 			DateCreated: DateCreated,
@@ -41,4 +38,4 @@ const EntityChangeHistory = () => {
 | module.exports
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-module.exports = EntityChangeHistory;
+module.exports = InboxMessageRecipient;

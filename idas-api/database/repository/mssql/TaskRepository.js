@@ -1,7 +1,7 @@
 /*
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
-| Create date:	2022-03-04
+| Create date:	2022-03-29
 | Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[Task] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
@@ -69,7 +69,6 @@ const Repository = () => {
     const update = (request, response, next) => {
         try{
             const uid = request.query.uid;
-            console.log(request.body);
             dbContext.update(uid, entityName, request.body, (error, data, message) => {
                 return onHttpRequestCompleted(__filename, request, response, error, data, message);
             });

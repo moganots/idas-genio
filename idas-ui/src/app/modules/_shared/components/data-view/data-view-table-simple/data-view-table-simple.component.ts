@@ -15,6 +15,7 @@ import { ReferenceValueService } from 'app/modules/_shared/services/reference-va
 import {
   AlertifyService,
   AuthenticationService,
+  DataColumn,
   GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
@@ -43,6 +44,8 @@ export class DataViewTableSimpleComponent
   @Output() manageProjectTasks: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectReInstate: EventEmitter<any> = new EventEmitter();
   @Output() manageSubtask: EventEmitter<any> = new EventEmitter();
+  @Output() messageReply: EventEmitter<any> = new EventEmitter();
+  @Output() messageReplyAll: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public router: Router,
@@ -74,6 +77,13 @@ export class DataViewTableSimpleComponent
       this.matTableDataSource.sort = this.sort;
     }
   }
+  getFormattedColumnDisplayName(column: DataColumn) {
+    return this.entityName === `inbox-message` && column?.name === `CreatedBy`
+      ? `Sent By`
+      : this.entityName === `inbox-message` && column?.name === `DateCreated`
+      ? `Date Sent`
+      : column?.displayName;
+  }
   onClickCreate(): void {
     super.onClickCreate();
     this.onOpenCreateEditDialog();
@@ -92,7 +102,7 @@ export class DataViewTableSimpleComponent
   }
   hideEditButton() {
     // ToDo: Check current user's permissions
-    return false;
+    return [`inbox-message`].includes(this.entityName);
   }
   onClickDelete(element: any, index?: number): void {
     super.onClickDelete(element, index);
@@ -183,7 +193,7 @@ export class DataViewTableSimpleComponent
     );
     return !(
       ['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``))
- /*      &&
+      /*      &&
       [
         'created',
         'not started',
@@ -243,17 +253,28 @@ export class DataViewTableSimpleComponent
     this.manageSubtask.emit({ index, element });
   }
   getTitleManageParentTaskButton(element: any, index?: number) {
-    return [`Create`, `sub-task`].join(' ').trim();
+    return [`Create`, `Sub Task`].join(' ').trim();
   }
   hideManageParentTaskButton(element: any, index?: number) {
     return !['task'].includes(
       this.toLocaleLowerCaseTrim(this.entityName || ``)
     );
   }
+  onClickMessageReply(element: any, index?: number) {
+    this.setSelectedElementAndIndex(element, index);
+    this.messageReply.emit({ index, element });
+  }
+  onClickMessageReplyAll(element: any, index?: number) {
+    this.setSelectedElementAndIndex(element, index);
+    this.messageReplyAll.emit({ index, element });
+  }
+  hideMessageReplyButtons() {
+    return !(this.entityName === `inbox-message`);
+  }
   onOpenCreateEditDialog(element?: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
-    const id = ((element || {})?._id || (element || {})?.id);
-    const name = (element || {})?.DisplayName || (element || {})?.Name;
+    const id = (element || {})?._id || (element || {})?.id;
+    const name = (element || {})?.DisplayName || (element || {})?.Name  || (element || {})?.Subject;
     super.openDialog(
       DialogCreateEditDataComponent,
       {
@@ -261,8 +282,12 @@ export class DataViewTableSimpleComponent
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
-        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
-        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageName: `${this.capitalizeFirstLetter(
+          this.action
+        )} ${this.entityName?.split(`-`)?.map((en) => this.capitalizeFirstLetter(en)).join(` `)}`,
+        pageTitle: `${this.capitalizeFirstLetter(
+          this.action
+        )} ${this.entityName?.split(`-`)?.map((en) => this.capitalizeFirstLetter(en)).join(` `)}`,
         pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
         dataColumns: this.dataSourceColumns,
         selectedElement: element || {},

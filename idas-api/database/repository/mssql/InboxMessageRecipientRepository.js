@@ -2,7 +2,7 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------
 | Author:		TS MOGANO
 | Create date:	2022-03-29
-| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[UserGroup] Table
+| Description:	IDAS - Genio - API - MS SQL Entity (Model) Repository utility class for the [dbo].[InboxMessageRecipient] Table
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -11,8 +11,8 @@
 | Dependency(ies)
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
-const entityName = `UserGroup`;
-const _UserGroup = require(`./../../models/mssql/UserGroup`);
+const entityName = `InboxMessageRecipient`;
+const _InboxMessageRecipient = require(`./../../models/mssql/InboxMessageRecipient`);
 const _dbContext = require(`./../../db-context/mssql/mssql-idas-genio-db-context`);
 const { onHttpRequestCompleted } = require(`../../../common/logging/logger`);
 const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-helper`);
@@ -23,7 +23,7 @@ const { getRequestQueryParametersWithoutUid } = require(`../../../common/http-he
 |--------------------------------------------------------------------------------------------------------------------------------------------
  */
 const Repository = () => {
-    const UserGroup = _UserGroup();
+    const InboxMessageRecipient = _InboxMessageRecipient();
     const dbContext = _dbContext();
     const create = (request, response, next) => {
         try{
