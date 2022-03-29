@@ -1098,6 +1098,15 @@ mat-header-cell:first-child {
     }
   }
   &.resize {
+    &.btn-5-px {
+      width: 5px;
+    }
+    &.btn-6-px {
+      width: 6px;
+    }
+    &.btn-7-px {
+      width: 6px;
+    }
     &.btn-8-px {
       width: 8px;
     }
