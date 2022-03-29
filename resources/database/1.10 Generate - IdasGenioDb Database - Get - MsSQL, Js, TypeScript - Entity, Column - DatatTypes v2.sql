@@ -76,7 +76,7 @@ SELECT
 		END AS [ReferenceValueInitialiser]
 FROM [cte]
 WHERE
-	([EntityName] = 'user')
+	([EntityName] = 'INBOXMESSAGE')
 	--AND ([ColumnName] LIKE '%Id')
 ORDER BY
 	[ColumnId]

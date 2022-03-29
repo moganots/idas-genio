@@ -147,29 +147,69 @@
                     <span>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         data-toggle="modal"
-                        (click)="onClickReplyAll(element, getElementIndex(element))"
-                        title="Reply All"
-                        [hidden]="hideMessageReplyButtons()"
-                      >
-                        <i class="material-icons idas-button-icon">reply_all</i>
-                      </button>
-                      <button
-                        mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
-                        type="button"
-                        data-toggle="modal"
-                        (click)="onClickMessageReply(element, getElementIndex(element))"
+                        (click)="
+                          onClickMessageReply(element, getElementIndex(element))
+                        "
                         title="Reply"
-                        [hidden]="hideMessageReplyButtons()"
+                        [hidden]="hideInboxMessageButtons()"
                       >
                         <i class="material-icons idas-button-icon">reply</i>
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
+                        type="button"
+                        data-toggle="modal"
+                        (click)="
+                          onClickMessageUnRead(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleMessageUnRead(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideInboxMessageButtons()"
+                      >
+                        <i class="material-icons idas-button-icon">{{
+                          getIconMessageUnRead(element)
+                        }}</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
+                        type="button"
+                        data-toggle="modal"
+                        (click)="
+                          onClickMessageView(element, getElementIndex(element))
+                        "
+                        title="Read / View Message"
+                        [hidden]="hideInboxMessageButtons()"
+                      >
+                        <i class="material-icons idas-button-icon">read_more</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
+                        type="button"
+                        data-toggle="modal"
+                        (click)="
+                          onClickReplyAll(element, getElementIndex(element))
+                        "
+                        title="Reply All"
+                        [hidden]="hideInboxMessageButtons()"
+                      >
+                        <i class="material-icons idas-button-icon">reply_all</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickManageEmployeeButton(
@@ -194,7 +234,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickManageParentTaskButton(
@@ -214,7 +254,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickManageProjectTaskButton(
@@ -234,7 +274,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickManageProjectAssignmentButton(
@@ -256,7 +296,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickViewProjectProgressButton(
@@ -278,7 +318,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickManageProjectReInstateButton(
@@ -298,7 +338,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         (click)="
                           onClickManageUserAccountButton(
@@ -342,7 +382,7 @@
                       </button>
                       <button
                         mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-8-px"
                         type="button"
                         data-toggle="modal"
                         data-target="#create-edit-modal-dialog"

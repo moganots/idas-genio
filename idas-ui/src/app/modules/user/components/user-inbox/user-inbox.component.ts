@@ -17,6 +17,7 @@ import {
   InboxMessage,
   LookupValueService,
 } from 'app/shared/app-shared.module';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-inbox',
@@ -58,10 +59,31 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     this.entityName = UserInboxConfiguration.identifier;
     this.dataSourceColumns = UserInboxConfiguration.dataColumns;
   }
-  onClickMessageReply(message: InboxMessage, index?: number) {
-
+  onClickMessageUnRead(message: any, index?: number) {
+    if (message && message?.element) {
+      message.element.IsActive = !message.element.IsActive;
+      this.inboxService
+        .CreateUpdateDelete<InboxMessage>(`update`, message.element)
+        .pipe(first())
+        .subscribe({
+          next: (updated) => {
+            this.alertifyService.success(
+              `Message marked as read`
+            );
+          },
+          complete: () => {
+            this.onDataRefresh();
+          },
+          error: (error) => {
+            this.alertifyService.error(error.message || error);
+          },
+        });
+    }
   }
-  onClickMessageReplyAll(message: InboxMessage, index?: number) {
-
+  onClickMessageReply(message: any, index?: number) {
+    console.log(message);
+  }
+  onClickMessageReplyAll(message: any, index?: number) {
+    console.log(message);
   }
 }

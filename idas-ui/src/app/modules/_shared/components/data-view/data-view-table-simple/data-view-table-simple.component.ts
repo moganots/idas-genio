@@ -44,8 +44,10 @@ export class DataViewTableSimpleComponent
   @Output() manageProjectTasks: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectReInstate: EventEmitter<any> = new EventEmitter();
   @Output() manageSubtask: EventEmitter<any> = new EventEmitter();
+  @Output() messageView: EventEmitter<any> = new EventEmitter();
   @Output() messageReply: EventEmitter<any> = new EventEmitter();
   @Output() messageReplyAll: EventEmitter<any> = new EventEmitter();
+  @Output() messageUnRead: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public router: Router,
@@ -97,7 +99,7 @@ export class DataViewTableSimpleComponent
       'Edit',
       this.capitalizeFirstLetter(this.entityName || ``) /*, `(${index})`*/,
     ]
-      .join(' ')
+      .join(` `)
       .trim()}`;
   }
   hideEditButton() {
@@ -113,7 +115,7 @@ export class DataViewTableSimpleComponent
       'Delete',
       this.capitalizeFirstLetter(this.entityName || ``) /*, `(${index})`*/,
     ]
-      .join(' ')
+      .join(` `)
       .trim()}`;
   }
   hideDeleteButton() {
@@ -126,7 +128,7 @@ export class DataViewTableSimpleComponent
   }
   getTitleManageUserAccountButton(element: any, index?: number) {
     return `${[element[`IsLocked`] ? `Unlock` : 'Lock', 'User Account']
-      .join(' ')
+      .join(` `)
       .trim()}`;
   }
   hideManageUserAccountButton() {
@@ -144,7 +146,7 @@ export class DataViewTableSimpleComponent
   }
   getTitleManageEmployeeButton(element: any, index?: number) {
     return `${[element[`IsTerminated`] ? `Re-Instate` : 'Terminate', 'Employee']
-      .join(' ')
+      .join(` `)
       .trim()}`;
   }
   hideManageEmployeeButton() {
@@ -166,7 +168,7 @@ export class DataViewTableSimpleComponent
       this.capitalizeFirstLetter(this.entityName || ``),
       `Progress`,
     ]
-      .join(' ')
+      .join(` `)
       .trim();
   }
   hideViewProjectProgressButton(element) {
@@ -184,7 +186,7 @@ export class DataViewTableSimpleComponent
       this.capitalizeFirstLetter(this.entityName || ``),
       `Task(s)`,
     ]
-      .join(' ')
+      .join(` `)
       .trim();
   }
   hideManageProjectTaskButton(element: any) {
@@ -212,7 +214,7 @@ export class DataViewTableSimpleComponent
       this.capitalizeFirstLetter(this.entityName || ``),
       'Assignment(s)',
     ]
-      .join(' ')
+      .join(` `)
       .trim()}`;
   }
   hideManageProjectAssignmentButton(element: any, index?: number) {
@@ -236,7 +238,7 @@ export class DataViewTableSimpleComponent
   }
   getTitleManageProjectReInstateButton(element: any, index?: number) {
     return [`Re-Instate`, this.capitalizeFirstLetter(this.entityName || ``)]
-      .join(' ')
+      .join(` `)
       .trim();
   }
   hideManageProjectReInstateButton(element: any, index?: number) {
@@ -253,12 +255,20 @@ export class DataViewTableSimpleComponent
     this.manageSubtask.emit({ index, element });
   }
   getTitleManageParentTaskButton(element: any, index?: number) {
-    return [`Create`, `Sub Task`].join(' ').trim();
+    return [`Create`, `Sub Task`].join(` `).trim();
   }
   hideManageParentTaskButton(element: any, index?: number) {
-    return !['task'].includes(
+    return ![`task`].includes(
       this.toLocaleLowerCaseTrim(this.entityName || ``)
     );
+  }
+  onClickMessageView(element: any, index?: number) {
+    this.setSelectedElementAndIndex(element, index);
+    this.messageView.emit({ index, element });
+  }
+  onClickMessageUnRead(element: any, index?: number) {
+    this.setSelectedElementAndIndex(element, index);
+    this.messageUnRead.emit({ index, element });
   }
   onClickMessageReply(element: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
@@ -268,13 +278,22 @@ export class DataViewTableSimpleComponent
     this.setSelectedElementAndIndex(element, index);
     this.messageReplyAll.emit({ index, element });
   }
-  hideMessageReplyButtons() {
+  hideInboxMessageButtons() {
     return !(this.entityName === `inbox-message`);
+  }
+  getTitleMessageUnRead(element: any, index?: number) {
+    return [`Mark`, (element?.IsActive) ? `Read` : `Un-Read`].join(` `);
+  }
+  getIconMessageUnRead(element: any) {
+    return (element?.IsActive) ? `mark_email_read` : `mark_email_unread`;
   }
   onOpenCreateEditDialog(element?: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
     const id = (element || {})?._id || (element || {})?.id;
-    const name = (element || {})?.DisplayName || (element || {})?.Name  || (element || {})?.Subject;
+    const name =
+      (element || {})?.DisplayName ||
+      (element || {})?.Name ||
+      (element || {})?.Subject;
     super.openDialog(
       DialogCreateEditDataComponent,
       {
@@ -282,12 +301,14 @@ export class DataViewTableSimpleComponent
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
-        pageName: `${this.capitalizeFirstLetter(
-          this.action
-        )} ${this.entityName?.split(`-`)?.map((en) => this.capitalizeFirstLetter(en)).join(` `)}`,
-        pageTitle: `${this.capitalizeFirstLetter(
-          this.action
-        )} ${this.entityName?.split(`-`)?.map((en) => this.capitalizeFirstLetter(en)).join(` `)}`,
+        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
+          ?.split(`-`)
+          ?.map((en) => this.capitalizeFirstLetter(en))
+          .join(` `)}`,
+        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
+          ?.split(`-`)
+          ?.map((en) => this.capitalizeFirstLetter(en))
+          .join(` `)}`,
         pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
         dataColumns: this.dataSourceColumns,
         selectedElement: element || {},
