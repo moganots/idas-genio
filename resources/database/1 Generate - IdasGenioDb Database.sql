@@ -1350,6 +1350,7 @@ CREATE TABLE [dbo].[InboxMessage](
 	[_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[Subject] [nvarchar] (max) NULL,
 	[Message] [nvarchar] (max) NULL,
+	[ParentInboxMessageId] [bigint] NULL,
 	[IsActive] [bit] NULL,
 	[CreatedBy] [bigint] NULL,
 	[DateCreated] [datetime] NULL,
@@ -1518,7 +1519,7 @@ BEGIN
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';
 		END
 		-- InboxMessage
-		ELSE IF(@ColumnName IN ('InboxMessageId'))
+		ELSE IF(@ColumnName IN ('InboxMessageId', 'ParentInboxMessageId'))
 		BEGIN
 			SET @ReferenceTableName = 'InboxMessage';
 			SET @ForeignKeyConstraintName = '[FK_' + @TableName + '_' + @ReferenceTableName + '_' + @ColumnName + ']';

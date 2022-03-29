@@ -3,7 +3,6 @@ import { Client } from '../client/client';
 import { Employee } from '../employee/employee';
 import { LookupValue } from '../lookups/lookup-value';
 import { Supplier } from '../supplier/supplier';
-import { ContactDetail } from './contact-detail';
 export class User extends BaseModel {
   EmployeeId: number;
   ClientId: number;
@@ -25,7 +24,6 @@ export class User extends BaseModel {
 
   MenuItems: any[] = [];
 
-  // tslint:disable-next-line:max-line-length
   constructor(
     _id?: number,
     EmployeeId?: number,

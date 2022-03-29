@@ -1,40 +1,44 @@
 import { GeneralUtils } from '../utilities/general-utils';
 import { BaseModel } from './base/base-model';
+import { InboxMessage } from './messaging/inbox-message';
 import { Project } from './project/project';
 import { CalendarEvent } from './scheduling/calendar-event';
 import { Task } from './task/task';
 export class FileAttachment extends BaseModel {
-  ProjectId?: number;
-  TaskId?: number;
-  CalendarEventId?: number;
-  FileName?: string;
-  FileExtension?: string;
-  ContentType?: string;
-  FileContent?: any;
-  FileSize?: number;
+  ProjectId: number;
+  TaskId: number;
+  CalendarEventId: number;
+  InboxMessageId: number;
+  FileName: string;
+  FileExtension: string;
+  ContentType: string;
+  FileContent: string;
+  FileSize: number;
   Project?: Project;
   Task?: Task;
   CalendarEvent?: CalendarEvent;
-
+  InboxMessage?: InboxMessage;
+  RouterLink: string;
   constructor(
-    id: number,
-    IsActive: boolean,
-    FileName: string,
+    _id?: number,
     ProjectId?: number,
     TaskId?: number,
     CalendarEventId?: number,
+    InboxMessageId?: number,
+    FileName?: string,
     FileExtension?: string,
     ContentType?: string,
-    FileContent?: any,
+    FileContent?: string,
     FileSize?: number,
     RouterLink?: string,
+    IsActive?: boolean,
     CreatedBy?: number,
     DateCreated?: Date,
     ModifiedBy?: number,
-    DateModified?: Date
+    DateModified?: Date,
   ) {
     super(
-      id,
+      _id,
       IsActive,
       undefined,
       FileName,
@@ -47,6 +51,7 @@ export class FileAttachment extends BaseModel {
     this.ProjectId = ProjectId;
     this.TaskId = TaskId;
     this.CalendarEventId = CalendarEventId;
+    this.InboxMessageId = InboxMessageId;
     this.FileName = FileName;
     this.FileExtension = FileExtension;
     this.ContentType = ContentType;

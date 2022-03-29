@@ -25,7 +25,8 @@ import { UserNotificationsComponent } from './components/user-notifications/user
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserMeetingCalendarComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
 import { UsersComponent } from './users.component';
-import { InboxService } from './components/user-inbox/services/inbox.service';
+import { InboxMessageService } from './components/user-inbox/services/inbox-message-service/inbox-message.service';
+import { InboxMessageRecipientService } from './components/user-inbox/services/inbox-message-recipient-service/inbox-message-recipient.service';
 import { NotificationsService } from './components/user-notifications/services/notifications.service';
 import { AppSharedComponentsCalendarModule } from 'app/shared/components/calendar/app-shared-components-calendar.module';
 import { DialogCreateEditCalendarEventComponent } from './components/user-meeting-calendar/components/dialog-create-edit-calendar-event/dialog-create-edit-calendar-event.component';
@@ -35,6 +36,7 @@ import { UserService } from './services/user-service/user.service';
 import { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
+import { DialogViewReplyInboxMessageComponent } from './components/user-inbox/components/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message.component';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -42,7 +44,7 @@ export { UserProfileComponent } from './components/user-profile/user-profile.com
 export { UserMeetingCalendarComponent } from './components/user-meeting-calendar/user-meeting-calendar.component';
 export { UsersComponent } from './users.component';
 
-export { UserInboxConfiguration } from './components/user-inbox/user-inbox-configuration';
+export { UserInboxMessageConfiguration } from './components/user-inbox/user-inbox-message-configuration';
 export { UserNotificationsConfiguration } from './components/user-notifications/user-notifications-configuration';
 export { UserProfileConfiguration } from './components/user-profile/user-profile-configuration';
 export { CalendarEventConfiguration } from './components/user-meeting-calendar/services/meeting-calendar-service/calendar-event-configuration';
@@ -51,7 +53,8 @@ export { CalendarEventAttendeeConfiguration } from './components/user-meeting-ca
 
 export { UserService } from './services/user-service/user.service';
 export { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
-export { InboxService } from './components/user-inbox/services/inbox.service';
+export { InboxMessageService } from './components/user-inbox/services/inbox-message-service/inbox-message.service';
+export { InboxMessageRecipientService } from './components/user-inbox/services/inbox-message-recipient-service/inbox-message-recipient.service';
 export { NotificationsService } from './components/user-notifications/services/notifications.service';
 export { MeetingCalendarService } from './components/user-meeting-calendar/services/meeting-calendar-service/meeting-calendar.service';
 export { MeetingCalendarAttendeeService } from './components/user-meeting-calendar/services/meeting-calendar-attendee/meeting-calendar-attendee.service';
@@ -90,11 +93,12 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     UserMeetingCalendarComponent,
     UsersComponent,
     DialogCreateEditCalendarEventComponent,
+    DialogViewReplyInboxMessageComponent,
   ],
   providers: [
     UserService,
     NotificationsService,
-    InboxService,
+    InboxMessageService,
     MeetingCalendarService,
     MeetingCalendarAttendeeService,
     ContactDetailService

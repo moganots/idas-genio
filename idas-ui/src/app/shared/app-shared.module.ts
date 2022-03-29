@@ -19,8 +19,9 @@ export { Entity } from './domain-models/base/entity';
 
 export { User } from './domain-models/user/user';
 export { ContactDetail } from './domain-models/user/contact-detail';
-export { InboxMessage } from './domain-models/user/inbox-message';
-export { NotificationMessage } from './domain-models/user/notification-message';
+export { InboxMessage } from './domain-models/messaging/inbox-message';
+export { InboxMessageRecipient } from './domain-models/messaging/inbox-message-recipient';
+export { NotificationMessage } from './domain-models/messaging/notification-message';
 
 export { LookupCategory } from './domain-models/lookups/lookup-category';
 export { LookupValue } from './domain-models/lookups/lookup-value';

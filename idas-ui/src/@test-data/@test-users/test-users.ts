@@ -358,7 +358,7 @@ export class TestUsers {
         Path: '/inbox',
         Icon: 'contact_mail',
         Component: 'UserInboxComponent',
-        Configuration: 'UserInboxConfiguration',
+        Configuration: 'UserInboxMessageConfiguration',
         IsActive: true,
         CreatedBy: 3,
         DateCreated: '2021-07-27T16:54:00.130',

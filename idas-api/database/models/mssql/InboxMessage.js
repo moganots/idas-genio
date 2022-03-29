@@ -13,13 +13,14 @@
  */
 const InboxMessage = () => {
 	const fromEntity = (entity = {}) => {
-		return fromComponents(entity._id, entity.Subject, entity.Message, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
+		return fromComponents(entity._id, entity.Subject, entity.Message, entity.ParentInboxMessageId, entity.IsActive, entity.CreatedBy, entity.DateCreated, entity.ModifiedBy, entity.DateModified);
 	}
-	const fromComponents = (_id, Subject, Message, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
+	const fromComponents = (_id, Subject, Message, ParentInboxMessageId, IsActive, CreatedBy, DateCreated, ModifiedBy, DateModified) => {
 		return {
 			_id: _id,
 			Subject: Subject,
 			Message: Message,
+			ParentInboxMessageId: ParentInboxMessageId,
 			IsActive: IsActive,
 			CreatedBy: CreatedBy,
 			DateCreated: DateCreated,

@@ -28,7 +28,7 @@ import {
 } from 'app/modules/suppliers/app-modules-suppliers.module';
 import {
   UserInboxComponent,
-  UserInboxConfiguration,
+  UserInboxMessageConfiguration,
   UserNotificationsComponent,
   UserNotificationsConfiguration,
   UserProfileComponent,
@@ -67,7 +67,7 @@ export const AppMainRoutes: Routes = [
     // canActivate: [AuthenticationGuardService],
   },
   {
-    path: UserInboxConfiguration.pageRoute,
+    path: UserInboxMessageConfiguration.pageRoute,
     pathMatch: 'full',
     component: UserInboxComponent,
     // canActivate: [AuthenticationGuardService],

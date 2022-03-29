@@ -72,6 +72,7 @@ export class DataViewTableSimpleComponent
     // this.setDataSourceColumns();
     this.initFormGroupAndFields();
     this.onDataRefresh();
+    console.log(this.dataSource);
   }
   ngAfterViewInit() {
     if (this.matTableDataSource) {

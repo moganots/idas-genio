@@ -9,8 +9,8 @@ import {
   PageComponent,
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
-import { UserInboxConfiguration } from './user-inbox-configuration';
-import { InboxService } from './services/inbox.service';
+import { UserInboxMessageConfiguration } from './user-inbox-message-configuration';
+import { InboxMessageService } from './services/inbox-message-service/inbox-message.service';
 import {
   AlertifyService,
   AuthenticationService,
@@ -28,7 +28,7 @@ import { first } from 'rxjs/operators';
     AuthenticationService,
     LookupValueService,
     ReferenceValueService,
-    InboxService,
+    InboxMessageService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} },
   ],
 })
@@ -41,7 +41,7 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
     public referenceValueService: ReferenceValueService,
-    public inboxService: InboxService
+    public inboxMessageService: InboxMessageService
   ) {
     super(
       router,
@@ -52,17 +52,17 @@ export class UserInboxComponent extends PageComponent implements OnInit {
       lookupValueService,
       referenceValueService
     );
-    this.pageIcon = UserInboxConfiguration.pageIcon;
-    this.pageTitle = UserInboxConfiguration.pageTitle;
-    this.pageName = UserInboxConfiguration.pageName;
-    this.dataService = inboxService;
-    this.entityName = UserInboxConfiguration.identifier;
-    this.dataSourceColumns = UserInboxConfiguration.dataColumns;
+    this.pageIcon = UserInboxMessageConfiguration.pageIcon;
+    this.pageTitle = UserInboxMessageConfiguration.pageTitle;
+    this.pageName = UserInboxMessageConfiguration.pageName;
+    this.dataService = inboxMessageService;
+    this.entityName = UserInboxMessageConfiguration.identifier;
+    this.dataSourceColumns = UserInboxMessageConfiguration.dataColumns;
   }
   onClickMessageUnRead(message: any, index?: number) {
     if (message && message?.element) {
       message.element.IsActive = !message.element.IsActive;
-      this.inboxService
+      this.dataService
         .CreateUpdateDelete<InboxMessage>(`update`, message.element)
         .pipe(first())
         .subscribe({
