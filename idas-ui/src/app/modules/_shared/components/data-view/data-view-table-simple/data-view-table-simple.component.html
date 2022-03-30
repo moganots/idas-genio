@@ -38,7 +38,7 @@
                         ></mat-checkbox>
                       </span>
                       <span *ngSwitchCase="'datetimepicker'">
-                        {{ element[column?.name] }}
+                        {{ getFormattedDate(element[column?.name]) }}
                       </span>
                       <span *ngSwitchCase="'number'">
                         {{ element[column?.name] }}
@@ -151,6 +151,19 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
+                          onClickReplyAll(element, getElementIndex(element))
+                        "
+                        title="Reply All"
+                        [hidden]="hideInboxMessageButtons()"
+                      >
+                        <i class="material-icons idas-button-icon">reply_all</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-6-px"
+                        type="button"
+                        data-toggle="modal"
+                        (click)="
                           onClickMessageReply(element, getElementIndex(element))
                         "
                         title="Reply"
@@ -198,19 +211,6 @@
                         mat-icon-button
                         class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-6-px"
                         type="button"
-                        data-toggle="modal"
-                        (click)="
-                          onClickReplyAll(element, getElementIndex(element))
-                        "
-                        title="Reply All"
-                        [hidden]="hideInboxMessageButtons()"
-                      >
-                        <i class="material-icons idas-button-icon">reply_all</i>
-                      </button>
-                      <button
-                        mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-6-px"
-                        type="button"
                         (click)="
                           onClickManageEmployeeButton(
                             element,
@@ -251,26 +251,6 @@
                         [hidden]="hideManageParentTaskButton(element)"
                       >
                         <i class="material-icons idas-button-icon">task_alt</i>
-                      </button>
-                      <button
-                        mat-icon-button
-                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-6-px"
-                        type="button"
-                        (click)="
-                          onClickManageProjectTaskButton(
-                            element,
-                            getElementIndex(element)
-                          )
-                        "
-                        title="{{
-                          getTitleManageProjectTaskButton(
-                            element,
-                            getElementIndex(element)
-                          )
-                        }}"
-                        [hidden]="hideManageProjectTaskButton(element)"
-                      >
-                        <i class="material-icons idas-button-icon">list</i>
                       </button>
                       <button
                         mat-icon-button
@@ -335,6 +315,26 @@
                         [hidden]="hideManageProjectReInstateButton(element)"
                       >
                         <i class="material-icons idas-button-icon">repeat</i>
+                      </button>
+                      <button
+                        mat-icon-button
+                        class="btn btn-white btn-round btn-just-icon btn-idas-float-right resize btn-6-px"
+                        type="button"
+                        (click)="
+                          onClickManageProjectTaskButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        "
+                        title="{{
+                          getTitleManageProjectTaskButton(
+                            element,
+                            getElementIndex(element)
+                          )
+                        }}"
+                        [hidden]="hideManageProjectTaskButton(element)"
+                      >
+                        <i class="material-icons idas-button-icon">list</i>
                       </button>
                       <button
                         mat-icon-button
@@ -406,6 +406,7 @@
                     let elementIndex = index;
                     columns: dataSourceColumnNames
                   "
+                  [ngClass]="{ 'is-active': (entityName === 'inbox-message' && element.IsActive === true) }"
                 ></mat-row>
               </table>
               <mat-paginator

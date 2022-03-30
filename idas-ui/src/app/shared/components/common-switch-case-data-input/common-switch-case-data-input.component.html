@@ -3,6 +3,7 @@
     *ngFor="let column of useColumns; let id = index"
     class="container {{ columnsCssClass }}"
     formGroupName="formFields"
+    [hidden]="getFieldConditionalIsHidden(column)"
   >
     <span [ngSwitch]="column?.controlType">
       <span *ngSwitchCase="'break'"><br /></span>

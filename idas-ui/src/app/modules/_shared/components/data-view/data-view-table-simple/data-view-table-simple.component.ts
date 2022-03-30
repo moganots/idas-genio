@@ -1,7 +1,10 @@
+import { DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   EventEmitter,
+  Inject,
+  LOCALE_ID,
   OnInit,
   Output,
 } from '@angular/core';
@@ -16,6 +19,7 @@ import {
   AlertifyService,
   AuthenticationService,
   DataColumn,
+  DateUtils,
   GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
@@ -49,6 +53,8 @@ export class DataViewTableSimpleComponent
   @Output() messageReplyAll: EventEmitter<any> = new EventEmitter();
   @Output() messageUnRead: EventEmitter<any> = new EventEmitter();
 
+  datepipe: DatePipe = new DatePipe(this.locale);
+
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -56,7 +62,8 @@ export class DataViewTableSimpleComponent
     public alertifyService: AlertifyService,
     public authenticationService: AuthenticationService,
     public lookupValueService: LookupValueService,
-    public referenceValueService: ReferenceValueService
+    public referenceValueService: ReferenceValueService,
+    @Inject(LOCALE_ID) public locale: string
   ) {
     super(
       router,
@@ -72,7 +79,6 @@ export class DataViewTableSimpleComponent
     // this.setDataSourceColumns();
     this.initFormGroupAndFields();
     this.onDataRefresh();
-    console.log(this.dataSource);
   }
   ngAfterViewInit() {
     if (this.matTableDataSource) {
@@ -86,6 +92,9 @@ export class DataViewTableSimpleComponent
       : this.entityName === `inbox-message` && column?.name === `DateCreated`
       ? `Date Sent`
       : column?.displayName;
+  }
+  getFormattedDate(date: Date) {
+    return this.datepipe.transform(date, DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE);
   }
   onClickCreate(): void {
     super.onClickCreate();

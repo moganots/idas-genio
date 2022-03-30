@@ -5,6 +5,10 @@
   // // border: 1px gray;
   overflow: auto;
   max-height: 500px;
+  tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
+  }
 }
 
 mat-footer-row,
@@ -75,10 +79,20 @@ mat-cell {
 
 .data-view-action-buttons-cell {
   border-style: none;
-  padding: 0 5px 0 60px;
+  float: right;
+  padding: 0 5px 0 5px;
   right: 0;
   i {
     margin: 0 0 0 10px;
     padding: 0 0 0 0;
   }
+}
+
+.is-active {
+  // background: #DCDCDC; // Light-Gray
+  // background: #FFFAFA; // Snow
+  // background: #F0FFF0; // Honeydew
+  // background: #F8F8FF; // GhostsWhite
+  // background: #F5F5F5; // WhiteSmoke
+  background: #DCDCDC; // Gainsboro
 }

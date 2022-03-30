@@ -41,7 +41,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       const control = new FormControl(
         {
           value: '', // column.value,
-          disabled: this.isFieldDisabled(column),
+          disabled: this.isFieldDisabled(column)
         },
         this.getFieldConditionalIsRequired(column)
       );
@@ -110,6 +110,9 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       default:
         return !column.canEdit;
     }
+  }
+  getFieldConditionalIsHidden(column: DataColumn) {
+    return [`IsActive`, `CreatedBy`, `DateCreated`, `ModifiedBy`, `DateModified`].includes(column?.name);
   }
   getFieldConditionalIsRequired(column: DataColumn) {
     if (
