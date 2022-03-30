@@ -1,1 +1,42 @@
-<p>dialog-view-reply-inbox-message works!</p>
+<div class="idas-dialog open">
+    <div class="card-header card-header-danger header">
+      <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+      <h4 class="card-title">{{ pageTitle }}</h4>
+      <p class="category">{{ pageSubTitle }}</p>
+      <span>
+        <button
+          mat-icon-button
+          class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
+          type="button"
+          data-dismiss="modal"
+          (click)="onButtonClickCloseDialog()"
+          title="Close"
+        >
+          <i class="material-icons header.buttons">close</i>
+        </button>
+      </span>
+    </div>
+    <div class="content">
+    </div>
+    <footer class="footer">
+      <button
+        mat-icon-button
+        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+        type="button"
+        (click)="onButtonClickSend()"
+        title="Save Changes"
+      >
+        <i class="material-icons idas-button-icon">send</i>
+      </button>
+      <button
+        mat-icon-button
+        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+        type="button"
+        (click)="onButtonClickSave()"
+        title="Reply"
+      >
+        <i class="material-icons idas-button-icon">reply</i>
+      </button>
+    </footer>
+  </div>
+  

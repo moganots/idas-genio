@@ -61,7 +61,10 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     this.entityName = UserInboxMessageConfiguration.identifier;
     this.dataSourceColumns = UserInboxMessageConfiguration.dataColumns;
   }
-  onClickInboxMessageCreateNew() {}
+  onClickInboxMessageCreateNew() {
+    this.action = `Create`;
+    this.openDialog({});
+  }
   onClickInboxMessageReadView(message: any, index?: number) {
     this.action = `View`;
     this.openDialog(message, index);

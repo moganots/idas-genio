@@ -48,6 +48,7 @@ export class DataViewTableSimpleComponent
   @Output() manageProjectTasks: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectReInstate: EventEmitter<any> = new EventEmitter();
   @Output() manageSubtask: EventEmitter<any> = new EventEmitter();
+  @Output() inboxMessageCreateNew: EventEmitter<any> = new EventEmitter();
   @Output() inboxMessageReadView: EventEmitter<any> = new EventEmitter();
   @Output() inboxMessageUnRead: EventEmitter<any> = new EventEmitter();
   @Output() inboxMessageReply: EventEmitter<any> = new EventEmitter();
@@ -94,11 +95,21 @@ export class DataViewTableSimpleComponent
       : column?.displayName;
   }
   getFormattedDate(date: Date) {
-    return this.datepipe.transform(date, DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE);
+    return this.datepipe.transform(
+      date,
+      DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE
+    );
   }
   onButtonClickCreate(): void {
     super.onButtonClickCreate();
-    this.onOpenCreateEditDialog();
+    switch (this.toLocaleLowerCaseTrim(this.entityName)) {
+      case `inbox-message`:
+        this.inboxMessageCreateNew.emit({});
+        break;
+      default:
+        this.onOpenCreateEditDialog();
+        break;
+    }
   }
   onButtonClickEdit(element: any, index?: number): void {
     super.onButtonClickEdit(element, index);
@@ -292,10 +303,10 @@ export class DataViewTableSimpleComponent
     return !(this.entityName === `inbox-message`);
   }
   getTitleMessageUnRead(element: any, index?: number) {
-    return [`Mark`, (element?.IsActive) ? `Read` : `Un-Read`].join(` `);
+    return [`Mark`, element?.IsActive ? `Read` : `Un-Read`].join(` `);
   }
   getIconMessageUnRead(element: any) {
-    return (element?.IsActive) ? `mark_email_read` : `mark_email_unread`;
+    return element?.IsActive ? `mark_email_read` : `mark_email_unread`;
   }
   onOpenCreateEditDialog(element?: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);

@@ -20,7 +20,7 @@ import {
 @Component({
   selector: 'app-dialog-view-reply-inbox-message',
   templateUrl: './dialog-view-reply-inbox-message.component.html',
-  styleUrls: ['./dialog-view-reply-inbox-message.component.css'],
+  styleUrls: ['./dialog-view-reply-inbox-message.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -61,4 +61,5 @@ export class DialogReadViewReplyInboxMessageComponent
         this.entityName
       )}`;
   }
+  onButtonClickSend(): void {}
 }
