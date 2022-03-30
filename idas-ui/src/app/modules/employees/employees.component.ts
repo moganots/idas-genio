@@ -12,10 +12,12 @@ import {
 import {
   AlertifyService,
   AuthenticationService,
+  Employee,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { EmployeeConfiguration } from './services/employee-configuration';
 import { EmployeesService } from './services/employees.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employees',
@@ -56,5 +58,30 @@ export class EmployeesComponent extends PageComponent implements OnInit {
     this.dataService = employeesService;
     this.entityName = EmployeeConfiguration.identifier;
     this.dataSourceColumns = EmployeeConfiguration.dataColumns;
+  }
+
+  onButtonClickEmployeeTerminateReInstate(employee: any, index?: number) {
+    if (employee && employee.element) {
+      employee.element.IsActive = !employee.element.IsActive;
+      employee.element.IsTerminated = !employee.element.IsTerminated;
+      employee.element.DateTerminated =
+        employee.element.IsTerminated === true ? new Date() : null;
+      this.dataService
+        .CreateUpdateDelete<Employee>(`Update`, employee.element)
+        .pipe(first())
+        .subscribe({
+          next: (updated) => {
+            this.alertifyService.success(
+              `Employee ${(updated?.IsTerminated) ? `termination` : `re-instatement`} completed, successfully`
+            );
+          },
+          complete: () => {
+            this.onDataRefresh();
+          },
+          error: (error) => {
+            this.alertifyService.error(error.message || error);
+          },
+        });
+    }
   }
 }

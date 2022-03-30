@@ -12,5 +12,6 @@
   [canDelete]="false"
   [canSave]="false"
   [canRefresh]="true"
+  (manageEmployee)="onButtonClickEmployeeTerminateReInstate($event, getElementIndex($event))"
   (refresh)="onDataRefresh()"
 ></app-data-view-table-simple>

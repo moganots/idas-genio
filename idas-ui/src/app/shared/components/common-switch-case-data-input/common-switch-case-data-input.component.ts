@@ -85,7 +85,6 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
           case `DateAccounLocked`:
           case `DateAccounUnlocked`:
           case `DateCreated`:
-          case `DateHired`:
           case `DateLastLoggedIn`:
           case `DateLastLoggedOut`:
           case `DateModified`:
