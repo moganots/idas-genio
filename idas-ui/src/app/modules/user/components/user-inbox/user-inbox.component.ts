@@ -14,10 +14,12 @@ import { InboxMessageService } from './services/inbox-message-service/inbox-mess
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   InboxMessage,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import { first } from 'rxjs/operators';
+import { DialogReadViewReplyInboxMessageComponent } from './components/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message.component';
 
 @Component({
   selector: 'app-user-inbox',
@@ -59,7 +61,12 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     this.entityName = UserInboxMessageConfiguration.identifier;
     this.dataSourceColumns = UserInboxMessageConfiguration.dataColumns;
   }
-  onClickMessageUnRead(message: any, index?: number) {
+  onClickInboxMessageCreateNew() {}
+  onClickInboxMessageReadView(message: any, index?: number) {
+    this.action = `View`;
+    this.openDialog(message, index);
+  }
+  onClickInboxMessageUnRead(message: any, index?: number) {
     if (message && message?.element) {
       message.element.IsActive = !message.element.IsActive;
       this.dataService
@@ -67,8 +74,9 @@ export class UserInboxComponent extends PageComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: (updated) => {
+            console.log(updated);
             this.alertifyService.success(
-              `Message marked as read`
+              `Message marked as ${updated?.IsActive ? `un-read` : `read`}`
             );
           },
           complete: () => {
@@ -80,10 +88,43 @@ export class UserInboxComponent extends PageComponent implements OnInit {
         });
     }
   }
-  onClickMessageReply(message: any, index?: number) {
-    console.log(message);
+  onClickInboxMessageReply(message: any, index?: number) {
+    this.action = `Reply`;
+    this.openDialog(message, index);
   }
-  onClickMessageReplyAll(message: any, index?: number) {
-    console.log(message);
+  onClickInboxMessageReplyAll(message: any, index?: number) {
+    this.action = `ReplyAll`;
+    this.openDialog(message, index);
+  }
+  openDialog(message: any, index?: number): void {
+    const id = (message || {})?._id || (message || {})?.id;
+    const name =
+      (message || {})?.DisplayName ||
+      (message || {})?.Name ||
+      (message || {})?.Subject;
+    super.openDialog(
+      DialogReadViewReplyInboxMessageComponent,
+      {
+        action: this.action,
+        dataService: this.dataService,
+        entityName: this.entityName,
+        pageIcon: this.pageIcon,
+        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
+          ?.split(`-`)
+          ?.map((en) => this.capitalizeFirstLetter(en))
+          .join(` `)}`,
+        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
+          ?.split(`-`)
+          ?.map((en) => this.capitalizeFirstLetter(en))
+          .join(` `)}`,
+        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        dataColumns: this.dataSourceColumns,
+        selectedElement: message || {},
+        selectedElementIndex: index || this.selectedElementIndex,
+      },
+      () => {
+        this.onDataRefresh();
+      }
+    );
   }
 }

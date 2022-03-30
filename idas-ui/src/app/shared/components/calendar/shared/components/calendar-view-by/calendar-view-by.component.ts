@@ -81,7 +81,7 @@ export class CalendarViewByComponent implements OnInit {
   onClickNewCalendarEvent(date: Date) {
     this.newCalendarEvent.emit(date);
   }
-  onClickEditCalendarEvent(event: CalendarEvent) {
+  onButtonClickEditCalendarEvent(event: CalendarEvent) {
     this.editCalendarEvent.emit(event);
   }
 }

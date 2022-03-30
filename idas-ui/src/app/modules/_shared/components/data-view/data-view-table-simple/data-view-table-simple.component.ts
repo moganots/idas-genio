@@ -4,6 +4,7 @@ import {
   Component,
   EventEmitter,
   Inject,
+  Input,
   LOCALE_ID,
   OnInit,
   Output,
@@ -41,17 +42,16 @@ export class DataViewTableSimpleComponent
   extends BaseDataViewComponent
   implements OnInit, AfterViewInit
 {
-  @Output() delete: EventEmitter<any> = new EventEmitter();
   @Output() manageEmployee: EventEmitter<any> = new EventEmitter();
   @Output() manageUser: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectAssignments: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectTasks: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectReInstate: EventEmitter<any> = new EventEmitter();
   @Output() manageSubtask: EventEmitter<any> = new EventEmitter();
-  @Output() messageView: EventEmitter<any> = new EventEmitter();
-  @Output() messageReply: EventEmitter<any> = new EventEmitter();
-  @Output() messageReplyAll: EventEmitter<any> = new EventEmitter();
-  @Output() messageUnRead: EventEmitter<any> = new EventEmitter();
+  @Output() inboxMessageReadView: EventEmitter<any> = new EventEmitter();
+  @Output() inboxMessageUnRead: EventEmitter<any> = new EventEmitter();
+  @Output() inboxMessageReply: EventEmitter<any> = new EventEmitter();
+  @Output() inboxMessageReplyAll: EventEmitter<any> = new EventEmitter();
 
   datepipe: DatePipe = new DatePipe(this.locale);
 
@@ -96,12 +96,12 @@ export class DataViewTableSimpleComponent
   getFormattedDate(date: Date) {
     return this.datepipe.transform(date, DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE);
   }
-  onClickCreate(): void {
-    super.onClickCreate();
+  onButtonClickCreate(): void {
+    super.onButtonClickCreate();
     this.onOpenCreateEditDialog();
   }
-  onClickEdit(element: any, index?: number): void {
-    super.onClickEdit(element, index);
+  onButtonClickEdit(element: any, index?: number): void {
+    super.onButtonClickEdit(element, index);
     this.onOpenCreateEditDialog(element, index);
   }
   getTitleEditButton(element: any, index?: number) {
@@ -116,8 +116,8 @@ export class DataViewTableSimpleComponent
     // ToDo: Check current user's permissions
     return [`inbox-message`].includes(this.entityName);
   }
-  onClickDelete(element: any, index?: number): void {
-    super.onClickDelete(element, index);
+  onButtonClickDelete(element: any, index?: number): void {
+    super.onButtonClickDelete(element, index);
     this.delete.emit(element);
   }
   getTitleDeleteButton(element: any, index?: number) {
@@ -272,21 +272,21 @@ export class DataViewTableSimpleComponent
       this.toLocaleLowerCaseTrim(this.entityName || ``)
     );
   }
-  onClickMessageView(element: any, index?: number) {
+  onClickInboxMessageReadView(element: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
-    this.messageView.emit({ index, element });
+    this.inboxMessageReadView.emit({ index, element });
   }
-  onClickMessageUnRead(element: any, index?: number) {
+  onClickInboxMessageUnRead(element: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
-    this.messageUnRead.emit({ index, element });
+    this.inboxMessageUnRead.emit({ index, element });
   }
-  onClickMessageReply(element: any, index?: number) {
+  onClickInboxMessageReply(element: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
-    this.messageReply.emit({ index, element });
+    this.inboxMessageReply.emit({ index, element });
   }
-  onClickMessageReplyAll(element: any, index?: number) {
+  onClickInboxMessageReplyAll(element: any, index?: number) {
     this.setSelectedElementAndIndex(element, index);
-    this.messageReplyAll.emit({ index, element });
+    this.inboxMessageReplyAll.emit({ index, element });
   }
   hideInboxMessageButtons() {
     return !(this.entityName === `inbox-message`);

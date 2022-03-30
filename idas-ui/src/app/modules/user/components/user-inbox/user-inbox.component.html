@@ -1,1 +1,29 @@
-<app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [dataSource]="dataSource" [dataSourceColumns]="dataSourceColumns" (messageUnRead)="onClickMessageUnRead($event, getElementIndex($event))" (messageReply)="onClickMessageReply($event, getElementIndex($event))" (messageReplyAll)="onClickMessageReplyAll($event, getElementIndex($event))"></app-data-view-table-simple>
+<app-data-view-table-simple
+  [pageIcon]="pageIcon"
+  [pageTitle]="pageTitle"
+  [pageName]="pageName"
+  [dataService]="dataService"
+  [entityName]="entityName"
+  [dataSource]="dataSource"
+  [dataSourceColumns]="dataSourceColumns"
+  [canCreate]="true"
+  [canView]="false"
+  [canEdit]="false"
+  [canDelete]="false"
+  [canSave]="false"
+  [canRefresh]="true"
+  (inboxMessageCreateNew)="onClickInboxMessageCreateNew()"
+  (inboxMessageReadView)="
+    onClickInboxMessageReadView($event, getElementIndex($event))
+  "
+  (inboxMessageUnRead)="
+    onClickInboxMessageUnRead($event, getElementIndex($event))
+  "
+  (inboxMessageReply)="
+    onClickInboxMessageReply($event, getElementIndex($event))
+  "
+  (inboxMessageReplyAll)="
+    onClickInboxMessageReplyAll($event, getElementIndex($event))
+  "
+  (refresh)="onDataRefresh()"
+></app-data-view-table-simple>

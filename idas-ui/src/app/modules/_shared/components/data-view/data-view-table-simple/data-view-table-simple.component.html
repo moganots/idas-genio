@@ -5,14 +5,21 @@
         <div class="card">
           <app-page-header
             [entityName]="entityName"
+            [dataService]="dataService"
             [pageIcon]="pageIcon"
             [pageName]="pageName"
             [pageTitle]="pageTitle"
             [pageSubTitle]="pageSubTitle"
-            [hideButtonCreate]="false"
-            [hideButtonRefresh]="false"
-            [hideButtonSave]="true"
-            (create)="onClickCreate()"
+            [canCreate]="canCreate"
+            [canView]="canView"
+            [canEdit]="canEdit"
+            [canDelete]="canDelete"
+            [canSave]="canSave"
+            [canRefresh]="canRefresh"
+            (create)="onButtonClickCreate()"
+            (edit)="onButtonClickEdit($event, getElementIndex($event))"
+            (delete)="onButtonClickDelete($event, getElementIndex($event))"
+            (save)="onButtonClickSave()"
             (refresh)="onDataRefresh()"
           ></app-page-header>
           <div class="card-body">
@@ -151,7 +158,7 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickReplyAll(element, getElementIndex(element))
+                          onClickInboxMessageReplyAll(element, getElementIndex(element))
                         "
                         title="Reply All"
                         [hidden]="hideInboxMessageButtons()"
@@ -164,7 +171,7 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickMessageReply(element, getElementIndex(element))
+                          onClickInboxMessageReply(element, getElementIndex(element))
                         "
                         title="Reply"
                         [hidden]="hideInboxMessageButtons()"
@@ -177,7 +184,7 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickMessageUnRead(
+                          onClickInboxMessageUnRead(
                             element,
                             getElementIndex(element)
                           )
@@ -200,7 +207,7 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickMessageView(element, getElementIndex(element))
+                          onClickInboxMessageReadView(element, getElementIndex(element))
                         "
                         title="Read / View Message"
                         [hidden]="hideInboxMessageButtons()"
@@ -366,7 +373,7 @@
                         class="btn btn-white btn-round btn-just-icon btn-idas-resize btn-idas-float-right"
                         type="button"
                         (click)="
-                          onClickDelete(element, getElementIndex(element))
+                          onButtonClickDelete(element, getElementIndex(element))
                         "
                         title="{{
                           getTitleDeleteButton(
@@ -386,7 +393,7 @@
                         type="button"
                         data-toggle="modal"
                         data-target="#create-edit-modal-dialog"
-                        (click)="onClickEdit(element, getElementIndex(element))"
+                        (click)="onButtonClickEdit(element, getElementIndex(element))"
                         title="{{
                           getTitleEditButton(element, getElementIndex(element))
                         }}"
@@ -406,7 +413,7 @@
                     let elementIndex = index;
                     columns: dataSourceColumnNames
                   "
-                  [ngClass]="{ 'is-active': (entityName === 'inbox-message' && element.IsActive === true) }"
+                  [ngClass]="{ 'is-active': (entityName === 'inbox-message' && element.IsActive === true), 'is-terminated' : (entityName === 'employee' && element.IsTerminated === true), 'is-user-inactive' : (entityName === 'user' && element?.IsActive === false)}"
                 ></mat-row>
               </table>
               <mat-paginator

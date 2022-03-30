@@ -98,7 +98,7 @@
           class="calendar-event work-week-view"
           [title]="calendarEvent?.Title"
           [ngStyle]="{ display: showEvents(calendarDay?.Date) }"
-          (click)="onClickEditCalendarEvent(calendarEvent)"
+          (click)="onButtonClickEditCalendarEvent(calendarEvent)"
         >
           <i
             class="material-icons {{ calendarEvent?.CssClass }}"

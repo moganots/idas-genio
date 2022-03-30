@@ -80,7 +80,7 @@ export class BaseDialogComponent
   ngOnInit(): void {
     this.setDataSourceColumns();
   }
-  onClickDialogClose() {
+  onButtonClickCloseDialog() {
     this.dialogRef.close();
   }
 }

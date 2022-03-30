@@ -105,13 +105,13 @@ export class UserMeetingCalendarComponent
         });
       });
   }
-  onClickCreateNewCalendarEvent(date: Date): void {
+  onButtonClickCreateNewCalendarEvent(date: Date): void {
     this.openDialog(
       `Create`,
       this.getDefaultCalendarEvent(undefined, undefined, date)
     );
   }
-  onClickCreateEditCalendarEvent(event: CalendarEvent): void {
+  onButtonClickCreateEditCalendarEvent(event: CalendarEvent): void {
     this.openDialog(`Edit`, event);
   }
   openDialog(eventAction: string, event: CalendarEvent) {

@@ -236,11 +236,11 @@ export class GeneralUtils {
       )
       ?.join(delimiter) : ``;
   }
-  public static splitJoin(
+  public static SplitJoin(
     value: string,
     separator: string = ` `,
     delimiter: string = `-`
   ) {
-    return value?.split(separator)?.join(delimiter);
+    return value?.split(separator)?.filter((el) => !(el === null && el === undefined && String(el).trim().length === 0)).join(delimiter);
   }
 }

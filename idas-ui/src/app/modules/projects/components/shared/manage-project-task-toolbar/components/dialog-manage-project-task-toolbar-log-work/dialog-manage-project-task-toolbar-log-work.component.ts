@@ -81,7 +81,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
       ),
     });
   }
-  onClickSave(): void {
+  onButtonClickSave(): void {
     if (
       this.dataService &&
       GeneralUtils.isStringSet(this.timeSpent) &&

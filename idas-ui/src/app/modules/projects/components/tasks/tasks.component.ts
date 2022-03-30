@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DialogCreateEditDataComponent, ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
+import {
+  DialogCreateEditDataComponent,
+  ReferenceValueService,
+} from 'app/modules/_shared/app-modules-shared.module';
 import { PageComponent } from 'app/modules/_shared/components/page/page.component';
 import {
   AlertifyService,
@@ -51,6 +54,9 @@ export class TasksComponent extends PageComponent implements OnInit {
     this.dataSourceColumns = TaskConfiguration.dataColumns;
   }
   ngOnInit(): void {
+    this.onDataLoadRefresh();
+  }
+  onDataLoadRefresh(): void {
     this.referenceValueService.userService
       .getAll<User>()
       // .toPromise()
@@ -85,11 +91,15 @@ export class TasksComponent extends PageComponent implements OnInit {
         dataService: this.dataService,
         entityName: this.entityName,
         pageIcon: this.pageIcon,
-        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
-        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageName: `${this.capitalizeFirstLetter(
+          this.action
+        )} ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageTitle: `${this.capitalizeFirstLetter(
+          this.action
+        )} ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
         dataColumns: this.dataSourceColumns,
-        selectedElement: {ProjectId: id},
+        selectedElement: { ProjectId: id },
       },
       () => {}
     );

@@ -58,7 +58,7 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     this.entityName = ProjectConfiguration.identifier;
     this.dataSourceColumns = ProjectConfiguration.dataColumns;
   }
-  onClickProjectAssignments(element: any, index?: number) {
+  onButtonClickManageProjectAssignments(element: any, index?: number) {
     super.openDialog(
       DialogProjectAssignmentComponent,
       {
@@ -72,8 +72,8 @@ export class ProjectsComponent extends PageComponent implements OnInit {
       '67.3vw'
     );
   }
-  onClickProjectTasks(element: any, index?: number) {
+  onButtonClickManageProjectTasks(element: any, index?: number) {
     this.router.navigate([`${this.removeHashtag(element.element.RouterLink)}`]);
   }
-  onClickProjectReInstate(element: any, index?: number) {}
+  onButtonClickManageProjectReInstatement(element: any, index?: number) {}
 }

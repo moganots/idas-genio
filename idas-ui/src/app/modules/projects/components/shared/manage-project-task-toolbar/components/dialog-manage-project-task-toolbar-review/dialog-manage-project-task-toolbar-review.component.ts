@@ -97,10 +97,10 @@ export class DialogManageProjectTaskToolbarReviewComponent
       ) === `reject`
     );
   }
-  get canSave() {
+  get ifCanSave() {
     return this.reviewIsSet && this.f?.reviewRapproveReject?.touched;
   }
-  onClickSave(): void {
+  onButtonClickSave(): void {
       if(this.dataService && GeneralUtils.isNumberSet(this.currentEntityId)){
         this.dataService.CreateUpdateDelete('Create', this.getReview()).subscribe(
           (updated) => {

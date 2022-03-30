@@ -6,13 +6,21 @@
         <div class="card">
           <app-page-header
             [entityName]="entityName"
+            [dataService]="dataService"
             [pageIcon]="pageIcon"
             [pageName]="pageName"
             [pageTitle]="pageTitle"
             [pageSubTitle]="pageSubTitle"
-            [hideButtonCreate]="true"
-            [hideButtonRefresh]="false"
-            [hideButtonSave]="true"
+            [canCreate]="true"
+            [canView]="false"
+            [canEdit]="false"
+            [canDelete]="false"
+            [canSave]="false"
+            [canRefresh]="true"
+            (create)="onButtonClickCreate()"
+            (edit)="onButtonClickEdit($event, getElementIndex($event))"
+            (delete)="onButtonClickDelete($event, getElementIndex($event))"
+            (save)="onButtonClickSave()"
             (refresh)="onLoadRefreshData()"
           ></app-page-header>
           <div class="card-body">
@@ -21,29 +29,29 @@
               <span *ngSwitchCase="'Month'">
                 <app-calendar-view-by-month
                   [calendarEvents]="calendarEvents"
-                  (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"
-                  (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"
+                  (newCalendarEvent)="onButtonClickCreateNewCalendarEvent($event)"
+                  (editCalendarEvent)="onButtonClickCreateEditCalendarEvent($event)"
                 ></app-calendar-view-by-month>
               </span>
               <span *ngSwitchCase="'Week'">
                 <app-calendar-view-by-week
                   [calendarEvents]="calendarEvents"
-                  (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"
-                  (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"
+                  (newCalendarEvent)="onButtonClickCreateNewCalendarEvent($event)"
+                  (editCalendarEvent)="onButtonClickCreateEditCalendarEvent($event)"
                 ></app-calendar-view-by-week>
               </span>
               <span *ngSwitchCase="'Work Week'">
                 <app-calendar-view-by-work-week
                   [calendarEvents]="calendarEvents"
-                  (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"
-                  (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"
+                  (newCalendarEvent)="onButtonClickCreateNewCalendarEvent($event)"
+                  (editCalendarEvent)="onButtonClickCreateEditCalendarEvent($event)"
                 ></app-calendar-view-by-work-week>
               </span>
               <span *ngSwitchCase="'Day'">
                 <app-calendar-view-by-day
                   [calendarEvents]="calendarEvents"
-                  (newCalendarEvent)="onClickCreateNewCalendarEvent($event)"
-                  (editCalendarEvent)="onClickCreateEditCalendarEvent($event)"
+                  (newCalendarEvent)="onButtonClickCreateNewCalendarEvent($event)"
+                  (editCalendarEvent)="onButtonClickCreateEditCalendarEvent($event)"
                 ></app-calendar-view-by-day>
               </span>
             </span>

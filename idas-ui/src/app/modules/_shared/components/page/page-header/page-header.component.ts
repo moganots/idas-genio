@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GeneralUtils } from 'app/shared/app-shared.module';
+import {
+  DataService,
+  GeneralUtils,
+  SharedConfiguration,
+} from 'app/shared/app-shared.module';
 
 @Component({
   selector: 'app-page-header',
@@ -8,33 +12,41 @@ import { GeneralUtils } from 'app/shared/app-shared.module';
 })
 export class PageHeaderComponent implements OnInit {
   @Input() public entityName: string;
+  @Input() public dataService: DataService;
   @Input() public pageIcon: string;
   @Input() public pageName: string;
   @Input() public pageTitle: string;
   @Input() public pageSubTitle: string;
-  @Input() public hideButtonCreate = true;
-  @Input() public hideButtonRefresh = true;
-  @Input() public hideButtonSave = true;
+  @Input() public canCreate = false;
+  @Input() public canView = false;
+  @Input() public canEdit = false;
+  @Input() public canDelete = false;
+  @Input() public canSave = false;
+  @Input() public canRefresh = false;
   @Output() create: EventEmitter<any> = new EventEmitter();
-  @Output() refresh: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() delete: EventEmitter<any> = new EventEmitter();
   @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() refresh: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   getButtonTitle(action: string) {
-    switch (GeneralUtils.toLocalLowerCaseWithTrim(action)) {
-      case `add`:
-      case `create`:
-        return `Add / Create a New ${this.formatDisplayEntityName()}`;
-      case `refresh`:
-        return `Refresh ${this.formatDisplayEntityName()}(s) Data View`;
-      case `save`:
-        return `Save ${this.formatDisplayEntityName()} Change(s)`;
-    }
+    const fden = this.formatDisplayEntityName();
+    const laction = GeneralUtils.toLocalLowerCaseWithTrim(action);
+    const caction = GeneralUtils.capitalizeFirstLetter(action);
+    return SharedConfiguration.optionsCreate.includes(laction)
+      ? `Add / Create a New ${fden}`
+      : SharedConfiguration.optionsView.includes(laction)
+      ? `${caction} ${fden} View`
+      : SharedConfiguration.optionsUpdate.includes(laction)
+      ? `${caction} ${fden} Change(s)`
+      : SharedConfiguration.optionsDelete.includes(laction)
+      ? `${caction} ${fden}`
+      : ``;
   }
-
   formatDisplayEntityName() {
     return GeneralUtils.flattenArray(
       this.entityName
@@ -44,16 +56,19 @@ export class PageHeaderComponent implements OnInit {
       ?.map((e) => GeneralUtils.capitalizeFirstLetter(e))
       .join(` `);
   }
-
-  onClickCreate() {
+  onButtonButtonClickCreate() {
     this.create.emit();
   }
-
-  onClickDataRefresh() {
-    this.refresh.emit();
+  onButtonButtonClickEdit(element: any, index?: number) {
+    this.edit.emit({ index, element });
   }
-
-  onClickSave() {
-    this.save.emit()
+  onButtonButtonClickDelete(element: any, index?: number) {
+    this.delete.emit({ index, element });
+  }
+  onButtonButtonClickSave() {
+    this.save.emit();
+  }
+  onButtonClickRefresh() {
+    this.refresh.emit();
   }
 }

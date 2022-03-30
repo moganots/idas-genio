@@ -150,7 +150,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
       this.toLocaleLowerCaseTrim(this.action)
     );
   }
-  onClickSave() {
+  onButtonClickSave() {
     if (this.hasChanges() && this.dataService) {
       this.setChanges();
       this.dataService

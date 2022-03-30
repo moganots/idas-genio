@@ -1,1 +1,16 @@
-<app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [dataSource]="dataSource" [dataSourceColumns]="dataSourceColumns"></app-data-view-table-simple>
+<app-data-view-table-simple
+  [pageIcon]="pageIcon"
+  [pageTitle]="pageTitle"
+  [pageName]="pageName"
+  [dataService]="dataService"
+  [entityName]="entityName"
+  [dataSource]="dataSource"
+  [dataSourceColumns]="dataSourceColumns"
+  [canCreate]="false"
+  [canView]="false"
+  [canEdit]="false"
+  [canDelete]="false"
+  [canSave]="false"
+  [canRefresh]="true"
+  (refresh)="onDataRefresh()"
+></app-data-view-table-simple>

@@ -68,7 +68,7 @@ export class UsersComponent extends PageComponent implements OnInit {
   ngOnInit(): void {
     this.onLoadRefreshData();
   }
-  private onLoadRefreshData() {
+  onLoadRefreshData() {
     this.lookupValueService
       .getAll<LookupValue>()
       // .toPromise()

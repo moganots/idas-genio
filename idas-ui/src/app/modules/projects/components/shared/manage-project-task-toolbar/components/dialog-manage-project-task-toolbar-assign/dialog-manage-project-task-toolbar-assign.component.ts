@@ -176,7 +176,7 @@ export class DialogManageProjectTaskToolbarAssignComponent
       image: lookupValue?.Image,
     };
   }
-  onClickSave(): void {
+  onButtonClickSave(): void {
     if (this.dataService && GeneralUtils.isNumberSet(this.currentEntityId)) {
       this.dataService
         .CreateUpdateDelete('Create', this.getAssignment())

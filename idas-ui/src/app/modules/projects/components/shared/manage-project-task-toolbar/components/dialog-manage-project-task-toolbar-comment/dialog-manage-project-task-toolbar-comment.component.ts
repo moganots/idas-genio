@@ -60,7 +60,7 @@ export class DialogManageProjectTaskToolbarCommentComponent
   ngOnInit(): void {
     this.initFormGroupAndFields();
   }
-  onClickSave(): void {
+  onButtonClickSave(): void {
       if(this.dataService && GeneralUtils.isNumberSet(this.currentEntityId) && this.isNotEmptyString(this.updates?.Comment)){
         this.dataService.CreateUpdateDelete('Create', this.getComment()).subscribe(
           (updated) => {

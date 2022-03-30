@@ -36,7 +36,7 @@ import { UserService } from './services/user-service/user.service';
 import { ContactDetailService } from './services/contact-detail-service/contact-detail.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
-import { DialogViewReplyInboxMessageComponent } from './components/user-inbox/components/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message.component';
+import { DialogReadViewReplyInboxMessageComponent } from './components/user-inbox/components/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message.component';
 
 export { UserInboxComponent } from './components/user-inbox/user-inbox.component';
 export { UserNotificationsComponent } from './components/user-notifications/user-notifications.component';
@@ -93,7 +93,7 @@ export { MeetingCalendarAttendeeService } from './components/user-meeting-calend
     UserMeetingCalendarComponent,
     UsersComponent,
     DialogCreateEditCalendarEventComponent,
-    DialogViewReplyInboxMessageComponent,
+    DialogReadViewReplyInboxMessageComponent,
   ],
   providers: [
     UserService,

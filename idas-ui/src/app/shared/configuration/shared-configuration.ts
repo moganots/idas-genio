@@ -300,4 +300,8 @@ export class SharedConfiguration {
     `23:30`,
   ];
   public static timePeriods = [`Year`, `Month`, `Day`, `Week`, `Hour`, `Minute`, `Second`];
+  public static optionsCreate = [`add`, `create`, `new`];
+  public static optionsView = [`load`, `read`, `view`, `refresh`, `show`];
+  public static optionsUpdate = [`change`, `edit`, `save`, `update`];
+  public static optionsDelete = [`archive`, `delete`, `remove`, `deactivate`];
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -27,6 +27,17 @@ import { BaseDataComponent } from '../../base-data-component/base-data.component
   ],
 })
 export class BaseDataViewComponent extends BaseDataComponent {
+  @Input() public canCreate = false;
+  @Input() public canView = false;
+  @Input() public canEdit = false;
+  @Input() public canDelete = false;
+  @Input() public canSave = false;
+  @Input() public canRefresh = false;
+  @Output() create: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Output() refresh: EventEmitter<any> = new EventEmitter();
   currentHour: string;
   currentMinutes: string;
   constructor(
@@ -132,20 +143,20 @@ export class BaseDataViewComponent extends BaseDataComponent {
       this.matTableDataSource.filter = this.toLocaleLowerCaseTrim(filterValue);
     }
   }
-  onClickCreate(): void {
-    this.action = 'create';
-    this.selectedElement = {};
-  }
-  onClickEdit(element: any, index?: number): void {
-    this.action = 'edit';
-    this.setSelectedElementAndIndex(element, index);
-  }
-  onClickDelete(element: any, index?: number): void {
-    this.action = 'delete';
-    this.setSelectedElementAndIndex(element, index);
-  }
   setSelectedElementAndIndex(element: any, index?: number) {
     this.selectedElement = element;
     this.selectedElementIndex = index || this.getElementIndex(element);
+  }
+  onButtonClickCreate(): void {
+    this.action = 'create';
+    this.selectedElement = {};
+  }
+  onButtonClickEdit(element: any, index?: number): void {
+    this.action = 'edit';
+    this.setSelectedElementAndIndex(element, index);
+  }
+  onButtonClickDelete(element: any, index?: number): void {
+    this.action = 'delete';
+    this.setSelectedElementAndIndex(element, index);
   }
 }

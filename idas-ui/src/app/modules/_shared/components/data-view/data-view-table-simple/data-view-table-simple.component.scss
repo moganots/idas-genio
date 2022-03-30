@@ -88,6 +88,10 @@ mat-cell {
   }
 }
 
+.is-active, .is-terminated, .is-user-active {
+  font-weight: bold;
+}
+
 .is-active {
   // background: #DCDCDC; // Light-Gray
   // background: #FFFAFA; // Snow
@@ -95,4 +99,14 @@ mat-cell {
   // background: #F8F8FF; // GhostsWhite
   // background: #F5F5F5; // WhiteSmoke
   background: #DCDCDC; // Gainsboro
+}
+
+.is-terminated {
+  // background: #FF4500; // OrangeRed
+  background: #FF6347; // Tomato
+}
+
+.is-user-inactive {
+  // background: #FF4500; // OrangeRed
+  background: #FF6347; // Tomato
 }

@@ -7,9 +7,9 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
       type="button"
-      (click)="onClickSave()"
+      (click)="onButtonButtonClickSave()"
       title="{{ getButtonTitle('Save') }}"
-      [hidden]="hideButtonSave"
+      [hidden]="!canSave"
     >
       <i class="material-icons">save</i>
     </button>
@@ -17,9 +17,9 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-float-right"
       type="button"
-      (click)="onClickDataRefresh()"
+      (click)="onButtonClickRefresh()"
       title="{{ getButtonTitle('Refresh') }}"
-      [hidden]="hideButtonRefresh"
+      [hidden]="!canRefresh"
     >
       <i class="material-icons">autorenew</i>
     </button>
@@ -29,9 +29,9 @@
       type="button"
       data-toggle="modal"
       data-target="#create-edit-modal-dialog"
-      (click)="onClickCreate()"
+      (click)="onButtonButtonClickCreate()"
       title="{{ getButtonTitle('Add') }}"
-      [hidden]="hideButtonCreate"
+      [hidden]="!canCreate"
     >
       <i class="material-icons">add</i>
     </button>

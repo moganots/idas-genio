@@ -6,13 +6,22 @@
         <div class="card">
           <app-page-header
             [entityName]="entityName"
+            [dataService]="dataService"
             [pageIcon]="pageIcon"
             [pageName]="pageName"
             [pageTitle]="pageTitle"
             [pageSubTitle]="pageSubTitle"
-            [hideButtonCreate]="true"
-            [hideButtonRefresh]="true"
-            [hideButtonSave]="true"
+            [canCreate]="false"
+            [canView]="false"
+            [canEdit]="false"
+            [canDelete]="false"
+            [canSave]="false"
+            [canRefresh]="true"
+            (create)="onButtonClickCreate()"
+            (edit)="onButtonClickEdit($event, getElementIndex($event))"
+            (delete)="onButtonClickDelete($event, getElementIndex($event))"
+            (save)="onButtonClickSave()"
+            (refresh)="onDataLoadRefresh()"
           ></app-page-header>
           <div class="card-body">
             <div class="idas-project-task-card-main-toolbar mat-elevation-z4">

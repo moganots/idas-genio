@@ -54,6 +54,6 @@ export class LookupValueService extends DataService {
     return `${this.getCssColorCategory(value)}-${this.getCssClass(value)}`;
   }
   getCssClassFrom(value: string) {    ;
-    return GeneralUtils.toLocalLowerCaseWithTrim(GeneralUtils.splitJoin(value, ` `, `-`));
+    return GeneralUtils.toLocalLowerCaseWithTrim(GeneralUtils.SplitJoin(value, ` `, `-`));
   }
 }

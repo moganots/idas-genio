@@ -9,7 +9,7 @@
         class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
         type="button"
         data-dismiss="modal"
-        (click)="onClickDialogClose()"
+        (click)="onButtonClickCloseDialog()"
         title="Close"
       >
         <i class="material-icons header.buttons">close</i>
@@ -239,7 +239,7 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
-      (click)="onClickSave()"
+      (click)="onButtonClickSave()"
       [mat-dialog-close]="selectedElement"
       title="Save Changes"
     >

@@ -5,14 +5,22 @@
         <div class="card">
           <app-page-header
             [entityName]="entityName"
+            [dataService]="dataService"
             [pageIcon]="pageIcon"
             [pageName]="pageName"
             [pageTitle]="pageTitle"
             [pageSubTitle]="pageSubTitle"
-            [hideButtonCreate]="true"
-            [hideButtonRefresh]="true"
-            [hideButtonSave]="false"
-            (save)="onClickSave()"
+            [canCreate]="canCreate"
+            [canView]="canView"
+            [canEdit]="canEdit"
+            [canDelete]="canDelete"
+            [canSave]="canSave"
+            [canRefresh]="canRefresh"
+            (create)="onButtonClickCreate()"
+            (edit)="onButtonClickEdit($event, getElementIndex($event))"
+            (delete)="onButtonClickDelete($event, getElementIndex($event))"
+            (save)="onButtonClickSave()"
+            (refresh)="onDataRefresh()"
           ></app-page-header>
           <div class="card-body">
             <form [formGroup]="frmGroup">

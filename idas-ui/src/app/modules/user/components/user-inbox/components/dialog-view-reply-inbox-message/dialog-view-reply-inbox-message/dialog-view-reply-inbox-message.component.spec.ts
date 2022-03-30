@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogViewReplyInboxMessageComponent } from './dialog-view-reply-inbox-message.component';
+import { DialogReadViewReplyInboxMessageComponent } from './dialog-view-reply-inbox-message.component';
 
-describe('DialogViewReplyInboxMessageComponent', () => {
-  let component: DialogViewReplyInboxMessageComponent;
-  let fixture: ComponentFixture<DialogViewReplyInboxMessageComponent>;
+describe('DialogReadViewReplyInboxMessageComponent', () => {
+  let component: DialogReadViewReplyInboxMessageComponent;
+  let fixture: ComponentFixture<DialogReadViewReplyInboxMessageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogViewReplyInboxMessageComponent ]
+      declarations: [ DialogReadViewReplyInboxMessageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogViewReplyInboxMessageComponent);
+    fixture = TestBed.createComponent(DialogReadViewReplyInboxMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,1 +1,23 @@
-<app-data-view-table-simple [pageIcon] = "pageIcon" [pageTitle] = "pageTitle" [pageName] = "pageName" [dataService] = "dataService" [entityName] = "entityName" [dataSource]="dataSource" [dataSourceColumns]="dataSourceColumns" (manageProjectAssignments)="onClickProjectAssignments($event, getElementIndex($event))" (manageProjectTasks)="onClickProjectTasks($event, getElementIndex($event))" (manageProjectReInstate)="onClickProjectReInstate($event, getElementIndex($event))"></app-data-view-table-simple>
+<app-data-view-table-simple
+  [pageIcon]="pageIcon"
+  [pageTitle]="pageTitle"
+  [pageName]="pageName"
+  [dataService]="dataService"
+  [entityName]="entityName"
+  [dataSource]="dataSource"
+  [dataSourceColumns]="dataSourceColumns"
+  [canCreate]="true"
+  [canView]="false"
+  [canEdit]="false"
+  [canDelete]="false"
+  [canSave]="false"
+  [canRefresh]="true"
+  (manageProjectAssignments)="
+    onButtonClickManageProjectAssignments($event, getElementIndex($event))
+  "
+  (manageProjectTasks)="onButtonClickManageProjectTasks($event, getElementIndex($event))"
+  (manageProjectReInstate)="
+    onButtonClickManageProjectReInstatement($event, getElementIndex($event))
+  "
+  (refresh)="onDataRefresh()"
+></app-data-view-table-simple>
