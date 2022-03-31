@@ -66,7 +66,7 @@ export class DialogManageProjectTaskToolbarLogWorkComponent
     );
   }
   ngOnInit(): void {
-    this.frmGroup = new FormGroup({
+    this.formGroup = new FormGroup({
       timeSpent: new FormControl(
         { value: null, disabled: false },
         Validators.required

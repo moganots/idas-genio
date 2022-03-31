@@ -1,1 +1,39 @@
+@import "../../../../../../../../assets/scss/idas/colors.scss";
+@import "../../../../../../../../assets/scss/idas/fonts.scss";
 @import "../../../../../../../../assets/scss/idas/_idas-dialogs.scss";
+
+ul {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  li {
+    border: 1px solid $idas-color-LightGray;
+    border-radius: 8px;
+    display: inline;
+    margin: 0 0 0 0;
+    padding: 8px 25px 10px 2px;
+    i,
+    img {
+      border-radius: 8px;
+      display: inline-block;
+      height: auto;
+      font-size: 20px;
+      margin: 0 1px 0 3px;
+      padding: 0 0 0 0;
+      text-align: left;
+      vertical-align: middle;
+    }
+    img {
+      width: 20px;
+    }
+  }
+}
+.close {
+  border: 1px solid $idas-color-DarkRed;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 0 0 0 0;
+  padding: 15px;
+  right: 0%;
+}

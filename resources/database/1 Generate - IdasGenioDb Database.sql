@@ -4929,6 +4929,21 @@ SELECT
 	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
 FROM [cte]
 
+GO
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[InboxMessage]')
+GO
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+-- INSERT >> Test >> Reply Inbox Message(s) > ([dbo].[InboxMessage])
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [dbo].[InboxMessage] ([Subject], [Message], [ParentInboxMessageId], [CreatedBy])
+SELECT
+	[Subject]
+	,[Message]
+	,[_id] AS [ParentInboxMessageId]
+	,(SELECT [_id] FROM [dbo].[User] WHERE [EmailAddress] = 'root@genio.idas.co.za') AS [CreatedBy]
+FROM [dbo].[InboxMessage] AS [im]
+
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Test >> Inbox Message(s), Inbox Message Recipient(s) > ([dbo].[InboxMessageRecipient])
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4968,6 +4983,10 @@ SELECT
 	,[RecipientId]
 	,[CreatedBy]
 FROM [cte]
+
+GO
+PRINT ('>> Completed > INSERT >> Test Data > [dbo].[InboxMessageRecipient]')
+GO
 
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERT >> Test >> File Attachment(s) > Project(s), Task(s), Calendar Event(s) > ([dbo].[FileAttachment])

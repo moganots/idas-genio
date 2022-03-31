@@ -52,8 +52,8 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   public matTableDataSource: MatTableDataSource<any[]>;
   public updates: { [key: string]: any } = {};
   public form = new FormControl();
-  public frmGroup: FormGroup;
-  public frmGroupFields: FormGroup;
+  public formGroup: FormGroup;
+  public formGroupFields: FormGroup;
   isLoading = false;
   hasError = false;
   hasWarnings = false;

@@ -76,7 +76,7 @@ export class DialogCreateNewTaskComponent
     this.initFormGroupAndFields(this.dataSourceColumns?.filter((dsc) => this.useColumns.includes(dsc.name)));
   }
   onClickAssignToMe() {
-    this.frmGroupFields.controls.AssigneeId.setValue(this.currentUser.DisplayName);
+    this.formGroupFields.controls.AssigneeId.setValue(this.currentUser.DisplayName);
     this.updates.AssigneeId = this.currentUser._id;
   }
 }

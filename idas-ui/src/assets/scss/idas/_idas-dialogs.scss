@@ -12,42 +12,47 @@ mat-autocomplete,
 mat-checkbox,
 select {
   font-size: 1em;
+  margin: 0 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+  text-align: left;
+  vertical-align: middle;
 }
-
 span {
   mat-form-field {
     mat-autocomplete {
       mat-select {
         mat-option {
-          padding: 0 0 0 0 !important;
+          margin: 0 0 0 3px !important;
+          padding: 0 0 0 3px !important;
         }
       }
-
       mat-option {
-        padding: 0 0 0 0 !important;
+        margin: 0 0 0 3px !important;
+        padding: 0 0 0 3px !important;
       }
     }
   }
 }
-
 mat-option,
 mat-select,
 select {
-  padding: 0 0 0 0 !important;
+  margin: 0 0 0 3px !important;
+  padding: 0 0 0 3px !important;
 }
-
 :host mat-option,
 mat-select,
 select {
-  padding: 0 0 0 0;
+  margin: 0 0 0 3px !important;
+  padding: 0 0 0 3px !important;
 }
-
 mat-checkbox {
-  font-size: 0.9em;
+  font-size: 0.7em;
+  margin: 0 0 0 0 !important;
+  padding: 0 0 0 0 !important;
 }
-
 .mat-select-panel-wrap {
-  margin: 28px 0 0 0;
+  margin: 28px 0 0 0 !important;
+  padding: 0 0 0 0 !important;
   pointer-events: auto;
 }
 
@@ -218,9 +223,9 @@ mat-tab {
     display: inline-block;
     height: auto;
     width: 35px;
-    padding: 30px 0 10px 15px;
-    position: fixed;
-    text-align: justify;
+    margin: 0 0 0 0;
+    padding: 15px 0 0 10px;
+    text-align: left;
     vertical-align: middle;
   }
 
@@ -229,37 +234,69 @@ mat-tab {
     display: inline-block;
     font-family: $OpenSans_Bold;
     font-size: 1.55em;
-    padding: 30px 0 10px 50px;
-    position: fixed;
-    text-align: justify;
+    margin: 0 0 0 0;
+    padding: 15px 0 0 8px;
+    text-align: left;
     vertical-align: middle;
   }
 
   p {
     color: $idas-color-body-background-main;
     display: inline-block;
-    position: fixed;
-    text-align: justify;
+    margin: 0 0 0 0;
+    text-align: left;
     vertical-align: middle;
 
     &.category {
       font-family: $OpenSans_Bold;
       font-size: 1.05em;
+      margin: 0 0 0 0;
       padding: 55px 0 10px 50px;
     }
   }
 
   span {
     float: right;
-    padding: 15px 10px 0 0;
+    margin: 0 0 0 0;
+    padding: 15px 0 0 10px;
 
     i {
-      padding: 1px 0 10px 10px;
+      display: inline-block;
+      height: auto;
+      width: 35px;
+      margin: 0 0 0 0;
+      padding: 0 0 25px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    button {
+      background-color: $white;
+      margin: 20px 10px 0 0;
+      padding: 0 0 0 0;
+      i {
+        display: inline-block;
+        height: auto;
+        width: 35px;
+        margin: 0 0 0 0;
+        padding: 0 0 25px 10px;
+        text-align: left;
+        vertical-align: middle;
+      }
     }
   }
+
   button {
-    margin: 8px 0 0 0;
-    padding: 0 0 0 0;
+    background-color: $white;
+    i {
+      display: inline-block;
+      height: auto;
+      width: 35px;
+      margin: 0 0 0 0;
+      padding: 0 0 25px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
   }
 }
 

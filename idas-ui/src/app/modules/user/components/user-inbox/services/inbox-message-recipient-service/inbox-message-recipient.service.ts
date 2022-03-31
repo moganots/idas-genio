@@ -30,6 +30,9 @@ export class InboxMessageRecipientService extends DataService {
       });
   }
   mapValues(inboxMessageRecipient: InboxMessageRecipient) {
+    inboxMessageRecipient.Recipient = this.users.find(
+      (user) => user?._id === inboxMessageRecipient?.RecipientId
+    );
     inboxMessageRecipient.createdBy = this.users.find(
       (user) => user?._id === inboxMessageRecipient?.CreatedBy
     );

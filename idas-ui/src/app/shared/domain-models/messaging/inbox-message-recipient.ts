@@ -1,8 +1,10 @@
 import { BaseModel } from '../base/base-model';
+import { User } from '../user/user';
 export class InboxMessageRecipient extends BaseModel {
   _id: number;
   InboxMessageId: number;
   RecipientId: number;
+  Recipient: User;
   constructor(
     _id?: number,
     InboxMessageId?: number,

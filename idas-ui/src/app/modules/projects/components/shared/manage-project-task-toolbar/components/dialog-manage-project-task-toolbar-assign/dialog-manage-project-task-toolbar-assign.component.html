@@ -16,7 +16,7 @@
       </button>
     </span>
   </div>
-  <form [formGroup]="frmGroup">
+  <form [formGroup]="formGroup">
     <div class="content">
       <span>
         <mat-form-field>
@@ -157,7 +157,7 @@
       (click)="onButtonClickSave()"
       [mat-dialog-close]="selectedElement"
       title="Save Changes"
-      [disabled]="frmGroup.invalid"
+      [disabled]="formGroup.invalid"
     >
       <i class="material-icons idas-button-icon">save</i>
     </button>

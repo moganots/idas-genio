@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'app-page-header',
   templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.css'],
+  styleUrls: ['./page-header.component.scss'],
 })
 export class PageHeaderComponent implements OnInit {
   @Input() public entityName: string;

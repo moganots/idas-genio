@@ -260,7 +260,7 @@ export class BaseDataComponent extends BaseComponent {
   }
   getFormControlFieldValue(column: DataColumn): any {
     return (
-      (this.frmGroupFields || this.frmGroup || new FormGroup({})).get(
+      (this.formGroupFields || this.formGroup || new FormGroup({})).get(
         column.name
       ) || new FormControl()
     ).value;

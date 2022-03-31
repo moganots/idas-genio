@@ -24,7 +24,7 @@ export class CommonComponent {
   @Input() public companyName: string;
   @Input() public applicationName: string;
   @Input() public applicationHostName: string;
-  frmGroup: FormGroup;
+  formGroup: FormGroup;
   public lookupValues: LookupValue[] = [];
   public currentUser: User;
   public currentUserType: LookupValue;

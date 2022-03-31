@@ -1,4 +1,10 @@
-<div class="idas-dialog open" [ngClass]="{ 'dialog-resize-38vw' : (pageWidth === '38vw'), 'dialog-resize-68vw' : (pageWidth === '68vw') }">
+<div
+  class="idas-dialog open"
+  [ngClass]="{
+    'dialog-resize-38vw': pageWidth === '38vw',
+    'dialog-resize-68vw': pageWidth === '68vw'
+  }"
+>
   <div class="card-header card-header-danger header">
     <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
     <h4 class="card-title">{{ pageTitle }}</h4>
@@ -16,7 +22,98 @@
       </button>
     </span>
   </div>
-  <div class="content"></div>
+  <div class="content">
+    <form [formGroup]="formGroup">
+      <span>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            id="recipients"
+            name="recipients"
+            placeholder="Recipient"
+            formControlName="recipients"
+            [formControl]="cfRecipients"
+            class=""
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete
+            id="recipients"
+            #auto="matAutocomplete"
+            [displayWith]="displayWithFn(filteredUsers | async)"
+          >
+            <mat-option
+              id="recipients"
+              *ngFor="let value of filteredUsers | async"
+              [value]="value?.id"
+              (onSelectionChange)="onSelectedValueChanged($event)"
+              matSort
+            >
+              <i
+                [ngStyle]="{
+                  display:
+                    value?.icon === null || value?.icon === undefined
+                      ? 'none'
+                      : 'inline'
+                }"
+                class="material-icons icon-mat-option rounded {{
+                  value?.cssClassCategory
+                }} {{ value?.cssClass }}"
+                [title]="value?.tooltip || value?.title"
+                >{{ value?.icon }}</i
+              >
+              <img
+                [ngStyle]="{
+                  display:
+                    value?.image === null || value?.image === undefined
+                      ? 'none'
+                      : 'inline'
+                }"
+                class="img-mat-option img23 rounded"
+                [title]="value?.displayName || value?.displayValue"
+                src="{{ value?.image }}"
+              />
+              {{ value?.displayName || value?.displayValue }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field></span
+      >
+      <span>
+        <ul>
+          <li *ngFor="let recipient of selectedElement?.Recipients">
+            <i
+              [ngStyle]="{
+                display:
+                  recipient?.Recipient?.UserType?.Icon === null ||
+                  recipient?.Recipient?.UserType?.Icon === undefined
+                    ? 'none'
+                    : 'inline'
+              }"
+              class="material-icons {{
+                recipient?.Recipient?.UserType?.CssClassCategory
+              }} {{ recipient?.Recipient?.UserType?.CssClass }}"
+              [title]="recipient?.Recipient?.UserType?.Value || ''"
+              >{{ recipient?.Recipient?.UserType?.Icon }}</i
+            >
+            <img
+              [ngStyle]="{
+                display:
+                  recipient?.Recipient?.Avatar === null ||
+                  recipient?.Recipient?.Avatar === undefined
+                    ? 'none'
+                    : 'inline'
+              }"
+              class="img-mat-option"
+              [title]="recipient?.Recipient?.DisplayName"
+              src="{{ recipient?.Recipient?.Avatar }}"
+            />
+            {{ recipient?.Recipient?.DisplayName }}
+            <span class="close">X</span>
+          </li>
+        </ul>
+      </span>
+    </form>
+  </div>
   <footer class="footer">
     <button
       mat-icon-button
@@ -24,7 +121,7 @@
       type="button"
       (click)="onButtonClickReply('all')"
       title="Reply All"
-      [hidden]="!isViewMessage() || !isReplySendAllMessage()"
+      [hidden]="!isViewMessage()"
     >
       <i class="material-icons idas-button-icon">reply_all</i>
     </button>
@@ -34,7 +131,7 @@
       type="button"
       (click)="onButtonClickReply()"
       title="Reply"
-      [hidden]="!isViewMessage() || !isReplySendMessage()"
+      [hidden]="!isViewMessage()"
     >
       <i class="material-icons idas-button-icon">reply</i>
     </button>

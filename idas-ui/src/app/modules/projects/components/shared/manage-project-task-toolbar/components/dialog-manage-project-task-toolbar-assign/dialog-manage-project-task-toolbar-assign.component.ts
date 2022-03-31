@@ -94,7 +94,7 @@ export class DialogManageProjectTaskToolbarAssignComponent
       });
   }
   ngOnInit(): void {
-    this.frmGroup = this.formBuilder.group({
+    this.formGroup = this.formBuilder.group({
       assignee: [
         {
           value: ``,
@@ -120,13 +120,13 @@ export class DialogManageProjectTaskToolbarAssignComponent
         Validators.required,
       ],
     });
-    this.filteredAssignees = this.frmGroup?.controls[
+    this.filteredAssignees = this.formGroup?.controls[
       `assignee`
     ]?.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterValuesBy(this.assignees, value))
     );
-    this.filteredProjectAssignmentTypes = this.frmGroup?.controls[
+    this.filteredProjectAssignmentTypes = this.formGroup?.controls[
       `projectAssignmentType`
     ]?.valueChanges.pipe(
       startWith(''),

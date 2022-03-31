@@ -57,7 +57,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
   }
 
   ngOnInit(): void {
-    this.frmGroup = this.formBuilder.group({
+    this.formGroup = this.formBuilder.group({
       review: [
         {
           value: ``,
@@ -73,7 +73,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
     });
   }
   get f() {
-    return this.frmGroup.controls;
+    return this.formGroup.controls;
   }
   get review() {
     return document.getElementById(`review`);

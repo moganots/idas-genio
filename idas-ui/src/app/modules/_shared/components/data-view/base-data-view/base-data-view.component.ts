@@ -66,7 +66,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
   initFormGroupAndFields(useColumns: DataColumn[] = null) {
     this.setDataSourceColumns();
     this.setFormInputDataColumns(useColumns);
-    this.frmGroupFields = new FormGroup({});
+    this.formGroupFields = new FormGroup({});
     this.formInputDataColumns.forEach((column) => {
       column.value = this.getFieldValue(column, this.selectedElement || {});
       const control = new FormControl(
@@ -77,10 +77,10 @@ export class BaseDataViewComponent extends BaseDataComponent {
         this.getFieldConditionalIsRequired(column)
       );
       this.setControlFilterValues(column, control);
-      this.frmGroupFields.addControl(column.name, control);
+      this.formGroupFields.addControl(column.name, control);
     });
-    this.frmGroup = this.formBuilder.group({
-      frmFields: this.frmGroupFields,
+    this.formGroup = this.formBuilder.group({
+      frmFields: this.formGroupFields,
     });
   }
   getButtonTitleDataRefresh() {
@@ -136,7 +136,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
     ).displayValue;
   }
   getTimeFormControl(name: string) {
-    return this.frmGroupFields.controls[`${name}Time`];
+    return this.formGroupFields.controls[`${name}Time`];
   }
   onApplyFilter(filterValue) {
     if (this.hasData()) {

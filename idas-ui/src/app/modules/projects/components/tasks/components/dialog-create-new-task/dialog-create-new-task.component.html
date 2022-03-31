@@ -23,7 +23,7 @@
       </button>
     </span>
   </div>
-  <form [formGroup]="frmGroup">
+  <form [formGroup]="formGroup">
     <div class="content" formGroupName="frmFields">
       <div *ngFor="let fidc of canShowFormInputDataColumns; let i = index">
         <span [ngSwitch]="fidc?.controlType">
@@ -34,7 +34,7 @@
                 type="text"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
-                [formControl]="frmGroupFields.controls[fidc?.name]"
+                [formControl]="formGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
                 (change)="onValueChanged($event)"
@@ -48,7 +48,7 @@
                 type="number"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
-                [formControl]="frmGroupFields.controls[fidc?.name]"
+                [formControl]="formGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
                 (keyup)="onValueChanged($event)"
@@ -62,7 +62,7 @@
                 type="text"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
-                [formControl]="frmGroupFields.controls[fidc?.name]"
+                [formControl]="formGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
                 [matAutocomplete]="i"
@@ -114,7 +114,7 @@
             <mat-checkbox
               id="{{ fidc?.name }}"
               name="{{ fidc?.name }}"
-              [formControl]="frmGroupFields.controls[fidc?.name]"
+              [formControl]="formGroupFields.controls[fidc?.name]"
               (change)="onCheckboxClicked($event)"
               class=""
               ><p class="display-name-check-box">
@@ -130,7 +130,7 @@
                 [matDatepicker]="picker"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
-                [formControl]="frmGroupFields.controls[fidc?.name]"
+                [formControl]="formGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
                 (dateInput)="onDatePickerChanged($event)"
@@ -151,7 +151,7 @@
                 type="password"
                 id="{{ fidc?.name }}"
                 name="{{ fidc?.name }}"
-                [formControl]="frmGroupFields.controls[fidc?.name]"
+                [formControl]="formGroupFields.controls[fidc?.name]"
                 class=""
                 placeholder="{{ fidc?.displayName }}"
                 (keyup)="onValueChanged($event)"
@@ -166,7 +166,7 @@
               class="textarea-editor"
               (keyup)="onDivValueChanged($event)"
             >
-              {{ frmGroupFields.controls[fidc?.name].value }}
+              {{ formGroupFields.controls[fidc?.name].value }}
             </div>
             <!-- <mat-form-field>
                 <textarea
@@ -174,7 +174,7 @@
                   type="textarea"
                   id="{{ fidc?.name }}"
                   name="{{ fidc?.name }}"
-                  [formControl]="frmGroupFields.controls[fidc?.name]"
+                  [formControl]="formGroupFields.controls[fidc?.name]"
                   class=""
                   placeholder="{{ fidc?.displayName }}"
                   (keyup)="onValueChanged($event)"
