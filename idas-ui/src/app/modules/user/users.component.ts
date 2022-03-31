@@ -116,6 +116,7 @@ export class UsersComponent extends PageComponent implements OnInit {
         pageName: `${this.capitalizeFirstLetter(dialogAction)} ${this.capitalizeFirstLetter(this.entityName)}`,
         pageTitle: `${this.capitalizeFirstLetter(dialogAction)} ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        pageWidth: this.pageWidth,
         dataColumns: this.dataSourceColumns,
         selectedElement: this.getEntity(dialogAction, user, userType),
         selectedElementIndex: index || this.selectedElementIndex,

@@ -331,6 +331,7 @@ export class DataViewTableSimpleComponent
           ?.map((en) => this.capitalizeFirstLetter(en))
           .join(` `)}`,
         pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        pageWidth: this.pageWidth,
         dataColumns: this.dataSourceColumns,
         selectedElement: element || {},
         selectedElementIndex: index || this.selectedElementIndex,

@@ -98,6 +98,7 @@ export class TasksComponent extends PageComponent implements OnInit {
           this.action
         )} ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        pageWidth: this.pageWidth,
         dataColumns: this.dataSourceColumns,
         selectedElement: { ProjectId: id },
       },

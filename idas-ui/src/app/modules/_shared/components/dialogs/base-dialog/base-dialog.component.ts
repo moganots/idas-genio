@@ -51,6 +51,7 @@ export class BaseDialogComponent
       pageName: 'no page name',
       pageTitle: 'no page title',
       pageSubTitle: 'no page title',
+      pageWidth: '38vw',
       dataColumns: [],
       selectedElementIndex: -1,
       selectedElement: {},
@@ -68,11 +69,12 @@ export class BaseDialogComponent
     this.action = data?.action;
     this.entityName = data?.entityName;
     this.dataService = data?.dataService;
+    this.dataSourceColumns = data?.dataColumns;
     this.pageIcon = data?.pageIcon;
     this.pageName = data?.pageName;
     this.pageTitle = data?.pageTitle;
     this.pageSubTitle = data?.pageSubTitle;
-    this.dataSourceColumns = data?.dataColumns;
+    this.pageWidth = data?.pageWidth;
     this.currentEntityId = data?.selectedElement?._id || data?.selectedElement?.id;
     this.selectedElementIndex = data?.selectedElementIndex;
     this.selectedElement = data?.selectedElement || {};

@@ -1,4 +1,4 @@
-<div class="idas-dialog open">
+<div class="idas-dialog open" [ngClass]="{ 'dialog-resize-38vw' : (pageWidth === '38vw'), 'dialog-resize-68vw' : (pageWidth === '68vw') }">
   <div class="card-header card-header-danger header">
     <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
     <h4 class="card-title">{{ pageTitle }}</h4>

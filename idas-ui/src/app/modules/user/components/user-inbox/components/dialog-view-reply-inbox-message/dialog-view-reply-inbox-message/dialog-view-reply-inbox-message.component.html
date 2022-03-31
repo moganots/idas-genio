@@ -1,42 +1,52 @@
-<div class="idas-dialog open">
-    <div class="card-header card-header-danger header">
-      <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-      <h4 class="card-title">{{ pageTitle }}</h4>
-      <p class="category">{{ pageSubTitle }}</p>
-      <span>
-        <button
-          mat-icon-button
-          class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
-          type="button"
-          data-dismiss="modal"
-          (click)="onButtonClickCloseDialog()"
-          title="Close"
-        >
-          <i class="material-icons header.buttons">close</i>
-        </button>
-      </span>
-    </div>
-    <div class="content">
-    </div>
-    <footer class="footer">
+<div class="idas-dialog open" [ngClass]="{ 'dialog-resize-38vw' : (pageWidth === '38vw'), 'dialog-resize-68vw' : (pageWidth === '68vw') }">
+  <div class="card-header card-header-danger header">
+    <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+    <h4 class="card-title">{{ pageTitle }}</h4>
+    <p class="category">{{ pageSubTitle }}</p>
+    <span>
       <button
         mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
         type="button"
-        (click)="onButtonClickSend()"
-        title="Save Changes"
+        data-dismiss="modal"
+        (click)="onButtonClickCloseDialog()"
+        title="Close"
       >
-        <i class="material-icons idas-button-icon">send</i>
+        <i class="material-icons header.buttons">close</i>
       </button>
-      <button
-        mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
-        type="button"
-        (click)="onButtonClickSave()"
-        title="Reply"
-      >
-        <i class="material-icons idas-button-icon">reply</i>
-      </button>
-    </footer>
+    </span>
   </div>
-  
+  <div class="content"></div>
+  <footer class="footer">
+    <button
+      mat-icon-button
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+      type="button"
+      (click)="onButtonClickReply('all')"
+      title="Reply All"
+      [hidden]="!isViewMessage() || !isReplySendAllMessage()"
+    >
+      <i class="material-icons idas-button-icon">reply_all</i>
+    </button>
+    <button
+      mat-icon-button
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+      type="button"
+      (click)="onButtonClickReply()"
+      title="Reply"
+      [hidden]="!isViewMessage() || !isReplySendMessage()"
+    >
+      <i class="material-icons idas-button-icon">reply</i>
+    </button>
+    <button
+      mat-icon-button
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+      type="button"
+      (click)="onButtonClickSend()"
+      title="Send"
+      [hidden]="isViewMessage()"
+    >
+      <i class="material-icons idas-button-icon">send</i>
+    </button>
+  </footer>
+</div>

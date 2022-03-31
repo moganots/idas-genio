@@ -74,7 +74,7 @@ mat-tab {
   right: 0;
   resize: both;
   top: 7vh;
-  width: 38vw;
+  // width: 38vw;
   max-width: 100%;
   z-index: 9999 !important;
 }
@@ -85,6 +85,105 @@ mat-tab {
 
 .idas-dialog.resize {
   width: 67.3vw;
+  &.dialog-resize-38vw {
+    width: 38vw;
+  }
+  &.dialog-resize-39vw {
+    width: 39vw;
+  }
+  &.dialog-resize-40vw {
+    width: 40vw;
+  }
+  &.dialog-resize-41vw {
+    width: 41vw;
+  }
+  &.dialog-resize-42vw {
+    width: 42vw;
+  }
+  &.dialog-resize-43vw {
+    width: 43vw;
+  }
+  &.dialog-resize-44vw {
+    width: 44vw;
+  }
+  &.dialog-resize-45vw {
+    width: 45vw;
+  }
+  &.dialog-resize-46vw {
+    width: 46vw;
+  }
+  &.dialog-resize-47vw {
+    width: 47vw;
+  }
+  &.dialog-resize-48vw {
+    width: 48vw;
+  }
+  &.dialog-resize-49vw {
+    width: 49vw;
+  }
+  &.dialog-resize-50vw {
+    width: 50vw;
+  }
+  &.dialog-resize-51vw {
+    width: 51vw;
+  }
+  &.dialog-resize-52vw {
+    width: 52vw;
+  }
+  &.dialog-resize-53vw {
+    width: 53vw;
+  }
+  &.dialog-resize-54vw {
+    width: 54vw;
+  }
+  &.dialog-resize-55vw {
+    width: 55vw;
+  }
+  &.dialog-resize-56vw {
+    width: 56vw;
+  }
+  &.dialog-resize-57vw {
+    width: 57vw;
+  }
+  &.dialog-resize-58vw {
+    width: 58vw;
+  }
+  &.dialog-resize-59vw {
+    width: 59vw;
+  }
+  &.dialog-resize-60vw {
+    width: 60vw;
+  }
+  &.dialog-resize-61vw {
+    width: 61vw;
+  }
+  &.dialog-resize-62vw {
+    width: 62vw;
+  }
+  &.dialog-resize-63vw {
+    width: 63vw;
+  }
+  &.dialog-resize-64vw {
+    width: 64vw;
+  }
+  &.dialog-resize-65vw {
+    width: 65vw;
+  }
+  &.dialog-resize-66vw {
+    width: 66vw;
+  }
+  &.dialog-resize-67vw {
+    width: 67vw;
+  }
+  &.dialog-resize-68vw {
+    width: 68vw;
+  }
+  &.dialog-resize-69vw {
+    width: 69vw;
+  }
+  &.dialog-resize-70vw {
+    width: 70vw;
+  }
   &.calendar-event-dialog {
     width: 45vw;
   }
@@ -165,7 +264,7 @@ mat-tab {
 }
 
 .content {
-  height: 71.5vh;
+  height: 71.2vh;
   margin: 0 0 0 0;
   overflow-y: auto;
   padding: 12px;
@@ -256,7 +355,8 @@ mat-tab {
   border: 2px solid rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
   margin-bottom: 1rem;
-  &.comment, &.review {
+  &.comment,
+  &.review {
     min-height: 20rem;
   }
   &.work-description {
@@ -286,8 +386,8 @@ mat-tab {
 .footer {
   background: transparent;
   bottom: 2.8vh;
-  height: 7vh;
-  padding: 0 5px 0 5px;
+  height: 7.3vh;
+  padding: 10px 5px 10px 5px;
   text-align: left;
   vertical-align: middle;
   i,
@@ -298,6 +398,10 @@ mat-tab {
     padding: 0 0 0 0;
     text-align: left;
     vertical-align: middle;
+  }
+  button {
+    margin: 0 0 0 5px;
+    padding: 0 0 0 5px;
   }
 }
 
@@ -339,4 +443,104 @@ mat-tab {
 
 .hidden {
   display: none;
+}
+
+.dialog-resize-38vw {
+  width: 38vw;
+}
+.dialog-resize-39vw {
+  width: 39vw;
+}
+.dialog-resize-40vw {
+  width: 40vw;
+}
+.dialog-resize-41vw {
+  width: 41vw;
+}
+.dialog-resize-42vw {
+  width: 42vw;
+}
+.dialog-resize-43vw {
+  width: 43vw;
+}
+.dialog-resize-44vw {
+  width: 44vw;
+}
+.dialog-resize-45vw {
+  width: 45vw;
+}
+.dialog-resize-46vw {
+  width: 46vw;
+}
+.dialog-resize-47vw {
+  width: 47vw;
+}
+.dialog-resize-48vw {
+  width: 48vw;
+}
+.dialog-resize-49vw {
+  width: 49vw;
+}
+.dialog-resize-50vw {
+  width: 50vw;
+}
+.dialog-resize-51vw {
+  width: 51vw;
+}
+.dialog-resize-52vw {
+  width: 52vw;
+}
+.dialog-resize-53vw {
+  width: 53vw;
+}
+.dialog-resize-54vw {
+  width: 54vw;
+}
+.dialog-resize-55vw {
+  width: 55vw;
+}
+.dialog-resize-56vw {
+  width: 56vw;
+}
+.dialog-resize-57vw {
+  width: 57vw;
+}
+.dialog-resize-58vw {
+  width: 58vw;
+}
+.dialog-resize-59vw {
+  width: 59vw;
+}
+.dialog-resize-60vw {
+  width: 60vw;
+}
+.dialog-resize-61vw {
+  width: 61vw;
+}
+.dialog-resize-62vw {
+  width: 62vw;
+}
+.dialog-resize-63vw {
+  width: 63vw;
+}
+.dialog-resize-64vw {
+  width: 64vw;
+}
+.dialog-resize-65vw {
+  width: 65vw;
+}
+.dialog-resize-66vw {
+  width: 66vw;
+}
+.dialog-resize-67vw {
+  width: 67vw;
+}
+.dialog-resize-68vw {
+  width: 68vw;
+}
+.dialog-resize-69vw {
+  width: 69vw;
+}
+.dialog-resize-70vw {
+  width: 70vw;
 }

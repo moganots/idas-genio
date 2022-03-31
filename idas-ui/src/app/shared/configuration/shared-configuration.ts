@@ -304,4 +304,8 @@ export class SharedConfiguration {
   public static optionsView = [`load`, `read`, `view`, `refresh`, `show`];
   public static optionsUpdate = [`change`, `edit`, `save`, `update`];
   public static optionsDelete = [`archive`, `delete`, `remove`, `deactivate`];
+  public static inboxMessageOptionsCreate = [`add`, `create`, `new`];
+  public static inboxMessageOptionsView = [`read`, `show`, `view`];
+  public static inboxMessageOptionsReplySend = [`reply`, `send`];
+  public static inboxMessageOptionsReplySendAll = [`replyall`, `reply-all`, `sendall`, `send-all`];
 }

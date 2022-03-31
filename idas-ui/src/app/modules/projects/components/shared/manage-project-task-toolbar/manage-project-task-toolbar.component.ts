@@ -136,6 +136,7 @@ export class ManageProjectTaskToolbarComponent
           this.capitalizeFirstLetter(this.getProjectDialogName(action))
         )} / ${this.capitalizeFirstLetter(this.entityName)}`,
         pageSubTitle: GeneralUtils.StringJoin([id, name], ` / `),
+        pageWidth: this.pageWidth,
         dataColumns: this.dataService.dataColumns,
         selectedElement: this.getSelectedElement(action),
       },

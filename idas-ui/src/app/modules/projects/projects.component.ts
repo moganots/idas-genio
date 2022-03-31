@@ -62,14 +62,15 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     super.openDialog(
       DialogProjectAssignmentComponent,
       {
+        pageWidth: `67.3vw`,
         selectedElement: element || this.selectedElement,
         selectedElementIndex: index || this.selectedElementIndex,
       },
       () => {
         this.onDataRefresh();
       },
-      '90vh',
-      '67.3vw'
+      `90vh`,
+      `67.3vw`
     );
   }
   onButtonClickManageProjectTasks(element: any, index?: number) {

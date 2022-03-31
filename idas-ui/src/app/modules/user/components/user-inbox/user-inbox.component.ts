@@ -17,6 +17,7 @@ import {
   GeneralUtils,
   InboxMessage,
   LookupValueService,
+  SharedConfiguration,
 } from 'app/shared/app-shared.module';
 import { first } from 'rxjs/operators';
 import { DialogReadViewReplyInboxMessageComponent } from './components/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message/dialog-view-reply-inbox-message.component';
@@ -67,7 +68,7 @@ export class UserInboxComponent extends PageComponent implements OnInit {
   }
   onClickInboxMessageReadView(message: any, index?: number) {
     this.action = `View`;
-    this.openDialog(message, index);
+    this.openDialog(message?.element, index);
   }
   onClickInboxMessageUnRead(message: any, index?: number) {
     if (message && message?.element) {
@@ -93,41 +94,65 @@ export class UserInboxComponent extends PageComponent implements OnInit {
   }
   onClickInboxMessageReply(message: any, index?: number) {
     this.action = `Reply`;
-    this.openDialog(message, index);
+    this.openDialog(message?.element, index);
   }
   onClickInboxMessageReplyAll(message: any, index?: number) {
     this.action = `ReplyAll`;
-    this.openDialog(message, index);
+    this.openDialog(message?.element, index);
   }
   openDialog(message: any, index?: number): void {
-    const id = (message || {})?._id || (message || {})?.id;
-    const name =
-      (message || {})?.DisplayName ||
-      (message || {})?.Name ||
-      (message || {})?.Subject;
-    super.openDialog(
-      DialogReadViewReplyInboxMessageComponent,
-      {
-        action: this.action,
-        dataService: this.dataService,
-        entityName: this.entityName,
-        pageIcon: this.pageIcon,
-        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
-          ?.split(`-`)
-          ?.map((en) => this.capitalizeFirstLetter(en))
-          .join(` `)}`,
-        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
-          ?.split(`-`)
-          ?.map((en) => this.capitalizeFirstLetter(en))
-          .join(` `)}`,
-        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
-        dataColumns: this.dataSourceColumns,
-        selectedElement: message || {},
-        selectedElementIndex: index || this.selectedElementIndex,
-      },
-      () => {
-        this.onDataRefresh();
-      }
+    if (GeneralUtils.isStringSet(message)) {
+      const pageTitleName = this.getDialogPageTitleName(message);
+      super.openDialog(
+        DialogReadViewReplyInboxMessageComponent,
+        {
+          action: this.action,
+          dataService: this.dataService,
+          entityName: this.entityName,
+          pageIcon: this.pageIcon,
+          pageName: pageTitleName,
+          pageTitle: pageTitleName,
+          pageWidth: this.getDialogPageWidth(),
+          dataColumns: this.dataSourceColumns,
+          selectedElement: message || {},
+          selectedElementIndex: index || this.selectedElementIndex,
+        },
+        () => {
+          this.onDataRefresh();
+        },
+        `96vh`,
+        this.getDialogPageWidth(),
+      );
+    }
+  }
+  getDialogPageTitleName(message: any) {
+    const pageName = `${this.capitalizeFirstLetter(
+      this.action
+    )} ${this.entityName
+      ?.split(`-`)
+      ?.map((en) => this.capitalizeFirstLetter(en))
+      .join(` `)}`;
+    return (
+      GeneralUtils.StringNullIf(
+        this.isViewMessage() || this.isReplySendMessage() || this.isReplySendAllMessage()
+          ? `${message?.Subject}`
+          : pageName
+      ) || pageName
     );
+  }
+  getDialogPageWidth() {
+    return (this.isViewMessage() || this.isReplySendMessage() || this.isReplySendAllMessage()) ? `68vw` : `38vw`;
+  }
+  isCreateMessage() {
+    return SharedConfiguration.inboxMessageOptionsCreate.includes(this.toLocaleLowerCaseTrim(this.action));
+  }
+  isViewMessage() {
+    return SharedConfiguration.inboxMessageOptionsView.includes(this.toLocaleLowerCaseTrim(this.action));
+  }
+  isReplySendMessage() {
+    return SharedConfiguration.inboxMessageOptionsReplySend.includes(this.toLocaleLowerCaseTrim(this.action));
+  }
+  isReplySendAllMessage() {
+    return SharedConfiguration.inboxMessageOptionsReplySendAll.includes(this.toLocaleLowerCaseTrim(this.action));
   }
 }

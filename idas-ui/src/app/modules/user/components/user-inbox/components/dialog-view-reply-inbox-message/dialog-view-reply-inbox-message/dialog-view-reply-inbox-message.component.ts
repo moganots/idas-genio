@@ -15,6 +15,7 @@ import {
   AlertifyService,
   AuthenticationService,
   LookupValueService,
+  SharedConfiguration,
 } from 'app/shared/app-shared.module';
 
 @Component({
@@ -55,11 +56,21 @@ export class DialogReadViewReplyInboxMessageComponent
       dialogRef,
       data
     );
-    this.pageTitle =
-      this.pageTitle ||
-      `${this.capitalizeFirstLetter(this.action)} ${this.capitalizeFirstLetter(
-        this.entityName
-      )}`;
+    this.pageWidth = data?.pageWidth;
+    console.log(`this.pageWidth=${this.pageWidth}`);
+  }
+  isCreateMessage() {
+    return SharedConfiguration.inboxMessageOptionsCreate.includes(this.toLocaleLowerCaseTrim(this.action));
+  }
+  isViewMessage() {
+    return SharedConfiguration.inboxMessageOptionsView.includes(this.toLocaleLowerCaseTrim(this.action));
+  }
+  isReplySendMessage() {
+    return SharedConfiguration.inboxMessageOptionsReplySend.includes(this.toLocaleLowerCaseTrim(this.action));
+  }
+  isReplySendAllMessage() {
+    return SharedConfiguration.inboxMessageOptionsReplySendAll.includes(this.toLocaleLowerCaseTrim(this.action));
   }
   onButtonClickSend(): void {}
+  onButtonClickReply(type?: string) {}
 }

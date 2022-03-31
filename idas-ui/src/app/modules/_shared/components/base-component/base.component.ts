@@ -39,6 +39,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
   @Input() public pageName: string;
   @Input() public pageTitle: string;
   @Input() public pageSubTitle: string;
+  @Input() public pageWidth = `38vw`;
   @Input() public entityName: string;
   @Input() public currentEntity: any;
   @Input() public currentEntityId: any;
