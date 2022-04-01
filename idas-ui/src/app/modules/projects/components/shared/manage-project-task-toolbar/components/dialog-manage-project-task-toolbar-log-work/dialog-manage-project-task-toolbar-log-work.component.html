@@ -1,22 +1,12 @@
 <div class="idas-dialog open">
-  <div class="card-header card-header-danger header">
-    <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-    <h4 class="card-title">{{ pageTitle }}</h4>
-    <p class="category">{{ pageSubTitle }}</p>
-    <span>
-      <button
-        mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
-        type="button"
-        data-dismiss="modal"
-        (click)="onClickDialogClose()"
-        title="Close"
-      >
-        <i class="material-icons header.buttons">close</i>
-      </button>
-    </span>
-  </div>
-  <form [formGroup]="frmGroup">
+  <app-dialog-header
+    [pageIcon]="pageIcon"
+    [pageName]="pageName"
+    [pageTitle]="pageTitle"
+    [pageSubTitle]="pageSubTitle"
+    (closeDialog)="onButtonClickCloseDialog()"
+  ></app-dialog-header>
+  <form [formGroup]="formGroup">
     <div class="content">
       <span>
         <mat-form-field>
@@ -65,7 +55,10 @@
             matSuffix
             [for]="picker"
           ></mat-datepicker-toggle>
-          <ngx-mat-datetime-picker #picker [enableMeridian]="true"></ngx-mat-datetime-picker>
+          <ngx-mat-datetime-picker
+            #picker
+            [enableMeridian]="true"
+          ></ngx-mat-datetime-picker>
         </mat-form-field>
       </span>
       <span>
@@ -77,7 +70,7 @@
           [(ngModel)]="comment"
           (keyup)="onDivValueChanged($event)"
         >
-          {{ frmGroup.controls["comment"].value }}
+          {{ formGroup.controls["comment"].value }}
         </div>
       </span>
     </div>
@@ -87,7 +80,7 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
-      (click)="onClickSave()"
+      (click)="onButtonClickSave()"
       [mat-dialog-close]="selectedElement"
       title="Save Changes"
     >

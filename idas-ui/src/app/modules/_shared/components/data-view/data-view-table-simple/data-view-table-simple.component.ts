@@ -44,7 +44,6 @@ export class DataViewTableSimpleComponent
 {
   @Output() manageEmployee: EventEmitter<any> = new EventEmitter();
   @Output() manageUser: EventEmitter<any> = new EventEmitter();
-  @Output() manageProjectAssignments: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectTasks: EventEmitter<any> = new EventEmitter();
   @Output() manageProjectReInstate: EventEmitter<any> = new EventEmitter();
   @Output() manageSubtask: EventEmitter<any> = new EventEmitter();
@@ -224,33 +223,6 @@ export class DataViewTableSimpleComponent
         're-started',
         'in progress',
       ].includes(status) */
-    );
-  }
-  onClickManageProjectAssignmentButton(element: any, index?: number): void {
-    this.setSelectedElementAndIndex(element, index);
-    this.manageProjectAssignments.emit({ index, element });
-  }
-  getTitleManageProjectAssignmentButton(element: any, index?: number) {
-    return `${[
-      this.capitalizeFirstLetter(this.entityName || ``),
-      'Assignment(s)',
-    ]
-      .join(` `)
-      .trim()}`;
-  }
-  hideManageProjectAssignmentButton(element: any, index?: number) {
-    const status = this.toLocaleLowerCaseTrim(
-      this.getLookupValueById(element[`StatusId`]).Value || ``
-    );
-    return !(
-      ['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``)) &&
-      [
-        'created',
-        'not started',
-        'started',
-        're-started',
-        'in progress',
-      ].includes(status)
     );
   }
   onClickManageProjectReInstateButton(element: any, index?: number): void {

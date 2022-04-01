@@ -75,9 +75,9 @@ export class BaseDialogComponent
     this.pageTitle = data?.pageTitle;
     this.pageSubTitle = data?.pageSubTitle;
     this.pageWidth = data?.pageWidth;
+    this.selectedElement = data?.selectedElement || {};
     this.currentEntityId = data?.selectedElement?._id || data?.selectedElement?.id;
     this.selectedElementIndex = data?.selectedElementIndex;
-    this.selectedElement = data?.selectedElement || {};
   }
   ngOnInit(): void {
     this.setDataSourceColumns();

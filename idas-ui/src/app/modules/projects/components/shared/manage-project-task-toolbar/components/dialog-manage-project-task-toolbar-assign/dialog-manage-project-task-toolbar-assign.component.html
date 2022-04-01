@@ -1,21 +1,11 @@
 <div class="idas-dialog open">
-  <div class="card-header card-header-danger header">
-    <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-    <h4 class="card-title">{{ pageTitle }}</h4>
-    <p class="category">{{ pageSubTitle }}</p>
-    <span>
-      <button
-        mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
-        type="button"
-        data-dismiss="modal"
-        (click)="onButtonClickCloseDialog()"
-        title="Close"
-      >
-        <i class="material-icons header.buttons">close</i>
-      </button>
-    </span>
-  </div>
+  <app-dialog-header
+    [pageIcon]="pageIcon"
+    [pageName]="pageName"
+    [pageTitle]="pageTitle"
+    [pageSubTitle]="pageSubTitle"
+    (closeDialog)="onButtonClickCloseDialog()"
+  ></app-dialog-header>
   <form [formGroup]="formGroup">
     <div class="content">
       <span>
@@ -89,12 +79,13 @@
             class=""
             [matAutocomplete]="macProjectAssignmentType"
             [(ngModel)]="projectAssignmentType"
-            
           />
           <mat-autocomplete
             id="projectAssignmentType"
             #macProjectAssignmentType="matAutocomplete"
-            [displayWith]="displayWithFn(filteredProjectAssignmentTypes | async)"
+            [displayWith]="
+              displayWithFn(filteredProjectAssignmentTypes | async)
+            "
           >
             <mat-option
               id="projectAssignmentType"
@@ -144,8 +135,7 @@
           contenteditable="true"
           class="textarea-editor work-description"
           (keyup)="onDivValueChanged($event)"
-        >
-        </div>
+        ></div>
       </span>
     </div>
   </form>

@@ -80,7 +80,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
       this.formGroupFields.addControl(column.name, control);
     });
     this.formGroup = this.formBuilder.group({
-      frmFields: this.formGroupFields,
+      formFields: this.formGroupFields,
     });
   }
   getButtonTitleDataRefresh() {

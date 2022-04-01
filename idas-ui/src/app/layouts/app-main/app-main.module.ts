@@ -13,7 +13,6 @@ import { AppMainRoutes } from './app-main.routing';
 import { AppModulesModule } from 'app/modules/app-modules.module';
 import { DialogCreateEditDataComponent } from 'app/modules/_shared/app-modules-shared.module';
 import { MatIconModule } from '@angular/material/icon';
-import { DialogProjectAssignmentComponent } from 'app/modules/projects/app-modules-projects.module';
 
 export { AppMainLoginComponent } from './app-main-login/app-main-login.component';
 export { AppLoginConfiguration } from './app-main-login/app-login-configuration';
@@ -36,9 +35,6 @@ export { AppMainComponent } from './app-main.component';
     AppModulesModule
   ],
   declarations: [],
-  entryComponents: [
-    DialogCreateEditDataComponent,
-    DialogProjectAssignmentComponent
-  ]
+  entryComponents: []
 })
 export class AppMainModule {}

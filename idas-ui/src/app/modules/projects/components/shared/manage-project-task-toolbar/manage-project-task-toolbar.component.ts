@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DialogCreateEditDataComponent, ReferenceValueService } from 'app/modules/_shared/app-modules-shared.module';
+import {
+  DialogCreateEditDataComponent,
+  ReferenceValueService,
+} from 'app/modules/_shared/app-modules-shared.module';
 import { BaseDataComponent } from 'app/modules/_shared/components/base-data-component/base-data.component';
 import {
   AlertifyService,
@@ -59,8 +62,7 @@ export class ManageProjectTaskToolbarComponent
     );
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getDependentElementName() {
     switch (this.toLocaleLowerCaseTrim(this.entityName)) {
@@ -118,9 +120,16 @@ export class ManageProjectTaskToolbarComponent
     }
   }
   openDialog(dialogComponent: any, action: string) {
-    const id = this.currentEntityId || this.selectedElement?._id || this.selectedElement?.id;
-    const name = this.selectedElement?.DisplayName || this.selectedElement?.Name;
-    const icon = (this.selectedElement?.ProjectType || this.selectedElement?.TaskType)?.Icon || this.pageIcon;
+    const id =
+      this.currentEntityId ||
+      this.selectedElement?._id ||
+      this.selectedElement?.id;
+    const name =
+      this.selectedElement?.DisplayName || this.selectedElement?.Name;
+    const icon =
+      (this.selectedElement?.ProjectType || this.selectedElement?.TaskType)
+        ?.Icon || this.pageIcon;
+    const pageNameTitle = this.getDialogPageNameTitle(action);
     super.openDialog(
       dialogComponent,
       {
@@ -129,12 +138,8 @@ export class ManageProjectTaskToolbarComponent
         entityName: this.entityName,
         entityId: id,
         pageIcon: icon,
-        pageName: `${this.splitCamelCase(
-          this.capitalizeFirstLetter(this.getProjectDialogName(action))
-        )} / ${this.capitalizeFirstLetter(this.entityName)}`,
-        pageTitle: `${this.splitCamelCase(
-          this.capitalizeFirstLetter(this.getProjectDialogName(action))
-        )} / ${this.capitalizeFirstLetter(this.entityName)}`,
+        pageName: pageNameTitle,
+        pageTitle: pageNameTitle,
         pageSubTitle: GeneralUtils.StringJoin([id, name], ` / `),
         pageWidth: this.pageWidth,
         dataColumns: this.dataService.dataColumns,
@@ -143,8 +148,27 @@ export class ManageProjectTaskToolbarComponent
       () => {}
     );
   }
-  getProjectDialogName(action: string): string {
-    return (this.isProject) ? this.toLocaleLowerCaseTrim(action).replace(`sub`, `Child`) : action;
+  getFormattedDialogAction(action: string) {
+    let fda = this.splitCamelCase(action);
+    fda = String(
+      this.isProject
+        ? this.toLocaleLowerCaseTrim(fda)?.replace(`sub`, `child`)
+        : fda
+    )?.trim();
+    fda =
+      fda?.includes(`clone`) || fda?.includes(`copy`)
+        ? fda?.split(` `).join(` or `)?.trim()
+        : fda;
+    return fda;
+  }
+  getDialogPageNameTitle(action: string) {
+    return [
+      this.getFormattedDialogAction(action)
+        .split(` `)
+        .map((ae) => this.capitalizeFirstLetter(ae))
+        .join(` `),
+      this.capitalizeFirstLetter(this.entityName),
+    ].join(` / `);
   }
   getDialogAction(action: string) {
     return [`createsub`, `clonecopy`].includes(
@@ -161,7 +185,7 @@ export class ManageProjectTaskToolbarComponent
           ProjectId: this.selectedElement?.ProjectId,
           ParentProjectId: this.selectedElement?._id,
           ParentTaskId: this.selectedElement?._id,
-          Name: ``
+          Name: ``,
         }
       : this.selectedElement || {};
   }

@@ -36,6 +36,9 @@
   p {
     color: $idas-color-body-background-main;
     font-family: $OpenSans_Bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &.category {
       font-size: 1.05em;

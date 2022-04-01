@@ -1,40 +1,30 @@
 <div class="idas-dialog open">
-    <div class="card-header card-header-danger header">
-      <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-      <h4 class="card-title">{{ pageTitle }}</h4>
-      <p class="category">{{ pageSubTitle }}</p>
-      <span>
-        <button
-          mat-icon-button
-          class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
-          type="button"
-          data-dismiss="modal"
-          (click)="onButtonClickCloseDialog()"
-          title="Close"
-        >
-          <i class="material-icons header.buttons">close</i>
-        </button>
-      </span>
-    </div>
-    <div class="content">
-      <app-file-upload
-      [ProjectId]="(isProject) ? currentEntityId : null"
-      [TaskId]="(isTask) ? currentEntityId : null"
+  <app-dialog-header
+    [pageIcon]="pageIcon"
+    [pageName]="pageName"
+    [pageTitle]="pageTitle"
+    [pageSubTitle]="pageSubTitle"
+    (closeDialog)="onButtonClickCloseDialog()"
+  ></app-dialog-header>
+  <div class="content">
+    <app-file-upload
+      [ProjectId]="isProject ? currentEntityId : null"
+      [TaskId]="isTask ? currentEntityId : null"
       [files]="selectedElement?.Files"
       appFileDragDrop
     >
     </app-file-upload>
-    </div>
-    <footer class="footer" [hidden]="true">
-      <button
-        mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
-        type="button"
-        (click)="onButtonClickSave()"
-        [mat-dialog-close]="selectedElement"
-        title="Save Changes"
-      >
-        <i class="material-icons idas-button-icon">save</i>
-      </button>
-    </footer>
   </div>
+  <footer class="footer" [hidden]="true">
+    <button
+      mat-icon-button
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+      type="button"
+      (click)="onButtonClickSave()"
+      [mat-dialog-close]="selectedElement"
+      title="Save Changes"
+    >
+      <i class="material-icons idas-button-icon">save</i>
+    </button>
+  </footer>
+</div>

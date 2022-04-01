@@ -8,6 +8,7 @@ import {
 import {
   AlertifyService,
   AuthenticationService,
+  GeneralUtils,
   LookupValueService,
 } from 'app/shared/app-shared.module';
 import {
@@ -15,8 +16,8 @@ import {
   ReferenceValueService,
 } from 'app/modules/_shared/app-modules-shared.module';
 import { ProjectConfiguration } from './services/project-service/project-configuration';
-import { DialogProjectAssignmentComponent } from './components/dialog-project-assignment/dialog-project-assignment.component';
 import { ProjectService } from './services/project-service/project.service';
+import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 
 @Component({
   selector: 'app-projects',
@@ -59,18 +60,28 @@ export class ProjectsComponent extends PageComponent implements OnInit {
     this.dataSourceColumns = ProjectConfiguration.dataColumns;
   }
   onButtonClickManageProjectAssignments(element: any, index?: number) {
+    const id = (element?._id || element?.id);
+    const name = (element?.Name || element?.DisplayName || element?.DisplayValue);
+    const icon = (element?.ProjectType?.Icon || element?.ProjectType?.Image || element?.ProjectType?.Avatar);
     super.openDialog(
-      DialogProjectAssignmentComponent,
+      DialogManageProjectTaskToolbarAssignComponent,
       {
-        pageWidth: `67.3vw`,
+        action: `Assign`,
+        dataService: this.dataService,
+        entityName: this.entityName,
+        entityId: id,
+        pageIcon: icon,
+        pageName: `Assign  / Project`,
+        pageTitle: `Assign  / Project`,
+        pageSubTitle: GeneralUtils.StringJoin([id, name], ` / `),
+        pageWidth: this.pageWidth,
+        dataColumns: this.dataService.dataColumns,
         selectedElement: element || this.selectedElement,
         selectedElementIndex: index || this.selectedElementIndex,
       },
       () => {
         this.onDataRefresh();
-      },
-      `90vh`,
-      `67.3vw`
+      }
     );
   }
   onButtonClickManageProjectTasks(element: any, index?: number) {
