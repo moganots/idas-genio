@@ -27,24 +27,27 @@ import {
 import { AppModulesSharedModule } from '../_shared/app-modules-shared.module';
 import { AppSharedModule } from 'app/shared/app-shared.module';
 
+import { ProjectsComponent } from './projects.component';
 import { ProjectComponent } from './components/project-component/project.component';
-import { ViewProjectTaskActivityComponent } from './components/shared/view-project-task-activity/view-project-task-activity.component';
-import { ViewProjectTaskDetailsComponent } from './components/shared/view-project-task-details/view-project-task-details.component';
+
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskComponent } from './components/tasks/components/task-component/task.component';
+
+import { ManageProjectTaskToolbarComponent } from './components/shared/manage-project-task-toolbar/manage-project-task-toolbar.component';
 import { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 import { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
 import { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
 import { DialogManageProjectTaskToolbarReviewComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
-import { ManageProjectTaskToolbarComponent } from './components/shared/manage-project-task-toolbar/manage-project-task-toolbar.component';
-import { TaskComponent } from './components/tasks/components/task-component/task.component';
-import { TaskAssignService } from './components/tasks/services/task-assign-service/task-assign-service';
-import { TaskCloneCopyService } from './components/tasks/services/task-clone-copy-service/task-clone-copy.service';
-import { TaskCommentService } from './components/tasks/services/task-comment-service/task-comment.service';
-import { TaskCreateSubService } from './components/tasks/services/task-create-sub-service/task-create-sub.service';
-import { TaskReviewService } from './components/tasks/services/task-review-service/task-review.service';
-import { TaskService } from './components/tasks/services/task-service/task.service';
-import { TaskStatusService } from './components/tasks/services/task-status-service/task-status.service';
-import { TasksComponent } from './components/tasks/tasks.component';
-import { ProjectsComponent } from './projects.component';
+import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach/dialog-manage-project-task-toolbar-attach.component';
+import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
+import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
+
+import { ViewProjectTaskActivityComponent } from './components/shared/view-project-task-activity/view-project-task-activity.component';
+import { ViewProjectTaskDetailsComponent } from './components/shared/view-project-task-details/view-project-task-details.component';
+import {
+  ViewAssociatedProjectTaskComponent
+} from './components/shared/view-associated-project-task/view-associated-project-task.component';
+
 import { ProjectAssignService } from './services/project-assign-service/project-assign.service';
 import { ProjectCloneCopyService } from './services/project-clone-copy-service/project-clone-copy.service';
 import { ProjectCommentService } from './services/project-comment-service/project-comment.service';
@@ -53,30 +56,37 @@ import { ProjectReviewService } from './services/project-review-service/project-
 import { ProjectService } from './services/project-service/project.service';
 import { ProjectStatusService } from './services/project-status-service/project-status.service';
 import { ProjectWorklogService } from './services/project-worklog-service/project-worklog.service';
-import { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach/dialog-manage-project-task-toolbar-attach.component';
-import { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
-import { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
 import { TaskWorklogService } from './components/tasks/services/task-work-log-service/task-worklog-service';
-import { ViewAssociatedProjectTaskComponent } from './components/shared/view-associated-project-task/view-associated-project-task/view-associated-project-task.component';
 
+import { TaskAssignService } from './components/tasks/services/task-assign-service/task-assign-service';
+import { TaskCloneCopyService } from './components/tasks/services/task-clone-copy-service/task-clone-copy.service';
+import { TaskCommentService } from './components/tasks/services/task-comment-service/task-comment.service';
+import { TaskCreateSubService } from './components/tasks/services/task-create-sub-service/task-create-sub.service';
+import { TaskReviewService } from './components/tasks/services/task-review-service/task-review.service';
+import { TaskService } from './components/tasks/services/task-service/task.service';
+import { TaskStatusService } from './components/tasks/services/task-status-service/task-status.service';
+
+export { ProjectsComponent } from './projects.component';
 export { ProjectComponent } from './components/project-component/project.component';
-export { ViewProjectTaskActivityComponent } from './components/shared/view-project-task-activity/view-project-task-activity.component';
-export { ViewProjectTaskDetailsComponent } from './components/shared/view-project-task-details/view-project-task-details.component';
+
+export { TasksComponent } from './components/tasks/tasks.component';
+export { TaskComponent } from './components/tasks/components/task-component/task.component';
+
+export { ManageProjectTaskToolbarComponent } from './components/shared/manage-project-task-toolbar/manage-project-task-toolbar.component';
 export { DialogManageProjectTaskToolbarAssignComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-assign/dialog-manage-project-task-toolbar-assign.component';
 export { DialogManageProjectTaskToolbarCommentComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-comment/dialog-manage-project-task-toolbar-comment.component';
 export { DialogManageProjectTaskToolbarLogWorkComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-log-work/dialog-manage-project-task-toolbar-log-work.component';
 export { DialogManageProjectTaskToolbarReviewComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-review/dialog-manage-project-task-toolbar-review.component';
-export { ManageProjectTaskToolbarComponent } from './components/shared/manage-project-task-toolbar/manage-project-task-toolbar.component';
-export { TaskComponent } from './components/tasks/components/task-component/task.component';
-export { TaskAssignService } from './components/tasks/services/task-assign-service/task-assign-service';
-export { TaskCloneCopyService } from './components/tasks/services/task-clone-copy-service/task-clone-copy.service';
-export { TaskCommentService } from './components/tasks/services/task-comment-service/task-comment.service';
-export { TaskCreateSubService } from './components/tasks/services/task-create-sub-service/task-create-sub.service';
-export { TaskReviewService } from './components/tasks/services/task-review-service/task-review.service';
-export { TaskService } from './components/tasks/services/task-service/task.service';
-export { TaskStatusService } from './components/tasks/services/task-status-service/task-status.service';
-export { TasksComponent } from './components/tasks/tasks.component';
-export { ProjectsComponent } from './projects.component';
+export { DialogManageProjectTaskToolbarAttachFilesComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-attach/dialog-manage-project-task-toolbar-attach.component';
+export { DialogManageProjectTaskToolbarCloneCopyComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-copy/dialog-manage-project-task-toolbar-copy.component';
+export { DialogManageProjectTaskToolbarCreateSubComponent } from './components/shared/manage-project-task-toolbar/components/dialog-manage-project-task-toolbar-sub/dialog-manage-project-task-toolbar-sub.component';
+
+export { ViewProjectTaskActivityComponent } from './components/shared/view-project-task-activity/view-project-task-activity.component';
+export { ViewProjectTaskDetailsComponent } from './components/shared/view-project-task-details/view-project-task-details.component';
+export {
+  ViewAssociatedProjectTaskComponent
+} from './components/shared/view-associated-project-task/view-associated-project-task.component';
+
 export { ProjectAssignService } from './services/project-assign-service/project-assign.service';
 export { ProjectCloneCopyService } from './services/project-clone-copy-service/project-clone-copy.service';
 export { ProjectCommentService } from './services/project-comment-service/project-comment.service';
@@ -85,6 +95,16 @@ export { ProjectReviewService } from './services/project-review-service/project-
 export { ProjectService } from './services/project-service/project.service';
 export { ProjectStatusService } from './services/project-status-service/project-status.service';
 export { ProjectWorklogService } from './services/project-worklog-service/project-worklog.service';
+export { TaskWorklogService } from './components/tasks/services/task-work-log-service/task-worklog-service';
+
+export { TaskAssignService } from './components/tasks/services/task-assign-service/task-assign-service';
+export { TaskCloneCopyService } from './components/tasks/services/task-clone-copy-service/task-clone-copy.service';
+export { TaskCommentService } from './components/tasks/services/task-comment-service/task-comment.service';
+export { TaskCreateSubService } from './components/tasks/services/task-create-sub-service/task-create-sub.service';
+export { TaskReviewService } from './components/tasks/services/task-review-service/task-review.service';
+export { TaskService } from './components/tasks/services/task-service/task.service';
+export { TaskStatusService } from './components/tasks/services/task-status-service/task-status.service';
+
 export { TaskAssignConfiguration } from './components/tasks/services/task-assign-service/task-assign-configuration';
 export { TaskCloneCopyConfiguration } from './components/tasks/services/task-clone-copy-service/task-clone-copy-configuration';
 export { TaskCommentConfiguration } from './components/tasks/services/task-comment-service/task-comment-configuration';
@@ -107,6 +127,7 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     ManageProjectTaskToolbarComponent,
     ViewProjectTaskActivityComponent,
     ViewProjectTaskDetailsComponent,
+    ViewAssociatedProjectTaskComponent,
     DialogManageProjectTaskToolbarLogWorkComponent,
     DialogManageProjectTaskToolbarReviewComponent,
     DialogManageProjectTaskToolbarCommentComponent,
@@ -114,7 +135,6 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     DialogManageProjectTaskToolbarAttachFilesComponent,
     DialogManageProjectTaskToolbarCloneCopyComponent,
     DialogManageProjectTaskToolbarCreateSubComponent,
-    ViewAssociatedProjectTaskComponent,
   ],
   imports: [
     CommonModule,
@@ -148,6 +168,9 @@ export { ProjectCreateSubConfiguration } from './services/project-create-sub-ser
     DialogManageProjectTaskToolbarReviewComponent,
     DialogManageProjectTaskToolbarCommentComponent,
     DialogManageProjectTaskToolbarAssignComponent,
+    DialogManageProjectTaskToolbarAttachFilesComponent,
+    DialogManageProjectTaskToolbarCloneCopyComponent,
+    DialogManageProjectTaskToolbarCreateSubComponent,
   ],
   providers: [
     ProjectAssignService,
