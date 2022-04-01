@@ -318,27 +318,30 @@ export class DataViewTableSimpleComponent
     super.openDialog(
       DialogCreateEditDataComponent,
       {
-        action: this.action,
-        dataService: this.dataService,
-        entityName: this.entityName,
-        pageIcon: this.pageIcon,
-        pageName: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
-          ?.split(`-`)
-          ?.map((en) => this.capitalizeFirstLetter(en))
-          .join(` `)}`,
-        pageTitle: `${this.capitalizeFirstLetter(this.action)} ${this.entityName
-          ?.split(`-`)
-          ?.map((en) => this.capitalizeFirstLetter(en))
-          .join(` `)}`,
-        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
-        pageWidth: this.pageWidth,
-        dataColumns: this.dataSourceColumns,
-        selectedElement: element || {},
-        selectedElementIndex: index || this.selectedElementIndex,
+        action : this.action,
+        entityName : this.entityName,
+        entityId : id,
+        dataService : this.dataService,
+        pageIcon : this.pageIcon,
+        pageName : this.getDialogPageNameOrTitle(),
+        pageTitle : this.getDialogPageNameOrTitle(),
+        pageSubTitle : `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        pageWidth : this.pageWidth,
+        dataColumns : this.dataSourceColumns,
+        selectedElement: this.selectedElement,
+        selectedElementIndex: this.selectedElementIndex,
       },
       () => {
         this.onDataRefresh();
       }
     );
+  }
+  getDialogPageNameOrTitle() {
+    return `${this.capitalizeFirstLetter(
+      this.action
+    )} ${this.entityName
+      ?.split(`-`)
+      ?.map((en) => this.capitalizeFirstLetter(en))
+      .join(` `)}`;
   }
 }

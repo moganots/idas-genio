@@ -107,7 +107,7 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
     afterClosed?: () => void,
     height: string = '96vh',
     width: string = '38vw',
-    top: string = '7vh'
+    top: string = '7.2vh'
   ): void {
     const left = '25vw';
     const dialogConfig = new MatDialogConfig();

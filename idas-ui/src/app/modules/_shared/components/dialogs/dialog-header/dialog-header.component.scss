@@ -1,1 +1,68 @@
-@import "../../../../../../assets/scss/idas/_idas-dialogs.scss";
+@import "../../../../../../assets/scss/idas/colors.scss";
+@import "../../../../../../assets/scss/idas/fonts.scss";
+
+.header {
+  background: transparent;
+  background: $idas-color-heading-background-secondary;
+  border-radius: 6px;
+  color: $idas-color-body-background-main;
+  height: 12vh;
+  position: relative;
+
+  i,
+  h4,
+  span {
+    display: inline-block;
+    margin: 0 0 1em 0.1em !important;
+    padding: 0 0 0 0 !important;
+    position: relative;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  i {
+    height: auto;
+    font-size: 3em;
+    padding: 0.35em 0 0 0 !important;
+  }
+
+  h4 {
+    color: $idas-color-body-background-main;
+    font-family: $OpenSans_Bold;
+    font-size: 1.55em;
+    padding: 0.1em 0 0 0.5em !important;
+  }
+
+  p {
+    color: $idas-color-body-background-main;
+    font-family: $OpenSans_Bold;
+
+    &.category {
+      font-size: 1.05em;
+      left: 0%;
+      margin: 3.5em 0 0 5em !important;
+      padding: 0 0 0 0 !important;
+      position: absolute;
+    }
+  }
+
+  span {
+    float: right;
+    padding: 0.9em 0 0 0 !important;
+
+    button {
+      background-color: $white;
+      margin: 0 0 0 0 !important;
+      padding: 0 0 0 0 !important;
+      i {
+        display: inline-block;
+        height: auto;
+        font-size: 0.85em;
+        margin: 0 0 0 0 !important;
+        padding: 0 0 0.2em 0.5em !important;
+        text-align: left;
+        vertical-align: middle;
+      }
+    }
+  }
+}

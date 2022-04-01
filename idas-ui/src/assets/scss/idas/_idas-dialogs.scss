@@ -188,6 +188,21 @@ mat-tab {
   &.dialog-resize-70vw {
     width: 70vw;
   }
+  &.dialog-resize-71vw {
+    width: 71vw;
+  }
+  &.dialog-resize-72vw {
+    width: 72vw;
+  }
+  &.dialog-resize-73vw {
+    width: 73vw;
+  }
+  &.dialog-resize-74vw {
+    width: 74vw;
+  }
+  &.dialog-resize-75vw {
+    width: 75vw;
+  }
   &.calendar-event-dialog {
     width: 45vw;
   }
@@ -196,7 +211,6 @@ mat-tab {
   }
 }
 
-.header,
 .content,
 .footer {
   border-radius: 6px;
@@ -210,97 +224,8 @@ mat-tab {
   position: absolute;
 }
 
-.header {
-  background: transparent;
-  background: $idas-color-heading-background-secondary;
-  border-radius: 6px;
-  color: $idas-color-body-background-main;
-  height: 12vh;
-  position: relative;
-
-  i {
-    display: inline-block;
-    height: auto;
-    width: 35px;
-    margin: 0 0 0 0;
-    padding: 15px 0 0 10px;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  h4 {
-    color: $idas-color-body-background-main;
-    display: inline-block;
-    font-family: $OpenSans_Bold;
-    font-size: 1.55em;
-    margin: 0 0 0 0;
-    padding: 15px 0 0 8px;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  p {
-    color: $idas-color-body-background-main;
-    display: inline-block;
-    margin: 0 0 0 0;
-    text-align: left;
-    vertical-align: middle;
-
-    &.category {
-      font-family: $OpenSans_Bold;
-      font-size: 1.05em;
-      margin: 0 0 0 0;
-      padding: 55px 0 10px 50px;
-    }
-  }
-
-  span {
-    float: right;
-    margin: 0 0 0 0;
-    padding: 15px 0 0 10px;
-
-    i {
-      display: inline-block;
-      height: auto;
-      width: 35px;
-      margin: 0 0 0 0;
-      padding: 0 0 25px 10px;
-      text-align: left;
-      vertical-align: middle;
-    }
-
-    button {
-      background-color: $white;
-      margin: 20px 10px 0 0;
-      padding: 0 0 0 0;
-      i {
-        display: inline-block;
-        height: auto;
-        width: 35px;
-        margin: 0 0 0 0;
-        padding: 0 0 25px 10px;
-        text-align: left;
-        vertical-align: middle;
-      }
-    }
-  }
-
-  button {
-    background-color: $white;
-    i {
-      display: inline-block;
-      height: auto;
-      width: 35px;
-      margin: 0 0 0 0;
-      padding: 0 0 25px 10px;
-      text-align: left;
-      vertical-align: middle;
-    }
-  }
-}
-
 .content {
-  height: 71.2vh;
+  height: 70vh;
   margin: 0 0 0 0;
   overflow-y: auto;
   padding: 12px;
@@ -403,27 +328,11 @@ mat-tab {
   }
 }
 
-.btn-idas-dialog-no:hover {
-  box-shadow: 0 0 5px $bad-trend;
-}
-
-.btn-idas-dialog-yes:hover {
-  box-shadow: 0 0 5px $good-trend;
-}
-
-.btn-idas-dialog-no-padding {
-  padding: 1em;
-}
-
-.btn-idas-dialog-float-right {
-  float: right;
-}
-
 .footer {
   background: transparent;
   bottom: 2.8vh;
-  height: 7.3vh;
-  padding: 10px 5px 10px 5px;
+  height: 8vh;
+  padding: 10px 10px 20px 5px;
   text-align: left;
   vertical-align: middle;
   i,
@@ -439,6 +348,22 @@ mat-tab {
     margin: 0 0 0 5px;
     padding: 0 0 0 5px;
   }
+}
+
+.btn-idas-dialog-no:hover {
+  box-shadow: 0 0 5px $bad-trend;
+}
+
+.btn-idas-dialog-yes:hover {
+  box-shadow: 0 0 5px $good-trend;
+}
+
+.btn-idas-dialog-no-padding {
+  padding: 1em;
+}
+
+.btn-idas-dialog-float-right {
+  float: right;
 }
 
 .calendar-event-response {
@@ -579,4 +504,19 @@ mat-tab {
 }
 .dialog-resize-70vw {
   width: 70vw;
+}
+.dialog-resize-71vw {
+  width: 71vw;
+}
+.dialog-resize-72vw {
+  width: 72vw;
+}
+.dialog-resize-73vw {
+  width: 73vw;
+}
+.dialog-resize-74vw {
+  width: 74vw;
+}
+.dialog-resize-75vw {
+  width: 75vw;
 }

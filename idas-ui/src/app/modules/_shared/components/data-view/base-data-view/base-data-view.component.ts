@@ -144,7 +144,7 @@ export class BaseDataViewComponent extends BaseDataComponent {
     }
   }
   setSelectedElementAndIndex(element: any, index?: number) {
-    this.selectedElement = element;
+    this.selectedElement = element || {};
     this.selectedElementIndex = index || this.getElementIndex(element);
   }
   onButtonClickCreate(): void {

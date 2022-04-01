@@ -53,9 +53,7 @@ export class DialogCreateEditDataComponent
       dialogRef,
       data
     );
-    this.pageTitle = this.pageTitle || `${this.capitalizeFirstLetter(
-      this.action
-    )} ${this.capitalizeFirstLetter(this.entityName)}`;
+    console.log(`DialogCreateEditDataComponent >> this.pageWidth=${this.pageWidth}`);
   }
 
   ngOnInit() {
