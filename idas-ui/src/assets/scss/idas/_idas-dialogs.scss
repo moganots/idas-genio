@@ -79,7 +79,7 @@ mat-tab {
   right: 0;
   resize: both;
   top: 7vh;
-  // width: 38vw;
+  width: 38vw;
   max-width: 100%;
   z-index: 9999 !important;
 }
@@ -89,7 +89,6 @@ mat-tab {
 }
 
 .idas-dialog.resize {
-  width: 67.3vw;
   &.dialog-resize-38vw {
     width: 38vw;
   }

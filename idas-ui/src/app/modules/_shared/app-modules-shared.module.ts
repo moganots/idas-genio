@@ -25,6 +25,8 @@ import { DialogCreateEditDataComponent } from './components/dialogs/dialog-creat
 import { MetricDetailComponent } from './components/metric-detail/metric-detail.component';
 import { PageHeaderComponent } from './components/page/page-header/page-header.component';
 import { PageComponent } from './components/page/page.component';
+import { DialogHeaderComponent } from './components/dialogs/dialog-header/dialog-header.component';
+
 import { ReferenceValueService } from './services/reference-value-service/reference-value.service';
 
 export { BaseComponent } from './components/base-component/base.component';
@@ -36,6 +38,8 @@ export { DialogCreateEditDataComponent } from './components/dialogs/dialog-creat
 export { MetricDetailComponent } from './components/metric-detail/metric-detail.component';
 export { PageHeaderComponent } from './components/page/page-header/page-header.component';
 export { PageComponent } from './components/page/page.component';
+export { DialogHeaderComponent } from './components/dialogs/dialog-header/dialog-header.component';
+
 export { ReferenceValueService } from './services/reference-value-service/reference-value.service';
 
 @NgModule({
@@ -66,10 +70,12 @@ export { ReferenceValueService } from './services/reference-value-service/refere
     DialogCreateEditDataComponent,
     PageComponent,
     PageHeaderComponent,
-    MetricDetailComponent
+    MetricDetailComponent,
+    DialogHeaderComponent
   ],
   entryComponents: [
-    DialogCreateEditDataComponent
+    DialogCreateEditDataComponent,
+    DialogHeaderComponent
   ],
   exports: [
     BaseComponent,
@@ -80,7 +86,8 @@ export { ReferenceValueService } from './services/reference-value-service/refere
     DialogCreateEditDataComponent,
     PageComponent,
     PageHeaderComponent,
-    MetricDetailComponent
+    MetricDetailComponent,
+    DialogHeaderComponent
   ],
   providers: [
     ReferenceValueService

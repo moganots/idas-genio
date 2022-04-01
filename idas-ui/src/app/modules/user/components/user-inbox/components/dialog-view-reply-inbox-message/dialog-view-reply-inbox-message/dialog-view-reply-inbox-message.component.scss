@@ -4,13 +4,14 @@
 
 ul {
   margin: 0 0 0 0;
-  padding: 0 0 0 0;
+  padding: 5px 0 0 0;
   li {
     border: 1px solid $idas-color-LightGray;
     border-radius: 8px;
     display: inline;
+    font-size: 1em;
     margin: 0 0 0 0;
-    padding: 8px 25px 10px 2px;
+    padding: 8px 5px 10px 2px;
     i,
     img {
       border-radius: 8px;
@@ -25,15 +26,27 @@ ul {
     img {
       width: 20px;
     }
+    a,
+    a:link,
+    a:visited,
+    a:active {
+      border: 2px solid $idas-color-DarkRed;
+      border-radius: 25px;
+      cursor: pointer;
+      display: none;
+      font-size: 1em;
+      font-weight: bold;
+      height: 25px;
+      padding: 2px 0 0 0;
+      text-align: center;
+      text-decoration: none;
+      width: 25px;
+      vertical-align: middle;
+    }
   }
-}
-.close {
-  border: 1px solid $idas-color-DarkRed;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-weight: bold;
-  margin: 0 0 0 0;
-  padding: 15px;
-  right: 0%;
+  li:hover {
+    a {
+      display: inline-block;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <div
-  class="idas-dialog open"
+  class="card-header card-header-danger header"
   [ngClass]="{
     'dialog-resize-38vw': pageWidth === '38vw',
     'dialog-resize-39': pageWidth === '39',
@@ -41,31 +41,19 @@
     'dialog-resize-75': pageWidth === '75'
   }"
 >
-  <app-dialog-header
-    (closeDialog)="onButtonClickCloseDialog()"
-  ></app-dialog-header>
-  <div class="content">
-    <app-common-switch-case-data-input
-      [action]="action"
-      [entityId]="
-        currentEntityId || selectedElement?._id || selectedElement?.id
-      "
-      [entityName]="entityName"
-      [entity]="selectedElement"
-      [columns]="dataSourceColumns"
-      [updates]="updates"
-    ></app-common-switch-case-data-input>
-  </div>
-  <footer class="footer">
+  <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
+  <h4 class="card-title">{{ pageTitle }}</h4>
+  <p class="category">{{ pageSubTitle }}</p>
+  <span>
     <button
       mat-icon-button
-      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
+      class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
       type="button"
-      (click)="onButtonClickSave()"
-      [mat-dialog-close]="selectedElement"
-      title="Save Changes"
+      data-dismiss="modal"
+      (click)="onButtonClickCloseDialog()"
+      title="Close"
     >
-      <i class="material-icons idas-button-icon">save</i>
+      <i class="material-icons header.buttons">close</i>
     </button>
-  </footer>
+  </span>
 </div>

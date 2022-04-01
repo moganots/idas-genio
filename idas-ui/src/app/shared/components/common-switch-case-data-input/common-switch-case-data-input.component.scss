@@ -70,8 +70,14 @@ p {
   text-align: left;
   width: 100%;
   vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &.textarea {
     border: 1px solid #a6a6a6;
     border-radius: 4px;

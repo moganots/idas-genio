@@ -86,6 +86,7 @@ export class DialogReadViewReplyInboxMessageComponent
         map((value) => this.filterValuesBy(this.recipients, value))
       );
     });
+    this.selectedElement.Recipients = (this.isReplySendMessage()) ? [this.selectedElement?.createdBy] : this.selectedElement.Recipients;
   }
   get f() {
     return this.formGroup;

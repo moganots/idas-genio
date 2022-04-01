@@ -5,26 +5,12 @@
     'dialog-resize-68vw': pageWidth === '68vw'
   }"
 >
-  <div class="card-header card-header-danger header">
-    <i class="material-icons idas-button-icon">{{ pageIcon }}</i>
-    <h4 class="card-title">{{ pageTitle }}</h4>
-    <p class="category">{{ pageSubTitle }}</p>
-    <span>
-      <button
-        mat-icon-button
-        class="btn btn-white btn-round btn-just-icon btn-idas-dialog-no btn-idas-dialog-float-right"
-        type="button"
-        data-dismiss="modal"
-        (click)="onButtonClickCloseDialog()"
-        title="Close"
-      >
-        <i class="material-icons header.buttons">close</i>
-      </button>
-    </span>
-  </div>
+  <app-dialog-header
+    (closeDialog)="onButtonClickCloseDialog()"
+  ></app-dialog-header>
   <div class="content">
     <form [formGroup]="formGroup">
-      <span>
+      <span [hidden]="isViewMessage()">
         <mat-form-field>
           <input
             matInput
@@ -78,7 +64,7 @@
           </mat-autocomplete>
         </mat-form-field></span
       >
-      <span>
+      <span [hidden]="selectedElement?.Recipients?.length === 0">
         <ul>
           <li *ngFor="let recipient of selectedElement?.Recipients">
             <i
@@ -108,7 +94,11 @@
               src="{{ recipient?.Recipient?.Avatar }}"
             />
             {{ recipient?.Recipient?.DisplayName }}
-            <span class="close">X</span>
+            <a
+              [hidden]="isViewMessage()"
+              (click)="onButtonClickRemoveRecipient(recipient)"
+              >X</a
+            >
           </li>
         </ul>
       </span>
