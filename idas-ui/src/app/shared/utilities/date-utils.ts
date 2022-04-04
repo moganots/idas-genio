@@ -407,6 +407,11 @@ export class DateUtils {
   public static DATE_FORMAT_YYYY_MMM_HH_MM_SS_WITH_SPACE = `yyyy MMM HH:mm:ss`;
   public static DATE_FORMAT_YYYY_MMMM_HH_MM_SS_WITH_SPACE = `yyyy MMMM HH:mm:ss`;
 
+  public static DATE_FORMAT_M_DD_YYYY_HH_MM_SS_WITH_COMMA = `M dd, yyyy, HH:mm:ss`;
+  public static DATE_FORMAT_MM_DD_YYYY_HH_MM_SS_WITH_COMMA = `MM dd, yyyy, HH:mm:ss`;
+  public static DATE_FORMAT_MMM_DD_YYYY_HH_MM_SS_WITH_COMMA = `MMM dd, yyyy, HH:mm:ss`;
+  public static DATE_FORMAT_MMMM_DD_YYYY_HH_MM_SS_WITH_COMMA = `MMMM dd, yyyy, HH:mm:ss`;
+
   public static DateParts = () => {
     const date = new Date();
     return {
@@ -417,8 +422,8 @@ export class DateUtils {
       minutes: GeneralUtils.appendLeadingZero(date.getMinutes()),
       seconds: GeneralUtils.appendLeadingZero(date.getSeconds()),
       ms: GeneralUtils.padRight(
-        GeneralUtils.padLeft(date.getMilliseconds(), '000'),
-        '000'
+        GeneralUtils.padLeft(date.getMilliseconds(), `000`),
+        `000`
       ),
       dow: date.getDay(),
     };
@@ -429,15 +434,15 @@ export class DateUtils {
   };
   public static yyyymmddDashSeparator = () => {
     const dp = DateUtils.DateParts();
-    return [dp.year, dp.month, dp.day].join('-').trim();
+    return [dp.year, dp.month, dp.day].join(`-`).trim();
   };
   public static yyyymmddDotSeparator = () => {
     const dp = DateUtils.DateParts();
-    return [dp.year, dp.month, dp.day].join('.').trim();
+    return [dp.year, dp.month, dp.day].join(`.`).trim();
   };
   public static hms = () => {
     const dp = DateUtils.DateParts();
-    return [dp.hour, dp.minutes, dp.seconds].join(':').trim();
+    return [dp.hour, dp.minutes, dp.seconds].join(`:`).trim();
   };
   public static Thms = () => {
     return `T${DateUtils.hms()}`.trim();
@@ -447,8 +452,8 @@ export class DateUtils {
   };
   public static hmsms = () => {
     const dp = DateUtils.DateParts();
-    return [[dp.hour, dp.minutes, dp.seconds].join(':').trim(), dp.ms]
-      .join('.')
+    return [[dp.hour, dp.minutes, dp.seconds].join(`:`).trim(), dp.ms]
+      .join(`.`)
       .trim();
   };
   public static Thmsms = () => {
@@ -458,27 +463,27 @@ export class DateUtils {
     return `${DateUtils.Thmsms()}+0200`.trim();
   };
   public static yyyymmddhms = () => {
-    return [DateUtils.yyyymmdd(), DateUtils.hms()].join(' ').trim();
+    return [DateUtils.yyyymmdd(), DateUtils.hms()].join(` `).trim();
   };
   public static yyyymmddhmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.hms()]
-      .join(' ')
+      .join(` `)
       .trim();
   };
   public static yyyymmddhmsDotSeparator = () => {
-    return [DateUtils.yyyymmddDotSeparator(), DateUtils.hms()].join(' ').trim();
+    return [DateUtils.yyyymmddDotSeparator(), DateUtils.hms()].join(` `).trim();
   };
   public static yyyymmddhmsms = () => {
-    return [DateUtils.yyyymmdd(), DateUtils.hmsms()].join(' ').trim();
+    return [DateUtils.yyyymmdd(), DateUtils.hmsms()].join(` `).trim();
   };
   public static yyyymmddhmsmsDashSeparator = () => {
     return [DateUtils.yyyymmddDashSeparator(), DateUtils.hmsms()]
-      .join(' ')
+      .join(` `)
       .trim();
   };
   public static yyyymmddhmsmsDotSeparator = () => {
     return [DateUtils.yyyymmddDotSeparator(), DateUtils.hmsms()]
-      .join(' ')
+      .join(` `)
       .trim();
   };
   public static yyyymmddThms = () => {
@@ -678,7 +683,7 @@ export class DateUtils {
     return dates;
   }
   private static getStartDateForCalendar(selectedDate: Date): Date {
-    // for the day we selected let's get the previous month last day
+    // for the day we selected let`s get the previous month last day
     const lastDayOfPreviousMonth = new Date(selectedDate.setDate(0));
     // start by setting the starting date of the calendar same as the last day of previous month
     let startingDateOfCalendar: Date = lastDayOfPreviousMonth;
@@ -723,7 +728,7 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getMonth() + 1),
       GeneralUtils.appendLeadingZero(date.getDate()),
     ]
-      .join('-')
+      .join(`-`)
       .trim();
   };
   public static formatDateMMDDYYWithDashSeparator = (date: Date) => {
@@ -732,7 +737,7 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getDate()),
       date.getFullYear(),
     ]
-      .join('-')
+      .join(`-`)
       .trim();
   };
   public static formatDateYYMMDDWithDotSeparator = (date: Date) => {
@@ -741,7 +746,7 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getMonth() + 1),
       GeneralUtils.appendLeadingZero(date.getDate()),
     ]
-      .join('.')
+      .join(`.`)
       .trim();
   };
   public static formatDateMMDDYYWithDotSeparator = (date: Date) => {
@@ -750,7 +755,7 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getDate()),
       date.getFullYear(),
     ]
-      .join('.')
+      .join(`.`)
       .trim();
   };
   public static formatDateYYMMDDWithSlashSeparator = (date: Date) => {
@@ -759,7 +764,7 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getMonth() + 1),
       GeneralUtils.appendLeadingZero(date.getDate()),
     ]
-      .join('/')
+      .join(`/`)
       .trim();
   };
   public static formatDateMMDDYYWithSlashSeparator = (date: Date) => {
@@ -768,7 +773,7 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getDate()),
       date.getFullYear(),
     ]
-      .join('/')
+      .join(`/`)
       .trim();
   };
   public static formatDateYYYYMMDDHMSDashSeparator = (date: Date) => {
@@ -776,7 +781,7 @@ export class DateUtils {
       DateUtils.formatDateMMDDYYWithDashSeparator(date),
       DateUtils.formatDateHMS(date),
     ]
-      .join(' ')
+      .join(` `)
       .trim();
   };
   public static formatDateHMS = (date: Date) => {
@@ -785,49 +790,49 @@ export class DateUtils {
       GeneralUtils.appendLeadingZero(date.getMinutes()),
       GeneralUtils.appendLeadingZero(date.getSeconds()),
     ]
-      .join(':')
+      .join(`:`)
       .trim();
   };
   public static timeAgo = (time) => {
     switch (typeof time) {
-      case 'number':
+      case `number`:
         break;
-      case 'string':
+      case `string`:
         time = +new Date(time).getTime();
         break;
-      case 'object':
+      case `object`:
         if (time.constructor === Date) time = time.getTime();
         break;
       default:
         time = +new Date();
     }
     const timeFormats = [
-      [60, 'seconds', 1], // 60
-      [120, '1 minute ago', '1 minute from now'], // 60*2
-      [3600, 'minutes', 60], // 60*60, 60
-      [7200, '1 hour ago', '1 hour from now'], // 60*60*2
-      [86400, 'hours', 3600], // 60*60*24, 60*60
-      [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
-      [604800, 'days', 86400], // 60*60*24*7, 60*60*24
-      [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
-      [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
-      [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
-      [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
-      [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
-      [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
-      [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
-      [58060800000, 'centuries', 2903040000], // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
+      [60, `seconds`, 1], // 60
+      [120, `1 minute ago`, `1 minute from now`], // 60*2
+      [3600, `minutes`, 60], // 60*60, 60
+      [7200, `1 hour ago`, `1 hour from now`], // 60*60*2
+      [86400, `hours`, 3600], // 60*60*24, 60*60
+      [172800, `Yesterday`, `Tomorrow`], // 60*60*24*2
+      [604800, `days`, 86400], // 60*60*24*7, 60*60*24
+      [1209600, `Last week`, `Next week`], // 60*60*24*7*4*2
+      [2419200, `weeks`, 604800], // 60*60*24*7*4, 60*60*24*7
+      [4838400, `Last month`, `Next month`], // 60*60*24*7*4*2
+      [29030400, `months`, 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
+      [58060800, `Last year`, `Next year`], // 60*60*24*7*4*12*2
+      [2903040000, `years`, 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
+      [5806080000, `Last century`, `Next century`], // 60*60*24*7*4*12*100*2
+      [58060800000, `centuries`, 2903040000], // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
     ];
     let seconds = (+new Date() - time) / 1000;
-    let token = 'ago';
+    let token = `ago`;
     let listChoice = 1;
 
     if (seconds === 0) {
-      return 'Just now';
+      return `Just now`;
     }
     if (seconds < 0) {
       seconds = Math.abs(seconds);
-      token = 'from now';
+      token = `from now`;
       listChoice = 2;
     }
     let i = 0;
@@ -835,14 +840,14 @@ export class DateUtils {
     // tslint:disable-next-line:no-conditional-assignment
     while ((format = timeFormats[i++])) {
       if (seconds < format[0]) {
-        if (typeof format[2] === 'string') {
+        if (typeof format[2] === `string`) {
           return format[listChoice];
         } else {
           return (
             Math.abs(Math.floor(seconds / format[2])) +
-            ' ' +
+            ` ` +
             format[1] +
-            ' ' +
+            ` ` +
             token
           );
         }

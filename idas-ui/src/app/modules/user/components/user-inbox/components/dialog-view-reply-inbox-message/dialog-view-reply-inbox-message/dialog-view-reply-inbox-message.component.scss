@@ -2,23 +2,42 @@
 @import "../../../../../../../../assets/scss/idas/fonts.scss";
 @import "../../../../../../../../assets/scss/idas/_idas-dialogs.scss";
 
+.inbox-message {
+  border-bottom: 1px dashed $idas-color-LightGray;
+  margin: 0 0 0 0;
+  padding: 1em 0 1em 0;
+
+  span {
+    &.message {
+      margin: 0 0 0 0;
+      padding: 1em 0 1em 0;
+    }
+    p {
+      &.message {
+        margin: 0 0 0 0;
+        padding: 1em 0 1em 0;
+      }
+    }
+  }
+}
+
 ul {
   margin: 0 0 0 0;
-  padding: 5px 0 0 0;
+  padding: 8px 0 0 0;
   li {
     border: 1px solid $idas-color-LightGray;
     border-radius: 8px;
     display: inline;
     font-size: 1em;
     margin: 0 0 0 0;
-    padding: 8px 5px 10px 2px;
+    padding: 8px 8px 10px 2px;
     i,
     img {
       border-radius: 8px;
       display: inline-block;
       height: auto;
       font-size: 20px;
-      margin: 0 1px 0 3px;
+      margin: 0 1px 0 2px;
       padding: 0 0 0 0;
       text-align: left;
       vertical-align: middle;
@@ -43,10 +62,41 @@ ul {
       width: 25px;
       vertical-align: middle;
     }
+    &.label,
+    &.description {
+      border: none;
+      font-size: 1em;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+    }
+    &.label {
+      font-weight: bold;
+    }
+    &.description {
+      padding: 0 0.5em 0 0;
+    }
   }
   li:hover {
     a {
       display: inline-block;
     }
+  }
+}
+div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &.textarea {
+    border: 1px solid #a6a6a6;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-weight: 500;
+    height: 15em;
+    margin: 5px 0 8px 0;
+    padding: 5px;
+/*     p {
+      margin: 5px !important;
+      padding: 5px !important;
+    } */
   }
 }

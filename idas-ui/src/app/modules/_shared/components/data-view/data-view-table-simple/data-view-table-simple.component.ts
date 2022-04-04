@@ -4,7 +4,6 @@ import {
   Component,
   EventEmitter,
   Inject,
-  Input,
   LOCALE_ID,
   OnInit,
   Output,

@@ -59,8 +59,12 @@ export class InboxMessageService extends DataService {
     inboxMessage.Recipients = this.recipients.filter((recipient) => recipient?.InboxMessageId === inboxMessage?._id);
     inboxMessage.Files = this.files.filter((file) => file?.InboxMessageId === inboxMessage?._id);
     inboxMessage.LinkedMessages = this.messages.filter((cim) => cim?.ParentInboxMessageId === inboxMessage?._id);
-    inboxMessage.createdBy = this.users.find((user) => user?._id === inboxMessage?.CreatedBy);
-    inboxMessage.modifiedBy = this.users.find((user) => user?._id === inboxMessage?.ModifiedBy);
+    inboxMessage.createdBy = this.users.find(
+      (user) => user?._id === inboxMessage?.CreatedBy
+    );
+    inboxMessage.modifiedBy = this.users.find(
+      (user) => user?._id === inboxMessage?.ModifiedBy
+    );
     return inboxMessage;
   }
 }

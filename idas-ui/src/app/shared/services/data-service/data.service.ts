@@ -83,7 +83,7 @@ export class DataService extends BaseService {
       .pipe(
         map(
           (responseResult: ResponseResult) =>
-            responseResult.data || [] as unknown as T[]
+          (responseResult.data || [] as unknown as T[]).map(value => this.mapValues(value))
         ),
         catchError((error) => this._handleError(error))
       );
