@@ -1,17 +1,17 @@
-import { DatePipe } from "@angular/common";
-import { Component, Inject, LOCALE_ID, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DatePipe } from '@angular/common';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
   MAT_DIALOG_DEFAULT_OPTIONS,
-} from "@angular/material/dialog";
-import { Router } from "@angular/router";
+} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import {
   BaseDialogComponent,
   ReferenceValueService,
-} from "app/modules/_shared/app-modules-shared.module";
+} from 'app/modules/_shared/app-modules-shared.module';
 import {
   AlertifyService,
   AuthenticationService,
@@ -22,16 +22,16 @@ import {
   LookupValueService,
   SharedConfiguration,
   User,
-} from "app/shared/app-shared.module";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { InboxMessageRecipientService } from "../../../services/inbox-message-recipient-service/inbox-message-recipient.service";
-import { InboxMessageService } from "../../../services/inbox-message-service/inbox-message.service";
+} from 'app/shared/app-shared.module';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { InboxMessageRecipientService } from '../../../services/inbox-message-recipient-service/inbox-message-recipient.service';
+import { InboxMessageService } from '../../../services/inbox-message-service/inbox-message.service';
 
 @Component({
-  selector: "app-dialog-view-reply-inbox-message",
-  templateUrl: "./dialog-view-reply-inbox-message.component.html",
-  styleUrls: ["./dialog-view-reply-inbox-message.component.scss"],
+  selector: 'app-dialog-view-reply-inbox-message',
+  templateUrl: './dialog-view-reply-inbox-message.component.html',
+  styleUrls: ['./dialog-view-reply-inbox-message.component.scss'],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -183,12 +183,8 @@ export class DialogReadViewReplyInboxMessageComponent
     const eRecipient = this.newRecipients.find(
       (recipient) => recipient?.Recipient?._id === nRecipient?._id
     );
-    console.log(nRecipient);
-    console.log(eRecipient);
     if (nRecipient && eRecipient === null || eRecipient === undefined) {
-      console.log(this.newRecipients);
       this.newRecipients?.push({ Recipient: nRecipient });
-      console.log(this.newRecipients);
     }
   }
   onButtonClickRemoveRecipient(recipient: any) {

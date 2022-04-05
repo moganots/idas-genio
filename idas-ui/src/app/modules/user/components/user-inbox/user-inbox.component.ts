@@ -68,7 +68,7 @@ export class UserInboxComponent extends PageComponent implements OnInit {
   }
   onClickInboxMessageReadView(message: any, index?: number) {
     this.action = `View`;
-    this.openDialog(message?.element, index);
+    this.openDialog(message, index);
   }
   onClickInboxMessageUnRead(message: any, index?: number) {
     if (message && message?.element) {
@@ -94,32 +94,30 @@ export class UserInboxComponent extends PageComponent implements OnInit {
   }
   onClickInboxMessageReply(action: string, message: any, index?: number) {
     this.action = action;
-    this.openDialog(message?.element, index);
+    this.openDialog(message, index);
   }
   openDialog(message: any, index?: number): void {
-    if (GeneralUtils.isStringSet(message)) {
-      const pageTitleName = this.getDialogPageTitleName(message);
-      super.openDialog(
-        DialogReadViewReplyInboxMessageComponent,
-        {
-          action: this.action,
-          dataService: this.dataService,
-          entityName: this.entityName,
-          pageIcon: this.pageIcon,
-          pageName: pageTitleName,
-          pageTitle: pageTitleName,
-          pageWidth: this.getDialogPageWidth(),
-          dataColumns: this.dataSourceColumns,
-          selectedElement: message || {},
-          selectedElementIndex: index || this.selectedElementIndex,
-        },
-        () => {
-          this.onDataRefresh();
-        },
-        `96vh`,
-        this.getDialogPageWidth(),
-      );
-    }
+    const pageTitleName = this.getDialogPageTitleName(message);
+    super.openDialog(
+      DialogReadViewReplyInboxMessageComponent,
+      {
+        action: this.action,
+        dataService: this.dataService,
+        entityName: this.entityName,
+        pageIcon: this.pageIcon,
+        pageName: pageTitleName,
+        pageTitle: pageTitleName,
+        pageWidth: this.getDialogPageWidth(),
+        dataColumns: this.dataSourceColumns,
+        selectedElement: message?.element || {},
+        selectedElementIndex: index || this.selectedElementIndex,
+      },
+      () => {
+        this.onDataRefresh();
+      },
+      `96vh`,
+      this.getDialogPageWidth(),
+    );
   }
   getDialogPageTitleName(message: any) {
     const pageName = `${this.capitalizeFirstLetter(
