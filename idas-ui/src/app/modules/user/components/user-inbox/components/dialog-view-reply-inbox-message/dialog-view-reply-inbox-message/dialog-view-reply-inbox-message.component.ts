@@ -51,8 +51,7 @@ export class DialogReadViewReplyInboxMessageComponent
   recipients: any[] = [];
   filteredUsers: Observable<any[]>;
   datepipe: DatePipe = new DatePipe(this.locale);
-  replyInboxMessage: InboxMessage;
-  newInboxMessage = { Recipients: [], Message: `` };
+  newInboxMessage: InboxMessage;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -94,7 +93,7 @@ export class DialogReadViewReplyInboxMessageComponent
         this.referenceValueService.userService
           .getAll<User>()
           .subscribe((users) => {
-            this.messages?.forEach((msg) => {
+            this.messages?.forEach((msg, index) => {
               msg.createdBy = users.find(
                 (user) => user?._id === msg?.CreatedBy
               );
@@ -105,11 +104,15 @@ export class DialogReadViewReplyInboxMessageComponent
                 });
             });
           });
+        message.Recipients = this.isReplySendMessage()
+          ? ([
+              { Recipient: message.createdBy },
+            ] as unknown as InboxMessageRecipient[])
+          : message.Recipients;
+        this.newInboxMessage = message;
         this.messages = this.messages?.sort(
           (x, y) => +new Date(y.DateCreated) - +new Date(x.DateCreated)
         );
-        this.replyInboxMessage = this.messages[0];
-        this.onSetNewInboxMessage();
       });
     this.referenceValueService.userService.getAll<User>().subscribe((users) => {
       this.recipients = users.map((user) => ({
@@ -122,9 +125,6 @@ export class DialogReadViewReplyInboxMessageComponent
         map((value) => this.filterValuesBy(this.recipients, value))
       );
     });
-    console.log(this.messages);
-    console.log(this.replyInboxMessage);
-    console.log(this.newInboxMessage);
   }
   get f() {
     return this.formGroup;
@@ -158,19 +158,21 @@ export class DialogReadViewReplyInboxMessageComponent
       DateUtils.DATE_FORMAT_MMM_DD_YYYY_HH_MM_SS_WITH_COMMA
     );
   }
-  onSetNewInboxMessage() {
-    this.newInboxMessage.Recipients = this.isReplySendMessage()
-      ? [this.replyInboxMessage?.createdBy]
-      : this.replyInboxMessage?.Recipients;
-    this.newInboxMessage.Message = null;
-  }
   onAddSelectedRecipient(event: any) {
-    console.log(event);
+    if (event && (event._id || event.id)) {
+    }
   }
+  onButtonClickRemoveRecipient(recipient: InboxMessageRecipient) {}
   onDivValueChanged(event: any) {
     console.log(event);
   }
-  onButtonClickRemoveRecipient(recipient: InboxMessageRecipient) {}
   onButtonClickSend(): void {}
+  canSend() {
+    return (
+      this.newInboxMessage &&
+      GeneralUtils.hasItems(this.newInboxMessage.Recipients) &&
+      GeneralUtils.isStringSet(this.newInboxMessage.Message)
+    );
+  }
   onButtonClickReply(type?: string) {}
 }

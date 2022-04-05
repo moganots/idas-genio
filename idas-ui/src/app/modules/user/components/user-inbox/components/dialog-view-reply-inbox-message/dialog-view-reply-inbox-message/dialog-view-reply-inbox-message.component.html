@@ -14,279 +14,175 @@
   ></app-dialog-header>
   <div class="content">
     <div class="inbox-message" *ngFor="let message of messages">
-      <span>
-        <ul>
-          <li class="label">Date Sent</li>
-          <li class="description">
-            &nbsp;:&nbsp;{{
-              getFormatedInboxMessageDateCreated(message?.DateCreated)
-            }}
-          </li>
-          <li class="label">Sent By</li>
-          <li class="description">
-            <i
-              [ngStyle]="{
-                display:
-                  message?.createdBy?.UserType?.Icon === null ||
-                  message?.createdBy?.UserType?.Icon === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="material-icons {{
-                message?.createdBy?.UserType?.CssClassCategory
-              }} {{ message?.createdBy?.UserType?.CssClass }}"
-              [title]="message?.createdBy?.UserType?.Value || ''"
-              >{{ message?.createdBy?.UserType?.Icon }}</i
-            >
-            <img
-              [ngStyle]="{
-                display:
-                  message?.createdBy?.Avatar === null ||
-                  message?.createdBy?.Avatar === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="img-mat-option"
-              [title]="message?.createdBy?.DisplayName"
-              src="{{ message?.createdBy?.Avatar }}"
-            />
-            {{ message?.createdBy?.DisplayName }}
-          </li>
-        </ul>
-        <ul>
-          <li class="label">Recipient(s)&nbsp;:&nbsp;</li>
-          <li class="description" *ngFor="let recipient of message?.Recipients">
-            <i
-              [ngStyle]="{
-                display:
-                  recipient?.Recipient?.UserType?.Icon === null ||
-                  recipient?.Recipient?.UserType?.Icon === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="material-icons {{
-                recipient?.Recipient?.UserType?.CssClassCategory
-              }} {{ recipient?.Recipient?.UserType?.CssClass }}"
-              [title]="recipient?.Recipient?.UserType?.Value || ''"
-              >{{ recipient?.Recipient?.UserType?.Icon }}</i
-            >
-            <img
-              [ngStyle]="{
-                display:
-                  recipient?.Recipient?.Avatar === null ||
-                  recipient?.Recipient?.Avatar === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="img-mat-option"
-              [title]="recipient?.Recipient?.DisplayName"
-              src="{{ recipient?.Recipient?.Avatar }}"
-            />
-            {{ recipient?.Recipient?.DisplayName }}
-          </li>
-        </ul>
-      </span>
-      <span class="message">
-        <p class="message">{{ message?.Message }}</p>
-      </span>
+      <ul>
+        <li class="label">Date Sent</li>
+        <li class="description">
+          {{ getFormatedInboxMessageDateCreated(message?.DateCreated) }}
+        </li>
+        <li class="label">Sent By</li>
+        <li class="description">
+          <i
+            [ngStyle]="{
+              display:
+                message?.createdBy?.UserType?.Icon === null ||
+                message?.createdBy?.UserType?.Icon === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            class="material-icons {{
+              message?.createdBy?.UserType?.CssClassCategory
+            }} {{ message?.createdBy?.UserType?.CssClass }}"
+            [title]="message?.createdBy?.UserType?.Value || ''"
+            >{{ message?.createdBy?.UserType?.Icon }}</i
+          >
+          <img
+            [ngStyle]="{
+              display:
+                message?.createdBy?.Avatar === null ||
+                message?.createdBy?.Avatar === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            [title]="message?.createdBy?.DisplayName"
+            src="{{ message?.createdBy?.Avatar }}"
+          />
+          {{ message?.createdBy?.DisplayName }}
+        </li>
+      </ul>
+      <ul>
+        <li class="label">Recipient(s)&nbsp;:&nbsp;</li>
+        <li class="description" *ngFor="let recipient of message?.Recipients">
+          <i
+            [ngStyle]="{
+              display:
+                recipient?.Recipient?.UserType?.Icon === null ||
+                recipient?.Recipient?.UserType?.Icon === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            class="material-icons {{
+              recipient?.Recipient?.UserType?.CssClassCategory
+            }} {{ recipient?.Recipient?.UserType?.CssClass }}"
+            [title]="recipient?.Recipient?.UserType?.Value || ''"
+            >{{ recipient?.Recipient?.UserType?.Icon }}</i
+          >
+          <img
+            [ngStyle]="{
+              display:
+                recipient?.Recipient?.Avatar === null ||
+                recipient?.Recipient?.Avatar === undefined
+                  ? 'none'
+                  : 'inline'
+            }"
+            [title]="recipient?.Recipient?.DisplayName"
+            src="{{ recipient?.Recipient?.Avatar }}"
+          />
+          {{ recipient?.Recipient?.DisplayName }}
+        </li>
+      </ul>
+      <p class="inbox-message">{{ message?.Message }}</p>
     </div>
-    <div class="inbox-message" [hidden]="isViewMessage()">
+    <div [hidden]="isViewMessage()">
       <form [formGroup]="formGroup">
-      <span>
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            id="recipients"
-            name="recipients"
-            placeholder="Recipient"
-            formControlName="recipients"
-            [formControl]="cfRecipients"
-            class=""
-            [matAutocomplete]="auto"
-          />
-          <mat-autocomplete
-            id="recipients"
-            #auto="matAutocomplete"
-            [displayWith]="displayWithFn(filteredUsers | async)"
-          >
-            <mat-option
+        <span>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
               id="recipients"
-              *ngFor="let value of filteredUsers | async"
-              [value]="value?.id"
-              (onSelectionChange)="onAddSelectedRecipient($event)"
-              matSort
+              name="recipients"
+              placeholder="Recipient"
+              formControlName="recipients"
+              [formControl]="cfRecipients"
+              class=""
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete
+              id="recipients"
+              #auto="matAutocomplete"
+              [displayWith]="displayWithFn(filteredUsers | async)"
+            >
+              <mat-option
+                id="recipients"
+                *ngFor="let value of filteredUsers | async"
+                [value]="value?.id"
+                (onSelectionChange)="onAddSelectedRecipient($event)"
+                matSort
+              >
+                <i
+                  [ngStyle]="{
+                    display:
+                      value?.icon === null || value?.icon === undefined
+                        ? 'none'
+                        : 'inline'
+                  }"
+                  class="material-icons icon-mat-option rounded {{
+                    value?.cssClassCategory
+                  }} {{ value?.cssClass }}"
+                  [title]="value?.tooltip || value?.title"
+                  >{{ value?.icon }}</i
+                >
+                <img
+                  [ngStyle]="{
+                    display:
+                      value?.image === null || value?.image === undefined
+                        ? 'none'
+                        : 'inline'
+                  }"
+                  class="img-mat-option img23 rounded"
+                  [title]="value?.displayName || value?.displayValue"
+                  src="{{ value?.image }}"
+                />
+                {{ value?.displayName || value?.displayValue }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </span>
+        <span>
+          <ul>
+            <li class="label">Recipient(s)&nbsp;:&nbsp;</li>
+            <li
+              class="description"
+              *ngFor="let recipient of newInboxMessage?.Recipients"
             >
               <i
                 [ngStyle]="{
                   display:
-                    value?.icon === null || value?.icon === undefined
+                    recipient?.Recipient?.UserType?.Icon === null ||
+                    recipient?.Recipient?.UserType?.Icon === undefined
                       ? 'none'
                       : 'inline'
                 }"
-                class="material-icons icon-mat-option rounded {{
-                  value?.cssClassCategory
-                }} {{ value?.cssClass }}"
-                [title]="value?.tooltip || value?.title"
-                >{{ value?.icon }}</i
+                class="material-icons {{
+                  recipient?.Recipient?.UserType?.CssClassCategory
+                }} {{ recipient?.Recipient?.UserType?.CssClass }}"
+                [title]="recipient?.Recipient?.UserType?.Value || ''"
+                >{{ recipient?.Recipient?.UserType?.Icon }}</i
               >
               <img
                 [ngStyle]="{
                   display:
-                    value?.image === null || value?.image === undefined
+                    recipient?.Recipient?.Avatar === null ||
+                    recipient?.Recipient?.Avatar === undefined
                       ? 'none'
                       : 'inline'
                 }"
-                class="img-mat-option img23 rounded"
-                [title]="value?.displayName || value?.displayValue"
-                src="{{ value?.image }}"
+                [title]="recipient?.Recipient?.DisplayName"
+                src="{{ recipient?.Recipient?.Avatar }}"
               />
-              {{ value?.displayName || value?.displayValue }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </span>
-      <span>
-        <ul>
-          <li class="label">Recipient(s)&nbsp;:&nbsp;</li>
-          <li
-            class="description"
-            *ngFor="let recipient of newInboxMessage?.Recipients"
-          >
-            <i
-              [ngStyle]="{
-                display:
-                  recipient?.Recipient?.UserType?.Icon === null ||
-                  recipient?.Recipient?.UserType?.Icon === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="material-icons {{
-                recipient?.Recipient?.UserType?.CssClassCategory
-              }} {{ recipient?.Recipient?.UserType?.CssClass }}"
-              [title]="recipient?.Recipient?.UserType?.Value || ''"
-              >{{ recipient?.Recipient?.UserType?.Icon }}</i
-            >
-            <img
-              [ngStyle]="{
-                display:
-                  recipient?.Recipient?.Avatar === null ||
-                  recipient?.Recipient?.Avatar === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="img-mat-option"
-              [title]="recipient?.Recipient?.DisplayName"
-              src="{{ recipient?.Recipient?.Avatar }}"
-            />
-            {{ recipient?.Recipient?.DisplayName }}
-          </li>
-        </ul>
-      </span>
-      <div
-        id="message"
-        contenteditable="true"
-        class="textarea"
-        (change)="onDivValueChanged($event)"
-        (keyup)="onDivValueChanged($event)"
-      ></div>
-    </form>
+              {{ recipient?.Recipient?.DisplayName }}
+            </li>
+          </ul>
+        </span>
+        <div
+          id="message"
+          contenteditable="true"
+          class="reply-message"
+          (change)="onDivValueChanged($event)"
+          (keyup)="onDivValueChanged($event)"
+        ></div>
+      </form>
     </div>
-
-    <form [formGroup]="formGroup">
-      <span [hidden]="isViewMessage()">
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            id="recipients"
-            name="recipients"
-            placeholder="Recipient"
-            formControlName="recipients"
-            [formControl]="cfRecipients"
-            class=""
-            [matAutocomplete]="auto"
-          />
-          <mat-autocomplete
-            id="recipients"
-            #auto="matAutocomplete"
-            [displayWith]="displayWithFn(filteredUsers | async)"
-          >
-            <mat-option
-              id="recipients"
-              *ngFor="let value of filteredUsers | async"
-              [value]="value?.id"
-              (onSelectionChange)="onSelectedValueChanged($event)"
-              matSort
-            >
-              <i
-                [ngStyle]="{
-                  display:
-                    value?.icon === null || value?.icon === undefined
-                      ? 'none'
-                      : 'inline'
-                }"
-                class="material-icons icon-mat-option rounded {{
-                  value?.cssClassCategory
-                }} {{ value?.cssClass }}"
-                [title]="value?.tooltip || value?.title"
-                >{{ value?.icon }}</i
-              >
-              <img
-                [ngStyle]="{
-                  display:
-                    value?.image === null || value?.image === undefined
-                      ? 'none'
-                      : 'inline'
-                }"
-                class="img-mat-option img23 rounded"
-                [title]="value?.displayName || value?.displayValue"
-                src="{{ value?.image }}"
-              />
-              {{ value?.displayName || value?.displayValue }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field></span
-      >
-      <span [hidden]="selectedElement?.Recipients?.length === 0">
-        <ul>
-          <li *ngFor="let recipient of selectedElement?.Recipients">
-            <i
-              [ngStyle]="{
-                display:
-                  recipient?.Recipient?.UserType?.Icon === null ||
-                  recipient?.Recipient?.UserType?.Icon === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="material-icons {{
-                recipient?.Recipient?.UserType?.CssClassCategory
-              }} {{ recipient?.Recipient?.UserType?.CssClass }}"
-              [title]="recipient?.Recipient?.UserType?.Value || ''"
-              >{{ recipient?.Recipient?.UserType?.Icon }}</i
-            >
-            <img
-              [ngStyle]="{
-                display:
-                  recipient?.Recipient?.Avatar === null ||
-                  recipient?.Recipient?.Avatar === undefined
-                    ? 'none'
-                    : 'inline'
-              }"
-              class="img-mat-option"
-              [title]="recipient?.Recipient?.DisplayName"
-              src="{{ recipient?.Recipient?.Avatar }}"
-            />
-            {{ recipient?.Recipient?.DisplayName }}
-            <a
-              [hidden]="isViewMessage()"
-              (click)="onButtonClickRemoveRecipient(recipient)"
-              >X</a
-            >
-          </li>
-        </ul>
-      </span>
-    </form>
   </div>
   <footer class="footer">
     <button
@@ -315,6 +211,7 @@
       type="button"
       (click)="onButtonClickSend()"
       title="Send"
+      [disabled]="!canSend()"
       [hidden]="isViewMessage()"
     >
       <i class="material-icons idas-button-icon">send</i>

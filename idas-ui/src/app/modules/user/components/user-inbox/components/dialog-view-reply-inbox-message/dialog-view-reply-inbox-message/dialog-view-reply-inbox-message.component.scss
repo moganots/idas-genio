@@ -2,61 +2,63 @@
 @import "../../../../../../../../assets/scss/idas/fonts.scss";
 @import "../../../../../../../../assets/scss/idas/_idas-dialogs.scss";
 
-.inbox-message {
-  border-bottom: 1px dashed $idas-color-LightGray;
-  margin: 0 0 0 0;
-  padding: 1em 0 1em 0;
-
-  span {
-    &.message {
-      margin: 0 0 0 0;
-      padding: 1em 0 1em 0;
-    }
-    p {
-      &.message {
-        margin: 0 0 0 0;
-        padding: 1em 0 1em 0;
-      }
-    }
+div {
+  &.inbox-message {
+    border-bottom: 0.1em dashed $idas-color-LightGray;
+    border-bottom-left-radius: 0.4em;
+    border-bottom-right-radius: 0.4em;
+    box-sizing: border-box;
+    margin: 0 0 1.5em 0;
+    padding: 0 0 0 0;
+  }
+  &.reply-message {
+    border: 0.1em solid $idas-color-LightGray;
+    border-radius: 0.4em;
+    box-sizing: border-box;
+    height: 34em;
+    margin: 0.5em 0 0 0;
+    padding: 0.5em;
   }
 }
 
 ul {
-  margin: 0 0 0 0;
-  padding: 8px 0 0 0;
+  margin: 0 0 0.6em 0;
+  padding: 0 0 0 0;
   li {
-    border: 1px solid $idas-color-LightGray;
-    border-radius: 8px;
+    border: 0.1em solid $idas-color-LightGray;
+    border-radius: 0.8em;
     display: inline;
     font-size: 1em;
     margin: 0 0 0 0;
-    padding: 8px 8px 10px 2px;
+    padding: 0 0 0 0;
     i,
     img {
-      border-radius: 8px;
+      border-radius: 0.8em;
       display: inline-block;
       height: auto;
-      font-size: 20px;
-      margin: 0 1px 0 2px;
+      margin: 0 0.1em 0 0;
       padding: 0 0 0 0;
       text-align: left;
       vertical-align: middle;
     }
+    i {
+      font-size: 2em;
+    }
     img {
-      width: 20px;
+      width: 1.8em;
     }
     a,
     a:link,
     a:visited,
     a:active {
-      border: 2px solid $idas-color-DarkRed;
+      border: 0.1em solid $idas-color-DarkRed;
       border-radius: 25px;
       cursor: pointer;
       display: none;
       font-size: 1em;
       font-weight: bold;
       height: 25px;
-      padding: 2px 0 0 0;
+      padding: 0.2em 0 0 0;
       text-align: center;
       text-decoration: none;
       width: 25px;
@@ -73,7 +75,12 @@ ul {
       font-weight: bold;
     }
     &.description {
-      padding: 0 0.5em 0 0;
+      padding: 0 0.5em 0 0.2em;
+    }
+    &.message {
+      border: none;
+      display: list-item;
+      width: fit-content;
     }
   }
   li:hover {
@@ -82,21 +89,12 @@ ul {
     }
   }
 }
-div {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  &.textarea {
-    border: 1px solid #a6a6a6;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-weight: 500;
-    height: 15em;
-    margin: 5px 0 8px 0;
-    padding: 5px;
-/*     p {
-      margin: 5px !important;
-      padding: 5px !important;
-    } */
+
+p {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  &.inbox-message {
+    margin: 0.8em 0 0.8em 0;
+    padding: 0 0 0 0;
   }
 }
