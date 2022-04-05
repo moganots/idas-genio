@@ -20,10 +20,10 @@
     onClickInboxMessageUnRead($event, getElementIndex($event))
   "
   (inboxMessageReply)="
-    onClickInboxMessageReply($event, getElementIndex($event))
+    onClickInboxMessageReply('Reply', $event, getElementIndex($event))
   "
   (inboxMessageReplyAll)="
-    onClickInboxMessageReplyAll($event, getElementIndex($event))
+    onClickInboxMessageReply('ReplyAll', $event, getElementIndex($event))
   "
   (refresh)="onDataRefresh()"
 ></app-data-view-table-simple>

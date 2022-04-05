@@ -100,12 +100,14 @@
             <mat-autocomplete
               id="recipients"
               #auto="matAutocomplete"
-              [displayWith]="displayWithFn(filteredUsers | async)"
+              [displayWith]="
+                displayWithOptionsFilterByValueFn(filteredRecipients | async)
+              "
             >
               <mat-option
                 id="recipients"
-                *ngFor="let value of filteredUsers | async"
-                [value]="value?.id"
+                *ngFor="let value of filteredRecipients | async"
+                [value]="value"
                 (onSelectionChange)="onAddSelectedRecipient($event)"
                 matSort
               >
@@ -141,10 +143,7 @@
         <span>
           <ul>
             <li class="label">Recipient(s)&nbsp;:&nbsp;</li>
-            <li
-              class="description"
-              *ngFor="let recipient of newInboxMessage?.Recipients"
-            >
+            <li class="description" *ngFor="let recipient of newRecipients">
               <i
                 [ngStyle]="{
                   display:
@@ -171,15 +170,18 @@
                 src="{{ recipient?.Recipient?.Avatar }}"
               />
               {{ recipient?.Recipient?.DisplayName }}
+              <a (click)="onButtonClickRemoveRecipient(recipient)">X</a>
             </li>
           </ul>
         </span>
         <div
           id="message"
+          name="message"
+          placeholder="Message"
           contenteditable="true"
           class="reply-message"
-          (change)="onDivValueChanged($event)"
-          (keyup)="onDivValueChanged($event)"
+          (change)="onReplyMessageValueChanged($event)"
+          (keyup)="onReplyMessageValueChanged($event)"
         ></div>
       </form>
     </div>
@@ -189,7 +191,7 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
-      (click)="onButtonClickReply('all')"
+      (click)="action = 'ReplyAll'; setRecipients()"
       title="Reply All"
       [hidden]="!isViewMessage()"
     >
@@ -199,7 +201,7 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
-      (click)="onButtonClickReply()"
+      (click)="action = 'Reply'; setRecipients()"
       title="Reply"
       [hidden]="!isViewMessage()"
     >

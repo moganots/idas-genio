@@ -54,7 +54,7 @@
                 id="{{ fidc?.name }}"
                 #i="matAutocomplete"
                 [displayWith]="
-                  displayWithFn(fidc?.filteredLookupValues | async)
+                  displayWithOptionsFilterByIdFn(fidc?.filteredLookupValues | async)
                 "
               >
                 <mat-option

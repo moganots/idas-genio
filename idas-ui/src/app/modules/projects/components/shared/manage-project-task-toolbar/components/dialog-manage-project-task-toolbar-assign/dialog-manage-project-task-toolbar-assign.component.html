@@ -24,7 +24,7 @@
           <mat-autocomplete
             id="assignee"
             #macAssignee="matAutocomplete"
-            [displayWith]="displayWithFn(filteredAssignees | async)"
+            [displayWith]="displayWithOptionsFilterByIdFn(filteredAssignees | async)"
           >
             <mat-option
               id="assignee"
@@ -84,7 +84,7 @@
             id="projectAssignmentType"
             #macProjectAssignmentType="matAutocomplete"
             [displayWith]="
-              displayWithFn(filteredProjectAssignmentTypes | async)
+              displayWithOptionsFilterByIdFn(filteredProjectAssignmentTypes | async)
             "
           >
             <mat-option

@@ -92,12 +92,8 @@ export class UserInboxComponent extends PageComponent implements OnInit {
         });
     }
   }
-  onClickInboxMessageReply(message: any, index?: number) {
-    this.action = `Reply`;
-    this.openDialog(message?.element, index);
-  }
-  onClickInboxMessageReplyAll(message: any, index?: number) {
-    this.action = `ReplyAll`;
+  onClickInboxMessageReply(action: string, message: any, index?: number) {
+    this.action = action;
     this.openDialog(message?.element, index);
   }
   openDialog(message: any, index?: number): void {

@@ -74,14 +74,13 @@
         <br />
         <div
           id="{{ column?.name }}"
+          name="{{ column?.name }}"
           contenteditable="true"
-          class="textarea"
+          class="description"
+          [textContent]="entity[column?.name]"
           (change)="onDivValueChanged($event)"
           (keyup)="onDivValueChanged($event)"
         >
-          <p>
-            {{ getTextAreaValue(column) }}
-          </p>
         </div>
         <br
       />
@@ -158,7 +157,7 @@
           <mat-autocomplete
             id="{{ column?.name }}"
             #auto="matAutocomplete"
-            [displayWith]="displayWith(column)"
+            [displayWith]="displayWithColumnFilterByIdFn(column)"
           >
             <mat-option
               id="{{ column?.name }}"

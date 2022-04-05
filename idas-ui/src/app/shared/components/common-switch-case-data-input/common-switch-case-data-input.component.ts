@@ -191,26 +191,40 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
       GeneralUtils.toLocalLowerCaseWithTrim(this.action)
     );
   }
-  displayWithFn(options: any[]): (id: number) => string | null {
+  displayWithColumnFilterByIdFn(column: DataColumn): (id: number) => string | null {
+    return (id: number) => {
+      const correspondingOption = Array.isArray(column?.lookupValues)
+        ? column?.lookupValues.find((option) => option.id === id)
+        : null;
+      return correspondingOption ? correspondingOption.displayValue : id;
+    };
+  }
+  displayWithColumnFilterByValueFn(column: DataColumn): (value: any) => string | null {
+    return (value: any) => {
+      const correspondingOption = Array.isArray(column?.lookupValues)
+        ? column?.lookupValues?.find((option) => value && (option.id === value.id || option.id === value._id))
+        : null;
+        return correspondingOption ? correspondingOption.displayValue : (value?.id || value?._id);
+    };
+  }
+  displayWithOptionsFilterByIdFn(options: any[]): (id: number) => string | null {
     return (id: number) => {
       const correspondingOption = Array.isArray(options)
         ? options.find((option) => option.id === id)
         : null;
-      return (
-        correspondingOption?.displayValue || correspondingOption?.value || id
-      );
+      return correspondingOption ? correspondingOption.displayValue : id;
     };
   }
-  displayWith(column: DataColumn): (id: any) => string | null {
-    return (id: any) => {
-      const lookupValue = column?.lookupValues?.find(
-        (lv) => lv.id === id || lv.displayValue === id
-      );
-      return lookupValue?.displayValue || lookupValue?.id || id;
+  displayWithOptionsFilterByValueFn(options: any[]): (value: any) => string | null {
+    return (value: any) => {
+      const correspondingOption = Array.isArray(options)
+        ? options?.find((option) => value && (option.id === value.id || option.id === value._id))
+        : null;
+      return correspondingOption ? correspondingOption.displayValue : (value?.id || value?._id);
     };
   }
   getTextAreaValue(column: DataColumn) {
-    const value = String(this.formGroupFields?.controls[column?.name]?.value);
+    const value = String(this.formGroupFields?.controls[column?.name].value);
     return GeneralUtils.StringNullIf(value).trim();
   }
   onValueChanged(event: any) {

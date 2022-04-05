@@ -82,7 +82,7 @@
               <mat-autocomplete
                 id="eventAttendee"
                 #eventAttendee="matAutocomplete"
-                [displayWith]="displayWithFn(filteredEventAttendees | async)"
+                [displayWith]="displayWithOptionsFilterByIdFn(filteredEventAttendees | async)"
               >
                 <mat-option
                   id="eventAttendee"

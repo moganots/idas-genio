@@ -135,6 +135,7 @@ export class ReferenceValueService {
       cssClass: user?.UserType?.CssClass || `client`,
       icon: user?.UserType?.Icon || `reduce_capacity`,
       image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
+      value: client
     };
   }
   mapValuesEmployee(employee: Employee): any {
@@ -152,6 +153,7 @@ export class ReferenceValueService {
       cssClass: user?.UserType?.CssClass || `employee`,
       icon: user?.UserType?.Icon || `groups`,
       image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
+      value: employee
     };
   }
   mapValuesProject(project: Project): any {
@@ -164,6 +166,7 @@ export class ReferenceValueService {
       cssClassCategory: project?.ProjectType?.CssClassCategory,
       cssClass: project?.ProjectType?.CssClass,
       icon: project?.ProjectType?.Icon,
+      value: project
     };
   }
   mapValuesSupplier(supplier: Supplier): any {
@@ -181,6 +184,7 @@ export class ReferenceValueService {
       cssClass: user?.UserType?.CssClass || `supplier`,
       icon: user?.UserType?.Icon || `connect_without_contact`,
       image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
+      value: supplier
     };
   }
   mapValuesTask(task: Task): any {
@@ -193,6 +197,7 @@ export class ReferenceValueService {
       cssClassCategory: task?.TaskType?.CssClassCategory,
       cssClass: task?.TaskType?.CssClass,
       icon: task?.TaskType?.Icon,
+      value: task
     };
   }
   mapValuesUser(user: User): any {
@@ -212,6 +217,7 @@ export class ReferenceValueService {
       cssClass: user?.UserType?.CssClass,
       icon: user?.UserType?.Icon,
       image: user?.Avatar || `./assets/img/avatars/avatar-0.png`,
+      value: user
     };
   }
   addFieldLookupValues(field: DataColumn, values: any[] = []) {

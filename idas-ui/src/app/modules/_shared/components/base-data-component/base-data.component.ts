@@ -275,7 +275,23 @@ export class BaseDataComponent extends BaseComponent {
       String(value?.displayValue || value || ``)
     ).includes(this.toLocaleLowerCaseTrim(filterValue));
   }
-  displayWithFn(options: any[]): (id: number) => string | null {
+  displayWithColumnFilterByIdFn(column: DataColumn): (id: number) => string | null {
+    return (id: number) => {
+      const correspondingOption = Array.isArray(column?.lookupValues)
+        ? column?.lookupValues.find((option) => option.id === id)
+        : null;
+      return correspondingOption ? correspondingOption.displayValue : id;
+    };
+  }
+  displayWithColumnFilterByValueFn(column: DataColumn): (value: any) => string | null {
+    return (value: any) => {
+      const correspondingOption = Array.isArray(column?.lookupValues)
+        ? column?.lookupValues?.find((option) => value && (option.id === value.id || option.id === value._id))
+        : null;
+        return correspondingOption ? correspondingOption.displayValue : (value?.id || value?._id);
+    };
+  }
+  displayWithOptionsFilterByIdFn(options: any[]): (id: number) => string | null {
     return (id: number) => {
       const correspondingOption = Array.isArray(options)
         ? options.find((option) => option.id === id)
@@ -283,20 +299,14 @@ export class BaseDataComponent extends BaseComponent {
       return correspondingOption ? correspondingOption.displayValue : id;
     };
   }
-  /*     return (id: number) => {
-      const option = options?.find((opt) => opt?.id === id) || id;
-      return
-      option?.DisplayName ||
-        option?.displayValue ||
-        option?.title ||
-        option?.name ||
-        option?.Title ||
-        option?.Name ||
-        option?._id ||
-        option?.id ||
-        option?.value;
-    }
-  } */
+  displayWithOptionsFilterByValueFn(options: any[]): (value: any) => string | null {
+    return (value: any) => {
+      const correspondingOption = Array.isArray(options)
+        ? options?.find((option) => value && (option.id === value.id || option.id === value._id))
+        : null;
+      return correspondingOption ? correspondingOption.displayValue : (value?.id || value?._id);
+    };
+  }
   onValueChanged(event: any) {
     if (event && event.target && GeneralUtils.isStringSet(event?.target?.id)) {
       this.updates[event?.target?.id] =
