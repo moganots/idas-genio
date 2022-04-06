@@ -35,7 +35,7 @@ export class PageHeaderComponent implements OnInit {
 
   getButtonTitle(action: string) {
     const fden = this.formatDisplayEntityName();
-    const laction = GeneralUtils.toLocalLowerCaseWithTrim(action);
+    const laction = GeneralUtils.toLocaleLowerCaseWithTrim(action);
     const caction = GeneralUtils.capitalizeFirstLetter(action);
     return SharedConfiguration.optionsCreate.includes(laction)
       ? `Add / Create a New ${fden}`

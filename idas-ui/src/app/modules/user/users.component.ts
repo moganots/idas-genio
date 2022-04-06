@@ -165,7 +165,7 @@ export class UsersComponent extends PageComponent implements OnInit {
     );
   }
   getEntity(action: string, user: User, userType: UserType) {
-    switch(GeneralUtils.toLocalLowerCaseWithTrim(action)){
+    switch(GeneralUtils.toLocaleLowerCaseWithTrim(action)){
       case `create`: return {_id: null, UserTypeId: userType?._id };
       case `edit`: return user;
       default: return null;

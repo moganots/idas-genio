@@ -75,7 +75,7 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
     return value;
   }
   isFieldDisabled(column: DataColumn) {
-    switch (GeneralUtils.toLocalLowerCaseWithTrim(this.action)) {
+    switch (GeneralUtils.toLocaleLowerCaseWithTrim(this.action)) {
       case `create`:
       case `edit`:
         switch (column.name) {
@@ -173,22 +173,22 @@ export class CommonSwitchCaseDataInputComponent implements OnInit {
   }
   findByValue(value: any, findValue: any) {
     return String(value?.displayValue || value?.title || value?.value).includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(findValue)
+      GeneralUtils.toLocaleLowerCaseWithTrim(findValue)
     );
   }
   isCreate() {
     return [`add`, `create`, `insert`, `new`].includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(this.action)
+      GeneralUtils.toLocaleLowerCaseWithTrim(this.action)
     );
   }
   isEdit() {
     return [`change`, `edit`, `update`].includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(this.action)
+      GeneralUtils.toLocaleLowerCaseWithTrim(this.action)
     );
   }
   isDelete() {
     return [`archive`, `delete`, `remove`, `deactivate`].includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(this.action)
+      GeneralUtils.toLocaleLowerCaseWithTrim(this.action)
     );
   }
   displayWithColumnFilterByIdFn(column: DataColumn): (id: number) => string | null {

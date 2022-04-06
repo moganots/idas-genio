@@ -441,7 +441,7 @@ export class TestUsers {
         DateCreated: '2021-07-27T16:54:00.130',
       },
     ];
-    switch (GeneralUtils.toLocalLowerCaseWithTrim(userType || ``)) {
+    switch (GeneralUtils.toLocaleLowerCaseWithTrim(userType || ``)) {
       case 'client':
       case 'employee-active':
       case 'supplier':

@@ -7,7 +7,7 @@ export class InboxMessage extends BaseModel {
   ParentInboxMessageId: number;
   Recipients: InboxMessageRecipient[] = [];
   Files: FileAttachment[] = [];
-  LinkedMessages: InboxMessage[] = [];
+  ReplyMessages: InboxMessage[] = [];
   constructor(
     _id?: number,
     Subject?: string,

@@ -84,7 +84,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
   get reviewApproved() {
     return (
       this.f?.reviewRapproveReject?.touched &&
-      GeneralUtils.toLocalLowerCaseWithTrim(
+      GeneralUtils.toLocaleLowerCaseWithTrim(
         this.f?.reviewRapproveReject?.value
       ) === `approve`
     );
@@ -92,7 +92,7 @@ export class DialogManageProjectTaskToolbarReviewComponent
   get reviewRejected() {
     return (
       this.f?.reviewRapproveReject?.touched &&
-      GeneralUtils.toLocalLowerCaseWithTrim(
+      GeneralUtils.toLocaleLowerCaseWithTrim(
         this.f?.reviewRapproveReject?.value
       ) === `reject`
     );

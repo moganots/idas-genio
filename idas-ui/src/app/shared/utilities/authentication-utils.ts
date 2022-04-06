@@ -20,7 +20,7 @@ export class AuthenticationUtils {
     return this.isValidUser(user) && this.hasUserSessionToken(user);
   }
   public static getTestUser() {
-    switch (GeneralUtils.toLocalLowerCaseWithTrim(environment.testAs || 'root')) {
+    switch (GeneralUtils.toLocaleLowerCaseWithTrim(environment.testAs || 'root')) {
       case 'root':
         return TestUsers.Root();
       case 'admin':

@@ -330,6 +330,8 @@ i {
   &.icon-mat-option {
     margin: 0 0 0 5px;
     padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
   }
   &.btn-idas-task-assign-to-me {
     color: $idas-color-main-links-active;
@@ -618,6 +620,8 @@ img {
   &.img-mat-option {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
+    text-align: left;
+    vertical-align: middle;
   }
   &.img-manage-task-toolbar {
     margin: 0 0 0 5px;

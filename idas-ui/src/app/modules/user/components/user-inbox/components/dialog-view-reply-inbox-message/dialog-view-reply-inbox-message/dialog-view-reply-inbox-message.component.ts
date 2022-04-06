@@ -87,47 +87,60 @@ export class DialogReadViewReplyInboxMessageComponent
     });
   }
   onLoadRefreshMessages() {
-    this.inboxMessageService
-      .getFirstById<InboxMessage>(this.selectedElement?._id)
-      .subscribe((message) => {
-        this.messages.push(message);
-        message?.LinkedMessages?.forEach((lm) => this.messages.push(lm));
-        this.referenceValueService?.userService
-          ?.getAll<User>()
-          .subscribe((users) => {
+    this.referenceValueService?.userService
+      ?.getAll<User>()
+      ?.subscribe((users) => {
+        // Get / load - Recipient value(s)
+        this.filteredRecipients = this.cfRecipients?.valueChanges.pipe(
+          startWith(``),
+          map((value) =>
+            this.filterValuesBy(
+              users?.map((user) => ({
+                id: user._id,
+                displayValue: user.DisplayName,
+                image: user.Avatar,
+                value: user,
+              })),
+              value
+            )
+          )
+        );
+        // Get - InboxMessage (as is / with recent update(s)) > this.selectedElement?._id
+        this.inboxMessageService
+          ?.getFirstById<InboxMessage>(this.selectedElement?._id)
+          ?.subscribe((message) => {
+            // Add - InboxMessage to messages list
+            this.messages.push(message);
+            // Add - InboxMessage.ReplyMessages to messages list
+            message?.ReplyMessages?.forEach((replyMessage) => {
+              this.messages.push(replyMessage);
+            });
+            // Update - References / User - InboxMessage.createdBy for each message
             this.messages?.forEach((msg, index) => {
               msg.createdBy = users?.find(
                 (user) => user?._id === msg?.CreatedBy
               );
+              // Get / Update - InboxMessage Recipient(s)
               this.inboxMessageRecipientService
                 .getBy<InboxMessageRecipient>({ InboxMessageId: msg?._id })
                 .subscribe((recipients) => {
+                  // Set / Update - InboxMessage Recipient(s)
                   msg.Recipients = recipients;
+                  // Update - References / User - InboxMessage.Recipients
+                  msg?.Recipients?.forEach((recipient) => {
+                    recipient.Recipient = users?.find(
+                      (user) => user?._id === recipient?.RecipientId
+                    );
+                  });
                 });
             });
+            // Set / Update - this.selectedElement to update message
             this.selectedElement = message;
-            this.selectedElement?.Recipients?.forEach((recipient) => {
-              recipient.Recipient = users?.find(
-                (user) => user?._id === recipient.RecipientId
-              );
-            });
+            // Set / Update - newRecipients
             this.setRecipients();
+            // Sort this.messages by DateCreated
             this.messages = this.messages?.sort(
               (x, y) => +new Date(y.DateCreated) - +new Date(x.DateCreated)
-            );
-            this.filteredRecipients = this.cfRecipients?.valueChanges.pipe(
-              startWith(``),
-              map((value) =>
-                this.filterValuesBy(
-                  users?.map((user) => ({
-                    id: user._id,
-                    displayValue: user.DisplayName,
-                    image: user.Avatar,
-                    value: user,
-                  })),
-                  value
-                )
-              )
             );
           });
       });
@@ -175,7 +188,7 @@ export class DialogReadViewReplyInboxMessageComponent
         } as unknown as InboxMessageRecipient,
       ];
     } else {
-      this.newRecipients = this.selectedElement.Recipients;
+      this.newRecipients = this.selectedElement.Recipients || [];
     }
   }
   onAddSelectedRecipient(event: any) {
@@ -183,7 +196,7 @@ export class DialogReadViewReplyInboxMessageComponent
     const eRecipient = this.newRecipients.find(
       (recipient) => recipient?.Recipient?._id === nRecipient?._id
     );
-    if (nRecipient && eRecipient === null || eRecipient === undefined) {
+    if ((nRecipient && eRecipient === null) || eRecipient === undefined) {
       this.newRecipients?.push({ Recipient: nRecipient });
     }
   }

@@ -74,11 +74,10 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     if (message && message?.element) {
       message.element.IsActive = !message.element.IsActive;
       this.dataService
-        .CreateUpdateDelete<InboxMessage>(`update`, message.element)
+        ?.CreateUpdateDelete<InboxMessage>(`update`, message.element)
         .pipe(first())
         .subscribe({
           next: (updated) => {
-            console.log(updated);
             this.alertifyService.success(
               `Message marked as ${updated?.IsActive ? `un-read` : `read`}`
             );
@@ -97,7 +96,22 @@ export class UserInboxComponent extends PageComponent implements OnInit {
     this.openDialog(message, index);
   }
   openDialog(message: any, index?: number): void {
-    const pageTitleName = this.getDialogPageTitleName(message);
+    if (message && message.element && message.element.IsActive === true) {
+      message.element.IsActive = false;
+      this.dataService
+        ?.CreateUpdateDelete<InboxMessage>(`Update`, message?.element)
+        .pipe(first())
+        .subscribe({
+          next: (updated) => {},
+          complete: () => {
+            this.onDataRefresh();
+          },
+          error: (error) => {
+            this.alertifyService.error(error.message || error);
+          },
+        });
+    }
+    const pageTitleName = this.getDialogPageTitleName(message?.element);
     super.openDialog(
       DialogReadViewReplyInboxMessageComponent,
       {
@@ -116,7 +130,7 @@ export class UserInboxComponent extends PageComponent implements OnInit {
         this.onDataRefresh();
       },
       `96vh`,
-      this.getDialogPageWidth(),
+      this.getDialogPageWidth()
     );
   }
   getDialogPageTitleName(message: any) {
@@ -128,25 +142,39 @@ export class UserInboxComponent extends PageComponent implements OnInit {
       .join(` `)}`;
     return (
       GeneralUtils.StringNullIf(
-        this.isViewMessage() || this.isReplySendMessage() || this.isReplySendAllMessage()
+        this.isViewMessage() ||
+          this.isReplySendMessage() ||
+          this.isReplySendAllMessage()
           ? `${message?.Subject}`
           : pageName
       ) || pageName
     );
   }
   getDialogPageWidth() {
-    return (this.isViewMessage() || this.isReplySendMessage() || this.isReplySendAllMessage()) ? `68vw` : `38vw`;
+    return this.isViewMessage() ||
+      this.isReplySendMessage() ||
+      this.isReplySendAllMessage()
+      ? `68vw`
+      : `38vw`;
   }
   isCreateMessage() {
-    return SharedConfiguration.inboxMessageOptionsCreate.includes(this.toLocaleLowerCaseTrim(this.action));
+    return SharedConfiguration.inboxMessageOptionsCreate.includes(
+      this.toLocaleLowerCaseTrim(this.action)
+    );
   }
   isViewMessage() {
-    return SharedConfiguration.inboxMessageOptionsView.includes(this.toLocaleLowerCaseTrim(this.action));
+    return SharedConfiguration.inboxMessageOptionsView.includes(
+      this.toLocaleLowerCaseTrim(this.action)
+    );
   }
   isReplySendMessage() {
-    return SharedConfiguration.inboxMessageOptionsReplySend.includes(this.toLocaleLowerCaseTrim(this.action));
+    return SharedConfiguration.inboxMessageOptionsReplySend.includes(
+      this.toLocaleLowerCaseTrim(this.action)
+    );
   }
   isReplySendAllMessage() {
-    return SharedConfiguration.inboxMessageOptionsReplySendAll.includes(this.toLocaleLowerCaseTrim(this.action));
+    return SharedConfiguration.inboxMessageOptionsReplySendAll.includes(
+      this.toLocaleLowerCaseTrim(this.action)
+    );
   }
 }

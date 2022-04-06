@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { GeneralUtils } from 'app/shared/utilities/general-utils';
 import { DataColumn } from 'app/shared/domain-models/data-column';
+import { SharedConfiguration } from 'app/shared/configuration/shared-configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +26,8 @@ export class DataService extends BaseService {
     return this.httpClient
       .put(this.getEndpointUrl(), entity, this.getQueryParams())
       .pipe(
-        map(
-          (responseResult: ResponseResult) =>
-            this.mapValues(responseResult.data as unknown as T)
+        map((responseResult: ResponseResult) =>
+          this.mapValues(responseResult.data as unknown as T)
         ),
         catchError((error) => this._handleError(error))
       );
@@ -37,9 +37,10 @@ export class DataService extends BaseService {
     return this.httpClient
       .get(this.getEndpointUrl(), this.getQueryParams())
       .pipe(
-        map(
-          (responseResult: ResponseResult) =>
-            (responseResult.data || [] as unknown as T[]).map(value => this.mapValues(value))
+        map((responseResult: ResponseResult) =>
+          (responseResult.data || ([] as unknown as T[])).map((value) =>
+            this.mapValues(value)
+          )
         ),
         catchError((error) => this._handleError(error))
       );
@@ -56,9 +57,10 @@ export class DataService extends BaseService {
     return this.httpClient
       .get(this.getEndpointUrl(), this.getQueryParams(predicate))
       .pipe(
-        map(
-          (responseResult: ResponseResult) =>
-            (responseResult.data || [] as unknown as T[]).map(value => this.mapValues(value))
+        map((responseResult: ResponseResult) =>
+          (responseResult.data || ([] as unknown as T[])).map((value) =>
+            this.mapValues(value)
+          )
         ),
         catchError((error) => this._handleError(error))
       );
@@ -67,7 +69,7 @@ export class DataService extends BaseService {
     return this.getBy<T>(predicate).pipe(
       map(
         (values) => {
-          return (values || []).find(value => predicate);
+          return (values || []).find((value) => predicate);
         },
         catchError((error) => this._handleError(error))
       )
@@ -81,9 +83,10 @@ export class DataService extends BaseService {
     return this.httpClient
       .get(this.getEndpointUrl(), this.getQueryParams({ id: entityId }))
       .pipe(
-        map(
-          (responseResult: ResponseResult) =>
-          (responseResult.data || [] as unknown as T[]).map(value => this.mapValues(value))
+        map((responseResult: ResponseResult) =>
+          (responseResult.data || ([] as unknown as T[])).map((value) =>
+            this.mapValues(value)
+          )
         ),
         catchError((error) => this._handleError(error))
       );
@@ -103,9 +106,8 @@ export class DataService extends BaseService {
     return this.httpClient
       .put(this.getEndpointUrl(), entity, this.getQueryParams())
       .pipe(
-        map(
-          (responseResult: ResponseResult) =>
-            this.mapValues(responseResult.data as unknown as T)
+        map((responseResult: ResponseResult) =>
+          this.mapValues(responseResult.data as unknown as T)
         ),
         catchError((error) => this._handleError(error))
       );
@@ -115,9 +117,8 @@ export class DataService extends BaseService {
     return this.httpClient
       .put(this.getEndpointUrl(), entity, this.getQueryParams())
       .pipe(
-        map(
-          (responseResult: ResponseResult) =>
-            this.mapValues(responseResult.data as unknown as T)
+        map((responseResult: ResponseResult) =>
+          this.mapValues(responseResult.data as unknown as T)
         ),
         catchError((error) => this._handleError(error))
       );
@@ -126,31 +127,40 @@ export class DataService extends BaseService {
     return value;
   }
   CreateUpdateDelete<T>(action: string, entity: T) {
-    if (this.isCreate(action)) return this.create<T>(entity);
-    if (this.isUpdate(action)) return this.update<T>(entity);
-    if (this.isDelete(action)) return this.delete<T>(entity);
+    if (this.isCreate(action) && this.isEntitySet(entity)) return this.create<T>(entity);
+    if (this.isUpdate(action) && this.isEntitySet(entity)) return this.update<T>(entity);
+    if (this.isDelete(action) && this.isEntitySet(entity)) return this.delete<T>(entity);
   }
   isCreate(action: string) {
-    return ['add', 'create', 'new'].includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(action)
-    );
+    return SharedConfiguration.optionsCreate
+      .map((option) => GeneralUtils.toLocaleLowerCaseWithTrim(option))
+      .includes(GeneralUtils.toLocaleLowerCaseWithTrim(action));
   }
   isUpdate(action: string) {
-    return ['change', 'edit', 'update'].includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(action)
-    );
+    return SharedConfiguration.optionsUpdate
+      .map((option) => GeneralUtils.toLocaleLowerCaseWithTrim(option))
+      .includes(GeneralUtils.toLocaleLowerCaseWithTrim(action));
   }
   isDelete(action: string) {
-    return [`archive`, 'delete', 'remove', 'deactivate'].includes(
-      GeneralUtils.toLocalLowerCaseWithTrim(action)
-    );
+    return SharedConfiguration.optionsDelete
+      .map((option) => GeneralUtils.toLocaleLowerCaseWithTrim(option))
+      .includes(GeneralUtils.toLocaleLowerCaseWithTrim(action));
   }
   getQueryParams(predicate?: any) {
     const fromStringOptions = [
-      GeneralUtils.StringNullIf(`uid=${this.authenticationService.getCurrentUserId}`),
-      GeneralUtils.getPredicateParams(predicate)]
-      .filter((fromStringOption) =>
-        !(fromStringOption === null || fromStringOption === undefined)).join('&');
+      GeneralUtils.StringNullIf(
+        `uid=${this.authenticationService.getCurrentUserId}`
+      ),
+      GeneralUtils.getPredicateParams(predicate),
+    ]
+      .filter(
+        (fromStringOption) =>
+          !(fromStringOption === null || fromStringOption === undefined)
+      )
+      .join(`&`);
     return { params: new HttpParams({ fromString: fromStringOptions }) };
+  }
+  isEntitySet(entity: any) {
+    return entity && Object.keys(entity).length !== 0;
   }
 }

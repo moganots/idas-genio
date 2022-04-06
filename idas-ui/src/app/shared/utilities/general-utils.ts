@@ -92,17 +92,17 @@ export class GeneralUtils {
   }
   public static columnNameWithoutId(column: any) {
     const columnName = String(column.name || column.Name || column);
-    if ([`_id`, `userid`].includes(this.toLocalLowerCaseWithTrim(columnName))) {
+    if ([`_id`, `userid`].includes(this.toLocaleLowerCaseWithTrim(columnName))) {
       return columnName;
     }
-    return this.toLocalLowerCaseWithTrim(columnName).endsWith(`id`)
+    return this.toLocaleLowerCaseWithTrim(columnName).endsWith(`id`)
       ? columnName.substring(0, columnName.length - 2)
       : columnName;
   }
-  public static toLocalLowerCaseWithTrim(value: any) {
+  public static toLocaleLowerCaseWithTrim(value: any) {
     return String(value).toLocaleLowerCase().trim();
   }
-  public static toLocalUpperCaseWithTrim(value: any) {
+  public static toLocaleUpperCaseWithTrim(value: any) {
     return String(value).toLocaleUpperCase().trim();
   }
   public static hasItems(array: any[]) {
@@ -157,8 +157,8 @@ export class GeneralUtils {
   public static filterByValue<T>(array: T[], filterValue: any) {
     return array.filter((obj) =>
       Object.keys(obj).every((key) =>
-        this.toLocalLowerCaseWithTrim(obj[key]).includes(
-          this.toLocalLowerCaseWithTrim(filterValue)
+        this.toLocaleLowerCaseWithTrim(obj[key]).includes(
+          this.toLocaleLowerCaseWithTrim(filterValue)
         )
       )
     );

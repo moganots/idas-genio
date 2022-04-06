@@ -558,7 +558,7 @@ export class DateUtils {
     return new Date(DateUtils.addDays(DateUtils.startOfWeek(date), 6));
   };
   public static add = (date: Date, datePart: string, increment: number = 0) => {
-    switch (GeneralUtils.toLocalLowerCaseWithTrim(datePart)) {
+    switch (GeneralUtils.toLocaleLowerCaseWithTrim(datePart)) {
       case `y`:
       case `year`:
         return DateUtils.addYears(date, increment);
