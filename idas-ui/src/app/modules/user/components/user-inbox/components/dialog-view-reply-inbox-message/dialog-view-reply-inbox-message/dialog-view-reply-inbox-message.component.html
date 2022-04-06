@@ -84,6 +84,20 @@
     </div>
     <div [hidden]="isViewMessage()">
       <form [formGroup]="formGroup">
+        <span [hidden]="!isCreateMessage()"
+          ><mat-form-field>
+            <input
+              matInput
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Subject"
+              formControlName="subject"
+              [formControl]="cfMessageSubject"
+              [(ngModel)]="messageSubject"
+              class=""
+            /> </mat-form-field
+        ></span>
         <span>
           <mat-form-field>
             <input
@@ -93,7 +107,7 @@
               name="recipients"
               placeholder="Recipient"
               formControlName="recipients"
-              [formControl]="cfRecipients"
+              [formControl]="cfMessageRecipients"
               class=""
               [matAutocomplete]="auto"
             />
@@ -211,10 +225,11 @@
       mat-icon-button
       class="btn btn-white btn-round btn-just-icon btn-idas-dialog-yes btn-idas-dialog-float-right"
       type="button"
-      (click)="onButtonClickSend()"
       title="Send"
       [disabled]="!canSend()"
       [hidden]="isViewMessage()"
+      (click)="onButtonClickSend()"
+      [mat-dialog-close]="selectedElement"
     >
       <i class="material-icons idas-button-icon">send</i>
     </button>

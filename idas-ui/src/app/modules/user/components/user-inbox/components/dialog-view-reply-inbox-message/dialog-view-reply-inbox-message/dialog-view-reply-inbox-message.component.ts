@@ -1,17 +1,17 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from "@angular/common";
+import { Component, Inject, LOCALE_ID, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
   MAT_DIALOG_DEFAULT_OPTIONS,
-} from '@angular/material/dialog';
-import { Router } from '@angular/router';
+} from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import {
   BaseDialogComponent,
   ReferenceValueService,
-} from 'app/modules/_shared/app-modules-shared.module';
+} from "app/modules/_shared/app-modules-shared.module";
 import {
   AlertifyService,
   AuthenticationService,
@@ -22,16 +22,16 @@ import {
   LookupValueService,
   SharedConfiguration,
   User,
-} from 'app/shared/app-shared.module';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { InboxMessageRecipientService } from '../../../services/inbox-message-recipient-service/inbox-message-recipient.service';
-import { InboxMessageService } from '../../../services/inbox-message-service/inbox-message.service';
+} from "app/shared/app-shared.module";
+import { Observable } from "rxjs";
+import { first, map, startWith } from "rxjs/operators";
+import { InboxMessageRecipientService } from "../../../services/inbox-message-recipient-service/inbox-message-recipient.service";
+import { InboxMessageService } from "../../../services/inbox-message-service/inbox-message.service";
 
 @Component({
-  selector: 'app-dialog-view-reply-inbox-message',
-  templateUrl: './dialog-view-reply-inbox-message.component.html',
-  styleUrls: ['./dialog-view-reply-inbox-message.component.scss'],
+  selector: "app-dialog-view-reply-inbox-message",
+  templateUrl: "./dialog-view-reply-inbox-message.component.html",
+  styleUrls: ["./dialog-view-reply-inbox-message.component.scss"],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -51,8 +51,10 @@ export class DialogReadViewReplyInboxMessageComponent
   formGroup: FormGroup;
   filteredRecipients: Observable<any[]>;
   datepipe: DatePipe = new DatePipe(this.locale);
+  messageSubject = null;
   newRecipients = [];
-  newMessage = ``;
+  newMessage = null;
+  parentInboxMessageId: number;
   constructor(
     public router: Router,
     public matDialog: MatDialog,
@@ -82,6 +84,7 @@ export class DialogReadViewReplyInboxMessageComponent
   ngOnInit(): void {
     this.onLoadRefreshMessages();
     this.formGroup = this.formBuilder.group({
+      subject: [``, Validators.required],
       recipients: [``, Validators.required],
       message: [``, Validators.required],
     });
@@ -91,7 +94,7 @@ export class DialogReadViewReplyInboxMessageComponent
       ?.getAll<User>()
       ?.subscribe((users) => {
         // Get / load - Recipient value(s)
-        this.filteredRecipients = this.cfRecipients?.valueChanges.pipe(
+        this.filteredRecipients = this.cfMessageRecipients?.valueChanges.pipe(
           startWith(``),
           map((value) =>
             this.filterValuesBy(
@@ -136,6 +139,10 @@ export class DialogReadViewReplyInboxMessageComponent
             });
             // Set / Update - this.selectedElement to update message
             this.selectedElement = message;
+            // Set - Message subject
+            this.messageSubject = message?.Subject;
+            // Set - Reply Message parent Id
+            this.parentInboxMessageId = message?._id;
             // Set / Update - newRecipients
             this.setRecipients();
             // Sort this.messages by DateCreated
@@ -148,7 +155,10 @@ export class DialogReadViewReplyInboxMessageComponent
   get f() {
     return this.formGroup;
   }
-  get cfRecipients() {
+  get cfMessageSubject() {
+    return this.f?.controls?.subject;
+  }
+  get cfMessageRecipients() {
     return this.f?.controls?.recipients;
   }
   get cfMessage() {
@@ -177,7 +187,8 @@ export class DialogReadViewReplyInboxMessageComponent
   getFormatedInboxMessageDateCreated(date: Date) {
     return this.datepipe.transform(
       date,
-      DateUtils.DATE_FORMAT_MMM_DD_YYYY_HH_MM_SS_WITH_COMMA
+      DateUtils.DATE_FORMAT_MMM_DD_YYYY_HH_MM_SS_WITH_COMMA,
+      this.locale
     );
   }
   setRecipients() {
@@ -214,9 +225,36 @@ export class DialogReadViewReplyInboxMessageComponent
   }
   canSend() {
     return (
+      GeneralUtils.isStringSet(this.messageSubject) &&
       GeneralUtils.hasItems(this.newRecipients) &&
       GeneralUtils.isStringSet(this.newMessage)
     );
   }
-  onButtonClickSend(): void {}
+  onButtonClickSend(): void {
+    if (
+      GeneralUtils.isStringSet(this.messageSubject) &&
+      GeneralUtils.hasItems(this.newRecipients) &&
+      GeneralUtils.isStringSet(this.newMessage)
+    ) {
+      this.dataService
+        ?.CreateUpdateDelete(`Create`, {
+          Subject: this.messageSubject,
+          Message: this.newMessage,
+          ParentInboxMessageId: this.parentInboxMessageId,
+        })
+        .subscribe((message) => {
+          this.newRecipients.forEach((recipient) => {
+            this.inboxMessageRecipientService
+              ?.CreateUpdateDelete(`Create`, {
+                InboxMessageId: message[0]._id,
+                RecipientId: recipient.Recipient._id,
+              })
+              .subscribe(() => {});
+          });
+          this.alertifyService.success(
+            `New inbox message created / sent, successfully`
+          );
+        });
+    }
+  }
 }

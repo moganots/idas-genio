@@ -161,6 +161,7 @@ export class DataService extends BaseService {
     return { params: new HttpParams({ fromString: fromStringOptions }) };
   }
   isEntitySet(entity: any) {
+    console.log(entity);
     return entity && Object.keys(entity).length !== 0;
   }
 }

@@ -27,9 +27,9 @@ import { DialogCreateEditDataComponent } from '../../dialogs/dialog-create-edit-
 import { BaseDataViewComponent } from '../base-data-view/base-data-view.component';
 
 @Component({
-  selector: 'app-data-view-table-simple',
-  templateUrl: './data-view-table-simple.component.html',
-  styleUrls: ['./data-view-table-simple.component.scss'],
+  selector: `app-data-view-table-simple`,
+  templateUrl: `./data-view-table-simple.component.html`,
+  styleUrls: [`./data-view-table-simple.component.scss`],
   providers: [
     AlertifyService,
     AuthenticationService,
@@ -95,7 +95,8 @@ export class DataViewTableSimpleComponent
   getFormattedDate(date: Date) {
     return this.datepipe.transform(
       date,
-      DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE
+      DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE,
+      this.locale
     );
   }
   onButtonClickCreate(): void {
@@ -115,7 +116,7 @@ export class DataViewTableSimpleComponent
   }
   getTitleEditButton(element: any, index?: number) {
     return `${[
-      'Edit',
+      `Edit`,
       this.capitalizeFirstLetter(this.entityName || ``) /*, `(${index})`*/,
     ]
       .join(` `)
@@ -131,7 +132,7 @@ export class DataViewTableSimpleComponent
   }
   getTitleDeleteButton(element: any, index?: number) {
     return `${[
-      'Delete',
+      `Delete`,
       this.capitalizeFirstLetter(this.entityName || ``) /*, `(${index})`*/,
     ]
       .join(` `)
@@ -146,13 +147,13 @@ export class DataViewTableSimpleComponent
     this.manageUser.emit({ index, element });
   }
   getTitleManageUserAccountButton(element: any, index?: number) {
-    return `${[element[`IsLocked`] ? `Unlock` : 'Lock', 'User Account']
+    return `${[element[`IsLocked`] ? `Unlock` : `Lock`, `User Account`]
       .join(` `)
       .trim()}`;
   }
   hideManageUserAccountButton() {
     // ToDo: Check current user's permissions
-    return !['user'].includes(
+    return ![`user`].includes(
       this.toLocaleLowerCaseTrim(this.entityName || ``)
     );
   }
@@ -164,13 +165,13 @@ export class DataViewTableSimpleComponent
     this.manageEmployee.emit({ index, element });
   }
   getTitleManageEmployeeButton(element: any, index?: number) {
-    return `${[element[`IsTerminated`] ? `Re-Instate` : 'Terminate', 'Employee']
+    return `${[element[`IsTerminated`] ? `Re-Instate` : `Terminate`, `Employee`]
       .join(` `)
       .trim()}`;
   }
   hideManageEmployeeButton() {
     // ToDo: Check current user's permissions
-    return !['employee'].includes(
+    return ![`employee`].includes(
       this.toLocaleLowerCaseTrim(this.entityName || ``)
     );
   }
@@ -191,7 +192,7 @@ export class DataViewTableSimpleComponent
       .trim();
   }
   hideViewProjectProgressButton(element) {
-    return !['project'].includes(
+    return ![`project`].includes(
       this.toLocaleLowerCaseTrim(this.entityName || ``)
     );
   }
@@ -213,7 +214,7 @@ export class DataViewTableSimpleComponent
       this.getLookupValueById(element[`StatusId`]).Value || ``
     );
     return !(
-      ['project'].includes(this.toLocaleLowerCaseTrim(this.entityName || ``))
+      [`project`].includes(this.toLocaleLowerCaseTrim(this.entityName || ``))
       /*      &&
       [
         'created',
@@ -238,8 +239,8 @@ export class DataViewTableSimpleComponent
       this.getLookupValueById(element[`StatusId`]).Value || ``
     );
     return !(
-      ['project'].includes(this.entityName || ``) &&
-      ['blocked', 'completed', 'done'].includes(status)
+      [`project`].includes(this.entityName || ``) &&
+      [`blocked`, `completed`, `done`].includes(status)
     );
   }
   onClickManageParentTaskButton(element: any, index?: number) {
@@ -289,16 +290,16 @@ export class DataViewTableSimpleComponent
     super.openDialog(
       DialogCreateEditDataComponent,
       {
-        action : this.action,
-        entityName : this.entityName,
-        entityId : id,
-        dataService : this.dataService,
-        pageIcon : this.pageIcon,
-        pageName : this.getDialogPageNameOrTitle(),
-        pageTitle : this.getDialogPageNameOrTitle(),
-        pageSubTitle : `${GeneralUtils.StringJoin([id, name], ` / `)}`,
-        pageWidth : this.pageWidth,
-        dataColumns : this.dataSourceColumns,
+        action: this.action,
+        entityName: this.entityName,
+        entityId: id,
+        dataService: this.dataService,
+        pageIcon: this.pageIcon,
+        pageName: this.getDialogPageNameOrTitle(),
+        pageTitle: this.getDialogPageNameOrTitle(),
+        pageSubTitle: `${GeneralUtils.StringJoin([id, name], ` / `)}`,
+        pageWidth: this.pageWidth,
+        dataColumns: this.dataSourceColumns,
         selectedElement: this.selectedElement,
         selectedElementIndex: this.selectedElementIndex,
       },
@@ -308,9 +309,7 @@ export class DataViewTableSimpleComponent
     );
   }
   getDialogPageNameOrTitle() {
-    return `${this.capitalizeFirstLetter(
-      this.action
-    )} ${this.entityName
+    return `${this.capitalizeFirstLetter(this.action)} ${this.entityName
       ?.split(`-`)
       ?.map((en) => this.capitalizeFirstLetter(en))
       .join(` `)}`;
