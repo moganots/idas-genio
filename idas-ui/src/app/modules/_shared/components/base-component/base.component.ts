@@ -187,8 +187,9 @@ export class BaseComponent extends CommonComponent implements AfterViewInit {
       .getAll()
       // .toPromise()
       .subscribe((data) => {
+        this.dataSource = data || this.dataSource;
         this.matTableDataSource = new MatTableDataSource<any[]>();
-        this.matTableDataSource.data = data || this.dataSource;
+        this.matTableDataSource.data = this.dataSource;
         this.matTableDataSource.paginator = this.paginator;
         this.matTableDataSource.sort = this.sort;
       });

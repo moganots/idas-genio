@@ -15,7 +15,7 @@ export class UserInboxMessageConfiguration {
     {id: 1, name: `_id`, canShow: false, canSort: true, canGroup: false},
     {id: 6, name: `CreatedBy`, canShow: true, canSort: true, canGroup: false},
     {id: 2, name: `Subject`, canShow: true, canSort: true, canGroup: false},
-    {id: 3, name: `Message`, canShow: true, canSort: true, canGroup: false},
+    {id: 3, name: `Message`, canShow: false, canSort: true, canGroup: false},
     {id: 4, name: `ParentInboxMessageId`, canShow: false, canSort: true, canGroup: false},
     {id: 5, name: `IsActive`, canShow: false, canSort: true, canGroup: false},
     {id: 7, name: `DateCreated`, canShow: true, canSort: true, canGroup: false},

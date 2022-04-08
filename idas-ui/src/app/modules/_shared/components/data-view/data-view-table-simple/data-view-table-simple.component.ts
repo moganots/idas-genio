@@ -52,6 +52,8 @@ export class DataViewTableSimpleComponent
   @Output() inboxMessageReply: EventEmitter<any> = new EventEmitter();
   @Output() inboxMessageReplyAll: EventEmitter<any> = new EventEmitter();
 
+  tableDimensions = {height: 0, width: 0, thead: {height: 0, width: 0}, tbody: {height: 0, width: 0}};
+
   datepipe: DatePipe = new DatePipe(this.locale);
 
   constructor(
@@ -84,6 +86,24 @@ export class DataViewTableSimpleComponent
       this.matTableDataSource.paginator = this.paginator;
       this.matTableDataSource.sort = this.sort;
     }
+
+    const table = document?.getElementById('container');
+    const tableHeader = Array.from(table?.getElementsByTagName('thead'))[0];
+    const tableBody = Array.from(table?.getElementsByTagName('tbody'))[0];
+
+    this.tableDimensions.height = table?.offsetHeight;
+    this.tableDimensions.width = table?.offsetWidth;
+    this.tableDimensions.thead.height = tableHeader?.offsetHeight;
+    this.tableDimensions.thead.width = tableHeader?.offsetWidth;
+    this.tableDimensions.tbody.height = tableBody?.offsetHeight;
+    this.tableDimensions.tbody.width = tableBody?.offsetWidth;
+
+    console.log(tableBody);
+
+
+
+    console.log(`this.tableDimensions`);
+    console.log(this.tableDimensions);
   }
   getFormattedColumnDisplayName(column: DataColumn) {
     return this.entityName === `inbox-message` && column?.name === `CreatedBy`
@@ -92,10 +112,34 @@ export class DataViewTableSimpleComponent
       ? `Date Sent`
       : column?.displayName;
   }
-  getFormattedDate(date: Date) {
+  getColumnFormattedDisplayDate(column: DataColumn, date: Date) {
+    switch (column?.displayName) {
+      case `Birth Date`:
+      case `Date Hired`:
+      case `Date Terminated`:
+      case `End Date`:
+      case `Start Date`:
+        return this.datepipe.transform(
+          date,
+          DateUtils.DATE_FORMAT_DD_MM_YYYY_WITH_SLASH,
+          this.locale
+        );
+    }
+    switch(this.entityName) {
+      case `inbox-message`:
+        switch (column?.displayName) {
+          case `Date Created`:
+            return this.datepipe.transform(
+              date,
+              DateUtils.DATE_FORMAT_MMM_DD_YYYY_HH_MM_SS_WITH_COMMA,
+              this.locale
+            );
+        }
+
+    }
     return this.datepipe.transform(
       date,
-      DateUtils.DATE_FORMAT_DD_MMM_YY_HH_MM_SS_WITH_SPACE,
+      DateUtils.DATE_FORMAT_DD_MMMM_YYYY_HH_MM_SS_WITH_SPACE,
       this.locale
     );
   }

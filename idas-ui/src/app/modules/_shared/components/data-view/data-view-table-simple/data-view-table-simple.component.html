@@ -24,15 +24,25 @@
           ></app-page-header>
           <div class="card-body">
             <div class="table-responsive">
-              <table mat-table [dataSource]="matTableDataSource" matSort>
+              <table
+                id="container"
+                mat-table
+                [dataSource]="matTableDataSource"
+                matSort
+              >
                 <ng-container
                   [matColumnDef]="column?.name"
                   *ngFor="let column of dataSourceDisplayColumns"
                 >
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <mat-header-cell
+                    id="{{ column?.name }}"
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
                     {{ getFormattedColumnDisplayName(column) }}
                   </mat-header-cell>
                   <mat-cell
+                    id="{{ column?.name }}"
                     *matCellDef="let index; let element"
                     class="mat-cell"
                   >
@@ -45,7 +55,12 @@
                         ></mat-checkbox>
                       </span>
                       <span *ngSwitchCase="'datetimepicker'">
-                        {{ getFormattedDate(element[column?.name]) }}
+                        {{
+                          getColumnFormattedDisplayDate(
+                            column,
+                            element[column?.name]
+                          )
+                        }}
                       </span>
                       <span *ngSwitchCase="'number'">
                         {{ element[column?.name] }}
@@ -53,7 +68,10 @@
                       <span *ngSwitchCase="'password'"> </span>
                       <span *ngSwitchCase="'select'">
                         <span [ngSwitch]="column?.selectOptionControlType">
-                          <span *ngSwitchCase="'lookupIcon'">
+                          <span
+                            *ngSwitchCase="'lookupIcon'"
+                            class="icon-image-mat-cell-td-center"
+                          >
                             <i
                               class="material-icons {{
                                 getColumnCssClassCategoryById(
@@ -80,7 +98,10 @@
                               }}</i
                             >
                           </span>
-                          <span *ngSwitchCase="'lookupImage'">
+                          <span
+                            *ngSwitchCase="'lookupImage'"
+                            class="icon-image-mat-cell-td-center"
+                          >
                             <img
                               class="img-in-grid img30 rounded"
                               src="{{
@@ -158,7 +179,10 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickInboxMessageReplyAll(element, getElementIndex(element))
+                          onClickInboxMessageReplyAll(
+                            element,
+                            getElementIndex(element)
+                          )
                         "
                         title="Reply All"
                         [hidden]="hideInboxMessageButtons()"
@@ -171,7 +195,10 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickInboxMessageReply(element, getElementIndex(element))
+                          onClickInboxMessageReply(
+                            element,
+                            getElementIndex(element)
+                          )
                         "
                         title="Reply"
                         [hidden]="hideInboxMessageButtons()"
@@ -207,7 +234,10 @@
                         type="button"
                         data-toggle="modal"
                         (click)="
-                          onClickInboxMessageReadView(element, getElementIndex(element))
+                          onClickInboxMessageReadView(
+                            element,
+                            getElementIndex(element)
+                          )
                         "
                         title="Read / View Message"
                         [hidden]="hideInboxMessageButtons()"
@@ -371,7 +401,9 @@
                         type="button"
                         data-toggle="modal"
                         data-target="#create-edit-modal-dialog"
-                        (click)="onButtonClickEdit(element, getElementIndex(element))"
+                        (click)="
+                          onButtonClickEdit(element, getElementIndex(element))
+                        "
                         title="{{
                           getTitleEditButton(element, getElementIndex(element))
                         }}"
@@ -391,7 +423,16 @@
                     let elementIndex = index;
                     columns: dataSourceColumnNames
                   "
-                  [ngClass]="{ 'is-active': (entityName === 'inbox-message' && element.IsActive === true), 'is-terminated' : (entityName === 'employee' && element.IsTerminated === true), 'is-user-inactive' : (entityName === 'user' && element?.IsActive === false)}"
+                  [ngClass]="{
+                    'is-active':
+                      entityName === 'inbox-message' &&
+                      element.IsActive === true,
+                    'is-terminated':
+                      entityName === 'employee' &&
+                      element.IsTerminated === true,
+                    'is-user-inactive':
+                      entityName === 'user' && element?.IsActive === false
+                  }"
                 ></mat-row>
               </table>
               <mat-paginator

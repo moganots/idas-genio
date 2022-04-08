@@ -4,7 +4,7 @@
 
 div {
   &.inbox-message {
-    border-bottom: 0.1em dashed $idas-color-LightGray;
+    border-bottom: 0.1em dashed $idas-color-light-gray;
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
     box-sizing: border-box;
@@ -12,7 +12,7 @@ div {
     padding: 0 0 0 0;
   }
   &.reply-message {
-    border: 0.1em solid $idas-color-LightGray;
+    border: 0.1em solid $idas-color-light-gray;
     border-radius: 0.4em;
     box-sizing: border-box;
     height: 32em;
@@ -27,7 +27,7 @@ ul {
   text-align: left;
   vertical-align: middle;
   li {
-    border: 0.1em solid $idas-color-LightGray;
+    border: 0.1em solid $idas-color-light-gray;
     border-radius: 0.8em;
     display: inline;
     font-size: 1em;
@@ -55,7 +55,7 @@ ul {
     a:link,
     a:visited,
     a:active {
-      border: 0.1em solid $idas-color-DarkRed;
+      border: 0.1em solid $idas-color-dark-red;
       border-radius: 25px;
       cursor: pointer;
       display: none;
