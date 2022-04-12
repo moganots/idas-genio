@@ -1,12 +1,10 @@
 @import "./../../../../../../assets/scss/idas/colors.scss";
 @import "./../../../../../../assets/scss/idas/fonts.scss";
 
-table,
-mat-table {
-  max-height: 15em;
+.mat-table {
+  // // border: 1px gray;
   overflow: auto;
-  table-layout: auto;
-  width: 100%;
+  max-height: 500px;
   tr td:last-child {
     width: 1%;
     white-space: nowrap;
@@ -17,9 +15,8 @@ mat-footer-row,
 mat-header-row,
 mat-row {
   display: inline-flex;
-  flex:content;
-  text-align: left;
-  vertical-align: middle;
+  min-width: 100%;
+  width: 100%;
 }
 
 mwlResizable {
@@ -29,28 +26,26 @@ mwlResizable {
 mat-cell,
 mat-footer-cell,
 mat-header-cell {
-  border: 0.1em solid black;
-  margin: 0 0 0 0;
-  padding: 0 0 0 1.5em;
-  text-align: left;
-  vertical-align: middle;
-}
-
-mat-header-cell {
-  flex: content;
+  width: 200px;
+  word-break: break-all;
+  flex: none;
+  display: block;
 }
 
 mat-cell:first-child,
 mat-footer-cell:first-child,
 mat-header-cell:first-child {
-  padding-left: 1.5em !important;
+  padding-left: 24px !important;
 }
 
 mat-header-cell {
-  background-color: $idas-color-dark-gray;
-  color: $idas-color-whitesmoke;
+  background-color: gray;
+  color: whitesmoke;
   font-family: $OpenSans_Bold;
   font-size: 0.9em;
+  padding: 18px 10px 10px 10px;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .mat-sort-header-button {
@@ -60,21 +55,22 @@ mat-header-cell {
 }
 
 mat-cell {
+  display: inline-block;
   font-family: $OpenSans_Light;
   font-size: 1em;
   overflow: hidden;
-  margin: 0 0 0 0;
-  padding: 0 0 0 1.5em;
-  width: 10em;
-
-  .icon-image-mat-cell-td-center {
-    margin: 0 0.8em 0 0.8em;
-    text-align: center;
-  }
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
 
   mat-checkbox {
     padding: 2px 12px 0 15px;
   }
+}
+
+.mat-cell {
+  padding: 13px 6px 0 13px;
 }
 
 .data-view-action-buttons-header {
@@ -82,10 +78,9 @@ mat-cell {
 }
 
 .data-view-action-buttons-cell {
-  border: 1px solid red;
+  border-style: none;
   float: right;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
+  padding: 0 5px 0 5px;
   right: 0;
   i {
     margin: 0 0 0 10px;
@@ -93,14 +88,8 @@ mat-cell {
   }
 }
 
-.is-active,
-.is-terminated,
-.is-user-active {
+.is-active, .is-terminated, .is-user-active {
   font-weight: bold;
-}
-
-.maximum-hours-allocated {
-  width: 100%;
 }
 
 .is-active {
@@ -109,15 +98,15 @@ mat-cell {
   // background: #F0FFF0; // Honeydew
   // background: #F8F8FF; // GhostsWhite
   // background: #F5F5F5; // WhiteSmoke
-  background: #dcdcdc; // Gainsboro
+  background: #DCDCDC; // Gainsboro
 }
 
 .is-terminated {
   // background: #FF4500; // OrangeRed
-  background: #ff6347; // Tomato
+  background: #FF6347; // Tomato
 }
 
 .is-user-inactive {
   // background: #FF4500; // OrangeRed
-  background: #ff6347; // Tomato
+  background: #FF6347; // Tomato
 }
