@@ -1906,6 +1906,41 @@ GO
 
 -- =============================================
 -- Author:		TS MOGANO
+-- Create date: 17/05/2022
+-- Function Name: [dbo].[ValueJoinNameSurnameCompanyName]
+-- Description:	Joins (Concatenates) the specified value(s) using the specified delimiter
+-- Parameters:
+-- @Name
+-- @Surname
+-- @CompanyName
+-- =============================================
+CREATE FUNCTION [dbo].[ValueJoinNameSurnameCompanyName](
+	@Name [nvarchar](255),
+	@Surname [nvarchar](255),
+	@CompanyName [nvarchar](255)
+)
+RETURNS NVARCHAR(MAX)
+AS
+BEGIN
+	DECLARE @RetValue [nvarchar](MAX) =
+		CASE
+			WHEN LEN(LTRIM(RTRIM(@Name))) <> 0 AND LEN(LTRIM(RTRIM(@Surname))) <> 0 AND LEN(LTRIM(RTRIM(@CompanyName))) <> 0 THEN CONCAT(@Name, ' ', @Surname, ' - ', @CompanyName)
+			WHEN LEN(LTRIM(RTRIM(@Name))) <> 0 AND LEN(LTRIM(RTRIM(@CompanyName))) <> 0 THEN CONCAT(@Name, ' - ', @CompanyName)
+			WHEN LEN(LTRIM(RTRIM(@Surname))) <> 0 AND LEN(LTRIM(RTRIM(@CompanyName))) <> 0 THEN CONCAT(@Surname, ' - ', @CompanyName)
+			WHEN LEN(LTRIM(RTRIM(@Name))) <> 0 AND LEN(LTRIM(RTRIM(@Surname))) <> 0 THEN CONCAT(@Name, ' ', @Surname)
+			WHEN LEN(LTRIM(RTRIM(@Name))) <> 0 THEN @Name
+			WHEN LEN(LTRIM(RTRIM(@Surname))) <> 0 THEN @Surname
+			WHEN LEN(LTRIM(RTRIM(@CompanyName))) <> 0 THEN @CompanyName
+			ELSE NULL
+		END;		
+	RETURN CASE WHEN LEN(LTRIM(RTRIM((ISNULL(@RetValue, ''))))) <> 0 THEN @RetValue ELSE NULL END;
+END
+GO
+PRINT ('>> Completed > Create > UDF > [dbo].[ValueJoinNameSurnameCompanyName]')
+GO
+
+-- =============================================
+-- Author:		TS MOGANO
 -- Create date: 02/03/2021
 -- Function Name: [dbo].[GetUserProfile]
 -- Description:	Fetches the User Profile of the specified @UID

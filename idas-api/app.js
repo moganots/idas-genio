@@ -98,6 +98,6 @@ server.listen(port, function () {
   info(
     __filename,
     `server.listen`,
-    `${apiName} listening on ${api.protocol}://${api.host}:${port}/${api.path}`
+    `${apiName} listening on ${api.protocol}://${api.host}:${port}/${api.relativePath}`
   );
 });
